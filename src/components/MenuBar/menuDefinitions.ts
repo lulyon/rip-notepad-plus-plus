@@ -191,6 +191,14 @@ export const MENU_STRUCTURE: MenuDef[] = [
       { id: "window.closeAll", label: "全部关闭" },
     ],
   },
+  {
+    id: "help",
+    label: "帮助(&H)",
+    altKey: "h",
+    children: [
+      { id: "help.about", label: "关于 ripNotepad++(&A)" },
+    ],
+  },
 ];
 
 /** Dispatch a menu action via a single custom event. */

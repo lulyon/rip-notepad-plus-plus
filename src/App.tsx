@@ -17,6 +17,8 @@ import { EncodingDialog } from "./components/Dialogs/EncodingDialog";
 import { GoToLineDialog } from "./components/Dialogs/GoToLineDialog";
 import { PreferencesDialog } from "./components/Dialogs/PreferencesDialog";
 import { ShortcutMapperDialog } from "./components/Dialogs/ShortcutMapperDialog";
+import { RunDialog } from "./components/Dialogs/RunDialog";
+import { AboutDialog } from "./components/Dialogs/AboutDialog";
 
 function App() {
   const activeTabId = useEditorStore((s) => s.activeTabId);
@@ -26,6 +28,8 @@ function App() {
   const [gotoLineOpen, setGotoLineOpen] = useState(false);
   const [prefsOpen, setPrefsOpen] = useState(false);
   const [shortcutMapperOpen, setShortcutMapperOpen] = useState(false);
+  const [runOpen, setRunOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   // Global hooks
   useWindowTitle();
@@ -73,6 +77,17 @@ function App() {
         setPrefsOpen(true);
       } else if (actionId === "file.shortcutMapper") {
         setShortcutMapperOpen(true);
+      } else if (actionId === "run.dialog") {
+        setRunOpen(true);
+      } else if (actionId === "help.about") {
+        setAboutOpen(true);
+      } else if (actionId === "run.openInBrowser") {
+        const tab = useEditorStore.getState().tabs.find(
+          (t) => t.id === useEditorStore.getState().activeTabId,
+        );
+        if (tab?.path) {
+          ipc.openInBrowser(tab.path).catch(console.error);
+        }
       }
       // file.open and file.saveAs use Tauri dialog (native), triggered in useMenuActions
     }
@@ -103,6 +118,8 @@ function App() {
       <GoToLineDialog open={gotoLineOpen} onClose={() => setGotoLineOpen(false)} />
       <PreferencesDialog open={prefsOpen} onClose={() => setPrefsOpen(false)} />
       <ShortcutMapperDialog open={shortcutMapperOpen} onClose={() => setShortcutMapperOpen(false)} />
+      <RunDialog open={runOpen} onClose={() => setRunOpen(false)} />
+      <AboutDialog open={aboutOpen} onClose={() => setAboutOpen(false)} />
     </div>
   );
 }

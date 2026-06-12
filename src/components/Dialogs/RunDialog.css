@@ -1,0 +1,37 @@
+.run-dialog {
+  min-width: 500px;
+}
+
+.run-row {
+  margin-bottom: 12px;
+}
+
+.run-input {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: monospace;
+  border-radius: 4px;
+  outline: none;
+}
+
+.run-input:focus {
+  border-color: var(--accent-color);
+}
+
+.run-output {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  margin-bottom: 12px;
+}

@@ -1,0 +1,38 @@
+.about-dialog {
+  min-width: 380px;
+  text-align: center;
+}
+
+.about-dialog h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.about-version {
+  font-size: 13px;
+  color: var(--accent-color);
+  margin-bottom: 16px;
+}
+
+.about-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.about-stack {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.about-copy {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.about-dialog .dialog-actions {
+  justify-content: center;
+}
