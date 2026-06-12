@@ -9,6 +9,7 @@ import type {
   ConvertEncodingRequest,
   CommandResult,
   DirEntry,
+  PluginInfo,
 } from "../types/ipc";
 
 /** Typed wrapper around Tauri invoke(). */
@@ -92,5 +93,22 @@ export const ipc = {
 
   getSystemInfo(): Promise<SystemInfo> {
     return invoke("get_system_info");
+  },
+
+  // ── Plugin ──
+  listPlugins(): Promise<PluginInfo[]> {
+    return invoke("list_plugins");
+  },
+
+  startPlugin(name: string): Promise<void> {
+    return invoke("start_plugin", { name });
+  },
+
+  stopPlugin(name: string): Promise<void> {
+    return invoke("stop_plugin", { name });
+  },
+
+  sendPluginCommand(name: string, method: string, params?: unknown): Promise<unknown> {
+    return invoke("send_plugin_command", { name, method, params: params ?? null });
   },
 };

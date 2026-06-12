@@ -1,6 +1,7 @@
 mod commands;
 mod encoding;
 mod models;
+mod plugin_api;
 mod search;
 
 use commands::encoding::{
@@ -10,6 +11,7 @@ use commands::encoding::{
 use commands::file_ops::{delete_file, file_exists, get_file_size, list_directory, read_file, rename_file, write_file};
 use commands::search::find_in_files;
 use commands::session::{clear_session, load_session, save_session};
+use commands::plugin::{list_plugins, send_plugin_command, start_plugin, stop_plugin};
 use commands::system::{get_system_info, open_in_browser, run_command};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -43,6 +45,11 @@ pub fn run() {
             open_in_browser,
             run_command,
             get_system_info,
+            // Plugin
+            list_plugins,
+            start_plugin,
+            stop_plugin,
+            send_plugin_command,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

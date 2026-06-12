@@ -202,6 +202,14 @@ export const MENU_STRUCTURE: MenuDef[] = [
     ],
   },
   {
+    id: "plugins",
+    labelKey: "menu.plugins",
+    altKey: "p",
+    children: [
+      { id: "plugins.manager", labelKey: "plugin.title" },
+    ],
+  },
+  {
     id: "help",
     labelKey: "menu.help",
     altKey: "h",

@@ -174,6 +174,16 @@ const zh = {
     // ── Sidebar ──
     "sidebar.files": "文件",
     "sidebar.symbols": "符号",
+    // ── Plugin ──
+    "plugin.title": "插件管理",
+    "plugin.loading": "加载中...",
+    "plugin.empty": "未发现插件。将插件文件夹放入 plugins/ 目录。",
+    "plugin.running": "运行中",
+    "plugin.disabled": "已禁用",
+    "plugin.start": "启动",
+    "plugin.stop": "停止",
+    "menu.plugins": "插件(&P)",
+
     "panel.noSymbols": "当前文件无符号",
     "panel.noFile": "未打开文件",
 

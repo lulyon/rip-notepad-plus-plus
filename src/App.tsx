@@ -21,6 +21,7 @@ import { PreferencesDialog } from "./components/Dialogs/PreferencesDialog";
 import { ShortcutMapperDialog } from "./components/Dialogs/ShortcutMapperDialog";
 import { RunDialog } from "./components/Dialogs/RunDialog";
 import { AboutDialog } from "./components/Dialogs/AboutDialog";
+import { PluginDialog } from "./components/Dialogs/PluginDialog";
 import { Sidebar } from "./components/Panels/Sidebar";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
   const [shortcutMapperOpen, setShortcutMapperOpen] = useState(false);
   const [runOpen, setRunOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [pluginOpen, setPluginOpen] = useState(false);
 
   // Global hooks
   useWindowTitle();
@@ -85,6 +87,8 @@ function App() {
         setRunOpen(true);
       } else if (actionId === "help.about") {
         setAboutOpen(true);
+      } else if (actionId === "plugins.manager") {
+        setPluginOpen(true);
       } else if (actionId === "run.openInBrowser") {
         const tab = useEditorStore.getState().tabs.find(
           (t) => t.id === useEditorStore.getState().activeTabId,
@@ -127,6 +131,7 @@ function App() {
       <ShortcutMapperDialog open={shortcutMapperOpen} onClose={() => setShortcutMapperOpen(false)} />
       <RunDialog open={runOpen} onClose={() => setRunOpen(false)} />
       <AboutDialog open={aboutOpen} onClose={() => setAboutOpen(false)} />
+      <PluginDialog open={pluginOpen} onClose={() => setPluginOpen(false)} />
     </div>
   );
 }

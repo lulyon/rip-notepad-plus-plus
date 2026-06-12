@@ -174,6 +174,16 @@ const en = {
     // ── Sidebar ──
     "sidebar.files": "Files",
     "sidebar.symbols": "Symbols",
+    // ── Plugin ──
+    "plugin.title": "Plugin Manager",
+    "plugin.loading": "Loading...",
+    "plugin.empty": "No plugins found. Add plugin folders to the plugins/ directory.",
+    "plugin.running": "Running",
+    "plugin.disabled": "Disabled",
+    "plugin.start": "Start",
+    "plugin.stop": "Stop",
+    "menu.plugins": "&Plugins",
+
     "panel.noSymbols": "No symbols in current file",
     "panel.noFile": "No file open",
 

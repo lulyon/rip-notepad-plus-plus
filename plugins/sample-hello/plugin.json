@@ -1,0 +1,9 @@
+{
+  "name": "sample-hello",
+  "version": "1.0.0",
+  "description": "A hello world sample plugin demonstrating the plugin API",
+  "author": "ripNotepad++ Team",
+  "main": "main.py",
+  "runtime": "python3",
+  "enabled": true
+}

@@ -75,3 +75,12 @@ export interface DirEntry {
   size: number;
   extension: string | null;
 }
+
+export interface PluginInfo {
+  name: string;
+  version: string;
+  description: string;
+  author: string;
+  enabled: boolean;
+  running: boolean;
+}

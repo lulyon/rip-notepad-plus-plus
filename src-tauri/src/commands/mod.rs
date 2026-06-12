@@ -3,3 +3,4 @@ pub mod encoding;
 pub mod search;
 pub mod session;
 pub mod system;
+pub mod plugin;
