@@ -14,3 +14,13 @@
   align-items: center;
   gap: 4px;
 }
+
+.status-clickable {
+  cursor: pointer;
+  padding: 0 4px;
+  border-radius: 2px;
+}
+
+.status-clickable:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}

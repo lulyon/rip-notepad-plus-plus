@@ -1,7 +1,8 @@
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import MonacoEditor from "@monaco-editor/react";
 import type { editor } from "monaco-editor";
 import { useEditorStore } from "../../stores/editorStore";
+import { useEditorRefStore } from "../../stores/editorRefStore";
 import { useMonacoActions } from "../../hooks/useMonacoActions";
 
 export function Editor() {
@@ -12,12 +13,21 @@ export function Editor() {
   const updateTabCursor = useEditorStore((s) => s.updateTabCursor);
 
   const { handleMount } = useMonacoActions();
+  const setEditorRef = useEditorRefStore((s) => s.setEditorRef);
 
   const activeTab = tabs.find((t) => t.id === activeTabId);
+
+  // Cleanup editor ref on unmount
+  useEffect(() => {
+    return () => {
+      setEditorRef(null);
+    };
+  }, [setEditorRef]);
 
   const onMount = useCallback(
     (editor: editor.IStandaloneCodeEditor, monaco: Parameters<typeof handleMount>[1]) => {
       editorRef.current = editor;
+      setEditorRef(editor);
 
       // Register all keyboard actions
       handleMount(editor, monaco);
@@ -33,7 +43,7 @@ export function Editor() {
         }
       });
     },
-    [handleMount, activeTabId, updateTabCursor],
+    [handleMount, activeTabId, updateTabCursor, setEditorRef],
   );
 
   const handleChange = useCallback(

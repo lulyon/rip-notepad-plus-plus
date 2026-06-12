@@ -1,0 +1,110 @@
+.enc-current {
+  color: var(--text-secondary);
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.enc-layout {
+  display: flex;
+  gap: 12px;
+  height: 360px;
+}
+
+.enc-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 150px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.enc-group-btn {
+  padding: 5px 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.enc-group-btn:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.enc-group-btn.active {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.enc-list-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.enc-search {
+  padding: 5px 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 12px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  outline: none;
+}
+
+.enc-search:focus {
+  border-color: var(--accent-color);
+}
+
+.enc-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.enc-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  text-align: left;
+}
+
+.enc-item:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.enc-item.active {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.enc-item.active .enc-detail {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.enc-name {
+  flex: 1;
+}
+
+.enc-detail {
+  color: var(--text-secondary);
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.encoding-dialog {
+  min-width: 500px;
+}

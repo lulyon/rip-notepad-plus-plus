@@ -1,10 +1,12 @@
 import { useEditorStore } from "../../stores/editorStore";
+import { useEncodingStore } from "../../stores/encodingStore";
 import "./StatusBar.css";
 
 export function StatusBar() {
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const tabs = useEditorStore((s) => s.tabs);
   const activeTab = tabs.find((t) => t.id === activeTabId);
+  const openEncodingDialog = useEncodingStore((s) => s.openEncodingDialog);
 
   if (!activeTab) {
     return (
@@ -22,7 +24,13 @@ export function StatusBar() {
         {activeTab.name}
       </span>
       <span className="status-item">{activeTab.language}</span>
-      <span className="status-item">{activeTab.encoding}</span>
+      <span
+        className="status-item status-clickable"
+        onClick={openEncodingDialog}
+        title="Click to change encoding"
+      >
+        {activeTab.encoding}
+      </span>
       <span className="status-item">
         Ln {activeTab.cursorLine}, Col {activeTab.cursorColumn}
       </span>

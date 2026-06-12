@@ -41,6 +41,7 @@ body,
 .editor-area {
   flex: 1;
   overflow: hidden;
+  position: relative;
 }
 
 .welcome {

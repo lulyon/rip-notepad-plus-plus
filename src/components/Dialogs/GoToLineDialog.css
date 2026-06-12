@@ -1,0 +1,32 @@
+.goto-dialog {
+  min-width: 320px;
+}
+
+.goto-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.goto-row label {
+  color: var(--text-secondary);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.goto-input {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  border-radius: 4px;
+  outline: none;
+  font-family: monospace;
+}
+
+.goto-input:focus {
+  border-color: var(--accent-color);
+}
