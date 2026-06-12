@@ -252,13 +252,40 @@ Each tab: `{ id, path, name, content, encoding, modified, language, cursorLine, 
 
 ## Dev Commands
 
+### Start the app
+
 ```bash
-npm install              # Install all deps
-npm run tauri dev        # Dev mode with HMR
-npm run tauri build      # Production build
-npx tsc --noEmit         # TypeScript check (from root)
-cargo check              # Rust check (from src-tauri/)
-git commit -m "..."      # Commit
+npm run tauri dev        # Full app: Vite HMR + Tauri desktop window
+npm run dev              # Frontend only: Vite at http://localhost:1420 (no Rust)
+```
+
+On first run, Tauri compiles Rust backend (~5s incremental, ~30s clean). The Vite dev server starts in ~300ms. If port 1420 is in use, kill the old process first:
+
+```bash
+lsof -ti :1420 | xargs kill
+npm run tauri dev
+```
+
+### Build
+
+```bash
+npm run tauri build      # Production build → src-tauri/target/release/
+npx tsc --noEmit         # TypeScript type-check only (no emit)
+cargo check              # Rust type-check only (from src-tauri/)
+```
+
+### Dependencies
+
+```bash
+npm install              # Install all npm deps (after clone)
+```
+
+### Git
+
+```bash
+git add -A
+git commit -m "feat: description"
+git push
 ```
 
 ## Next Priorities
