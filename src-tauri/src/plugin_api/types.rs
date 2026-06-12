@@ -65,6 +65,7 @@ pub struct PluginInfo {
 }
 
 impl JsonRpcRequest {
+    #[allow(dead_code)] // helper for future plugin commands
     pub fn new(id: u64, method: &str, params: Option<serde_json::Value>) -> Self {
         Self {
             jsonrpc: "2.0".to_string(),
@@ -76,6 +77,7 @@ impl JsonRpcRequest {
 }
 
 impl JsonRpcResponse {
+    #[allow(dead_code)] // helper for future plugin responses
     pub fn result(id: Option<u64>, result: serde_json::Value) -> Self {
         Self {
             jsonrpc: "2.0".to_string(),
@@ -85,6 +87,7 @@ impl JsonRpcResponse {
         }
     }
 
+    #[allow(dead_code)] // helper for future plugin error responses
     pub fn error(id: Option<u64>, code: i32, message: &str) -> Self {
         Self {
             jsonrpc: "2.0".to_string(),

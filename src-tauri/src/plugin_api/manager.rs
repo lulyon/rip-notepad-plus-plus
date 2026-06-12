@@ -7,6 +7,7 @@ use std::sync::{Arc, Mutex};
 use crate::plugin_api::types::{JsonRpcRequest, JsonRpcResponse, PluginInfo, PluginManifest};
 
 /// A running plugin process
+#[allow(dead_code)] // fields reserved for future plugin API expansion
 struct PluginProcess {
     manifest: PluginManifest,
     child: Child,
@@ -211,6 +212,7 @@ impl PluginManager {
     }
 
     /// Stop all running plugins
+    #[allow(dead_code)] // reserved for graceful shutdown
     pub fn stop_all(&self) {
         let names: Vec<String> = {
             let plugins = self.plugins.lock().unwrap();

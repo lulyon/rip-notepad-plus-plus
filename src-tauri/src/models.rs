@@ -17,13 +17,6 @@ pub struct FileReadResult {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct FileWriteRequest {
-    pub path: String,
-    pub content: String,
-    pub encoding: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EncodingInfo {
     pub name: String,
     pub label: String,
@@ -64,12 +57,14 @@ pub struct SessionTab {
     pub language: String,
 }
 
+#[allow(dead_code)] // reserved for future macro persistence
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MacroAction {
     pub action_type: String,
     pub payload: serde_json::Value,
 }
 
+#[allow(dead_code)] // reserved for future macro persistence
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MacroEntry {
     pub name: String,
@@ -88,12 +83,6 @@ pub struct CommandResult {
 pub struct SystemInfo {
     pub platform: String,
     pub locale: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct RenameRequest {
-    pub old_path: String,
-    pub new_path: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
