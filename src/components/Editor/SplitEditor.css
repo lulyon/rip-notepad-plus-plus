@@ -1,0 +1,44 @@
+.split-editor {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.split-horizontal {
+  flex-direction: row;
+}
+
+.split-vertical {
+  flex-direction: column;
+}
+
+.split-pane {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.split-divider {
+  background-color: var(--border-color);
+  flex-shrink: 0;
+}
+
+.split-horizontal .split-divider {
+  width: 3px;
+  cursor: col-resize;
+}
+
+.split-vertical .split-divider {
+  height: 3px;
+  cursor: row-resize;
+}
+
+.split-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-secondary);
+  font-size: 13px;
+}

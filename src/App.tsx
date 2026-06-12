@@ -5,11 +5,12 @@ import { useWindowTitle } from "./hooks/useWindowTitle";
 import { useFileDrop } from "./hooks/useFileDrop";
 import { useKeyboardShortcuts } from "./hooks/useKeyboardShortcuts";
 import { useMenuActions } from "./hooks/useMenuActions";
+import { useMacroRecorder } from "./hooks/useMacroRecorder";
 import { ipc } from "./lib/ipc";
 import { detectLanguage } from "./lib/constants";
 import { MenuBar } from "./components/MenuBar/MenuBar";
 import { TabBar } from "./components/TabBar/TabBar";
-import { Editor } from "./components/Editor/Editor";
+import { SplitEditor } from "./components/Editor/SplitEditor";
 import { StatusBar } from "./components/StatusBar/StatusBar";
 import { SearchPanel } from "./components/SearchPanel/SearchPanel";
 import { EncodingDialog } from "./components/Dialogs/EncodingDialog";
@@ -31,6 +32,7 @@ function App() {
   useFileDrop();
   useKeyboardShortcuts();
   useMenuActions();
+  useMacroRecorder();
 
   // Listen for custom events
   useEffect(() => {
@@ -84,7 +86,7 @@ function App() {
       <TabBar />
       <div className="editor-area">
         {activeTabId ? (
-          <Editor />
+          <SplitEditor />
         ) : (
           <div className="welcome">
             <h1>ripNotepad++</h1>

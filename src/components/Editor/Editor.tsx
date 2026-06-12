@@ -6,15 +6,23 @@ import { useEditorRefStore } from "../../stores/editorRefStore";
 import { useSettingsStore } from "../../stores/settingsStore";
 import { useMonacoActions } from "../../hooks/useMonacoActions";
 
-export function Editor() {
+interface EditorProps {
+  /** Override which tab to edit. Defaults to store's activeTabId. */
+  tabId?: string;
+}
+
+export function Editor({ tabId }: EditorProps) {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
-  const activeTabId = useEditorStore((s) => s.activeTabId);
+  const storeActiveTabId = useEditorStore((s) => s.activeTabId);
+  const activeTabId = tabId ?? storeActiveTabId;
   const tabs = useEditorStore((s) => s.tabs);
   const updateTabContent = useEditorStore((s) => s.updateTabContent);
   const updateTabCursor = useEditorStore((s) => s.updateTabCursor);
 
   const { handleMount } = useMonacoActions();
   const setEditorRef = useEditorRefStore((s) => s.setEditorRef);
+  // Only update global editor ref if this is the primary editor
+  const isPrimary = !tabId;
 
   // Read editor settings
   const fontSize = useSettingsStore((s) => s.fontSize);
@@ -35,14 +43,14 @@ export function Editor() {
   // Cleanup editor ref on unmount
   useEffect(() => {
     return () => {
-      setEditorRef(null);
+      if (isPrimary) setEditorRef(null);
     };
-  }, [setEditorRef]);
+  }, [setEditorRef, isPrimary]);
 
   const onMount = useCallback(
     (editor: editor.IStandaloneCodeEditor, monaco: Parameters<typeof handleMount>[1]) => {
       editorRef.current = editor;
-      setEditorRef(editor);
+      if (isPrimary) setEditorRef(editor);
 
       // Register all keyboard actions
       handleMount(editor, monaco);
@@ -58,7 +66,7 @@ export function Editor() {
         }
       });
     },
-    [handleMount, activeTabId, updateTabCursor, setEditorRef],
+    [handleMount, activeTabId, updateTabCursor, setEditorRef, isPrimary],
   );
 
   const handleChange = useCallback(

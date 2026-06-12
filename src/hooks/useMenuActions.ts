@@ -6,6 +6,7 @@ import { useSettingsStore } from "../stores/settingsStore";
 import { useEditorRefStore } from "../stores/editorRefStore";
 import { ipc } from "../lib/ipc";
 import { detectLanguage } from "../lib/constants";
+import { useMacroStore } from "../stores/macroStore";
 import { open, save } from "@tauri-apps/plugin-dialog";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 
@@ -235,6 +236,29 @@ export function useMenuActions() {
           }
           break;
         }
+
+        // ── Macro ──
+        case "macro.startRecord":
+          useMacroStore.getState().startRecording();
+          break;
+        case "macro.stopRecord":
+          useMacroStore.getState().stopRecording();
+          break;
+        case "macro.playback": {
+          const macro = useMacroStore.getState().savedMacros[0];
+          if (macro) {
+            useMacroStore.getState().setPlaybackMacro(macro.name);
+            useMacroStore.getState().setIsPlaying(true);
+          }
+          break;
+        }
+        case "macro.save":
+          if (useMacroStore.getState().recordedActions.length > 0) {
+            useMacroStore.getState().saveMacro(
+              `macro-${Math.random().toString(36).slice(2, 8)}`,
+            );
+          }
+          break;
 
         // ── Window ──
         case "window.nextTab": {
