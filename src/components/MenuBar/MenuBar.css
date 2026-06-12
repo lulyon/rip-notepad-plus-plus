@@ -1,0 +1,115 @@
+.menu-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  height: 28px;
+  user-select: none;
+  flex-shrink: 0;
+  z-index: 500;
+}
+
+.menu-bar-item {
+  position: relative;
+  padding: 4px 10px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 12px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.menu-bar-item:hover,
+.menu-bar-item.active {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.menu-bar-label {
+  pointer-events: none;
+}
+
+/* ── Dropdown menu ── */
+.menu-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  padding: 4px 0;
+  z-index: 1000;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 12px;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 12px;
+  white-space: nowrap;
+  position: relative;
+}
+
+.menu-item:hover {
+  background-color: var(--accent-color);
+}
+
+.menu-item.disabled {
+  color: var(--text-secondary);
+  opacity: 0.5;
+  cursor: default;
+}
+
+.menu-item.disabled:hover {
+  background-color: transparent;
+}
+
+.menu-item-label {
+  flex: 1;
+}
+
+.menu-item-shortcut {
+  color: var(--text-secondary);
+  font-size: 11px;
+  margin-left: 24px;
+}
+
+.menu-item:hover .menu-item-shortcut {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.menu-item-arrow {
+  margin-left: 8px;
+  font-size: 9px;
+  color: var(--text-secondary);
+}
+
+.menu-separator {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 4px 8px;
+}
+
+/* ── Submenu ── */
+.menu-submenu {
+  position: absolute;
+  top: -4px;
+  left: 100%;
+  min-width: 200px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  padding: 4px 0;
+  z-index: 1001;
+}
+
+.menu-submenu-left {
+  left: auto;
+  right: 100%;
+}

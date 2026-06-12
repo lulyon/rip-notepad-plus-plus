@@ -1,0 +1,74 @@
+.shortcut-dialog {
+  min-width: 500px;
+  max-height: 80vh;
+}
+
+.shortcut-search {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  outline: none;
+}
+
+.shortcut-search:focus {
+  border-color: var(--accent-color);
+}
+
+.shortcut-list {
+  max-height: 350px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px;
+  border-radius: 3px;
+}
+
+.shortcut-row:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.shortcut-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.shortcut-binding {
+  padding: 3px 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 11px;
+  font-family: monospace;
+  border-radius: 3px;
+  cursor: pointer;
+  min-width: 120px;
+  text-align: center;
+}
+
+.shortcut-binding:hover {
+  border-color: var(--accent-color);
+}
+
+.shortcut-binding.rebinding {
+  border-color: var(--accent-color);
+  background-color: var(--accent-color);
+  color: #fff;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}

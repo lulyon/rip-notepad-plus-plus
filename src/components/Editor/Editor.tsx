@@ -3,6 +3,7 @@ import MonacoEditor from "@monaco-editor/react";
 import type { editor } from "monaco-editor";
 import { useEditorStore } from "../../stores/editorStore";
 import { useEditorRefStore } from "../../stores/editorRefStore";
+import { useSettingsStore } from "../../stores/settingsStore";
 import { useMonacoActions } from "../../hooks/useMonacoActions";
 
 export function Editor() {
@@ -14,6 +15,20 @@ export function Editor() {
 
   const { handleMount } = useMonacoActions();
   const setEditorRef = useEditorRefStore((s) => s.setEditorRef);
+
+  // Read editor settings
+  const fontSize = useSettingsStore((s) => s.fontSize);
+  const fontFamily = useSettingsStore((s) => s.fontFamily);
+  const tabSize = useSettingsStore((s) => s.tabSize);
+  const insertSpaces = useSettingsStore((s) => s.insertSpaces);
+  const wordWrap = useSettingsStore((s) => s.wordWrap);
+  const lineNumbers = useSettingsStore((s) => s.lineNumbers);
+  const renderWhitespace = useSettingsStore((s) => s.renderWhitespace);
+  const showIndentGuides = useSettingsStore((s) => s.showIndentGuides);
+  const showMinimap = useSettingsStore((s) => s.showMinimap);
+  const bracketPairColorization = useSettingsStore((s) => s.bracketPairColorization);
+  const smoothScrolling = useSettingsStore((s) => s.smoothScrolling);
+  const theme = useSettingsStore((s) => s.theme);
 
   const activeTab = tabs.find((t) => t.id === activeTabId);
 
@@ -65,29 +80,28 @@ export function Editor() {
       height="100%"
       language={activeTab.language}
       value={activeTab.content}
-      theme="vs-dark"
+      theme={theme}
       onChange={handleChange}
       onMount={onMount}
       options={{
-        fontSize: 13,
-        fontFamily:
-          "'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Consolas', monospace",
-        minimap: { enabled: true },
+        fontSize,
+        fontFamily,
+        minimap: { enabled: showMinimap },
         scrollBeyondLastLine: false,
-        wordWrap: "off",
-        lineNumbers: "on",
-        renderWhitespace: "selection",
-        tabSize: 4,
-        insertSpaces: true,
-        bracketPairColorization: { enabled: true },
+        wordWrap,
+        lineNumbers,
+        renderWhitespace,
+        tabSize,
+        insertSpaces,
+        bracketPairColorization: { enabled: bracketPairColorization },
         automaticLayout: true,
         suggest: { showWords: true },
         folding: true,
         foldingStrategy: "indentation",
-        guides: { bracketPairs: true, indentation: true },
+        guides: { bracketPairs: bracketPairColorization, indentation: showIndentGuides },
         cursorBlinking: "smooth",
         cursorSmoothCaretAnimation: "on",
-        smoothScrolling: true,
+        smoothScrolling,
         padding: { top: 8 },
         find: {
           addExtraSpaceOnTop: false,

@@ -1,0 +1,78 @@
+.prefs-dialog {
+  min-width: 500px;
+  max-height: 80vh;
+}
+
+.prefs-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 12px;
+}
+
+.prefs-tab {
+  padding: 6px 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.prefs-tab:hover {
+  color: var(--text-primary);
+}
+
+.prefs-tab.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent-color);
+}
+
+.prefs-body {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.prefs-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.prefs-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.prefs-row span:first-child {
+  min-width: 100px;
+  color: var(--text-secondary);
+}
+
+.prefs-row select,
+.prefs-row input[type="number"],
+.prefs-row input[type="text"] {
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 12px;
+  border-radius: 3px;
+  outline: none;
+}
+
+.prefs-row select:focus,
+.prefs-row input:focus {
+  border-color: var(--accent-color);
+}
+
+.prefs-row input[type="number"] {
+  width: 64px;
+}
+
+.prefs-row input[type="text"] {
+  width: 200px;
+}
