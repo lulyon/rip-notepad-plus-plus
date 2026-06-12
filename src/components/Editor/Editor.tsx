@@ -1,30 +1,40 @@
 import { useRef, useCallback } from "react";
-import MonacoEditor, { OnMount } from "@monaco-editor/react";
+import MonacoEditor from "@monaco-editor/react";
 import type { editor } from "monaco-editor";
 import { useEditorStore } from "../../stores/editorStore";
+import { useMonacoActions } from "../../hooks/useMonacoActions";
 
 export function Editor() {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const tabs = useEditorStore((s) => s.tabs);
   const updateTabContent = useEditorStore((s) => s.updateTabContent);
+  const updateTabCursor = useEditorStore((s) => s.updateTabCursor);
+
+  const { handleMount } = useMonacoActions();
 
   const activeTab = tabs.find((t) => t.id === activeTabId);
 
-  const handleMount: OnMount = useCallback((editor, monaco) => {
-    editorRef.current = editor;
+  const onMount = useCallback(
+    (editor: editor.IStandaloneCodeEditor, monaco: Parameters<typeof handleMount>[1]) => {
+      editorRef.current = editor;
 
-    // Register keyboard shortcuts
-    editor.addAction({
-      id: "save-file",
-      label: "Save File",
-      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
-      run: () => {
-        // TODO: implement save via Tauri dialog
-        console.log("Save triggered");
-      },
-    });
-  }, []);
+      // Register all keyboard actions
+      handleMount(editor, monaco);
+
+      // Track cursor position
+      editor.onDidChangeCursorPosition((e) => {
+        if (activeTabId) {
+          updateTabCursor(
+            activeTabId,
+            e.position.lineNumber,
+            e.position.column,
+          );
+        }
+      });
+    },
+    [handleMount, activeTabId, updateTabCursor],
+  );
 
   const handleChange = useCallback(
     (value: string | undefined) => {
@@ -47,7 +57,7 @@ export function Editor() {
       value={activeTab.content}
       theme="vs-dark"
       onChange={handleChange}
-      onMount={handleMount}
+      onMount={onMount}
       options={{
         fontSize: 13,
         fontFamily:
@@ -69,6 +79,10 @@ export function Editor() {
         cursorSmoothCaretAnimation: "on",
         smoothScrolling: true,
         padding: { top: 8 },
+        find: {
+          addExtraSpaceOnTop: false,
+          autoFindInSelection: "never",
+        },
       }}
     />
   );

@@ -18,12 +18,13 @@ export function StatusBar() {
   return (
     <div className="status-bar">
       <span className="status-item">
-        {activeTab.modified ? "●" : ""} {activeTab.name}
+        {activeTab.modified ? "● " : ""}
+        {activeTab.name}
       </span>
       <span className="status-item">{activeTab.language}</span>
       <span className="status-item">{activeTab.encoding}</span>
       <span className="status-item">
-        Ln {1}, Col {1}
+        Ln {activeTab.cursorLine}, Col {activeTab.cursorColumn}
       </span>
     </div>
   );

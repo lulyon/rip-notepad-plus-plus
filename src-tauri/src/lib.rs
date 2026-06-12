@@ -1,32 +1,16 @@
-use serde::{Deserialize, Serialize};
+mod commands;
+mod encoding;
+mod models;
+mod search;
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct FileInfo {
-    pub path: String,
-    pub name: String,
-    pub content: String,
-    pub encoding: String,
-    pub modified: bool,
-}
-
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! ripNotepad++ is ready.", name)
-}
-
-#[tauri::command]
-fn detect_encoding(data: Vec<u8>) -> String {
-    // Use encoding_rs to detect encoding via BOM, default to UTF-8
-    if let Some((encoding, _)) = encoding_rs::Encoding::for_bom(&data) {
-        return encoding.name().to_string();
-    }
-
-    // Try to decode as UTF-8, fall back to other encodings
-    match std::str::from_utf8(&data) {
-        Ok(_) => "UTF-8".to_string(),
-        Err(_) => "UTF-8".to_string(),
-    }
-}
+use commands::encoding::{
+    convert_encoding_command, decode_with_encoding, detect_encoding, encode_with_encoding,
+    list_encodings,
+};
+use commands::file_ops::{delete_file, file_exists, get_file_size, read_file, rename_file, write_file};
+use commands::search::find_in_files;
+use commands::session::{clear_session, load_session, save_session};
+use commands::system::{get_system_info, open_in_browser};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -34,7 +18,30 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![greet, detect_encoding])
+        .invoke_handler(tauri::generate_handler![
+            // File ops
+            read_file,
+            write_file,
+            delete_file,
+            rename_file,
+            file_exists,
+            get_file_size,
+            // Encoding
+            detect_encoding,
+            convert_encoding_command,
+            list_encodings,
+            decode_with_encoding,
+            encode_with_encoding,
+            // Search
+            find_in_files,
+            // Session
+            save_session,
+            load_session,
+            clear_session,
+            // System
+            open_in_browser,
+            get_system_info,
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
