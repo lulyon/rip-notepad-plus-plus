@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_STRUCTURE, dispatchMenuAction } from "./menuDefinitions";
 import { MenuItem } from "./MenuItem";
 import "./MenuBar.css";
 
 export function MenuBar() {
+  const { t } = useTranslation();
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const menuBarRef = useRef<HTMLDivElement>(null);
 
@@ -95,7 +97,7 @@ export function MenuBar() {
             }
           }}
         >
-          <span className="menu-bar-label">{menu.label}</span>
+          <span className="menu-bar-label">{t(menu.labelKey)}</span>
 
           {openMenuId === menu.id && (
             <div className="menu-dropdown">

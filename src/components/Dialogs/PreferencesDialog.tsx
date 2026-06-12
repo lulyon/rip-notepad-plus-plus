@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useSettingsStore } from "../../stores/settingsStore";
 import "./PreferencesDialog.css";
 
@@ -10,6 +11,7 @@ interface Props {
 type PrefTab = "general" | "editing" | "newdoc";
 
 export function PreferencesDialog({ open, onClose }: Props) {
+  const { i18n } = useTranslation();
   const settings = useSettingsStore();
   const [activeTab, setActiveTab] = useState<PrefTab>("general");
 
@@ -99,6 +101,21 @@ export function PreferencesDialog({ open, onClose }: Props) {
                   onChange={() => settings.toggleSetting("showMenuBar")}
                 />
                 <span>Show menu bar (Alt to toggle)</span>
+              </label>
+
+              <label className="prefs-row">
+                <span>Language / 语言:</span>
+                <select
+                  value={i18n.language}
+                  onChange={(e) => {
+                    const lang = e.target.value;
+                    i18n.changeLanguage(lang);
+                    localStorage.setItem("ripnotepadpp-lang", lang);
+                  }}
+                >
+                  <option value="zh">中文</option>
+                  <option value="en">English</option>
+                </select>
               </label>
             </div>
           )}

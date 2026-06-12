@@ -7,10 +7,10 @@ use commands::encoding::{
     convert_encoding_command, decode_with_encoding, detect_encoding, encode_with_encoding,
     list_encodings,
 };
-use commands::file_ops::{delete_file, file_exists, get_file_size, read_file, rename_file, write_file};
+use commands::file_ops::{delete_file, file_exists, get_file_size, list_directory, read_file, rename_file, write_file};
 use commands::search::find_in_files;
 use commands::session::{clear_session, load_session, save_session};
-use commands::system::{get_system_info, open_in_browser};
+use commands::system::{get_system_info, open_in_browser, run_command};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -26,6 +26,7 @@ pub fn run() {
             rename_file,
             file_exists,
             get_file_size,
+            list_directory,
             // Encoding
             detect_encoding,
             convert_encoding_command,
@@ -40,6 +41,7 @@ pub fn run() {
             clear_session,
             // System
             open_in_browser,
+            run_command,
             get_system_info,
         ])
         .run(tauri::generate_context!())

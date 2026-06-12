@@ -7,6 +7,8 @@ import type {
   SessionData,
   SystemInfo,
   ConvertEncodingRequest,
+  CommandResult,
+  DirEntry,
 } from "../types/ipc";
 
 /** Typed wrapper around Tauri invoke(). */
@@ -34,6 +36,10 @@ export const ipc = {
 
   getFileSize(path: string): Promise<number> {
     return invoke("get_file_size", { path });
+  },
+
+  listDirectory(path: string): Promise<DirEntry[]> {
+    return invoke("list_directory", { path });
   },
 
   // ── Encoding ──
@@ -78,6 +84,10 @@ export const ipc = {
   // ── System ──
   openInBrowser(url: string): Promise<void> {
     return invoke("open_in_browser", { url });
+  },
+
+  runCommand(command: string, cwd?: string): Promise<CommandResult> {
+    return invoke("run_command", { command, cwd: cwd ?? null });
   },
 
   getSystemInfo(): Promise<SystemInfo> {

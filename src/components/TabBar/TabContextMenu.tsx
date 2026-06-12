@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useEditorStore } from "../../stores/editorStore";
 import "./TabContextMenu.css";
 
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export function TabContextMenu({ tabId, x, y, onClose }: Props) {
+  const { t } = useTranslation();
   const menuRef = useRef<HTMLDivElement>(null);
   const tab = useEditorStore((s) => s.tabs.find((t) => t.id === tabId));
   const closeTab = useEditorStore((s) => s.closeTab);
@@ -36,12 +38,11 @@ export function TabContextMenu({ tabId, x, y, onClose }: Props) {
   if (!tab) return null;
 
   const items = [
-    { label: "Close", action: () => { closeTab(tabId); onClose(); } },
-    { label: "Close Others", action: () => { closeOtherTabs(tabId); onClose(); }, disabled: useEditorStore.getState().tabs.length <= 1 },
-    { label: "Close All", action: () => { closeAllTabs(); onClose(); }, disabled: useEditorStore.getState().tabs.length === 0 },
+    { labelKey: "tab.close", action: () => { closeTab(tabId); onClose(); } },
+    { labelKey: "tab.closeOthers", action: () => { closeOtherTabs(tabId); onClose(); }, disabled: useEditorStore.getState().tabs.length <= 1 },
+    { labelKey: "tab.closeAll", action: () => { closeAllTabs(); onClose(); }, disabled: useEditorStore.getState().tabs.length === 0 },
     { type: "separator" as const },
-    { label: "Copy File Path", action: () => { if (tab.path) navigator.clipboard.writeText(tab.path); onClose(); }, disabled: !tab.path },
-    { label: "Open Containing Folder", action: () => { /* TODO: Phase 5 */ onClose(); }, disabled: !tab.path },
+    { labelKey: "tab.copyPath", action: () => { if (tab.path) navigator.clipboard.writeText(tab.path); onClose(); }, disabled: !tab.path },
   ];
 
   return (
@@ -57,7 +58,7 @@ export function TabContextMenu({ tabId, x, y, onClose }: Props) {
             onClick={item.action}
             disabled={item.disabled}
           >
-            {item.label}
+            {t(item.labelKey)}
           </button>
         );
       })}

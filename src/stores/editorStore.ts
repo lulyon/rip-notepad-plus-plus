@@ -33,6 +33,7 @@ interface EditorState {
   renameTab: (id: string, newPath: string) => void;
   reloadTab: (id: string, content: string, encoding: string) => void;
   getTab: (id: string) => Tab | undefined;
+  moveTab: (fromIndex: number, toIndex: number) => void;
 }
 
 let tabCounter = 0;
@@ -197,5 +198,21 @@ export const useEditorStore = create<EditorState>((set, get) => ({
         t.id === id ? { ...t, content, encoding, modified: false } : t,
       ),
     }));
+  },
+
+  moveTab: (fromIndex, toIndex) => {
+    set((s) => {
+      if (
+        fromIndex < 0 || fromIndex >= s.tabs.length ||
+        toIndex < 0 || toIndex >= s.tabs.length ||
+        fromIndex === toIndex
+      ) {
+        return s;
+      }
+      const newTabs = [...s.tabs];
+      const [moved] = newTabs.splice(fromIndex, 1);
+      newTabs.splice(toIndex, 0, moved);
+      return { ...s, tabs: newTabs };
+    });
   },
 }));

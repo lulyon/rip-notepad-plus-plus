@@ -11,6 +11,7 @@ interface Props {
 export function RunDialog({ open, onClose }: Props) {
   const [command, setCommand] = useState("");
   const [output, setOutput] = useState("");
+  const [running, setRunning] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const activeTab = useEditorStore((s) =>
     s.tabs.find((t) => t.id === s.activeTabId),
@@ -26,6 +27,29 @@ export function RunDialog({ open, onClose }: Props) {
     }
   }, [open, activeTab]);
 
+  const executeCommand = async () => {
+    const cmd = command.trim();
+    if (!cmd) return;
+
+    setOutput((p) => p + `> ${cmd}\n`);
+    setRunning(true);
+
+    try {
+      const cwd = activeTab?.path
+        ? activeTab.path.split(/[/\\]/).slice(0, -1).join("/") || undefined
+        : undefined;
+      const result = await ipc.runCommand(cmd, cwd);
+      setOutput((p) => p + `${result.stdout}${result.stderr ? `\n[stderr]\n${result.stderr}` : ""}`);
+      if (result.exit_code !== 0) {
+        setOutput((p) => p + `\n[exit code: ${result.exit_code}]`);
+      }
+    } catch (err) {
+      setOutput((p) => p + `Error: ${err}\n`);
+    } finally {
+      setRunning(false);
+    }
+  };
+
   if (!open) return null;
 
   return (
@@ -39,20 +63,21 @@ export function RunDialog({ open, onClose }: Props) {
             className="run-input"
             value={command}
             onChange={(e) => setCommand(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && command.trim()) {
-                setOutput(`> ${command}\n`);
-                if (command.startsWith("open ") && activeTab?.path) {
-                  ipc.openInBrowser(activeTab.path).catch((err) => {
-                    setOutput((p) => p + `Error: ${err}\n`);
-                  });
-                } else {
-                  setOutput((p) => p + "Command execution not available in dev mode\n");
-                }
+            disabled={running}
+            onKeyDown={async (e) => {
+              if (e.key === "Enter" && !running) {
+                await executeCommand();
               }
             }}
-            placeholder="open index.html / command..."
+            placeholder="Enter a shell command..."
           />
+          <button
+            className="btn run-btn"
+            onClick={executeCommand}
+            disabled={running || !command.trim()}
+          >
+            {running ? "Running..." : "Run"}
+          </button>
         </div>
 
         {output && (

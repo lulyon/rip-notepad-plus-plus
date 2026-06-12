@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import type { MenuItemDef } from "./menuDefinitions";
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export function MenuItem({ item, depth, onAction }: Props) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const hasChildren = item.children && item.children.length > 0;
@@ -47,7 +49,7 @@ export function MenuItem({ item, depth, onAction }: Props) {
         }
       }}
     >
-      <span className="menu-item-label">{item.label}</span>
+      <span className="menu-item-label">{t(item.labelKey)}</span>
       {item.shortcut && !hasChildren && (
         <span className="menu-item-shortcut">{item.shortcut}</span>
       )}

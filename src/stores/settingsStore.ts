@@ -20,7 +20,9 @@ export interface SettingsState {
   splitView: "none" | "horizontal" | "vertical";
   showMenuBar: boolean;
   showStatusBar: boolean;
+  showSidebar: boolean;
   fullScreen: boolean;
+  alwaysOnTop: boolean;
 
   // ── New Document ──
   defaultEncoding: string;
@@ -109,7 +111,9 @@ export const useSettingsStore = create<SettingsState>((set) => {
     splitView: saved.splitView ?? "none",
     showMenuBar: saved.showMenuBar ?? true,
     showStatusBar: saved.showStatusBar ?? true,
+    showSidebar: saved.showSidebar ?? false,
     fullScreen: saved.fullScreen ?? false,
+    alwaysOnTop: saved.alwaysOnTop ?? false,
     defaultEncoding: saved.defaultEncoding ?? "UTF-8",
     defaultLanguage: saved.defaultLanguage ?? "plaintext",
     defaultEol: saved.defaultEol ?? "LF",

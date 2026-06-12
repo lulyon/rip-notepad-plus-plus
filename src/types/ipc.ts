@@ -61,3 +61,17 @@ export interface ConvertEncodingRequest {
   from_encoding: string;
   to_encoding: string;
 }
+
+export interface CommandResult {
+  exit_code: number;
+  stdout: string;
+  stderr: string;
+}
+
+export interface DirEntry {
+  name: string;
+  path: string;
+  is_dir: boolean;
+  size: number;
+  extension: string | null;
+}

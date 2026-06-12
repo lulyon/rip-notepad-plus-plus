@@ -18,7 +18,9 @@
         "minWidth": 400,
         "minHeight": 300,
         "resizable": true,
-        "fullscreen": false
+        "fullscreen": false,
+        "decorations": true,
+        "center": true
       }
     ],
     "security": {
@@ -32,6 +34,18 @@
       "icons/32x32.png",
       "icons/128x128.png",
       "icons/128x128@2x.png"
+    ],
+    "fileAssociations": [
+      {
+        "ext": ["txt", "md", "json", "xml", "html", "css", "js", "ts", "py", "rs", "go", "java", "c", "cpp", "h", "yaml", "yml", "toml", "ini", "cfg", "log", "csv"],
+        "name": "Text Document",
+        "description": "Text file"
+      },
+      {
+        "ext": ["jsx", "tsx", "vue", "svelte"],
+        "name": "Source Code",
+        "description": "Source code file"
+      }
     ]
   }
 }

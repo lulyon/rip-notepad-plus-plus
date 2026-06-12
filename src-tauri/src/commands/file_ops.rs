@@ -1,7 +1,19 @@
-use crate::models::FileReadResult;
+use crate::models::{DirEntry, FileReadResult};
+
+const LARGE_FILE_THRESHOLD: u64 = 50 * 1024 * 1024; // 50MB
 
 #[tauri::command]
 pub async fn read_file(path: String, encoding_override: Option<String>) -> Result<FileReadResult, String> {
+    let metadata = std::fs::metadata(&path)
+        .map_err(|e| format!("Failed to read file metadata '{}': {}", path, e))?;
+
+    if metadata.len() > LARGE_FILE_THRESHOLD {
+        return Err(format!(
+            "File is too large: {} MB. Maximum supported size is 50 MB. Consider using a different editor for large files.",
+            metadata.len() / (1024 * 1024)
+        ));
+    }
+
     let bytes = std::fs::read(&path)
         .map_err(|e| format!("Failed to read file '{}': {}", path, e))?;
 
@@ -58,4 +70,52 @@ pub async fn get_file_size(path: String) -> Result<u64, String> {
     let metadata = std::fs::metadata(&path)
         .map_err(|e| format!("Failed to get file metadata: {}", e))?;
     Ok(metadata.len())
+}
+
+#[tauri::command]
+pub async fn list_directory(path: String) -> Result<Vec<DirEntry>, String> {
+    let entries = std::fs::read_dir(&path)
+        .map_err(|e| format!("Failed to read directory '{}': {}", path, e))?;
+
+    let mut result: Vec<DirEntry> = Vec::new();
+    for entry in entries {
+        let entry = entry.map_err(|e| format!("Failed to read entry: {}", e))?;
+        let path_buf = entry.path();
+        let metadata = entry
+            .metadata()
+            .map_err(|e| format!("Failed to get metadata: {}", e))?;
+
+        let is_dir = metadata.is_dir();
+        let name = entry.file_name().to_string_lossy().to_string();
+
+        // Skip hidden files (starting with .)
+        if name.starts_with('.') {
+            continue;
+        }
+
+        let ext = if !is_dir {
+            path_buf.extension().map(|e| e.to_string_lossy().to_string())
+        } else {
+            None
+        };
+
+        result.push(DirEntry {
+            name,
+            path: path_buf.to_string_lossy().to_string(),
+            is_dir,
+            size: metadata.len(),
+            extension: ext,
+        });
+    }
+
+    // Sort: directories first, then files, both alphabetically
+    result.sort_by(|a, b| {
+        if a.is_dir != b.is_dir {
+            b.is_dir.cmp(&a.is_dir) // directories first
+        } else {
+            a.name.to_lowercase().cmp(&b.name.to_lowercase())
+        }
+    });
+
+    Ok(result)
 }

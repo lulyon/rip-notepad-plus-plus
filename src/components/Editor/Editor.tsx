@@ -115,6 +115,8 @@ export function Editor({ tabId }: EditorProps) {
           addExtraSpaceOnTop: false,
           autoFindInSelection: "never",
         },
+        columnSelection: true,
+        multiCursorModifier: "alt",
       }}
     />
   );

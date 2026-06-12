@@ -3,7 +3,13 @@
 }
 
 .run-row {
+  display: flex;
+  gap: 8px;
   margin-bottom: 12px;
+}
+
+.run-input {
+  flex: 1;
 }
 
 .run-input {

@@ -81,6 +81,9 @@ export function useMenuActions() {
             } catch (err) { console.error("Reload failed:", err); }
           }
           break;
+        case "file.print":
+          editorRef?.trigger("keyboard", "editor.action.print", null);
+          break;
         case "file.exit":
           await getCurrentWindow().close();
           break;
@@ -118,6 +121,32 @@ export function useMenuActions() {
           break;
         case "edit.toLower":
           editorRef?.trigger("keyboard", "editor.action.transformToLowercase", null);
+          break;
+        case "edit.removeEmptyLines": {
+          const model = editorRef?.getModel();
+          if (!model) break;
+          const lines = model.getLinesContent();
+          const nonEmpty: number[] = [];
+          lines.forEach((line, i) => {
+            if (line.trim() !== "") nonEmpty.push(i + 1);
+          });
+          if (nonEmpty.length < lines.length) {
+            const newContent = nonEmpty.map((i) => lines[i - 1]).join(model.getEOL());
+            const fullRange = model.getFullModelRange();
+            editorRef?.executeEdits("remove-empty-lines", [
+              { range: fullRange, text: newContent },
+            ]);
+          }
+          break;
+        }
+        case "edit.moveLineUp":
+          editorRef?.trigger("keyboard", "editor.action.moveLinesUpAction", null);
+          break;
+        case "edit.moveLineDown":
+          editorRef?.trigger("keyboard", "editor.action.moveLinesDownAction", null);
+          break;
+        case "edit.columnMode":
+          editorRef?.trigger("keyboard", "editor.action.toggleColumnSelection", null);
           break;
 
         // ── Search ──
@@ -197,6 +226,16 @@ export function useMenuActions() {
           useSettingsStore.getState().updateSetting("fullScreen", !isFull);
           break;
         }
+        case "view.alwaysOnTop": {
+          const win = getCurrentWindow();
+          const isOnTop = await win.isAlwaysOnTop();
+          await win.setAlwaysOnTop(!isOnTop);
+          useSettingsStore.getState().updateSetting("alwaysOnTop", !isOnTop);
+          break;
+        }
+        case "view.toggleSidebar":
+          useSettingsStore.getState().toggleSetting("showSidebar");
+          break;
         case "view.splitNone":
           useSettingsStore.getState().updateSetting("splitView", "none");
           break;

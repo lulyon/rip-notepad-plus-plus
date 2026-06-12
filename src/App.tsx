@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import "./i18n";
 import { useEditorStore } from "./stores/editorStore";
 import { useSettingsStore } from "./stores/settingsStore";
 import { useWindowTitle } from "./hooks/useWindowTitle";
@@ -19,8 +21,10 @@ import { PreferencesDialog } from "./components/Dialogs/PreferencesDialog";
 import { ShortcutMapperDialog } from "./components/Dialogs/ShortcutMapperDialog";
 import { RunDialog } from "./components/Dialogs/RunDialog";
 import { AboutDialog } from "./components/Dialogs/AboutDialog";
+import { Sidebar } from "./components/Panels/Sidebar";
 
 function App() {
+  const { t } = useTranslation();
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const showMenuBar = useSettingsStore((s) => s.showMenuBar);
   const showStatusBar = useSettingsStore((s) => s.showStatusBar);
@@ -99,17 +103,20 @@ function App() {
     <div className="app">
       {showMenuBar && <MenuBar />}
       <TabBar />
-      <div className="editor-area">
-        {activeTabId ? (
-          <SplitEditor />
-        ) : (
-          <div className="welcome">
-            <h1>ripNotepad++</h1>
-            <p>Ctrl+N new file · Ctrl+O open · Ctrl+S save</p>
-            <p>Drop files here to open</p>
-          </div>
-        )}
-        <SearchPanel />
+      <div className="main-content">
+        <Sidebar />
+        <div className="editor-area">
+          {activeTabId ? (
+            <SplitEditor />
+          ) : (
+            <div className="welcome">
+              <h1>{t("welcome.title")}</h1>
+              <p>{t("welcome.subtitle")}</p>
+              <p>{t("welcome.dropHint")}</p>
+            </div>
+          )}
+          <SearchPanel />
+        </div>
       </div>
       {showStatusBar && <StatusBar />}
 
