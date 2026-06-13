@@ -26,3 +26,4 @@ regex = "1"
 open = "5"
 sys-locale = "0.3"
 log = "0.4"
+image = { version = "0.25", default-features = false, features = ["png"] }

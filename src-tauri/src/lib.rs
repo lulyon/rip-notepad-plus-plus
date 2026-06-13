@@ -14,6 +14,7 @@ use commands::session::{clear_session, load_session, save_session};
 use commands::git::{git_branch, git_diff_file, git_status};
 use commands::plugin::{list_plugins, notify_plugins, send_plugin_command, start_plugin, stop_plugin, update_editor_state};
 use commands::system::{get_system_info, open_in_browser, open_terminal, run_command};
+use tauri::Manager;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -21,6 +22,18 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_shell::init())
+        .setup(|app| {
+            let icon_bytes = include_bytes!("../icons/128x128.png");
+            if let Ok(img) = image::load_from_memory(icon_bytes) {
+                let rgba = img.to_rgba8();
+                let (width, height) = rgba.dimensions();
+                let icon = tauri::image::Image::new_owned(rgba.into_raw(), width, height);
+                if let Some(window) = app.get_webview_window("main") {
+                    let _ = window.set_icon(icon);
+                }
+            }
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             // File ops
             read_file,
