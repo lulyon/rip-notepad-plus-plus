@@ -24,7 +24,12 @@ export function usePluginBridge() {
         cursor_line: activeTab.cursorLine,
         cursor_column: activeTab.cursorColumn,
         tab_count: tabs.length,
-      }).catch(() => {}); // Silently ignore if no plugins running
+        selection_start_line: 1,
+        selection_start_column: 1,
+        selection_end_line: 1,
+        selection_end_column: 1,
+        has_selection: false,
+      }).catch(() => {});
     } else {
       ipc.updateEditorState({
         active_file_path: null,
@@ -35,6 +40,11 @@ export function usePluginBridge() {
         cursor_line: 1,
         cursor_column: 1,
         tab_count: tabs.length,
+        selection_start_line: 1,
+        selection_start_column: 1,
+        selection_end_line: 1,
+        selection_end_column: 1,
+        has_selection: false,
       }).catch(() => {});
     }
   }, [activeTab?.id, activeTab?.cursorLine, activeTab?.cursorColumn, activeTab?.content?.length ?? 0]);
@@ -99,6 +109,9 @@ export function usePluginBridge() {
           cursor_line: tab.cursorLine,
           cursor_column: tab.cursorColumn,
           tab_count: useEditorStore.getState().tabs.length,
+          selection_start_line: 1, selection_start_column: 1,
+          selection_end_line: 1, selection_end_column: 1,
+          has_selection: false,
         }).catch(() => {});
       }
     }

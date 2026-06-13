@@ -64,6 +64,11 @@ pub struct EditorState {
     pub cursor_line: u32,
     pub cursor_column: u32,
     pub tab_count: usize,
+    pub selection_start_line: u32,
+    pub selection_start_column: u32,
+    pub selection_end_line: u32,
+    pub selection_end_column: u32,
+    pub has_selection: bool,
 }
 
 impl Default for EditorState {
@@ -77,6 +82,11 @@ impl Default for EditorState {
             cursor_line: 1,
             cursor_column: 1,
             tab_count: 0,
+            selection_start_line: 1,
+            selection_start_column: 1,
+            selection_end_line: 1,
+            selection_end_column: 1,
+            has_selection: false,
         }
     }
 }

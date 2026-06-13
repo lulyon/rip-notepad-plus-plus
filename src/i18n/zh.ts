@@ -35,6 +35,13 @@ const zh = {
     "menu.edit.removeEmptyLines": "删除空行",
     "menu.edit.toUpper": "转为大写(&U)",
     "menu.edit.toLower": "转为小写(&L)",
+    "menu.edit.copyFilePath": "复制文件路径到剪贴板",
+    "menu.edit.copyFileName": "复制文件名到剪贴板",
+    "menu.edit.copyDirPath": "复制目录路径到剪贴板",
+    "menu.edit.insertDateTime": "插入日期时间",
+    "menu.edit.sortAscending": "升序排列文本行",
+    "menu.edit.sortDescending": "降序排列文本行",
+    "menu.edit.removeDupLines": "移除重复行",
 
     // ── Menu: Search ──
     "menu.search": "搜索(&S)",
@@ -174,8 +181,13 @@ const zh = {
 
     // ── Sidebar ──
     "sidebar.files": "文件",
+    "sidebar.doclist": "文档列表",
     "sidebar.symbols": "符号",
     "sidebar.git": "Git",
+
+    // ── DocList ──
+    "doclist.empty": "没有打开的文档",
+    "doclist.count": "个文档",
 
     // ── Git ──
     "git.noProject": "打开一个文件夹以查看 Git 状态",

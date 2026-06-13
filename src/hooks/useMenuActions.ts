@@ -205,6 +205,54 @@ export function useMenuActions() {
         case "edit.moveLineDown":
           editorRef?.trigger("keyboard", "editor.action.moveLinesDownAction", null);
           break;
+        case "edit.copyFilePath":
+          if (tab?.path) navigator.clipboard.writeText(tab.path);
+          break;
+        case "edit.copyFileName":
+          if (tab?.path) navigator.clipboard.writeText(tab.path.split(/[/\\]/).pop() || "");
+          break;
+        case "edit.copyDirPath":
+          if (tab?.path) navigator.clipboard.writeText(tab.path.split(/[/\\]/).slice(0, -1).join("/") || tab.path);
+          break;
+        case "edit.insertDateTime": {
+          const now = new Date();
+          const text = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")} ${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}:${String(now.getSeconds()).padStart(2,"0")}`;
+          editorRef?.trigger("keyboard", "type", { text });
+          break;
+        }
+        case "edit.sortAscending": {
+          const model = editorRef?.getModel();
+          if (!model) break;
+          const lines = model.getLinesContent();
+          const sorted = [...lines].sort((a, b) => a.localeCompare(b));
+          const fullRange = model.getFullModelRange();
+          editorRef?.executeEdits("sort", [{ range: fullRange, text: sorted.join(model.getEOL()) }]);
+          break;
+        }
+        case "edit.sortDescending": {
+          const model = editorRef?.getModel();
+          if (!model) break;
+          const lines = model.getLinesContent();
+          const sorted = [...lines].sort((a, b) => b.localeCompare(a));
+          const fullRange = model.getFullModelRange();
+          editorRef?.executeEdits("sort", [{ range: fullRange, text: sorted.join(model.getEOL()) }]);
+          break;
+        }
+        case "edit.removeDupLines": {
+          const model = editorRef?.getModel();
+          if (!model) break;
+          const lines = model.getLinesContent();
+          const seen = new Set<string>();
+          const unique = lines.filter((line) => {
+            const key = line.trim();
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          });
+          const fullRange = model.getFullModelRange();
+          editorRef?.executeEdits("dedup", [{ range: fullRange, text: unique.join(model.getEOL()) }]);
+          break;
+        }
         case "edit.columnMode":
           editorRef?.trigger("keyboard", "editor.action.toggleColumnSelection", null);
           break;

@@ -35,6 +35,13 @@ const en = {
     "menu.edit.removeEmptyLines": "Remove Empty Lines",
     "menu.edit.toUpper": "To &Uppercase",
     "menu.edit.toLower": "To &Lowercase",
+    "menu.edit.copyFilePath": "Copy File Path to Clipboard",
+    "menu.edit.copyFileName": "Copy File Name to Clipboard",
+    "menu.edit.copyDirPath": "Copy Directory Path to Clipboard",
+    "menu.edit.insertDateTime": "Insert Date && Time",
+    "menu.edit.sortAscending": "Sort Lines Ascending",
+    "menu.edit.sortDescending": "Sort Lines Descending",
+    "menu.edit.removeDupLines": "Remove Duplicate Lines",
 
     // ── Menu: Search ──
     "menu.search": "&Search",
@@ -174,8 +181,13 @@ const en = {
 
     // ── Sidebar ──
     "sidebar.files": "Files",
+    "sidebar.doclist": "Doc List",
     "sidebar.symbols": "Symbols",
     "sidebar.git": "Git",
+
+    // ── DocList ──
+    "doclist.empty": "No documents open",
+    "doclist.count": "documents",
 
     // ── Git ──
     "git.noProject": "Open a folder to view Git status",

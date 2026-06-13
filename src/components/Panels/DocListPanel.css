@@ -1,0 +1,13 @@
+.doclist-panel { height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+.doclist-header { padding: 6px 8px; font-size: 11px; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); }
+.doclist-empty { padding: 16px; text-align: center; color: var(--text-secondary); font-size: 12px; }
+.doclist-list { flex: 1; overflow-y: auto; }
+.doclist-item { display: flex; align-items: center; padding: 4px 8px; cursor: pointer; font-size: 12px; gap: 6px; }
+.doclist-item:hover { background-color: var(--bg-tertiary); }
+.doclist-item.active { background-color: var(--accent-color); color: #fff; }
+.doclist-icon { font-size: 10px; flex-shrink: 0; }
+.doclist-item.modified .doclist-icon { color: #ffcc00; }
+.doclist-item.active.modified .doclist-icon { color: #ffcc00; }
+.doclist-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.doclist-close { font-size: 14px; border: none; background: transparent; color: inherit; cursor: pointer; padding: 0 4px; opacity: 0.5; flex-shrink: 0; }
+.doclist-close:hover { opacity: 1; }

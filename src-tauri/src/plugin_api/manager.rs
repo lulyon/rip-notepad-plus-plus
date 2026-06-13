@@ -317,6 +317,24 @@ impl PluginManager {
             "editor.getLanguage" => {
                 Ok(serde_json::json!(state.active_file_language))
             }
+            "editor.getEncoding" => {
+                Ok(serde_json::json!(state.active_file_encoding))
+            }
+            "editor.getCursor" => {
+                Ok(serde_json::json!({
+                    "line": state.cursor_line,
+                    "column": state.cursor_column,
+                }))
+            }
+            "editor.getFileName" => {
+                Ok(serde_json::json!({
+                    "path": state.active_file_path,
+                    "name": state.active_file_name,
+                }))
+            }
+            "editor.getTabCount" => {
+                Ok(serde_json::json!({ "count": state.tab_count }))
+            }
             _ => Err(format!("Unknown editor method: {}", method)),
         }
     }

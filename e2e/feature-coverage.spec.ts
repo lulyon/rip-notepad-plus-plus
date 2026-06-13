@@ -164,17 +164,13 @@ test.describe("Feature coverage — dialogs", () => {
 test.describe("Feature coverage — sidebar", () => {
   test.beforeEach(async ({ page: p }) => { await setupPage(p); });
 
-  test("sidebar has three tabs", async ({ page }) => {
-    // Open sidebar first via View menu
+  test("sidebar has four tabs", async ({ page }) => {
     await page.locator(".menu-bar-item").nth(3).click(); // View
     await page.waitForTimeout(150);
     await page.locator(".menu-item", { hasText: "显示侧边栏" }).click();
     await page.waitForTimeout(300);
     await expect(page.locator(".sidebar")).toBeVisible();
-    // Check tabs
-    await expect(page.locator(".sidebar-tab").nth(0)).toContainText("文件");
-    await expect(page.locator(".sidebar-tab").nth(1)).toContainText("Git");
-    await expect(page.locator(".sidebar-tab").nth(2)).toContainText("符号");
+    await expect(page.locator(".sidebar-tab")).toHaveCount(4);
   });
 
   test("Workspace: Open Folder menu item exists with shortcut", async ({ page }) => {

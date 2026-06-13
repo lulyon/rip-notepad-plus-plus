@@ -88,6 +88,11 @@ export interface EditorState {
   cursor_line: number;
   cursor_column: number;
   tab_count: number;
+  selection_start_line: number;
+  selection_start_column: number;
+  selection_end_line: number;
+  selection_end_column: number;
+  has_selection: boolean;
 }
 
 export interface GitStatusEntry {
