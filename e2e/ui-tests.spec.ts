@@ -1,44 +1,9 @@
-import { test, expect, type Page } from "@playwright/test";
-import { execSync, spawn, type ChildProcess } from "child_process";
-
-let devServer: ChildProcess;
-const BASE = "http://localhost:1420";
+import { test, expect } from "@playwright/test";
+import { execSync } from "child_process";
 
 test.describe("ripNotepad++ UI Tests", () => {
-  let page: Page;
 
-  test.beforeAll(async () => {
-    // Kill any existing server on port 1420
-    try { spawn("bash", ["-c", "lsof -ti :1420 | xargs kill 2>/dev/null"]); } catch {}
-    // Start Vite dev server via npm run dev
-    devServer = spawn("npm", ["run", "dev"], {
-      cwd: "/Users/zhihu/code/rip-notepad-plus-plus",
-      stdio: "pipe",
-      env: { ...process.env, CI: "true" },
-    });
-    // Wait for server ready
-    await new Promise<void>((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error("Vite start timeout")), 60000);
-      const onData = (data: Buffer) => {
-        const text = data.toString();
-        if (text.includes("Local:") || text.includes("ready in")) {
-          clearTimeout(timeout);
-          resolve();
-        }
-      };
-      devServer.stdout?.on("data", onData);
-      devServer.stderr?.on("data", onData);
-      devServer.on("error", reject);
-    });
-  });
-
-  test.afterAll(() => {
-    devServer?.kill("SIGTERM");
-  });
-
-  test.beforeEach(async ({ browser }) => {
-    const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
-    page = await context.newPage();
+  test.beforeEach(async ({ page }) => {
 
     // Inject Tauri internals BEFORE any JS loads
     await page.addInitScript(() => {
@@ -85,16 +50,12 @@ export function invoke(cmd, args) {
     await page.route("**/@tauri-apps/plugin-*", (r) =>
       r.fulfill({ status: 200, contentType: "application/javascript", body: `export {}` }));
 
-    await page.goto(BASE, { waitUntil: "networkidle" });
+    await page.goto("/", { waitUntil: "networkidle" });
     await page.waitForTimeout(800);
   });
 
-  test.afterEach(async () => {
-    await page.close();
-  });
-
   // ── Basic UI presence ──
-  test("app title and welcome screen visible", async () => {
+  test("app title and welcome screen visible", async ({ page }) => {
     await expect(page.locator(".app")).toBeVisible();
     await expect(page.locator(".menu-bar")).toBeVisible();
     await expect(page.locator(".tab-bar")).toBeVisible();
@@ -103,7 +64,7 @@ export function invoke(cmd, args) {
   });
 
   // ── Menu: File → New (click) ──
-  test("File → New creates a tab", async () => {
+  test("File → New creates a tab", async ({ page }) => {
     // Open File menu
     await page.locator(".menu-bar-item").first().click();
     await page.waitForTimeout(200);
@@ -119,7 +80,7 @@ export function invoke(cmd, args) {
   });
 
   // ── File → New via Ctrl+N menu item ──
-  test("File menu New creates new tab", async () => {
+  test("File menu New creates new tab", async ({ page }) => {
     await page.locator(".menu-bar-item").first().click();
     await page.waitForTimeout(100);
     await page.locator(".menu-item", { hasText: "新建" }).click();
@@ -129,7 +90,7 @@ export function invoke(cmd, args) {
   });
 
   // ── Editor container appears after tab creation ──
-  test("editor area visible after creating tab", async () => {
+  test("editor area visible after creating tab", async ({ page }) => {
     await page.locator(".menu-bar-item").first().click();
     await page.waitForTimeout(100);
     await page.locator(".menu-item", { hasText: "新建" }).click();
@@ -143,7 +104,7 @@ export function invoke(cmd, args) {
   // due to Monaco's complex IME/input handling. Verified manually.
 
   // ── File → Close Tab ──
-  test("File menu Close removes tab and shows welcome", async () => {
+  test("File menu Close removes tab and shows welcome", async ({ page }) => {
     await page.locator(".menu-bar-item").first().click();
     await page.waitForTimeout(100);
     await page.locator(".menu-item", { hasText: "新建" }).click();
@@ -158,7 +119,7 @@ export function invoke(cmd, args) {
   });
 
   // ── Search: Find menu item ──
-  test("Search menu Find opens search panel", async () => {
+  test("Search menu Find opens search panel", async ({ page }) => {
     await page.locator(".menu-bar-item").first().click();
     await page.waitForTimeout(100);
     await page.locator(".menu-item", { hasText: "新建" }).click();
@@ -172,7 +133,7 @@ export function invoke(cmd, args) {
   });
 
   // ── Go to Line ──
-  test("Search menu Go To opens goto dialog", async () => {
+  test("Search menu Go To opens goto dialog", async ({ page }) => {
     await page.locator(".menu-bar-item").first().click();
     await page.waitForTimeout(100);
     await page.locator(".menu-item", { hasText: "新建" }).click();
@@ -185,7 +146,7 @@ export function invoke(cmd, args) {
   });
 
   // ── Tab context menu ──
-  test("right-click tab shows context menu", async () => {
+  test("right-click tab shows context menu", async ({ page }) => {
     await page.locator(".menu-bar-item").first().click();
     await page.waitForTimeout(100);
     await page.locator(".menu-item", { hasText: "新建" }).click();
@@ -196,7 +157,7 @@ export function invoke(cmd, args) {
   });
 
   // ── i18n: language switch via preferences ──
-  test("language switch changes menu labels", async () => {
+  test("language switch changes menu labels", async ({ page }) => {
     // Open File → Preferences
     await page.locator(".menu-bar-item").first().click();
     await page.waitForTimeout(100);
@@ -218,7 +179,7 @@ export function invoke(cmd, args) {
   });
 
   // ── Menu: View always on top toggle ──
-  test("View → Always on Top menu item is present", async () => {
+  test("View → Always on Top menu item is present", async ({ page }) => {
     // Open View menu (4th menu)
     await page.locator(".menu-bar-item").nth(3).click();
     await page.waitForTimeout(200);
@@ -226,7 +187,7 @@ export function invoke(cmd, args) {
   });
 
   // ── Multiple tabs ──
-  test("multiple tabs via menu and tab button", async () => {
+  test("multiple tabs via menu and tab button", async ({ page }) => {
     // Create 3 tabs using menu
     for (let i = 0; i < 2; i++) {
       await page.locator(".menu-bar-item").first().click();
@@ -246,7 +207,7 @@ export function invoke(cmd, args) {
   });
 
   // ── Tab drag-and-drop ──
-  test("tab can be dragged to reorder", async () => {
+  test("tab can be dragged to reorder", async ({ page }) => {
     await page.locator(".menu-bar-item").first().click();
     await page.waitForTimeout(100);
     await page.locator(".menu-item", { hasText: "新建" }).click();
@@ -263,7 +224,7 @@ export function invoke(cmd, args) {
   });
 
   // ── Plugins menu ──
-  test("Plugins menu shows manager item", async () => {
+  test("Plugins menu shows manager item", async ({ page }) => {
     // Plugins menu is 9th (0-indexed)
     await page.locator(".menu-bar-item").nth(9).click();
     await page.waitForTimeout(200);
@@ -271,14 +232,14 @@ export function invoke(cmd, args) {
   });
 
   // ── Sidebar toggle (not visible by default) ──
-  test("sidebar is hidden by default", async () => {
+  test("sidebar is hidden by default", async ({ page }) => {
     await expect(page.locator(".sidebar")).not.toBeVisible();
   });
 });
 
 // ── Rust IPC command tests (via cargo test) ──
 test.describe("Rust IPC Commands", () => {
-  test("cargo check passes with 0 errors", async () => {
+  test("cargo check passes with 0 errors", async ({ page }) => {
     const result = execSync("cargo check 2>&1", {
       cwd: "/Users/zhihu/code/rip-notepad-plus-plus/src-tauri",
       encoding: "utf-8",
@@ -286,7 +247,7 @@ test.describe("Rust IPC Commands", () => {
     expect(result).not.toContain("error[");
   });
 
-  test("npx tsc --noEmit passes with 0 errors", async () => {
+  test("npx tsc --noEmit passes with 0 errors", async ({ page }) => {
     const result = execSync("npx tsc --noEmit 2>&1", {
       cwd: "/Users/zhihu/code/rip-notepad-plus-plus",
       encoding: "utf-8",
