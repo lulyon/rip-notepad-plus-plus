@@ -42,21 +42,27 @@ export function useMenuActions() {
           break;
         }
         case "file.openFolder": {
-          const result = await open({ title: "Open Folder", directory: true, multiple: false });
-          if (result && typeof result === "string") {
-            useSettingsStore.getState().updateSetting("projectRoot", result);
-            // Persist project root to session
-            const tabs = useEditorStore.getState().tabs;
-            const sessionTabs = tabs
-              .filter((t) => t.path)
-              .map((t) => ({ path: t.path!, encoding: t.encoding, language: t.language }));
-            ipc.saveSession({
-              open_tabs: sessionTabs,
-              active_tab_id: useEditorStore.getState().activeTabId,
-              project_root: result,
-              window_width: null,
-              window_height: null,
-            }).catch(() => {});
+          console.log("[openFolder] opening directory picker...");
+          try {
+            const result = await open({ title: "Open Folder", directory: true, multiple: false });
+            console.log("[openFolder] result:", result, typeof result);
+            if (result && typeof result === "string") {
+              useSettingsStore.getState().updateSetting("projectRoot", result);
+              // Persist project root to session
+              const tabs = useEditorStore.getState().tabs;
+              const sessionTabs = tabs
+                .filter((t) => t.path)
+                .map((t) => ({ path: t.path!, encoding: t.encoding, language: t.language }));
+              ipc.saveSession({
+                open_tabs: sessionTabs,
+                active_tab_id: useEditorStore.getState().activeTabId,
+                project_root: result,
+                window_width: null,
+                window_height: null,
+              }).catch(() => {});
+            }
+          } catch (err) {
+            console.error("[openFolder] error:", err);
           }
           break;
         }
