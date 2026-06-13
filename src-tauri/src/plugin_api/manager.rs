@@ -59,10 +59,22 @@ pub struct PluginManager {
 
 impl PluginManager {
     pub fn new() -> Self {
-        // Default plugin directory: next to the executable, or in the project
-        let plugin_dir = std::env::current_dir()
-            .unwrap_or_else(|_| PathBuf::from("."))
-            .join("plugins");
+        // Search multiple locations for the plugins directory
+        let cwd = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
+        let project_root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .parent()
+            .map(|p| p.to_path_buf())
+            .unwrap_or_else(|| cwd.clone());
+
+        let candidates = vec![
+            cwd.join("plugins"),           // Running from project root
+            project_root.join("plugins"),  // Running from src-tauri/ (dev mode)
+        ];
+
+        let plugin_dir = candidates
+            .into_iter()
+            .find(|p| p.exists())
+            .unwrap_or_else(|| project_root.join("plugins"));
 
         Self {
             plugin_dir,
