@@ -57,12 +57,7 @@ fn find_git_root(path: &str) -> Result<String, String> {
 
 #[tauri::command]
 pub async fn git_status(repo_path: String) -> Result<GitStatus, String> {
-    let git_path = find_git();
-    eprintln!("[git] using git at: {}", git_path);
-    eprintln!("[git] repo_path arg: {}", repo_path);
-    let root = find_git_root(&repo_path)
-        .map_err(|e| format!("find_git_root failed: {}", e))?;
-    eprintln!("[git] root: {}", root);
+    let root = find_git_root(&repo_path)?;
 
     let branch = run_git(&root, &["rev-parse", "--abbrev-ref", "HEAD"])?
         .trim()

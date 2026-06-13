@@ -82,7 +82,7 @@ export function GitPanel() {
             </span>
           </>
         ) : error ? (
-          <span className="git-error" title={error}>{error}</span>
+          <span className="git-error" title={error}>{t("git.notRepo")}</span>
         ) : null}
       </div>
 
