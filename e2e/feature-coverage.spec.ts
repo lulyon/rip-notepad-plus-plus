@@ -114,11 +114,6 @@ test.describe("Feature coverage — menus", () => {
     await expect(page.locator(".menu-dropdown")).toContainText("打开文件夹");
   });
 
-  test("Print menu item is present", async ({ page }) => {
-    await page.locator(".menu-bar-item").first().click();
-    await page.waitForTimeout(150);
-    await expect(page.locator(".menu-dropdown")).toContainText("打印");
-  });
 });
 
 test.describe("Feature coverage — dialogs", () => {

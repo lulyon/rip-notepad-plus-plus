@@ -42,8 +42,6 @@ export const MENU_STRUCTURE: MenuDef[] = [
       S(),
       { id: "file.reload", labelKey: "menu.file.reload" },
       S(),
-      { id: "file.print", labelKey: "menu.file.print", shortcut: "Ctrl+P" },
-      S(),
       { id: "file.preferences", labelKey: "menu.file.preferences" },
       { id: "file.shortcutMapper", labelKey: "menu.file.shortcutMapper" },
       S(),

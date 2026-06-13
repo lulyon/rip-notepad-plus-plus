@@ -10,10 +10,6 @@ import { useMacroStore } from "../stores/macroStore";
 import { open, save } from "@tauri-apps/plugin-dialog";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 
-function escapeHtml(s: string): string {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
 export function useMenuActions() {
   const editorRef = useEditorRefStore((s) => s.editorRef);
 
@@ -127,27 +123,6 @@ export function useMenuActions() {
             } catch (err) { console.error("Reload failed:", err); }
           }
           break;
-        case "file.print": {
-          const tab = useEditorStore.getState().tabs.find(
-            (t) => t.id === useEditorStore.getState().activeTabId,
-          );
-          if (!tab) break;
-          if (tab.path) {
-            // Open existing file in browser, user can Ctrl+P to print
-            ipc.openInBrowser(`file://${tab.path}`).catch(console.error);
-          } else {
-            // Untitled file: save temp HTML and open
-            const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${tab.name}</title><style>
-body{font-family:monospace;font-size:12px;line-height:1.5;padding:20px}
-pre{white-space:pre-wrap;word-wrap:break-word}
-@media print{body{margin:0}}</style></head><body><pre>${escapeHtml(tab.content)}</pre></body></html>`;
-            try {
-              await ipc.writeFile(`${tab.name}.print.html`, html, "UTF-8");
-              await ipc.openInBrowser(`file://${tab.name}.print.html`);
-            } catch (err) { console.error("Print failed:", err); }
-          }
-          break;
-        }
         case "file.exit": {
           // Save session before closing
           const tabs = useEditorStore.getState().tabs;

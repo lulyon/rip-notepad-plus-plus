@@ -12,7 +12,6 @@ const zh = {
     "menu.file.closeAll": "全部关闭",
     "menu.file.closeOthers": "关闭其他标签",
     "menu.file.reload": "从磁盘重新加载(&R)",
-    "menu.file.print": "打印(&P)...",
     "menu.file.preferences": "首选项(&P)...",
     "menu.file.shortcutMapper": "快捷键管理(&K)...",
     "menu.file.exit": "退出(&X)",

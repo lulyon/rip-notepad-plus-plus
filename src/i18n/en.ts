@@ -12,7 +12,6 @@ const en = {
     "menu.file.closeAll": "Close All",
     "menu.file.closeOthers": "Close Others",
     "menu.file.reload": "&Reload from Disk",
-    "menu.file.print": "&Print...",
     "menu.file.preferences": "&Preferences...",
     "menu.file.shortcutMapper": "Shortcut &Mapper...",
     "menu.file.exit": "E&xit",
