@@ -132,19 +132,19 @@ export function useMenuActions() {
             (t) => t.id === useEditorStore.getState().activeTabId,
           );
           if (!tab) break;
-          const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${tab.name}</title><style>
-body{font-family:monospace;font-size:12px;line-height:1.5;padding:20px;color:#000;background:#fff}
-pre{white-space:pre-wrap;word-wrap:break-word}@media print{body{margin:0}}
-</style></head><body><pre>${escapeHtml(tab.content)}</pre></body></html>`;
-          // Write temp HTML file and open in browser
-          const tempPath = tab.path
-            ? tab.path.replace(/\.[^/.]+$/, ".print.html")
-            : `${tab.name}.print.html`;
-          try {
-            await ipc.writeFile(tempPath, html, "UTF-8");
-            await ipc.openInBrowser(`file://${tempPath}`);
-          } catch (err) {
-            console.error("Print failed:", err);
+          if (tab.path) {
+            // Open existing file in browser, user can Ctrl+P to print
+            ipc.openInBrowser(`file://${tab.path}`).catch(console.error);
+          } else {
+            // Untitled file: save temp HTML and open
+            const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${tab.name}</title><style>
+body{font-family:monospace;font-size:12px;line-height:1.5;padding:20px}
+pre{white-space:pre-wrap;word-wrap:break-word}
+@media print{body{margin:0}}</style></head><body><pre>${escapeHtml(tab.content)}</pre></body></html>`;
+            try {
+              await ipc.writeFile(`${tab.name}.print.html`, html, "UTF-8");
+              await ipc.openInBrowser(`file://${tab.name}.print.html`);
+            } catch (err) { console.error("Print failed:", err); }
           }
           break;
         }
