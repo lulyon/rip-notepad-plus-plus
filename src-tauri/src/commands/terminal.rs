@@ -1,21 +1,19 @@
-use portable_pty::{CommandBuilder, PtySize, native_pty_system};
 use std::io::{Read, Write};
+use std::process::{Child, Command, Stdio};
 use std::sync::mpsc::{channel, Receiver, Sender};
 use std::sync::Mutex;
 
-type PtyMaster = Box<dyn portable_pty::MasterPty + Send>;
+struct ShellProcess {
+    stdin: Box<dyn Write + Send>,
+    child: Child,
+}
 
-static PTY_MASTER: Mutex<Option<PtyMaster>> = Mutex::new(None);
+static SHELL: Mutex<Option<ShellProcess>> = Mutex::new(None);
 static OUTPUT_RX: Mutex<Option<Receiver<String>>> = Mutex::new(None);
 
 #[tauri::command]
 pub async fn pty_spawn(cwd: String) -> Result<(), String> {
     pty_kill_internal();
-
-    let pty_system = native_pty_system();
-    let pty_pair = pty_system
-        .openpty(PtySize { rows: 30, cols: 100, pixel_width: 0, pixel_height: 0 })
-        .map_err(|e| format!("openpty: {}", e))?;
 
     let shell = if cfg!(target_os = "windows") {
         "cmd.exe".to_string()
@@ -23,59 +21,60 @@ pub async fn pty_spawn(cwd: String) -> Result<(), String> {
         std::env::var("SHELL").unwrap_or_else(|_| "/bin/zsh".to_string())
     };
 
-    let mut cmd = CommandBuilder::new(&shell);
-    cmd.cwd(&cwd);
-    cmd.env("TERM", "xterm-256color");
-    cmd.env("LANG", "en_US.UTF-8");
+    let mut child = Command::new(&shell)
+        .current_dir(&cwd)
+        .env("TERM", "xterm-256color")
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .map_err(|e| format!("spawn shell: {}", e))?;
 
-    let master = pty_pair.master;
-    let mut reader = master.try_clone_reader().map_err(|e| format!("clone reader: {}", e))?;
+    let stdin = child.stdin.take().ok_or("no stdin")?;
+    let mut stdout = child.stdout.take().ok_or("no stdout")?;
+    let mut stderr = child.stderr.take().ok_or("no stderr")?;
 
-    let child = pty_pair.slave.spawn_command(cmd).map_err(|e| format!("spawn: {}", e))?;
-
-    // Background thread: read PTY output into channel
+    // Background threads: read stdout and stderr
     let (tx, rx): (Sender<String>, Receiver<String>) = channel();
+    let tx2 = tx.clone();
     std::thread::spawn(move || {
         let mut buf = [0u8; 8192];
         loop {
-            match reader.read(&mut buf) {
+            match stdout.read(&mut buf) {
                 Ok(0) => break,
                 Ok(n) => {
                     let s = String::from_utf8_lossy(&buf[..n]).to_string();
                     if tx.send(s).is_err() { break; }
                 }
-                Err(_e) => { break; }
+                Err(_) => break,
+            }
+        }
+    });
+    std::thread::spawn(move || {
+        let mut buf = [0u8; 8192];
+        loop {
+            match stderr.read(&mut buf) {
+                Ok(0) => break,
+                Ok(n) => {
+                    let s = String::from_utf8_lossy(&buf[..n]).to_string();
+                    if tx2.send(s).is_err() { break; }
+                }
+                Err(_) => break,
             }
         }
     });
 
-    *PTY_MASTER.lock().unwrap() = Some(master);
+    *SHELL.lock().unwrap() = Some(ShellProcess { stdin: Box::new(stdin), child });
     *OUTPUT_RX.lock().unwrap() = Some(rx);
-
-    // DEBUG: Write to shell after a short delay
-    let debug_cwd = cwd.clone();
-    std::thread::spawn(move || {
-        std::thread::sleep(std::time::Duration::from_millis(800));
-        let lock = PTY_MASTER.lock().unwrap();
-        if let Some(m) = lock.as_ref() {
-            let mut w = m.take_writer().unwrap();
-            let _ = w.write_all(b"echo Shell working in $PWD\n");
-            let _ = w.flush();
-        }
-    });
-
-    std::mem::forget(child);
     Ok(())
 }
 
 #[tauri::command]
 pub async fn pty_write(data: String) -> Result<(), String> {
-    // take_writer returns a new writer each time (non-consuming)
-    let lock = PTY_MASTER.lock().unwrap();
-    if let Some(m) = lock.as_ref() {
-        let mut w = m.take_writer().map_err(|e| format!("take_writer: {}", e))?;
-        w.write_all(data.as_bytes()).map_err(|e| format!("write: {}", e))?;
-        w.flush().ok();
+    let mut lock = SHELL.lock().unwrap();
+    if let Some(s) = lock.as_mut() {
+        s.stdin.write_all(data.as_bytes()).map_err(|e| format!("write: {}", e))?;
+        s.stdin.flush().ok();
     }
     Ok(())
 }
@@ -99,6 +98,8 @@ pub async fn pty_kill() -> Result<(), String> {
 }
 
 fn pty_kill_internal() {
-    *PTY_MASTER.lock().unwrap() = None;
+    if let Some(mut s) = SHELL.lock().unwrap().take() {
+        let _ = s.child.kill();
+    }
     *OUTPUT_RX.lock().unwrap() = None;
 }
