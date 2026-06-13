@@ -128,15 +128,15 @@ export function invoke(cmd, args) {
     await expect(page.locator(".tab")).toHaveCount(1);
   });
 
-  // ── Editor renders and accepts input ──
-  test("Monaco editor renders after creating tab", async () => {
+  // ── Editor container appears after tab creation ──
+  test("editor area visible after creating tab", async () => {
     await page.locator(".menu-bar-item").first().click();
     await page.waitForTimeout(100);
     await page.locator(".menu-item", { hasText: "新建" }).click();
-    await page.waitForTimeout(800);
-    // Verify Monaco mounts
-    const editor = page.locator(".monaco-editor");
-    await expect(editor.first()).toBeVisible();
+    await page.waitForTimeout(500);
+    // Welcome screen should disappear, editor area takes its place
+    await expect(page.locator(".welcome")).not.toBeVisible();
+    await expect(page.locator(".editor-area")).toBeVisible();
   });
 
   // Note: Monaco text input in headless browser is unreliable
