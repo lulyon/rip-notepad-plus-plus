@@ -187,6 +187,11 @@ const en = {
     "sidebar.clipboard": "Clipboard",
     "sidebar.symbols": "Symbols",
     "sidebar.git": "Git",
+    "sidebar.terminal": "Terminal",
+
+    // ── Terminal ──
+    "terminal.title": "Terminal",
+    "terminal.restart": "Restart Terminal",
 
     // ── Clipboard ──
     "clipboard.search": "Search...",

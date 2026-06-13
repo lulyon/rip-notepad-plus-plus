@@ -187,6 +187,11 @@ const zh = {
     "sidebar.clipboard": "剪贴板历史",
     "sidebar.symbols": "符号",
     "sidebar.git": "Git",
+    "sidebar.terminal": "终端",
+
+    // ── Terminal ──
+    "terminal.title": "终端",
+    "terminal.restart": "重启终端",
 
     // ── Clipboard ──
     "clipboard.search": "搜索...",
