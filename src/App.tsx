@@ -79,7 +79,7 @@ function App() {
   useEffect(() => {
     function handler(e: Event) {
       const actionId = (e as CustomEvent).detail as string;
-      if (actionId === "file.preferences" || actionId === "view.preferences") {
+      if (actionId === "file.preferences") {
         setPrefsOpen(true);
       } else if (actionId === "file.shortcutMapper") {
         setShortcutMapperOpen(true);

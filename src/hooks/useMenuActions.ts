@@ -53,6 +53,18 @@ export function useMenuActions() {
             }
           }
           break;
+        case "file.saveAll": {
+          const allTabs = useEditorStore.getState().tabs;
+          for (const t of allTabs) {
+            if (t.path) {
+              try {
+                await ipc.writeFile(t.path, t.content, t.encoding);
+                useEditorStore.getState().markTabSaved(t.id, t.path);
+              } catch (err) { console.error("Save all failed for", t.path, err); }
+            }
+          }
+          break;
+        }
         case "file.saveAs":
           if (tab) {
             const filePath = await save({ title: "Save As", defaultPath: tab.path || tab.name });
@@ -103,6 +115,9 @@ export function useMenuActions() {
           break;
         case "edit.paste":
           editorRef?.trigger("keyboard", "editor.action.clipboardPasteAction", null);
+          break;
+        case "edit.delete":
+          editorRef?.trigger("keyboard", "deleteRight", null);
           break;
         case "edit.selectAll":
           editorRef?.trigger("keyboard", "editor.action.selectAll", null);
@@ -250,14 +265,67 @@ export function useMenuActions() {
         case "encoding.openDialog":
           useEncodingStore.getState().openEncodingDialog();
           break;
-        case "encoding.convertUtf8":
         case "encoding.encodeUtf8":
+          if (tab) {
+            try {
+              useEditorStore.getState().updateTabEncoding(tab.id, "UTF-8");
+            } catch (err) { console.error("Encoding change failed:", err); }
+          }
+          break;
+        case "encoding.encodeUtf8Bom":
+          if (tab) {
+            try {
+              useEditorStore.getState().updateTabEncoding(tab.id, "UTF-8-BOM");
+            } catch (err) { console.error("Encoding change failed:", err); }
+          }
+          break;
+        case "encoding.convertUtf8":
           if (tab && tab.encoding !== "UTF-8") {
             try {
               const converted = await useEncodingStore.getState().convertTabEncoding(
                 tab.content, tab.encoding, "UTF-8");
               useEditorStore.getState().updateTabContent(tab.id, converted);
               useEditorStore.getState().updateTabEncoding(tab.id, "UTF-8");
+            } catch (err) { console.error("Encoding conversion failed:", err); }
+          }
+          break;
+        case "encoding.convertUtf8Bom":
+          if (tab && tab.encoding !== "UTF-8-BOM") {
+            try {
+              const converted = await useEncodingStore.getState().convertTabEncoding(
+                tab.content, tab.encoding, "UTF-8");
+              useEditorStore.getState().updateTabContent(tab.id, converted);
+              useEditorStore.getState().updateTabEncoding(tab.id, "UTF-8-BOM");
+            } catch (err) { console.error("Encoding conversion failed:", err); }
+          }
+          break;
+        case "encoding.convertAnsi":
+          if (tab && tab.encoding !== "windows-1252") {
+            try {
+              const converted = await useEncodingStore.getState().convertTabEncoding(
+                tab.content, tab.encoding, "windows-1252");
+              useEditorStore.getState().updateTabContent(tab.id, converted);
+              useEditorStore.getState().updateTabEncoding(tab.id, "windows-1252");
+            } catch (err) { console.error("Encoding conversion failed:", err); }
+          }
+          break;
+        case "encoding.convertUtf16LE":
+          if (tab && tab.encoding !== "UTF-16LE") {
+            try {
+              const converted = await useEncodingStore.getState().convertTabEncoding(
+                tab.content, tab.encoding, "UTF-16LE");
+              useEditorStore.getState().updateTabContent(tab.id, converted);
+              useEditorStore.getState().updateTabEncoding(tab.id, "UTF-16LE");
+            } catch (err) { console.error("Encoding conversion failed:", err); }
+          }
+          break;
+        case "encoding.convertUtf16BE":
+          if (tab && tab.encoding !== "UTF-16BE") {
+            try {
+              const converted = await useEncodingStore.getState().convertTabEncoding(
+                tab.content, tab.encoding, "UTF-16BE");
+              useEditorStore.getState().updateTabContent(tab.id, converted);
+              useEditorStore.getState().updateTabEncoding(tab.id, "UTF-16BE");
             } catch (err) { console.error("Encoding conversion failed:", err); }
           }
           break;

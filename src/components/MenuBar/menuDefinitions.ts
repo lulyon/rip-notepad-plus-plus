@@ -101,7 +101,7 @@ export const MENU_STRUCTURE: MenuDef[] = [
     children: [
       { id: "view.wordWrap", labelKey: "menu.view.wordWrap" },
       { id: "view.showWhitespace", labelKey: "menu.view.showWhitespace" },
-      { id: "view.showIndentGuide", labelKey: "menu.view.showIndentGuide" },
+      { id: "view.showIndentGuides", labelKey: "menu.view.showIndentGuide" },
       { id: "view.showLineNumbers", labelKey: "menu.view.showLineNumbers" },
       { id: "view.showMinimap", labelKey: "menu.view.showMinimap" },
       S(),

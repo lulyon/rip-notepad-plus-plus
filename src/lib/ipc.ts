@@ -16,7 +16,7 @@ import type {
 export const ipc = {
   // ── File Ops ──
   readFile(path: string, encoding?: string): Promise<FileReadResult> {
-    return invoke("read_file", { path, encodingOverride: encoding ?? null });
+    return invoke("read_file", { path, encoding_override: encoding ?? null });
   },
 
   writeFile(path: string, content: string, encoding: string): Promise<void> {
@@ -28,7 +28,7 @@ export const ipc = {
   },
 
   renameFile(oldPath: string, newPath: string): Promise<void> {
-    return invoke("rename_file", { oldPath, newPath });
+    return invoke("rename_file", { old_path: oldPath, new_path: newPath });
   },
 
   fileExists(path: string): Promise<boolean> {
@@ -57,11 +57,11 @@ export const ipc = {
   },
 
   decodeWithEncoding(data: number[], encodingName: string): Promise<string> {
-    return invoke("decode_with_encoding", { data, encodingName });
+    return invoke("decode_with_encoding", { data, encoding_name: encodingName });
   },
 
   encodeWithEncoding(content: string, encodingName: string): Promise<number[]> {
-    return invoke("encode_with_encoding", { content, encodingName });
+    return invoke("encode_with_encoding", { content, encoding_name: encodingName });
   },
 
   // ── Search ──
