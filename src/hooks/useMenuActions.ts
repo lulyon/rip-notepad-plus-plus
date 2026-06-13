@@ -43,30 +43,32 @@ export function useMenuActions() {
         }
         case "file.openFolder": {
           try {
-            // Use open() for file selection, then extract parent directory
-            // Tauri v2 dialog: directory param may not work as expected on all platforms
             const result = await open({
               title: "Select any file in the target folder",
               multiple: false,
             });
-            if (result && typeof result === "string") {
-              // Extract parent directory from selected file path
-              const dir = result.split(/[/\\]/).slice(0, -1).join("/") || result;
-              useSettingsStore.getState().updateSetting("projectRoot", dir);
-              const tabs = useEditorStore.getState().tabs;
-              const sessionTabs = tabs
-                .filter((t) => t.path)
-                .map((t) => ({ path: t.path!, encoding: t.encoding, language: t.language }));
-              ipc.saveSession({
-                open_tabs: sessionTabs,
-                active_tab_id: useEditorStore.getState().activeTabId,
-                project_root: dir,
-                window_width: null,
-                window_height: null,
-              }).catch(() => {});
+            window.alert("DEBUG: result=" + JSON.stringify(result) + " type=" + typeof result);
+            if (result) {
+              const arr = Array.isArray(result) ? result : [result as string];
+              const dir = arr[0]?.split(/[/\\]/).slice(0, -1).join("/") || arr[0];
+              window.alert("DEBUG: dir=" + dir);
+              if (dir) {
+                useSettingsStore.getState().updateSetting("projectRoot", dir);
+                const tabs = useEditorStore.getState().tabs;
+                const sessionTabs = tabs
+                  .filter((t) => t.path)
+                  .map((t) => ({ path: t.path!, encoding: t.encoding, language: t.language }));
+                ipc.saveSession({
+                  open_tabs: sessionTabs,
+                  active_tab_id: useEditorStore.getState().activeTabId,
+                  project_root: dir,
+                  window_width: null,
+                  window_height: null,
+                }).catch(() => {});
+              }
             }
           } catch (err) {
-            console.error("openFolder failed:", err);
+            window.alert("DEBUG error: " + String(err));
           }
           break;
         }
