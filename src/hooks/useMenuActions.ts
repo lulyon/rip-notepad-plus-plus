@@ -422,7 +422,9 @@ export function useMenuActions() {
   // Single event listener for all menu actions
   useEffect(() => {
     function handler(e: Event) {
-      handleMenuAction((e as CustomEvent).detail);
+      const id = (e as CustomEvent).detail;
+      console.log("[debug] handler received:", id);
+      handleMenuAction(id);
     }
     window.addEventListener("menu-action", handler);
     return () => window.removeEventListener("menu-action", handler);
