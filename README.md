@@ -49,11 +49,25 @@ Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **
 - Execute shell commands (cross-platform)
 - Open in browser (HTML files)
 
+### Workspace / Project
+- Open folder as project (File → Open Folder / Ctrl+Shift+O)
+- Sidebar file tree with fixed project root
+- Drag folder to window to set as project root
+- Session auto-save/restore (tabs, project root, sidebar state)
+
+### Git Integration
+- Sidebar Git tab: changed files, branch name, ahead/behind
+- Inline diff viewer (click diff button on any changed file)
+- Status bar branch indicator
+- Works with any Git repository
+
 ### Plugin System
 - Sidecar process architecture (language-agnostic)
 - JSON-RPC 2.0 protocol over stdin/stdout
 - Plugin discovery via `plugins/<name>/plugin.json` manifests
 - Start / Stop / Manage plugins from UI
+- Editor API: getActiveFile, getContent, getSelection
+- Event notifications: fileOpened, fileSaved, fileClosed
 - Sample Python plugin included
 
 ### Settings
@@ -103,13 +117,14 @@ cargo check            # Rust (from src-tauri/)
 ┌─ WebView (React + Monaco + i18n) ───────────────────────┐
 │  MenuBar │ TabBar │ Sidebar │ SplitEditor │ StatusBar   │
 │  SearchPanel │ 9 Dialogs                                 │
-│  7 Zustand stores                                        │
-├─ Tauri IPC (24 commands) ───────────────────────────────┤
+│  8 Zustand stores                                        │
+├─ Tauri IPC (30 commands) ───────────────────────────────┤
 ├─ Rust Backend ──────────────────────────────────────────┤
-│  file_ops / encoding / search / session / system / plugin│
+│  file_ops / encoding / search / session / system /       │
+│  plugin / git                                            │
 │  plugin_api (sidecar manager, JSON-RPC 2.0)             │
 └─────────────────────────────────────────────────────────┘
-         │ stdin/stdout
+         │ stdin/stdout (JSON-RPC 2.0)
          ▼
 ┌─ Plugin Process (Python / Node / Rust / any) ───────────┐
 ```
@@ -165,6 +180,18 @@ rip-notepad-plus-plus/
 | `F11` | Full screen |
 | `F3` | Find next |
 | `Shift+F3` | Find previous |
+
+## Testing
+
+```bash
+npm run test:e2e      # 32 Playwright tests (UI + compile checks)
+npm run test:check    # TypeScript + Rust compile checks only
+```
+
+- 30 UI tests: menu items, dialogs, tab operations, sidebar, i18n, search, language
+- 2 compile checks: `cargo check` and `npx tsc --noEmit`
+- Headless Chromium with mocked Tauri IPC
+- `npm run test:e2e` auto-starts Vite dev server
 
 ## License
 

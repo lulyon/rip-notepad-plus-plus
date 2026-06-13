@@ -9,7 +9,9 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 - **Target**: Windows, macOS, Linux
 - **Node**: >= 20
 - **Rust**: >= 1.70 (edition 2021)
-- **Version**: 0.2.0 (7 phases complete)
+- **Version**: 0.3.0 (10 phases complete)
+- **Tests**: 32 E2E (Playwright + mocked Tauri IPC)
+- **IPC Commands**: 30 (file_ops, encoding, search, session, system, plugin, git)
 
 ## Architecture
 
@@ -22,7 +24,7 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 ├─ Tauri IPC (src/lib/ipc.ts) ────────────────────────────────┤
 ├─ Rust Backend ──────────────────────────────────────────────┤
 │  commands/ (file_ops, encoding, search, session, system,     │
-│             plugin)                                          │
+│             plugin, git)                                      │
 │  encoding/ (detect BOM+chardetng, convert encoding_rs 60+)   │
 │  search/   (regex+walkdir grep)                              │
 │  plugin_api/ (sidecar manager, JSON-RPC 2.0)                │
@@ -54,7 +56,9 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 | `src/components/TabBar/TabContextMenu.tsx` | Close/Close Others/Close All/Copy Path (i18n) |
 | `src/components/StatusBar/StatusBar.tsx` | File name, language, encoding, Ln/Col |
 | `src/components/SearchPanel/SearchPanel.tsx` | Find/replace with regex, case, word, wrap, FindInFiles |
-| `src/components/Panels/Sidebar.tsx` | Sidebar with Files (tree) + Symbols (function list) tabs |
+| `src/components/Panels/Sidebar.tsx` | Sidebar with Files (tree) + Git (status/diff) + Symbols tabs |
+| `src/components/Panels/GitPanel.tsx` | Git changed files list, inline diff view |
+| `src/stores/gitStore.ts` | Git status state, branch, changed files |
 | `src/hooks/useMenuActions.ts` | All menu action handlers (50+ actions) |
 | `src/hooks/useMonacoActions.ts` | Ctrl+S/N/O/W/F/H/G + save/open/new/close IPC |
 | `src/hooks/useWindowTitle.ts` | Sync window title with active tab |
@@ -250,6 +254,19 @@ Each tab: `{ id, path, name, content, encoding, modified, language, cursorLine, 
 | i18next + react-i18next | Internationalization |
 | typescript + vite + @vitejs/plugin-react | Build toolchain |
 
+## Testing
+
+```bash
+npm run test:e2e      # 32 Playwright tests (UI + compile checks), ~80s
+npm run test:check    # TypeScript + Rust compile checks only
+```
+
+- **30 UI tests**: menu items, dialogs, tab operations, sidebar, i18n, search, language
+- **2 compile checks**: `cargo check` and `npx tsc --noEmit`
+- Headless Chromium with mocked Tauri IPC (`window.__TAURI_INTERNALS__`)
+- Config: `e2e/playwright.config.ts` (webServer auto-starts Vite)
+- Test files: `e2e/ui-tests.spec.ts`, `e2e/feature-coverage.spec.ts`
+
 ## Dev Commands
 
 ### Start the app
@@ -290,11 +307,9 @@ git push
 
 ## Next Priorities
 
-1. **Plugin API expansion** — more editor methods (getText, setText, getSelection, addMenuItem)
-2. **Auto-updater** — Tauri updater integration for auto-updates
-3. **Workspace/project support** — open folders as projects, persistent project settings
-4. **Git integration** — basic git status/diff in sidebar
-5. **Themes marketplace** — import/export custom themes
-6. **Performance** — virtual scrolling for large files, web workers for search
-7. **Cross-platform testing** — Windows/Linux packaging and testing
-8. **Plugin marketplace** — discover and install plugins from a central registry
+1. **Auto-updater** — Tauri updater integration for auto-updates
+2. **Cross-platform testing** — Windows/Linux packaging and testing
+3. **Themes marketplace** — import/export custom themes
+4. **Plugin marketplace** — discover and install plugins from a central registry
+5. **Advanced Git** — stage/unstage, commit, branch switch
+6. **Performance** — virtual scrolling for large files, web workers
