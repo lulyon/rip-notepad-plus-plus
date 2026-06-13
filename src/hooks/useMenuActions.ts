@@ -133,17 +133,19 @@ export function useMenuActions() {
           );
           if (!tab) break;
           const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${tab.name}</title><style>
-            body { font-family: 'Cascadia Code', 'JetBrains Mono', 'Menlo', monospace; font-size: 12px; line-height:1.5; padding:20px; color:#000; background:#fff; }
-            pre { white-space: pre-wrap; word-wrap: break-word; }
-            @media print { body { margin:0; } }
+body{font-family:monospace;font-size:12px;line-height:1.5;padding:20px;color:#000;background:#fff}
+pre{white-space:pre-wrap;word-wrap:break-word}@media print{body{margin:0}}
 </style></head><body><pre>${escapeHtml(tab.content)}</pre></body></html>`;
-          // Open in browser where printing works
-          ipc.openInBrowser(`data:text/html;charset=utf-8,${encodeURIComponent(html)}`).catch(() => {
-            // Fallback: write temp file
-            const blob = new Blob([html], { type: "text/html" });
-            const url = URL.createObjectURL(blob);
-            window.open(url, "_blank");
-          });
+          // Write temp HTML file and open in browser
+          const tempPath = tab.path
+            ? tab.path.replace(/\.[^/.]+$/, ".print.html")
+            : `${tab.name}.print.html`;
+          try {
+            await ipc.writeFile(tempPath, html, "UTF-8");
+            await ipc.openInBrowser(`file://${tempPath}`);
+          } catch (err) {
+            console.error("Print failed:", err);
+          }
           break;
         }
         case "file.exit": {
