@@ -9,8 +9,8 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 - **Target**: Windows, macOS, Linux
 - **Node**: >= 20
 - **Rust**: >= 1.70 (edition 2021)
-- **Version**: 0.3.0 (10 phases complete)
-- **Tests**: 32 E2E (Playwright + mocked Tauri IPC)
+- **Version**: 0.3.0 (10 phases complete, 13 NP++ plugins ported)
+- **Tests**: 48 E2E (Playwright + mocked Tauri IPC)
 - **IPC Commands**: 30 (file_ops, encoding, search, session, system, plugin, git)
 
 ## Architecture
@@ -307,7 +307,7 @@ git push
 
 ## Next Priorities
 
-1. **Auto-updater** — Tauri updater integration for auto-updates
+1. **1. **Cross-platform testing** — Windows/Linux packaging and testing
 2. **Cross-platform testing** — Windows/Linux packaging and testing
 3. **Themes marketplace** — import/export custom themes
 4. **Plugin marketplace** — discover and install plugins from a central registry

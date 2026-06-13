@@ -9,8 +9,7 @@ Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **
 ### File Operations
 - New / Open / Save / Save As / Close / Reload / Drag-and-drop
 - Multi-tab with drag-and-drop reorder
-- Session restore (reopen last files)
-- Recent files list
+- Session restore (reopen last files on startup)
 - Large file warning (>50MB)
 
 ### Editing
@@ -19,6 +18,12 @@ Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **
 - Duplicate line / Delete line / Move line up/down
 - Trim trailing whitespace / Remove empty lines / Case conversion
 - Column/box selection (Alt+drag)
+- Sort lines (ascending/descending) / Remove duplicate lines
+- Insert date/time
+- Copy file path / name / directory to clipboard
+- Auto-save (30s interval for modified files with paths)
+- Emmet abbreviation expansion (HTML/CSS/JSX/TSX)
+- Format / Validate XML
 - 60+ language highlighting
 
 ### Search
@@ -26,6 +31,7 @@ Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **
 - Find in Files (recursive directory search with regex)
 - Mark All / Count occurrences
 - Go to Line (Ctrl+G)
+- Command Palette (Ctrl+Shift+P) — fuzzy search all 80+ menu commands
 
 ### View
 - Word wrap / Show whitespace / Indent guides / Line numbers / Minimap
@@ -34,7 +40,18 @@ Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **
 - Full screen (F11)
 - Window always on top
 - Horizontal / Vertical split editor with sync scroll
-- Sidebar (file tree explorer + document symbols)
+- Sidebar with 7 panels: Files, DocList, Clipboard History, JSON Viewer, Task List, Git, Symbols
+
+### Sidebar Panels
+| Panel | Description |
+|-------|-------------|
+| 📁 Files | File tree explorer (fixed project root or follow active tab) |
+| 📋 DocList | Open documents list (click to switch, × to close) |
+| 📄 Clipboard | Clipboard history (auto-capture, search, pin, paste) |
+| {} JSON | JSON tree viewer (expand/collapse, click path to copy) |
+| ✅ TaskList | TODO / FIXME / HACK / XXX / NOTE scanner |
+| ⎇ Git | Changed files, branch, inline diff |
+| 🔣 Symbols | Function/class outline (regex-based, language-agnostic) |
 
 ### Encoding
 - BOM + chardetng detection (UTF-8, GBK, Shift-JIS, EUC-JP, EUC-KR, etc.)
@@ -46,8 +63,15 @@ Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **
 - Record / Stop / Playback / Save macros
 
 ### Run
-- Execute shell commands (cross-platform)
-- Open in browser (HTML files)
+- Execute shell commands (cross-platform, NppExec-style console)
+- Variable substitution: `$(FULL_CURRENT_PATH)`, `$(FILE_NAME)`, `$(CURRENT_WORD)`, etc.
+- Error output parsing (clickable file:line links)
+- Open terminal at project root
+- Launch Claude / Codex in terminal
+
+### Compare
+- Side-by-side diff viewer (Monaco DiffEditor)
+- Select any two files to compare
 
 ### Workspace / Project
 - Open folder as project (File → Open Folder / Ctrl+Shift+O)
@@ -57,16 +81,15 @@ Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **
 
 ### Git Integration
 - Sidebar Git tab: changed files, branch name, ahead/behind
-- Inline diff viewer (click diff button on any changed file)
+- Inline diff viewer
 - Status bar branch indicator
-- Works with any Git repository
 
 ### Plugin System
 - Sidecar process architecture (language-agnostic)
 - JSON-RPC 2.0 protocol over stdin/stdout
 - Plugin discovery via `plugins/<name>/plugin.json` manifests
 - Start / Stop / Manage plugins from UI
-- Editor API: getActiveFile, getContent, getSelection
+- Editor API: getActiveFile, getContent, getSelection, getCursor, getEncoding, getFileName, getTabCount
 - Event notifications: fileOpened, fileSaved, fileClosed
 - Sample Python plugin included
 
@@ -116,8 +139,8 @@ cargo check            # Rust (from src-tauri/)
 ```
 ┌─ WebView (React + Monaco + i18n) ───────────────────────┐
 │  MenuBar │ TabBar │ Sidebar │ SplitEditor │ StatusBar   │
-│  SearchPanel │ 9 Dialogs                                 │
-│  8 Zustand stores                                        │
+│  SearchPanel │ 10 Dialogs                                │
+│  9 Zustand stores                                        │
 ├─ Tauri IPC (30 commands) ───────────────────────────────┤
 ├─ Rust Backend ──────────────────────────────────────────┤
 │  file_ops / encoding / search / session / system /       │
@@ -137,23 +160,24 @@ rip-notepad-plus-plus/
 │   │   ├── MenuBar/              # Custom HTML menu (11 menus)
 │   │   ├── TabBar/               # Drag-and-drop tabs
 │   │   ├── SearchPanel/          # Find/replace/find-in-files
-│   │   ├── StatusBar/            # Encoding, language, Ln/Col
-│   │   ├── Panels/               # Sidebar (files + symbols)
-│   │   └── Dialogs/              # 9 dialogs
-│   ├── stores/                   # 7 Zustand stores
-│   ├── hooks/                    # 6 custom hooks
+│   │   ├── StatusBar/            # Encoding, language, Ln/Col, branch
+│   │   ├── Panels/               # 7 sidebar panels
+│   │   └── Dialogs/              # 10 dialogs
+│   ├── stores/                   # 9 Zustand stores
+│   ├── hooks/                    # 8 custom hooks
 │   ├── i18n/                     # zh / en locales
 │   ├── lib/                      # IPC, utils, constants
 │   └── types/                    # TypeScript interfaces
 ├── src-tauri/                    # Backend (Rust)
 │   └── src/
-│       ├── commands/             # 6 modules, 24 commands
+│       ├── commands/             # 7 modules, 30 commands
 │       ├── encoding/             # detect + convert
 │       ├── search/               # regex + walkdir
 │       ├── plugin_api/           # sidecar manager
 │       └── models.rs             # shared types
 ├── plugins/                      # Plugin directory
 │   └── sample-hello/             # Sample Python plugin
+├── e2e/                          # 48 E2E tests (Playwright)
 ├── CLAUDE.md                     # AI development guide
 └── package.json
 ```
@@ -164,6 +188,7 @@ rip-notepad-plus-plus/
 |----------|--------|
 | `Ctrl+N` | New file |
 | `Ctrl+O` | Open file |
+| `Ctrl+Shift+O` | Open folder |
 | `Ctrl+S` | Save |
 | `Ctrl+Shift+S` | Save As |
 | `Ctrl+W` | Close tab |
@@ -175,6 +200,7 @@ rip-notepad-plus-plus/
 | `Ctrl+L` | Delete line |
 | `Ctrl+Shift+Up` | Move line up |
 | `Ctrl+Shift+Down` | Move line down |
+| `Ctrl+Shift+P` | Command Palette |
 | `Ctrl+Tab` | Next tab |
 | `Ctrl+Shift+Tab` | Previous tab |
 | `F11` | Full screen |
@@ -184,14 +210,14 @@ rip-notepad-plus-plus/
 ## Testing
 
 ```bash
-npm run test:e2e      # 32 Playwright tests (UI + compile checks)
+npm run test:e2e      # 48 Playwright tests (UI + compile checks)
 npm run test:check    # TypeScript + Rust compile checks only
 ```
 
-- 30 UI tests: menu items, dialogs, tab operations, sidebar, i18n, search, language
+- 46 UI tests: menus, dialogs, tab operations, sidebar, i18n, search, clipboard, JSON, task list, command palette, compare
 - 2 compile checks: `cargo check` and `npx tsc --noEmit`
 - Headless Chromium with mocked Tauri IPC
-- `npm run test:e2e` auto-starts Vite dev server
+- Auto-starts Vite dev server
 
 ## License
 
