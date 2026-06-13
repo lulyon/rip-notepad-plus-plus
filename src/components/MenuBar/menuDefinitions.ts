@@ -222,6 +222,5 @@ export const MENU_STRUCTURE: MenuDef[] = [
 
 /** Dispatch a menu action via a single custom event. */
 export function dispatchMenuAction(actionId: string): void {
-  console.log("[debug] dispatching:", actionId);
   window.dispatchEvent(new CustomEvent("menu-action", { detail: actionId }));
 }

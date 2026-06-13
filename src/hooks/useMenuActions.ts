@@ -42,13 +42,17 @@ export function useMenuActions() {
           break;
         }
         case "file.openFolder": {
-          console.log("[openFolder] opening directory picker...");
           try {
-            const result = await open({ title: "Open Folder", directory: true, multiple: false });
-            console.log("[openFolder] result:", result, typeof result);
+            // Use open() for file selection, then extract parent directory
+            // Tauri v2 dialog: directory param may not work as expected on all platforms
+            const result = await open({
+              title: "Select any file in the target folder",
+              multiple: false,
+            });
             if (result && typeof result === "string") {
-              useSettingsStore.getState().updateSetting("projectRoot", result);
-              // Persist project root to session
+              // Extract parent directory from selected file path
+              const dir = result.split(/[/\\]/).slice(0, -1).join("/") || result;
+              useSettingsStore.getState().updateSetting("projectRoot", dir);
               const tabs = useEditorStore.getState().tabs;
               const sessionTabs = tabs
                 .filter((t) => t.path)
@@ -56,13 +60,13 @@ export function useMenuActions() {
               ipc.saveSession({
                 open_tabs: sessionTabs,
                 active_tab_id: useEditorStore.getState().activeTabId,
-                project_root: result,
+                project_root: dir,
                 window_width: null,
                 window_height: null,
               }).catch(() => {});
             }
           } catch (err) {
-            console.error("[openFolder] error:", err);
+            console.error("openFolder failed:", err);
           }
           break;
         }
@@ -422,9 +426,7 @@ export function useMenuActions() {
   // Single event listener for all menu actions
   useEffect(() => {
     function handler(e: Event) {
-      const id = (e as CustomEvent).detail;
-      console.log("[debug] handler received:", id);
-      handleMenuAction(id);
+      handleMenuAction((e as CustomEvent).detail);
     }
     window.addEventListener("menu-action", handler);
     return () => window.removeEventListener("menu-action", handler);
