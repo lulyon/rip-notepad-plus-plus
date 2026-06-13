@@ -15,12 +15,28 @@ pub struct GitStatus {
     pub behind: u32,
 }
 
+fn find_git() -> &'static str {
+    // macOS GUI apps have a restricted PATH; try common locations
+    for candidate in &["/usr/bin/git", "/usr/local/bin/git", "/opt/homebrew/bin/git", "git"] {
+        if std::process::Command::new(candidate)
+            .arg("--version")
+            .output()
+            .map(|o| o.status.success())
+            .unwrap_or(false)
+        {
+            return candidate;
+        }
+    }
+    "git" // fallback
+}
+
 fn run_git(cwd: &str, args: &[&str]) -> Result<String, String> {
-    let output = std::process::Command::new("git")
+    let git_path = find_git();
+    let output = std::process::Command::new(git_path)
         .args(args)
         .current_dir(cwd)
         .output()
-        .map_err(|e| format!("Failed to run git: {}", e))?;
+        .map_err(|e| format!("Failed to run git ({}): {}", git_path, e))?;
 
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
