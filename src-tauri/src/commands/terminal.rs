@@ -4,8 +4,9 @@ use std::sync::mpsc::{channel, Receiver, Sender};
 use std::sync::Mutex;
 
 struct PtyState {
-    #[allow(dead_code)] master: Box<dyn portable_pty::MasterPty + Send>, so PTY doesn't close
-    writer: Box<dyn Write + Send>,                     // take_writer() called ONCE
+    #[allow(dead_code)] // kept alive so PTY doesn't close
+    master: Box<dyn portable_pty::MasterPty + Send>,
+    writer: Box<dyn Write + Send>, // take_writer() called ONCE
 }
 
 static PTY: Mutex<Option<PtyState>> = Mutex::new(None);
