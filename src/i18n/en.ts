@@ -113,7 +113,6 @@ const en = {
     // ── Menu: Run ──
     "menu.run": "&Run",
     "menu.run.dialog": "&Run...",
-    "menu.run.openInBrowser": "Open in &Browser",
     "menu.run.openTerminal": "Open &Terminal",
     "menu.run.claudeCode": "Launch Claude",
     "menu.run.codex": "Launch Codex",

@@ -200,8 +200,6 @@ export const MENU_STRUCTURE: MenuDef[] = [
     children: [
       { id: "run.dialog", labelKey: "menu.run.dialog" },
       S(),
-      { id: "run.openInBrowser", labelKey: "menu.run.openInBrowser" },
-      S(),
       { id: "run.openTerminal", labelKey: "menu.run.openTerminal" },
       { id: "run.claudeCode", labelKey: "menu.run.claudeCode" },
       { id: "run.codex", labelKey: "menu.run.codex" },

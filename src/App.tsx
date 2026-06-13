@@ -192,13 +192,6 @@ function App() {
         const projectRoot = useSettingsStore.getState().projectRoot;
         const wd = projectRoot || cwd;
         ipc.openTerminal(wd, "claude").catch(console.error);
-      } else if (actionId === "run.openInBrowser") {
-        const tab = useEditorStore.getState().tabs.find(
-          (t) => t.id === useEditorStore.getState().activeTabId,
-        );
-        if (tab?.path) {
-          ipc.openInBrowser(tab.path).catch(console.error);
-        }
       }
       // file.open and file.saveAs use Tauri dialog (native), triggered in useMenuActions
     }

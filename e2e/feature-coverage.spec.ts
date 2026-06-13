@@ -97,7 +97,6 @@ test.describe("Feature coverage — menus", () => {
     await page.waitForTimeout(150);
     const dropdown = page.locator(".menu-dropdown");
     await expect(dropdown).toContainText("运行");
-    await expect(dropdown).toContainText("在浏览器中打开");
   });
 
   test("View split submenu items are present", async ({ page }) => {
