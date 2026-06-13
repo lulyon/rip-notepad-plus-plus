@@ -8,12 +8,13 @@ import { detectLanguage } from "../../lib/constants";
 import type { DirEntry } from "../../types/ipc";
 import { GitPanel } from "./GitPanel";
 import { DocListPanel } from "./DocListPanel";
+import { ClipboardPanel } from "./ClipboardPanel";
 import "./Sidebar.css";
 
 export function Sidebar() {
   const { t } = useTranslation();
   const showSidebar = useSettingsStore((s) => s.showSidebar);
-  const [activeTab, setActiveTab] = useState<"files" | "doclist" | "git" | "symbols">("files");
+  const [activeTab, setActiveTab] = useState<"files" | "doclist" | "clipboard" | "git" | "symbols">("files");
 
   if (!showSidebar) return null;
 
@@ -33,6 +34,12 @@ export function Sidebar() {
           📋 {t("sidebar.doclist")}
         </button>
         <button
+          className={`sidebar-tab ${activeTab === "clipboard" ? "active" : ""}`}
+          onClick={() => setActiveTab("clipboard")}
+        >
+          📄 {t("sidebar.clipboard")}
+        </button>
+        <button
           className={`sidebar-tab ${activeTab === "git" ? "active" : ""}`}
           onClick={() => setActiveTab("git")}
         >
@@ -48,6 +55,7 @@ export function Sidebar() {
       <div className="sidebar-content">
         {activeTab === "files" && <ProjectPanel />}
         {activeTab === "doclist" && <DocListPanel />}
+        {activeTab === "clipboard" && <ClipboardPanel />}
         {activeTab === "git" && <GitPanel />}
         {activeTab === "symbols" && <FunctionList />}
       </div>

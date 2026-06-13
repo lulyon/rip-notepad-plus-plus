@@ -182,8 +182,19 @@ const zh = {
     // ── Sidebar ──
     "sidebar.files": "文件",
     "sidebar.doclist": "文档列表",
+    "sidebar.clipboard": "剪贴板历史",
     "sidebar.symbols": "符号",
     "sidebar.git": "Git",
+
+    // ── Clipboard ──
+    "clipboard.search": "搜索...",
+    "clipboard.clear": "清空历史",
+    "clipboard.empty": "复制内容将显示在此处",
+    "clipboard.noResults": "无匹配结果",
+    "clipboard.paste": "粘贴到编辑器",
+    "clipboard.copy": "复制到系统剪贴板",
+    "clipboard.pin": "固定/取消固定",
+    "clipboard.remove": "移除",
 
     // ── DocList ──
     "doclist.empty": "没有打开的文档",

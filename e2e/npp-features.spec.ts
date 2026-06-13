@@ -72,13 +72,42 @@ test.describe("Notepad++ ported features", () => {
     await expect(page.locator(".doclist-item")).toHaveCount(2);
   });
 
-  // ── Sidebar has 4 tabs total ──
-  test("sidebar has four tabs after NP++ features", async ({ page }) => {
+  // ── Clipboard Panel ──
+  test("Clipboard tab exists in sidebar", async ({ page }) => {
     await page.locator(".menu-bar-item").nth(3).click();
     await page.waitForTimeout(150);
     await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
     await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar-tab")).toHaveCount(4);
+    await expect(page.locator(".sidebar-tab").nth(2)).toContainText("剪贴板");
+  });
+
+  test("Clipboard panel shows empty state", async ({ page }) => {
+    await page.locator(".menu-bar-item").nth(3).click();
+    await page.waitForTimeout(150);
+    await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
+    await page.waitForTimeout(300);
+    await page.locator(".sidebar-tab").nth(2).click();
+    await page.waitForTimeout(200);
+    await expect(page.locator(".clipboard-empty")).toBeVisible();
+  });
+
+  test("Clipboard panel has search input", async ({ page }) => {
+    await page.locator(".menu-bar-item").nth(3).click();
+    await page.waitForTimeout(150);
+    await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
+    await page.waitForTimeout(300);
+    await page.locator(".sidebar-tab").nth(2).click();
+    await page.waitForTimeout(200);
+    await expect(page.locator(".clipboard-search")).toBeVisible();
+  });
+
+  // ── Sidebar now has 5 tabs ──
+  test("sidebar has five tabs total", async ({ page }) => {
+    await page.locator(".menu-bar-item").nth(3).click();
+    await page.waitForTimeout(150);
+    await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
+    await page.waitForTimeout(300);
+    await expect(page.locator(".sidebar-tab")).toHaveCount(5);
   });
 
   // ── Plugin API: editor methods available ──

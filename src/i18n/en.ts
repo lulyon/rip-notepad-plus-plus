@@ -182,8 +182,19 @@ const en = {
     // ── Sidebar ──
     "sidebar.files": "Files",
     "sidebar.doclist": "Doc List",
+    "sidebar.clipboard": "Clipboard",
     "sidebar.symbols": "Symbols",
     "sidebar.git": "Git",
+
+    // ── Clipboard ──
+    "clipboard.search": "Search...",
+    "clipboard.clear": "Clear History",
+    "clipboard.empty": "Copied content will appear here",
+    "clipboard.noResults": "No matching entries",
+    "clipboard.paste": "Paste to editor",
+    "clipboard.copy": "Copy to system clipboard",
+    "clipboard.pin": "Pin/Unpin",
+    "clipboard.remove": "Remove",
 
     // ── DocList ──
     "doclist.empty": "No documents open",
