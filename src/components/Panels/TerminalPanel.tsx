@@ -70,13 +70,19 @@ export function TerminalPanel({ embedded }: { embedded?: boolean }) {
 
     // Send keystrokes to PTY
     t.onData((data) => {
-      ipc.ptyWrite(data).catch(() => {});
+      ipc.ptyWrite(data).catch((err) => {
+        t.write(`\x1b[31m[INPUT ERROR: ${err}]\x1b[0m`);
+      });
     });
 
     // Spawn shell
-    await ipc.ptySpawn(cwd).catch((err) => {
-      t.writeln(`\x1b[31mFailed to start terminal: ${err}\x1b[0m`);
-    });
+    try {
+      await ipc.ptySpawn(cwd);
+    } catch (err) {
+      t.writeln(`\r\n\x1b[31m[ERROR] Failed to start shell: ${err}\x1b[0m`);
+      t.writeln(`\x1b[33mWorking directory: ${cwd}\x1b[0m`);
+      return;
+    }
 
     // Poll for output
     pollTimer.current = setInterval(async () => {
