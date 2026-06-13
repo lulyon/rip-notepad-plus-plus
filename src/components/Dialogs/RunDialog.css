@@ -41,3 +41,17 @@
   white-space: pre-wrap;
   margin-bottom: 12px;
 }
+
+.run-vars-toggle { margin-bottom: 8px; }
+.run-vars-grid { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; padding: 8px; background: var(--bg-secondary); border-radius: 4px; border: 1px solid var(--border-color); }
+.run-var-btn { display: flex; flex-direction: column; align-items: center; padding: 4px 8px; border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); cursor: pointer; border-radius: 3px; font-size: 10px; font-family: monospace; }
+.run-var-btn:hover { background: var(--accent-color); color: #fff; border-color: var(--accent-color); }
+.run-var-key { font-weight: 600; }
+.run-var-desc { color: var(--text-secondary); font-size: 9px; }
+.run-var-btn:hover .run-var-desc { color: rgba(255,255,255,0.8); }
+
+.run-error { color: #f44747; cursor: pointer; text-decoration: underline; }
+.run-warning { color: #e2b714; cursor: pointer; text-decoration: underline; }
+.run-link { color: var(--accent-color); cursor: pointer; text-decoration: underline; }
+.run-error:hover,.run-warning:hover,.run-link:hover { opacity: 0.8; }
+.btn-small { font-size: 11px; padding: 2px 8px; }

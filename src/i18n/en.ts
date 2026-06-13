@@ -225,6 +225,10 @@ const en = {
     "cmdPalette.placeholder": "Type a command name...",
     "cmdPalette.noResults": "No matching commands",
 
+    // ── Run Dialog ──
+    "run.variables": "Variables",
+    "run.clear": "Clear",
+
     // ── DocList ──
     "doclist.empty": "No documents open",
     "doclist.count": "documents",

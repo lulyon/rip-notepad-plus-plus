@@ -225,6 +225,10 @@ const zh = {
     "cmdPalette.placeholder": "输入命令名称搜索...",
     "cmdPalette.noResults": "未找到匹配的命令",
 
+    // ── Run Dialog ──
+    "run.variables": "变量",
+    "run.clear": "清空",
+
     // ── DocList ──
     "doclist.empty": "没有打开的文档",
     "doclist.count": "个文档",
