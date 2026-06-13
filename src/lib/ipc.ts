@@ -43,6 +43,14 @@ export const ipc = {
     return invoke("list_directory", { path });
   },
 
+  createDirectory(path: string): Promise<void> {
+    return invoke("create_directory", { path });
+  },
+
+  deleteDirectory(path: string): Promise<void> {
+    return invoke("delete_directory", { path });
+  },
+
   // ── Encoding ──
   detectEncoding(data: number[]): Promise<string> {
     return invoke("detect_encoding", { data });

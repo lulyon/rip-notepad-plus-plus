@@ -4,6 +4,7 @@ const en = {
     "menu.file": "&File",
     "menu.file.new": "&New",
     "menu.file.open": "&Open...",
+    "menu.file.openFolder": "Open &Folder...",
     "menu.file.save": "&Save",
     "menu.file.saveAs": "Save &As...",
     "menu.file.saveAll": "Save A&ll",

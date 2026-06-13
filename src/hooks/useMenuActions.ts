@@ -41,6 +41,25 @@ export function useMenuActions() {
           }
           break;
         }
+        case "file.openFolder": {
+          const result = await open({ title: "Open Folder", directory: true, multiple: false });
+          if (result && typeof result === "string") {
+            useSettingsStore.getState().updateSetting("projectRoot", result);
+            // Persist project root to session
+            const tabs = useEditorStore.getState().tabs;
+            const sessionTabs = tabs
+              .filter((t) => t.path)
+              .map((t) => ({ path: t.path!, encoding: t.encoding, language: t.language }));
+            ipc.saveSession({
+              open_tabs: sessionTabs,
+              active_tab_id: useEditorStore.getState().activeTabId,
+              project_root: result,
+              window_width: null,
+              window_height: null,
+            }).catch(() => {});
+          }
+          break;
+        }
         case "file.save":
           if (tab?.path) {
             await ipc.writeFile(tab.path, tab.content, tab.encoding);

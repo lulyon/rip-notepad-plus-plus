@@ -48,6 +48,9 @@ pub struct FindInFilesParams {
 pub struct SessionData {
     pub open_tabs: Vec<SessionTab>,
     pub active_tab_id: Option<String>,
+    pub project_root: Option<String>,
+    pub window_width: Option<u32>,
+    pub window_height: Option<u32>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

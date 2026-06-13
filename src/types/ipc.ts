@@ -32,6 +32,9 @@ export interface FindInFilesParams {
 export interface SessionData {
   open_tabs: SessionTab[];
   active_tab_id: string | null;
+  project_root: string | null;
+  window_width: number | null;
+  window_height: number | null;
 }
 
 export interface SessionTab {

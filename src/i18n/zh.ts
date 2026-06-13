@@ -4,6 +4,7 @@ const zh = {
     "menu.file": "文件(&F)",
     "menu.file.new": "新建(&N)",
     "menu.file.open": "打开(&O)...",
+    "menu.file.openFolder": "打开文件夹(&F)...",
     "menu.file.save": "保存(&S)",
     "menu.file.saveAs": "另存为(&A)...",
     "menu.file.saveAll": "全部保存(&L)",

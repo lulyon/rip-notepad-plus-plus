@@ -38,6 +38,60 @@ function App() {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [pluginOpen, setPluginOpen] = useState(false);
 
+  // ── Session: load on startup ──
+  useEffect(() => {
+    ipc.loadSession().then((session) => {
+      if (!session) return;
+      // Restore project root
+      if (session.project_root) {
+        useSettingsStore.getState().updateSetting("projectRoot", session.project_root);
+      }
+      // Restore open tabs
+      if (session.open_tabs && session.open_tabs.length > 0) {
+        const store = useEditorStore.getState();
+        // First, clear default welcome state by adding tabs
+        for (const tab of session.open_tabs) {
+          ipc.readFile(tab.path).then((data) => {
+            store.openTab({
+              path: tab.path,
+              name: tab.path.split(/[/\\]/).pop() || tab.path,
+              content: data.content,
+              encoding: tab.encoding,
+              language: tab.language,
+            });
+          }).catch(() => {
+            // File may have been moved/deleted — skip
+          });
+        }
+        if (session.active_tab_id) {
+          store.setActiveTab(session.active_tab_id);
+        }
+      }
+    }).catch(() => {});
+  }, []);
+
+  // ── Session: auto-save on changes ──
+  const tabs = useEditorStore((s) => s.tabs);
+  const projectRoot = useSettingsStore((s) => s.projectRoot);
+
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      const sessionTabs = tabs
+        .filter((t) => t.path)
+        .map((t) => ({ path: t.path!, encoding: t.encoding, language: t.language }));
+      if (sessionTabs.length > 0) {
+        ipc.saveSession({
+          open_tabs: sessionTabs,
+          active_tab_id: activeTabId,
+          project_root: projectRoot,
+          window_width: null,
+          window_height: null,
+        }).catch(() => {});
+      }
+    }, 1000);
+    return () => clearTimeout(debounce);
+  }, [tabs, activeTabId, projectRoot]);
+
   // Global hooks
   useWindowTitle();
   useFileDrop();

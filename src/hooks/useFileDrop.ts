@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { useEditorStore } from "../stores/editorStore";
+import { useSettingsStore } from "../stores/settingsStore";
 import { ipc } from "../lib/ipc";
 import { detectLanguage } from "../lib/constants";
 import { isBinaryExtension } from "../lib/fileUtils";
@@ -16,26 +17,42 @@ export function useFileDrop() {
         if (cancelled) return;
         if (event.payload.type === "drop") {
           for (const path of event.payload.paths) {
-            if (isBinaryExtension(path)) continue;
-
-            ipc
-              .readFile(path)
-              .then((result) => {
-                if (cancelled) return;
-                const name = path.split(/[/\\]/).pop() || path;
-                const ext = path.split(".").pop() || "";
-                const language = detectLanguage(ext);
-                useEditorStore.getState().openTab({
-                  path,
-                  name,
-                  content: result.content,
-                  encoding: result.encoding,
-                  language,
+            // Check if it's a directory
+            ipc.fileExists(path).then((exists) => {
+              if (!exists || cancelled) return;
+              // Heuristic: paths without common file extensions are likely dirs
+              // Better: use a proper dir check via list_directory
+              return ipc.listDirectory(path).then(() => {
+                // Success = it's a directory → set as project root
+                useSettingsStore.getState().updateSetting("projectRoot", path);
+                // Save to session
+                const tabs = useEditorStore.getState().tabs;
+                ipc.saveSession({
+                  open_tabs: tabs.filter((t) => t.path).map((t) => ({
+                    path: t.path!, encoding: t.encoding, language: t.language,
+                  })),
+                  active_tab_id: useEditorStore.getState().activeTabId,
+                  project_root: path,
+                  window_width: null, window_height: null,
+                }).catch(() => {});
+              }).catch(() => {
+                // Not a directory → open as file
+                if (isBinaryExtension(path)) return;
+                ipc.readFile(path).then((result) => {
+                  if (cancelled) return;
+                  const name = path.split(/[/\\]/).pop() || path;
+                  const ext = path.split(".").pop() || "";
+                  useEditorStore.getState().openTab({
+                    path, name,
+                    content: result.content,
+                    encoding: result.encoding,
+                    language: detectLanguage(ext),
+                  });
+                }).catch((err) => {
+                  console.error(`Failed to open dropped file: ${path}`, err);
                 });
-              })
-              .catch((err) => {
-                console.error(`Failed to open dropped file: ${path}`, err);
               });
+            }).catch(() => {});
           }
         }
       });

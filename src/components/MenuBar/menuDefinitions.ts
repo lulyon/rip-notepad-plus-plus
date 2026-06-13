@@ -30,6 +30,7 @@ export const MENU_STRUCTURE: MenuDef[] = [
     children: [
       { id: "file.new", labelKey: "menu.file.new", shortcut: "Ctrl+N" },
       { id: "file.open", labelKey: "menu.file.open", shortcut: "Ctrl+O" },
+      { id: "file.openFolder", labelKey: "menu.file.openFolder" },
       S(),
       { id: "file.save", labelKey: "menu.file.save", shortcut: "Ctrl+S" },
       { id: "file.saveAs", labelKey: "menu.file.saveAs", shortcut: "Ctrl+Shift+S" },

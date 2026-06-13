@@ -44,21 +44,23 @@ function ProjectPanel() {
   const tabs = useEditorStore((s) => s.tabs);
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const activeTab = tabs.find((t) => t.id === activeTabId);
+  const projectRoot = useSettingsStore((s) => s.projectRoot);
   const [root, setRoot] = useState<string>(".");
   const [entries, setEntries] = useState<DirEntry[]>([]);
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(false);
 
-  // Determine root from active tab
+  // Determine root: fixed project root > active tab parent > cwd
   useEffect(() => {
-    const dir = activeTab?.path
-      ? activeTab.path.split(/[/\\]/).slice(0, -1).join("/") || "."
-      : ".";
+    const dir = projectRoot
+      || (activeTab?.path
+        ? activeTab.path.split(/[/\\]/).slice(0, -1).join("/") || "."
+        : ".");
     if (dir !== root) {
       setRoot(dir);
       loadDir(dir);
     }
-  }, [activeTab?.path]);
+  }, [projectRoot, activeTab?.path]);
 
   const loadDir = useCallback(async (dir: string) => {
     setLoading(true);

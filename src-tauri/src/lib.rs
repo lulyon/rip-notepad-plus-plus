@@ -8,7 +8,7 @@ use commands::encoding::{
     convert_encoding_command, decode_with_encoding, detect_encoding, encode_with_encoding,
     list_encodings,
 };
-use commands::file_ops::{delete_file, file_exists, get_file_size, list_directory, read_file, rename_file, write_file};
+use commands::file_ops::{create_directory, delete_directory, delete_file, file_exists, get_file_size, list_directory, read_file, rename_file, write_file};
 use commands::search::find_in_files;
 use commands::session::{clear_session, load_session, save_session};
 use commands::plugin::{list_plugins, notify_plugins, send_plugin_command, start_plugin, stop_plugin, update_editor_state};
@@ -29,6 +29,8 @@ pub fn run() {
             file_exists,
             get_file_size,
             list_directory,
+            create_directory,
+            delete_directory,
             // Encoding
             detect_encoding,
             convert_encoding_command,

@@ -119,3 +119,15 @@ pub async fn list_directory(path: String) -> Result<Vec<DirEntry>, String> {
 
     Ok(result)
 }
+
+#[tauri::command]
+pub async fn create_directory(path: String) -> Result<(), String> {
+    std::fs::create_dir_all(&path)
+        .map_err(|e| format!("Failed to create directory '{}': {}", path, e))
+}
+
+#[tauri::command]
+pub async fn delete_directory(path: String) -> Result<(), String> {
+    std::fs::remove_dir_all(&path)
+        .map_err(|e| format!("Failed to delete directory '{}': {}", path, e))
+}

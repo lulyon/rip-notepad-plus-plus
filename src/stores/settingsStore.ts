@@ -21,6 +21,7 @@ export interface SettingsState {
   showMenuBar: boolean;
   showStatusBar: boolean;
   showSidebar: boolean;
+  projectRoot: string | null;
   fullScreen: boolean;
   alwaysOnTop: boolean;
 
@@ -112,6 +113,7 @@ export const useSettingsStore = create<SettingsState>((set) => {
     showMenuBar: saved.showMenuBar ?? true,
     showStatusBar: saved.showStatusBar ?? true,
     showSidebar: saved.showSidebar ?? false,
+    projectRoot: saved.projectRoot ?? null,
     fullScreen: saved.fullScreen ?? false,
     alwaysOnTop: saved.alwaysOnTop ?? false,
     defaultEncoding: saved.defaultEncoding ?? "UTF-8",
