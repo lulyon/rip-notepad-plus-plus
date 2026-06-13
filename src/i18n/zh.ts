@@ -71,7 +71,6 @@ const zh = {
     "menu.view.splitVertical": "垂直分屏",
     "menu.view.alwaysOnTop": "窗口置顶",
     "menu.view.toggleSidebar": "显示侧边栏",
-    "menu.view.toggleTerminal": "显示终端",
 
     // ── Menu: Encoding ──
     "menu.encoding": "编码(&N)",
@@ -188,11 +187,6 @@ const zh = {
     "sidebar.clipboard": "剪贴板历史",
     "sidebar.symbols": "符号",
     "sidebar.git": "Git",
-    "sidebar.terminal": "终端",
-
-    // ── Terminal ──
-    "terminal.title": "终端",
-    "terminal.restart": "重启终端",
 
     // ── Clipboard ──
     "clipboard.search": "搜索...",

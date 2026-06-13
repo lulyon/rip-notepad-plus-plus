@@ -27,7 +27,6 @@ import { PluginDialog } from "./components/Dialogs/PluginDialog";
 import { CompareDialog } from "./components/Dialogs/CompareDialog";
 import { CommandPalette } from "./components/Dialogs/CommandPalette";
 import { Sidebar } from "./components/Panels/Sidebar";
-import { BottomPanel } from "./components/Panels/BottomPanel";
 
 function App() {
   const { t } = useTranslation();
@@ -216,7 +215,6 @@ function App() {
           <SearchPanel />
         </div>
       </div>
-      <BottomPanel />
       {showStatusBar && <StatusBar />}
 
       {/* Dialogs */}

@@ -71,7 +71,6 @@ const en = {
     "menu.view.splitVertical": "Split Vertically",
     "menu.view.alwaysOnTop": "Always on Top",
     "menu.view.toggleSidebar": "Show Sidebar",
-    "menu.view.toggleTerminal": "Toggle Terminal",
 
     // ── Menu: Encoding ──
     "menu.encoding": "E&ncoding",
@@ -188,11 +187,6 @@ const en = {
     "sidebar.clipboard": "Clipboard",
     "sidebar.symbols": "Symbols",
     "sidebar.git": "Git",
-    "sidebar.terminal": "Terminal",
-
-    // ── Terminal ──
-    "terminal.title": "Terminal",
-    "terminal.restart": "Restart Terminal",
 
     // ── Clipboard ──
     "clipboard.search": "Search...",

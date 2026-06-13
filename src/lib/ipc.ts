@@ -99,19 +99,6 @@ export const ipc = {
     return invoke("open_terminal", { cwd, command });
   },
 
-  // ── Terminal (PTY) ──
-  ptySpawn(cwd: string): Promise<void> {
-    return invoke("pty_spawn", { cwd });
-  },
-  ptyWrite(data: string): Promise<void> {
-    return invoke("pty_write", { data });
-  },
-  ptyRead(): Promise<string> {
-    return invoke("pty_read");
-  },
-  ptyKill(): Promise<void> {
-    return invoke("pty_kill");
-  },
 
   runCommand(command: string, cwd?: string): Promise<CommandResult> {
     return invoke("run_command", { command, cwd: cwd ?? null });

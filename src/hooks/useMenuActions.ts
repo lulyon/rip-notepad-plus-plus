@@ -385,9 +385,6 @@ export function useMenuActions() {
         case "view.toggleSidebar":
           useSettingsStore.getState().toggleSetting("showSidebar");
           break;
-        case "view.toggleTerminal":
-          useSettingsStore.getState().toggleSetting("showTerminal");
-          break;
         case "view.splitNone":
           useSettingsStore.getState().updateSetting("splitView", "none");
           break;

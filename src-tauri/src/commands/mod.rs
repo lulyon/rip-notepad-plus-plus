@@ -5,4 +5,3 @@ pub mod session;
 pub mod system;
 pub mod plugin;
 pub mod git;
-pub mod terminal;

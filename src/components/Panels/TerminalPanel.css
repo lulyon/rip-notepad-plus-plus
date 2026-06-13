@@ -1,5 +1,0 @@
-.terminal-panel { height:100%; display:flex; flex-direction:column; overflow:hidden; }
-.terminal-header { display:flex; align-items:center; justify-content:space-between; padding:4px 8px; font-size:11px; color:var(--text-secondary); border-bottom:1px solid var(--border-color); flex-shrink:0; }
-.terminal-restart-btn { border:none; background:transparent; color:var(--text-secondary); cursor:pointer; font-size:14px; padding:0 4px; }
-.terminal-restart-btn:hover { color:var(--text-primary); }
-.terminal-container { flex:1; overflow:hidden; padding:4px; }

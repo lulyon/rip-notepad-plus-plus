@@ -14,7 +14,6 @@ use commands::session::{clear_session, load_session, save_session};
 use commands::git::{git_branch, git_diff_file, git_status};
 use commands::plugin::{list_plugins, notify_plugins, send_plugin_command, start_plugin, stop_plugin, update_editor_state};
 use commands::system::{get_system_info, open_in_browser, open_terminal, run_command};
-use commands::terminal::{pty_kill, pty_read, pty_spawn, pty_write};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -61,11 +60,6 @@ pub fn run() {
             git_status,
             git_branch,
             git_diff_file,
-            // Terminal (PTY)
-            pty_spawn,
-            pty_write,
-            pty_read,
-            pty_kill,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

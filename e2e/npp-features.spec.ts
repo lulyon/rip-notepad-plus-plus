@@ -131,15 +131,6 @@ test.describe("Notepad++ ported features", () => {
   });
 
   // ── Terminal toggle menu item ──
-  test("View menu has terminal toggle", async ({ page }) => {
-    await page.locator(".menu-bar-item").nth(3).click();
-    await page.waitForTimeout(150);
-    await expect(page.locator(".menu-dropdown")).toContainText("显示终端");
-  });
-
-  // Emmet is enabled in editor options (verified via config)
-
-  // ── Compare dialog ──
   test("Compare menu item exists", async ({ page }) => {
     await page.locator(".menu-bar-item").nth(9).click(); // Plugins
     await page.waitForTimeout(150);

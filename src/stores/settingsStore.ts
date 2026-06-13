@@ -25,7 +25,6 @@ export interface SettingsState {
   fullScreen: boolean;
   alwaysOnTop: boolean;
   autoSave: boolean;
-  showTerminal: boolean;
 
   // ── New Document ──
   defaultEncoding: string;
@@ -119,7 +118,6 @@ export const useSettingsStore = create<SettingsState>((set) => {
     fullScreen: saved.fullScreen ?? false,
     alwaysOnTop: saved.alwaysOnTop ?? false,
     autoSave: saved.autoSave ?? true,
-    showTerminal: saved.showTerminal ?? false,
     defaultEncoding: saved.defaultEncoding ?? "UTF-8",
     defaultLanguage: saved.defaultLanguage ?? "plaintext",
     defaultEol: saved.defaultEol ?? "LF",
