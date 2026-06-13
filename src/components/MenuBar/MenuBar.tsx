@@ -100,7 +100,10 @@ export function MenuBar() {
           <span className="menu-bar-label">{t(menu.labelKey)}</span>
 
           {openMenuId === menu.id && (
-            <div className="menu-dropdown">
+            <div
+              className="menu-dropdown"
+              onMouseDown={(e) => e.stopPropagation()}
+            >
               {menu.children.map((item) => (
                 <MenuItem
                   key={item.id}
