@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import type { OnMount } from "@monaco-editor/react";
 import { useEditorStore } from "../stores/editorStore";
+import { useSettingsStore } from "../stores/settingsStore";
 import { ipc } from "../lib/ipc";
 import { detectLanguage } from "../lib/constants";
 import { open, save } from "@tauri-apps/plugin-dialog";
@@ -219,6 +220,19 @@ export function useMonacoActions() {
         ],
         run: () => {
           window.dispatchEvent(new CustomEvent("open-command-palette"));
+        },
+      });
+
+      // Ctrl+` toggles terminal (VS Code style)
+      editor.addAction({
+        id: "toggle-terminal",
+        label: "Toggle Terminal",
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyCode.Backquote,
+          monaco.KeyMod.WinCtrl | monaco.KeyCode.Backquote,
+        ],
+        run: () => {
+          useSettingsStore.getState().toggleSetting("showTerminal");
         },
       });
     },

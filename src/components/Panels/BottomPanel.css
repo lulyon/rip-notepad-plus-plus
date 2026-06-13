@@ -1,0 +1,4 @@
+.bottom-panel { border-top:1px solid var(--border-color); background:var(--bg-primary); display:flex; flex-direction:column; overflow:hidden; flex-shrink:0; }
+.bottom-panel-drag { height:3px; cursor:row-resize; background:transparent; flex-shrink:0; }
+.bottom-panel-drag:hover { background:var(--accent-color); }
+.bottom-panel-content { flex:1; overflow:hidden; }

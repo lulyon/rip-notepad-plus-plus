@@ -170,7 +170,7 @@ test.describe("Feature coverage — sidebar", () => {
     await page.locator(".menu-item", { hasText: "显示侧边栏" }).click();
     await page.waitForTimeout(300);
     await expect(page.locator(".sidebar")).toBeVisible();
-    await expect(page.locator(".sidebar-tab")).toHaveCount(8);
+    await expect(page.locator(".sidebar-tab")).toHaveCount(7);
   });
 
   test("Workspace: Open Folder menu item exists with shortcut", async ({ page }) => {

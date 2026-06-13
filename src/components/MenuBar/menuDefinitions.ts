@@ -135,6 +135,7 @@ export const MENU_STRUCTURE: MenuDef[] = [
       { id: "view.alwaysOnTop", labelKey: "menu.view.alwaysOnTop" },
       S(),
       { id: "view.toggleSidebar", labelKey: "menu.view.toggleSidebar" },
+      { id: "view.toggleTerminal", labelKey: "menu.view.toggleTerminal", shortcut: "Ctrl+`" },
     ],
   },
   {

@@ -11,13 +11,12 @@ import { DocListPanel } from "./DocListPanel";
 import { ClipboardPanel } from "./ClipboardPanel";
 import { JsonViewerPanel } from "./JsonViewerPanel";
 import { TaskListPanel } from "./TaskListPanel";
-import { TerminalPanel } from "./TerminalPanel";
 import "./Sidebar.css";
 
 export function Sidebar() {
   const { t } = useTranslation();
   const showSidebar = useSettingsStore((s) => s.showSidebar);
-  const [activeTab, setActiveTab] = useState<"files" | "doclist" | "clipboard" | "json" | "tasklist" | "git" | "terminal" | "symbols">("files");
+  const [activeTab, setActiveTab] = useState<"files" | "doclist" | "clipboard" | "json" | "tasklist" | "git" | "symbols">("files");
 
   if (!showSidebar) return null;
 
@@ -61,12 +60,6 @@ export function Sidebar() {
           ⎇ {t("sidebar.git")}
         </button>
         <button
-          className={`sidebar-tab ${activeTab === "terminal" ? "active" : ""}`}
-          onClick={() => setActiveTab("terminal")}
-        >
-          💻 {t("sidebar.terminal")}
-        </button>
-        <button
           className={`sidebar-tab ${activeTab === "symbols" ? "active" : ""}`}
           onClick={() => setActiveTab("symbols")}
         >
@@ -80,7 +73,6 @@ export function Sidebar() {
         {activeTab === "json" && <JsonViewerPanel />}
         {activeTab === "tasklist" && <TaskListPanel />}
         {activeTab === "git" && <GitPanel />}
-        {activeTab === "terminal" && <TerminalPanel />}
         {activeTab === "symbols" && <FunctionList />}
       </div>
     </div>

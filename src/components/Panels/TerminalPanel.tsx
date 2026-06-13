@@ -8,7 +8,7 @@ import { FitAddon } from "@xterm/addon-fit";
 import "@xterm/xterm/css/xterm.css";
 import "./TerminalPanel.css";
 
-export function TerminalPanel() {
+export function TerminalPanel({ embedded }: { embedded?: boolean }) {
   const { t } = useTranslation();
   const terminalRef = useRef<HTMLDivElement>(null);
   const term = useRef<Terminal | null>(null);
@@ -107,16 +107,12 @@ export function TerminalPanel() {
 
   return (
     <div className="terminal-panel">
-      <div className="terminal-header">
-        <span>⎇ {t("terminal.title")}</span>
-        <button
-          className="terminal-restart-btn"
-          onClick={startTerminal}
-          title={t("terminal.restart")}
-        >
-          ↻
-        </button>
-      </div>
+      {!embedded && (
+        <div className="terminal-header">
+          <span>⎇ {t("terminal.title")}</span>
+          <button className="terminal-restart-btn" onClick={startTerminal} title={t("terminal.restart")}>↻</button>
+        </div>
+      )}
       <div ref={terminalRef} className="terminal-container" />
     </div>
   );

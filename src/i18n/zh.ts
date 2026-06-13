@@ -71,6 +71,7 @@ const zh = {
     "menu.view.splitVertical": "垂直分屏",
     "menu.view.alwaysOnTop": "窗口置顶",
     "menu.view.toggleSidebar": "显示侧边栏",
+    "menu.view.toggleTerminal": "显示终端",
 
     // ── Menu: Encoding ──
     "menu.encoding": "编码(&N)",

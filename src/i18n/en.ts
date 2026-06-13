@@ -71,6 +71,7 @@ const en = {
     "menu.view.splitVertical": "Split Vertically",
     "menu.view.alwaysOnTop": "Always on Top",
     "menu.view.toggleSidebar": "Show Sidebar",
+    "menu.view.toggleTerminal": "Toggle Terminal",
 
     // ── Menu: Encoding ──
     "menu.encoding": "E&ncoding",
