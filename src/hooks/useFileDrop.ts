@@ -6,14 +6,14 @@ import { detectLanguage } from "../lib/constants";
 import { isBinaryExtension } from "../lib/fileUtils";
 
 export function useFileDrop() {
-  const openTab = useEditorStore((s) => s.openTab);
-
   useEffect(() => {
-    let unlisten: (() => void) | undefined;
+    let cancelled = false;
+    let unlistenFn: (() => void) | undefined;
 
     async function setup() {
       const appWindow = getCurrentWindow();
-      unlisten = await appWindow.onDragDropEvent((event) => {
+      const unlisten = await appWindow.onDragDropEvent((event) => {
+        if (cancelled) return;
         if (event.payload.type === "drop") {
           for (const path of event.payload.paths) {
             if (isBinaryExtension(path)) continue;
@@ -21,10 +21,11 @@ export function useFileDrop() {
             ipc
               .readFile(path)
               .then((result) => {
+                if (cancelled) return;
                 const name = path.split(/[/\\]/).pop() || path;
                 const ext = path.split(".").pop() || "";
                 const language = detectLanguage(ext);
-                openTab({
+                useEditorStore.getState().openTab({
                   path,
                   name,
                   content: result.content,
@@ -38,12 +39,19 @@ export function useFileDrop() {
           }
         }
       });
+
+      if (cancelled) {
+        unlisten();
+      } else {
+        unlistenFn = unlisten;
+      }
     }
 
     setup();
 
     return () => {
-      if (unlisten) unlisten();
+      cancelled = true;
+      if (unlistenFn) unlistenFn();
     };
-  }, [openTab]);
+  }, []); // Stable — no dependencies needed
 }
