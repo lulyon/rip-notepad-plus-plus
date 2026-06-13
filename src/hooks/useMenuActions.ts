@@ -124,7 +124,7 @@ export function useMenuActions() {
           }
           break;
         case "file.print":
-          editorRef?.trigger("keyboard", "editor.action.print", null);
+          window.print();
           break;
         case "file.exit": {
           // Save session before closing
