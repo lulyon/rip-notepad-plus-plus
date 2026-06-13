@@ -4,7 +4,7 @@ use std::path::PathBuf;
 use std::process::{Child, Command, Stdio};
 use std::sync::{Arc, Mutex};
 
-use crate::plugin_api::types::{JsonRpcRequest, JsonRpcResponse, PluginInfo, PluginManifest};
+use crate::plugin_api::types::{EditorState, JsonRpcRequest, JsonRpcResponse, PluginInfo, PluginManifest};
 
 /// A running plugin process
 #[allow(dead_code)] // fields reserved for future plugin API expansion
@@ -54,6 +54,7 @@ impl PluginProcess {
 pub struct PluginManager {
     plugin_dir: PathBuf,
     plugins: Arc<Mutex<HashMap<String, PluginProcess>>>,
+    editor_state: Arc<Mutex<EditorState>>,
 }
 
 impl PluginManager {
@@ -66,6 +67,7 @@ impl PluginManager {
         Self {
             plugin_dir,
             plugins: Arc::new(Mutex::new(HashMap::new())),
+            editor_state: Arc::new(Mutex::new(EditorState::default())),
         }
     }
 
@@ -197,17 +199,113 @@ impl PluginManager {
         }
     }
 
-    /// Send a JSON-RPC request to a running plugin
+    /// Send a JSON-RPC request to a running plugin.
+    /// Intercepts editor.* methods and returns cached state directly.
     pub fn send_to_plugin(
         &self,
         name: &str,
         request: &JsonRpcRequest,
     ) -> Result<JsonRpcResponse, String> {
+        // Intercept editor.* methods — serve from cache
+        if request.method.starts_with("editor.") {
+            return match self.handle_plugin_editor_request(&request.method, request.params.clone()) {
+                Ok(result) => Ok(JsonRpcResponse {
+                    jsonrpc: "2.0".to_string(),
+                    id: request.id,
+                    result: Some(result),
+                    error: None,
+                }),
+                Err(e) => Ok(JsonRpcResponse {
+                    jsonrpc: "2.0".to_string(),
+                    id: request.id,
+                    result: None,
+                    error: Some(crate::plugin_api::types::JsonRpcError {
+                        code: -32603,
+                        message: e,
+                        data: None,
+                    }),
+                }),
+            };
+        }
+
         let mut plugins = self.plugins.lock().unwrap();
         if let Some(process) = plugins.get_mut(name) {
             process.send_request(request)
         } else {
             Err(format!("Plugin '{}' is not running", name))
+        }
+    }
+
+    /// Update cached editor state (called by frontend on editor changes)
+    pub fn update_state(&self, state: EditorState) {
+        let mut cached = self.editor_state.lock().unwrap();
+        *cached = state;
+    }
+
+    /// Send a JSON-RPC notification to all running plugins
+    pub fn notify_all(&self, method: &str, params: Option<serde_json::Value>) {
+        let notification = serde_json::json!({
+            "jsonrpc": "2.0",
+            "method": method,
+            "params": params,
+        });
+        let notification_str = notification.to_string();
+
+        let mut plugins = self.plugins.lock().unwrap();
+        let mut dead_plugins = Vec::new();
+
+        for (name, process) in plugins.iter_mut() {
+            if let Some(stdin) = process.child.stdin.as_mut() {
+                if writeln!(stdin, "{}", notification_str).is_err() {
+                    dead_plugins.push(name.clone());
+                } else {
+                    let _ = stdin.flush();
+                }
+            }
+        }
+
+        for name in dead_plugins {
+            plugins.remove(&name);
+        }
+    }
+
+    /// Handle editor.* requests from plugins, returning cached state
+    pub fn handle_plugin_editor_request(
+        &self,
+        method: &str,
+        _params: Option<serde_json::Value>,
+    ) -> Result<serde_json::Value, String> {
+        let state = self.editor_state.lock().unwrap();
+
+        match method {
+            "editor.getActiveFile" => {
+                Ok(serde_json::json!({
+                    "path": state.active_file_path,
+                    "name": state.active_file_name,
+                    "content": state.active_file_content,
+                    "language": state.active_file_language,
+                    "encoding": state.active_file_encoding,
+                    "cursorLine": state.cursor_line,
+                    "cursorColumn": state.cursor_column,
+                    "tabCount": state.tab_count,
+                }))
+            }
+            "editor.getContent" => {
+                Ok(serde_json::json!({
+                    "content": state.active_file_content,
+                }))
+            }
+            "editor.getSelection" => {
+                // Selection info is limited without Monaco integration
+                Ok(serde_json::json!({
+                    "cursorLine": state.cursor_line,
+                    "cursorColumn": state.cursor_column,
+                }))
+            }
+            "editor.getLanguage" => {
+                Ok(serde_json::json!(state.active_file_language))
+            }
+            _ => Err(format!("Unknown editor method: {}", method)),
         }
     }
 

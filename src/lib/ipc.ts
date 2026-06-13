@@ -111,4 +111,12 @@ export const ipc = {
   sendPluginCommand(name: string, method: string, params?: unknown): Promise<unknown> {
     return invoke("send_plugin_command", { name, method, params: params ?? null });
   },
+
+  updateEditorState(state: import("../types/ipc").EditorState): Promise<void> {
+    return invoke("update_editor_state", { state });
+  },
+
+  notifyPlugins(method: string, params?: unknown): Promise<void> {
+    return invoke("notify_plugins", { method, params: params ?? null });
+  },
 };

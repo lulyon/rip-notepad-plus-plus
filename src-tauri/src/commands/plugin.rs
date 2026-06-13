@@ -1,5 +1,5 @@
 use crate::plugin_api::get_plugin_manager;
-use crate::plugin_api::types::PluginInfo;
+use crate::plugin_api::types::{EditorState, PluginInfo};
 
 #[tauri::command]
 pub async fn list_plugins() -> Result<Vec<PluginInfo>, String> {
@@ -34,4 +34,16 @@ pub async fn send_plugin_command(
     } else {
         Ok(response.result.unwrap_or(serde_json::Value::Null))
     }
+}
+
+#[tauri::command]
+pub async fn update_editor_state(state: EditorState) -> Result<(), String> {
+    get_plugin_manager().update_state(state);
+    Ok(())
+}
+
+#[tauri::command]
+pub async fn notify_plugins(method: String, params: Option<serde_json::Value>) -> Result<(), String> {
+    get_plugin_manager().notify_all(&method, params);
+    Ok(())
 }

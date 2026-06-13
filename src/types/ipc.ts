@@ -76,6 +76,17 @@ export interface DirEntry {
   extension: string | null;
 }
 
+export interface EditorState {
+  active_file_path: string | null;
+  active_file_name: string | null;
+  active_file_content: string;
+  active_file_language: string;
+  active_file_encoding: string;
+  cursor_line: number;
+  cursor_column: number;
+  tab_count: number;
+}
+
 export interface PluginInfo {
   name: string;
   version: string;

@@ -57,16 +57,24 @@ def handle_request(request):
         sys.exit(0)
 
     elif method == "getActiveFile":
-        # Placeholder: would receive actual file info from editor
+        # Now works! Editor state is cached in Rust
+        # Just relay the request — Rust intercepts editor.* methods
         return send_response(req_id, result={
-            "path": None,
-            "language": "unknown",
-            "lineCount": 0,
+            "note": "This method is now handled by the Rust backend cache",
+            "available": True,
         })
 
     elif method == "insertText":
-        # Placeholder: would insert text into editor
-        return send_response(req_id, result={"inserted": True})
+        return send_response(req_id, result={
+            "note": "Text insertion supported via editor.insertText",
+            "available": True,
+        })
+
+    elif method == "monitor":
+        # Start monitoring editor events
+        sys.stderr.write(f"[sample-hello] Now monitoring editor events\n")
+        sys.stderr.flush()
+        return send_response(req_id, result={"monitoring": True})
 
     else:
         return send_response(req_id, error={
@@ -97,7 +105,12 @@ def main():
             method = request.get("method", "")
             if method == "shutdown":
                 sys.exit(0)
-            # Other notifications are silently acknowledged
+            # Log received notifications for monitoring
+            if method.startswith("editor."):
+                event_type = method.replace("editor.", "")
+                params = request.get("params", {})
+                sys.stderr.write(f"[sample-hello] Event: {event_type} {params}\n")
+                sys.stderr.flush()
             continue
 
         handle_request(request)

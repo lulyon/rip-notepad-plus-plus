@@ -8,6 +8,7 @@ import { useFileDrop } from "./hooks/useFileDrop";
 import { useKeyboardShortcuts } from "./hooks/useKeyboardShortcuts";
 import { useMenuActions } from "./hooks/useMenuActions";
 import { useMacroRecorder } from "./hooks/useMacroRecorder";
+import { usePluginBridge } from "./hooks/usePluginBridge";
 import { ipc } from "./lib/ipc";
 import { detectLanguage } from "./lib/constants";
 import { MenuBar } from "./components/MenuBar/MenuBar";
@@ -43,6 +44,7 @@ function App() {
   useKeyboardShortcuts();
   useMenuActions();
   useMacroRecorder();
+  usePluginBridge();
 
   // Listen for custom events
   useEffect(() => {

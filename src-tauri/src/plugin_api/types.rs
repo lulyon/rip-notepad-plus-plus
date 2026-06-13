@@ -53,6 +53,34 @@ pub struct JsonRpcError {
     pub data: Option<serde_json::Value>,
 }
 
+/// Editor state cached for plugin access
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct EditorState {
+    pub active_file_path: Option<String>,
+    pub active_file_name: Option<String>,
+    pub active_file_content: String,
+    pub active_file_language: String,
+    pub active_file_encoding: String,
+    pub cursor_line: u32,
+    pub cursor_column: u32,
+    pub tab_count: usize,
+}
+
+impl Default for EditorState {
+    fn default() -> Self {
+        Self {
+            active_file_path: None,
+            active_file_name: None,
+            active_file_content: String::new(),
+            active_file_language: "plaintext".to_string(),
+            active_file_encoding: "UTF-8".to_string(),
+            cursor_line: 1,
+            cursor_column: 1,
+            tab_count: 0,
+        }
+    }
+}
+
 /// Plugin state exposed to frontend
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PluginInfo {
