@@ -51,6 +51,19 @@ pub async fn pty_spawn(cwd: String) -> Result<(), String> {
 
     *PTY_MASTER.lock().unwrap() = Some(master);
     *OUTPUT_RX.lock().unwrap() = Some(rx);
+
+    // DEBUG: Write to shell after a short delay
+    let debug_cwd = cwd.clone();
+    std::thread::spawn(move || {
+        std::thread::sleep(std::time::Duration::from_millis(800));
+        let lock = PTY_MASTER.lock().unwrap();
+        if let Some(m) = lock.as_ref() {
+            let mut w = m.take_writer().unwrap();
+            let _ = w.write_all(b"echo Shell working in $PWD\n");
+            let _ = w.flush();
+        }
+    });
+
     std::mem::forget(child);
     Ok(())
 }
