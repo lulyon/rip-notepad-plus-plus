@@ -172,6 +172,16 @@ function App() {
         const projectRoot = useSettingsStore.getState().projectRoot;
         const wd = projectRoot || cwd;
         ipc.openTerminal(wd, "").catch(console.error);
+      } else if (actionId === "run.codex") {
+        const tab = useEditorStore.getState().tabs.find(
+          (t) => t.id === useEditorStore.getState().activeTabId,
+        );
+        const cwd = tab?.path
+          ? tab.path.split(/[/\\]/).slice(0, -1).join("/") || "."
+          : useSettingsStore.getState().projectRoot || ".";
+        const projectRoot = useSettingsStore.getState().projectRoot;
+        const wd = projectRoot || cwd;
+        ipc.openTerminal(wd, "codex").catch(console.error);
       } else if (actionId === "run.claudeCode") {
         const tab = useEditorStore.getState().tabs.find(
           (t) => t.id === useEditorStore.getState().activeTabId,

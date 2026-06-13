@@ -116,6 +116,7 @@ const en = {
     "menu.run.openInBrowser": "Open in &Browser",
     "menu.run.openTerminal": "Open &Terminal",
     "menu.run.claudeCode": "Launch Claude",
+    "menu.run.codex": "Launch Codex",
 
     // ── Menu: Window ──
     "menu.window": "&Window",

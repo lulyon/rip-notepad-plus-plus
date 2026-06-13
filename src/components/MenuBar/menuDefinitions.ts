@@ -204,6 +204,7 @@ export const MENU_STRUCTURE: MenuDef[] = [
       S(),
       { id: "run.openTerminal", labelKey: "menu.run.openTerminal" },
       { id: "run.claudeCode", labelKey: "menu.run.claudeCode" },
+      { id: "run.codex", labelKey: "menu.run.codex" },
     ],
   },
   {
