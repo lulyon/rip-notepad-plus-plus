@@ -16,7 +16,7 @@ import type {
 export const ipc = {
   // ── File Ops ──
   readFile(path: string, encoding?: string): Promise<FileReadResult> {
-    return invoke("read_file", { path, encoding_override: encoding ?? null });
+    return invoke("read_file", { path, encodingOverride: encoding ?? null });
   },
 
   writeFile(path: string, content: string, encoding: string): Promise<void> {
@@ -28,7 +28,7 @@ export const ipc = {
   },
 
   renameFile(oldPath: string, newPath: string): Promise<void> {
-    return invoke("rename_file", { old_path: oldPath, new_path: newPath });
+    return invoke("rename_file", { oldPath, newPath });
   },
 
   fileExists(path: string): Promise<boolean> {
@@ -65,11 +65,11 @@ export const ipc = {
   },
 
   decodeWithEncoding(data: number[], encodingName: string): Promise<string> {
-    return invoke("decode_with_encoding", { data, encoding_name: encodingName });
+    return invoke("decode_with_encoding", { data, encodingName });
   },
 
   encodeWithEncoding(content: string, encodingName: string): Promise<number[]> {
-    return invoke("encode_with_encoding", { content, encoding_name: encodingName });
+    return invoke("encode_with_encoding", { content, encodingName });
   },
 
   // ── Search ──
@@ -130,14 +130,14 @@ export const ipc = {
 
   // ── Git ──
   gitStatus(repoPath: string): Promise<import("../types/ipc").GitStatus> {
-    return invoke("git_status", { repo_path: repoPath });
+    return invoke("git_status", { repoPath });
   },
 
   gitBranch(repoPath: string): Promise<string> {
-    return invoke("git_branch", { repo_path: repoPath });
+    return invoke("git_branch", { repoPath });
   },
 
   gitDiffFile(repoPath: string, filePath: string): Promise<string> {
-    return invoke("git_diff_file", { repo_path: repoPath, file_path: filePath });
+    return invoke("git_diff_file", { repoPath, filePath });
   },
 };
