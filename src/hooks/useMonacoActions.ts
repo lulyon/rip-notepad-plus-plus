@@ -12,7 +12,10 @@ export function useMonacoActions() {
       editor.addAction({
         id: "file-save",
         label: "Save",
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS,
+          monaco.KeyMod.WinCtrl | monaco.KeyCode.KeyS,
+        ],
         run: () => {
           const tab = useEditorStore.getState().tabs.find(
             (t) => t.id === useEditorStore.getState().activeTabId,
@@ -55,6 +58,7 @@ export function useMonacoActions() {
         label: "Save As...",
         keybindings: [
           monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyS,
+          monaco.KeyMod.WinCtrl | monaco.KeyMod.Shift | monaco.KeyCode.KeyS,
         ],
         run: () => {
           const tab = useEditorStore.getState().tabs.find(
@@ -84,7 +88,10 @@ export function useMonacoActions() {
       editor.addAction({
         id: "file-open",
         label: "Open...",
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyO],
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyO,
+          monaco.KeyMod.WinCtrl | monaco.KeyCode.KeyO,
+        ],
         run: () => {
           open({
             title: "Open File",
@@ -119,7 +126,10 @@ export function useMonacoActions() {
       editor.addAction({
         id: "file-new",
         label: "New",
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyN],
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyN,
+          monaco.KeyMod.WinCtrl | monaco.KeyCode.KeyN,
+        ],
         run: () => {
           useEditorStore.getState().newTab();
         },
@@ -128,7 +138,10 @@ export function useMonacoActions() {
       editor.addAction({
         id: "file-close",
         label: "Close Tab",
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyW],
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyW,
+          monaco.KeyMod.WinCtrl | monaco.KeyCode.KeyW,
+        ],
         run: () => {
           const activeId = useEditorStore.getState().activeTabId;
           if (activeId) {
@@ -151,7 +164,10 @@ export function useMonacoActions() {
       editor.addAction({
         id: "find-toggle",
         label: "Find...",
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyF],
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyF,
+          monaco.KeyMod.WinCtrl | monaco.KeyCode.KeyF,
+        ],
         run: () => {
           // emit custom event for SearchPanel to toggle
           window.dispatchEvent(new CustomEvent("toggle-find-panel"));
@@ -161,7 +177,10 @@ export function useMonacoActions() {
       editor.addAction({
         id: "replace-toggle",
         label: "Replace...",
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyH],
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyH,
+          monaco.KeyMod.WinCtrl | monaco.KeyCode.KeyH,
+        ],
         run: () => {
           window.dispatchEvent(new CustomEvent("toggle-replace-panel"));
         },
@@ -170,7 +189,10 @@ export function useMonacoActions() {
       editor.addAction({
         id: "go-to-line",
         label: "Go To Line...",
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyG],
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyG,
+          monaco.KeyMod.WinCtrl | monaco.KeyCode.KeyG,
+        ],
         run: () => {
           window.dispatchEvent(new CustomEvent("open-go-to-line"));
         },
