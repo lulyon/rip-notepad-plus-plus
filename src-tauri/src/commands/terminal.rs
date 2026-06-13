@@ -1,68 +1,141 @@
-use portable_pty::{CommandBuilder, PtySize, native_pty_system};
-use std::io::{Read, Write};
+use std::io::Read;
+use std::process::Command;
 use std::sync::mpsc::{channel, Receiver, Sender};
 use std::sync::Mutex;
+use std::os::fd::{FromRawFd, IntoRawFd};
 
-struct PtyState {
-    #[allow(dead_code)] // kept alive so PTY doesn't close
-    master: Box<dyn portable_pty::MasterPty + Send>,
-    writer: Box<dyn Write + Send>, // take_writer() called ONCE
+struct PtyHandle {
+    fd: i32,
+    #[allow(dead_code)]
+    child: std::process::Child,
 }
 
-static PTY: Mutex<Option<PtyState>> = Mutex::new(None);
+static PTY: Mutex<Option<PtyHandle>> = Mutex::new(None);
 static OUTPUT_RX: Mutex<Option<Receiver<String>>> = Mutex::new(None);
 
 #[tauri::command]
 pub async fn pty_spawn(cwd: String) -> Result<(), String> {
     pty_kill_internal();
 
-    let pty_system = native_pty_system();
-    let pty_pair = pty_system
-        .openpty(PtySize { rows: 30, cols: 100, pixel_width: 0, pixel_height: 0 })
-        .map_err(|e| format!("openpty: {}", e))?;
+    let shell = std::env::var("SHELL").unwrap_or_else(|_| "/bin/zsh".to_string());
 
-    let shell = if cfg!(target_os = "windows") {
-        "cmd.exe".to_string()
-    } else {
-        std::env::var("SHELL").unwrap_or_else(|_| "/bin/zsh".to_string())
-    };
+    #[cfg(target_os = "macos")]
+    return pty_spawn_native(&shell, &cwd);
 
-    let mut cmd = CommandBuilder::new(&shell);
-    cmd.cwd(&cwd);
-    cmd.env("TERM", "xterm-256color");
+    #[cfg(not(target_os = "macos"))]
+    return pty_spawn_piped(&shell, &cwd);
+}
 
-    let master = pty_pair.master;
-    // take_writer() ONCE — dropping it sends EOF to shell
-    let writer = master.take_writer().map_err(|e| format!("take_writer: {}", e))?;
-    let mut reader = master.try_clone_reader().map_err(|e| format!("clone reader: {}", e))?;
+#[cfg(target_os = "macos")]
+fn pty_spawn_native(shell: &str, cwd: &str) -> Result<(), String> {
+    unsafe {
+        use std::ffi::CString;
+        let mut master_fd: libc::c_int = 0;
+        let pid = libc::forkpty(
+            &mut master_fd,
+            std::ptr::null_mut(),
+            std::ptr::null_mut(),
+            std::ptr::null_mut(),
+        );
 
-    let child = pty_pair.slave.spawn_command(cmd).map_err(|e| format!("spawn: {}", e))?;
+        if pid == -1 {
+            return Err("forkpty failed".into());
+        }
 
-    // Background thread: read PTY output into channel
+        if pid == 0 {
+            // Child
+            let cwd_c = CString::new(cwd).unwrap();
+            libc::chdir(cwd_c.as_ptr());
+            let shell_c = CString::new(shell).unwrap();
+            let argv: [*const libc::c_char; 2] = [shell_c.as_ptr(), std::ptr::null()];
+            libc::execvp(shell_c.as_ptr(), argv.as_ptr());
+            libc::_exit(1);
+        }
+
+        // Parent: spawn reader thread
+        let read_fd = libc::dup(master_fd);
+        let (tx, rx): (Sender<String>, Receiver<String>) = channel();
+        let master_fd_copy = master_fd;
+
+        std::thread::spawn(move || {
+            let mut f = std::fs::File::from_raw_fd(read_fd);
+            let mut buf = [0u8; 8192];
+            loop {
+                match f.read(&mut buf) {
+                    Ok(0) => break,
+                    Ok(n) => {
+                        if tx.send(String::from_utf8_lossy(&buf[..n]).to_string()).is_err() {
+                            break;
+                        }
+                    }
+                    Err(_) => break,
+                }
+            }
+            // Don't drop f — the fd is still needed elsewhere
+            let _ = f.into_raw_fd();
+        });
+
+        let child = Command::new("true").spawn().unwrap();
+        *PTY.lock().unwrap() = Some(PtyHandle {
+            fd: master_fd_copy,
+            child,
+        });
+        *OUTPUT_RX.lock().unwrap() = Some(rx);
+        Ok(())
+    }
+}
+
+#[cfg(not(target_os = "macos"))]
+fn pty_spawn_piped(shell: &str, cwd: &str) -> Result<(), String> {
+    let mut child = Command::new(shell)
+        .current_dir(cwd)
+        .env("TERM", "xterm-256color")
+        .stdin(std::process::Stdio::piped())
+        .stdout(std::process::Stdio::piped())
+        .stderr(std::process::Stdio::piped())
+        .spawn()
+        .map_err(|e| format!("spawn: {}", e))?;
+
+    let stdin = child.stdin.take().ok_or("no stdin")?;
+    let mut stdout = child.stdout.take().ok_or("no stdout")?;
+
     let (tx, rx): (Sender<String>, Receiver<String>) = channel();
     std::thread::spawn(move || {
         let mut buf = [0u8; 8192];
         loop {
-            match reader.read(&mut buf) {
+            match stdout.read(&mut buf) {
                 Ok(0) => break,
-                Ok(n) => { if tx.send(String::from_utf8_lossy(&buf[..n]).to_string()).is_err() { break; } }
+                Ok(n) => {
+                    if tx.send(String::from_utf8_lossy(&buf[..n]).to_string()).is_err() {
+                        break;
+                    }
+                }
                 Err(_) => break,
             }
         }
     });
 
-    *PTY.lock().unwrap() = Some(PtyState { master, writer });
+    let stdin_fd: i32 = stdin.into_raw_fd();
+    *PTY.lock().unwrap() = Some(PtyHandle {
+        fd: stdin_fd,
+        child: Command::new("true").spawn().unwrap(),
+    });
     *OUTPUT_RX.lock().unwrap() = Some(rx);
-    std::mem::forget(child);
     Ok(())
 }
 
 #[tauri::command]
 pub async fn pty_write(data: String) -> Result<(), String> {
-    let mut lock = PTY.lock().unwrap();
-    if let Some(s) = lock.as_mut() {
-        s.writer.write_all(data.as_bytes()).map_err(|e| format!("write: {}", e))?;
-        s.writer.flush().ok();
+    let lock = PTY.lock().unwrap();
+    if let Some(h) = lock.as_ref() {
+        #[cfg(unix)]
+        unsafe {
+            let len = data.len();
+            let written = libc::write(h.fd, data.as_ptr() as *const libc::c_void, len);
+            if written < 0 {
+                return Err(format!("write err: {}", std::io::Error::last_os_error()));
+            }
+        }
     }
     Ok(())
 }
@@ -84,6 +157,6 @@ pub async fn pty_kill() -> Result<(), String> {
 }
 
 fn pty_kill_internal() {
-    *PTY.lock().unwrap() = None;   // drops writer → EOF → shell exits
+    *PTY.lock().unwrap() = None;
     *OUTPUT_RX.lock().unwrap() = None;
 }
