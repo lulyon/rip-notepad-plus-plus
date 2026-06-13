@@ -70,9 +70,7 @@ export function TerminalPanel({ embedded }: { embedded?: boolean }) {
 
     // Send keystrokes to PTY
     t.onData((data) => {
-      ipc.ptyWrite(data).catch((err) => {
-        t.write(`\x1b[31m[INPUT ERROR: ${err}]\x1b[0m`);
-      });
+      ipc.ptyWrite(data).catch(() => {});
     });
 
     // Spawn shell

@@ -3,9 +3,10 @@ use std::io::{Read, Write};
 use std::sync::mpsc::{channel, Receiver, Sender};
 use std::sync::Mutex;
 
-// Buffered PTY output, continuously filled by a background thread
+type PtyMaster = Box<dyn portable_pty::MasterPty + Send>;
+
+static PTY_MASTER: Mutex<Option<PtyMaster>> = Mutex::new(None);
 static OUTPUT_RX: Mutex<Option<Receiver<String>>> = Mutex::new(None);
-static PTY_WRITER: Mutex<Option<Box<dyn Write + Send>>> = Mutex::new(None);
 
 #[tauri::command]
 pub async fn pty_spawn(cwd: String) -> Result<(), String> {
@@ -13,34 +14,29 @@ pub async fn pty_spawn(cwd: String) -> Result<(), String> {
 
     let pty_system = native_pty_system();
     let pty_pair = pty_system
-        .openpty(PtySize { rows: 24, cols: 80, pixel_width: 0, pixel_height: 0 })
-        .map_err(|e| format!("Failed to open PTY: {}", e))?;
+        .openpty(PtySize { rows: 30, cols: 100, pixel_width: 0, pixel_height: 0 })
+        .map_err(|e| format!("openpty: {}", e))?;
 
-    let shell: String = if cfg!(target_os = "windows") {
+    let shell = if cfg!(target_os = "windows") {
         "cmd.exe".to_string()
     } else {
-        std::env::var("SHELL").unwrap_or_else(|_| "/bin/bash".to_string())
+        std::env::var("SHELL").unwrap_or_else(|_| "/bin/zsh".to_string())
     };
 
     let mut cmd = CommandBuilder::new(&shell);
-    cmd.cwd(cwd);
-    #[cfg(unix)] {
-        cmd.env("TERM", "xterm-256color");
-        cmd.env("COLORTERM", "truecolor");
-    }
+    cmd.cwd(&cwd);
+    cmd.env("TERM", "xterm-256color");
+    cmd.env("LANG", "en_US.UTF-8");
 
-    let mut reader = pty_pair.master.try_clone_reader()
-        .map_err(|e| format!("Failed: {}", e))?;
-    let writer = pty_pair.master.take_writer()
-        .map_err(|e| format!("Failed: {}", e))?;
+    let master = pty_pair.master;
+    let mut reader = master.try_clone_reader().map_err(|e| format!("clone reader: {}", e))?;
 
-    let child = pty_pair.slave.spawn_command(cmd)
-        .map_err(|e| format!("Failed to spawn: {}", e))?;
+    let child = pty_pair.slave.spawn_command(cmd).map_err(|e| format!("spawn: {}", e))?;
 
-    // Background thread: continuously read PTY output into channel
+    // Background thread: read PTY output into channel
     let (tx, rx): (Sender<String>, Receiver<String>) = channel();
     std::thread::spawn(move || {
-        let mut buf = [0u8; 4096];
+        let mut buf = [0u8; 8192];
         loop {
             match reader.read(&mut buf) {
                 Ok(0) => break,
@@ -48,31 +44,23 @@ pub async fn pty_spawn(cwd: String) -> Result<(), String> {
                     let s = String::from_utf8_lossy(&buf[..n]).to_string();
                     if tx.send(s).is_err() { break; }
                 }
-                Err(_) => break,
+                Err(_e) => { break; }
             }
         }
     });
 
+    *PTY_MASTER.lock().unwrap() = Some(master);
     *OUTPUT_RX.lock().unwrap() = Some(rx);
-    *PTY_WRITER.lock().unwrap() = Some(writer);
-
-    // Verify PTY works: write a test command from Rust side
-    std::thread::spawn(|| {
-        std::thread::sleep(std::time::Duration::from_millis(500));
-        if let Some(w) = PTY_WRITER.lock().unwrap().as_mut() {
-            let _ = w.write_all(b"echo 'PTY OK'\n");
-            let _ = w.flush();
-        }
-    });
-
     std::mem::forget(child);
     Ok(())
 }
 
 #[tauri::command]
 pub async fn pty_write(data: String) -> Result<(), String> {
-    let mut lock = PTY_WRITER.lock().unwrap();
-    if let Some(w) = lock.as_mut() {
+    // take_writer returns a new writer each time (non-consuming)
+    let lock = PTY_MASTER.lock().unwrap();
+    if let Some(m) = lock.as_ref() {
+        let mut w = m.take_writer().map_err(|e| format!("take_writer: {}", e))?;
         w.write_all(data.as_bytes()).map_err(|e| format!("write: {}", e))?;
         w.flush().ok();
     }
@@ -82,17 +70,13 @@ pub async fn pty_write(data: String) -> Result<(), String> {
 #[tauri::command]
 pub async fn pty_read() -> Result<String, String> {
     let lock = OUTPUT_RX.lock().unwrap();
-    let mut result = String::new();
+    let mut out = String::new();
     if let Some(rx) = lock.as_ref() {
-        loop {
-            match rx.try_recv() {
-                Ok(chunk) => result.push_str(&chunk),
-                Err(std::sync::mpsc::TryRecvError::Empty) => break,
-                Err(std::sync::mpsc::TryRecvError::Disconnected) => break,
-            }
+        while let Ok(chunk) = rx.try_recv() {
+            out.push_str(&chunk);
         }
     }
-    Ok(result)
+    Ok(out)
 }
 
 #[tauri::command]
@@ -102,6 +86,6 @@ pub async fn pty_kill() -> Result<(), String> {
 }
 
 fn pty_kill_internal() {
+    *PTY_MASTER.lock().unwrap() = None;
     *OUTPUT_RX.lock().unwrap() = None;
-    *PTY_WRITER.lock().unwrap() = None;
 }
