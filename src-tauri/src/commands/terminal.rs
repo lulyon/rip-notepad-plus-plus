@@ -55,7 +55,17 @@ pub async fn pty_spawn(cwd: String) -> Result<(), String> {
 
     *OUTPUT_RX.lock().unwrap() = Some(rx);
     *PTY_WRITER.lock().unwrap() = Some(writer);
-    std::mem::forget(child); // Keeps child alive; dies when writer drops
+
+    // Verify PTY works: write a test command from Rust side
+    std::thread::spawn(|| {
+        std::thread::sleep(std::time::Duration::from_millis(500));
+        if let Some(w) = PTY_WRITER.lock().unwrap().as_mut() {
+            let _ = w.write_all(b"echo 'PTY OK'\n");
+            let _ = w.flush();
+        }
+    });
+
+    std::mem::forget(child);
     Ok(())
 }
 
