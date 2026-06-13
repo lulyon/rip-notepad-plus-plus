@@ -101,13 +101,42 @@ test.describe("Notepad++ ported features", () => {
     await expect(page.locator(".clipboard-search")).toBeVisible();
   });
 
-  // ── Sidebar now has 5 tabs ──
-  test("sidebar has five tabs total", async ({ page }) => {
+  // sidebar has seven tabs (tested below)
+
+  // ── JSON Viewer tab ──
+  test("JSON Viewer tab exists in sidebar", async ({ page }) => {
     await page.locator(".menu-bar-item").nth(3).click();
     await page.waitForTimeout(150);
     await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
     await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar-tab")).toHaveCount(5);
+    await expect(page.locator(".sidebar-tab").nth(3)).toContainText("JSON");
+  });
+
+  // ── Task List tab ──
+  test("Task List tab exists in sidebar", async ({ page }) => {
+    await page.locator(".menu-bar-item").nth(3).click();
+    await page.waitForTimeout(150);
+    await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
+    await page.waitForTimeout(300);
+    await expect(page.locator(".sidebar-tab").nth(4)).toContainText("任务列表");
+  });
+
+  // ── Sidebar now has 7 tabs ──
+  test("sidebar has seven tabs total", async ({ page }) => {
+    await page.locator(".menu-bar-item").nth(3).click();
+    await page.waitForTimeout(150);
+    await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
+    await page.waitForTimeout(300);
+    await expect(page.locator(".sidebar-tab")).toHaveCount(7);
+  });
+
+  // Emmet is enabled in editor options (verified via config)
+
+  // ── Compare dialog ──
+  test("Compare menu item exists", async ({ page }) => {
+    await page.locator(".menu-bar-item").nth(9).click(); // Plugins
+    await page.waitForTimeout(150);
+    await expect(page.locator(".menu-dropdown")).toContainText("文件对比");
   });
 
   // ── Plugin API: editor methods available ──

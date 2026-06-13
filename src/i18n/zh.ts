@@ -195,6 +195,29 @@ const zh = {
     "clipboard.copy": "复制到系统剪贴板",
     "clipboard.pin": "固定/取消固定",
     "clipboard.remove": "移除",
+    "sidebar.jsonViewer": "JSON",
+    "sidebar.taskList": "任务列表",
+
+    // ── JSON Viewer ──
+    "json.noFile": "打开 JSON 文件以查看树形结构",
+    "json.notJson": "当前文件不是 JSON 格式",
+    "json.invalid": "JSON 解析错误",
+    "json.empty": "文件为空",
+
+    // ── Task List ──
+    "tasklist.noFile": "打开文件以扫描待办事项",
+    "tasklist.empty": "未发现待办事项",
+    "tasklist.count": "个待办事项",
+
+    // ── Compare ──
+    "compare.title": "文件对比",
+    "compare.back": "返回选择",
+    "compare.left": "左侧文件（原始）",
+    "compare.right": "右侧文件（修改后）",
+    "compare.selectFile": "选择文件...",
+    "compare.browse": "浏览",
+    "compare.compare": "开始对比",
+    "menu.compare": "文件对比(&C)...",
 
     // ── DocList ──
     "doclist.empty": "没有打开的文档",

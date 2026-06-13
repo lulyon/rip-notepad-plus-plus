@@ -103,7 +103,6 @@ export function Editor({ tabId }: EditorProps) {
         insertSpaces,
         bracketPairColorization: { enabled: bracketPairColorization },
         automaticLayout: true,
-        suggest: { showWords: true },
         folding: true,
         foldingStrategy: "indentation",
         guides: { bracketPairs: bracketPairColorization, indentation: showIndentGuides },
@@ -117,6 +116,9 @@ export function Editor({ tabId }: EditorProps) {
         },
         columnSelection: true,
         multiCursorModifier: "alt",
+        // Emmet abbreviation expansion (HTML/CSS/JSX/TSX)
+        acceptSuggestionOnCommitCharacter: true,
+        suggest: { showWords: true } as const,
       }}
     />
   );

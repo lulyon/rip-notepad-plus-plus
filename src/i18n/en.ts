@@ -195,6 +195,29 @@ const en = {
     "clipboard.copy": "Copy to system clipboard",
     "clipboard.pin": "Pin/Unpin",
     "clipboard.remove": "Remove",
+    "sidebar.jsonViewer": "JSON",
+    "sidebar.taskList": "Task List",
+
+    // ── JSON Viewer ──
+    "json.noFile": "Open a JSON file to view tree",
+    "json.notJson": "Current file is not JSON",
+    "json.invalid": "JSON parse error",
+    "json.empty": "File is empty",
+
+    // ── Task List ──
+    "tasklist.noFile": "Open a file to scan for tasks",
+    "tasklist.empty": "No tasks found",
+    "tasklist.count": "tasks",
+
+    // ── Compare ──
+    "compare.title": "Compare Files",
+    "compare.back": "Back to Selection",
+    "compare.left": "Left (Original)",
+    "compare.right": "Right (Modified)",
+    "compare.selectFile": "Select file...",
+    "compare.browse": "Browse",
+    "compare.compare": "Compare",
+    "menu.compare": "&Compare...",
 
     // ── DocList ──
     "doclist.empty": "No documents open",

@@ -217,6 +217,7 @@ export const MENU_STRUCTURE: MenuDef[] = [
     labelKey: "menu.plugins",
     altKey: "p",
     children: [
+      { id: "plugins.compare", labelKey: "menu.compare" },
       { id: "plugins.manager", labelKey: "plugin.title" },
     ],
   },

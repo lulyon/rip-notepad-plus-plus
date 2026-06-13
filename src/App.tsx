@@ -9,6 +9,7 @@ import { useKeyboardShortcuts } from "./hooks/useKeyboardShortcuts";
 import { useMenuActions } from "./hooks/useMenuActions";
 import { useMacroRecorder } from "./hooks/useMacroRecorder";
 import { usePluginBridge } from "./hooks/usePluginBridge";
+import { useAutoSave } from "./hooks/useAutoSave";
 import { ipc } from "./lib/ipc";
 import { detectLanguage } from "./lib/constants";
 import { MenuBar } from "./components/MenuBar/MenuBar";
@@ -23,6 +24,7 @@ import { ShortcutMapperDialog } from "./components/Dialogs/ShortcutMapperDialog"
 import { RunDialog } from "./components/Dialogs/RunDialog";
 import { AboutDialog } from "./components/Dialogs/AboutDialog";
 import { PluginDialog } from "./components/Dialogs/PluginDialog";
+import { CompareDialog } from "./components/Dialogs/CompareDialog";
 import { Sidebar } from "./components/Panels/Sidebar";
 
 function App() {
@@ -37,6 +39,7 @@ function App() {
   const [runOpen, setRunOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [pluginOpen, setPluginOpen] = useState(false);
+  const [compareOpen, setCompareOpen] = useState(false);
 
   // ── Session: load on startup ──
   useEffect(() => {
@@ -100,6 +103,7 @@ function App() {
   useMenuActions();
   useMacroRecorder();
   usePluginBridge();
+  useAutoSave();
 
   // Listen for custom events
   useEffect(() => {
@@ -146,6 +150,8 @@ function App() {
         setAboutOpen(true);
       } else if (actionId === "plugins.manager") {
         setPluginOpen(true);
+      } else if (actionId === "plugins.compare") {
+        setCompareOpen(true);
       } else if (actionId === "run.openInBrowser") {
         const tab = useEditorStore.getState().tabs.find(
           (t) => t.id === useEditorStore.getState().activeTabId,
@@ -189,6 +195,7 @@ function App() {
       <RunDialog open={runOpen} onClose={() => setRunOpen(false)} />
       <AboutDialog open={aboutOpen} onClose={() => setAboutOpen(false)} />
       <PluginDialog open={pluginOpen} onClose={() => setPluginOpen(false)} />
+      <CompareDialog open={compareOpen} onClose={() => setCompareOpen(false)} />
     </div>
   );
 }

@@ -9,12 +9,14 @@ import type { DirEntry } from "../../types/ipc";
 import { GitPanel } from "./GitPanel";
 import { DocListPanel } from "./DocListPanel";
 import { ClipboardPanel } from "./ClipboardPanel";
+import { JsonViewerPanel } from "./JsonViewerPanel";
+import { TaskListPanel } from "./TaskListPanel";
 import "./Sidebar.css";
 
 export function Sidebar() {
   const { t } = useTranslation();
   const showSidebar = useSettingsStore((s) => s.showSidebar);
-  const [activeTab, setActiveTab] = useState<"files" | "doclist" | "clipboard" | "git" | "symbols">("files");
+  const [activeTab, setActiveTab] = useState<"files" | "doclist" | "clipboard" | "json" | "tasklist" | "git" | "symbols">("files");
 
   if (!showSidebar) return null;
 
@@ -40,6 +42,18 @@ export function Sidebar() {
           📄 {t("sidebar.clipboard")}
         </button>
         <button
+          className={`sidebar-tab ${activeTab === "json" ? "active" : ""}`}
+          onClick={() => setActiveTab("json")}
+        >
+          {'{}'} {t("sidebar.jsonViewer")}
+        </button>
+        <button
+          className={`sidebar-tab ${activeTab === "tasklist" ? "active" : ""}`}
+          onClick={() => setActiveTab("tasklist")}
+        >
+          ✅ {t("sidebar.taskList")}
+        </button>
+        <button
           className={`sidebar-tab ${activeTab === "git" ? "active" : ""}`}
           onClick={() => setActiveTab("git")}
         >
@@ -56,6 +70,8 @@ export function Sidebar() {
         {activeTab === "files" && <ProjectPanel />}
         {activeTab === "doclist" && <DocListPanel />}
         {activeTab === "clipboard" && <ClipboardPanel />}
+        {activeTab === "json" && <JsonViewerPanel />}
+        {activeTab === "tasklist" && <TaskListPanel />}
         {activeTab === "git" && <GitPanel />}
         {activeTab === "symbols" && <FunctionList />}
       </div>
