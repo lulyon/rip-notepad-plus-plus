@@ -8,7 +8,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "test:e2e": "npx playwright test --config=e2e/playwright.config.ts",
+    "test:check": "npx tsc --noEmit && cargo check"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
@@ -24,6 +26,7 @@
     "zustand": "^5.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@tauri-apps/cli": "^2.2.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
