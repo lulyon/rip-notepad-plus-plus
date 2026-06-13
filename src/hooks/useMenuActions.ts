@@ -43,31 +43,28 @@ export function useMenuActions() {
         }
         case "file.openFolder": {
           try {
-            const result = await open({
-              title: "Select any file in the target folder",
+            const dir = await open({
+              title: "Open Folder",
+              directory: true,
               multiple: false,
             });
-            if (result) {
-              const arr = Array.isArray(result) ? result : [result as string];
-              const dir = arr[0]?.split(/[/\\]/).slice(0, -1).join("/") || arr[0];
-              if (dir) {
-                useSettingsStore.getState().updateSetting("projectRoot", dir);
-                // Auto-open sidebar so user sees the file tree
-                if (!useSettingsStore.getState().showSidebar) {
-                  useSettingsStore.getState().updateSetting("showSidebar", true);
-                }
-                const tabs = useEditorStore.getState().tabs;
-                const sessionTabs = tabs
-                  .filter((t) => t.path)
-                  .map((t) => ({ path: t.path!, encoding: t.encoding, language: t.language }));
-                ipc.saveSession({
-                  open_tabs: sessionTabs,
-                  active_tab_id: useEditorStore.getState().activeTabId,
-                  project_root: dir,
-                  window_width: null,
-                  window_height: null,
-                }).catch(() => {});
+            if (dir && typeof dir === "string") {
+              useSettingsStore.getState().updateSetting("projectRoot", dir);
+              // Auto-open sidebar
+              if (!useSettingsStore.getState().showSidebar) {
+                useSettingsStore.getState().updateSetting("showSidebar", true);
               }
+              const tabs = useEditorStore.getState().tabs;
+              const sessionTabs = tabs
+                .filter((t) => t.path)
+                .map((t) => ({ path: t.path!, encoding: t.encoding, language: t.language }));
+              ipc.saveSession({
+                open_tabs: sessionTabs,
+                active_tab_id: useEditorStore.getState().activeTabId,
+                project_root: dir,
+                window_width: null,
+                window_height: null,
+              }).catch(() => {});
             }
           } catch (err) {
             console.error("openFolder failed:", err);
