@@ -141,7 +141,7 @@ cargo check            # Rust (from src-tauri/)
 │  MenuBar │ TabBar │ Sidebar │ SplitEditor │ StatusBar   │
 │  SearchPanel │ 10 Dialogs                                │
 │  9 Zustand stores                                        │
-├─ Tauri IPC (30 commands) ───────────────────────────────┤
+├─ Tauri IPC (31 commands) ───────────────────────────────┤
 ├─ Rust Backend ──────────────────────────────────────────┤
 │  file_ops / encoding / search / session / system /       │
 │  plugin / git                                            │
@@ -170,14 +170,15 @@ rip-notepad-plus-plus/
 │   └── types/                    # TypeScript interfaces
 ├── src-tauri/                    # Backend (Rust)
 │   └── src/
-│       ├── commands/             # 7 modules, 30 commands
+│       ├── commands/             # 7 modules, 31 commands
 │       ├── encoding/             # detect + convert
 │       ├── search/               # regex + walkdir
 │       ├── plugin_api/           # sidecar manager
 │       └── models.rs             # shared types
 ├── plugins/                      # Plugin directory
 │   └── sample-hello/             # Sample Python plugin
-├── e2e/                          # 48 E2E tests (Playwright)
+├── e2e/                          # 70 E2E tests (Playwright)
+├── tests/                        # 232 unit tests (vitest)
 ├── CLAUDE.md                     # AI development guide
 └── package.json
 ```
@@ -210,13 +211,21 @@ rip-notepad-plus-plus/
 ## Testing
 
 ```bash
-npm run test:e2e      # 48 Playwright tests (UI + compile checks)
-npm run test:check    # TypeScript + Rust compile checks only
+npm test              # Run all tests (unit + E2E)
+npm run test:unit     # 232 vitest unit tests (stores + hooks)
+npm run test:e2e      # 70 Playwright E2E tests
+npm run test:check    # TypeScript + Rust compile checks
 ```
 
-- 46 UI tests: menus, dialogs, tab operations, sidebar, i18n, search, clipboard, JSON, task list, command palette, compare
-- 2 compile checks: `cargo check` and `npx tsc --noEmit`
-- Headless Chromium with mocked Tauri IPC
+### Unit Tests (vitest)
+- **17 test suites, 232 tests** covering all 9 Zustand stores and 8 hooks
+- Store tests: editorStore (48), settingsStore (26), searchStore (20), macroStore (19), clipboardStore (16), pluginStore (12), encodingStore (8), gitStore (7), editorRefStore (7)
+- Hook tests: useMenuActions (39), usePluginBridge (7), useMacroRecorder (5), useKeyboardShortcuts (5), useAutoSave (4), useWindowTitle (3), useFileDrop (3), useMonacoActions (2)
+- jsdom environment with mocked Tauri IPC and localStorage
+
+### E2E Tests (Playwright)
+- **70 tests** across 4 spec files: UI basics (16), feature coverage (15), NP++ ported features (16), deep behavior (23)
+- Headless Chromium with mocked Tauri IPC (`page.route`)
 - Auto-starts Vite dev server
 
 ## License
