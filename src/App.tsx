@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import "./i18n";
 import { useEditorStore } from "./stores/editorStore";
@@ -44,32 +44,35 @@ function App() {
   const [compareOpen, setCompareOpen] = useState(false);
   const [cmdPaletteOpen, setCmdPaletteOpen] = useState(false);
 
-  // ── Session: load on startup ──
+  // ── Session: load on startup (guarded against React StrictMode double-fire) ──
+  const sessionLoaded = useRef(false);
   useEffect(() => {
+    if (sessionLoaded.current) return; // Prevent double restore in StrictMode
+    sessionLoaded.current = true;
+
     ipc.loadSession().then(async (session) => {
       if (!session) return;
-      // Restore project root
       if (session.project_root) {
         useSettingsStore.getState().updateSetting("projectRoot", session.project_root);
-        // If project root was saved, also restore sidebar
         useSettingsStore.getState().updateSetting("showSidebar", true);
       }
-      // Restore open tabs
       if (session.open_tabs && session.open_tabs.length > 0) {
         const store = useEditorStore.getState();
-        const openPromises = session.open_tabs.map((tab) =>
-          ipc.readFile(tab.path).then((data) => {
-            return store.openTab({
-              path: tab.path,
-              name: tab.path.split(/[/\\]/).pop() || tab.path,
-              content: data.content,
-              encoding: tab.encoding,
-              language: tab.language,
-            });
-          }).catch(() => null) // File may have been moved/deleted — skip
-        );
+        const existingPaths = new Set(store.tabs.map((t) => t.path).filter(Boolean));
+        const openPromises = session.open_tabs
+          .filter((tab) => !existingPaths.has(tab.path)) // Deduplicate: skip already-open files
+          .map((tab) =>
+            ipc.readFile(tab.path).then((data) => {
+              return store.openTab({
+                path: tab.path,
+                name: tab.path.split(/[/\\]/).pop() || tab.path,
+                content: data.content,
+                encoding: tab.encoding,
+                language: tab.language,
+              });
+            }).catch(() => null)
+          );
         const tabIds = (await Promise.all(openPromises)).filter(Boolean);
-        // Activate the last-opened tab, or the first one
         if (tabIds.length > 0) {
           store.setActiveTab(tabIds[tabIds.length - 1]!);
         }
@@ -94,6 +97,9 @@ function App() {
           window_width: null,
           window_height: null,
         }).catch(() => {});
+      } else {
+        // No tabs with paths → clear stale session
+        ipc.clearSession().catch(() => {});
       }
     }, 1000);
     return () => clearTimeout(debounce);
