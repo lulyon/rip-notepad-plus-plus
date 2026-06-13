@@ -13,7 +13,7 @@ use commands::search::find_in_files;
 use commands::session::{clear_session, load_session, save_session};
 use commands::git::{git_branch, git_diff_file, git_status};
 use commands::plugin::{list_plugins, notify_plugins, send_plugin_command, start_plugin, stop_plugin, update_editor_state};
-use commands::system::{get_system_info, open_in_browser, run_command};
+use commands::system::{get_system_info, open_in_browser, open_terminal, run_command};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -46,6 +46,7 @@ pub fn run() {
             clear_session,
             // System
             open_in_browser,
+            open_terminal,
             run_command,
             get_system_info,
             // Plugin

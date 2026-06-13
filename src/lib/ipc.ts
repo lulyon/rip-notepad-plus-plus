@@ -95,6 +95,10 @@ export const ipc = {
     return invoke("open_in_browser", { url });
   },
 
+  openTerminal(cwd: string, command: string): Promise<void> {
+    return invoke("open_terminal", { cwd, command });
+  },
+
   runCommand(command: string, cwd?: string): Promise<CommandResult> {
     return invoke("run_command", { command, cwd: cwd ?? null });
   },

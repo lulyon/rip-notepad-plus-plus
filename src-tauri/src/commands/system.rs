@@ -6,6 +6,40 @@ pub async fn open_in_browser(url: String) -> Result<(), String> {
 }
 
 #[tauri::command]
+pub async fn open_terminal(cwd: String, command: String) -> Result<(), String> {
+    #[cfg(target_os = "macos")]
+    {
+        let script = format!(
+            "tell application \"Terminal\"\n    activate\n    do script \"cd '{}' && {}\"\nend tell",
+            cwd.replace('\'', "'\\''"),
+            command.replace('"', "\\\"")
+        );
+        std::process::Command::new("osascript")
+            .args(["-e", &script])
+            .spawn()
+            .map_err(|e| format!("Failed to open terminal: {}", e))?;
+    }
+    #[cfg(target_os = "linux")]
+    {
+        let script = format!("cd '{}' && {}; exec $SHELL",
+            cwd.replace('\'', "'\\''"),
+            command);
+        std::process::Command::new("sh")
+            .args(["-c", &format!("gnome-terminal -- bash -c {:?} 2>/dev/null || x-terminal-emulator -e bash -c {:?} 2>/dev/null || xterm -e bash -c {:?}", script, script, script)])
+            .spawn()
+            .map_err(|e| format!("Failed to open terminal: {}", e))?;
+    }
+    #[cfg(target_os = "windows")]
+    {
+        std::process::Command::new("cmd")
+            .args(["/c", "start", "cmd", "/k", &format!("cd /d \"{}\" && {}", cwd, command)])
+            .spawn()
+            .map_err(|e| format!("Failed to open terminal: {}", e))?;
+    }
+    Ok(())
+}
+
+#[tauri::command]
 pub async fn run_command(command: String, cwd: Option<String>) -> CommandResult {
     let mut cmd = if cfg!(target_os = "windows") {
         let mut c = std::process::Command::new("cmd");

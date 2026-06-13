@@ -114,6 +114,8 @@ const zh = {
     "menu.run": "运行(&R)",
     "menu.run.dialog": "运行(&R)...",
     "menu.run.openInBrowser": "在浏览器中打开(&B)",
+    "menu.run.openTerminal": "打开终端(&T)",
+    "menu.run.claudeCode": "启动 Claude Code",
 
     // ── Menu: Window ──
     "menu.window": "窗口(&W)",
