@@ -17,6 +17,9 @@ interface EditorState {
   tabs: Tab[];
   activeTabId: string | null;
   secondaryTabId: string | null; // for split view (Phase 4)
+  // Unsaved changes dialog
+  unsavedTabs: Tab[] | null; // non-null = show dialog, list of modified tabs to resolve
+  pendingCloseAll: boolean; // true = close all tabs after resolving unsaved
 
   // Actions
   newTab: () => string;
@@ -34,6 +37,10 @@ interface EditorState {
   reloadTab: (id: string, content: string, encoding: string) => void;
   getTab: (id: string) => Tab | undefined;
   moveTab: (fromIndex: number, toIndex: number) => void;
+  dismissUnsavedDialog: () => void;
+  forceCloseTab: (id: string) => void;
+  forceCloseAllTabs: () => void;
+  clearModified: (id: string) => void;
 }
 
 let tabCounter = 0;
@@ -55,6 +62,8 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   tabs: [],
   activeTabId: null,
   secondaryTabId: null,
+  unsavedTabs: null,
+  pendingCloseAll: false,
 
   getTab: (id) => get().tabs.find((t) => t.id === id),
 
@@ -98,6 +107,12 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   },
 
   closeTab: (id) => {
+    const tab = get().tabs.find((t) => t.id === id);
+    // If tab is modified, show unsaved changes dialog instead of closing
+    if (tab?.modified) {
+      set({ unsavedTabs: [tab], pendingCloseAll: false });
+      return;
+    }
     set((s) => {
       const idx = s.tabs.findIndex((t) => t.id === id);
       const newTabs = s.tabs.filter((t) => t.id !== id);
@@ -123,6 +138,11 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   },
 
   closeAllTabs: () => {
+    const modified = get().tabs.filter((t) => t.modified);
+    if (modified.length > 0) {
+      set({ unsavedTabs: modified, pendingCloseAll: true });
+      return;
+    }
     set({ tabs: [], activeTabId: null, secondaryTabId: null });
   },
 
@@ -214,5 +234,47 @@ export const useEditorStore = create<EditorState>((set, get) => ({
       newTabs.splice(toIndex, 0, moved);
       return { ...s, tabs: newTabs };
     });
+  },
+
+  dismissUnsavedDialog: () => {
+    set({ unsavedTabs: null, pendingCloseAll: false });
+  },
+
+  // Force-close without checking modified flag (used by unsaved dialog after save/discard)
+  forceCloseTab: (id) => {
+    set((s) => {
+      const idx = s.tabs.findIndex((t) => t.id === id);
+      const newTabs = s.tabs.filter((t) => t.id !== id);
+      let newActiveId = s.activeTabId;
+      let newSecondaryId = s.secondaryTabId;
+      if (s.activeTabId === id) {
+        if (newTabs.length === 0) {
+          newActiveId = null;
+        } else {
+          const newIdx = Math.min(idx, newTabs.length - 1);
+          newActiveId = newTabs[newIdx].id;
+        }
+      }
+      if (s.secondaryTabId === id) {
+        newSecondaryId = null;
+      }
+      return {
+        tabs: newTabs,
+        activeTabId: newActiveId,
+        secondaryTabId: newSecondaryId,
+      };
+    });
+  },
+
+  forceCloseAllTabs: () => {
+    set({ tabs: [], activeTabId: null, secondaryTabId: null });
+  },
+
+  clearModified: (id) => {
+    set((s) => ({
+      tabs: s.tabs.map((t) =>
+        t.id === id ? { ...t, modified: false } : t,
+      ),
+    }));
   },
 }));

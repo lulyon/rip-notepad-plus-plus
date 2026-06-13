@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useSettingsStore } from "../../stores/settingsStore";
 import "./ShortcutMapperDialog.css";
 
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export function ShortcutMapperDialog({ open, onClose }: Props) {
+  const { t } = useTranslation();
   const shortcuts = useSettingsStore((s) => s.shortcuts);
   const setShortcut = useSettingsStore((s) => s.setShortcut);
   const resetShortcuts = useSettingsStore((s) => s.resetShortcuts);
@@ -87,12 +89,12 @@ export function ShortcutMapperDialog({ open, onClose }: Props) {
   return (
     <div className="dialog-overlay" onClick={onClose}>
       <div className="dialog shortcut-dialog" onClick={(e) => e.stopPropagation()}>
-        <h2>Shortcut Mapper</h2>
+        <h2>{t("dialog.shortcutMapper")}</h2>
 
         <input
           type="text"
           className="shortcut-search"
-          placeholder="Filter shortcuts..."
+          placeholder={t("shortcutMapper.filter")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -105,7 +107,7 @@ export function ShortcutMapperDialog({ open, onClose }: Props) {
                 className={`shortcut-binding ${rebindingId === id ? "rebinding" : ""}`}
                 onClick={() => setRebindingId(id === rebindingId ? null : id)}
               >
-                {rebindingId === id ? "Press keys..." : binding}
+                {rebindingId === id ? t("shortcutMapper.pressKeys") : binding}
               </button>
             </div>
           ))}
@@ -113,10 +115,10 @@ export function ShortcutMapperDialog({ open, onClose }: Props) {
 
         <div className="dialog-actions">
           <button className="btn" onClick={resetShortcuts}>
-            Reset All
+            {t("shortcutMapper.resetAll")}
           </button>
           <button className="btn btn-primary" onClick={onClose}>
-            Close
+            {t("dialog.close")}
           </button>
         </div>
       </div>

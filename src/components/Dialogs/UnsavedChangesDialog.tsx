@@ -3,17 +3,19 @@ import "./UnsavedChangesDialog.css";
 
 interface Props {
   unsavedTabs: Tab[];
-  onSave: (tab: Tab) => void;
-  onDiscard: (tab: Tab) => void;
+  onSaveAll: () => void;
+  onDiscardAll: () => void;
   onCancel: () => void;
 }
 
 export function UnsavedChangesDialog({
   unsavedTabs,
-  onSave,
-  onDiscard,
+  onSaveAll,
+  onDiscardAll,
   onCancel,
 }: Props) {
+  if (unsavedTabs.length === 0) return null;
+
   return (
     <div className="dialog-overlay">
       <div className="dialog">
@@ -28,10 +30,10 @@ export function UnsavedChangesDialog({
           ))}
         </ul>
         <div className="dialog-actions">
-          <button className="btn btn-primary" onClick={() => unsavedTabs.forEach(onSave)}>
+          <button className="btn btn-primary" onClick={onSaveAll}>
             Save All
           </button>
-          <button className="btn" onClick={() => unsavedTabs.forEach(onDiscard)}>
+          <button className="btn" onClick={onDiscardAll}>
             Discard All
           </button>
           <button className="btn" onClick={onCancel}>

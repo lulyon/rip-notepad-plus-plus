@@ -26,11 +26,13 @@ import { AboutDialog } from "./components/Dialogs/AboutDialog";
 import { PluginDialog } from "./components/Dialogs/PluginDialog";
 import { CompareDialog } from "./components/Dialogs/CompareDialog";
 import { CommandPalette } from "./components/Dialogs/CommandPalette";
+import { UnsavedChangesDialog } from "./components/Dialogs/UnsavedChangesDialog";
 import { Sidebar } from "./components/Panels/Sidebar";
 
 function App() {
   const { t } = useTranslation();
   const activeTabId = useEditorStore((s) => s.activeTabId);
+  const unsavedTabs = useEditorStore((s) => s.unsavedTabs);
   const showMenuBar = useSettingsStore((s) => s.showMenuBar);
   const showStatusBar = useSettingsStore((s) => s.showStatusBar);
 
@@ -136,13 +138,15 @@ function App() {
       }
     }
 
+    function onOpenCommandPalette() { setCmdPaletteOpen(true); }
+
     window.addEventListener("open-go-to-line", onOpenGoToLine);
     window.addEventListener("navigate-to-match", onNavigateToMatch);
-    window.addEventListener("open-command-palette", () => setCmdPaletteOpen(true));
+    window.addEventListener("open-command-palette", onOpenCommandPalette);
     return () => {
       window.removeEventListener("open-go-to-line", onOpenGoToLine);
       window.removeEventListener("navigate-to-match", onNavigateToMatch);
-      window.removeEventListener("open-command-palette", () => setCmdPaletteOpen(true));
+      window.removeEventListener("open-command-palette", onOpenCommandPalette);
     };
   }, []);
 
@@ -230,6 +234,47 @@ function App() {
       <PluginDialog open={pluginOpen} onClose={() => setPluginOpen(false)} />
       <CompareDialog open={compareOpen} onClose={() => setCompareOpen(false)} />
       <CommandPalette open={cmdPaletteOpen} onClose={() => setCmdPaletteOpen(false)} />
+      <UnsavedChangesDialog
+        unsavedTabs={unsavedTabs || []}
+        onSaveAll={async () => {
+          const store = useEditorStore.getState();
+          const tabsToSave = unsavedTabs || [];
+          for (const tab of tabsToSave) {
+            if (tab.path) {
+              try {
+                await ipc.writeFile(tab.path, tab.content, tab.encoding);
+                store.markTabSaved(tab.id, tab.path);
+              } catch (err) {
+                console.error("Failed to save before close:", err);
+              }
+            }
+          }
+          // Close after saving
+          if (store.pendingCloseAll) {
+            store.forceCloseAllTabs();
+          } else {
+            for (const tab of tabsToSave) {
+              store.forceCloseTab(tab.id);
+            }
+          }
+          store.dismissUnsavedDialog();
+        }}
+        onDiscardAll={() => {
+          const store = useEditorStore.getState();
+          for (const tab of (unsavedTabs || [])) {
+            store.clearModified(tab.id);
+          }
+          if (store.pendingCloseAll) {
+            store.forceCloseAllTabs();
+          } else {
+            for (const tab of (unsavedTabs || [])) {
+              store.forceCloseTab(tab.id);
+            }
+          }
+          store.dismissUnsavedDialog();
+        }}
+        onCancel={() => useEditorStore.getState().dismissUnsavedDialog()}
+      />
     </div>
   );
 }

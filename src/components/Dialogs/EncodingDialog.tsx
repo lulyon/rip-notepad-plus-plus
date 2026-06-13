@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useEncodingStore } from "../../stores/encodingStore";
 import { useEditorStore } from "../../stores/editorStore";
 import "./EncodingDialog.css";
 
 export function EncodingDialog() {
+  const { t } = useTranslation();
   const encodingDialogOpen = useEncodingStore((s) => s.encodingDialogOpen);
   const closeEncodingDialog = useEncodingStore((s) => s.closeEncodingDialog);
   const encodingGroups = useEncodingStore((s) => s.encodingGroups);
@@ -81,10 +83,10 @@ export function EncodingDialog() {
   return (
     <div className="dialog-overlay" onClick={closeEncodingDialog}>
       <div className="dialog encoding-dialog" onClick={(e) => e.stopPropagation()}>
-        <h2>Encoding</h2>
+        <h2>{t("dialog.encoding")}</h2>
         {activeTab && (
           <p className="enc-current">
-            Current: <strong>{activeTab.encoding}</strong>
+            {t("encoding.current")}: <strong>{activeTab.encoding}</strong>
           </p>
         )}
 
@@ -107,7 +109,7 @@ export function EncodingDialog() {
             <input
               type="text"
               className="enc-search"
-              placeholder="Filter encodings..."
+              placeholder={t("encoding.filter")}
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
             />
@@ -131,7 +133,7 @@ export function EncodingDialog() {
 
         <div className="dialog-actions">
           <button className="btn" onClick={closeEncodingDialog}>
-            Cancel
+            {t("dialog.cancel")}
           </button>
         </div>
       </div>

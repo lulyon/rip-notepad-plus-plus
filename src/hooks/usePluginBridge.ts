@@ -1,6 +1,39 @@
 import { useEffect, useRef } from "react";
 import { useEditorStore } from "../stores/editorStore";
+import { useEditorRefStore } from "../stores/editorRefStore";
 import { ipc } from "../lib/ipc";
+
+/** Read real selection from active Monaco editor instance */
+function getSelectionData() {
+  const editor = useEditorRefStore.getState().editorRef;
+  if (!editor) {
+    return {
+      selection_start_line: 1,
+      selection_start_column: 1,
+      selection_end_line: 1,
+      selection_end_column: 1,
+      has_selection: false,
+    };
+  }
+  const sel = editor.getSelection();
+  if (!sel || sel.isEmpty()) {
+    const pos = editor.getPosition();
+    return {
+      selection_start_line: pos?.lineNumber ?? 1,
+      selection_start_column: pos?.column ?? 1,
+      selection_end_line: pos?.lineNumber ?? 1,
+      selection_end_column: pos?.column ?? 1,
+      has_selection: false,
+    };
+  }
+  return {
+    selection_start_line: sel.startLineNumber,
+    selection_start_column: sel.startColumn,
+    selection_end_line: sel.endLineNumber,
+    selection_end_column: sel.endColumn,
+    has_selection: !sel.isEmpty(),
+  };
+}
 
 /**
  * Bridges editor events to the plugin system.
@@ -13,6 +46,7 @@ export function usePluginBridge() {
   const activeTab = tabs.find((t) => t.id === activeTabId);
 
   useEffect(() => {
+    const sel = getSelectionData();
     // Push editor state to Rust for plugin access
     if (activeTab) {
       ipc.updateEditorState({
@@ -24,11 +58,7 @@ export function usePluginBridge() {
         cursor_line: activeTab.cursorLine,
         cursor_column: activeTab.cursorColumn,
         tab_count: tabs.length,
-        selection_start_line: 1,
-        selection_start_column: 1,
-        selection_end_line: 1,
-        selection_end_column: 1,
-        has_selection: false,
+        ...sel,
       }).catch(() => {});
     } else {
       ipc.updateEditorState({
@@ -40,11 +70,7 @@ export function usePluginBridge() {
         cursor_line: 1,
         cursor_column: 1,
         tab_count: tabs.length,
-        selection_start_line: 1,
-        selection_start_column: 1,
-        selection_end_line: 1,
-        selection_end_column: 1,
-        has_selection: false,
+        ...sel,
       }).catch(() => {});
     }
   }, [activeTab?.id, activeTab?.cursorLine, activeTab?.cursorColumn, activeTab?.content?.length ?? 0]);
@@ -100,6 +126,7 @@ export function usePluginBridge() {
         (t) => t.id === useEditorStore.getState().activeTabId,
       );
       if (tab) {
+        const sel = getSelectionData();
         ipc.updateEditorState({
           active_file_path: tab.path,
           active_file_name: tab.name,
@@ -109,9 +136,7 @@ export function usePluginBridge() {
           cursor_line: tab.cursorLine,
           cursor_column: tab.cursorColumn,
           tab_count: useEditorStore.getState().tabs.length,
-          selection_start_line: 1, selection_start_column: 1,
-          selection_end_line: 1, selection_end_column: 1,
-          has_selection: false,
+          ...sel,
         }).catch(() => {});
       }
     }

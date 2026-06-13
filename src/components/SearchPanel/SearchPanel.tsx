@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useSearchStore } from "../../stores/searchStore";
 import { useEditorRefStore } from "../../stores/editorRefStore";
 import "./SearchPanel.css";
 
 export function SearchPanel() {
+  const { t } = useTranslation();
   const findText = useSearchStore((s) => s.findText);
   const replaceText = useSearchStore((s) => s.replaceText);
   const isRegex = useSearchStore((s) => s.isRegex);
@@ -130,13 +132,13 @@ export function SearchPanel() {
           className={`search-tab ${activeTab === "find" ? "active" : ""}`}
           onClick={() => setActiveTab("find")}
         >
-          Find / Replace
+          {t("search.findReplace")}
         </button>
         <button
           className={`search-tab ${activeTab === "findInFiles" ? "active" : ""}`}
           onClick={() => setActiveTab("findInFiles")}
         >
-          Find in Files
+          {t("search.inFiles")}
         </button>
         <button className="search-close" onClick={closePanel}>
           ×
@@ -147,7 +149,7 @@ export function SearchPanel() {
         <div className="search-body">
           {/* Find input */}
           <div className="search-row">
-            <label>Find:</label>
+            <label>{t("search.findLabel")}:</label>
             <input
               ref={findInputRef}
               type="text"
@@ -157,24 +159,24 @@ export function SearchPanel() {
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleFindNext();
               }}
-              placeholder="Search text or regex..."
+              placeholder={t("search.findPlaceholder")}
             />
             <span className="search-stats">
               {matchCount > 0 &&
-                `${currentMatchIndex + 1} of ${matchCount}`}
+                t("search.matchStats", { current: currentMatchIndex + 1, count: matchCount })}
             </span>
           </div>
 
           {/* Replace input (only in replace mode) */}
           {replaceMode && (
             <div className="search-row">
-              <label>Replace:</label>
+              <label>{t("search.replaceLabel")}:</label>
               <input
                 type="text"
                 className="search-input"
                 value={replaceText}
                 onChange={(e) => setReplaceText(e.target.value)}
-                placeholder="Replacement text..."
+                placeholder={t("search.replacePlaceholder")}
               />
             </div>
           )}
@@ -187,7 +189,7 @@ export function SearchPanel() {
                 checked={isRegex}
                 onChange={() => setOptions({ isRegex: !isRegex })}
               />
-              Regex
+              {t("search.regex")}
             </label>
             <label className="search-option">
               <input
@@ -195,7 +197,7 @@ export function SearchPanel() {
                 checked={caseSensitive}
                 onChange={() => setOptions({ caseSensitive: !caseSensitive })}
               />
-              Match case
+              {t("search.matchCase")}
             </label>
             <label className="search-option">
               <input
@@ -203,7 +205,7 @@ export function SearchPanel() {
                 checked={wholeWord}
                 onChange={() => setOptions({ wholeWord: !wholeWord })}
               />
-              Whole word
+              {t("search.wholeWord")}
             </label>
             <label className="search-option">
               <input
@@ -211,40 +213,40 @@ export function SearchPanel() {
                 checked={wrapSearch}
                 onChange={() => setOptions({ wrapSearch: !wrapSearch })}
               />
-              Wrap
+              {t("search.wrap")}
             </label>
           </div>
 
           {/* Action buttons */}
           <div className="search-actions">
             <button className="sbtn sbtn-primary" onClick={handleFind}>
-              Find
+              {t("search.findLabel")}
             </button>
             <button className="sbtn" onClick={handleFindNext}>
-              Find Next
+              {t("search.findNextBtn")}
             </button>
             <button className="sbtn" onClick={handleFindPrev}>
-              Find Prev
+              {t("search.findPrevBtn")}
             </button>
             {replaceMode && (
               <>
                 <button className="sbtn" onClick={handleReplaceOne}>
-                  Replace
+                  {t("search.replaceBtn")}
                 </button>
                 <button className="sbtn" onClick={handleReplaceAll}>
-                  Replace All
+                  {t("search.replaceAllBtn")}
                 </button>
               </>
             )}
             <button className="sbtn" onClick={handleMarkAll}>
-              Mark All
+              {t("search.markAllBtn")}
             </button>
             {!replaceMode && (
               <button
                 className="sbtn"
                 onClick={() => toggleReplacePanel()}
               >
-                Replace Mode
+                {t("search.replaceMode")}
               </button>
             )}
           </div>
@@ -254,33 +256,33 @@ export function SearchPanel() {
       {activeTab === "findInFiles" && (
         <div className="search-body">
           <div className="search-row">
-            <label>Find:</label>
+            <label>{t("search.findLabel")}:</label>
             <input
               type="text"
               className="search-input"
               value={findText}
               onChange={(e) => setFindText(e.target.value)}
-              placeholder="Text or regex to find..."
+              placeholder={t("search.findInFilesPlaceholder")}
             />
           </div>
           <div className="search-row">
-            <label>Directory:</label>
+            <label>{t("search.directory")}:</label>
             <input
               type="text"
               className="search-input"
               value={findInFilesRoot}
               onChange={(e) => setFindInFilesRoot(e.target.value)}
-              placeholder="/path/to/search"
+              placeholder={t("search.directoryPlaceholder")}
             />
           </div>
           <div className="search-row">
-            <label>File pattern:</label>
+            <label>{t("search.filePattern")}:</label>
             <input
               type="text"
               className="search-input"
               value={findInFilesFilePattern}
               onChange={(e) => setFindInFilesFilePattern(e.target.value)}
-              placeholder="*.ts,*.rs,*.json"
+              placeholder={t("search.filePatternPlaceholder")}
             />
           </div>
 
@@ -290,14 +292,14 @@ export function SearchPanel() {
               onClick={handleFindInFiles}
               disabled={findInFilesSearching}
             >
-              {findInFilesSearching ? "Searching..." : "Search"}
+              {findInFilesSearching ? t("search.searching") : t("search.searchBtn")}
             </button>
             <button
               className="sbtn"
               onClick={clearFindInFilesResults}
               disabled={findInFilesResults.length === 0}
             >
-              Clear
+              {t("search.clear")}
             </button>
           </div>
 
@@ -305,7 +307,7 @@ export function SearchPanel() {
           {findInFilesResults.length > 0 && (
             <div className="find-in-files-results">
               <div className="results-header">
-                {findInFilesResults.length} results found
+                {t("search.resultsCount", { count: findInFilesResults.length })}
               </div>
               <div className="results-list">
                 {findInFilesResults.map((match, i) => (

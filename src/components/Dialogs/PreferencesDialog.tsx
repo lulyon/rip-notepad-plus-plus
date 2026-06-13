@@ -11,7 +11,7 @@ interface Props {
 type PrefTab = "general" | "editing" | "newdoc";
 
 export function PreferencesDialog({ open, onClose }: Props) {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const settings = useSettingsStore();
   const [activeTab, setActiveTab] = useState<PrefTab>("general");
 
@@ -30,7 +30,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
   return (
     <div className="dialog-overlay" onClick={onClose}>
       <div className="dialog prefs-dialog" onClick={(e) => e.stopPropagation()}>
-        <h2>Preferences</h2>
+        <h2>{t("dialog.preferences")}</h2>
 
         {/* Tab bar */}
         <div className="prefs-tabs">
@@ -40,7 +40,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
               className={`prefs-tab ${activeTab === tab ? "active" : ""}`}
               onClick={() => setActiveTab(tab)}
             >
-              {tab === "general" ? "General" : tab === "editing" ? "Editing" : "New Document"}
+              {tab === "general" ? t("preferences.general") : tab === "editing" ? t("preferences.editing") : t("preferences.newDoc")}
             </button>
           ))}
         </div>
@@ -50,19 +50,19 @@ export function PreferencesDialog({ open, onClose }: Props) {
           {activeTab === "general" && (
             <div className="prefs-section">
               <label className="prefs-row">
-                <span>Theme:</span>
+                <span>{t("preferences.theme")}:</span>
                 <select
                   value={settings.theme}
                   onChange={(e) => settings.updateSetting("theme", e.target.value as "vs-dark" | "vs" | "hc-black")}
                 >
-                  <option value="vs-dark">Dark (VS Dark)</option>
-                  <option value="vs">Light (VS)</option>
-                  <option value="hc-black">High Contrast</option>
+                  <option value="vs-dark">{t("preferences.themeDark")}</option>
+                  <option value="vs">{t("preferences.themeLight")}</option>
+                  <option value="hc-black">{t("preferences.themeHighContrast")}</option>
                 </select>
               </label>
 
               <label className="prefs-row">
-                <span>Font size:</span>
+                <span>{t("preferences.fontSize")}:</span>
                 <input
                   type="number"
                   min={8}
@@ -75,7 +75,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
               </label>
 
               <label className="prefs-row">
-                <span>Font family:</span>
+                <span>{t("preferences.fontFamily")}:</span>
                 <input
                   type="text"
                   value={settings.fontFamily}
@@ -91,7 +91,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
                   checked={settings.showStatusBar}
                   onChange={() => settings.toggleSetting("showStatusBar")}
                 />
-                <span>Show status bar</span>
+                <span>{t("preferences.showStatusBar")}</span>
               </label>
 
               <label className="prefs-row">
@@ -100,7 +100,16 @@ export function PreferencesDialog({ open, onClose }: Props) {
                   checked={settings.showMenuBar}
                   onChange={() => settings.toggleSetting("showMenuBar")}
                 />
-                <span>Show menu bar (Alt to toggle)</span>
+                <span>{t("preferences.showMenuBar")}</span>
+              </label>
+
+              <label className="prefs-row">
+                <input
+                  type="checkbox"
+                  checked={settings.autoSave}
+                  onChange={() => settings.toggleSetting("autoSave")}
+                />
+                <span>{t("preferences.autoSave")}</span>
               </label>
 
               <label className="prefs-row">
@@ -124,7 +133,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
           {activeTab === "editing" && (
             <div className="prefs-section">
               <label className="prefs-row">
-                <span>Tab size:</span>
+                <span>{t("preferences.tabSize")}:</span>
                 <input
                   type="number"
                   min={1}
@@ -142,7 +151,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
                   checked={settings.insertSpaces}
                   onChange={() => settings.toggleSetting("insertSpaces")}
                 />
-                <span>Insert spaces instead of tabs</span>
+                <span>{t("preferences.insertSpaces")}</span>
               </label>
 
               <label className="prefs-row">
@@ -156,7 +165,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
                     )
                   }
                 />
-                <span>Word wrap</span>
+                <span>{t("preferences.wordWrap")}</span>
               </label>
 
               <label className="prefs-row">
@@ -170,7 +179,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
                     )
                   }
                 />
-                <span>Show line numbers</span>
+                <span>{t("preferences.showLineNumbers")}</span>
               </label>
 
               <label className="prefs-row">
@@ -179,7 +188,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
                   checked={settings.showMinimap}
                   onChange={() => settings.toggleSetting("showMinimap")}
                 />
-                <span>Show minimap</span>
+                <span>{t("preferences.showMinimap")}</span>
               </label>
 
               <label className="prefs-row">
@@ -188,7 +197,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
                   checked={settings.showIndentGuides}
                   onChange={() => settings.toggleSetting("showIndentGuides")}
                 />
-                <span>Show indent guides</span>
+                <span>{t("preferences.showIndentGuides")}</span>
               </label>
 
               <label className="prefs-row">
@@ -199,7 +208,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
                     settings.toggleSetting("bracketPairColorization")
                   }
                 />
-                <span>Bracket pair colorization</span>
+                <span>{t("preferences.bracketColorization")}</span>
               </label>
 
               <label className="prefs-row">
@@ -208,20 +217,29 @@ export function PreferencesDialog({ open, onClose }: Props) {
                   checked={settings.smoothScrolling}
                   onChange={() => settings.toggleSetting("smoothScrolling")}
                 />
-                <span>Smooth scrolling</span>
+                <span>{t("preferences.smoothScrolling")}</span>
               </label>
 
               <label className="prefs-row">
-                <span>Whitespace:</span>
+                <input
+                  type="checkbox"
+                  checked={settings.scrollBeyondLastLine}
+                  onChange={() => settings.toggleSetting("scrollBeyondLastLine")}
+                />
+                <span>{t("preferences.scrollBeyondLastLine")}</span>
+              </label>
+
+              <label className="prefs-row">
+                <span>{t("preferences.renderWhitespace")}:</span>
                 <select
                   value={settings.renderWhitespace}
                   onChange={(e) =>
                     settings.updateSetting("renderWhitespace", e.target.value as "selection" | "none" | "all")
                   }
                 >
-                  <option value="none">None</option>
-                  <option value="selection">Selection</option>
-                  <option value="all">All</option>
+                  <option value="none">{t("preferences.whitespaceNone")}</option>
+                  <option value="selection">{t("preferences.whitespaceSelection")}</option>
+                  <option value="all">{t("preferences.whitespaceAll")}</option>
                 </select>
               </label>
             </div>
@@ -231,7 +249,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
           {activeTab === "newdoc" && (
             <div className="prefs-section">
               <label className="prefs-row">
-                <span>Default encoding:</span>
+                <span>{t("preferences.defaultEncoding")}:</span>
                 <select
                   value={settings.defaultEncoding}
                   onChange={(e) =>
@@ -247,32 +265,32 @@ export function PreferencesDialog({ open, onClose }: Props) {
               </label>
 
               <label className="prefs-row">
-                <span>Default language:</span>
+                <span>{t("preferences.defaultLanguage")}:</span>
                 <select
                   value={settings.defaultLanguage}
                   onChange={(e) =>
                     settings.updateSetting("defaultLanguage", e.target.value)
                   }
                 >
-                  <option value="plaintext">Plain Text</option>
-                  <option value="javascript">JavaScript</option>
-                  <option value="typescript">TypeScript</option>
-                  <option value="python">Python</option>
-                  <option value="rust">Rust</option>
+                  <option value="plaintext">{t("menu.language.plaintext")}</option>
+                  <option value="javascript">{t("menu.language.javascript")}</option>
+                  <option value="typescript">{t("menu.language.typescript")}</option>
+                  <option value="python">{t("menu.language.python")}</option>
+                  <option value="rust">{t("menu.language.rust")}</option>
                 </select>
               </label>
 
               <label className="prefs-row">
-                <span>EOL:</span>
+                <span>{t("preferences.eol")}:</span>
                 <select
                   value={settings.defaultEol}
                   onChange={(e) =>
                     settings.updateSetting("defaultEol", e.target.value as "LF" | "CRLF" | "CR")
                   }
                 >
-                  <option value="LF">LF (Unix/macOS)</option>
-                  <option value="CRLF">CRLF (Windows)</option>
-                  <option value="CR">CR (Classic Mac)</option>
+                  <option value="LF">{t("preferences.eolLf")}</option>
+                  <option value="CRLF">{t("preferences.eolCrlf")}</option>
+                  <option value="CR">{t("preferences.eolCr")}</option>
                 </select>
               </label>
             </div>
@@ -281,7 +299,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
 
         <div className="dialog-actions">
           <button className="btn btn-primary" onClick={onClose}>
-            Close
+            {t("dialog.close")}
           </button>
         </div>
       </div>

@@ -1,44 +1,5 @@
 import { test, expect } from "@playwright/test";
-
-async function setupPage(page: any) {
-  await page.addInitScript(() => {
-    window.__TAURI_INTERNALS__ = {
-      metadata: {
-        currentWindow: { label: "main" },
-        currentWebview: { label: "main" },
-        windows: [{ label: "main" }],
-        webviews: [{ label: "main" }],
-      },
-    };
-  });
-  const MOCK = `
-export function invoke(cmd, args) {
-  const ok = () => {};
-  const m = {
-    read_file: () => ({ content:"", encoding:"UTF-8", detected_by_bom:false }),
-    write_file: ok, delete_file: ok, rename_file: ok, file_exists: () => false,
-    get_file_size: () => 0, list_directory: () => [],
-    load_session: () => null, save_session: ok, clear_session: ok,
-    get_system_info: () => ({ platform:"macos", locale:"zh-CN" }),
-    open_in_browser: ok, run_command: () => ({ exit_code:0, stdout:"", stderr:"" }),
-    detect_encoding: () => "UTF-8", convert_encoding_command: () => new Uint8Array(),
-    list_encodings: () => [{ name:"UTF-8", label:"UTF-8", group:"Unicode", has_bom:false }],
-    decode_with_encoding: () => "", encode_with_encoding: () => new Uint8Array(),
-    find_in_files: () => [],
-    list_plugins: () => [{ name:"sample-hello", version:"1.0.0", description:"Test", author:"Test", enabled:true, running:false }],
-    start_plugin: ok, stop_plugin: ok, send_plugin_command: () => ({})
-  };
-  return m[cmd] ? Promise.resolve(m[cmd]()) : Promise.reject(new Error("Unknown: "+cmd));
-}`;
-  await page.route("**/@tauri-apps/api/core*", (r: any) => r.fulfill({ status:200, contentType:"application/javascript", body:MOCK }));
-  await page.route("**/@tauri-apps/api/window*", (r: any) => r.fulfill({ status:200, contentType:"application/javascript",
-    body: `export function getCurrentWindow() { return { close:()=>{}, setFullscreen:()=>{}, isFullscreen:()=>false, setAlwaysOnTop:()=>{}, isAlwaysOnTop:()=>false }; }` }));
-  await page.route("**/@tauri-apps/plugin-dialog*", (r: any) => r.fulfill({ status:200, contentType:"application/javascript",
-    body: `export async function open() { return null; } export async function save() { return null; }` }));
-  await page.route("**/@tauri-apps/plugin-*", (r: any) => r.fulfill({ status:200, contentType:"application/javascript", body:"export {}" }));
-  await page.goto("/", { waitUntil: "networkidle" });
-  await page.waitForTimeout(800);
-}
+import { setupPage } from "./mocks/tauri-mock";
 
 /** Helper: click a menu item by menu index and item text */
 async function clickMenuItem(page: any, menuIndex: number, itemText: string) {
@@ -122,10 +83,10 @@ test.describe("Feature coverage — dialogs", () => {
   test("Preferences dialog opens and has tabs", async ({ page }) => {
     await clickMenuItem(page, 0, "首选项");
     await expect(page.locator(".prefs-dialog")).toBeVisible();
-    // Check tabs
-    await expect(page.locator(".prefs-tab").nth(0)).toContainText("General");
-    await expect(page.locator(".prefs-tab").nth(1)).toContainText("Editing");
-    await expect(page.locator(".prefs-tab").nth(2)).toContainText("New Document");
+    // Check tabs (Chinese locale default)
+    await expect(page.locator(".prefs-tab").nth(0)).toContainText("常规");
+    await expect(page.locator(".prefs-tab").nth(1)).toContainText("编辑");
+    await expect(page.locator(".prefs-tab").nth(2)).toContainText("新建文档");
   });
 
   test("About dialog opens", async ({ page }) => {
@@ -158,7 +119,7 @@ test.describe("Feature coverage — dialogs", () => {
 test.describe("Feature coverage — sidebar", () => {
   test.beforeEach(async ({ page: p }) => { await setupPage(p); });
 
-  test("sidebar has four tabs", async ({ page }) => {
+  test("sidebar has seven tabs", async ({ page }) => {
     await page.locator(".menu-bar-item").nth(3).click(); // View
     await page.waitForTimeout(150);
     await page.locator(".menu-item", { hasText: "显示侧边栏" }).click();

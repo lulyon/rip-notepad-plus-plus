@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useEditorRefStore } from "../../stores/editorRefStore";
 import "./GoToLineDialog.css";
 
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export function GoToLineDialog({ open, onClose }: Props) {
+  const { t } = useTranslation();
   const [lineStr, setLineStr] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const editorRef = useEditorRefStore((s) => s.editorRef);
@@ -49,9 +51,9 @@ export function GoToLineDialog({ open, onClose }: Props) {
   return (
     <div className="dialog-overlay" onClick={onClose}>
       <div className="dialog goto-dialog" onClick={(e) => e.stopPropagation()}>
-        <h2>Go To Line</h2>
+        <h2>{t("dialog.goToLine")}</h2>
         <div className="goto-row">
-          <label>Line number:</label>
+          <label>{t("dialog.lineNumber")}:</label>
           <input
             ref={inputRef}
             type="number"
@@ -67,10 +69,10 @@ export function GoToLineDialog({ open, onClose }: Props) {
         </div>
         <div className="dialog-actions">
           <button className="sbtn sbtn-primary" onClick={handleGo}>
-            Go
+            {t("gotoLine.go")}
           </button>
           <button className="btn" onClick={onClose}>
-            Cancel
+            {t("dialog.cancel")}
           </button>
         </div>
       </div>

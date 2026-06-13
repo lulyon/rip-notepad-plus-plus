@@ -21,6 +21,7 @@ export function Editor({ tabId }: EditorProps) {
 
   const { handleMount } = useMonacoActions();
   const setEditorRef = useEditorRefStore((s) => s.setEditorRef);
+  const setSecondaryEditorRef = useEditorRefStore((s) => s.setSecondaryEditorRef);
   // Only update global editor ref if this is the primary editor
   const isPrimary = !tabId;
 
@@ -36,6 +37,7 @@ export function Editor({ tabId }: EditorProps) {
   const showMinimap = useSettingsStore((s) => s.showMinimap);
   const bracketPairColorization = useSettingsStore((s) => s.bracketPairColorization);
   const smoothScrolling = useSettingsStore((s) => s.smoothScrolling);
+  const scrollBeyondLastLine = useSettingsStore((s) => s.scrollBeyondLastLine);
   const theme = useSettingsStore((s) => s.theme);
 
   const activeTab = tabs.find((t) => t.id === activeTabId);
@@ -44,13 +46,15 @@ export function Editor({ tabId }: EditorProps) {
   useEffect(() => {
     return () => {
       if (isPrimary) setEditorRef(null);
+      else setSecondaryEditorRef(null);
     };
-  }, [setEditorRef, isPrimary]);
+  }, [setEditorRef, setSecondaryEditorRef, isPrimary]);
 
   const onMount = useCallback(
     (editor: editor.IStandaloneCodeEditor, monaco: Parameters<typeof handleMount>[1]) => {
       editorRef.current = editor;
       if (isPrimary) setEditorRef(editor);
+      else setSecondaryEditorRef(editor);
 
       // Register all keyboard actions
       handleMount(editor, monaco);
@@ -95,7 +99,7 @@ export function Editor({ tabId }: EditorProps) {
         fontSize,
         fontFamily,
         minimap: { enabled: showMinimap },
-        scrollBeyondLastLine: false,
+        scrollBeyondLastLine,
         wordWrap,
         lineNumbers,
         renderWhitespace,

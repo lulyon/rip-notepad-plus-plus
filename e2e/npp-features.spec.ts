@@ -1,14 +1,5 @@
 import { test, expect } from "@playwright/test";
-
-async function setupPage(page: any) {
-  await page.addInitScript(() => { window.__TAURI_INTERNALS__ = { metadata: { currentWindow: { label: "main" }, currentWebview: { label: "main" }, windows: [{ label: "main" }], webviews: [{ label: "main" }] } }; });
-  const M = `export function invoke(cmd,args){ const ok=()=>{}; const m={read_file:()=>({content:"",encoding:"UTF-8",detected_by_bom:false}),write_file:ok,delete_file:ok,rename_file:ok,file_exists:()=>false,get_file_size:()=>0,list_directory:()=>[],load_session:()=>null,save_session:ok,clear_session:ok,get_system_info:()=>({platform:"macos",locale:"zh-CN"}),open_in_browser:ok,run_command:()=>({exit_code:0,stdout:"",stderr:""}),detect_encoding:()=>"UTF-8",list_encodings:()=>[{name:"UTF-8",label:"UTF-8",group:"Unicode",has_bom:false}],find_in_files:()=>[],list_plugins:()=>[{name:"test",version:"1.0.0",description:"",author:"",enabled:true,running:false}],start_plugin:ok,stop_plugin:ok,send_plugin_command:()=>({}),update_editor_state:ok,notify_plugins:ok,git_status:()=>({branch:"main",changed:[],ahead:0,behind:0})}; return m[cmd]?Promise.resolve(m[cmd]()):Promise.reject(new Error("Unknown: "+cmd)); }`;
-  await page.route("**/@tauri-apps/api/core*",(r:any)=>r.fulfill({status:200,contentType:"application/javascript",body:M}));
-  await page.route("**/@tauri-apps/api/window*",(r:any)=>r.fulfill({status:200,contentType:"application/javascript",body:`export function getCurrentWindow(){return{close:()=>{},setFullscreen:()=>{},isFullscreen:()=>false,setAlwaysOnTop:()=>{},isAlwaysOnTop:()=>false}}`}));
-  await page.route("**/@tauri-apps/plugin-dialog*",(r:any)=>r.fulfill({status:200,contentType:"application/javascript",body:`export async function open(){return null} export async function save(){return null}`}));
-  await page.route("**/@tauri-apps/plugin-*",(r:any)=>r.fulfill({status:200,contentType:"application/javascript",body:"export {}"}));
-  await page.goto("/",{waitUntil:"networkidle"}); await page.waitForTimeout(800);
-}
+import { setupPage } from "./mocks/tauri-mock";
 
 async function createTwoTabs(page: any) {
   for (let i = 0; i < 2; i++) {

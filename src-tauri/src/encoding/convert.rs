@@ -72,7 +72,8 @@ const ENCODING_NAMES: &[&str] = &[
     "KOI8-R",
     "KOI8-U",
     "IBM866",
-    // Western European
+    "x-mac-cyrillic",
+    // Western European + other single-byte
     "windows-1252",
     "windows-1250",
     "windows-1253",
@@ -84,7 +85,6 @@ const ENCODING_NAMES: &[&str] = &[
     "windows-874",
     "macintosh",
     "x-mac-roman",
-    "x-mac-cyrillic",
     // ISO 8859
     "ISO-8859-1",
     "ISO-8859-2",
@@ -128,14 +128,23 @@ fn encoding_group(enc: &'static Encoding) -> String {
     let name = enc.name();
     if name.starts_with("UTF-") || name.starts_with("ISO-10646") {
         "Unicode".into()
-    } else if name.starts_with("windows-125") || name == "x-mac-roman" {
-        "Western European".into()
-    } else if ["GBK", "Big5", "EUC-KR", "Shift_JIS", "EUC-JP", "ISO-2022-JP"]
+    } else if ["GBK", "Big5", "EUC-KR", "Shift_JIS", "EUC-JP", "ISO-2022-JP", "gb18030"]
         .contains(&name)
     {
         "East Asian".into()
-    } else if name.starts_with("windows-125") && name == "windows-1251" {
+    } else if name == "windows-1251"
+        || name == "KOI8-R"
+        || name == "KOI8-U"
+        || name == "IBM866"
+        || name == "x-mac-cyrillic"
+    {
         "Cyrillic".into()
+    } else if name.starts_with("windows-125")
+        || name == "x-mac-roman"
+        || name == "macintosh"
+        || name == "windows-874"
+    {
+        "Western European".into()
     } else if name.starts_with("ISO-8859") {
         "ISO 8859".into()
     } else {

@@ -1,57 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { execSync } from "child_process";
+import { setupPage } from "./mocks/tauri-mock";
 
 test.describe("ripNotepad++ UI Tests", () => {
 
   test.beforeEach(async ({ page }) => {
-
-    // Inject Tauri internals BEFORE any JS loads
-    await page.addInitScript(() => {
-      window.__TAURI_INTERNALS__ = {
-        metadata: {
-          currentWindow: { label: "main" },
-          currentWebview: { label: "main" },
-          windows: [{ label: "main" }],
-          webviews: [{ label: "main" }],
-        },
-      };
-    });
-
-    // Route all @tauri-apps/* imports to mock implementations
-    const MOCK_CORE = `
-export function invoke(cmd, args) {
-  const ok = () => {};
-  const m = {
-    read_file: () => ({ content: "", encoding: "UTF-8", detected_by_bom: false }),
-    write_file: ok, delete_file: ok, rename_file: ok, file_exists: () => false,
-    get_file_size: () => 0, list_directory: () => [],
-    load_session: () => null, save_session: ok, clear_session: ok,
-    get_system_info: () => ({ platform: "macos", locale: "zh-CN" }),
-    open_in_browser: ok, run_command: () => ({ exit_code:0, stdout:"", stderr:"" }),
-    detect_encoding: () => "UTF-8", convert_encoding_command: () => new Uint8Array(),
-    list_encodings: () => [{ name:"UTF-8", label:"UTF-8", group:"Unicode", has_bom:false }],
-    decode_with_encoding: () => "", encode_with_encoding: () => new Uint8Array(),
-    find_in_files: () => [],
-    list_plugins: () => [{ name:"sample-hello", version:"1.0.0", description:"Test", author:"Test", enabled:true, running:false }],
-    start_plugin: ok, stop_plugin: ok, send_plugin_command: () => ({})
-  };
-  const fn = m[cmd];
-  return fn ? Promise.resolve(fn()) : Promise.reject(new Error("Unknown: "+cmd));
-}
-`;
-    await page.route("**/@tauri-apps/api/core*", (r) =>
-      r.fulfill({ status: 200, contentType: "application/javascript", body: MOCK_CORE }));
-    await page.route("**/@tauri-apps/api/window*", (r) =>
-      r.fulfill({ status: 200, contentType: "application/javascript",
-        body: `export function getCurrentWindow() { return { close:()=>{}, setFullscreen:()=>{}, isFullscreen:()=>false, setAlwaysOnTop:()=>{}, isAlwaysOnTop:()=>false }; }` }));
-    await page.route("**/@tauri-apps/plugin-dialog*", (r) =>
-      r.fulfill({ status: 200, contentType: "application/javascript",
-        body: `export async function open() { return null; } export async function save() { return null; }` }));
-    await page.route("**/@tauri-apps/plugin-*", (r) =>
-      r.fulfill({ status: 200, contentType: "application/javascript", body: `export {}` }));
-
-    await page.goto("/", { waitUntil: "networkidle" });
-    await page.waitForTimeout(800);
+    await setupPage(page);
   });
 
   // ── Basic UI presence ──
