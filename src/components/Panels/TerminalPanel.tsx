@@ -74,13 +74,14 @@ export function TerminalPanel({ embedded }: { embedded?: boolean }) {
     });
 
     // Spawn shell
+    t.writeln(`\x1b[90mStarting shell in: ${cwd}\x1b[0m`);
     try {
       await ipc.ptySpawn(cwd);
     } catch (err) {
       t.writeln(`\r\n\x1b[31m[ERROR] Failed to start shell: ${err}\x1b[0m`);
-      t.writeln(`\x1b[33mWorking directory: ${cwd}\x1b[0m`);
       return;
     }
+    t.writeln(`\x1b[90mShell spawned, waiting for output...\x1b[0m`);
 
     // Poll for output
     pollTimer.current = setInterval(async () => {
