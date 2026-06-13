@@ -139,6 +139,37 @@ test.describe("Notepad++ ported features", () => {
     await expect(page.locator(".menu-dropdown")).toContainText("文件对比");
   });
 
+  // ── XML Tools ──
+  test("Edit menu has XML tools", async ({ page }) => {
+    await page.locator(".menu-bar-item").nth(1).click();
+    await page.waitForTimeout(150);
+    const dd = page.locator(".menu-dropdown");
+    await expect(dd).toContainText("格式化 XML");
+    await expect(dd).toContainText("校验 XML");
+  });
+
+  // ── Command Palette Ctrl+Shift+P ──
+  test("Command palette opens with Ctrl+Shift+P", async ({ page }) => {
+    // The action is registered in Monaco, test via custom event
+    await page.evaluate(() => {
+      window.dispatchEvent(new CustomEvent("open-command-palette"));
+    });
+    await page.waitForTimeout(300);
+    await expect(page.locator(".cmd-palette")).toBeVisible();
+  });
+
+  test("Command palette shows commands and filters", async ({ page }) => {
+    await page.evaluate(() => {
+      window.dispatchEvent(new CustomEvent("open-command-palette"));
+    });
+    await page.waitForTimeout(300);
+    await expect(page.locator(".cmd-palette-item").first()).toBeVisible();
+    // Type to filter
+    await page.locator(".cmd-palette-input").fill("新建");
+    await page.waitForTimeout(200);
+    await expect(page.locator(".cmd-palette-item")).toHaveCount(1);
+  });
+
   // ── Plugin API: editor methods available ──
   test("Plugin manager opens and shows sample-hello", async ({ page }) => {
     await page.locator(".menu-bar-item").nth(9).click(); // Plugins

@@ -25,6 +25,7 @@ import { RunDialog } from "./components/Dialogs/RunDialog";
 import { AboutDialog } from "./components/Dialogs/AboutDialog";
 import { PluginDialog } from "./components/Dialogs/PluginDialog";
 import { CompareDialog } from "./components/Dialogs/CompareDialog";
+import { CommandPalette } from "./components/Dialogs/CommandPalette";
 import { Sidebar } from "./components/Panels/Sidebar";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [pluginOpen, setPluginOpen] = useState(false);
   const [compareOpen, setCompareOpen] = useState(false);
+  const [cmdPaletteOpen, setCmdPaletteOpen] = useState(false);
 
   // ── Session: load on startup ──
   useEffect(() => {
@@ -130,9 +132,11 @@ function App() {
 
     window.addEventListener("open-go-to-line", onOpenGoToLine);
     window.addEventListener("navigate-to-match", onNavigateToMatch);
+    window.addEventListener("open-command-palette", () => setCmdPaletteOpen(true));
     return () => {
       window.removeEventListener("open-go-to-line", onOpenGoToLine);
       window.removeEventListener("navigate-to-match", onNavigateToMatch);
+      window.removeEventListener("open-command-palette", () => setCmdPaletteOpen(true));
     };
   }, []);
 
@@ -196,6 +200,7 @@ function App() {
       <AboutDialog open={aboutOpen} onClose={() => setAboutOpen(false)} />
       <PluginDialog open={pluginOpen} onClose={() => setPluginOpen(false)} />
       <CompareDialog open={compareOpen} onClose={() => setCompareOpen(false)} />
+      <CommandPalette open={cmdPaletteOpen} onClose={() => setCmdPaletteOpen(false)} />
     </div>
   );
 }

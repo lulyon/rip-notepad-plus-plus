@@ -220,6 +220,47 @@ export function useMenuActions() {
           editorRef?.trigger("keyboard", "type", { text });
           break;
         }
+        case "edit.formatXml": {
+          const model = editorRef?.getModel();
+          if (!model) break;
+          try {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(model.getValue(), "text/xml");
+            const errNode = doc.querySelector("parsererror");
+            if (errNode) {
+              window.alert(`XML Error: ${errNode.textContent}`);
+            } else {
+              const serializer = new XMLSerializer();
+              let formatted = serializer.serializeToString(doc);
+              // Add newlines for readability
+              formatted = formatted
+                .replace(/></g, ">\n<")
+                .replace(/(<[^/][^>]*>[^\n<])(<\/)/g, "$1\n$2");
+              const fullRange = model.getFullModelRange();
+              editorRef?.executeEdits("format-xml", [{ range: fullRange, text: formatted }]);
+            }
+          } catch (e) {
+            window.alert(`XML Parse Error: ${e}`);
+          }
+          break;
+        }
+        case "edit.validateXml": {
+          const model = editorRef?.getModel();
+          if (!model) break;
+          try {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(model.getValue(), "text/xml");
+            const errNode = doc.querySelector("parsererror");
+            if (errNode) {
+              window.alert(`❌ XML Invalid:\n${errNode.textContent}`);
+            } else {
+              window.alert("✅ XML is valid.");
+            }
+          } catch (e) {
+            window.alert(`XML Parse Error: ${e}`);
+          }
+          break;
+        }
         case "edit.sortAscending": {
           const model = editorRef?.getModel();
           if (!model) break;

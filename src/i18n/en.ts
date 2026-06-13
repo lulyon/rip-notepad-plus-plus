@@ -218,6 +218,12 @@ const en = {
     "compare.browse": "Browse",
     "compare.compare": "Compare",
     "menu.compare": "&Compare...",
+    "menu.edit.formatXml": "Format XML",
+    "menu.edit.validateXml": "Validate XML",
+
+    // ── Command Palette ──
+    "cmdPalette.placeholder": "Type a command name...",
+    "cmdPalette.noResults": "No matching commands",
 
     // ── DocList ──
     "doclist.empty": "No documents open",

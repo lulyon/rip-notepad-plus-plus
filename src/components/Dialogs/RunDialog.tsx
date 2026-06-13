@@ -85,6 +85,11 @@ export function RunDialog({ open, onClose }: Props) {
         )}
 
         <div className="dialog-actions">
+          {output && (
+            <button className="btn" onClick={() => setOutput("")}>
+              Clear
+            </button>
+          )}
           <button className="btn" onClick={onClose}>
             Close
           </button>

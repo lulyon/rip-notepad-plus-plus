@@ -86,6 +86,9 @@ export const MENU_STRUCTURE: MenuDef[] = [
       { id: "edit.sortAscending", labelKey: "menu.edit.sortAscending" },
       { id: "edit.sortDescending", labelKey: "menu.edit.sortDescending" },
       { id: "edit.removeDupLines", labelKey: "menu.edit.removeDupLines" },
+      S(),
+      { id: "edit.formatXml", labelKey: "menu.edit.formatXml" },
+      { id: "edit.validateXml", labelKey: "menu.edit.validateXml" },
     ],
   },
   {

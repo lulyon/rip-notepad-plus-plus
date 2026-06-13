@@ -218,6 +218,12 @@ const zh = {
     "compare.browse": "浏览",
     "compare.compare": "开始对比",
     "menu.compare": "文件对比(&C)...",
+    "menu.edit.formatXml": "格式化 XML",
+    "menu.edit.validateXml": "校验 XML",
+
+    // ── Command Palette ──
+    "cmdPalette.placeholder": "输入命令名称搜索...",
+    "cmdPalette.noResults": "未找到匹配的命令",
 
     // ── DocList ──
     "doclist.empty": "没有打开的文档",

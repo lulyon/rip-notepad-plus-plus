@@ -209,6 +209,18 @@ export function useMonacoActions() {
           window.dispatchEvent(new CustomEvent("open-go-to-line"));
         },
       });
+
+      editor.addAction({
+        id: "command-palette",
+        label: "Command Palette...",
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyP,
+          monaco.KeyMod.WinCtrl | monaco.KeyMod.Shift | monaco.KeyCode.KeyP,
+        ],
+        run: () => {
+          window.dispatchEvent(new CustomEvent("open-command-palette"));
+        },
+      });
     },
     [],
   );
