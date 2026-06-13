@@ -47,13 +47,15 @@ export function useMenuActions() {
               title: "Select any file in the target folder",
               multiple: false,
             });
-            window.alert("DEBUG: result=" + JSON.stringify(result) + " type=" + typeof result);
             if (result) {
               const arr = Array.isArray(result) ? result : [result as string];
               const dir = arr[0]?.split(/[/\\]/).slice(0, -1).join("/") || arr[0];
-              window.alert("DEBUG: dir=" + dir);
               if (dir) {
                 useSettingsStore.getState().updateSetting("projectRoot", dir);
+                // Auto-open sidebar so user sees the file tree
+                if (!useSettingsStore.getState().showSidebar) {
+                  useSettingsStore.getState().updateSetting("showSidebar", true);
+                }
                 const tabs = useEditorStore.getState().tabs;
                 const sessionTabs = tabs
                   .filter((t) => t.path)
@@ -68,7 +70,7 @@ export function useMenuActions() {
               }
             }
           } catch (err) {
-            window.alert("DEBUG error: " + String(err));
+            console.error("openFolder failed:", err);
           }
           break;
         }
