@@ -86,6 +86,18 @@ export function useMonacoActions() {
       });
 
       editor.addAction({
+        id: "file-open-folder",
+        label: "Open Folder...",
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyO,
+          monaco.KeyMod.WinCtrl | monaco.KeyMod.Shift | monaco.KeyCode.KeyO,
+        ],
+        run: () => {
+          window.dispatchEvent(new CustomEvent("menu-action", { detail: "file.openFolder" }));
+        },
+      });
+
+      editor.addAction({
         id: "file-open",
         label: "Open...",
         keybindings: [

@@ -126,9 +126,24 @@ export function useMenuActions() {
         case "file.print":
           editorRef?.trigger("keyboard", "editor.action.print", null);
           break;
-        case "file.exit":
+        case "file.exit": {
+          // Save session before closing
+          const tabs = useEditorStore.getState().tabs;
+          const sessionTabs = tabs
+            .filter((t) => t.path)
+            .map((t) => ({ path: t.path!, encoding: t.encoding, language: t.language }));
+          try {
+            await ipc.saveSession({
+              open_tabs: sessionTabs,
+              active_tab_id: useEditorStore.getState().activeTabId,
+              project_root: useSettingsStore.getState().projectRoot,
+              window_width: null,
+              window_height: null,
+            });
+          } catch (_) { /* best effort */ }
           await getCurrentWindow().close();
           break;
+        }
 
         // ── Edit ──
         case "edit.undo":

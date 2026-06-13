@@ -40,31 +40,32 @@ function App() {
 
   // ── Session: load on startup ──
   useEffect(() => {
-    ipc.loadSession().then((session) => {
+    ipc.loadSession().then(async (session) => {
       if (!session) return;
       // Restore project root
       if (session.project_root) {
         useSettingsStore.getState().updateSetting("projectRoot", session.project_root);
+        // If project root was saved, also restore sidebar
+        useSettingsStore.getState().updateSetting("showSidebar", true);
       }
       // Restore open tabs
       if (session.open_tabs && session.open_tabs.length > 0) {
         const store = useEditorStore.getState();
-        // First, clear default welcome state by adding tabs
-        for (const tab of session.open_tabs) {
+        const openPromises = session.open_tabs.map((tab) =>
           ipc.readFile(tab.path).then((data) => {
-            store.openTab({
+            return store.openTab({
               path: tab.path,
               name: tab.path.split(/[/\\]/).pop() || tab.path,
               content: data.content,
               encoding: tab.encoding,
               language: tab.language,
             });
-          }).catch(() => {
-            // File may have been moved/deleted — skip
-          });
-        }
-        if (session.active_tab_id) {
-          store.setActiveTab(session.active_tab_id);
+          }).catch(() => null) // File may have been moved/deleted — skip
+        );
+        const tabIds = (await Promise.all(openPromises)).filter(Boolean);
+        // Activate the last-opened tab, or the first one
+        if (tabIds.length > 0) {
+          store.setActiveTab(tabIds[tabIds.length - 1]!);
         }
       }
     }).catch(() => {});
