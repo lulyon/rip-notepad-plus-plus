@@ -127,4 +127,17 @@ export const ipc = {
   notifyPlugins(method: string, params?: unknown): Promise<void> {
     return invoke("notify_plugins", { method, params: params ?? null });
   },
+
+  // ── Git ──
+  gitStatus(repoPath: string): Promise<import("../types/ipc").GitStatus> {
+    return invoke("git_status", { repo_path: repoPath });
+  },
+
+  gitBranch(repoPath: string): Promise<string> {
+    return invoke("git_branch", { repo_path: repoPath });
+  },
+
+  gitDiffFile(repoPath: string, filePath: string): Promise<string> {
+    return invoke("git_diff_file", { repo_path: repoPath, file_path: filePath });
+  },
 };

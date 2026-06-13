@@ -175,6 +175,16 @@ const en = {
     // ── Sidebar ──
     "sidebar.files": "Files",
     "sidebar.symbols": "Symbols",
+    "sidebar.git": "Git",
+
+    // ── Git ──
+    "git.noProject": "Open a folder to view Git status",
+    "git.loading": "Loading...",
+    "git.notRepo": "Not a Git repository",
+    "git.filesChanged": "files changed",
+    "git.refresh": "Refresh",
+    "git.clean": "✓ Working tree clean",
+    "git.viewDiff": "View Diff",
     // ── Plugin ──
     "plugin.title": "Plugin Manager",
     "plugin.loading": "Loading...",

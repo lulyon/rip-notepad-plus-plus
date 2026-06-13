@@ -90,6 +90,19 @@ export interface EditorState {
   tab_count: number;
 }
 
+export interface GitStatusEntry {
+  path: string;
+  status: string;
+  display_path: string;
+}
+
+export interface GitStatus {
+  branch: string;
+  changed: GitStatusEntry[];
+  ahead: number;
+  behind: number;
+}
+
 export interface PluginInfo {
   name: string;
   version: string;

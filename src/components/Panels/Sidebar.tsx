@@ -6,12 +6,13 @@ import { useSettingsStore } from "../../stores/settingsStore";
 import { ipc } from "../../lib/ipc";
 import { detectLanguage } from "../../lib/constants";
 import type { DirEntry } from "../../types/ipc";
+import { GitPanel } from "./GitPanel";
 import "./Sidebar.css";
 
 export function Sidebar() {
   const { t } = useTranslation();
   const showSidebar = useSettingsStore((s) => s.showSidebar);
-  const [activeTab, setActiveTab] = useState<"files" | "symbols">("files");
+  const [activeTab, setActiveTab] = useState<"files" | "symbols" | "git">("files");
 
   if (!showSidebar) return null;
 
@@ -25,6 +26,12 @@ export function Sidebar() {
           📁 {t("sidebar.files")}
         </button>
         <button
+          className={`sidebar-tab ${activeTab === "git" ? "active" : ""}`}
+          onClick={() => setActiveTab("git")}
+        >
+          ⎇ {t("sidebar.git")}
+        </button>
+        <button
           className={`sidebar-tab ${activeTab === "symbols" ? "active" : ""}`}
           onClick={() => setActiveTab("symbols")}
         >
@@ -32,7 +39,9 @@ export function Sidebar() {
         </button>
       </div>
       <div className="sidebar-content">
-        {activeTab === "files" ? <ProjectPanel /> : <FunctionList />}
+        {activeTab === "files" && <ProjectPanel />}
+        {activeTab === "git" && <GitPanel />}
+        {activeTab === "symbols" && <FunctionList />}
       </div>
     </div>
   );

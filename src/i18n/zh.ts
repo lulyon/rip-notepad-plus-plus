@@ -175,6 +175,16 @@ const zh = {
     // ── Sidebar ──
     "sidebar.files": "文件",
     "sidebar.symbols": "符号",
+    "sidebar.git": "Git",
+
+    // ── Git ──
+    "git.noProject": "打开一个文件夹以查看 Git 状态",
+    "git.loading": "加载中...",
+    "git.notRepo": "非 Git 仓库",
+    "git.filesChanged": "个文件已更改",
+    "git.refresh": "刷新",
+    "git.clean": "✅ 工作区干净",
+    "git.viewDiff": "查看差异",
     // ── Plugin ──
     "plugin.title": "插件管理",
     "plugin.loading": "加载中...",

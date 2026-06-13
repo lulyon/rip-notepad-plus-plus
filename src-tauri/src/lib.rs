@@ -11,6 +11,7 @@ use commands::encoding::{
 use commands::file_ops::{create_directory, delete_directory, delete_file, file_exists, get_file_size, list_directory, read_file, rename_file, write_file};
 use commands::search::find_in_files;
 use commands::session::{clear_session, load_session, save_session};
+use commands::git::{git_branch, git_diff_file, git_status};
 use commands::plugin::{list_plugins, notify_plugins, send_plugin_command, start_plugin, stop_plugin, update_editor_state};
 use commands::system::{get_system_info, open_in_browser, run_command};
 
@@ -54,6 +55,10 @@ pub fn run() {
             send_plugin_command,
             update_editor_state,
             notify_plugins,
+            // Git
+            git_status,
+            git_branch,
+            git_diff_file,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
