@@ -350,6 +350,7 @@ const zh = {
     "udl.delete": "删除",
     "udl.createNew": "创建新语言",
     "udl.noLanguages": "还没有用户自定义语言。点击「创建新语言」开始。",
+    "udl.importGrammar": "导入 .tmLanguage",
     "udl.unnamed": "未命名",
     "udl.customLanguages": "自定义语言",
     "udl.confirmDelete": "确定删除此语言？",

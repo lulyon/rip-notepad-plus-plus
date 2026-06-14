@@ -4,6 +4,8 @@ import MonacoEditor from "@monaco-editor/react";
 import { useUdlStore, createDefaultUdl } from "../../stores/udlStore";
 import type { UdlConfig } from "../../stores/udlStore";
 import { compileUdl, registerAllUdls } from "../../lib/udlCompiler";
+import { importTmLanguage } from "../../lib/tmLanguageImporter";
+import { ipc } from "../../lib/ipc";
 import "./UdlDialog.css";
 
 interface Props {
@@ -201,6 +203,49 @@ export function UdlDialog({ open, onClose }: Props) {
           <div className="dialog-actions">
             <button className="btn btn-primary" onClick={handleNew}>
               {t("udl.createNew")}
+            </button>
+            <button
+              className="btn"
+              onClick={async () => {
+                const { open } = await import("@tauri-apps/plugin-dialog");
+                const result = await open({
+                  title: "Import .tmLanguage.json",
+                  multiple: true,
+                  filters: [{ name: "TextMate Grammar", extensions: ["json"] }],
+                });
+                if (!result) return;
+                const paths: string[] = Array.isArray(result) ? result as string[] : [result as string];
+                for (const path of paths) {
+                  try {
+                    const fileData = await ipc.readFile(path);
+                    const json = JSON.parse(fileData.content);
+                    if (json.name && json.scopeName && json.patterns) {
+                      const imported = importTmLanguage(json);
+                      const store = useUdlStore.getState();
+                      store.addUdl({
+                        id: imported.id,
+                        name: imported.name,
+                        extensions: imported.fileTypes || [],
+                        lineComment: "",
+                        blockCommentStart: "",
+                        blockCommentEnd: "",
+                        keywords: [],
+                        keywordColors: [],
+                        operators: "",
+                        delimiters: "",
+                        stringChars: "'\"",
+                        caseSensitive: false,
+                        autoIndent: true,
+                      });
+                      registerAllUdls(useUdlStore.getState().udls);
+                    }
+                  } catch (e) {
+                    console.error("Failed to import grammar:", e);
+                  }
+                }
+              }}
+            >
+              {t("udl.importGrammar")}
             </button>
             <button className="btn" onClick={onClose}>
               {t("dialog.close")}

@@ -350,6 +350,7 @@ const en = {
     "udl.delete": "Delete",
     "udl.createNew": "Create New Language",
     "udl.noLanguages": "No user-defined languages yet. Click 'Create New Language' to start.",
+    "udl.importGrammar": "Import .tmLanguage",
     "udl.unnamed": "Unnamed",
     "udl.customLanguages": "Custom Languages",
     "udl.confirmDelete": "Delete this language?",
