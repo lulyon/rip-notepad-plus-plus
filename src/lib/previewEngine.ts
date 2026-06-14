@@ -1,0 +1,101 @@
+import MarkdownIt from "markdown-it";
+
+/**
+ * Generic preview engine with pluggable renderers.
+ * Each renderer maps a file pattern to a render function.
+ */
+
+export interface PreviewRenderer {
+  /** Unique id, e.g. "markdown", "html" */
+  id: string;
+  /** Display name for the UI */
+  name: string;
+  /** File extensions this renderer handles (without dot) */
+  extensions: string[];
+  /** Languages this renderer handles (Monaco language ids) */
+  languages: string[];
+  /** Render content to HTML string */
+  render: (content: string) => string;
+  /** Whether to render in a sandboxed iframe (true for HTML, false for Markdown) */
+  useIframe: boolean;
+}
+
+const renderers: Map<string, PreviewRenderer> = new Map();
+
+/** Register a preview renderer */
+export function registerPreviewRenderer(renderer: PreviewRenderer) {
+  renderers.set(renderer.id, renderer);
+}
+
+/** Find the matching renderer for a file */
+export function findRenderer(
+  fileName: string,
+  language: string,
+): PreviewRenderer | null {
+  for (const r of renderers.values()) {
+    if (r.languages.includes(language)) return r;
+    const ext = fileName.split(".").pop()?.toLowerCase();
+    if (ext && r.extensions.includes(ext)) return r;
+  }
+  return null;
+}
+
+/** Check if a file has a preview renderer available */
+export function hasPreview(fileName: string, language: string): boolean {
+  return findRenderer(fileName, language) !== null;
+}
+
+/** Get all registered renderers */
+export function getPreviewRenderers(): PreviewRenderer[] {
+  return [...renderers.values()];
+}
+
+// ── Built-in renderers ──
+
+/** Markdown renderer — uses markdown-it */
+const md = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true,
+  breaks: true,
+  highlight: function (str: string, lang: string) {
+    const escaped = str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+    return `<pre class="hljs"><code class="language-${lang || "plaintext"}">${escaped}</code></pre>`;
+  },
+});
+
+function renderMarkdown(content: string): string {
+  let lineIndex = 0;
+  const html = md.render(content);
+  // Inject data-line attributes for scroll sync
+  return html.replace(/<(h[1-6]|p|li|blockquote|pre|table|hr)([\s>])/gi, (match) => {
+    lineIndex++;
+    return match.replace(/^<(\w+)/, `<$1 data-line="${lineIndex}"`);
+  });
+}
+
+registerPreviewRenderer({
+  id: "markdown",
+  name: "Markdown",
+  extensions: ["md", "mdx", "markdown", "mdown"],
+  languages: ["markdown"],
+  render: renderMarkdown,
+  useIframe: false,
+});
+
+/** HTML renderer — renders raw HTML in a sandboxed iframe */
+function renderHtml(content: string): string {
+  return content;
+}
+
+registerPreviewRenderer({
+  id: "html",
+  name: "HTML",
+  extensions: ["html", "htm"],
+  languages: ["html"],
+  render: renderHtml,
+  useIframe: true,
+});

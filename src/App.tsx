@@ -36,7 +36,8 @@ import { HashDialog } from "./components/Dialogs/HashDialog";
 import { SummaryDialog } from "./components/Dialogs/SummaryDialog";
 import { UnsavedChangesDialog } from "./components/Dialogs/UnsavedChangesDialog";
 import { Sidebar } from "./components/Panels/Sidebar";
-import { MarkdownPreview } from "./components/Panels/MarkdownPreview";
+import { GenericPreview } from "./components/Panels/GenericPreview";
+import { hasPreview } from "./lib/previewEngine";
 
 function App() {
   const { t } = useTranslation();
@@ -101,9 +102,7 @@ function App() {
   const tabs = useEditorStore((s) => s.tabs);
   const projectRoot = useSettingsStore((s) => s.projectRoot);
   const activeTab = tabs.find((t) => t.id === activeTabId);
-  const isMdFile = activeTab?.language === "markdown" ||
-    activeTab?.path?.endsWith(".md") ||
-    activeTab?.name?.endsWith(".md");
+  const hasFilePreview = activeTab ? hasPreview(activeTab.name, activeTab.language) : false;
 
   useEffect(() => {
     const debounce = setTimeout(() => {
@@ -253,23 +252,23 @@ function App() {
       <div className="main-content">
         <Sidebar />
         <div className="editor-area">
-          {activeTabId && isMdFile && (
+          {activeTabId && hasFilePreview && (
             <button
               className="md-preview-toggle-btn"
               onClick={() => setShowMdPreview((prev) => !prev)}
-              title={showMdPreview ? "Close preview" : "Open preview (Ctrl+Shift+V)"}
+              title={showMdPreview ? "Close preview" : "Preview (Ctrl+Shift+V)"}
             >
               {showMdPreview ? "✕" : "👁"}
             </button>
           )}
-          {activeTabId && showMdPreview && isMdFile ? (
+          {activeTabId && showMdPreview && hasFilePreview ? (
             <div className="md-split-view">
               <div className="md-editor-pane">
                 <SplitEditor />
               </div>
               <div className="md-preview-divider" />
               <div className="md-preview-pane">
-                <MarkdownPreview />
+                <GenericPreview />
               </div>
             </div>
           ) : activeTabId ? (
