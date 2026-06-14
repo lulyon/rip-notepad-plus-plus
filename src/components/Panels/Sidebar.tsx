@@ -7,26 +7,12 @@ import { ipc } from "../../lib/ipc";
 import { detectLanguage } from "../../lib/constants";
 import type { DirEntry } from "../../types/ipc";
 import { GitPanel } from "./GitPanel";
-import { MarkdownPreview } from "./MarkdownPreview";
 import "./Sidebar.css";
 
 export function Sidebar() {
   const { t } = useTranslation();
   const showSidebar = useSettingsStore((s) => s.showSidebar);
-  const [activeTab, setActiveTab] = useState<"files" | "preview" | "git" | "symbols">("files");
-
-  // Listen for markdown preview toggle event
-  useEffect(() => {
-    function handleToggle() {
-      setActiveTab("preview");
-      // Also open sidebar if hidden
-      if (!useSettingsStore.getState().showSidebar) {
-        useSettingsStore.getState().updateSetting("showSidebar", true);
-      }
-    }
-    window.addEventListener("toggle-markdown-preview", handleToggle);
-    return () => window.removeEventListener("toggle-markdown-preview", handleToggle);
-  }, []);
+  const [activeTab, setActiveTab] = useState<"files" | "git" | "symbols">("files");
 
   if (!showSidebar) return null;
 
@@ -38,12 +24,6 @@ export function Sidebar() {
           onClick={() => setActiveTab("files")}
         >
           📁 {t("sidebar.files")}
-        </button>
-        <button
-          className={`sidebar-tab ${activeTab === "preview" ? "active" : ""}`}
-          onClick={() => setActiveTab("preview")}
-        >
-          👁 {t("sidebar.preview")}
         </button>
         <button
           className={`sidebar-tab ${activeTab === "git" ? "active" : ""}`}
@@ -60,7 +40,6 @@ export function Sidebar() {
       </div>
       <div className="sidebar-content">
         {activeTab === "files" && <ProjectPanel />}
-        {activeTab === "preview" && <MarkdownPreview />}
         {activeTab === "git" && <GitPanel />}
         {activeTab === "symbols" && <FunctionList />}
       </div>
