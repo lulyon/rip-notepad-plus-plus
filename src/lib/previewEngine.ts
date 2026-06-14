@@ -14,8 +14,8 @@ export interface PreviewRenderer {
   extensions: string[];
   /** Languages this renderer handles (Monaco language ids) */
   languages: string[];
-  /** Render content to HTML string */
-  render: (content: string) => string;
+  /** Render content to HTML string. filePath may be null for untitled tabs. */
+  render: (content: string, filePath: string | null) => string;
   /** Whether to render in a sandboxed iframe (true for HTML, false for Markdown) */
   useIframe: boolean;
 }
@@ -67,7 +67,7 @@ const md = new MarkdownIt({
   },
 });
 
-function renderMarkdown(content: string): string {
+function renderMarkdown(content: string, _filePath: string | null): string {
   let lineIndex = 0;
   const html = md.render(content);
   // Inject data-line attributes for scroll sync
@@ -87,7 +87,7 @@ registerPreviewRenderer({
 });
 
 /** HTML renderer — renders raw HTML in a sandboxed iframe */
-function renderHtml(content: string): string {
+function renderHtml(content: string, _filePath: string | null): string {
   return content;
 }
 
@@ -97,5 +97,32 @@ registerPreviewRenderer({
   extensions: ["html", "htm"],
   languages: ["html"],
   render: renderHtml,
+  useIframe: true,
+});
+
+/** Image renderer — renders image files via Tauri asset protocol */
+function renderImage(_content: string, filePath: string | null): string {
+  if (!filePath) return "<p style='color:#999;text-align:center;padding:40px'>Save the file first to preview</p>";
+
+  // Encode the file path for the Tauri asset protocol
+  const encoded = encodeURIComponent(filePath);
+  const assetUrl = `https://asset.localhost/${encoded}`;
+
+  return `<!DOCTYPE html>
+<html><head><style>
+  * { margin: 0; padding: 0; }
+  body { background: #1e1e1e; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  img { max-width: 95%; max-height: 95vh; object-fit: contain; border-radius: 4px; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+</style></head><body>
+  <img src="${assetUrl}" alt="Preview" onerror="this.parentElement.innerHTML='<p style=color:#999;text-align:center;padding:40px>Failed to load image</p>'" />
+</body></html>`;
+}
+
+registerPreviewRenderer({
+  id: "image",
+  name: "Image",
+  extensions: ["png", "jpg", "jpeg", "gif", "svg", "webp", "bmp", "ico"],
+  languages: [],
+  render: renderImage,
   useIframe: true,
 });

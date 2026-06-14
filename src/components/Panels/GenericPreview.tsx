@@ -21,8 +21,8 @@ export function GenericPreview() {
   // Render content to HTML
   const html = useMemo(() => {
     if (!renderer || !activeTab?.content) return "";
-    return renderer.render(activeTab.content);
-  }, [renderer, activeTab?.content]);
+    return renderer.render(activeTab.content, activeTab.path);
+  }, [renderer, activeTab?.content, activeTab?.path]);
 
   // Scroll sync: editor → preview
   const syncScroll = useCallback(() => {
@@ -92,12 +92,12 @@ export function GenericPreview() {
     [editorRef],
   );
 
-  if (!activeTab?.content) {
-    return <div className="markdown-empty">No content</div>;
-  }
-
   if (!renderer) {
     return <div className="markdown-empty">No preview available for this file type</div>;
+  }
+
+  if (!activeTab?.content && !renderer.extensions.length) {
+    return <div className="markdown-empty">No content</div>;
   }
 
   // HTML iframe renderer
