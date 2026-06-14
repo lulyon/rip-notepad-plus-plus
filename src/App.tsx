@@ -12,6 +12,7 @@ import { usePluginBridge } from "./hooks/usePluginBridge";
 import { useAutoSave } from "./hooks/useAutoSave";
 import { useFileWatcher } from "./hooks/useFileWatcher";
 import { useSnapshotAutoSave } from "./hooks/useSnapshotAutoSave";
+import { useUpdateChecker } from "./hooks/useUpdateChecker";
 import { ipc } from "./lib/ipc";
 import { detectLanguage } from "./lib/constants";
 import { MenuBar } from "./components/MenuBar/MenuBar";
@@ -129,6 +130,7 @@ function App() {
   useAutoSave();
   useFileWatcher();
   useSnapshotAutoSave();
+  useUpdateChecker();
 
   // Listen for custom events
   useEffect(() => {
@@ -182,6 +184,8 @@ function App() {
         setShortcutMapperOpen(true);
       } else if (actionId === "run.dialog") {
         setRunOpen(true);
+      } else if (actionId === "help.checkUpdate") {
+        window.dispatchEvent(new CustomEvent("check-for-updates"));
       } else if (actionId === "help.about") {
         setAboutOpen(true);
       } else if (actionId === "plugins.manager") {

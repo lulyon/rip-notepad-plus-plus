@@ -183,6 +183,7 @@ const zh = {
     // ── Menu: Help ──
     "menu.help": "帮助(&H)",
     "menu.help.about": "关于 ripNotepad++(&A)",
+    "menu.help.checkUpdate": "检查更新(&U)...",
 
     // ── Tab Context Menu ──
     "tab.close": "关闭",
@@ -252,6 +253,7 @@ const zh = {
     "preferences.showStatusBar": "显示状态栏",
     "preferences.showMenuBar": "显示菜单栏 (Alt 切换)",
     "preferences.autoSave": "自动保存（每30秒）",
+    "preferences.autoCheckUpdate": "自动检查更新",
     "preferences.tabSize": "制表符大小",
     "preferences.insertSpaces": "用空格代替制表符",
     "preferences.wordWrap": "自动换行",

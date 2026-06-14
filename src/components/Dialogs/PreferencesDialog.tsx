@@ -114,6 +114,15 @@ export function PreferencesDialog({ open, onClose }: Props) {
               </label>
 
               <label className="prefs-row">
+                <input
+                  type="checkbox"
+                  checked={settings.autoCheckUpdate}
+                  onChange={() => settings.toggleSetting("autoCheckUpdate")}
+                />
+                <span>{t("preferences.autoCheckUpdate")}</span>
+              </label>
+
+              <label className="prefs-row">
                 <span>Language / 语言:</span>
                 <select
                   value={i18n.language}

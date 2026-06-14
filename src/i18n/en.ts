@@ -183,6 +183,7 @@ const en = {
     // ── Menu: Help ──
     "menu.help": "&Help",
     "menu.help.about": "&About ripNotepad++",
+    "menu.help.checkUpdate": "Check for &Updates...",
 
     // ── Tab Context Menu ──
     "tab.close": "Close",
@@ -252,6 +253,7 @@ const en = {
     "preferences.showStatusBar": "Show status bar",
     "preferences.showMenuBar": "Show menu bar (Alt to toggle)",
     "preferences.autoSave": "Auto-save (every 30s)",
+    "preferences.autoCheckUpdate": "Automatically check for updates",
     "preferences.tabSize": "Tab size",
     "preferences.insertSpaces": "Insert spaces instead of tabs",
     "preferences.wordWrap": "Word wrap",

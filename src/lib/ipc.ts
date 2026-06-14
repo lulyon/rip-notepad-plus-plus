@@ -170,4 +170,9 @@ export const ipc = {
   clearSnapshot(tabId: string): Promise<void> {
     return invoke("clear_snapshot", { tabId });
   },
+
+  // ── Updater ──
+  checkUpdate(): Promise<{ available: boolean; version?: string; body?: string } | null> {
+    return invoke("plugin:updater|check");
+  },
 };

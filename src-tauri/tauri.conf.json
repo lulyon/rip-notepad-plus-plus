@@ -50,5 +50,12 @@
         "description": "Source code file"
       }
     ]
+  },
+  "plugins": {
+    "updater": {
+      "endpoints": [
+        "https://github.com/luliang/rip-notepad-plus-plus/releases/latest/download/latest.json"
+      ]
+    }
   }
 }

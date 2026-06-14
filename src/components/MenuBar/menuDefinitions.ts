@@ -317,6 +317,8 @@ export const MENU_STRUCTURE: MenuDef[] = [
     labelKey: "menu.help",
     altKey: "h",
     children: [
+      { id: "help.checkUpdate", labelKey: "menu.help.checkUpdate" },
+      S(),
       { id: "help.about", labelKey: "menu.help.about" },
     ],
   },
