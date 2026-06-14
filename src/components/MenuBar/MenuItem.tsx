@@ -49,7 +49,9 @@ export function MenuItem({ item, depth, onAction }: Props) {
         }
       }}
     >
-      <span className="menu-item-label">{t(item.labelKey)}</span>
+      <span className="menu-item-label">
+        {item.label || t(item.labelKey)}
+      </span>
       {item.shortcut && !hasChildren && (
         <span className="menu-item-shortcut">{item.shortcut}</span>
       )}

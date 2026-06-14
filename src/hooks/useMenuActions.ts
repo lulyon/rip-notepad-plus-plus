@@ -9,6 +9,7 @@ import { detectLanguage } from "../lib/constants";
 import { useMacroStore } from "../stores/macroStore";
 import { useMarkStore } from "../stores/markStore";
 import { useBookmarkStore } from "../stores/bookmarkStore";
+import { useUdlStore } from "../stores/udlStore";
 import { open, save } from "@tauri-apps/plugin-dialog";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 
@@ -628,6 +629,28 @@ export function useMenuActions() {
           }
           break;
         }
+        // UDL language items: lang.udl.<udlId>
+        default: {
+          if (actionId.startsWith("lang.udl.")) {
+            const udlId = actionId.replace("lang.udl.", "");
+            const udl = useUdlStore.getState().getUdl(udlId);
+            if (udl && editorState.activeTabId) {
+              useEditorStore.getState().updateTabLanguage(
+                editorState.activeTabId,
+                `udl.${udlId}`,
+              );
+            }
+          }
+          break;
+        }
+        case "language.defineLanguage":
+          // Menu item in the Language menu — dispatches dialog open
+          window.dispatchEvent(new CustomEvent("menu-action", { detail: "language.openUdl" }));
+          break;
+        case "language.openUdlFolder":
+          // Open the UDL config directory (stored in localStorage, so show info dialog)
+          console.log("Open UDL Folder requested");
+          break;
 
         // ── Macro ──
         case "macro.startRecord":

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSettingsStore } from "../../stores/settingsStore";
+import { LANGUAGES } from "../../i18n";
 import "./PreferencesDialog.css";
 
 interface Props {
@@ -122,8 +123,9 @@ export function PreferencesDialog({ open, onClose }: Props) {
                     localStorage.setItem("ripnotepadpp-lang", lang);
                   }}
                 >
-                  <option value="zh">中文</option>
-                  <option value="en">English</option>
+                  {LANGUAGES.map((lang) => (
+                    <option key={lang.code} value={lang.code}>{lang.name}</option>
+                  ))}
                 </select>
               </label>
             </div>

@@ -28,6 +28,7 @@ import { AboutDialog } from "./components/Dialogs/AboutDialog";
 import { PluginDialog } from "./components/Dialogs/PluginDialog";
 import { CompareDialog } from "./components/Dialogs/CompareDialog";
 import { CommandPalette } from "./components/Dialogs/CommandPalette";
+import { UdlDialog } from "./components/Dialogs/UdlDialog";
 import { HashDialog } from "./components/Dialogs/HashDialog";
 import { SummaryDialog } from "./components/Dialogs/SummaryDialog";
 import { UnsavedChangesDialog } from "./components/Dialogs/UnsavedChangesDialog";
@@ -50,6 +51,7 @@ function App() {
   const [cmdPaletteOpen, setCmdPaletteOpen] = useState(false);
   const [hashOpen, setHashOpen] = useState(false);
   const [summaryOpen, setSummaryOpen] = useState(false);
+  const [udlOpen, setUdlOpen] = useState(false);
 
   // ── Session: load on startup (guarded against React StrictMode double-fire) ──
   const sessionLoaded = useRef(false);
@@ -198,6 +200,8 @@ function App() {
         setHashOpen(true);
       } else if (actionId === "view.openSummary") {
         setSummaryOpen(true);
+      } else if (actionId === "language.openUdl") {
+        setUdlOpen(true);
       } else if (actionId === "run.claudeCode") {
         const tab = useEditorStore.getState().tabs.find(
           (t) => t.id === useEditorStore.getState().activeTabId,
@@ -248,6 +252,7 @@ function App() {
       <CommandPalette open={cmdPaletteOpen} onClose={() => setCmdPaletteOpen(false)} />
       <HashDialog open={hashOpen} onClose={() => setHashOpen(false)} />
       <SummaryDialog open={summaryOpen} onClose={() => setSummaryOpen(false)} />
+      <UdlDialog open={udlOpen} onClose={() => setUdlOpen(false)} />
       <UnsavedChangesDialog
         unsavedTabs={unsavedTabs || []}
         onSaveAll={async () => {

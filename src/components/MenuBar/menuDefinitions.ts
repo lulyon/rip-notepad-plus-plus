@@ -5,6 +5,8 @@ export interface MenuItemDef {
   disabled?: boolean;
   type?: "item" | "separator";
   children?: MenuItemDef[];
+  /** Direct label text, bypasses i18n translation */
+  label?: string;
 }
 
 // Helper
@@ -247,6 +249,10 @@ export const MENU_STRUCTURE: MenuDef[] = [
       { id: "lang.markdown", labelKey: "menu.language.markdown" },
       { id: "lang.sql", labelKey: "menu.language.sql" },
       { id: "lang.shell", labelKey: "menu.language.shell" },
+      S(),
+      { id: "language.defineLanguage", labelKey: "menu.language.defineLanguage" },
+      S(),
+      { id: "language.openUdlFolder", labelKey: "menu.language.openUdlFolder" },
     ],
   },
   {

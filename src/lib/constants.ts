@@ -78,6 +78,17 @@ export const EXT_TO_LANGUAGE: Record<string, string> = {
 };
 
 /** Detect Monaco language ID from a file extension. */
-export function detectLanguage(ext: string): string {
-  return EXT_TO_LANGUAGE[ext.toLowerCase()] || "plaintext";
+export function detectLanguage(ext: string, udls?: { id: string; extensions: string[] }[]): string {
+  const lower = ext.toLowerCase();
+
+  // Check UDL extensions first
+  if (udls) {
+    for (const udl of udls) {
+      if (udl.extensions.some((e) => e.toLowerCase() === lower)) {
+        return `udl.${udl.id}`;
+      }
+    }
+  }
+
+  return EXT_TO_LANGUAGE[lower] || "plaintext";
 }

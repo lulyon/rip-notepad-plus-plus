@@ -149,6 +149,9 @@ const en = {
     "menu.language.sql": "SQL",
     "menu.language.shell": "Shell",
 
+    "menu.language.defineLanguage": "User Defined Language...",
+    "menu.language.openUdlFolder": "Open UDL Folder...",
+
     // ── Menu: Macro ──
     "menu.macro": "&Macro",
     "menu.macro.startRecord": "&Start Recording",
@@ -322,6 +325,35 @@ const en = {
     "dialog.summaryEncoding": "Encoding",
     "dialog.summaryLanguage": "Language",
     "dialog.summaryCursor": "Cursor position",
+    "dialog.edit": "Edit",
+    "dialog.udl": "User Defined Language",
+
+    // ── UDL ──
+    "udl.basic": "Basic",
+    "udl.keywords": "Keywords",
+    "udl.syntax": "Syntax",
+    "udl.preview": "Preview",
+    "udl.name": "Language Name",
+    "udl.namePlaceholder": "My Custom Language",
+    "udl.extensions": "Extensions (comma separated)",
+    "udl.keywordGroup": "Keyword Group {{n}}",
+    "udl.lineComment": "Line Comment",
+    "udl.blockCommentStart": "Block Comment Start",
+    "udl.blockCommentEnd": "Block Comment End",
+    "udl.operators": "Operators",
+    "udl.delimiters": "Delimiters (pairs like () [] {})",
+    "udl.stringChars": "String Characters",
+    "udl.caseSensitive": "Case Sensitive",
+    "udl.autoIndent": "Auto Indent",
+    "udl.sampleCode": "Sample Code",
+    "udl.save": "Save",
+    "udl.delete": "Delete",
+    "udl.createNew": "Create New Language",
+    "udl.noLanguages": "No user-defined languages yet. Click 'Create New Language' to start.",
+    "udl.unnamed": "Unnamed",
+    "udl.customLanguages": "Custom Languages",
+    "udl.confirmDelete": "Delete this language?",
+    "udl.cancel": "Cancel",
 
     // ── Status Bar ──
     "status.encoding": "Encoding",

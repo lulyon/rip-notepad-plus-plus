@@ -7,6 +7,8 @@ import { useSettingsStore } from "../../stores/settingsStore";
 import { useBookmarkStore } from "../../stores/bookmarkStore";
 import { useMarkStore } from "../../stores/markStore";
 import { useMonacoActions } from "../../hooks/useMonacoActions";
+import { useUdlStore } from "../../stores/udlStore";
+import { setMonaco, registerAllUdls } from "../../lib/udlCompiler";
 
 interface EditorProps {
   /** Override which tab to edit. Defaults to store's activeTabId. */
@@ -70,6 +72,11 @@ export function Editor({ tabId }: EditorProps) {
 
       // Register all keyboard actions
       handleMount(editor, monaco);
+
+      // Store global monaco reference and register all UDL languages
+      setMonaco(monaco);
+      const udls = useUdlStore.getState().udls;
+      registerAllUdls(udls);
 
       // Track cursor position
       editor.onDidChangeCursorPosition((e) => {

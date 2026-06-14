@@ -1,13 +1,16 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { MENU_STRUCTURE, dispatchMenuAction } from "./menuDefinitions";
+import type { MenuItemDef } from "./menuDefinitions";
 import { MenuItem } from "./MenuItem";
+import { useUdlStore } from "../../stores/udlStore";
 import "./MenuBar.css";
 
 export function MenuBar() {
   const { t } = useTranslation();
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const menuBarRef = useRef<HTMLDivElement>(null);
+  const udls = useUdlStore((s) => s.udls);
 
   // Close the active menu when clicking outside
   const closeAllMenus = useCallback(() => {
@@ -81,9 +84,62 @@ export function MenuBar() {
     [closeAllMenus],
   );
 
+  // Build menu structure with dynamic UDL items injected into Language menu
+  const augmentedStructure = useMemo(() => {
+    return MENU_STRUCTURE.map((menu) => {
+      if (menu.id !== "language" || udls.length === 0) return menu;
+
+      // Insert UDL items after the separator before language.defineLanguage
+      const udlItems: MenuItemDef[] = udls.map((udl) => ({
+        id: `lang.udl.${udl.id}`,
+        labelKey: udl.name,
+        label: udl.name,
+      }));
+
+      // We need to inject the UDL items into the children. Let's find the
+      // separator before language.defineLanguage and add items before it.
+      const defineIdx = menu.children.findIndex(
+        (c) => c.id === "language.defineLanguage",
+      );
+
+      if (defineIdx < 0) return menu;
+
+      // Add a "Custom Languages" label item and UDL language items before the
+      // defineLanguage separator block.
+      const customLangHeader: MenuItemDef = {
+        id: "_udl_header",
+        labelKey: "udl.customLanguages",
+        label: "Custom Languages",
+        disabled: true,
+      };
+
+      const newChildren = [...menu.children];
+      // Insert before the separator that precedes language.defineLanguage
+      // The pattern is: [...languages, S(), defineLanguage, S(), openUdlFolder]
+      // We insert before the first separator that comes before defineLanguage
+      newChildren.splice(
+        defineIdx,
+        0,
+        ...([
+          { id: "_sep_udl", labelKey: "", type: "separator" as const },
+          customLangHeader,
+          ...udlItems.map(
+            (item) =>
+              ({
+                id: item.id,
+                labelKey: item.labelKey,
+              }) as MenuItemDef,
+          ),
+        ]),
+      );
+
+      return { ...menu, children: newChildren };
+    });
+  }, [udls]);
+
   return (
     <div ref={menuBarRef} className="menu-bar">
-      {MENU_STRUCTURE.map((menu) => (
+      {augmentedStructure.map((menu) => (
         <div
           key={menu.id}
           className={`menu-bar-item ${openMenuId === menu.id ? "active" : ""}`}

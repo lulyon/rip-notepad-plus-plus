@@ -149,6 +149,9 @@ const zh = {
     "menu.language.sql": "SQL",
     "menu.language.shell": "Shell",
 
+    "menu.language.defineLanguage": "用户自定义语言...",
+    "menu.language.openUdlFolder": "打开 UDL 文件夹...",
+
     // ── Menu: Macro ──
     "menu.macro": "宏(&M)",
     "menu.macro.startRecord": "开始录制(&S)",
@@ -322,6 +325,35 @@ const zh = {
     "dialog.summaryEncoding": "编码",
     "dialog.summaryLanguage": "语言",
     "dialog.summaryCursor": "光标位置",
+    "dialog.edit": "编辑",
+    "dialog.udl": "用户自定义语言",
+
+    // ── UDL ──
+    "udl.basic": "基本",
+    "udl.keywords": "关键词",
+    "udl.syntax": "语法",
+    "udl.preview": "预览",
+    "udl.name": "语言名称",
+    "udl.namePlaceholder": "我的自定义语言",
+    "udl.extensions": "扩展名（逗号分隔）",
+    "udl.keywordGroup": "关键词组 {{n}}",
+    "udl.lineComment": "行注释",
+    "udl.blockCommentStart": "块注释开始",
+    "udl.blockCommentEnd": "块注释结束",
+    "udl.operators": "运算符",
+    "udl.delimiters": "分隔符（如 () [] {}）",
+    "udl.stringChars": "字符串字符",
+    "udl.caseSensitive": "区分大小写",
+    "udl.autoIndent": "自动缩进",
+    "udl.sampleCode": "示例代码",
+    "udl.save": "保存",
+    "udl.delete": "删除",
+    "udl.createNew": "创建新语言",
+    "udl.noLanguages": "还没有用户自定义语言。点击「创建新语言」开始。",
+    "udl.unnamed": "未命名",
+    "udl.customLanguages": "自定义语言",
+    "udl.confirmDelete": "确定删除此语言？",
+    "udl.cancel": "取消",
 
     // ── Status Bar ──
     "status.encoding": "编码",
