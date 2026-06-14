@@ -253,6 +253,15 @@ function App() {
       <div className="main-content">
         <Sidebar />
         <div className="editor-area">
+          {activeTabId && isMdFile && (
+            <button
+              className="md-preview-toggle-btn"
+              onClick={() => setShowMdPreview((prev) => !prev)}
+              title={showMdPreview ? "Close preview" : "Open preview (Ctrl+Shift+V)"}
+            >
+              {showMdPreview ? "✕" : "👁"}
+            </button>
+          )}
           {activeTabId && showMdPreview && isMdFile ? (
             <div className="md-split-view">
               <div className="md-editor-pane">
