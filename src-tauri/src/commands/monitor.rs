@@ -228,3 +228,32 @@ pub async fn clear_snapshot(
 
     Ok(())
 }
+
+/// ── Archive listing ──
+
+use std::fs::File;
+
+#[derive(serde::Serialize)]
+pub struct ArchiveEntry {
+    pub name: String,
+    pub size: u64,
+    pub is_dir: bool,
+}
+
+/// List files inside a ZIP archive
+#[tauri::command]
+pub async fn list_archive(path: String) -> Result<Vec<ArchiveEntry>, String> {
+    let file = File::open(&path).map_err(|e| format!("Cannot open archive: {}", e))?;
+    let mut archive = zip::ZipArchive::new(file).map_err(|e| format!("Invalid ZIP: {}", e))?;
+
+    let mut entries = Vec::new();
+    for i in 0..archive.len() {
+        let entry = archive.by_index(i).map_err(|e| format!("Read error: {}", e))?;
+        entries.push(ArchiveEntry {
+            name: entry.name().to_string(),
+            size: entry.size(),
+            is_dir: entry.is_dir(),
+        });
+    }
+    Ok(entries)
+}

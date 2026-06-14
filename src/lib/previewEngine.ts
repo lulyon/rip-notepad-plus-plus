@@ -443,3 +443,319 @@ registerPreviewRenderer({
   render: renderVideo,
   useIframe: true,
 });
+
+// ── 1. Diff/Patch ──
+function renderDiff({ content }: { content: string }): string {
+  const lines = content.split(/\r?\n/).map((line) => {
+    let cls = "";
+    if (line.startsWith("+") && !line.startsWith("+++")) cls = "add";
+    else if (line.startsWith("-") && !line.startsWith("---")) cls = "del";
+    else if (line.startsWith("@@")) cls = "hunk";
+    else if (line.startsWith("diff ") || line.startsWith("--- ") || line.startsWith("+++ ")) cls = "meta";
+    return `<span class="${cls}">${line.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}</span>`;
+  }).join("\n");
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:13px/1.5 'Cascadia Code',monospace;padding:12px;white-space:pre-wrap}
+    .add{background:rgba(75,180,75,0.15);color:#8f8;display:block}.del{background:rgba(220,80,80,0.15);color:#f88;display:block}
+    .hunk{color:#569cd6;font-weight:bold;display:block}.meta{color:#888;font-weight:bold;display:block}
+  </style></head><body><pre>${lines}</pre></body></html>`;
+}
+registerPreviewRenderer({
+  id: "diff", name: "Diff", extensions: ["diff", "patch"], languages: ["diff"], render: renderDiff, useIframe: true,
+});
+
+// ── 2. .env table ──
+function renderEnv({ content }: { content: string }): string {
+  const rows = content.split(/\r?\n/).filter((l) => l.trim() && !l.trim().startsWith("#")).map((l) => {
+    const eq = l.indexOf("=");
+    if (eq < 0) return `<tr><td colspan="2">${l.replace(/&/g,"&amp;")}</td></tr>`;
+    const key = l.slice(0, eq).trim();
+    const val = l.slice(eq + 1).trim();
+    const masked = val.length > 20 ? val.slice(0, 6) + "•••••" + val.slice(-4) : "•••••";
+    return `<tr><td class="k">${key}</td><td class="v"><span class="masked">${masked}</span><span class="raw" style="display:none">${val.replace(/&/g,"&amp;").replace(/</g,"&lt;")}</span></td></tr>`;
+  }).join("");
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:13px/1.6 -apple-system,sans-serif;padding:16px}
+    table{border-collapse:collapse;width:100%}td{padding:6px 12px;border-bottom:1px solid #333}
+    .k{color:#9cdcfe;font-weight:600;width:40%}.v{color:#ce9178;word-break:break-all}
+    button{background:#333;border:1px solid #555;color:#ccc;padding:2px 8px;border-radius:3px;cursor:pointer;font-size:11px;margin-left:8px}
+    button:hover{background:#555}
+  </style></head><body>
+  <p style="color:#888;margin-bottom:8px;font-size:12px">🔒 Values masked — hover to reveal</p>
+  <table>${rows}</table>
+  <script>
+    document.querySelectorAll('td').forEach(td=>{td.onclick=function(e){if(e.target.tagName==='BUTTON')return;
+      const m=this.querySelector('.masked'),r=this.querySelector('.raw');
+      if(m.style.display!=='none'){m.style.display='none';r.style.display='inline'}else{m.style.display='inline';r.style.display='none'}}});
+  </script></body></html>`;
+}
+registerPreviewRenderer({
+  id: "env", name: ".env", extensions: ["env"], languages: [], render: renderEnv, useIframe: true,
+});
+
+// ── 3. Excel (.xlsx) ──
+function renderXlsx({ assetUrl }: { assetUrl: string | null }): string {
+  if (!assetUrl) return "<p style='color:#999;padding:40px;text-align:center'>Save the file first</p>";
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:13px -apple-system,sans-serif;padding:16px}
+    table{border-collapse:collapse}th,td{border:1px solid #444;padding:4px 8px;text-align:left;white-space:nowrap;max-width:300px;overflow:hidden;text-overflow:ellipsis}
+    th{background:#333;position:sticky;top:0}.err{color:#999;text-align:center;padding:40px}
+    .sheet-tabs{display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap}
+    .sheet-tab{padding:4px 12px;background:#333;border:1px solid #555;border-radius:4px 4px 0 0;cursor:pointer;color:#ccc}
+    .sheet-tab.active{background:#555;font-weight:600}
+  </style></head><body>
+  <div id="sheets" class="sheet-tabs"></div>
+  <div id="table"></div>
+  <div id="err" class="err" style="display:none">Failed to load spreadsheet</div>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+  <script>
+    (async function(){
+      try{
+        const resp=await fetch('${assetUrl}');
+        const buf=await resp.arrayBuffer();
+        const wb=XLSX.read(new Uint8Array(buf),{type:'array'});
+        const sheets=wb.SheetNames;
+        let sheetIdx=0;
+        function show(i){
+          sheetIdx=i;
+          const ws=wb.Sheets[sheets[i]];
+          const html=XLSX.utils.sheet_to_html(ws,{editable:false});
+          document.getElementById('table').innerHTML=html;
+          document.querySelectorAll('.sheet-tab').forEach((t,j)=>t.className='sheet-tab'+(j===i?' active':''));
+        }
+        if(sheets.length>1){
+          const tabs=document.getElementById('sheets');
+          sheets.forEach((s,i)=>{const b=document.createElement('button');b.className='sheet-tab'+(i===0?' active':'');b.textContent=s;b.onclick=()=>show(i);tabs.appendChild(b)});
+        }
+        show(0);
+      }catch(e){document.getElementById('err').style.display='block'}
+    })();
+  </script></body></html>`;
+}
+registerPreviewRenderer({
+  id: "xlsx", name: "Excel", extensions: ["xlsx", "xls"], languages: [], render: renderXlsx, useIframe: true,
+});
+
+// ── 4. Jupyter Notebook (.ipynb) ──
+function renderIpynb({ content }: { content: string }): string {
+  try {
+    const nb = JSON.parse(content);
+    const cells = (nb.cells || []).map((c: any, i: number) => {
+      const src = Array.isArray(c.source) ? c.source.join("") : c.source || "";
+      if (c.cell_type === "markdown") {
+        return `<div class="cell md"><div class="cell-label">[${i + 1}] Markdown</div><div class="cell-content">${src.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</div></div>`;
+      }
+      return `<div class="cell code"><div class="cell-label">[${i + 1}] Code</div><pre>${src.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</pre>${c.outputs?.length ? '<div class="output">' + c.outputs.map((o: any) => Array.isArray(o.text) ? o.text.join("") : o["text/plain"] || "").join("") + '</div>' : ""}</div>`;
+    }).join("");
+    const title = nb.metadata?.kernelspec?.display_name || "Notebook";
+    return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+      *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:13px/1.6 -apple-system,sans-serif;padding:16px}
+      h2{color:#9cdcfe;margin-bottom:12px}.cell{margin-bottom:12px;border:1px solid #333;border-radius:6px;overflow:hidden}
+      .cell-label{background:#333;padding:4px 10px;font-size:11px;color:#888}
+      .cell-content{padding:10px}pre{background:#252526;padding:10px;font:13px 'Cascadia Code',monospace;overflow-x:auto}
+      .output{background:#0a2a0a;color:#8f8;padding:8px 10px;border-top:1px solid #333;font:12px 'Cascadia Code',monospace;white-space:pre-wrap}
+    </style></head><body><h2>${title}</h2>${cells}</body></html>`;
+  } catch { return "<p style='color:#999;padding:40px;text-align:center'>Invalid notebook</p>"; }
+}
+registerPreviewRenderer({
+  id: "ipynb", name: "Jupyter", extensions: ["ipynb"], languages: [], render: renderIpynb, useIframe: true,
+});
+
+// ── 5. Office (.docx) ──
+function renderDocx({ assetUrl }: { assetUrl: string | null }): string {
+  if (!assetUrl) return "<p style='color:#999;padding:40px;text-align:center'>Save the file first</p>";
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    *{margin:0;padding:0}body{background:#fff;color:#333;font:14px/1.7 -apple-system,sans-serif;padding:24px;max-width:800px;margin:0 auto}
+    .err{color:#999;text-align:center;padding:40px}
+  </style></head><body><div id="content"></div><div id="err" class="err" style="display:none">Failed to load document</div>
+  <script src="https://cdn.jsdelivr.net/npm/mammoth@1/dist/mammoth.browser.min.js"></script>
+  <script>
+    (async function(){
+      try{
+        const resp=await fetch('${assetUrl}');
+        const buf=await resp.arrayBuffer();
+        const result=await mammoth.convertToHtml({arrayBuffer:buf});
+        document.getElementById('content').innerHTML=result.value;
+      }catch(e){document.getElementById('err').style.display='block'}
+    })();
+  </script></body></html>`;
+}
+registerPreviewRenderer({
+  id: "docx", name: "Word", extensions: ["docx"], languages: [], render: renderDocx, useIframe: true,
+});
+
+// ── 6. GeoJSON Map ──
+function renderGeoJson({ content }: { content: string }): string {
+  const encoded = encodeURIComponent(content);
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    *{margin:0;padding:0}body{background:#1e1e1e}#map{width:100%;height:100vh}
+    .err{color:#999;text-align:center;padding:40px;font-family:-apple-system,sans-serif}
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1/dist/leaflet.css">
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1/dist/leaflet.js"></script>
+  </head><body><div id="map"></div><div id="err" class="err" style="display:none">Failed to load GeoJSON</div>
+  <script>
+    try{
+      var map=L.map('map').setView([0,0],2);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OSM'}).addTo(map);
+      var data=JSON.parse(decodeURIComponent('${encoded}'));
+      var layer=L.geoJSON(data).addTo(map);
+      map.fitBounds(layer.getBounds());
+    }catch(e){document.getElementById('err').style.display='block'}
+  </script></body></html>`;
+}
+registerPreviewRenderer({
+  id: "geojson", name: "GeoJSON", extensions: ["geojson"], languages: ["json"], render: renderGeoJson, useIframe: true,
+});
+
+// ── 7. SQLite Browser ──
+function renderSqlite({ assetUrl }: { assetUrl: string | null }): string {
+  if (!assetUrl) return "<p style='color:#999;text-align:center;padding:40px'>Save the file first</p>";
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:13px -apple-system,sans-serif;padding:16px}
+    select{background:#333;color:#ccc;border:1px solid #555;padding:4px 8px;border-radius:3px;margin-bottom:8px}
+    table{border-collapse:collapse;width:100%}th,td{border:1px solid #444;padding:4px 8px;text-align:left;white-space:nowrap;max-width:300px;overflow:hidden;text-overflow:ellipsis}
+    th{background:#333;position:sticky;top:0}.err{color:#999;text-align:center;padding:40px}
+  </style></head><body>
+  <select id="tables" onchange="showTable(this.value)"></select>
+  <div id="data"></div>
+  <div id="err" class="err" style="display:none">Failed to open database</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+  <script>
+    (async function(){
+      try{
+        const SQL=await initSqlJs({locateFile:f=>'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.wasm'});
+        const resp=await fetch('${assetUrl}');
+        const buf=await resp.arrayBuffer();
+        const db=new SQL.Database(new Uint8Array(buf));
+        const tables=db.exec("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name");
+        const sel=document.getElementById('tables');
+        (tables[0]?.values||[]).forEach(([name])=>{
+          const o=document.createElement('option');o.value=name;o.textContent=name;sel.appendChild(o);
+        });
+        window.showTable=function(name){
+          const r=db.exec('SELECT * FROM ['+name+'] LIMIT 500');
+          if(!r[0]){document.getElementById('data').innerHTML='<p>Empty table</p>';return}
+          const cols=r[0].columns,h='<tr>'+cols.map(c=>'<th>'+c+'</th>').join('')+'</tr>';
+          const rows=r[0].values.map(row=>'<tr>'+row.map(v=>'<td>'+(v===null?'<i>NULL</i>':String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;')))+'</td>').join('')+'</tr>';
+          document.getElementById('data').innerHTML='<table>'+h+rows+'</table>';
+        };
+        if(tables[0]?.values?.length) showTable(tables[0].values[0][0]);
+      }catch(e){document.getElementById('err').style.display='block'}
+    })();
+  </script></body></html>`;
+}
+registerPreviewRenderer({
+  id: "sqlite", name: "SQLite", extensions: ["sqlite", "sqlite3", "db"], languages: [], render: renderSqlite, useIframe: true,
+});
+
+// ── 8. ZIP Archive listing ──
+function renderZip(_opts: { content: string; filePath: string | null }): string {
+  // The actual listing is done via Rust IPC — this is a placeholder
+  // GenericPreview handles the async loading for this type
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:13px/1.6 'Cascadia Code',monospace;padding:16px}
+    .entry{padding:4px 0;border-bottom:1px solid #2a2a2a;display:flex}.name{flex:1}.size{color:#888;text-align:right;min-width:100px}
+    .dir{color:#569cd6}.file{color:#d4d4d4}.err{color:#999;text-align:center;padding:40px;font-family:-apple-system,sans-serif}
+    .loading{color:#888;text-align:center;padding:40px}
+  </style></head><body><div id="list" class="loading">Loading archive...</div></body></html>`;
+}
+registerPreviewRenderer({
+  id: "zip", name: "ZIP", extensions: ["zip", "jar", "war", "apk"], languages: [], render: renderZip, useIframe: true,
+});
+
+// ── 9. Subtitle (.srt/.vtt) ──
+function renderSrt({ content }: { content: string }): string {
+  const blocks = content.split(/\r?\n\r?\n/).filter((b) => b.trim());
+  const items = blocks.map((b) => {
+    const lines = b.split(/\r?\n/);
+    const idx = lines[0]?.trim() || "";
+    const time = lines[1]?.trim() || "";
+    const text = lines.slice(2).join("<br>").replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    return `<div class="item"><span class="idx">${idx}</span><span class="time">${time}</span><span class="text">${text}</span></div>`;
+  }).join("");
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:13px/1.6 -apple-system,sans-serif;padding:12px}
+    .item{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid #2a2a2a}.idx{color:#888;min-width:40px;text-align:right}
+    .time{color:#569cd6;min-width:100px;font-family:'Cascadia Code',monospace}.text{flex:1}
+  </style></head><body>${items}</body></html>`;
+}
+registerPreviewRenderer({
+  id: "srt", name: "Subtitle", extensions: ["srt", "vtt"], languages: [], render: renderSrt, useIframe: true,
+});
+
+// ── 10. HAR HTTP Archive ──
+function renderHar({ content }: { content: string }): string {
+  try {
+    const har = JSON.parse(content);
+    const entries = har.log?.entries || [];
+    const rows = entries.map((e: any) => {
+      const req = e.request || {};
+      const res = e.response || {};
+      const status = res.status || 0;
+      const cls = status >= 400 ? "err" : status >= 300 ? "redir" : "ok";
+      const method = req.method || "GET";
+      const url = (req.url || "").replace(/&/g, "&amp;").replace(/</g, "&lt;");
+      const time = e.time ? `${Math.round(e.time)}ms` : "-";
+      const size = res.content?.size ? `${(res.content.size / 1024).toFixed(1)}KB` : "-";
+      return `<tr class="${cls}"><td>${method}</td><td class="url">${url}</td><td>${status}</td><td>${time}</td><td>${size}</td></tr>`;
+    }).join("");
+    return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+      *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:12px -apple-system,sans-serif;padding:12px}
+      h2{color:#9cdcfe;margin-bottom:8px}table{border-collapse:collapse;width:100%}
+      th{background:#333;padding:6px 8px;text-align:left;position:sticky;top:0}
+      td{padding:4px 8px;border-bottom:1px solid #2a2a2a}.url{max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+      .ok{color:#8f8}.redir{color:#ff0}.err{color:#f88}
+    </style></head><body><h2>HAR: ${entries.length} requests</h2><table><thead><tr><th>Method</th><th>URL</th><th>Status</th><th>Time</th><th>Size</th></tr></thead><tbody>${rows}</tbody></table></body></html>`;
+  } catch { return "<p style='color:#999;padding:40px;text-align:center;font-family:-apple-system,sans-serif'>Invalid HAR file</p>"; }
+}
+registerPreviewRenderer({
+  id: "har", name: "HAR", extensions: ["har"], languages: [], render: renderHar, useIframe: true,
+});
+
+// ── 11. 3D Model (.stl/.glb/.obj) ──
+function render3d({ assetUrl }: { assetUrl: string | null }): string {
+  if (!assetUrl) return "<p style='color:#999;padding:40px;text-align:center;font-family:-apple-system,sans-serif'>Save the file first</p>";
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    *{margin:0;padding:0}body{background:#1a1a2e;overflow:hidden}.err{color:#999;text-align:center;padding:40px;font-family:-apple-system,sans-serif}
+  </style></head><body>
+  <div id="err" class="err" style="display:none">3D preview not available offline</div>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/"}}</script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    try{
+      const scene=new THREE.Scene();scene.background=new THREE.Color(0x1a1a2e);
+      const camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,1000);camera.position.set(5,5,5);
+      const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setSize(window.innerWidth,window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+      new OrbitControls(camera,renderer.domElement);
+      scene.add(new THREE.AmbientLight(0xffffff,0.6));scene.add(new THREE.DirectionalLight(0xffffff,0.8));
+      const ext='${assetUrl}'.split('.').pop().toLowerCase();
+      if(ext==='stl'){
+        new STLLoader().load('${assetUrl}',g=>{scene.add(new THREE.Mesh(g,new THREE.MeshPhongMaterial({color:0x4fc1ff})))});
+      }else{
+        new GLTFLoader().load('${assetUrl}',g=>{scene.add(g.scene)},undefined,()=>{
+          new STLLoader().load('${assetUrl}',g=>{scene.add(new THREE.Mesh(g,new THREE.MeshPhongMaterial({color:0x4fc1ff})))});
+        });
+      }
+      function animate(){requestAnimationFrame(animate);renderer.render(scene,camera)}animate();
+    }catch(e){document.getElementById('err').style.display='block'}
+  </script></body></html>`;
+}
+registerPreviewRenderer({
+  id: "3d", name: "3D Model", extensions: ["stl", "glb", "gltf", "obj"], languages: [], render: render3d, useIframe: true,
+});
+
+// ── 12. Draw.io ──
+function renderDrawio({ content }: { content: string }): string {
+  const encoded = encodeURIComponent(content);
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    *{margin:0;padding:0}body{background:#fff}iframe{width:100%;height:100vh;border:none}
+  </style></head><body><iframe src="https://viewer.diagrams.net/?lightbox=1&edit=_blank&xml=${encoded}"></iframe></body></html>`;
+}
+registerPreviewRenderer({
+  id: "drawio", name: "Draw.io", extensions: ["drawio", "dio"], languages: ["xml"], render: renderDrawio, useIframe: true,
+});

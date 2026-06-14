@@ -175,4 +175,9 @@ export const ipc = {
   checkUpdate(): Promise<{ available: boolean; version?: string; body?: string } | null> {
     return invoke("plugin:updater|check");
   },
+
+  // ── Archive ──
+  listArchive(path: string): Promise<Array<{ name: string; size: number; is_dir: boolean }>> {
+    return invoke("list_archive", { path });
+  },
 };
