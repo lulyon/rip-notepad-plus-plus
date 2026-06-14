@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useMemo } from "react";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import { useEditorStore } from "../../stores/editorStore";
 import { useEditorRefStore } from "../../stores/editorRefStore";
 import { findRenderer } from "../../lib/previewEngine";
@@ -18,11 +19,21 @@ export function GenericPreview() {
     ? findRenderer(activeTab.name, activeTab.language)
     : null;
 
+  // Compute asset URL for local file access (images etc.)
+  const assetUrl = useMemo(() => {
+    if (!activeTab?.path) return null;
+    try { return convertFileSrc(activeTab.path); } catch { return null; }
+  }, [activeTab?.path]);
+
   // Render content to HTML
   const html = useMemo(() => {
-    if (!renderer || !activeTab?.content) return "";
-    return renderer.render(activeTab.content, activeTab.path);
-  }, [renderer, activeTab?.content, activeTab?.path]);
+    if (!renderer) return "";
+    return renderer.render({
+      content: activeTab?.content || "",
+      filePath: activeTab?.path || null,
+      assetUrl,
+    });
+  }, [renderer, activeTab?.content, activeTab?.path, assetUrl]);
 
   // Scroll sync: editor → preview
   const syncScroll = useCallback(() => {
@@ -96,8 +107,8 @@ export function GenericPreview() {
     return <div className="markdown-empty">No preview available for this file type</div>;
   }
 
-  if (!activeTab?.content && !renderer.extensions.length) {
-    return <div className="markdown-empty">No content</div>;
+  if (!activeTab?.content && !activeTab?.path) {
+    return <div className="markdown-empty">Save the file first to preview</div>;
   }
 
   // HTML iframe renderer
