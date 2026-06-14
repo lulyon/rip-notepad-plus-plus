@@ -230,17 +230,17 @@ test.describe("Context menu on tabs", () => {
   });
 });
 
-test.describe("Task List panel", () => {
+test.describe("Git panel", () => {
   test.beforeEach(async ({ page }) => { await setupPage(page); });
 
-  test("task list tab is in sidebar", async ({ page }) => {
+  test("git tab is in sidebar", async ({ page }) => {
     await createTab(page);
     await page.locator(".menu-bar-item").nth(3).click(); // View
     await page.waitForTimeout(100);
     await page.locator(".menu-item", { hasText: "显示侧边栏" }).click();
     await page.waitForTimeout(300);
-    // Task List is tab index 4 (Files=0, DocList=1, Clipboard=2, JSON=3, Tasks=4)
-    await expect(page.locator(".sidebar-tab").nth(4)).toContainText("任务列表");
+    // Git is tab index 1 (Files=0, Git=1, Symbols=2)
+    await expect(page.locator(".sidebar-tab").nth(1)).toContainText("Git");
   });
 });
 

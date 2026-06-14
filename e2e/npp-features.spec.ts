@@ -1,15 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { setupPage } from "./mocks/tauri-mock";
 
-async function createTwoTabs(page: any) {
-  for (let i = 0; i < 2; i++) {
-    await page.locator(".menu-bar-item").first().click();
-    await page.waitForTimeout(100);
-    await page.locator(".menu-item",{hasText:"新建"}).click();
-    await page.waitForTimeout(300);
-  }
-}
-
 test.describe("Notepad++ ported features", () => {
   test.beforeEach(async ({ page }) => { await setupPage(page); });
 
@@ -40,85 +31,31 @@ test.describe("Notepad++ ported features", () => {
     await expect(page.locator(".menu-dropdown")).toContainText("插入日期时间");
   });
 
-  // ── DocList panel ──
-  test("DocList tab visible in sidebar", async ({ page }) => {
-    await page.locator(".menu-bar-item").nth(3).click(); // View
-    await page.waitForTimeout(150);
-    await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
-    await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar")).toBeVisible();
-    await expect(page.locator(".sidebar-tab").nth(1)).toContainText("文档列表");
-  });
-
-  // ── DocList shows open documents ──
-  test("DocList shows created tabs", async ({ page }) => {
-    await createTwoTabs(page);
+  // ── Sidebar now has 3 tabs (Files, Git, Symbols) ──
+  test("sidebar has three tabs", async ({ page }) => {
     await page.locator(".menu-bar-item").nth(3).click();
     await page.waitForTimeout(150);
     await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
     await page.waitForTimeout(300);
-    // Click DocList tab (2nd tab: Files, DocList, Git, Symbols)
-    await page.locator(".sidebar-tab").nth(1).click();
-    await page.waitForTimeout(200);
-    await expect(page.locator(".doclist-item")).toHaveCount(2);
+    await expect(page.locator(".sidebar-tab")).toHaveCount(3);
   });
 
-  // ── Clipboard Panel ──
-  test("Clipboard tab exists in sidebar", async ({ page }) => {
+  // ── Git tab visible ──
+  test("Git tab visible in sidebar", async ({ page }) => {
     await page.locator(".menu-bar-item").nth(3).click();
     await page.waitForTimeout(150);
     await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
     await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar-tab").nth(2)).toContainText("剪贴板");
+    await expect(page.locator(".sidebar-tab").nth(1)).toContainText("Git");
   });
 
-  test("Clipboard panel shows empty state", async ({ page }) => {
+  // ── Symbols tab visible ──
+  test("Symbols tab visible in sidebar", async ({ page }) => {
     await page.locator(".menu-bar-item").nth(3).click();
     await page.waitForTimeout(150);
     await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
     await page.waitForTimeout(300);
-    await page.locator(".sidebar-tab").nth(2).click();
-    await page.waitForTimeout(200);
-    await expect(page.locator(".clipboard-empty")).toBeVisible();
-  });
-
-  test("Clipboard panel has search input", async ({ page }) => {
-    await page.locator(".menu-bar-item").nth(3).click();
-    await page.waitForTimeout(150);
-    await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
-    await page.waitForTimeout(300);
-    await page.locator(".sidebar-tab").nth(2).click();
-    await page.waitForTimeout(200);
-    await expect(page.locator(".clipboard-search")).toBeVisible();
-  });
-
-  // sidebar has seven tabs (tested below)
-
-  // ── JSON Viewer tab ──
-  test("JSON Viewer tab exists in sidebar", async ({ page }) => {
-    await page.locator(".menu-bar-item").nth(3).click();
-    await page.waitForTimeout(150);
-    await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
-    await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar-tab").nth(3)).toContainText("JSON");
-  });
-
-  // ── Task List tab ──
-  test("Task List tab exists in sidebar", async ({ page }) => {
-    await page.locator(".menu-bar-item").nth(3).click();
-    await page.waitForTimeout(150);
-    await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
-    await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar-tab").nth(4)).toContainText("任务列表");
-  });
-
-  // ── Sidebar now has 7 tabs (terminal moved to bottom) ──
-  test("sidebar has seven tabs", async ({ page }) => {
-    await page.locator(".menu-bar-item").nth(3).click();
-    await page.waitForTimeout(150);
-    await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
-    await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar-tab")).toHaveCount(7);
+    await expect(page.locator(".sidebar-tab").nth(2)).toContainText("符号");
   });
 
   // ── Terminal toggle menu item ──
