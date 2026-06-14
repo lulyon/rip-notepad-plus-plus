@@ -451,6 +451,16 @@ const zh = {
     "app.reload": "重新加载",
     "app.modified": "● ",
     "app.encoding.utf8": "UTF-8",
+
+    // ── Context Menu Config ──
+    "menu.file.editContextMenu": "编辑右键菜单...",
+    "contextMenu.title": "编辑右键菜单",
+    "contextMenu.description": "自定义编辑器区域的右键菜单。可以添加、删除或排序菜单项。",
+    "contextMenu.separator": "分隔线",
+    "contextMenu.addItem": "添加菜单项",
+    "contextMenu.add": "添加",
+    "contextMenu.selectAction": "选择操作...",
+    "contextMenu.resetDefaults": "恢复默认",
   },
 };
 

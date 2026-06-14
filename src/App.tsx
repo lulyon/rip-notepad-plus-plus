@@ -29,6 +29,8 @@ import { PluginDialog } from "./components/Dialogs/PluginDialog";
 import { CompareDialog } from "./components/Dialogs/CompareDialog";
 import { CommandPalette } from "./components/Dialogs/CommandPalette";
 import { UdlDialog } from "./components/Dialogs/UdlDialog";
+import { ContextMenuDialog } from "./components/Dialogs/ContextMenuDialog";
+import { EditorContextMenu } from "./components/Editor/EditorContextMenu";
 import { HashDialog } from "./components/Dialogs/HashDialog";
 import { SummaryDialog } from "./components/Dialogs/SummaryDialog";
 import { UnsavedChangesDialog } from "./components/Dialogs/UnsavedChangesDialog";
@@ -52,6 +54,9 @@ function App() {
   const [hashOpen, setHashOpen] = useState(false);
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [udlOpen, setUdlOpen] = useState(false);
+  const [ctxMenuOpen, setCtxMenuOpen] = useState(false);
+  const [ctxMenuPos, setCtxMenuPos] = useState({ x: 0, y: 0 });
+  const [ctxConfigOpen, setCtxConfigOpen] = useState(false);
 
   // ── Session: load on startup (guarded against React StrictMode double-fire) ──
   const sessionLoaded = useRef(false);
@@ -149,14 +154,21 @@ function App() {
     }
 
     function onOpenCommandPalette() { setCmdPaletteOpen(true); }
+    function onEditorContextMenu(e: Event) {
+      const { x, y } = (e as CustomEvent).detail;
+      setCtxMenuPos({ x, y });
+      setCtxMenuOpen(true);
+    }
 
     window.addEventListener("open-go-to-line", onOpenGoToLine);
     window.addEventListener("navigate-to-match", onNavigateToMatch);
     window.addEventListener("open-command-palette", onOpenCommandPalette);
+    window.addEventListener("editor-context-menu", onEditorContextMenu);
     return () => {
       window.removeEventListener("open-go-to-line", onOpenGoToLine);
       window.removeEventListener("navigate-to-match", onNavigateToMatch);
       window.removeEventListener("open-command-palette", onOpenCommandPalette);
+      window.removeEventListener("editor-context-menu", onEditorContextMenu);
     };
   }, []);
 
@@ -202,6 +214,8 @@ function App() {
         setSummaryOpen(true);
       } else if (actionId === "language.openUdl") {
         setUdlOpen(true);
+      } else if (actionId === "settings.editContextMenu") {
+        setCtxConfigOpen(true);
       } else if (actionId === "run.claudeCode") {
         const tab = useEditorStore.getState().tabs.find(
           (t) => t.id === useEditorStore.getState().activeTabId,
@@ -253,6 +267,10 @@ function App() {
       <HashDialog open={hashOpen} onClose={() => setHashOpen(false)} />
       <SummaryDialog open={summaryOpen} onClose={() => setSummaryOpen(false)} />
       <UdlDialog open={udlOpen} onClose={() => setUdlOpen(false)} />
+      <ContextMenuDialog open={ctxConfigOpen} onClose={() => setCtxConfigOpen(false)} />
+      {ctxMenuOpen && (
+        <EditorContextMenu x={ctxMenuPos.x} y={ctxMenuPos.y} onClose={() => setCtxMenuOpen(false)} />
+      )}
       <UnsavedChangesDialog
         unsavedTabs={unsavedTabs || []}
         onSaveAll={async () => {

@@ -451,6 +451,16 @@ const en = {
     "app.reload": "Reload",
     "app.modified": "● ",
     "app.encoding.utf8": "UTF-8",
+
+    // ── Context Menu Config ──
+    "menu.file.editContextMenu": "Edit Context Menu...",
+    "contextMenu.title": "Edit Context Menu",
+    "contextMenu.description": "Customize the right-click menu items in the editor area. Add, remove, or reorder items.",
+    "contextMenu.separator": "Separator",
+    "contextMenu.addItem": "Add Item",
+    "contextMenu.add": "Add",
+    "contextMenu.selectAction": "Select action...",
+    "contextMenu.resetDefaults": "Reset to Defaults",
   },
 };
 

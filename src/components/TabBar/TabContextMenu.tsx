@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useEditorStore } from "../../stores/editorStore";
+import { useContextMenuStore } from "../../stores/contextMenuStore";
 import "./TabContextMenu.css";
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 interface ContextMenuItemDef {
   type?: "item" | "separator" | "submenu-header";
   labelKey?: string;
+  label?: string;
   action?: () => void;
   disabled?: boolean;
   colorClass?: string;
@@ -64,6 +66,17 @@ export function TabContextMenu({ tabId, x, y, onClose }: Props) {
     { labelKey: "tab.colorYellow", action: () => { setTabColor(tabId, 3); onClose(); }, colorClass: "tab-color-3" },
     { labelKey: "tab.colorGreen", action: () => { setTabColor(tabId, 4); onClose(); }, colorClass: "tab-color-4" },
     { labelKey: "tab.colorBlue", action: () => { setTabColor(tabId, 5); onClose(); }, colorClass: "tab-color-5" },
+    // ── Custom items from context menu config ──
+    ...useContextMenuStore.getState().items.map((item) => {
+      if (item.separator) return { type: "separator" as const };
+      return {
+        label: item.label.replace(/&/g, ""),
+        action: () => {
+          window.dispatchEvent(new CustomEvent("menu-action", { detail: item.action }));
+          onClose();
+        },
+      };
+    }),
   ];
 
   function closeAllUnpinned() {
@@ -90,7 +103,7 @@ export function TabContextMenu({ tabId, x, y, onClose }: Props) {
             disabled={item.disabled}
           >
             {item.colorClass && <span className={`context-menu-color-dot ${item.colorClass}`} />}
-            {t(item.labelKey!)}
+            {item.labelKey ? t(item.labelKey!) : (item as any).label || ""}
           </button>
         );
       })}

@@ -1,0 +1,130 @@
+.context-menu-dialog {
+  width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.ctx-item-list {
+  margin: 12px 0;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.ctx-item {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-primary);
+}
+
+.ctx-item:last-child { border-bottom: none; }
+.ctx-item-sep { background: var(--bg-secondary); }
+
+.ctx-item-preview,
+.ctx-item-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ctx-item-label {
+  font-weight: 500;
+  min-width: 100px;
+  color: var(--text-primary);
+}
+
+.ctx-item-action {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-family: monospace;
+  flex: 1;
+}
+
+.ctx-sep-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  flex: 1;
+  text-align: center;
+}
+
+.ctx-item-actions {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.ctx-btn {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 2px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.ctx-btn:hover { background: var(--accent-color); }
+.ctx-btn:disabled { opacity: 0.3; cursor: default; }
+.ctx-btn-remove:hover { background: #d32f2f; color: white; }
+
+.ctx-input {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ctx-select {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ctx-add-section {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+.ctx-add-section h3 {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.ctx-add-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.ctx-add-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.ctx-add-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.dialog-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
