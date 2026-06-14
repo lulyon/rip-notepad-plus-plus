@@ -345,6 +345,17 @@ export function useMonacoActions() {
         ],
         run: () => { window.dispatchEvent(new CustomEvent("menu-action", { detail: "run.codex" })); },
       });
+
+      // ── Markdown Preview — Ctrl+Shift+V ──
+      editor.addAction({
+        id: "markdown-preview",
+        label: "Toggle Markdown Preview",
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyV,
+          monaco.KeyMod.WinCtrl | monaco.KeyMod.Shift | monaco.KeyCode.KeyV,
+        ],
+        run: () => { window.dispatchEvent(new CustomEvent("toggle-markdown-preview")); },
+      });
     },
     [],
   );

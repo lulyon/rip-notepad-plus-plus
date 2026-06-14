@@ -115,6 +115,7 @@ const en = {
     "menu.view.splitVertical": "Split Vertically",
     "menu.view.alwaysOnTop": "Always on Top",
     "menu.view.toggleSidebar": "Show Sidebar",
+    "menu.view.markdownPreview": "Toggle &Markdown Preview",
     "menu.view.distractionFree": "Distraction Free Mode",
     "menu.view.summary": "Summary...",
 
@@ -375,6 +376,7 @@ const en = {
     "sidebar.clipboard": "Clipboard",
     "sidebar.symbols": "Symbols",
     "sidebar.git": "Git",
+    "sidebar.preview": "Preview",
 
     // ── Clipboard ──
     "clipboard.search": "Search...",

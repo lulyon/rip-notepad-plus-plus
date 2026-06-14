@@ -523,6 +523,9 @@ export function useMenuActions() {
         case "view.toggleSidebar":
           useSettingsStore.getState().toggleSetting("showSidebar");
           break;
+        case "view.toggleMarkdownPreview":
+          window.dispatchEvent(new CustomEvent("toggle-markdown-preview"));
+          break;
         case "view.distractionFree": {
           const s = useSettingsStore.getState();
           const isDistraction = !s.showMenuBar && !s.showStatusBar && !s.showSidebar;

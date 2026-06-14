@@ -203,6 +203,7 @@ export const MENU_STRUCTURE: MenuDef[] = [
       { id: "view.alwaysOnTop", labelKey: "menu.view.alwaysOnTop" },
       S(),
       { id: "view.toggleSidebar", labelKey: "menu.view.toggleSidebar" },
+      { id: "view.toggleMarkdownPreview", labelKey: "menu.view.markdownPreview", shortcut: "Ctrl+Shift+V" },
       S(),
       { id: "view.distractionFree", labelKey: "menu.view.distractionFree", shortcut: "F12" },
       S(),

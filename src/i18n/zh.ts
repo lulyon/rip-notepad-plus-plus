@@ -115,6 +115,7 @@ const zh = {
     "menu.view.splitVertical": "垂直分屏",
     "menu.view.alwaysOnTop": "窗口置顶",
     "menu.view.toggleSidebar": "显示侧边栏",
+    "menu.view.markdownPreview": "切换 Markdown 预览(&M)",
     "menu.view.distractionFree": "专注模式",
     "menu.view.summary": "文档摘要...",
 
@@ -375,6 +376,7 @@ const zh = {
     "sidebar.clipboard": "剪贴板历史",
     "sidebar.symbols": "符号",
     "sidebar.git": "Git",
+    "sidebar.preview": "预览",
 
     // ── Clipboard ──
     "clipboard.search": "搜索...",
