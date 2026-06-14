@@ -115,3 +115,29 @@ html[dir="rtl"] .menu-dropdown { left: auto; right: 0; }
 html[dir="rtl"] .tab { float: right; }
 html[dir="rtl"] .tab-pin-icon { margin-right: 0; margin-left: 4px; }
 html[dir="rtl"] .tab-color-dot { margin-right: 0; margin-left: 4px; }
+
+/* ── Markdown Split View (Editor | Preview) ── */
+.md-split-view {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+}
+
+.md-editor-pane,
+.md-preview-pane {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.md-preview-divider {
+  width: 4px;
+  background: var(--border-color);
+  cursor: col-resize;
+  flex-shrink: 0;
+}
+
+.md-preview-pane {
+  border-left: 1px solid var(--border-color);
+}

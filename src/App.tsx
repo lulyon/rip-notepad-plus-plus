@@ -36,11 +36,13 @@ import { HashDialog } from "./components/Dialogs/HashDialog";
 import { SummaryDialog } from "./components/Dialogs/SummaryDialog";
 import { UnsavedChangesDialog } from "./components/Dialogs/UnsavedChangesDialog";
 import { Sidebar } from "./components/Panels/Sidebar";
+import { MarkdownPreview } from "./components/Panels/MarkdownPreview";
 
 function App() {
   const { t } = useTranslation();
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const unsavedTabs = useEditorStore((s) => s.unsavedTabs);
+  const [showMdPreview, setShowMdPreview] = useState(false);
   const showMenuBar = useSettingsStore((s) => s.showMenuBar);
   const showStatusBar = useSettingsStore((s) => s.showStatusBar);
 
@@ -98,6 +100,10 @@ function App() {
   // ── Session: auto-save on changes ──
   const tabs = useEditorStore((s) => s.tabs);
   const projectRoot = useSettingsStore((s) => s.projectRoot);
+  const activeTab = tabs.find((t) => t.id === activeTabId);
+  const isMdFile = activeTab?.language === "markdown" ||
+    activeTab?.path?.endsWith(".md") ||
+    activeTab?.name?.endsWith(".md");
 
   useEffect(() => {
     const debounce = setTimeout(() => {
@@ -156,6 +162,7 @@ function App() {
     }
 
     function onOpenCommandPalette() { setCmdPaletteOpen(true); }
+    function onToggleMdPreview() { setShowMdPreview((prev) => !prev); }
     function onEditorContextMenu(e: Event) {
       const { x, y } = (e as CustomEvent).detail;
       setCtxMenuPos({ x, y });
@@ -166,11 +173,13 @@ function App() {
     window.addEventListener("navigate-to-match", onNavigateToMatch);
     window.addEventListener("open-command-palette", onOpenCommandPalette);
     window.addEventListener("editor-context-menu", onEditorContextMenu);
+    window.addEventListener("toggle-markdown-preview", onToggleMdPreview);
     return () => {
       window.removeEventListener("open-go-to-line", onOpenGoToLine);
       window.removeEventListener("navigate-to-match", onNavigateToMatch);
       window.removeEventListener("open-command-palette", onOpenCommandPalette);
       window.removeEventListener("editor-context-menu", onEditorContextMenu);
+      window.removeEventListener("toggle-markdown-preview", onToggleMdPreview);
     };
   }, []);
 
@@ -244,7 +253,17 @@ function App() {
       <div className="main-content">
         <Sidebar />
         <div className="editor-area">
-          {activeTabId ? (
+          {activeTabId && showMdPreview && isMdFile ? (
+            <div className="md-split-view">
+              <div className="md-editor-pane">
+                <SplitEditor />
+              </div>
+              <div className="md-preview-divider" />
+              <div className="md-preview-pane">
+                <MarkdownPreview />
+              </div>
+            </div>
+          ) : activeTabId ? (
             <SplitEditor />
           ) : (
             <div className="welcome">
