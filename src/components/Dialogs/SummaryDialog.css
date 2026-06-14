@@ -1,0 +1,38 @@
+.summary-dialog {
+  min-width: 400px;
+  max-width: 450px;
+}
+
+.summary-dialog h2 {
+  margin-bottom: 16px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 6px 12px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.summary-label {
+  color: var(--text-secondary);
+  text-align: right;
+  padding: 4px 0;
+}
+
+.summary-value {
+  color: var(--text-primary);
+  padding: 4px 0;
+  word-break: break-all;
+}
+
+.summary-section-title {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 4px;
+  margin-top: 4px;
+}

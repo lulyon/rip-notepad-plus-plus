@@ -90,7 +90,8 @@ export function TabBar() {
             className={
               `tab ${tab.id === activeTabId ? "active" : ""}` +
               (dragOverIndex === idx ? " drag-over" : "") +
-              (dragIndex === idx ? " dragging" : "")
+              (dragIndex === idx ? " dragging" : "") +
+              (tab.color ? ` tab-color-${tab.color}` : "")
             }
             draggable
             onClick={() => setActiveTab(tab.id)}
@@ -103,8 +104,10 @@ export function TabBar() {
             onDragEnd={handleDragEnd}
           >
             <span className="tab-label">
+              {tab.pinned && <span className="tab-pin-icon">📌</span>}
               {tab.modified ? "● " : ""}
               {tab.name}
+              {tab.color && <span className={`tab-color-dot tab-color-${tab.color}`} />}
             </span>
             <button
               className="tab-close"

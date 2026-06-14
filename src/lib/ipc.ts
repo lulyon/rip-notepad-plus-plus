@@ -145,4 +145,29 @@ export const ipc = {
   gitDiffFile(repoPath: string, filePath: string): Promise<string> {
     return invoke("git_diff_file", { repoPath, filePath });
   },
+
+  // ── File Monitoring & Snapshots ──
+  watchFile(path: string): Promise<void> {
+    return invoke("watch_file", { path });
+  },
+
+  checkFileChanged(path: string): Promise<boolean> {
+    return invoke("check_file_changed", { path });
+  },
+
+  updateFileMtime(path: string): Promise<void> {
+    return invoke("update_file_mtime", { path });
+  },
+
+  saveSnapshot(tabId: string, filePath: string | null, content: string): Promise<void> {
+    return invoke("save_snapshot", { tabId, filePath, content });
+  },
+
+  loadSnapshots(): Promise<Array<[string, string | null, string]>> {
+    return invoke("load_snapshots");
+  },
+
+  clearSnapshot(tabId: string): Promise<void> {
+    return invoke("clear_snapshot", { tabId });
+  },
 };

@@ -1,0 +1,101 @@
+.hash-dialog {
+  min-width: 480px;
+  max-width: 520px;
+}
+
+.hash-dialog h2 {
+  margin-bottom: 16px;
+}
+
+.hash-textarea {
+  width: 100%;
+  height: 100px;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 12px;
+  resize: vertical;
+  margin-bottom: 8px;
+}
+
+.hash-textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.hash-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.hash-actions .btn {
+  font-size: 11px;
+}
+
+.hash-compute-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.hash-input-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.hash-results {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hash-result-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hash-algorithm {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  width: 70px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.hash-value {
+  flex: 1;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+  padding: 4px 8px;
+  border-radius: 3px;
+  word-break: break-all;
+  line-height: 1.4;
+  min-height: 22px;
+}
+
+.hash-copy-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.hash-copy-btn:hover {
+  background: var(--border-color);
+  color: var(--text-primary);
+}

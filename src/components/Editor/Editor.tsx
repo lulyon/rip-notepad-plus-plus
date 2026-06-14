@@ -4,6 +4,8 @@ import type { editor } from "monaco-editor";
 import { useEditorStore } from "../../stores/editorStore";
 import { useEditorRefStore } from "../../stores/editorRefStore";
 import { useSettingsStore } from "../../stores/settingsStore";
+import { useBookmarkStore } from "../../stores/bookmarkStore";
+import { useMarkStore } from "../../stores/markStore";
 import { useMonacoActions } from "../../hooks/useMonacoActions";
 
 interface EditorProps {
@@ -50,6 +52,16 @@ export function Editor({ tabId }: EditorProps) {
     };
   }, [setEditorRef, setSecondaryEditorRef, isPrimary]);
 
+  // Store event listener cleanup refs so we can remove them on tab change
+  const decorationCleanupRef = useRef<(() => void) | null>(null);
+
+  // Cleanup decorations on unmount
+  useEffect(() => {
+    return () => {
+      decorationCleanupRef.current?.();
+    };
+  }, []);
+
   const onMount = useCallback(
     (editor: editor.IStandaloneCodeEditor, monaco: Parameters<typeof handleMount>[1]) => {
       editorRef.current = editor;
@@ -69,6 +81,62 @@ export function Editor({ tabId }: EditorProps) {
           );
         }
       });
+
+      // ── Bookmark & Mark Decorations ──
+      function getMarkDecorations() {
+        const tabId = useEditorStore.getState().activeTabId;
+        if (!tabId) return [];
+        const marks = useMarkStore.getState().getMarks(tabId);
+        return marks.map(m => ({
+          range: { startLineNumber: m.line, startColumn: 1, endLineNumber: m.line, endColumn: 1 },
+          options: {
+            isWholeLine: true,
+            className: `mark-style-${m.style}`,
+            glyphMarginClassName: `mark-glyph-style-${m.style}`,
+          },
+        }));
+      }
+
+      const applyDecorations = () => {
+        const tabId = useEditorStore.getState().activeTabId;
+        if (!tabId) {
+          editor.deltaDecorations([], []);
+          return;
+        }
+        const bookmarks = useBookmarkStore.getState().getBookmarks(tabId);
+        const bookmarkDecs = bookmarks.map(b => ({
+          range: { startLineNumber: b.line, startColumn: 1, endLineNumber: b.line, endColumn: 1 },
+          options: { glyphMarginClassName: 'bookmark-glyph' },
+        }));
+        const markDecs = getMarkDecorations();
+        (editor as any).__bookmarkDecIds = editor.deltaDecorations(
+          (editor as any).__bookmarkDecIds || [],
+          bookmarkDecs,
+        );
+        (editor as any).__markDecIds = editor.deltaDecorations(
+          (editor as any).__markDecIds || [],
+          markDecs,
+        );
+      };
+
+      const onBookmarksChanged = () => applyDecorations();
+      const onMarksChanged = () => applyDecorations();
+
+      window.addEventListener('bookmarks-changed', onBookmarksChanged);
+      window.addEventListener('marks-changed', onMarksChanged);
+
+      const contentChangeSub = editor.onDidChangeModelContent(() => {
+        setTimeout(applyDecorations, 50);
+      });
+
+      setTimeout(applyDecorations, 200);
+
+      // Store cleanup function
+      decorationCleanupRef.current = () => {
+        window.removeEventListener('bookmarks-changed', onBookmarksChanged);
+        window.removeEventListener('marks-changed', onMarksChanged);
+        contentChangeSub.dispose();
+      };
     },
     [handleMount, activeTabId, updateTabCursor, setEditorRef, isPrimary],
   );

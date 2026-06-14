@@ -65,3 +65,34 @@ body,
   font-weight: 300;
   color: var(--text-primary);
 }
+
+/* ── Tab Colors (5 levels like NP++) ── */
+.tab-color-1 { color: #FF6B8A; }
+.tab-color-2 { color: #FFA344; }
+.tab-color-3 { color: #FFD700; }
+.tab-color-4 { color: #7BC86B; }
+.tab-color-5 { color: #4FC1FF; }
+
+/* ── Bookmarks (glyph margin) ── */
+.bookmark-glyph {
+  background: #007acc;
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50%;
+  margin-left: 4px;
+  margin-top: 3px;
+}
+
+/* ── Mark Styles (5 levels like NP++) ── */
+.mark-style-1 { background: rgba(79, 193, 255, 0.12); border-left: 3px solid #4FC1FF; }
+.mark-style-2 { background: rgba(123, 200, 107, 0.12); border-left: 3px solid #7BC86B; }
+.mark-style-3 { background: rgba(255, 163, 68, 0.12);  border-left: 3px solid #FFA344; }
+.mark-style-4 { background: rgba(255, 107, 138, 0.12); border-left: 3px solid #FF6B8A; }
+.mark-style-5 { background: rgba(197, 134, 192, 0.12); border-left: 3px solid #C586C0; }
+
+/* Mark glyph margin dots */
+.mark-glyph-style-1 { background: #4FC1FF; width: 8px !important; height: 8px !important; border-radius: 50%; margin-left: 4px; margin-top: 4px; }
+.mark-glyph-style-2 { background: #7BC86B; width: 8px !important; height: 8px !important; border-radius: 50%; margin-left: 4px; margin-top: 4px; }
+.mark-glyph-style-3 { background: #FFA344; width: 8px !important; height: 8px !important; border-radius: 50%; margin-left: 4px; margin-top: 4px; }
+.mark-glyph-style-4 { background: #FF6B8A; width: 8px !important; height: 8px !important; border-radius: 50%; margin-left: 4px; margin-top: 4px; }
+.mark-glyph-style-5 { background: #C586C0; width: 8px !important; height: 8px !important; border-radius: 50%; margin-left: 4px; margin-top: 4px; }

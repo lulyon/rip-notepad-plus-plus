@@ -36,3 +36,27 @@
   background-color: var(--border-color);
   margin: 4px 8px;
 }
+
+.context-menu-submenu-header {
+  padding: 4px 16px 2px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: default;
+  user-select: none;
+}
+
+.context-menu-color-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.context-menu-color-dot.tab-color-1 { background-color: #FF6B8A; }
+.context-menu-color-dot.tab-color-2 { background-color: #FFA344; }
+.context-menu-color-dot.tab-color-3 { background-color: #FFD700; }
+.context-menu-color-dot.tab-color-4 { background-color: #7BC86B; }
+.context-menu-color-dot.tab-color-5 { background-color: #4FC1FF; }

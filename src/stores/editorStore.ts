@@ -11,6 +11,18 @@ export interface Tab {
   language: string;
   cursorLine: number;
   cursorColumn: number;
+  pinned: boolean;
+  color: number | null; // null = no color, 1-5 = color index
+}
+
+export interface ClosedTabData {
+  path: string | null;
+  name: string;
+  content: string;
+  encoding: string;
+  language: string;
+  cursorLine: number;
+  cursorColumn: number;
 }
 
 interface EditorState {
@@ -20,13 +32,18 @@ interface EditorState {
   // Unsaved changes dialog
   unsavedTabs: Tab[] | null; // non-null = show dialog, list of modified tabs to resolve
   pendingCloseAll: boolean; // true = close all tabs after resolving unsaved
+  // Closed tab stack (for Restore Last Closed, max 20)
+  closedTabStack: ClosedTabData[];
 
   // Actions
   newTab: () => string;
-  openTab: (tab: Omit<Tab, "id" | "modified" | "cursorLine" | "cursorColumn">) => string;
+  openTab: (tab: Omit<Tab, "id" | "modified" | "cursorLine" | "cursorColumn" | "pinned" | "color">) => string;
   closeTab: (id: string) => void;
   closeAllTabs: () => void;
+  closeAllButCurrent: () => void;
   closeOtherTabs: (id: string) => void;
+  togglePinTab: (id: string) => void;
+  setTabColor: (id: string, color: number | null) => void;
   setActiveTab: (id: string) => void;
   updateTabContent: (id: string, content: string) => void;
   updateTabLanguage: (id: string, language: string) => void;
@@ -41,6 +58,7 @@ interface EditorState {
   forceCloseTab: (id: string) => void;
   forceCloseAllTabs: () => void;
   clearModified: (id: string) => void;
+  restoreLastClosedTab: () => void;
 }
 
 let tabCounter = 0;
@@ -64,6 +82,7 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   secondaryTabId: null,
   unsavedTabs: null,
   pendingCloseAll: false,
+  closedTabStack: [],
 
   getTab: (id) => get().tabs.find((t) => t.id === id),
 
@@ -79,6 +98,8 @@ export const useEditorStore = create<EditorState>((set, get) => ({
       language: "plaintext",
       cursorLine: 1,
       cursorColumn: 1,
+      pinned: false,
+      color: null,
     };
     set((s) => ({
       tabs: [...s.tabs, tab],
@@ -95,6 +116,8 @@ export const useEditorStore = create<EditorState>((set, get) => ({
       modified: false,
       cursorLine: 1,
       cursorColumn: 1,
+      pinned: false,
+      color: null,
       language: detectLanguage(
         tabData.path?.split(".").pop() || tabData.name.split(".").pop() || "",
       ),
@@ -108,10 +131,26 @@ export const useEditorStore = create<EditorState>((set, get) => ({
 
   closeTab: (id) => {
     const tab = get().tabs.find((t) => t.id === id);
+    if (tab?.pinned) return; // cannot close pinned tab
     // If tab is modified, show unsaved changes dialog instead of closing
     if (tab?.modified) {
       set({ unsavedTabs: [tab], pendingCloseAll: false });
       return;
+    }
+    // Save to closed tab stack (max 20)
+    if (tab) {
+      const stack = get().closedTabStack;
+      const entry = {
+        path: tab.path,
+        name: tab.name,
+        content: tab.content,
+        encoding: tab.encoding,
+        language: tab.language,
+        cursorLine: tab.cursorLine,
+        cursorColumn: tab.cursorColumn,
+      };
+      const newStack = [...stack, entry].slice(-20);
+      set({ closedTabStack: newStack });
     }
     set((s) => {
       const idx = s.tabs.findIndex((t) => t.id === id);
@@ -138,12 +177,20 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   },
 
   closeAllTabs: () => {
-    const modified = get().tabs.filter((t) => t.modified);
+    const tabs = get().tabs;
+    const pinned = tabs.filter((t) => t.pinned);
+    if (pinned.length === tabs.length) return; // all pinned, nothing to close
+    const modified = tabs.filter((t) => t.modified && !t.pinned);
     if (modified.length > 0) {
       set({ unsavedTabs: modified, pendingCloseAll: true });
       return;
     }
-    set({ tabs: [], activeTabId: null, secondaryTabId: null });
+    // Close only unpinned tabs, keep pinned open
+    set((s) => ({
+      tabs: pinned,
+      activeTabId: pinned.length > 0 ? pinned[0].id : null,
+      secondaryTabId: pinned.length > 0 && s.secondaryTabId && pinned.some(t => t.id === s.secondaryTabId) ? s.secondaryTabId : null,
+    }));
   },
 
   closeOtherTabs: (id) => {
@@ -236,12 +283,43 @@ export const useEditorStore = create<EditorState>((set, get) => ({
     });
   },
 
+  togglePinTab: (id) => set((s) => ({
+    tabs: s.tabs.map((t) => t.id === id ? { ...t, pinned: !t.pinned } : t),
+  })),
+
+  setTabColor: (id, color) => set((s) => ({
+    tabs: s.tabs.map((t) => t.id === id ? { ...t, color } : t),
+  })),
+
+  closeAllButCurrent: () => {
+    set((s) => {
+      const active = s.tabs.find((t) => t.id === s.activeTabId);
+      if (!active) return s;
+      return { tabs: [active], activeTabId: active.id, secondaryTabId: null };
+    });
+  },
+
   dismissUnsavedDialog: () => {
     set({ unsavedTabs: null, pendingCloseAll: false });
   },
 
   // Force-close without checking modified flag (used by unsaved dialog after save/discard)
   forceCloseTab: (id) => {
+    const tab = get().tabs.find((t) => t.id === id);
+    if (tab) {
+      const stack = get().closedTabStack;
+      const entry = {
+        path: tab.path,
+        name: tab.name,
+        content: tab.content,
+        encoding: tab.encoding,
+        language: tab.language,
+        cursorLine: tab.cursorLine,
+        cursorColumn: tab.cursorColumn,
+      };
+      const newStack = [...stack, entry].slice(-20);
+      set({ closedTabStack: newStack });
+    }
     set((s) => {
       const idx = s.tabs.findIndex((t) => t.id === id);
       const newTabs = s.tabs.filter((t) => t.id !== id);
@@ -267,7 +345,12 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   },
 
   forceCloseAllTabs: () => {
-    set({ tabs: [], activeTabId: null, secondaryTabId: null });
+    const pinned = get().tabs.filter((t) => t.pinned);
+    if (pinned.length > 0) {
+      set({ tabs: pinned, activeTabId: pinned[0].id, secondaryTabId: null });
+    } else {
+      set({ tabs: [], activeTabId: null, secondaryTabId: null });
+    }
   },
 
   clearModified: (id) => {
@@ -276,5 +359,17 @@ export const useEditorStore = create<EditorState>((set, get) => ({
         t.id === id ? { ...t, modified: false } : t,
       ),
     }));
+  },
+
+  restoreLastClosedTab: () => {
+    const stack = get().closedTabStack;
+    if (stack.length === 0) return;
+    const lastClosed = stack[stack.length - 1];
+    const { cursorLine, cursorColumn, ...tabData } = lastClosed;
+    const id = get().openTab(tabData);
+    if (id) {
+      get().updateTabCursor(id, cursorLine, cursorColumn);
+    }
+    set({ closedTabStack: stack.slice(0, -1) });
   },
 }));

@@ -4,6 +4,7 @@ mod models;
 mod plugin_api;
 mod search;
 
+use std::sync::Mutex;
 use commands::encoding::{
     convert_encoding_command, decode_with_encoding, detect_encoding, encode_with_encoding,
     list_encodings,
@@ -14,6 +15,7 @@ use commands::session::{clear_session, load_session, save_session};
 use commands::git::{git_branch, git_diff_file, git_status};
 use commands::plugin::{list_plugins, notify_plugins, send_plugin_command, start_plugin, stop_plugin, update_editor_state};
 use commands::system::{get_system_info, open_in_browser, open_terminal, run_command};
+use commands::monitor::{watch_file, check_file_changed, update_file_mtime, save_snapshot, load_snapshots, clear_snapshot, MonitorState};
 use tauri::Manager;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -22,6 +24,7 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_shell::init())
+        .manage(Mutex::new(MonitorState::new()))
         .setup(|app| {
             let icon_bytes = include_bytes!("../icons/128x128.png");
             if let Ok(img) = image::load_from_memory(icon_bytes) {
@@ -73,6 +76,13 @@ pub fn run() {
             git_status,
             git_branch,
             git_diff_file,
+            // Monitor
+            watch_file,
+            check_file_changed,
+            update_file_mtime,
+            save_snapshot,
+            load_snapshots,
+            clear_snapshot,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

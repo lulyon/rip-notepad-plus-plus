@@ -10,6 +10,8 @@ import { useMenuActions } from "./hooks/useMenuActions";
 import { useMacroRecorder } from "./hooks/useMacroRecorder";
 import { usePluginBridge } from "./hooks/usePluginBridge";
 import { useAutoSave } from "./hooks/useAutoSave";
+import { useFileWatcher } from "./hooks/useFileWatcher";
+import { useSnapshotAutoSave } from "./hooks/useSnapshotAutoSave";
 import { ipc } from "./lib/ipc";
 import { detectLanguage } from "./lib/constants";
 import { MenuBar } from "./components/MenuBar/MenuBar";
@@ -26,6 +28,8 @@ import { AboutDialog } from "./components/Dialogs/AboutDialog";
 import { PluginDialog } from "./components/Dialogs/PluginDialog";
 import { CompareDialog } from "./components/Dialogs/CompareDialog";
 import { CommandPalette } from "./components/Dialogs/CommandPalette";
+import { HashDialog } from "./components/Dialogs/HashDialog";
+import { SummaryDialog } from "./components/Dialogs/SummaryDialog";
 import { UnsavedChangesDialog } from "./components/Dialogs/UnsavedChangesDialog";
 import { Sidebar } from "./components/Panels/Sidebar";
 
@@ -44,6 +48,8 @@ function App() {
   const [pluginOpen, setPluginOpen] = useState(false);
   const [compareOpen, setCompareOpen] = useState(false);
   const [cmdPaletteOpen, setCmdPaletteOpen] = useState(false);
+  const [hashOpen, setHashOpen] = useState(false);
+  const [summaryOpen, setSummaryOpen] = useState(false);
 
   // ── Session: load on startup (guarded against React StrictMode double-fire) ──
   const sessionLoaded = useRef(false);
@@ -114,6 +120,8 @@ function App() {
   useMacroRecorder();
   usePluginBridge();
   useAutoSave();
+  useFileWatcher();
+  useSnapshotAutoSave();
 
   // Listen for custom events
   useEffect(() => {
@@ -186,6 +194,10 @@ function App() {
         const projectRoot = useSettingsStore.getState().projectRoot;
         const wd = projectRoot || cwd;
         ipc.openTerminal(wd, "codex").catch(console.error);
+      } else if (actionId === "tool.openHash") {
+        setHashOpen(true);
+      } else if (actionId === "view.openSummary") {
+        setSummaryOpen(true);
       } else if (actionId === "run.claudeCode") {
         const tab = useEditorStore.getState().tabs.find(
           (t) => t.id === useEditorStore.getState().activeTabId,
@@ -234,6 +246,8 @@ function App() {
       <PluginDialog open={pluginOpen} onClose={() => setPluginOpen(false)} />
       <CompareDialog open={compareOpen} onClose={() => setCompareOpen(false)} />
       <CommandPalette open={cmdPaletteOpen} onClose={() => setCmdPaletteOpen(false)} />
+      <HashDialog open={hashOpen} onClose={() => setHashOpen(false)} />
+      <SummaryDialog open={summaryOpen} onClose={() => setSummaryOpen(false)} />
       <UnsavedChangesDialog
         unsavedTabs={unsavedTabs || []}
         onSaveAll={async () => {

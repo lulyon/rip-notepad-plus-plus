@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import type { OnMount } from "@monaco-editor/react";
 import { useEditorStore } from "../stores/editorStore";
+import { useBookmarkStore } from "../stores/bookmarkStore";
 import { ipc } from "../lib/ipc";
 import { detectLanguage } from "../lib/constants";
 import { open, save } from "@tauri-apps/plugin-dialog";
@@ -222,6 +223,106 @@ export function useMonacoActions() {
         },
       });
 
+      // ── Bookmark toggle — Ctrl+F2 ──
+      editor.addAction({
+        id: "bookmark-toggle",
+        label: "Toggle Bookmark",
+        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.F2, monaco.KeyMod.WinCtrl | monaco.KeyCode.F2],
+        run: () => {
+          const tabId = useEditorStore.getState().activeTabId;
+          if (!tabId) return;
+          const pos = editor.getPosition();
+          if (pos) useBookmarkStore.getState().toggleBookmark(tabId, pos.lineNumber, pos.column);
+          window.dispatchEvent(new CustomEvent("bookmarks-changed"));
+        },
+      });
+
+      // ── Next bookmark — F2 ──
+      editor.addAction({
+        id: "bookmark-next",
+        label: "Next Bookmark",
+        keybindings: [monaco.KeyCode.F2],
+        run: () => {
+          const tabId = useEditorStore.getState().activeTabId;
+          if (!tabId) return;
+          const pos = editor.getPosition();
+          if (!pos) return;
+          const next = useBookmarkStore.getState().findNextBookmark(tabId, pos.lineNumber);
+          if (next !== null) {
+            editor.setPosition({ lineNumber: next, column: 1 });
+            editor.revealLineInCenter(next);
+          }
+        },
+      });
+
+      // ── Prev bookmark — Shift+F2 ──
+      editor.addAction({
+        id: "bookmark-prev",
+        label: "Previous Bookmark",
+        keybindings: [monaco.KeyMod.Shift | monaco.KeyCode.F2],
+        run: () => {
+          const tabId = useEditorStore.getState().activeTabId;
+          if (!tabId) return;
+          const pos = editor.getPosition();
+          if (!pos) return;
+          const prev = useBookmarkStore.getState().findPrevBookmark(tabId, pos.lineNumber);
+          if (prev !== null) {
+            editor.setPosition({ lineNumber: prev, column: 1 });
+            editor.revealLineInCenter(prev);
+          }
+        },
+      });
+
+      // ── Go to matching brace — Ctrl+B ──
+      editor.addAction({
+        id: "goto-brace",
+        label: "Go to Matching Brace",
+        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyB, monaco.KeyMod.WinCtrl | monaco.KeyCode.KeyB],
+        run: () => editor.getAction("editor.action.jumpToBracket")?.run(),
+      });
+
+      // ── Select matching braces — Ctrl+Shift+B ──
+      editor.addAction({
+        id: "select-braces",
+        label: "Select Matching Braces",
+        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyB],
+        run: () => editor.getAction("editor.action.selectToBracket")?.run(),
+      });
+
+      // ── Comment toggle — Ctrl+Q ──
+      editor.addAction({
+        id: "comment-toggle",
+        label: "Toggle Comment",
+        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyQ, monaco.KeyMod.WinCtrl | monaco.KeyCode.KeyQ],
+        run: () => editor.getAction("editor.action.commentLine")?.run(),
+      });
+
+      // ── Block comment — Ctrl+Shift+Q ──
+      editor.addAction({
+        id: "block-comment",
+        label: "Block Comment",
+        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyQ],
+        run: () => editor.getAction("editor.action.blockComment")?.run(),
+      });
+
+      // ── Restore Last Closed File — Ctrl+Shift+T ──
+      editor.addAction({
+        id: "restore-last-closed",
+        label: "Restore Last Closed File",
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyT,
+          monaco.KeyMod.WinCtrl | monaco.KeyMod.Shift | monaco.KeyCode.KeyT,
+        ],
+        run: () => useEditorStore.getState().restoreLastClosedTab(),
+      });
+
+      // ── Distraction Free Mode — F12 ──
+      editor.addAction({
+        id: "distraction-free",
+        label: "Distraction Free Mode",
+        keybindings: [monaco.KeyCode.F12],
+        run: () => { window.dispatchEvent(new CustomEvent("menu-action", { detail: "view.distractionFree" })); },
+      });
     },
     [],
   );

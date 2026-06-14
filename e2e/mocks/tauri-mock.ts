@@ -63,6 +63,13 @@ export function invoke(cmd, args) {
     git_status: () => ({ branch: "main", changed: [], ahead: 0, behind: 0 }),
     git_branch: () => "main",
     git_diff_file: () => "",
+    // Monitor (6)
+    watch_file: ok,
+    check_file_changed: () => false,
+    update_file_mtime: ok,
+    save_snapshot: ok,
+    load_snapshots: () => [],
+    clear_snapshot: ok,
   };
   const fn = m[cmd];
   return fn ? Promise.resolve(fn()) : Promise.reject(new Error("Unknown IPC: " + cmd));

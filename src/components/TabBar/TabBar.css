@@ -90,6 +90,28 @@
   color: var(--text-primary);
 }
 
+/* ── Tab pin icon ── */
+.tab-pin-icon {
+  margin-right: 2px;
+  font-size: 11px;
+}
+
+/* ── Tab color dot ── */
+.tab-color-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: 6px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.tab-color-1 .tab-color-dot { background: #FF6B8A; }
+.tab-color-2 .tab-color-dot { background: #FFA344; }
+.tab-color-3 .tab-color-dot { background: #FFD700; }
+.tab-color-4 .tab-color-dot { background: #7BC86B; }
+.tab-color-5 .tab-color-dot { background: #4FC1FF; }
+
 /* ── Drag-and-drop ── */
 .tab.dragging {
   opacity: 0.4;
