@@ -323,6 +323,28 @@ export function useMonacoActions() {
         keybindings: [monaco.KeyCode.F12],
         run: () => { window.dispatchEvent(new CustomEvent("menu-action", { detail: "view.distractionFree" })); },
       });
+
+      // ── Launch Claude — Ctrl+Alt+C ──
+      editor.addAction({
+        id: "launch-claude",
+        label: "Launch Claude",
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyMod.Alt | monaco.KeyCode.KeyC,
+          monaco.KeyMod.WinCtrl | monaco.KeyMod.Alt | monaco.KeyCode.KeyC,
+        ],
+        run: () => { window.dispatchEvent(new CustomEvent("menu-action", { detail: "run.claudeCode" })); },
+      });
+
+      // ── Launch Codex — Ctrl+Alt+X ──
+      editor.addAction({
+        id: "launch-codex",
+        label: "Launch Codex",
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyMod.Alt | monaco.KeyCode.KeyX,
+          monaco.KeyMod.WinCtrl | monaco.KeyMod.Alt | monaco.KeyCode.KeyX,
+        ],
+        run: () => { window.dispatchEvent(new CustomEvent("menu-action", { detail: "run.codex" })); },
+      });
     },
     [],
   );
