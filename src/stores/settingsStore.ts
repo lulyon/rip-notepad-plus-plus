@@ -25,6 +25,7 @@ export interface SettingsState {
   alwaysOnTop: boolean;
   autoSave: boolean;
   autoCheckUpdate: boolean;
+  columnMode: boolean;
 
   // ── New Document ──
   defaultEncoding: string;
@@ -118,6 +119,7 @@ export const useSettingsStore = create<SettingsState>((set) => {
     alwaysOnTop: saved.alwaysOnTop ?? false,
     autoSave: saved.autoSave ?? true,
     autoCheckUpdate: saved.autoCheckUpdate ?? true,
+    columnMode: saved.columnMode ?? false,
     defaultEncoding: saved.defaultEncoding ?? "UTF-8",
     defaultLanguage: saved.defaultLanguage ?? "plaintext",
     defaultEol: saved.defaultEol ?? "LF",

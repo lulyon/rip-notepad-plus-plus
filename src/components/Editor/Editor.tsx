@@ -43,6 +43,7 @@ export function Editor({ tabId }: EditorProps) {
   const smoothScrolling = useSettingsStore((s) => s.smoothScrolling);
   const scrollBeyondLastLine = useSettingsStore((s) => s.scrollBeyondLastLine);
   const theme = useSettingsStore((s) => s.theme);
+  const columnMode = useSettingsStore((s) => s.columnMode);
 
   const activeTab = tabs.find((t) => t.id === activeTabId);
 
@@ -204,7 +205,7 @@ export function Editor({ tabId }: EditorProps) {
           addExtraSpaceOnTop: false,
           autoFindInSelection: "never",
         },
-        columnSelection: true,
+        columnSelection: columnMode,
         multiCursorModifier: "alt",
         // Emmet abbreviation expansion (HTML/CSS/JSX/TSX)
         acceptSuggestionOnCommitCharacter: true,

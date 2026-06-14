@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { MENU_STRUCTURE, dispatchMenuAction } from "./menuDefinitions";
 import type { MenuItemDef } from "./menuDefinitions";
 import { MenuItem } from "./MenuItem";
+import { useSettingsStore } from "../../stores/settingsStore";
 import { useUdlStore } from "../../stores/udlStore";
 import "./MenuBar.css";
 
@@ -11,6 +12,7 @@ export function MenuBar() {
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const menuBarRef = useRef<HTMLDivElement>(null);
   const udls = useUdlStore((s) => s.udls);
+  const columnMode = useSettingsStore((s) => s.columnMode);
 
   // Close the active menu when clicking outside
   const closeAllMenus = useCallback(() => {
@@ -134,8 +136,19 @@ export function MenuBar() {
       );
 
       return { ...menu, children: newChildren };
+    }).map((menu) => {
+      // Inject checked state for toggleable items
+      return {
+        ...menu,
+        children: menu.children.map((child) => {
+          if (child.id === "edit.columnMode") {
+            return { ...child, checked: columnMode };
+          }
+          return child;
+        }),
+      };
     });
-  }, [udls]);
+  }, [udls, columnMode]);
 
   return (
     <div ref={menuBarRef} className="menu-bar">

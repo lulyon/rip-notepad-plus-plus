@@ -330,9 +330,11 @@ export function useMenuActions() {
           editorRef?.executeEdits("dedup", [{ range: fullRange, text: unique.join(model.getEOL()) }]);
           break;
         }
-        case "edit.columnMode":
-          editorRef?.trigger("keyboard", "editor.action.toggleColumnSelection", null);
+        case "edit.columnMode": {
+          const current = useSettingsStore.getState().columnMode;
+          useSettingsStore.getState().updateSetting("columnMode", !current);
           break;
+        }
         case "edit.commentToggle":
           editorRef?.getAction("editor.action.commentLine")?.run();
           break;

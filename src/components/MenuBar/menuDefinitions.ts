@@ -3,6 +3,7 @@ export interface MenuItemDef {
   labelKey: string;
   shortcut?: string;
   disabled?: boolean;
+  checked?: boolean;
   type?: "item" | "separator";
   children?: MenuItemDef[];
   /** Direct label text, bypasses i18n translation */

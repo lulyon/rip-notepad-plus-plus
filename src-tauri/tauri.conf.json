@@ -53,6 +53,8 @@
   },
   "plugins": {
     "updater": {
+      "active": false,
+      "pubkey": "",
       "endpoints": [
         "https://github.com/luliang/rip-notepad-plus-plus/releases/latest/download/latest.json"
       ]

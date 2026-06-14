@@ -50,6 +50,7 @@ export function MenuItem({ item, depth, onAction }: Props) {
       }}
     >
       <span className="menu-item-label">
+        {item.checked && <span className="menu-item-check">✓ </span>}
         {item.label || t(item.labelKey)}
       </span>
       {item.shortcut && !hasChildren && (
