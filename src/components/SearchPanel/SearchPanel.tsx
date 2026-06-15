@@ -215,6 +215,7 @@ export function SearchPanel() {
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleFindNext();
               }}
+              placeholder={t("search.findPlaceholder")}
             />
             <div className="search-regex-dropdown" style={{ position: "relative" }}>
               <button className="sbtn" onClick={() => setRegexDropdown(!regexDropdown)} title="Regex templates"
@@ -232,9 +233,6 @@ export function SearchPanel() {
                 </div>
               )}
             </div>
-            <input
-              placeholder={t("search.findPlaceholder")}
-            />
             <span className="search-stats">
               {matchCount > 0 &&
                 t("search.matchStats", { current: currentMatchIndex + 1, count: matchCount })}
