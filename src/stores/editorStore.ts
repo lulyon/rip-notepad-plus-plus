@@ -199,14 +199,15 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   },
 
   closeOtherTabs: (id) => {
+    const modifiedOthers = get().tabs.filter((t) => t.id !== id && t.modified);
+    if (modifiedOthers.length > 0) {
+      set({ unsavedTabs: modifiedOthers, pendingCloseAll: false });
+      return;
+    }
     set((s) => {
       const tab = s.tabs.find((t) => t.id === id);
       if (!tab) return s;
-      return {
-        tabs: [tab],
-        activeTabId: id,
-        secondaryTabId: s.secondaryTabId === id ? id : null,
-      };
+      return { tabs: [tab], activeTabId: id, secondaryTabId: s.secondaryTabId === id ? id : null };
     });
   },
 
@@ -297,6 +298,12 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   })),
 
   closeAllButCurrent: () => {
+    const activeId = get().activeTabId;
+    const modifiedOthers = get().tabs.filter((t) => t.id !== activeId && t.modified);
+    if (modifiedOthers.length > 0) {
+      set({ unsavedTabs: modifiedOthers, pendingCloseAll: false });
+      return;
+    }
     set((s) => {
       const active = s.tabs.find((t) => t.id === s.activeTabId);
       if (!active) return s;

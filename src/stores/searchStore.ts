@@ -197,11 +197,11 @@ export const useSearchStore = create<SearchState>((set, get) => ({
     }
 
     const selectedText = model.getValueInRange(selection);
-    if (
-      state.isRegex
-        ? new RegExp(state.findText).test(selectedText)
-        : selectedText === state.findText
-    ) {
+    let matches = selectedText === state.findText;
+    if (state.isRegex) {
+      try { matches = new RegExp(state.findText).test(selectedText); } catch { return; }
+    }
+    if (matches) {
       editor.executeEdits("replace", [
         { range: selection, text: state.replaceText },
       ]);

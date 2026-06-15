@@ -346,11 +346,11 @@ export function useMonacoActions() {
         run: () => { window.dispatchEvent(new CustomEvent("menu-action", { detail: "run.codex" })); },
       });
 
-      // ── Change History Navigation — Ctrl+Shift+Up/Down ──
+      // ── Change History Navigation (via Search menu or Ctrl+K Ctrl+Shift+Up/Down) ──
       editor.addAction({
         id: "change-history-prev",
         label: "Go to Previous Change",
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.UpArrow],
+        keybindings: [],
         run: () => {
           const tabId = useEditorStore.getState().activeTabId;
           if (!tabId) return;
@@ -363,7 +363,7 @@ export function useMonacoActions() {
       editor.addAction({
         id: "change-history-next",
         label: "Go to Next Change",
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.DownArrow],
+        keybindings: [],
         run: () => {
           const tabId = useEditorStore.getState().activeTabId;
           if (!tabId) return;
@@ -371,6 +371,18 @@ export function useMonacoActions() {
           if (!pos) return;
           const next = useEditorStore.getState().findNextChangedLine(tabId, pos.lineNumber);
           if (next) { editor.setPosition({ lineNumber: next, column: 1 }); editor.revealLineInCenter(next); }
+        },
+      });
+
+      // ── Find in Files — Ctrl+Shift+F ──
+      editor.addAction({
+        id: "find-in-files",
+        label: "Find in Files",
+        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyF],
+        run: () => {
+          window.dispatchEvent(new CustomEvent("toggle-find-panel"));
+          // Use setTimeout to open Find-in-Files tab after panel renders
+          setTimeout(() => window.dispatchEvent(new CustomEvent("open-find-in-files")), 100);
         },
       });
 

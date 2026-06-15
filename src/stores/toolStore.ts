@@ -19,7 +19,12 @@ interface ToolState {
 const STORAGE_KEY = "ripnotepadpp-tools";
 
 export const useToolStore = create<ToolState>((set) => ({
-  tools: [],
+  tools: (() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch { return []; }
+  })(),
 
   addTool: (tool) => {
     set((s) => {

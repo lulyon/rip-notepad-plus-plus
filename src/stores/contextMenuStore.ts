@@ -39,7 +39,12 @@ const DEFAULT_ITEMS: CustomMenuItem[] = [
 ];
 
 export const useContextMenuStore = create<ContextMenuState>((set) => ({
-  items: DEFAULT_ITEMS,
+  items: (() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : DEFAULT_ITEMS;
+    } catch { return DEFAULT_ITEMS; }
+  })(),
 
   setItems: (items) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));

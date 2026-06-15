@@ -50,7 +50,7 @@ const saved = loadSavedConfig();
 export const useAiStore = create<AiState>((set, get) => ({
   apiBaseUrl: saved.url || "https://api.deepseek.com/anthropic",
   apiKey: saved.key || "",
-  model: saved.model || "deepseek-v4-pro[1m]",
+  model: saved.model || "deepseek-v4-pro",
   messages: loadSavedChat(),
   streaming: false,
   conversationTitle: "AI Chat",
