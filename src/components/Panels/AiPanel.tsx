@@ -5,8 +5,8 @@ import { useEditorStore } from "../../stores/editorStore";
 import { streamChat } from "../../lib/aiClient";
 import "./AiPanel.css";
 
-function ThinkingBlock({ text }: { text: string }) {
-  const [open, setOpen] = useState(false);
+function ThinkingBlock({ text, defaultOpen }: { text: string; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen || false);
   return (
     <div className="ai-thinking">
       <div className="ai-thinking-toggle" onClick={() => setOpen(!open)}>
@@ -40,6 +40,7 @@ export function AiPanel() {
   const [cfgKey, setCfgKey] = useState(apiKey);
   const [cfgModel, setCfgModel] = useState(model);
   const [error, setError] = useState("");
+  const [streamThinking, setStreamThinking] = useState("");
 
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
 
@@ -80,6 +81,8 @@ export function AiPanel() {
     // Re-read state — addMessage replaces the messages array
     const latest = useAiStore.getState();
 
+    setStreamThinking("");
+    setThinkingDone(false);
     let full = "";
     let thinkingFull = "";
     await streamChat(
@@ -88,19 +91,21 @@ export function AiPanel() {
       (token) => { full += token; useAiStore.getState().updateLastMessage(full); },
       (thinking) => {
         thinkingFull += thinking;
-        useAiStore.getState().updateLastMessage(full); // trigger re-render
+        setStreamThinking(thinkingFull);
       },
-      () => useAiStore.getState().setStreaming(false),
-      (err) => { setError(err); useAiStore.getState().setStreaming(false); },
+      () => {
+        // Store thinking
+        if (thinkingFull) {
+          const s = useAiStore.getState();
+          const msgs = [...s.messages];
+          if (msgs.length > 0 && msgs[msgs.length - 1].role === "assistant") {
+            (msgs[msgs.length - 1] as any).thinking = thinkingFull;
+          }
+        }
+        useAiStore.getState().setStreaming(false);
+      },
+      (err) => { setError(err); setStreamThinking(""); useAiStore.getState().setStreaming(false); },
     );
-    // Store thinking after stream completes
-    if (thinkingFull) {
-      const s = useAiStore.getState();
-      const msgs = [...s.messages];
-      if (msgs.length > 0 && msgs[msgs.length - 1].role === "assistant") {
-        (msgs[msgs.length - 1] as any).thinking = thinkingFull;
-      }
-    }
   };
 
   const doQuickAction = (prompt: string) => {
@@ -179,11 +184,19 @@ export function AiPanel() {
             </div>
           </div>
         )}
+        {streamThinking && (
+          <div className="ai-msg assistant">
+            <div className="ai-msg-role">🤖</div>
+            <div className="ai-msg-content">
+              <ThinkingBlock text={streamThinking} defaultOpen />
+            </div>
+          </div>
+        )}
         {messages.map((msg, i) => (
           <div key={i} className={`ai-msg ${msg.role}`}>
             <div className="ai-msg-role">{msg.role === "user" ? "👤" : "🤖"}</div>
             <div className="ai-msg-content">
-              {(msg as any).thinking && <ThinkingBlock text={(msg as any).thinking} />}
+              {(msg as any).thinking && messages[messages.length - 1] !== msg && <ThinkingBlock text={(msg as any).thinking} />}
               <span dangerouslySetInnerHTML={{ __html: formatContent(msg.content) || (msg.role === "assistant" && streaming && i === messages.length - 1 ? "▊" : "") }} />
             </div>
           </div>
