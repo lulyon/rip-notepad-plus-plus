@@ -84,15 +84,15 @@ function ProjectPanel() {
   const updateSetting = useSettingsStore((s) => s.updateSetting);
 
   // Use roots if available, otherwise fall back to auto-detect single root
-  const roots = projectRoots.length > 0 ? projectRoots : [activeTabDerivedRoot()];
+  const roots = projectRoots.length > 0 ? projectRoots : activeTabDerivedRoots();
 
-  function activeTabDerivedRoot(): string {
+  function activeTabDerivedRoots(): string[] {
     const tabs1 = useEditorStore.getState().tabs;
     const activeId = useEditorStore.getState().activeTabId;
     const tab = tabs1.find((t) => t.id === activeId);
-    return tab?.path
-      ? tab.path.split(/[/\\]/).slice(0, -1).join("/") || "."
-      : ".";
+    if (!tab?.path) return [];
+    const dir = tab.path.split(/[/\\]/).slice(0, -1).join("/");
+    return dir ? [dir] : [];
   }
 
   const handleAddRoot = async () => {
