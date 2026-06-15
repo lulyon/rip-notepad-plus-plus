@@ -171,3 +171,4 @@
 .root-refresh { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 11px; padding: 0 4px; }
 .root-refresh:hover { color: var(--text-primary); }
 .project-root.active { color: var(--accent-color); }
+.project-panel.drag-over { background: rgba(0, 122, 204, 0.1); outline: 2px dashed var(--accent-color); outline-offset: -2px; }

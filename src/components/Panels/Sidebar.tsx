@@ -101,8 +101,42 @@ function ProjectPanel() {
     if (dir) addProjectRoot(dir as string);
   };
 
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [dragOver, setDragOver] = useState(false);
+
+  // Listen to Tauri drag-drop events, filter to this panel's area
+  useEffect(() => {
+    let unlisten: (() => void) | undefined;
+    const getCoords = (e: any) => {
+      const pos = e.payload?.position || e.position;
+      if (!pos) return null;
+      return { x: pos.x || pos.Physical?.x || 0, y: pos.y || pos.Physical?.y || 0 };
+    };
+    import("@tauri-apps/api/webview").then(({ getCurrentWebview }) => {
+      getCurrentWebview().onDragDropEvent(async (e: any) => {
+        const coords = getCoords(e);
+        if (!coords) return;
+        // Check if the drop position is within this panel
+        const rect = panelRef.current?.getBoundingClientRect();
+        if (!rect) return;
+        if (coords.x >= rect.left && coords.x <= rect.right && coords.y >= rect.top && coords.y <= rect.bottom) {
+          if (e.payload?.type === "over") setDragOver(true);
+          if (e.payload?.type === "leave") setDragOver(false);
+          if (e.payload?.type === "drop") {
+            setDragOver(false);
+            const paths: string[] = e.payload?.paths || [];
+            for (const p of paths) {
+              try { await ipc.listDirectory(p); addProjectRoot(p); } catch {}
+            }
+          }
+        }
+      });
+    });
+    return () => { unlisten?.(); };
+  }, []);
+
   return (
-    <div className="project-panel">
+    <div className={`project-panel ${dragOver ? "drag-over" : ""}`} ref={panelRef}>
       {roots.map((root) => (
         <RootTree key={root} root={root} isActive={root === activeProjectRoot}
           onRemove={projectRoots.includes(root) ? () => removeProjectRoot(root) : undefined}
