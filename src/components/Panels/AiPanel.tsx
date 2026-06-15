@@ -183,22 +183,25 @@ export function AiPanel() {
             </div>
           </div>
         )}
-        {streamThinking && (
-          <div className="ai-msg assistant">
-            <div className="ai-msg-role">🤖</div>
-            <div className="ai-msg-content">
-              <ThinkingBlock text={streamThinking} defaultOpen />
-            </div>
-          </div>
-        )}
         {messages.map((msg, i) => (
-          <div key={i} className={`ai-msg ${msg.role}`}>
-            <div className="ai-msg-role">{msg.role === "user" ? "👤" : "🤖"}</div>
-            <div className="ai-msg-content">
-              {(msg as any).thinking && messages[messages.length - 1] !== msg && <ThinkingBlock text={(msg as any).thinking} />}
-              <span dangerouslySetInnerHTML={{ __html: formatContent(msg.content) || (msg.role === "assistant" && streaming && i === messages.length - 1 ? "▊" : "") }} />
+          <React.Fragment key={i}>
+            <div className={`ai-msg ${msg.role}`}>
+              <div className="ai-msg-role">{msg.role === "user" ? "👤" : "🤖"}</div>
+              <div className="ai-msg-content">
+                {(msg as any).thinking && messages[messages.length - 1] !== msg && <ThinkingBlock text={(msg as any).thinking} />}
+                <span dangerouslySetInnerHTML={{ __html: formatContent(msg.content) || (msg.role === "assistant" && streaming && i === messages.length - 1 ? "▊" : "") }} />
+              </div>
             </div>
-          </div>
+            {/* Stream thinking right after user message, before assistant response */}
+            {streamThinking && msg.role === "user" && i === messages.length - 2 && (
+              <div className="ai-msg assistant">
+                <div className="ai-msg-role">🤖</div>
+                <div className="ai-msg-content">
+                  <ThinkingBlock text={streamThinking} defaultOpen />
+                </div>
+              </div>
+            )}
+          </React.Fragment>
         ))}
         {error && <div className="ai-error">{error}</div>}
         <div ref={messagesEndRef} />
