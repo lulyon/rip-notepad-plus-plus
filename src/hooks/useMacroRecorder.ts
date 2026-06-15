@@ -82,7 +82,6 @@ export function useMacroRecorder() {
             editorRef.trigger("keyboard", "deleteRight", {});
           } else if (key.startsWith("Arrow")) {
             const dir = key.replace("Arrow", "").toLowerCase();
-            const cursor = dir === "up" ? 16 : dir === "down" ? 18 : dir === "left" ? 15 : 17;
             editorRef.trigger("keyboard", "type", { text: "" });
             editorRef.setPosition({
               lineNumber: Math.max(1, editorRef.getPosition()!.lineNumber + (dir === "up" ? -1 : dir === "down" ? 1 : 0)),
