@@ -203,6 +203,20 @@ export const ipc = {
     return invoke("plugin:updater|check");
   },
 
+  // ── Workspace ──
+  saveWorkspace(path: string, data: any): Promise<void> {
+    return invoke("save_workspace", { path, data });
+  },
+  loadWorkspace(path: string): Promise<any> {
+    return invoke("load_workspace", { path });
+  },
+  listRecentWorkspaces(): Promise<Array<{ path: string; name: string; roots: string[]; last_opened: string }>> {
+    return invoke("list_recent_workspaces");
+  },
+  clearRecentWorkspaces(): Promise<void> {
+    return invoke("clear_recent_workspaces");
+  },
+
   // ── Archive ──
   listArchive(path: string): Promise<Array<{ name: string; size: number; is_dir: boolean }>> {
     return invoke("list_archive", { path });

@@ -230,6 +230,39 @@ function App() {
         setUdlOpen(true);
       } else if (actionId === "settings.editContextMenu") {
         setCtxConfigOpen(true);
+      } else if (actionId === "workspace.save") {
+        (async () => {
+          const { save } = await import("@tauri-apps/plugin-dialog");
+          const filePath = await save({ title: "Save Workspace", defaultPath: "my.ripworkspace", filters: [{ name: "ripNotepad++ Workspace", extensions: ["ripworkspace"] }] });
+          if (!filePath) return;
+          const tabs = useEditorStore.getState().tabs.filter(t => t.path);
+          await ipc.saveWorkspace(filePath, {
+            version: 1, name: filePath.split(/[/\\]/).pop() || "Untitled", roots: [useSettingsStore.getState().projectRoot || "."],
+            active_root: useSettingsStore.getState().projectRoot, open_tabs: tabs.map(t => ({ path: t.path!, language: t.language, encoding: t.encoding })),
+            active_tab_path: tabs.find(t => t.id === activeTabId)?.path || null, split_view: useSettingsStore.getState().splitView,
+            sidebar_tab: "files", created_at: new Date().toISOString(),
+          });
+        })().catch(console.error);
+      } else if (actionId === "workspace.load") {
+        (async () => {
+          const { open } = await import("@tauri-apps/plugin-dialog");
+          const filePath = await open({ title: "Open Workspace", filters: [{ name: "ripNotepad++ Workspace", extensions: ["ripworkspace"] }] });
+          if (!filePath) return;
+          try {
+            const ws = await ipc.loadWorkspace(filePath as string);
+            if (ws.roots?.[0]) useSettingsStore.getState().updateSetting("projectRoot", ws.roots[0]);
+            if (ws.open_tabs) {
+              const store = useEditorStore.getState();
+              for (const st of ws.open_tabs) {
+                try {
+                  const data = await ipc.readFile(st.path);
+                  store.openTab({ path: st.path, name: st.path.split(/[/\\]/).pop() || st.path, content: data.content, encoding: st.encoding, language: st.language });
+                } catch {}
+              }
+            }
+            if (ws.split_view) useSettingsStore.getState().updateSetting("splitView", ws.split_view as any);
+          } catch (e) { console.error("Load workspace failed:", e); }
+        })().catch(console.error);
       } else if (actionId === "run.claudeCode") {
         const tab = useEditorStore.getState().tabs.find(
           (t) => t.id === useEditorStore.getState().activeTabId,

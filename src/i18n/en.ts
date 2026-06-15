@@ -16,6 +16,8 @@ const en = {
     "menu.file.restoreLastClosed": "Restore Last Closed File",
     "menu.file.saveSession": "Save Session...",
     "menu.file.loadSession": "Load Session...",
+    "menu.file.saveWorkspace": "Save Workspace As...",
+    "menu.file.loadWorkspace": "Open Workspace...",
     "menu.file.preferences": "&Preferences...",
     "menu.file.shortcutMapper": "Shortcut &Mapper...",
     "menu.file.exit": "E&xit",

@@ -16,6 +16,8 @@ const zh = {
     "menu.file.restoreLastClosed": "恢复上次关闭的文件",
     "menu.file.saveSession": "保存会话...",
     "menu.file.loadSession": "加载会话...",
+    "menu.file.saveWorkspace": "保存工作区...",
+    "menu.file.loadWorkspace": "打开工作区...",
     "menu.file.preferences": "首选项(&P)...",
     "menu.file.shortcutMapper": "快捷键管理(&K)...",
     "menu.file.exit": "退出(&X)",

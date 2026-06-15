@@ -162,6 +162,14 @@ export function useMenuActions() {
           }
           break;
         }
+        case "file.saveWorkspace": {
+          window.dispatchEvent(new CustomEvent("menu-action", { detail: "workspace.save" }));
+          break;
+        }
+        case "file.loadWorkspace": {
+          window.dispatchEvent(new CustomEvent("menu-action", { detail: "workspace.load" }));
+          break;
+        }
         case "file.exit": {
           // Save session before closing
           const tabs = useEditorStore.getState().tabs;

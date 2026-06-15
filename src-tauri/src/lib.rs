@@ -16,6 +16,7 @@ use commands::git::{git_branch, git_checkout_branch, git_commit, git_create_bran
 use commands::plugin::{list_plugins, notify_plugins, send_plugin_command, start_plugin, stop_plugin, update_editor_state};
 use commands::system::{get_system_info, open_in_browser, open_terminal, run_command};
 use commands::monitor::{watch_file, check_file_changed, update_file_mtime, save_snapshot, load_snapshots, clear_snapshot, list_archive, MonitorState};
+use commands::workspace::{save_workspace, load_workspace, list_recent_workspaces, clear_recent_workspaces};
 use tauri::Manager;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -95,6 +96,11 @@ pub fn run() {
             clear_snapshot,
             // Archive
             list_archive,
+            // Workspace
+            save_workspace,
+            load_workspace,
+            list_recent_workspaces,
+            clear_recent_workspaces,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

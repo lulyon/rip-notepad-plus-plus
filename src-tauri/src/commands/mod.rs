@@ -6,3 +6,4 @@ pub mod system;
 pub mod plugin;
 pub mod git;
 pub mod monitor;
+pub mod workspace;
