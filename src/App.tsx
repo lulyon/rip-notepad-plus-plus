@@ -162,16 +162,19 @@ function App() {
     }
 
     function onOpenCommandPalette() { setCmdPaletteOpen(true); }
+    function onOpenToolsConfig() { setToolsOpen(true); }
     function onToggleMdPreview() { setShowMdPreview((prev) => !prev); }
     window.addEventListener("open-go-to-line", onOpenGoToLine);
     window.addEventListener("navigate-to-match", onNavigateToMatch);
     window.addEventListener("open-command-palette", onOpenCommandPalette);
     window.addEventListener("toggle-markdown-preview", onToggleMdPreview);
+    window.addEventListener("open-tools-config", onOpenToolsConfig);
     return () => {
       window.removeEventListener("open-go-to-line", onOpenGoToLine);
       window.removeEventListener("navigate-to-match", onNavigateToMatch);
       window.removeEventListener("open-command-palette", onOpenCommandPalette);
       window.removeEventListener("toggle-markdown-preview", onToggleMdPreview);
+      window.removeEventListener("open-tools-config", onOpenToolsConfig);
     };
   }, []);
 
@@ -221,8 +224,6 @@ function App() {
         setUdlOpen(true);
       } else if (actionId === "settings.editContextMenu") {
         setCtxConfigOpen(true);
-      } else if (actionId === "tools.configure") {
-        setToolsOpen(true);
       } else if (actionId.startsWith("tool.run.")) {
         (async () => {
           const toolId = actionId.replace("tool.run.", "");

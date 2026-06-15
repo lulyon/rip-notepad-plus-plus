@@ -716,6 +716,9 @@ export function useMenuActions() {
         case "tool.md5Generate": case "tool.sha1Generate": case "tool.sha256Generate": case "tool.sha512Generate":
           window.dispatchEvent(new CustomEvent("menu-action", { detail: "tool.openHash" }));
           break;
+        case "tools.configure":
+          window.dispatchEvent(new CustomEvent("open-tools-config"));
+          break;
 
         // ── Window ──
         case "window.nextTab": {
