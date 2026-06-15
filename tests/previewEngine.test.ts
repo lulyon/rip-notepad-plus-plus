@@ -358,7 +358,7 @@ describe("previewEngine — render outputs", () => {
   it("xlsx: requires file path", () => {
     const r = findRenderer("report.xlsx", "")!;
     const output = r.render(opts("", "/path/to/report.xlsx"));
-    expect(output).toContain("sheetjs");
+    expect(output).toContain("xlsx.full.min.js");
     expect(output).toContain("xlsx.full.min.js");
   });
 

@@ -1,5 +1,16 @@
 import MarkdownIt from "markdown-it";
 
+// ── Bundled library URLs (Vite ?url imports = offline, no CDN) ──
+import mammothUrl from "mammoth/mammoth.browser.min.js?url";
+import leafletJsUrl from "leaflet/dist/leaflet.js?url";
+import leafletCssUrl from "leaflet/dist/leaflet.css?url";
+import katexJsUrl from "katex/dist/katex.min.js?url";
+import katexCssUrl from "katex/dist/katex.min.css?url";
+import katexAutoRenderUrl from "katex/dist/contrib/auto-render.min.js?url";
+import xlsxUrl from "xlsx/dist/xlsx.full.min.js?url";
+import mermaidUrl from "mermaid/dist/mermaid.min.js?url";
+import sqlWasmUrl from "sql.js/dist/sql-wasm.js?url";
+
 /**
  * Generic preview engine with pluggable renderers.
  * Each renderer maps a file pattern to a render function.
@@ -287,7 +298,7 @@ function renderMermaid({ content }: { content: string }): string {
   </style></head><body>
   <div class="mermaid" id="diagram"></div>
   <div id="error" class="err" style="display:none">Failed to render diagram</div>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script src="${mermaidUrl}"></script>
   <script>
     mermaid.initialize({startOnLoad:false,theme:'default'});
     try {
@@ -315,9 +326,9 @@ function renderLatex({ content }: { content: string }): string {
     *{margin:0;padding:0}body{background:#fff;color:#333;font:16px/1.6 serif;padding:24px;max-width:800px;margin:0 auto}
     .err{color:#999;font-family:-apple-system,sans-serif}
   </style>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16/dist/katex.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16/dist/katex.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16/dist/contrib/auto-render.min.js"></script>
+  <link rel="stylesheet" href="${katexCssUrl}">
+  <script src="${katexJsUrl}"></script>
+  <script src="${katexAutoRenderUrl}"></script>
   </head><body><div id="math">${content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
   <p id="err" class="err" style="display:none">Math rendering may be limited in preview</p>
   <script>
@@ -510,7 +521,7 @@ function renderXlsx({ assetUrl }: { assetUrl: string | null }): string {
   <div id="sheets" class="sheet-tabs"></div>
   <div id="table"></div>
   <div id="err" class="err" style="display:none">Failed to load spreadsheet</div>
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+  <script src="${xlsxUrl}"></script>
   <script>
     (async function(){
       try{
@@ -571,7 +582,7 @@ function renderDocx({ assetUrl }: { assetUrl: string | null }): string {
     *{margin:0;padding:0}body{background:#fff;color:#333;font:14px/1.7 -apple-system,sans-serif;padding:24px;max-width:800px;margin:0 auto}
     .err{color:#999;text-align:center;padding:40px}
   </style></head><body><div id="content"></div><div id="err" class="err" style="display:none">Failed to load document</div>
-  <script src="https://cdn.jsdelivr.net/npm/mammoth/mammoth.browser.min.js"></script>
+  <script src="${mammothUrl}"></script>
   <script>
     (async function(){
       try{
@@ -596,8 +607,8 @@ function renderGeoJson({ content }: { content: string }): string {
     *{margin:0;padding:0}body{background:#1e1e1e}#map{width:100%;height:100vh}
     .err{color:#999;text-align:center;padding:40px;font-family:-apple-system,sans-serif}
   </style>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1/dist/leaflet.css">
-  <script src="https://cdn.jsdelivr.net/npm/leaflet@1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="${leafletCssUrl}">
+  <script src="${leafletJsUrl}"></script>
   </head><body><div id="map"></div><div id="err" class="err" style="display:none">Failed to load GeoJSON</div>
   <script>
     try{
@@ -625,11 +636,11 @@ function renderSqlite({ assetUrl }: { assetUrl: string | null }): string {
   <select id="tables" onchange="showTable(this.value)"></select>
   <div id="data"></div>
   <div id="err" class="err" style="display:none">Failed to open database</div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+  <script src="${sqlWasmUrl}"></script>
   <script>
     (async function(){
       try{
-        const SQL=await initSqlJs({locateFile:f=>'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.wasm'});
+        const SQL=await initSqlJs({locateFile:f=>'${sqlWasmUrl.replace(/\.js$/, '.wasm')}'});
         const resp=await fetch('${assetUrl}');
         const buf=await resp.arrayBuffer();
         const db=new SQL.Database(new Uint8Array(buf));
