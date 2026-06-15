@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect, useState } from "react";
 import MonacoEditor from "@monaco-editor/react";
 import type { editor } from "monaco-editor";
 import { useEditorStore } from "../../stores/editorStore";
@@ -9,6 +9,7 @@ import { useMarkStore } from "../../stores/markStore";
 import { useMonacoActions } from "../../hooks/useMonacoActions";
 import { useUdlStore } from "../../stores/udlStore";
 import { setMonaco, registerAllUdls } from "../../lib/udlCompiler";
+import { MinimapPreview } from "./MinimapPreview";
 
 interface EditorProps {
   /** Override which tab to edit. Defaults to store's activeTabId. */
@@ -47,6 +48,12 @@ export function Editor({ tabId }: EditorProps) {
   const columnMode = useSettingsStore((s) => s.columnMode);
 
   const activeTab = tabs.find((t) => t.id === activeTabId);
+
+  // ── Minimap hover preview state ──
+  const [mpVisible, setMpVisible] = useState(false);
+  const [mpLines, setMpLines] = useState<{ num: number; text: string; isTarget: boolean }[]>([]);
+  const [mpPos, setMpPos] = useState({ x: 0, y: 0 });
+  const mpTimerRef = useRef<number>(0);
 
   // ── Large file detection ──
   const contentLen = activeTab?.content?.length || 0;
@@ -156,11 +163,52 @@ export function Editor({ tabId }: EditorProps) {
 
       setTimeout(applyDecorations, 200);
 
+      // ── Minimap hover preview ──
+      const minimapEl = editor.getDomNode()?.querySelector(".minimap") as HTMLElement | null;
+      let minimapMouseHandler: ((e: MouseEvent) => void) | null = null;
+      let minimapLeaveHandler: (() => void) | null = null;
+
+      if (minimapEl) {
+        minimapMouseHandler = (e: MouseEvent) => {
+          const model = editor.getModel();
+          if (!model) return;
+          clearTimeout(mpTimerRef.current);
+          const rect = minimapEl!.getBoundingClientRect();
+          const ratio = (e.clientY - rect.top) / rect.height;
+          const line = Math.max(1, Math.floor(ratio * model.getLineCount()));
+
+          mpTimerRef.current = window.setTimeout(() => {
+            const total = model.getLineCount();
+            const start = Math.max(1, line - 10);
+            const end = Math.min(total, line + 10);
+            const previewLines = [];
+            for (let i = start; i <= end; i++) {
+              previewLines.push({
+                num: i,
+                text: model.getLineContent(i).slice(0, 150),
+                isTarget: i === line,
+              });
+            }
+            setMpLines(previewLines);
+            setMpPos({ x: rect.left - 220, y: e.clientY - 80 });
+            setMpVisible(true);
+          }, 80);
+        };
+        minimapLeaveHandler = () => {
+          clearTimeout(mpTimerRef.current);
+          setMpVisible(false);
+        };
+        minimapEl.addEventListener("mousemove", minimapMouseHandler);
+        minimapEl.addEventListener("mouseleave", minimapLeaveHandler);
+      }
+
       // Store cleanup function
       decorationCleanupRef.current = () => {
         window.removeEventListener('bookmarks-changed', onBookmarksChanged);
         window.removeEventListener('marks-changed', onMarksChanged);
         contentChangeSub.dispose();
+        if (minimapEl && minimapMouseHandler) minimapEl.removeEventListener("mousemove", minimapMouseHandler);
+        if (minimapEl && minimapLeaveHandler) minimapEl.removeEventListener("mouseleave", minimapLeaveHandler);
       };
     },
     [handleMount, activeTabId, updateTabCursor, setEditorRef, isPrimary],
@@ -180,15 +228,16 @@ export function Editor({ tabId }: EditorProps) {
   }
 
   return (
-    <MonacoEditor
-      key={activeTab.id}
-      height="100%"
-      language={activeTab.language}
-      value={activeTab.content}
-      theme={theme}
-      onChange={handleChange}
-      onMount={onMount}
-      options={{
+    <>
+      <MonacoEditor
+        key={activeTab.id}
+        height="100%"
+        language={activeTab.language}
+        value={activeTab.content}
+        theme={theme}
+        onChange={handleChange}
+        onMount={onMount}
+        options={{
         fontSize,
         fontFamily,
         minimap: {
@@ -223,5 +272,7 @@ export function Editor({ tabId }: EditorProps) {
         suggest: { showWords: !isLargeFile } as const,
       }}
     />
+    <MinimapPreview visible={mpVisible} lines={mpLines} pos={mpPos} />
+    </>
   );
 }
