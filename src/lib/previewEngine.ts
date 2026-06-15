@@ -769,20 +769,16 @@ registerPreviewRenderer({
 
 // ── 12. Draw.io ──
 function renderDrawio({ content }: { content: string }): string {
-  // diagrams.net uses pako deflate + base64 + URL-safe encoding
-  // Step 1: encode string to UTF-8 bytes
-  const encoder = new TextEncoder();
-  const utf8 = encoder.encode(content);
-  // Step 2: deflate with pako
-  const deflated = pako.deflate(utf8, { level: 9 });
-  // Step 3: binary to base64 (safe for all byte values)
-  let binary = "";
-  for (let i = 0; i < deflated.length; i++) {
-    binary += String.fromCharCode(deflated[i]);
+  // diagrams.net encoding: URL-encode → pako.deflateRaw → base64 → URL-safe
+  const urlEncoded = encodeURIComponent(content);
+  const utf8 = new TextEncoder().encode(urlEncoded);
+  const deflated = pako.deflateRaw(utf8);
+  // Chunked base64 to avoid JS argument limit
+  let fullB64 = "";
+  for (let i = 0; i < deflated.length; i += 32768) {
+    fullB64 += btoa(String.fromCharCode(...deflated.slice(i, i + 32768)));
   }
-  const b64 = btoa(binary);
-  // Step 4: URL-safe encoding
-  const encoded = b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const encoded = fullB64.replace(/\+/g, "-").replace(/\//g, "_");
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
     *{margin:0;padding:0}body{background:#fff}iframe{width:100%;height:100vh;border:none}
   </style></head><body><iframe src="https://viewer.diagrams.net/?lightbox=1&edit=_blank#R${encoded}"></iframe></body></html>`;
