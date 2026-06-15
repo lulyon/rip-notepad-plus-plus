@@ -50,101 +50,98 @@ export function Sidebar() {
 // ── ProjectPanel (File Tree) ──
 
 function ProjectPanel() {
+  const projectRoots = useSettingsStore((s) => s.projectRoots);
+  const activeProjectRoot = useSettingsStore((s) => s.activeProjectRoot);
+  const addProjectRoot = useSettingsStore((s) => s.addProjectRoot);
+  const removeProjectRoot = useSettingsStore((s) => s.removeProjectRoot);
+  const updateSetting = useSettingsStore((s) => s.updateSetting);
+
+  // Use roots if available, otherwise fall back to auto-detect single root
+  const roots = projectRoots.length > 0 ? projectRoots : [activeTabDerivedRoot()];
+
+  function activeTabDerivedRoot(): string {
+    const tabs1 = useEditorStore.getState().tabs;
+    const activeId = useEditorStore.getState().activeTabId;
+    const tab = tabs1.find((t) => t.id === activeId);
+    return tab?.path
+      ? tab.path.split(/[/\\]/).slice(0, -1).join("/") || "."
+      : ".";
+  }
+
+  const handleAddRoot = async () => {
+    const { open } = await import("@tauri-apps/plugin-dialog");
+    const dir = await open({ title: "Add Project Folder", directory: true });
+    if (dir) addProjectRoot(dir as string);
+  };
+
+  return (
+    <div className="project-panel">
+      {roots.map((root) => (
+        <RootTree key={root} root={root} isActive={root === activeProjectRoot}
+          onRemove={roots.length > 1 ? () => removeProjectRoot(root) : undefined}
+          onActivate={() => updateSetting("projectRoot", root)}
+        />
+      ))}
+      <button className="project-add-root" onClick={handleAddRoot}>
+        + Add Folder...
+      </button>
+    </div>
+  );
+}
+
+function RootTree({ root, isActive, onRemove, onActivate }: {
+  root: string; isActive: boolean; onRemove?: () => void; onActivate: () => void;
+}) {
   const tabs = useEditorStore((s) => s.tabs);
-  const activeTabId = useEditorStore((s) => s.activeTabId);
-  const activeTab = tabs.find((t) => t.id === activeTabId);
-  const projectRoot = useSettingsStore((s) => s.projectRoot);
-  const [root, setRoot] = useState<string>(".");
   const [entries, setEntries] = useState<DirEntry[]>([]);
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+  const name = root.split(/[/\\]/).pop() || root;
 
-  // Determine root: fixed project root > active tab parent > cwd
-  useEffect(() => {
-    const dir = projectRoot
-      || (activeTab?.path
-        ? activeTab.path.split(/[/\\]/).slice(0, -1).join("/") || "."
-        : ".");
-    if (dir !== root) {
-      setRoot(dir);
-      loadDir(dir);
-    }
-  }, [projectRoot, activeTab?.path]);
+  useEffect(() => { loadDir(root); }, [root]);
 
   const loadDir = useCallback(async (dir: string) => {
     setLoading(true);
     try {
       const items = await ipc.listDirectory(dir);
-      setEntries(items);
-    } catch (err) {
-      console.error("Failed to list directory:", err);
+      setEntries(items.sort((a, b) => (a.is_dir === b.is_dir ? a.name.localeCompare(b.name) : a.is_dir ? -1 : 1)));
+    } catch {
       setEntries([]);
-    } finally {
-      setLoading(false);
-    }
+    } finally { setLoading(false); }
   }, []);
 
   const toggleExpand = useCallback(async (entry: DirEntry) => {
     if (!entry.is_dir) return;
     const key = entry.path;
-    setExpanded((prev) => {
-      const next = new Set(prev);
-      if (next.has(key)) {
-        next.delete(key);
-      } else {
-        next.add(key);
-      }
-      return next;
-    });
+    setExpanded((prev) => { const next = new Set(prev); if (next.has(key)) next.delete(key); else next.add(key); return next; });
   }, []);
 
-  const handleOpenFile = useCallback(
-    async (entry: DirEntry) => {
-      if (entry.is_dir) {
-        toggleExpand(entry);
-        return;
-      }
-      const existingTab = tabs.find((t) => t.path === entry.path);
-      if (existingTab) {
-        useEditorStore.getState().setActiveTab(existingTab.id);
-        return;
-      }
-      try {
-        const data = await ipc.readFile(entry.path);
-        useEditorStore.getState().openTab({
-          path: entry.path,
-          name: entry.name,
-          content: data.content,
-          encoding: data.encoding,
-          language: detectLanguage(entry.extension || ""),
-        });
-      } catch (err) {
-        console.error("Failed to open file:", err);
-      }
-    },
-    [tabs, toggleExpand],
-  );
+  const handleOpenFile = useCallback(async (entry: DirEntry) => {
+    if (entry.is_dir) { toggleExpand(entry); return; }
+    const existingTab = tabs.find((t) => t.path === entry.path);
+    if (existingTab) { useEditorStore.getState().setActiveTab(existingTab.id); return; }
+    try {
+      const data = await ipc.readFile(entry.path);
+      useEditorStore.getState().openTab({ path: entry.path, name: entry.name, content: data.content, encoding: data.encoding, language: detectLanguage(entry.extension || "") });
+    } catch (err) { console.error("Failed to open file:", err); }
+  }, [tabs, toggleExpand]);
 
   return (
-    <div className="project-panel">
-      <div className="project-root">{root}</div>
-      {loading ? (
-        <div className="project-loading">...</div>
-      ) : (
+    <div className="root-tree">
+      <div className={`project-root ${isActive ? "active" : ""}`} onClick={onActivate} title={root}>
+        <span className="root-collapse" onClick={(e) => { e.stopPropagation(); setCollapsed(!collapsed); }}>{collapsed ? "▸" : "▾"}</span>
+        <span>{name}</span>
+        {onRemove && <button className="root-remove" onClick={(e) => { e.stopPropagation(); onRemove(); }} title="Remove root">×</button>}
+        <button className="root-refresh" onClick={(e) => { e.stopPropagation(); loadDir(root); }} title="Refresh">↻</button>
+      </div>
+      {!collapsed && (loading ? <div className="project-loading">...</div> : (
         <div className="project-tree">
           {entries.map((entry) => (
-            <div key={entry.path} className="tree-item">
-              <FileTreeNode
-                entry={entry}
-                depth={0}
-                expanded={expanded}
-                onToggle={toggleExpand}
-                onOpen={handleOpenFile}
-              />
-            </div>
+            <div key={entry.path}><FileTreeNode entry={entry} depth={0} expanded={expanded} onToggle={toggleExpand} onOpen={handleOpenFile} /></div>
           ))}
         </div>
-      )}
+      ))}
     </div>
   );
 }

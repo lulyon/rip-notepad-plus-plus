@@ -150,3 +150,16 @@
   color: var(--text-secondary);
   font-size: 11px;
 }
+
+/* ── Multi-root ── */
+.project-add-root {
+  width: 100%; padding: 4px 8px; background: var(--bg-secondary); border: 1px dashed var(--border-color); color: var(--text-secondary); cursor: pointer; font-size: 11px; margin-top: 4px;
+}
+.project-add-root:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+.root-tree { border-bottom: 1px solid var(--border-color); }
+.root-collapse { cursor: pointer; margin-right: 4px; font-size: 10px; }
+.root-remove { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 12px; padding: 0 4px; margin-left: auto; }
+.root-remove:hover { color: #d32f2f; }
+.root-refresh { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 11px; padding: 0 4px; }
+.root-refresh:hover { color: var(--text-primary); }
+.project-root.active { color: var(--accent-color); }

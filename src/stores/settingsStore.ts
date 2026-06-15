@@ -21,6 +21,8 @@ export interface SettingsState {
   showStatusBar: boolean;
   showSidebar: boolean;
   projectRoot: string | null;
+  projectRoots: string[];
+  activeProjectRoot: string | null;
   fullScreen: boolean;
   alwaysOnTop: boolean;
   autoSave: boolean;
@@ -47,6 +49,8 @@ export interface SettingsState {
   setShortcut: (actionId: string, keybind: string) => void;
   resetShortcuts: () => void;
   loadSettings: () => void;
+  addProjectRoot: (path: string) => void;
+  removeProjectRoot: (path: string) => void;
 }
 
 const DEFAULT_SHORTCUTS: Record<string, string> = {
@@ -115,6 +119,8 @@ export const useSettingsStore = create<SettingsState>((set) => {
     showStatusBar: saved.showStatusBar ?? true,
     showSidebar: saved.showSidebar ?? false,
     projectRoot: saved.projectRoot ?? null,
+    projectRoots: saved.projectRoots ?? (saved.projectRoot ? [saved.projectRoot] : []),
+    activeProjectRoot: saved.activeProjectRoot ?? saved.projectRoot ?? null,
     fullScreen: saved.fullScreen ?? false,
     alwaysOnTop: saved.alwaysOnTop ?? false,
     autoSave: saved.autoSave ?? true,
@@ -157,6 +163,23 @@ export const useSettingsStore = create<SettingsState>((set) => {
     resetShortcuts: () => {
       set({ shortcuts: { ...DEFAULT_SHORTCUTS } });
       saveToStorage({ shortcuts: { ...DEFAULT_SHORTCUTS } });
+    },
+
+    addProjectRoot: (path) => {
+      set((s) => {
+        if (s.projectRoots.includes(path)) return s;
+        const roots = [...s.projectRoots, path];
+        saveToStorage({ projectRoots: roots } as any);
+        return { projectRoots: roots, activeProjectRoot: path, projectRoot: path };
+      });
+    },
+    removeProjectRoot: (path) => {
+      set((s) => {
+        const roots = s.projectRoots.filter((r) => r !== path);
+        const newActive = s.activeProjectRoot === path ? (roots[0] || null) : s.activeProjectRoot;
+        saveToStorage({ projectRoots: roots, activeProjectRoot: newActive } as any);
+        return { projectRoots: roots, activeProjectRoot: newActive, projectRoot: newActive };
+      });
     },
 
     loadSettings: () => {
