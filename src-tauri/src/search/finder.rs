@@ -67,17 +67,15 @@ pub fn find_in_files(
             }
         }
 
-        // Skip binary files (check for null bytes in first 8KB)
-        if let Ok(data) = std::fs::read(path) {
-            if data.iter().take(8192).any(|&b| b == 0) {
-                continue;
-            }
-        } else {
+        // Read file once, check binary + use content
+        let data = match std::fs::read(path) {
+            Ok(d) => d,
+            Err(_) => continue,
+        };
+        if data.iter().take(8192).any(|&b| b == 0) {
             continue;
         }
-
-        // Read file content
-        let content = match std::fs::read_to_string(path) {
+        let content = match String::from_utf8(data) {
             Ok(c) => c,
             Err(_) => continue,
         };

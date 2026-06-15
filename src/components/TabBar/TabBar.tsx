@@ -109,16 +109,9 @@ export function TabBar() {
               {tab.name}
               {tab.color && <span className={`tab-color-dot tab-color-${tab.color}`} />}
             </span>
-            <button
-              className="tab-close"
-              onClick={(e) => {
-                e.stopPropagation();
-                closeTab(tab.id);
-              }}
-              title="Close"
-            >
-              ×
-            </button>
+            {!tab.pinned && (
+              <button className="tab-close" onClick={(e) => { e.stopPropagation(); closeTab(tab.id); }} title="Close">×</button>
+            )}
           </div>
         ))}
       </div>

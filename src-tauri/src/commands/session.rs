@@ -1,8 +1,8 @@
 use crate::models::SessionData;
 
 fn session_path() -> Result<std::path::PathBuf, String> {
-    let dir = dirs_next().ok_or("Cannot determine home directory")?;
-    let app_dir = dir.join(".ripnotepadpp");
+    let dir = dirs::data_dir().ok_or("Cannot determine data directory")?;
+    let app_dir = dir.join("ripnotepad-plus-plus");
     std::fs::create_dir_all(&app_dir)
         .map_err(|e| format!("Failed to create config dir: {}", e))?;
     Ok(app_dir.join("session.json"))
@@ -41,13 +41,3 @@ pub async fn clear_session() -> Result<(), String> {
     Ok(())
 }
 
-fn dirs_next() -> Option<std::path::PathBuf> {
-    #[cfg(target_os = "windows")]
-    {
-        std::env::var("APPDATA").ok().map(std::path::PathBuf::from)
-    }
-    #[cfg(not(target_os = "windows"))]
-    {
-        std::env::var("HOME").ok().map(|h| std::path::PathBuf::from(h))
-    }
-}
