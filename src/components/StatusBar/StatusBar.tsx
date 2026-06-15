@@ -59,6 +59,11 @@ export function StatusBar() {
           {gitStatus.behind > 0 && ` ↓${gitStatus.behind}`}
         </span>
       )}
+      {import.meta.env.DEV && activeTab && (
+        <span className="status-item" style={{ fontSize: "10px", opacity: 0.5 }}>
+          {(activeTab.content.length / 1024).toFixed(0)}KB
+        </span>
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import "./i18n";
 import { useEditorStore } from "./stores/editorStore";
@@ -20,24 +20,26 @@ import { TabBar } from "./components/TabBar/TabBar";
 import { SplitEditor } from "./components/Editor/SplitEditor";
 import { StatusBar } from "./components/StatusBar/StatusBar";
 import { SearchPanel } from "./components/SearchPanel/SearchPanel";
-import { EncodingDialog } from "./components/Dialogs/EncodingDialog";
-import { GoToLineDialog } from "./components/Dialogs/GoToLineDialog";
-import { PreferencesDialog } from "./components/Dialogs/PreferencesDialog";
-import { ShortcutMapperDialog } from "./components/Dialogs/ShortcutMapperDialog";
-import { RunDialog } from "./components/Dialogs/RunDialog";
-import { AboutDialog } from "./components/Dialogs/AboutDialog";
-import { PluginDialog } from "./components/Dialogs/PluginDialog";
-import { CompareDialog } from "./components/Dialogs/CompareDialog";
-import { CommandPalette } from "./components/Dialogs/CommandPalette";
-import { UdlDialog } from "./components/Dialogs/UdlDialog";
-import { ContextMenuDialog } from "./components/Dialogs/ContextMenuDialog";
-import { EditorContextMenu } from "./components/Editor/EditorContextMenu";
-import { HashDialog } from "./components/Dialogs/HashDialog";
-import { SummaryDialog } from "./components/Dialogs/SummaryDialog";
-import { UnsavedChangesDialog } from "./components/Dialogs/UnsavedChangesDialog";
 import { Sidebar } from "./components/Panels/Sidebar";
 import { GenericPreview } from "./components/Panels/GenericPreview";
 import { hasPreview } from "./lib/previewEngine";
+
+// ── Lazy-loaded dialogs (code-split, loaded on first open) ──
+const EncodingDialog = lazy(() => import("./components/Dialogs/EncodingDialog").then(m => ({ default: m.EncodingDialog })));
+const GoToLineDialog = lazy(() => import("./components/Dialogs/GoToLineDialog").then(m => ({ default: m.GoToLineDialog })));
+const PreferencesDialog = lazy(() => import("./components/Dialogs/PreferencesDialog").then(m => ({ default: m.PreferencesDialog })));
+const ShortcutMapperDialog = lazy(() => import("./components/Dialogs/ShortcutMapperDialog").then(m => ({ default: m.ShortcutMapperDialog })));
+const RunDialog = lazy(() => import("./components/Dialogs/RunDialog").then(m => ({ default: m.RunDialog })));
+const AboutDialog = lazy(() => import("./components/Dialogs/AboutDialog").then(m => ({ default: m.AboutDialog })));
+const PluginDialog = lazy(() => import("./components/Dialogs/PluginDialog").then(m => ({ default: m.PluginDialog })));
+const CompareDialog = lazy(() => import("./components/Dialogs/CompareDialog").then(m => ({ default: m.CompareDialog })));
+const CommandPalette = lazy(() => import("./components/Dialogs/CommandPalette").then(m => ({ default: m.CommandPalette })));
+const UdlDialog = lazy(() => import("./components/Dialogs/UdlDialog").then(m => ({ default: m.UdlDialog })));
+const ContextMenuDialog = lazy(() => import("./components/Dialogs/ContextMenuDialog").then(m => ({ default: m.ContextMenuDialog })));
+const HashDialog = lazy(() => import("./components/Dialogs/HashDialog").then(m => ({ default: m.HashDialog })));
+const SummaryDialog = lazy(() => import("./components/Dialogs/SummaryDialog").then(m => ({ default: m.SummaryDialog })));
+const UnsavedChangesDialog = lazy(() => import("./components/Dialogs/UnsavedChangesDialog").then(m => ({ default: m.UnsavedChangesDialog })));
+const EditorContextMenu = lazy(() => import("./components/Editor/EditorContextMenu").then(m => ({ default: m.EditorContextMenu })));
 
 function App() {
   const { t } = useTranslation();
@@ -285,8 +287,9 @@ function App() {
       </div>
       {showStatusBar && <StatusBar />}
 
-      {/* Dialogs */}
-      <EncodingDialog />
+      {/* Dialogs (lazy-loaded, code-split) */}
+      <Suspense fallback={null}>
+        <EncodingDialog />
       <GoToLineDialog open={gotoLineOpen} onClose={() => setGotoLineOpen(false)} />
       <PreferencesDialog open={prefsOpen} onClose={() => setPrefsOpen(false)} />
       <ShortcutMapperDialog open={shortcutMapperOpen} onClose={() => setShortcutMapperOpen(false)} />
@@ -343,6 +346,7 @@ function App() {
         }}
         onCancel={() => useEditorStore.getState().dismissUnsavedDialog()}
       />
+      </Suspense>
     </div>
   );
 }

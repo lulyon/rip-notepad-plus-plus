@@ -47,6 +47,11 @@ export function Editor({ tabId }: EditorProps) {
 
   const activeTab = tabs.find((t) => t.id === activeTabId);
 
+  // ── Large file detection ──
+  const contentLen = activeTab?.content?.length || 0;
+  const isLargeFile = contentLen > 1_000_000;    // >1MB → disable IntelliSense
+  const isVeryLargeFile = contentLen > 10_000_000; // >10MB → ultra-minimal mode
+
   // Cleanup editor ref on unmount
   useEffect(() => {
     return () => {
@@ -185,31 +190,30 @@ export function Editor({ tabId }: EditorProps) {
       options={{
         fontSize,
         fontFamily,
-        minimap: { enabled: showMinimap },
-        scrollBeyondLastLine,
-        wordWrap,
+        minimap: { enabled: showMinimap && !isVeryLargeFile },
+        scrollBeyondLastLine: isVeryLargeFile ? false : scrollBeyondLastLine,
+        wordWrap: isVeryLargeFile ? "off" : wordWrap,
         lineNumbers,
-        renderWhitespace,
+        renderWhitespace: isVeryLargeFile ? "none" : renderWhitespace,
         tabSize,
         insertSpaces,
-        bracketPairColorization: { enabled: bracketPairColorization },
-        automaticLayout: true,
-        folding: true,
-        foldingStrategy: "indentation",
-        guides: { bracketPairs: bracketPairColorization, indentation: showIndentGuides },
-        cursorBlinking: "smooth",
-        cursorSmoothCaretAnimation: "on",
+        bracketPairColorization: { enabled: bracketPairColorization && !isLargeFile },
+        automaticLayout: !isVeryLargeFile,
+        folding: !isVeryLargeFile,
+        foldingStrategy: "indentation" as const,
+        guides: { bracketPairs: bracketPairColorization && !isLargeFile, indentation: showIndentGuides && !isVeryLargeFile },
+        cursorBlinking: isVeryLargeFile ? "solid" : "smooth",
+        cursorSmoothCaretAnimation: isVeryLargeFile ? "off" : "on",
         smoothScrolling,
-        padding: { top: 8 },
+        padding: isVeryLargeFile ? { top: 4 } : { top: 8 },
         find: {
           addExtraSpaceOnTop: false,
           autoFindInSelection: "never",
         },
         columnSelection: columnMode,
         multiCursorModifier: "alt",
-        // Emmet abbreviation expansion (HTML/CSS/JSX/TSX)
-        acceptSuggestionOnCommitCharacter: true,
-        suggest: { showWords: true } as const,
+        acceptSuggestionOnCommitCharacter: !isLargeFile,
+        suggest: { showWords: !isLargeFile } as const,
       }}
     />
   );
