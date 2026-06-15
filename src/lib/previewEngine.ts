@@ -333,15 +333,19 @@ registerPreviewRenderer({
 
 // ── LaTeX/KaTeX math renderer ──
 function renderLatex({ content }: { content: string }): string {
+  // Escape LaTeX source for safe HTML display, preserving math delimiters
+  const safeContent = content
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/\n/g, "<br>");
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
     *{margin:0;padding:0}body{background:#fff;color:#333;font:16px/1.6 serif;padding:24px;max-width:800px;margin:0 auto}
-    .err{color:#999;font-family:-apple-system,sans-serif}
+    .katex-display{margin:1em 0}.err{color:#999;font-family:-apple-system,sans-serif}
   </style>
   <link rel="stylesheet" href="${katexCssUrl}">
   <script src="${katexJsUrl}"></script>
   <script src="${katexAutoRenderUrl}"></script>
-  </head><body><div id="math">${content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
-  <p id="err" class="err" style="display:none">Math rendering may be limited in preview</p>
+  </head><body><div id="math">${safeContent}</div>
+  <p id="err" class="err" style="display:none">KaTeX renders inline math ($...$) and display math ($$...$$) only</p>
   <script>
     try { renderMathInElement(document.getElementById('math'),{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]}); }
     catch(e) { document.getElementById('err').style.display='block'; }
