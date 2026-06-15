@@ -171,21 +171,24 @@ export function useMenuActions() {
           break;
         }
         case "file.exit": {
-          // Save session before closing
+          // Save session (best effort, don't block exit)
           const tabs = useEditorStore.getState().tabs;
           const sessionTabs = tabs
             .filter((t) => t.path)
             .map((t) => ({ path: t.path!, encoding: t.encoding, language: t.language }));
+          ipc.saveSession({
+            open_tabs: sessionTabs,
+            active_tab_id: useEditorStore.getState().activeTabId,
+            project_root: useSettingsStore.getState().projectRoot,
+            window_width: null,
+            window_height: null,
+          }).catch(() => {});
           try {
-            await ipc.saveSession({
-              open_tabs: sessionTabs,
-              active_tab_id: useEditorStore.getState().activeTabId,
-              project_root: useSettingsStore.getState().projectRoot,
-              window_width: null,
-              window_height: null,
-            });
-          } catch (_) { /* best effort */ }
-          await getCurrentWindow().close();
+            await getCurrentWindow().close();
+          } catch {
+            // Fallback: force process exit (dev mode)
+            window.close();
+          }
           break;
         }
 
