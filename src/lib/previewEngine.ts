@@ -346,26 +346,7 @@ registerPreviewRenderer({
   useIframe: true,
 });
 
-// ── PlantUML renderer ──
-function renderPlantUml({ content }: { content: string }): string {
-  const encoded = btoa(content);
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
-    *{margin:0;padding:0}body{background:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh}
-    img{max-width:95%;max-height:95vh} .err{color:#999;text-align:center;padding:40px;font-family:-apple-system,sans-serif}
-  </style></head><body>
-  <img src="https://www.plantuml.com/plantuml/svg/~1${encoded}" alt="PlantUML"
-    onerror="this.style.display='none';document.getElementById('err').style.display='block'">
-  <div id="err" class="err" style="display:none">Failed to render PlantUML</div>
-  </body></html>`;
-}
-registerPreviewRenderer({
-  id: "plantuml",
-  name: "PlantUML",
-  extensions: ["puml", "plantuml"],
-  languages: [],
-  render: renderPlantUml,
-  useIframe: true,
-});
+// PlantUML preview removed — requires Java server, no browser-side renderer
 
 // ── Graphviz/DOT renderer ──
 function renderDot({ content }: { content: string }): string {

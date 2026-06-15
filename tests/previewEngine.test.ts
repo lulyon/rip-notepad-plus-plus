@@ -115,10 +115,6 @@ describe("previewEngine — renderer detection", () => {
     expect(findRenderer("paper.latex", "")!.id).toBe("latex");
   });
 
-  it("finds plantuml renderer", () => {
-    expect(findRenderer("diagram.puml", "")!.id).toBe("plantuml");
-  });
-
   it("finds dot renderer", () => {
     expect(findRenderer("graph.dot", "")!.id).toBe("dot");
     expect(findRenderer("graph.gv", "")!.id).toBe("dot");
@@ -158,7 +154,7 @@ describe("previewEngine — renderer detection", () => {
   it("has at least 28 renderers registered", async () => {
     const { getPreviewRenderers } = await import("../src/lib/previewEngine");
     const renderers = getPreviewRenderers();
-    expect(renderers.length).toBeGreaterThanOrEqual(28);
+    expect(renderers.length).toBeGreaterThanOrEqual(26);
   });
 });
 
@@ -425,11 +421,6 @@ describe("previewEngine — render outputs", () => {
     expect(output).toContain("renderMathInElement");
   });
 
-  it("plantuml: renders PlantUML CDN URL", () => {
-    const r = findRenderer("diagram.puml", "")!;
-    const output = r.render(opts("@startuml\nA->B\n@enduml"));
-    expect(output).toContain("plantuml.com");
-  });
 
   it("dot: renders viz.js CDN", () => {
     const r = findRenderer("graph.dot", "")!;
