@@ -30,5 +30,6 @@ notify = "6"
 zip = "0.6"
 dirs = "5"
 chrono = "0.4"
+tauri-plugin-process = "2"
 tauri-plugin-updater = "2"
 image = { version = "0.25", default-features = false, features = ["png"] }

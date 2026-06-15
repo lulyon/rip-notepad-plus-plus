@@ -26,6 +26,7 @@ pub fn run() {
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
+        .plugin(tauri_plugin_process::init())
         .manage(Mutex::new(MonitorState::new()))
         .setup(|app| {
             let icon_bytes = include_bytes!("../icons/128x128.png");
