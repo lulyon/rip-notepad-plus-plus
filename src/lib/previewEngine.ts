@@ -234,8 +234,9 @@ registerPreviewRenderer({
 function renderPdf({ assetUrl }: { assetUrl: string | null }): string {
   if (!assetUrl) return "<p style='color:#999;padding:40px;text-align:center'>Save the file first</p>";
   return `<!DOCTYPE html><html><head><style>
-    *{margin:0;padding:0}body{background:#525659}embed{width:100%;height:100vh;border:none}
-  </style></head><body><embed src="${assetUrl}" type="application/pdf"></body></html>`;
+    *{margin:0;padding:0}body{background:#525659}
+    iframe{width:100%;height:100vh;border:none}
+  </style></head><body><iframe src="${assetUrl}"></iframe></body></html>`;
 }
 registerPreviewRenderer({
   id: "pdf",

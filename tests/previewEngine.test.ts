@@ -343,8 +343,7 @@ describe("previewEngine — render outputs", () => {
   it("pdf: requires file path", () => {
     const r = findRenderer("doc.pdf", "")!;
     const output = r.render(opts("", "/path/to/doc.pdf"));
-    expect(output).toContain("<embed");
-    expect(output).toContain("application/pdf");
+    expect(output).toContain("<iframe");
   });
 
   it("xlsx: requires file path", () => {
