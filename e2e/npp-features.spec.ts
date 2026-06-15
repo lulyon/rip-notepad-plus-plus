@@ -32,12 +32,12 @@ test.describe("Notepad++ ported features", () => {
   });
 
   // ── Sidebar now has 3 tabs (Files, Git, Symbols) ──
-  test("sidebar has three tabs", async ({ page }) => {
+  test("sidebar has four tabs", async ({ page }) => {
     await page.locator(".menu-bar-item").nth(3).click();
     await page.waitForTimeout(150);
     await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
     await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar-tab")).toHaveCount(3);
+    await expect(page.locator(".sidebar-tab")).toHaveCount(4);
   });
 
   // ── Git tab visible ──
@@ -46,7 +46,7 @@ test.describe("Notepad++ ported features", () => {
     await page.waitForTimeout(150);
     await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
     await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar-tab").nth(1)).toContainText("Git");
+    await expect(page.locator(".sidebar-tab").nth(2)).toContainText("Git");
   });
 
   // ── Symbols tab visible ──
@@ -55,12 +55,12 @@ test.describe("Notepad++ ported features", () => {
     await page.waitForTimeout(150);
     await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
     await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar-tab").nth(2)).toContainText("符号");
+    await expect(page.locator(".sidebar-tab").nth(3)).toContainText("符号");
   });
 
   // ── Terminal toggle menu item ──
   test("Compare menu item exists", async ({ page }) => {
-    await page.locator(".menu-bar-item").nth(9).click(); // Plugins
+    await page.locator(".menu-bar-item").nth(10).click(); // Plugins
     await page.waitForTimeout(150);
     await expect(page.locator(".menu-dropdown")).toContainText("文件对比");
   });
@@ -98,7 +98,7 @@ test.describe("Notepad++ ported features", () => {
 
   // ── Plugin API: editor methods available ──
   test("Plugin manager opens and shows sample-hello", async ({ page }) => {
-    await page.locator(".menu-bar-item").nth(9).click(); // Plugins
+    await page.locator(".menu-bar-item").nth(10).click(); // Plugins
     await page.waitForTimeout(150);
     await page.locator(".menu-item",{hasText:"插件管理"}).click();
     await page.waitForTimeout(300);

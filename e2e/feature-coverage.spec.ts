@@ -104,7 +104,7 @@ test.describe("Feature coverage — dialogs", () => {
   });
 
   test("Plugin manager dialog opens", async ({ page }) => {
-    await clickMenuItem(page, 9, "插件管理"); // Plugins → Plugin Manager
+    await clickMenuItem(page, 10, "插件管理"); // Plugins → Plugin Manager
     await page.waitForTimeout(300);
     await expect(page.locator(".plugin-dialog")).toBeVisible();
   });
@@ -119,13 +119,13 @@ test.describe("Feature coverage — dialogs", () => {
 test.describe("Feature coverage — sidebar", () => {
   test.beforeEach(async ({ page: p }) => { await setupPage(p); });
 
-  test("sidebar has three tabs", async ({ page }) => {
+  test("sidebar has four tabs", async ({ page }) => {
     await page.locator(".menu-bar-item").nth(3).click(); // View
     await page.waitForTimeout(150);
     await page.locator(".menu-item", { hasText: "显示侧边栏" }).click();
     await page.waitForTimeout(300);
     await expect(page.locator(".sidebar")).toBeVisible();
-    await expect(page.locator(".sidebar-tab")).toHaveCount(3);
+    await expect(page.locator(".sidebar-tab")).toHaveCount(4);
   });
 
   test("Workspace: Open Folder menu item exists with shortcut", async ({ page }) => {

@@ -239,8 +239,8 @@ test.describe("Git panel", () => {
     await page.waitForTimeout(100);
     await page.locator(".menu-item", { hasText: "显示侧边栏" }).click();
     await page.waitForTimeout(300);
-    // Git is tab index 1 (Files=0, Git=1, Symbols=2)
-    await expect(page.locator(".sidebar-tab").nth(1)).toContainText("Git");
+    // Git is tab index 2 (Files=0, AI=1, Git=2, Symbols=3)
+    await expect(page.locator(".sidebar-tab").nth(2)).toContainText("Git");
   });
 });
 
