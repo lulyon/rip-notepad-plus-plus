@@ -46,7 +46,7 @@ Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **
 - Full screen (F11) / Distraction-free mode (F12)
 - Window always on top
 - Horizontal / Vertical split editor with sync scroll
-- Sidebar with 3 panels: Files, Git, Symbols
+- Sidebar with 4 panels: Files, AI Chat, Git, Symbols
 - Markdown Preview (Ctrl+Shift+V) — split editor | rendered preview
 
 ### Sidebar Panels
@@ -105,8 +105,10 @@ Open a supported file and click the 👁 button in the editor toolbar, or press 
 - Import .tmLanguage.json (TextMate grammar → Monarch converter)
 
 ### Git Integration
-- Sidebar Git tab: changed files, branch name, ahead/behind
-- Inline diff viewer + status bar branch indicator
+- Sidebar Git tab: changed files, branch name, ahead/behind, stage/unstage checkboxes
+- Stage All / Commit (dialog with file list) / Push / Pull
+- Branch management (list / switch / create), status bar branch click popup
+- Inline diff viewer
 
 ### Plugin System
 - Sidecar process architecture (language-agnostic)
@@ -116,7 +118,30 @@ Open a supported file and click the 👁 button in the editor toolbar, or press 
 - Editor API: getActiveFile, getContent, getSelection, getCursor, getEncoding, getFileName, getTabCount
 - Event notifications: fileOpened, fileSaved, fileClosed
 
-### Customization
+### AI Assistant (Sidebar)
+- 🤖 AI tab in sidebar — DeepSeek API (Anthropic-compatible)
+- Streaming chat with real-time token display
+- Extended thinking process display (collapsible, real-time)
+- Auto-detect config from `~/.claude/settings.json`
+- Quick actions: Explain Code / Refactor / Generate Tests / Fix Bugs
+- Context injection: auto-attach active file + language
+- Conversation history persisted to localStorage
+
+### Workspace
+- Save / Open `.ripworkspace` files — multi-project roots
+- Sidebar multi-root Files panel (+ Add Folder / × Remove)
+- Recent workspaces list (max 10)
+- Auto-detect root from active tab when no workspace
+
+### External Tools
+- Configure custom tools (name, command, working dir, shortcut)
+- 11 variable substitutions: `$(FULL_CURRENT_PATH)`, `$(FILE_NAME)`, etc.
+- Tools → Configure External Tools... / Execute
+
+### Change History
+- Track modified lines per tab
+- Go to Previous / Next Change (Ctrl+Shift+↑/↓)
+- Search → Clear Change History
 - Theme (Dark / Light / High Contrast)
 - Font family, size, tab size, indent style
 - Default encoding, language, EOL
@@ -167,10 +192,10 @@ cargo check              # Rust check (from src-tauri/)
 │  MenuBar │ TabBar │ Sidebar │ SplitEditor │ StatusBar   │
 │  SearchPanel │ 14 Dialogs                                │
 │  14 Zustand stores                                       │
-├─ Tauri IPC (37 commands) ───────────────────────────────┤
+├─ Tauri IPC (41 commands) ───────────────────────────────┤
 ├─ Rust Backend ──────────────────────────────────────────┤
 │  file_ops / encoding / search / session / system /       │
-│  plugin / git / monitor                                  │
+│  plugin / git / monitor / workspace                      │
 │  plugin_api (sidecar manager, JSON-RPC 2.0)             │
 └─────────────────────────────────────────────────────────┘
          │ stdin/stdout (JSON-RPC 2.0)
@@ -187,16 +212,16 @@ rip-notepad-plus-plus/
 │   │   ├── TabBar/               # Drag-and-drop tabs + pin/colors
 │   │   ├── SearchPanel/          # Find/replace/find-in-files
 │   │   ├── StatusBar/            # Encoding, language, Ln/Col, branch
-│   │   ├── Panels/               # 3 sidebar panels + preview components
-│   │   └── Dialogs/              # 14 dialogs
+│   │   ├── Panels/               # 4 sidebar panels + preview components
+│   │   └── Dialogs/              # 15 dialogs
 │   ├── stores/                   # 14 Zustand stores
-│   ├── hooks/                    # 13 custom hooks
+│   ├── hooks/                    # 14 custom hooks
 │   ├── i18n/                     # 7 locales (zh/en/ja/ko/fr/ar/he)
 │   ├── lib/                      # IPC, utils, constants, preview engine
 │   └── types/                    # TypeScript interfaces
 ├── src-tauri/                    # Backend (Rust)
 │   └── src/
-│       ├── commands/             # 8 modules, 37 commands
+│       ├── commands/             # 8 modules, 41 commands
 │       ├── encoding/             # detect + convert
 │       ├── search/               # regex + walkdir
 │       ├── plugin_api/           # sidecar manager
@@ -228,6 +253,7 @@ rip-notepad-plus-plus/
 | `F12` | Distraction-free mode |
 | `F11` | Full screen |
 | `Ctrl+Alt+C` / `Ctrl+Alt+X` | Launch Claude / Codex |
+| `Ctrl+Alt+C` / `Ctrl+Alt+X` | Launch Claude / Codex in terminal |
 | `Ctrl+Tab` / `Ctrl+Shift+Tab` | Next / Previous tab |
 | `F3` / `Shift+F3` | Find next / previous |
 
@@ -240,7 +266,7 @@ npm run test:e2e      # 70 Playwright E2E tests
 npm run test:check    # TypeScript + Rust compile checks
 ```
 
-- **18 test suites, 308 unit tests** covering stores, hooks, and preview engine
+- **18 test suites, 308 unit tests** covering stores, hooks, and preview engine (all 26 types)
 - **70 E2E tests** across 4 spec files with mocked Tauri IPC
 - Headless Chromium, auto-starts Vite dev server
 

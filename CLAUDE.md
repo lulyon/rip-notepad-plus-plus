@@ -9,9 +9,9 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 - **Target**: Windows, macOS, Linux
 - **Node**: >= 20
 - **Rust**: >= 1.70 (edition 2021)
-- **Version**: 0.3.0 (15 phases complete)
+- **Version**: 0.3.0 (21 phases complete)
 - **Tests**: 70 E2E + 308 unit (Playwright + vitest)
-- **IPC Commands**: 37 (file_ops, encoding, search, session, system, plugin, git, monitor)
+- **IPC Commands**: 41 (file_ops, encoding, search, session, system, plugin, git, monitor, workspace)
 
 ## Architecture
 
@@ -21,7 +21,7 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 │  SearchPanel(overlay) │ Dialogs(portals)                     │
 │  Zustand stores: editor / search / settings / macro /        │
 │  encoding / plugin / git / clipboard / editorRef /           │
-│  bookmark / mark / contextMenu / udl                         │
+│  bookmark / mark / contextMenu / udl / ai / tool             │
 ├─ Tauri IPC (src/lib/ipc.ts) ────────────────────────────────┤
 ├─ Rust Backend ──────────────────────────────────────────────┤
 │  commands/ (file_ops, encoding, search, session, system,     │
@@ -60,7 +60,7 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 | `src/components/TabBar/TabContextMenu.tsx` | Close/Close Others/Close All/Copy Path (i18n) |
 | `src/components/StatusBar/StatusBar.tsx` | File name, language, encoding, Ln/Col, git branch |
 | `src/components/SearchPanel/SearchPanel.tsx` | Find/replace with regex, case, word, wrap, FindInFiles |
-| `src/components/Panels/Sidebar.tsx` | Sidebar: Files (tree) + Git (status/diff) + Symbols (3 tabs) |
+| `src/components/Panels/Sidebar.tsx` | Sidebar: Files (multi-root) + AI Chat + Git + Symbols (4 tabs) |
 | `src/components/Panels/GitPanel.tsx` | Git changed files list, inline diff view |
 | `src/components/Panels/ClipboardPanel.tsx` | Clipboard history with search, pin, paste at cursor |
 | `src/components/Panels/JsonViewerPanel.tsx` | Recursive JSON tree view with copy path |
