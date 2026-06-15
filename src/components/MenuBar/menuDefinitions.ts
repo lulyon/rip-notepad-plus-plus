@@ -298,6 +298,8 @@ export const MENU_STRUCTURE: MenuDef[] = [
       { id: "tool.sha1Generate", labelKey: "menu.tools.sha1" },
       { id: "tool.sha256Generate", labelKey: "menu.tools.sha256" },
       { id: "tool.sha512Generate", labelKey: "menu.tools.sha512" },
+      S(),
+      { id: "tools.configure", labelKey: "menu.tools.configure" },
     ],
   },
   {

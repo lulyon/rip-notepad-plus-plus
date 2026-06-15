@@ -22,6 +22,7 @@ import { StatusBar } from "./components/StatusBar/StatusBar";
 import { SearchPanel } from "./components/SearchPanel/SearchPanel";
 import { Sidebar } from "./components/Panels/Sidebar";
 import { GenericPreview } from "./components/Panels/GenericPreview";
+import { ToolsDialog } from "./components/Dialogs/ToolsDialog";
 import { hasPreview } from "./lib/previewEngine";
 
 // ── Lazy-loaded dialogs (code-split, loaded on first open) ──
@@ -60,6 +61,7 @@ function App() {
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [udlOpen, setUdlOpen] = useState(false);
   const [ctxConfigOpen, setCtxConfigOpen] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
 
   // ── Session: load on startup (guarded against React StrictMode double-fire) ──
   const sessionLoaded = useRef(false);
@@ -219,6 +221,29 @@ function App() {
         setUdlOpen(true);
       } else if (actionId === "settings.editContextMenu") {
         setCtxConfigOpen(true);
+      } else if (actionId === "tools.configure") {
+        setToolsOpen(true);
+      } else if (actionId.startsWith("tool.run.")) {
+        (async () => {
+          const toolId = actionId.replace("tool.run.", "");
+          const { useToolStore } = await import("./stores/toolStore");
+          const tool = useToolStore.getState().tools.find((t: any) => t.id === toolId);
+        if (tool) {
+          const tab = useEditorStore.getState().tabs.find((t2) => t2.id === activeTabId);
+          let cmd = tool.command;
+          const wd = tool.cwd || useSettingsStore.getState().projectRoot || (tab?.path ? tab.path.split(/[/\\]/).slice(0, -1).join("/") : ".");
+          if (tab) {
+            cmd = cmd.replace(/\$\(FULL_CURRENT_PATH\)/g, tab.path || "");
+            cmd = cmd.replace(/\$\(CURRENT_DIRECTORY\)/g, tab.path ? tab.path.split(/[/\\]/).slice(0, -1).join("/") : ".");
+            cmd = cmd.replace(/\$\(FILE_NAME\)/g, tab.name);
+            cmd = cmd.replace(/\$\(CURRENT_LINE\)/g, String(tab.cursorLine));
+          }
+          cmd = cmd.replace(/\$\(PROJECT_ROOT\)/g, useSettingsStore.getState().projectRoot || ".");
+          ipc.runCommand(cmd, wd || undefined).then((result: any) => {
+            window.dispatchEvent(new CustomEvent("tool-output", { detail: { name: tool.name, output: result.stderr || result.stdout || "Done" } }));
+          }).catch((e: any) => console.error(e));
+        }
+        })();
       } else if (actionId === "workspace.save") {
         (async () => {
           const { save } = await import("@tauri-apps/plugin-dialog");
@@ -324,6 +349,7 @@ function App() {
       <SummaryDialog open={summaryOpen} onClose={() => setSummaryOpen(false)} />
       <UdlDialog open={udlOpen} onClose={() => setUdlOpen(false)} />
       <ContextMenuDialog open={ctxConfigOpen} onClose={() => setCtxConfigOpen(false)} />
+      <ToolsDialog open={toolsOpen} onClose={() => setToolsOpen(false)} />
       <UnsavedChangesDialog
         unsavedTabs={unsavedTabs || []}
         onSaveAll={async () => {

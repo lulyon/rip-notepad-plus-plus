@@ -1,0 +1,14 @@
+.tools-dialog { width: 550px; max-height: 80vh; overflow-y: auto; }
+.tools-list { margin-bottom: 16px; }
+.tools-empty { color: var(--text-secondary); font-size: 12px; }
+.tools-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border-color); font-size: 12px; }
+.tools-item strong { color: var(--text-primary); margin-right: 8px; }
+.tools-cmd { color: var(--text-secondary); font-family: monospace; font-size: 11px; }
+.tools-key { color: var(--accent-color); font-size: 11px; margin-left: 8px; font-family: monospace; }
+.tools-form { border-top: 1px solid var(--border-color); padding-top: 12px; }
+.tools-form h3 { font-size: 13px; margin-bottom: 8px; color: var(--text-primary); }
+.tools-input { width: 100%; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); padding: 6px 8px; border-radius: 3px; font-size: 12px; margin-bottom: 6px; }
+.tools-vars { margin: 8px 0; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.tools-vars-label { font-size: 11px; color: var(--text-secondary); }
+.tools-var-btn { background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 2px 6px; border-radius: 3px; cursor: pointer; font-size: 10px; font-family: monospace; }
+.tools-var-btn:hover { color: var(--text-primary); background: var(--bg-secondary); }

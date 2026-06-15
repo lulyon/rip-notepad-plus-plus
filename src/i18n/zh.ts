@@ -178,6 +178,7 @@ const zh = {
     "menu.tools.sha1": "生成 SHA-1",
     "menu.tools.sha256": "生成 SHA-256",
     "menu.tools.sha512": "生成 SHA-512",
+    "menu.tools.configure": "配置外部工具...",
 
     // ── Menu: Window ──
     "menu.window": "窗口(&W)",

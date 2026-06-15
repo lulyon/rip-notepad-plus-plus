@@ -178,6 +178,7 @@ const en = {
     "menu.tools.sha1": "SHA-1 Generate",
     "menu.tools.sha256": "SHA-256 Generate",
     "menu.tools.sha512": "SHA-512 Generate",
+    "menu.tools.configure": "Configure External Tools...",
 
     // ── Menu: Window ──
     "menu.window": "&Window",
