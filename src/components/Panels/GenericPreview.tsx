@@ -3,6 +3,7 @@ import { convertFileSrc } from "@tauri-apps/api/core";
 import { useEditorStore } from "../../stores/editorStore";
 import { useEditorRefStore } from "../../stores/editorRefStore";
 import { findRenderer } from "../../lib/previewEngine";
+import { ThreePreview } from "./ThreePreview";
 import "./MarkdownPreview.css"; // reuse existing styles
 
 export function GenericPreview() {
@@ -135,6 +136,15 @@ export function GenericPreview() {
 
   if (!activeTab?.content && !activeTab?.path) {
     return <div className="markdown-empty">Save the file first to preview</div>;
+  }
+
+  // 3D model — React component (three.js from npm, fully offline)
+  if (renderer.id === "3d") {
+    return (
+      <div className="markdown-preview">
+        <ThreePreview />
+      </div>
+    );
   }
 
   // HTML iframe renderer

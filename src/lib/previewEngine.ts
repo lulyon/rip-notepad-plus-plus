@@ -763,7 +763,7 @@ function render3d({ assetUrl }: { assetUrl: string | null }): string {
   </script></body></html>`;
 }
 registerPreviewRenderer({
-  id: "3d", name: "3D Model", extensions: ["stl", "glb", "gltf", "obj"], languages: [], render: render3d, useIframe: true,
+  id: "3d", name: "3D Model", extensions: ["stl", "glb", "gltf", "obj"], languages: [], render: render3d, useIframe: false,
 });
 
 // ── 12. Draw.io ──
