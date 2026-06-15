@@ -4,6 +4,7 @@ import { useEditorStore } from "../../stores/editorStore";
 import { useEditorRefStore } from "../../stores/editorRefStore";
 import { findRenderer } from "../../lib/previewEngine";
 import { ThreePreview } from "./ThreePreview";
+import { DotPreview } from "./DotPreview";
 import "./MarkdownPreview.css"; // reuse existing styles
 
 export function GenericPreview() {
@@ -143,6 +144,15 @@ export function GenericPreview() {
     return (
       <div className="markdown-preview">
         <ThreePreview />
+      </div>
+    );
+  }
+
+  // DOT/Graphviz — React component (@hpcc-js/wasm, fully offline)
+  if (renderer.id === "dot") {
+    return (
+      <div className="markdown-preview">
+        <DotPreview />
       </div>
     );
   }

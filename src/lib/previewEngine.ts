@@ -362,36 +362,9 @@ registerPreviewRenderer({
 
 // PlantUML preview removed — requires Java server, no browser-side renderer
 
-// ── Graphviz/DOT renderer ──
-function renderDot({ content }: { content: string }): string {
-  const encoded = encodeURIComponent(content);
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
-    *{margin:0;padding:0}body{background:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:-apple-system,sans-serif}
-    .err{color:#f88;text-align:center;padding:40px;font-size:14px}
-  </style></head><body><div id="graph"></div><div id="err" class="err" style="display:none"></div>
-  <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/lite.render.js"></script>
-  <script>
-    (function() {
-      if (typeof Viz === 'undefined') {
-        document.getElementById('err').textContent = 'viz.js failed to load';
-        document.getElementById('err').style.display = 'block';
-        return;
-      }
-      try {
-        var v = new Viz();
-        v.renderSVGElement(decodeURIComponent('${encoded}')).then(function(el) {
-          document.getElementById('graph').appendChild(el);
-        }).catch(function(e) {
-          document.getElementById('err').textContent = 'Render error: ' + e.message;
-          document.getElementById('err').style.display = 'block';
-        });
-      } catch(e) {
-        document.getElementById('err').textContent = 'Init error: ' + e.message;
-        document.getElementById('err').style.display = 'block';
-      }
-    })();
-  </script></body></html>`;
+// ── Graphviz/DOT renderer ── (React component: DotPreview.tsx, @hpcc-js/wasm offline)
+function renderDot({ content: _content }: { content: string }): string {
+  return "";
 }
 registerPreviewRenderer({
   id: "dot",
@@ -399,7 +372,7 @@ registerPreviewRenderer({
   extensions: ["dot", "gv"],
   languages: [],
   render: renderDot,
-  useIframe: true,
+  useIframe: false,
 });
 
 // ── Font preview ──
