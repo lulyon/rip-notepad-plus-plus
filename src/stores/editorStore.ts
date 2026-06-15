@@ -59,6 +59,11 @@ interface EditorState {
   forceCloseAllTabs: () => void;
   clearModified: (id: string) => void;
   restoreLastClosedTab: () => void;
+  changedLines: Record<string, number[]>;
+  addChangedLine: (tabId: string, line: number) => void;
+  clearChangedLines: (tabId: string) => void;
+  findNextChangedLine: (tabId: string, currentLine: number) => number | null;
+  findPrevChangedLine: (tabId: string, currentLine: number) => number | null;
 }
 
 let tabCounter = 0;
@@ -371,5 +376,39 @@ export const useEditorStore = create<EditorState>((set, get) => ({
       get().updateTabCursor(id, cursorLine, cursorColumn);
     }
     set({ closedTabStack: stack.slice(0, -1) });
+  },
+
+  changedLines: {},
+
+  addChangedLine: (tabId, line) => {
+    set((s) => {
+      const lines = s.changedLines[tabId] || [];
+      if (lines.includes(line)) return s;
+      const next = [...lines, line].sort((a, b) => a - b);
+      return { changedLines: { ...s.changedLines, [tabId]: next } };
+    });
+  },
+
+  clearChangedLines: (tabId) => {
+    set((s) => {
+      const { [tabId]: _, ...rest } = s.changedLines;
+      return { changedLines: rest };
+    });
+  },
+
+  findNextChangedLine: (tabId, currentLine) => {
+    const lines = get().changedLines[tabId] || [];
+    for (const l of lines) {
+      if (l > currentLine) return l;
+    }
+    return lines.length > 0 ? lines[0] : null;
+  },
+
+  findPrevChangedLine: (tabId, currentLine) => {
+    const lines = get().changedLines[tabId] || [];
+    for (let i = lines.length - 1; i >= 0; i--) {
+      if (lines[i] < currentLine) return lines[i];
+    }
+    return lines.length > 0 ? lines[lines.length - 1] : null;
   },
 }));

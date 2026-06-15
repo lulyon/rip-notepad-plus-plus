@@ -437,6 +437,30 @@ export function useMenuActions() {
           if (tabId4) { useBookmarkStore.getState().clearBookmarks(tabId4); window.dispatchEvent(new CustomEvent("bookmarks-changed")); }
           break;
         }
+        case "search.gotoNextChange": {
+          if (editorState.activeTabId && editorRef) {
+            const pos = editorRef.getPosition();
+            if (pos) {
+              const next = useEditorStore.getState().findNextChangedLine(editorState.activeTabId, pos.lineNumber);
+              if (next != null) { editorRef.setPosition({ lineNumber: next, column: 1 }); editorRef.revealLineInCenter(next); }
+            }
+          }
+          break;
+        }
+        case "search.gotoPrevChange": {
+          if (editorState.activeTabId && editorRef) {
+            const pos = editorRef.getPosition();
+            if (pos) {
+              const prev = useEditorStore.getState().findPrevChangedLine(editorState.activeTabId, pos.lineNumber);
+              if (prev != null) { editorRef.setPosition({ lineNumber: prev, column: 1 }); editorRef.revealLineInCenter(prev); }
+            }
+          }
+          break;
+        }
+        case "search.clearChangeHistory": {
+          if (editorState.activeTabId) useEditorStore.getState().clearChangedLines(editorState.activeTabId);
+          break;
+        }
         // ── Bracket matching ──
         case "search.gotoMatchingBrace":
           editorRef?.getAction("editor.action.jumpToBracket")?.run();

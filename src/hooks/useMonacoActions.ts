@@ -346,6 +346,34 @@ export function useMonacoActions() {
         run: () => { window.dispatchEvent(new CustomEvent("menu-action", { detail: "run.codex" })); },
       });
 
+      // ── Change History Navigation — Ctrl+Shift+Up/Down ──
+      editor.addAction({
+        id: "change-history-prev",
+        label: "Go to Previous Change",
+        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.UpArrow],
+        run: () => {
+          const tabId = useEditorStore.getState().activeTabId;
+          if (!tabId) return;
+          const pos = editor.getPosition();
+          if (!pos) return;
+          const prev = useEditorStore.getState().findPrevChangedLine(tabId, pos.lineNumber);
+          if (prev) { editor.setPosition({ lineNumber: prev, column: 1 }); editor.revealLineInCenter(prev); }
+        },
+      });
+      editor.addAction({
+        id: "change-history-next",
+        label: "Go to Next Change",
+        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.DownArrow],
+        run: () => {
+          const tabId = useEditorStore.getState().activeTabId;
+          if (!tabId) return;
+          const pos = editor.getPosition();
+          if (!pos) return;
+          const next = useEditorStore.getState().findNextChangedLine(tabId, pos.lineNumber);
+          if (next) { editor.setPosition({ lineNumber: next, column: 1 }); editor.revealLineInCenter(next); }
+        },
+      });
+
       // ── Markdown Preview — Ctrl+Shift+V ──
       editor.addAction({
         id: "markdown-preview",

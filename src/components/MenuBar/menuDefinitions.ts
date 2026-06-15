@@ -135,6 +135,10 @@ export const MENU_STRUCTURE: MenuDef[] = [
       { id: "search.prevBookmark", labelKey: "menu.search.prevBookmark" },
       { id: "search.clearBookmarks", labelKey: "menu.search.clearBookmarks" },
       S(),
+      { id: "search.gotoNextChange", labelKey: "menu.search.gotoNextChange" },
+      { id: "search.gotoPrevChange", labelKey: "menu.search.gotoPrevChange" },
+      { id: "search.clearChangeHistory", labelKey: "menu.search.clearChangeHistory" },
+      S(),
       // ── Bracket matching ──
       { id: "search.gotoMatchingBrace", labelKey: "menu.search.gotoMatchingBrace" },
       { id: "search.selectMatchingBraces", labelKey: "menu.search.selectMatchingBraces" },

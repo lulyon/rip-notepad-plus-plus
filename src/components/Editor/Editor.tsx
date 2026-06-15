@@ -150,8 +150,20 @@ export function Editor({ tabId }: EditorProps) {
       window.addEventListener('bookmarks-changed', onBookmarksChanged);
       window.addEventListener('marks-changed', onMarksChanged);
 
-      const contentChangeSub = editor.onDidChangeModelContent(() => {
+      const contentChangeSub = editor.onDidChangeModelContent((e) => {
         setTimeout(applyDecorations, 50);
+        // Track changed lines for change history navigation
+        const tabId = useEditorStore.getState().activeTabId;
+        if (tabId) {
+          for (const change of e.changes) {
+            const startLine = change.range.startLineNumber;
+            const endLine = change.range.endLineNumber;
+            for (let l = startLine; l <= endLine; l++) {
+              useEditorStore.getState().addChangedLine(tabId, l);
+            }
+          }
+          window.dispatchEvent(new CustomEvent("changed-lines-updated"));
+        }
       });
 
       setTimeout(applyDecorations, 200);
