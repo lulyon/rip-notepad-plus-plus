@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useAiStore } from "../../stores/aiStore";
 import { useEditorStore } from "../../stores/editorStore";
 import { streamChat } from "../../lib/aiClient";
+import { searchWeb } from "../../lib/webSearch";
 import "./AiPanel.css";
 
 function ThinkingBlock({ text, defaultOpen }: { text: string; defaultOpen?: boolean }) {
@@ -41,6 +42,7 @@ export function AiPanel() {
   const [cfgModel, setCfgModel] = useState(model);
   const [error, setError] = useState("");
   const [streamThinking, setStreamThinking] = useState("");
+  const [webSearch, setWebSearch] = useState(false);
 
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
 
@@ -74,6 +76,18 @@ export function AiPanel() {
 
     setInput("");
     setError("");
+
+    // Web search
+    if (webSearch) {
+      const results = await searchWeb(text);
+      if (results.length > 0) {
+        const searchContext = results.map((r, i) =>
+          `[${i + 1}] ${r.title}\n${r.snippet}\nSource: ${r.url}`
+        ).join("\n\n");
+        contextPrompt += `\n\nWeb search results for "${text}":\n${searchContext}\n\nUse these search results to answer accurately. Cite sources with [1], [2], etc.`;
+      }
+    }
+
     store.addMessage({ role: "user", content: contextPrompt + text, timestamp: Date.now() });
     store.addMessage({ role: "assistant", content: "", timestamp: Date.now() });
     store.setStreaming(true);
@@ -167,6 +181,8 @@ export function AiPanel() {
       <div className="ai-header">
         <span>🤖 AI Chat</span>
         <div className="ai-header-actions">
+          <button className={`ai-btn-sm ${webSearch ? "ai-active" : ""}`}
+            onClick={() => setWebSearch(!webSearch)} title="Web Search">🌐</button>
           <button className="ai-btn-sm" onClick={() => setShowConfig(true)} title="Settings">⚙</button>
           <button className="ai-btn-sm" onClick={clearMessages} title="Clear chat">🗑</button>
         </div>

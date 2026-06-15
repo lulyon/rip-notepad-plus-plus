@@ -3,6 +3,7 @@
 .ai-header-actions { display: flex; gap: 4px; }
 .ai-btn-sm { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 14px; padding: 2px 4px; }
 .ai-btn-sm:hover { color: var(--text-primary); }
+.ai-btn-sm.ai-active { color: var(--accent-color); }
 
 .ai-messages { flex: 1; overflow-y: auto; padding: 8px; }
 .ai-empty { text-align: center; color: var(--text-secondary); padding: 20px; font-size: 13px; }
