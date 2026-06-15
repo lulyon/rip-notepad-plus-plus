@@ -12,7 +12,7 @@ use commands::encoding::{
 use commands::file_ops::{create_directory, delete_directory, delete_file, file_exists, get_file_size, list_directory, read_file, rename_file, write_file};
 use commands::search::find_in_files;
 use commands::session::{clear_session, load_session, save_session};
-use commands::git::{git_branch, git_diff_file, git_status};
+use commands::git::{git_branch, git_checkout_branch, git_commit, git_create_branch, git_diff_file, git_list_branches, git_pull, git_push, git_stage, git_stage_all, git_status, git_unstage};
 use commands::plugin::{list_plugins, notify_plugins, send_plugin_command, start_plugin, stop_plugin, update_editor_state};
 use commands::system::{get_system_info, open_in_browser, open_terminal, run_command};
 use commands::monitor::{watch_file, check_file_changed, update_file_mtime, save_snapshot, load_snapshots, clear_snapshot, list_archive, MonitorState};
@@ -77,6 +77,15 @@ pub fn run() {
             git_status,
             git_branch,
             git_diff_file,
+            git_stage,
+            git_unstage,
+            git_stage_all,
+            git_commit,
+            git_push,
+            git_pull,
+            git_list_branches,
+            git_checkout_branch,
+            git_create_branch,
             // Monitor
             watch_file,
             check_file_changed,

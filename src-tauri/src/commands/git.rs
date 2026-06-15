@@ -120,3 +120,58 @@ pub async fn git_diff_file(repo_path: String, file_path: String) -> Result<Strin
     let root = find_git_root(&repo_path)?;
     run_git(&root, &["diff", "--", &file_path])
 }
+
+#[tauri::command]
+pub async fn git_stage(repo_path: String, file_path: String) -> Result<(), String> {
+    let root = find_git_root(&repo_path)?;
+    run_git(&root, &["add", "--", &file_path]).map(|_| ())
+}
+
+#[tauri::command]
+pub async fn git_unstage(repo_path: String, file_path: String) -> Result<(), String> {
+    let root = find_git_root(&repo_path)?;
+    run_git(&root, &["reset", "HEAD", "--", &file_path]).map(|_| ())
+}
+
+#[tauri::command]
+pub async fn git_stage_all(repo_path: String) -> Result<(), String> {
+    let root = find_git_root(&repo_path)?;
+    run_git(&root, &["add", "."]).map(|_| ())
+}
+
+#[tauri::command]
+pub async fn git_commit(repo_path: String, message: String) -> Result<(), String> {
+    let root = find_git_root(&repo_path)?;
+    run_git(&root, &["commit", "-m", &message]).map(|_| ())
+}
+
+#[tauri::command]
+pub async fn git_push(repo_path: String) -> Result<String, String> {
+    let root = find_git_root(&repo_path)?;
+    run_git(&root, &["push"]).map(|s| s.trim().to_string())
+}
+
+#[tauri::command]
+pub async fn git_pull(repo_path: String) -> Result<String, String> {
+    let root = find_git_root(&repo_path)?;
+    run_git(&root, &["pull"]).map(|s| s.trim().to_string())
+}
+
+#[tauri::command]
+pub async fn git_list_branches(repo_path: String) -> Result<Vec<String>, String> {
+    let root = find_git_root(&repo_path)?;
+    let output = run_git(&root, &["branch", "-a"])?;
+    Ok(output.lines().map(|l| l.trim().trim_start_matches("* ").to_string()).collect())
+}
+
+#[tauri::command]
+pub async fn git_checkout_branch(repo_path: String, branch: String) -> Result<(), String> {
+    let root = find_git_root(&repo_path)?;
+    run_git(&root, &["checkout", &branch]).map(|_| ())
+}
+
+#[tauri::command]
+pub async fn git_create_branch(repo_path: String, name: String) -> Result<(), String> {
+    let root = find_git_root(&repo_path)?;
+    run_git(&root, &["checkout", "-b", &name]).map(|_| ())
+}

@@ -145,6 +145,33 @@ export const ipc = {
   gitDiffFile(repoPath: string, filePath: string): Promise<string> {
     return invoke("git_diff_file", { repoPath, filePath });
   },
+  gitStage(repoPath: string, filePath: string): Promise<void> {
+    return invoke("git_stage", { repoPath, filePath });
+  },
+  gitUnstage(repoPath: string, filePath: string): Promise<void> {
+    return invoke("git_unstage", { repoPath, filePath });
+  },
+  gitStageAll(repoPath: string): Promise<void> {
+    return invoke("git_stage_all", { repoPath });
+  },
+  gitCommit(repoPath: string, message: string): Promise<void> {
+    return invoke("git_commit", { repoPath, message });
+  },
+  gitPush(repoPath: string): Promise<string> {
+    return invoke("git_push", { repoPath });
+  },
+  gitPull(repoPath: string): Promise<string> {
+    return invoke("git_pull", { repoPath });
+  },
+  gitListBranches(repoPath: string): Promise<string[]> {
+    return invoke("git_list_branches", { repoPath });
+  },
+  gitCheckoutBranch(repoPath: string, branch: string): Promise<void> {
+    return invoke("git_checkout_branch", { repoPath, branch });
+  },
+  gitCreateBranch(repoPath: string, name: string): Promise<void> {
+    return invoke("git_create_branch", { repoPath, name });
+  },
 
   // ── File Monitoring & Snapshots ──
   watchFile(path: string): Promise<void> {

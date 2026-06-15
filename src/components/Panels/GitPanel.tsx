@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useEditorStore } from "../../stores/editorStore";
 import { useSettingsStore } from "../../stores/settingsStore";
@@ -9,132 +9,184 @@ import "./GitPanel.css";
 export function GitPanel() {
   const { t } = useTranslation();
   const projectRoot = useSettingsStore((s) => s.projectRoot);
-  const { status, loading, error, refreshStatus, clearStatus } = useGitStore();
+  const { status, loading, error, refreshStatus } = useGitStore();
   const [diffFile, setDiffFile] = useState<string | null>(null);
   const [diffContent, setDiffContent] = useState("");
+  const [commitMsg, setCommitMsg] = useState("");
+  const [stagedFiles, setStagedFiles] = useState<Set<string>>(new Set());
+  const [showBranchMenu, setShowBranchMenu] = useState(false);
+  const [branches, setBranches] = useState<string[]>([]);
+  const [newBranchName, setNewBranchName] = useState("");
+  const [actionMsg, setActionMsg] = useState("");
 
+  const refresh = useCallback(() => {
+    if (projectRoot) refreshStatus(projectRoot);
+  }, [projectRoot, refreshStatus]);
+
+  useEffect(() => { refresh(); }, [refresh]);
+
+  // Reset staged state when status changes
   useEffect(() => {
-    if (projectRoot) {
-      refreshStatus(projectRoot);
-    } else {
-      clearStatus();
+    if (status) {
+      setStagedFiles(new Set(status.changed.filter((e) => e.status[0] === "M" || e.status[0] === "A").map((e) => e.path)));
     }
-  }, [projectRoot, refreshStatus, clearStatus]);
+  }, [status]);
 
-  const handleOpenDiff = async (filePath: string) => {
+  const doStage = async (path: string) => {
     if (!projectRoot) return;
-    setDiffFile(filePath);
     try {
-      const diff = await ipc.gitDiffFile(projectRoot, filePath);
-      setDiffContent(diff);
-    } catch {
-      setDiffContent("Failed to load diff");
-    }
+      await ipc.gitStage(projectRoot, path);
+      setStagedFiles((s) => new Set(s).add(path));
+      refresh();
+    } catch (e: any) { setActionMsg(e); }
+  };
+
+  const doUnstage = async (path: string) => {
+    if (!projectRoot) return;
+    try {
+      await ipc.gitUnstage(projectRoot, path);
+      setStagedFiles((s) => { const n = new Set(s); n.delete(path); return n; });
+      refresh();
+    } catch (e: any) { setActionMsg(e); }
+  };
+
+  const doStageAll = async () => {
+    if (!projectRoot || !status) return;
+    try { await ipc.gitStageAll(projectRoot); refresh(); } catch (e: any) { setActionMsg(e); }
+  };
+
+  const doCommit = async () => {
+    if (!projectRoot || !commitMsg.trim()) return;
+    try {
+      await ipc.gitCommit(projectRoot, commitMsg.trim());
+      setCommitMsg(""); refresh();
+      setActionMsg("Committed ✓");
+    } catch (e: any) { setActionMsg("Commit failed: " + e); }
+  };
+
+  const doPush = async () => {
+    if (!projectRoot) return;
+    try { const r = await ipc.gitPush(projectRoot); setActionMsg(r || "Push OK"); refresh(); }
+    catch (e: any) { setActionMsg("Push failed: " + e); }
+  };
+
+  const doPull = async () => {
+    if (!projectRoot) return;
+    try { const r = await ipc.gitPull(projectRoot); setActionMsg(r || "Pull OK"); refresh(); }
+    catch (e: any) { setActionMsg("Pull failed: " + e); }
+  };
+
+  const loadBranches = async () => {
+    if (!projectRoot) return;
+    try { setBranches(await ipc.gitListBranches(projectRoot)); } catch {}
+    setShowBranchMenu((v) => !v);
+  };
+
+  const doSwitchBranch = async (branch: string) => {
+    if (!projectRoot) return;
+    try {
+      await ipc.gitCheckoutBranch(projectRoot, branch.startsWith("remotes/") ? branch.split("/").slice(2).join("/") : branch);
+      setShowBranchMenu(false); refresh();
+    } catch (e: any) { setActionMsg("Checkout failed: " + e); }
+  };
+
+  const doCreateBranch = async () => {
+    if (!projectRoot || !newBranchName.trim()) return;
+    try { await ipc.gitCreateBranch(projectRoot, newBranchName.trim()); setNewBranchName(""); refresh(); }
+    catch (e: any) { setActionMsg(e); }
   };
 
   const handleOpenFile = async (filePath: string) => {
     const tabs = useEditorStore.getState().tabs;
     const existing = tabs.find((t) => t.path === filePath);
-    if (existing) {
-      useEditorStore.getState().setActiveTab(existing.id);
-    } else {
-      try {
-        const data = await ipc.readFile(filePath);
-        useEditorStore.getState().openTab({
-          path: filePath,
-          name: filePath.split(/[/\\]/).pop() || filePath,
-          content: data.content,
-          encoding: data.encoding,
-          language: "",
-        });
-      } catch (err) {
-        console.error("Failed to open:", err);
-      }
-    }
+    if (existing) { useEditorStore.getState().setActiveTab(existing.id); return; }
+    try {
+      const data = await ipc.readFile(filePath);
+      useEditorStore.getState().openTab({ path: filePath, name: filePath.split(/[/\\]/).pop() || filePath, content: data.content, encoding: data.encoding, language: "" });
+    } catch (err) { console.error(err); }
+  };
+
+  const handleOpenDiff = async (filePath: string) => {
+    if (!projectRoot) return;
+    setDiffFile(filePath);
+    try { setDiffContent(await ipc.gitDiffFile(projectRoot, filePath)); } catch { setDiffContent("Failed"); }
   };
 
   if (!projectRoot) {
-    return (
-      <div className="git-panel">
-        <div className="git-empty">{t("git.noProject")}</div>
-      </div>
-    );
+    return <div className="git-panel"><div className="git-empty">{t("git.noProject")}</div></div>;
   }
 
   return (
     <div className="git-panel">
-      {/* Branch header */}
+      {/* Branch + actions row */}
       <div className="git-branch">
-        {loading ? (
-          <span>{t("git.loading")}</span>
-        ) : status ? (
-          <>
-            <span className="git-branch-icon">⎇</span>
-            <span className="git-branch-name">{status.branch}</span>
-            {status.ahead > 0 && (
-              <span className="git-ahead">↑{status.ahead}</span>
-            )}
-            {status.behind > 0 && (
-              <span className="git-behind">↓{status.behind}</span>
-            )}
-            <span className="git-changed-count">
-              {status.changed.length} {t("git.filesChanged")}
-            </span>
-          </>
-        ) : error ? (
-          <span className="git-error" title={error}>{t("git.notRepo")}</span>
-        ) : null}
+        {loading ? <span>{t("git.loading")}</span> : status ? <>
+          <span className="git-branch-icon">⎇</span>
+          <span className="git-branch-name" onClick={loadBranches} title="Switch branch">{status.branch}</span>
+          {status.ahead > 0 && <span className="git-ahead">↑{status.ahead}</span>}
+          {status.behind > 0 && <span className="git-behind">↓{status.behind}</span>}
+          <span className="git-changed-count">{status.changed.length} {t("git.filesChanged")}</span>
+        </> : error ? <span className="git-error">{t("git.notRepo")}</span> : null}
+        <div className="git-actions">
+          <button className="git-action-btn" onClick={doPull} title="Pull">↓</button>
+          <button className="git-action-btn" onClick={doPush} title="Push">↑</button>
+          <button className="git-action-btn" onClick={refresh} disabled={loading} title="Refresh">↻</button>
+        </div>
       </div>
 
-      {/* Refresh button */}
-      <button
-        className="git-refresh-btn"
-        onClick={() => projectRoot && refreshStatus(projectRoot)}
-        disabled={loading}
-      >
-        ↻ {t("git.refresh")}
-      </button>
-
-      {/* Changed files */}
-      {status && status.changed.length > 0 && (
-        <div className="git-file-list">
-          {status.changed.map((entry) => (
-            <div key={entry.path} className="git-file-item">
-              <span className={`git-status git-status-${entry.status[0] || "M"}`}>
-                {statusLabel(entry.status)}
-              </span>
-              <span
-                className="git-file-name"
-                onClick={() => handleOpenFile(entry.path)}
-                title={entry.path}
-              >
-                {entry.display_path}
-              </span>
-              <button
-                className="git-diff-btn"
-                onClick={() => handleOpenDiff(entry.path)}
-                title={t("git.viewDiff")}
-              >
-                diff
-              </button>
+      {/* Branch menu dropdown */}
+      {showBranchMenu && (
+        <div className="git-branch-menu">
+          <div className="git-branch-create">
+            <input className="git-input" value={newBranchName} onChange={(e) => setNewBranchName(e.target.value)} placeholder="New branch name..." />
+            <button className="git-btn" onClick={doCreateBranch}>+</button>
+          </div>
+          {branches.map((b, i) => (
+            <div key={i} className={`git-branch-item${b === status?.branch ? " active" : ""}`} onClick={() => doSwitchBranch(b)}>
+              {b.replace("remotes/origin/", "origin/")}
             </div>
           ))}
         </div>
       )}
 
-      {status && status.changed.length === 0 && (
-        <div className="git-clean">{t("git.clean")}</div>
+      {/* Action message */}
+      {actionMsg && <div className="git-action-msg" onClick={() => setActionMsg("")}>{actionMsg}</div>}
+
+      {/* Changed files with stage checkboxes */}
+      {status && status.changed.length > 0 && (
+        <div className="git-file-list">
+          {status.changed.map((entry) => {
+            const isStaged = stagedFiles.has(entry.path) || entry.status === "A";
+            return (
+              <div key={entry.path} className="git-file-item">
+                <input type="checkbox" className="git-stage-cb" checked={isStaged}
+                  onChange={() => isStaged ? doUnstage(entry.path) : doStage(entry.path)} />
+                <span className={`git-status git-status-${entry.status[0] || "M"}`}>{statusLabel(entry.status)}</span>
+                <span className="git-file-name" onClick={() => handleOpenFile(entry.path)} title={entry.path}>{entry.display_path}</span>
+                <button className="git-diff-btn" onClick={() => handleOpenDiff(entry.path)} title={t("git.viewDiff")}>diff</button>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {status && status.changed.length === 0 && <div className="git-clean">{t("git.clean")}</div>}
+
+      {/* Stage all + Commit */}
+      {status && status.changed.length > 0 && (
+        <div className="git-commit-section">
+          <button className="git-action-btn" onClick={doStageAll}>Stage All</button>
+          <input className="git-input commit-msg" value={commitMsg} onChange={(e) => setCommitMsg(e.target.value)}
+            placeholder="Commit message..." onKeyDown={(e) => e.key === "Enter" && doCommit()} />
+          <button className="git-btn git-commit-btn" onClick={doCommit} disabled={!commitMsg.trim()}>Commit</button>
+        </div>
       )}
 
       {/* Diff view */}
       {diffFile && (
         <div className="git-diff-view">
-          <div className="git-diff-header">
-            <span>{diffFile.split("/").pop()}</span>
-            <button onClick={() => { setDiffFile(null); setDiffContent(""); }}>
-              ×
-            </button>
-          </div>
+          <div className="git-diff-header"><span>{diffFile.split("/").pop()}</span>
+            <button onClick={() => { setDiffFile(null); setDiffContent(""); }}>×</button></div>
           <pre className="git-diff-content">{diffContent}</pre>
         </div>
       )}
@@ -143,14 +195,9 @@ export function GitPanel() {
 }
 
 function statusLabel(status: string): string {
-  switch (status) {
-    case "M":  return "M";
-    case "A":  return "A";
-    case "D":  return "D";
-    case "R":  return "R";
-    case "??": return "?";
-    case "MM": return "M";
-    case "AM": return "A";
-    default:   return status;
-  }
+  const s = status.trim();
+  if (s === "M" || s === "MM" || s === "AM") return "M";
+  if (s === "A") return "A"; if (s === "D") return "D";
+  if (s === "R") return "R"; if (s === "??") return "?";
+  return s;
 }
