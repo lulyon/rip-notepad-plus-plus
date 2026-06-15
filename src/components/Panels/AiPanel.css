@@ -40,4 +40,4 @@
 .ai-thinking { margin-bottom: 4px; }
 .ai-thinking-toggle { font-size: 11px; color: var(--text-secondary); cursor: pointer; padding: 2px 0; user-select: none; }
 .ai-thinking-toggle:hover { color: var(--text-primary); }
-.ai-thinking-content { font-size: 12px; color: var(--text-secondary); background: var(--bg-primary); padding: 8px; border-radius: 4px; margin: 4px 0; white-space: pre-wrap; max-height: 300px; overflow-y: auto; border-left: 3px solid var(--accent-color); }
+.ai-thinking-content { font-size: 12px; color: var(--text-secondary); background: var(--bg-primary); padding: 8px; border-radius: 4px; margin: 4px 0; white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; max-height: 300px; overflow-y: auto; overflow-x: hidden; border-left: 3px solid var(--accent-color); }
