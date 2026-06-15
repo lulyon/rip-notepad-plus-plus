@@ -20,6 +20,7 @@ export interface SettingsState {
   showMenuBar: boolean;
   showStatusBar: boolean;
   showSidebar: boolean;
+  sidebarWidth: number;
   projectRoot: string | null;
   projectRoots: string[];
   activeProjectRoot: string | null;
@@ -118,6 +119,7 @@ export const useSettingsStore = create<SettingsState>((set) => {
     showMenuBar: saved.showMenuBar ?? true,
     showStatusBar: saved.showStatusBar ?? true,
     showSidebar: saved.showSidebar ?? false,
+    sidebarWidth: saved.sidebarWidth ?? 260,
     projectRoot: saved.projectRoot ?? null,
     projectRoots: saved.projectRoots ?? (saved.projectRoot ? [saved.projectRoot] : []),
     activeProjectRoot: saved.activeProjectRoot ?? saved.projectRoot ?? null,

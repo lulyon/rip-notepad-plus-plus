@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useEditorStore } from "../../stores/editorStore";
 import { useEditorRefStore } from "../../stores/editorRefStore";
@@ -13,12 +13,30 @@ import "./Sidebar.css";
 export function Sidebar() {
   const { t } = useTranslation();
   const showSidebar = useSettingsStore((s) => s.showSidebar);
+  const sidebarWidth = useSettingsStore((s) => s.sidebarWidth);
+  const updateSetting = useSettingsStore((s) => s.updateSetting);
   const [activeTab, setActiveTab] = useState<"files" | "ai" | "git" | "symbols">("files");
+  const resizing = useRef(false);
+
+  const startResize = (e: React.MouseEvent) => {
+    e.preventDefault();
+    resizing.current = true;
+    const startX = e.clientX;
+    const startW = sidebarWidth;
+    const onMove = (ev: MouseEvent) => {
+      if (!resizing.current) return;
+      const w = Math.max(180, Math.min(600, startW + ev.clientX - startX));
+      updateSetting("sidebarWidth", w);
+    };
+    const onUp = () => { resizing.current = false; document.removeEventListener("mousemove", onMove); document.removeEventListener("mouseup", onUp); };
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
+  };
 
   if (!showSidebar) return null;
 
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={{ width: sidebarWidth, minWidth: sidebarWidth }}>
       <div className="sidebar-tabs">
         <button
           className={`sidebar-tab ${activeTab === "files" ? "active" : ""}`}
@@ -51,6 +69,7 @@ export function Sidebar() {
         {activeTab === "git" && <GitPanel />}
         {activeTab === "symbols" && <FunctionList />}
       </div>
+      <div className="sidebar-resize-handle" onMouseDown={startResize} />
     </div>
   );
 }
