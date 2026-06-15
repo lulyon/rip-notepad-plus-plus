@@ -355,6 +355,7 @@ function renderDot({ content }: { content: string }): string {
     .err{color:#f88;text-align:center;padding:40px;font-size:14px}
   </style></head><body><div id="graph"></div><div id="err" class="err" style="display:none"></div>
   <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/lite.render.js"></script>
   <script>
     (function() {
       if (typeof Viz === 'undefined') {
