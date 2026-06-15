@@ -96,17 +96,6 @@ export function Editor({ tabId }: EditorProps) {
         }
       });
 
-      // ── Custom context menu (right-click on editor) ──
-      editor.onContextMenu((e) => {
-        e.event.preventDefault();
-        const browserEvent = (e.event as any).browserEvent as MouseEvent;
-        if (browserEvent) {
-          window.dispatchEvent(new CustomEvent("editor-context-menu", {
-            detail: { x: browserEvent.pageX, y: browserEvent.pageY },
-          }));
-        }
-      });
-
       // ── Bookmark & Mark Decorations ──
       function getMarkDecorations() {
         const tabId = useEditorStore.getState().activeTabId;
@@ -225,7 +214,6 @@ export function Editor({ tabId }: EditorProps) {
         cursorSmoothCaretAnimation: isVeryLargeFile ? "off" : "on",
         smoothScrolling,
         padding: isVeryLargeFile ? { top: 4 } : { top: 8 },
-        contextmenu: false,
         find: {
           addExtraSpaceOnTop: false,
           autoFindInSelection: "never",

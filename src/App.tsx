@@ -39,7 +39,6 @@ const ContextMenuDialog = lazy(() => import("./components/Dialogs/ContextMenuDia
 const HashDialog = lazy(() => import("./components/Dialogs/HashDialog").then(m => ({ default: m.HashDialog })));
 const SummaryDialog = lazy(() => import("./components/Dialogs/SummaryDialog").then(m => ({ default: m.SummaryDialog })));
 const UnsavedChangesDialog = lazy(() => import("./components/Dialogs/UnsavedChangesDialog").then(m => ({ default: m.UnsavedChangesDialog })));
-const EditorContextMenu = lazy(() => import("./components/Editor/EditorContextMenu").then(m => ({ default: m.EditorContextMenu })));
 
 function App() {
   const { t } = useTranslation();
@@ -60,8 +59,6 @@ function App() {
   const [hashOpen, setHashOpen] = useState(false);
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [udlOpen, setUdlOpen] = useState(false);
-  const [ctxMenuOpen, setCtxMenuOpen] = useState(false);
-  const [ctxMenuPos, setCtxMenuPos] = useState({ x: 0, y: 0 });
   const [ctxConfigOpen, setCtxConfigOpen] = useState(false);
 
   // ── Session: load on startup (guarded against React StrictMode double-fire) ──
@@ -164,22 +161,14 @@ function App() {
 
     function onOpenCommandPalette() { setCmdPaletteOpen(true); }
     function onToggleMdPreview() { setShowMdPreview((prev) => !prev); }
-    function onEditorContextMenu(e: Event) {
-      const { x, y } = (e as CustomEvent).detail;
-      setCtxMenuPos({ x, y });
-      setCtxMenuOpen(true);
-    }
-
     window.addEventListener("open-go-to-line", onOpenGoToLine);
     window.addEventListener("navigate-to-match", onNavigateToMatch);
     window.addEventListener("open-command-palette", onOpenCommandPalette);
-    window.addEventListener("editor-context-menu", onEditorContextMenu);
     window.addEventListener("toggle-markdown-preview", onToggleMdPreview);
     return () => {
       window.removeEventListener("open-go-to-line", onOpenGoToLine);
       window.removeEventListener("navigate-to-match", onNavigateToMatch);
       window.removeEventListener("open-command-palette", onOpenCommandPalette);
-      window.removeEventListener("editor-context-menu", onEditorContextMenu);
       window.removeEventListener("toggle-markdown-preview", onToggleMdPreview);
     };
   }, []);
@@ -335,9 +324,6 @@ function App() {
       <SummaryDialog open={summaryOpen} onClose={() => setSummaryOpen(false)} />
       <UdlDialog open={udlOpen} onClose={() => setUdlOpen(false)} />
       <ContextMenuDialog open={ctxConfigOpen} onClose={() => setCtxConfigOpen(false)} />
-      {ctxMenuOpen && (
-        <EditorContextMenu x={ctxMenuPos.x} y={ctxMenuPos.y} onClose={() => setCtxMenuOpen(false)} />
-      )}
       <UnsavedChangesDialog
         unsavedTabs={unsavedTabs || []}
         onSaveAll={async () => {
