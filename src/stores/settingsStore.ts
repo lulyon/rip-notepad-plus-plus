@@ -183,8 +183,9 @@ export const useSettingsStore = create<SettingsState>((set) => {
       set((s) => {
         const roots = s.projectRoots.filter((r) => r !== path);
         const newActive = s.activeProjectRoot === path ? (roots[0] || null) : s.activeProjectRoot;
+        // When no roots left, switch to auto-detect mode (projectRoot=null)
         saveToStorage({ projectRoots: roots, activeProjectRoot: newActive } as any);
-        return { projectRoots: roots, activeProjectRoot: newActive, projectRoot: newActive };
+        return { projectRoots: roots, activeProjectRoot: newActive, projectRoot: roots.length > 0 ? newActive : null };
       });
     },
 

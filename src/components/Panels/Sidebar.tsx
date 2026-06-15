@@ -105,7 +105,7 @@ function ProjectPanel() {
     <div className="project-panel">
       {roots.map((root) => (
         <RootTree key={root} root={root} isActive={root === activeProjectRoot}
-          onRemove={roots.length > 1 ? () => removeProjectRoot(root) : undefined}
+          onRemove={() => removeProjectRoot(root)}
           onActivate={() => updateSetting("projectRoot", root)}
         />
       ))}
