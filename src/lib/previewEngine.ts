@@ -306,8 +306,10 @@ function renderMermaid({ content }: { content: string }): string {
     } else {
       mermaid.initialize({startOnLoad:false,theme:'default'});
       try {
-        mermaid.render('diagram', decodeURIComponent('${encoded}')).then(function(result){
-          document.getElementById('diagram').innerHTML = result.svg;
+        var el = document.getElementById('diagram');
+        if (!el) throw new Error('diagram element not found');
+        mermaid.render('mermaid-diagram', decodeURIComponent('${encoded}')).then(function(result){
+          el.innerHTML = result.svg;
         }).catch(function(e){
           document.getElementById('error').textContent = 'Error: '+e.message;
           document.getElementById('error').style.display='block';
