@@ -206,3 +206,8 @@
 .search-preview-before { color: #f88; display: block; }
 .search-preview-after { color: #8f8; display: block; }
 .search-preview-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
+
+/* ── Regex Dropdown ── */
+.search-regex-menu { position: absolute; top: 100%; right: 0; z-index: 10003; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 4px; min-width: 200px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.search-regex-item { padding: 6px 12px; font-size: 12px; cursor: pointer; color: var(--text-primary); }
+.search-regex-item:hover { background: var(--accent-color); color: #fff; }

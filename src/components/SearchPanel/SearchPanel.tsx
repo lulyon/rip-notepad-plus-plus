@@ -98,6 +98,21 @@ export function SearchPanel() {
   const [inSelection, setInSelection] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewItems, setPreviewItems] = useState<{ line: number; before: string; after: string }[]>([]);
+  const [regexDropdown, setRegexDropdown] = useState(false);
+
+  const REGEX_TEMPLATES = [
+    { name: "Email", pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}" },
+    { name: "URL", pattern: "https?://[\\w.-]+(:\\d+)?(/[\\w./%-]*)?" },
+    { name: "Integer", pattern: "-?\\d+" },
+    { name: "Decimal", pattern: "-?\\d+\\.\\d+" },
+    { name: "Date (YYYY-MM-DD)", pattern: "\\d{4}-\\d{2}-\\d{2}" },
+    { name: "Hex Color", pattern: "#[0-9a-fA-F]{3,8}" },
+    { name: "Identifier", pattern: "[a-zA-Z_$][\\w$]{0,30}" },
+    { name: "Mobile (CN)", pattern: "1[3-9]\\d{9}" },
+    { name: "IP Address", pattern: "(?:\\d{1,3}\\.){3}\\d{1,3}" },
+    { name: "Time (HH:MM:SS)", pattern: "\\d{2}:\\d{2}(:\\d{2})?" },
+    { name: "Markdown Link", pattern: "\\[([^\\]]+)\\]\\(([^)]+)\\)" },
+  ];
 
   const handleFind = useCallback(() => {
     if (editorRef) find(editorRef);
@@ -200,6 +215,24 @@ export function SearchPanel() {
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleFindNext();
               }}
+            />
+            <div className="search-regex-dropdown" style={{ position: "relative" }}>
+              <button className="sbtn" onClick={() => setRegexDropdown(!regexDropdown)} title="Regex templates"
+                style={{ padding: "4px 6px", fontSize: "12px" }}>📋</button>
+              {regexDropdown && (
+                <div className="search-regex-menu">
+                  {REGEX_TEMPLATES.map((t) => (
+                    <div key={t.name} className="search-regex-item" onClick={() => {
+                      handleFindInputChange(t.pattern);
+                      setOptions({ isRegex: true });
+                      setRegexDropdown(false);
+                      findInputRef.current?.focus();
+                    }}>{t.name}</div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <input
               placeholder={t("search.findPlaceholder")}
             />
             <span className="search-stats">
