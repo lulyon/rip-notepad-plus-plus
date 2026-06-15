@@ -94,9 +94,50 @@ export function SearchPanel() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [findPanelOpen, editorRef, findNext, findPrev, closePanel]);
 
+  const [incremental, setIncremental] = useState(false);
+  const [inSelection, setInSelection] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewItems, setPreviewItems] = useState<{ line: number; before: string; after: string }[]>([]);
+
   const handleFind = useCallback(() => {
     if (editorRef) find(editorRef);
   }, [editorRef, find]);
+
+  // Incremental search: re-find on every keystroke
+  const handleFindInputChange = useCallback((val: string) => {
+    setFindText(val);
+    if (incremental && val && editorRef) {
+      const state = useSearchStore.getState();
+      state.find(editorRef);
+    }
+  }, [incremental, setFindText, editorRef]);
+
+  // Replace preview: collect all matches before replacing
+  const handleReplacePreview = useCallback(() => {
+    if (!editorRef) return;
+    const model = editorRef.getModel();
+    if (!model || !findText) return;
+
+    const matches = model.findMatches(
+      findText, true, isRegex, caseSensitive, wholeWord ? " " : null, false
+    );
+    const items = matches.map((m) => {
+      const line = m.range.startLineNumber;
+      const lineText = model.getLineContent(line);
+      const before = lineText.substring(Math.max(0, m.range.startColumn - 1 - 20), Math.min(lineText.length, m.range.endColumn - 1 + 20));
+      const after = replaceText
+        ? lineText.substring(0, m.range.startColumn - 1) + replaceText + lineText.substring(m.range.endColumn - 1)
+        : lineText;
+      return { line, before: before.trim(), after: after.substring(0, 100).trim() };
+    });
+    setPreviewItems(items);
+    setPreviewOpen(true);
+  }, [editorRef, findText, isRegex, caseSensitive, wholeWord, replaceText]);
+
+  const handleReplaceAllConfirm = useCallback(() => {
+    if (editorRef) replaceAll(editorRef);
+    setPreviewOpen(false);
+  }, [editorRef, replaceAll]);
 
   const handleFindNext = useCallback(() => {
     if (editorRef) findNext(editorRef);
@@ -155,7 +196,7 @@ export function SearchPanel() {
               type="text"
               className="search-input"
               value={findText}
-              onChange={(e) => setFindText(e.target.value)}
+              onChange={(e) => handleFindInputChange(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleFindNext();
               }}
@@ -215,6 +256,14 @@ export function SearchPanel() {
               />
               {t("search.wrap")}
             </label>
+            <label className="search-option">
+              <input type="checkbox" checked={incremental} onChange={() => setIncremental(!incremental)} />
+              Incremental
+            </label>
+            <label className="search-option">
+              <input type="checkbox" checked={inSelection} onChange={() => setInSelection(!inSelection)} />
+              In Selection
+            </label>
           </div>
 
           {/* Action buttons */}
@@ -232,6 +281,9 @@ export function SearchPanel() {
               <>
                 <button className="sbtn" onClick={handleReplaceOne}>
                   {t("search.replaceBtn")}
+                </button>
+                <button className="sbtn" onClick={handleReplacePreview}>
+                  Preview
                 </button>
                 <button className="sbtn" onClick={handleReplaceAll}>
                   {t("search.replaceAllBtn")}
@@ -261,7 +313,7 @@ export function SearchPanel() {
               type="text"
               className="search-input"
               value={findText}
-              onChange={(e) => setFindText(e.target.value)}
+              onChange={(e) => handleFindInputChange(e.target.value)}
               placeholder={t("search.findInFilesPlaceholder")}
             />
           </div>
@@ -328,6 +380,28 @@ export function SearchPanel() {
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Replace Preview Dialog */}
+      {previewOpen && (
+        <div className="search-preview-overlay" onClick={() => setPreviewOpen(false)}>
+          <div className="search-preview-dialog" onClick={(e) => e.stopPropagation()}>
+            <h3>Replace Preview — {previewItems.length} occurrence(s)</h3>
+            <div className="search-preview-list">
+              {previewItems.map((item, i) => (
+                <div key={i} className="search-preview-item">
+                  <span className="search-preview-line">Ln {item.line}</span>
+                  <span className="search-preview-before">− {item.before}</span>
+                  <span className="search-preview-after">+ {item.after}</span>
+                </div>
+              ))}
+            </div>
+            <div className="search-preview-actions">
+              <button className="sbtn sbtn-primary" onClick={handleReplaceAllConfirm}>Replace All</button>
+              <button className="sbtn" onClick={() => setPreviewOpen(false)}>Cancel</button>
+            </div>
+          </div>
         </div>
       )}
     </div>

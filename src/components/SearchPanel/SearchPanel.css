@@ -195,3 +195,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* ── Replace Preview ── */
+.search-preview-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 10002; display: flex; align-items: center; justify-content: center; }
+.search-preview-dialog { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; max-width: 700px; max-height: 70vh; width: 90%; overflow: hidden; display: flex; flex-direction: column; }
+.search-preview-dialog h3 { font-size: 14px; margin-bottom: 8px; color: var(--text-primary); }
+.search-preview-list { flex: 1; overflow-y: auto; margin: 8px 0; }
+.search-preview-item { padding: 4px 0; border-bottom: 1px solid var(--border-color); font-size: 12px; }
+.search-preview-line { color: var(--text-secondary); margin-right: 8px; font-family: monospace; }
+.search-preview-before { color: #f88; display: block; }
+.search-preview-after { color: #8f8; display: block; }
+.search-preview-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
