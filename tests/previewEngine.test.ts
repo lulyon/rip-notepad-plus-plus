@@ -445,7 +445,7 @@ describe("previewEngine — render outputs", () => {
   it("dot: renders viz.js CDN", () => {
     const r = findRenderer("graph.dot", "")!;
     const output = r.render(opts("digraph { A -> B }"));
-    expect(output).toContain("hpcc-js/wasm");
+    expect(output).toContain("viz.js");
   });
 
   // ── Error/edge cases ──

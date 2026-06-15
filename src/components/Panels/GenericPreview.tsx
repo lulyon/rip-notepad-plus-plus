@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback, useMemo } from "react";
+import { useEffect, useRef, useCallback, useMemo, useState } from "react";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { useEditorStore } from "../../stores/editorStore";
 import { useEditorRefStore } from "../../stores/editorRefStore";
@@ -26,14 +26,40 @@ export function GenericPreview() {
   }, [activeTab?.path]);
 
   // Render content to HTML
+  const [zipHtml, setZipHtml] = useState<string>("");
   const html = useMemo(() => {
     if (!renderer) return "";
+    if (renderer.id === "zip") {
+      // Load archive listing asynchronously
+      if (activeTab?.path) {
+        import("../../lib/ipc").then(({ ipc }) => {
+          ipc.listArchive(activeTab.path!).then((entries) => {
+            const rows = entries.map((e: any) =>
+              `<div class="entry ${e.is_dir ? 'dir' : 'file'}"><span class="name">${e.is_dir ? '📁' : '📄'} ${e.name}</span><span class="size">${e.is_dir ? '' : formatSize(e.size)}</span></div>`
+            ).join("");
+            setZipHtml(`<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+              *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:13px/1.6 'Cascadia Code',monospace;padding:16px}
+              h2{color:#9cdcfe;margin-bottom:8px}.entry{padding:4px 0;border-bottom:1px solid #2a2a2a;display:flex}
+              .name{flex:1}.size{color:#888;text-align:right;min-width:80px}
+              .dir{color:#569cd6}.file{color:#d4d4d4}.err{color:#999;text-align:center;padding:40px}
+            </style></head><body><h2>${entries.length} entries</h2>${rows}</body></html>`);
+          }).catch(() => setZipHtml("<p class='err'>Failed to read archive</p>"));
+        });
+      }
+      return zipHtml || renderer.render({ content: "", filePath: activeTab?.path || null, assetUrl });
+    }
     return renderer.render({
       content: activeTab?.content || "",
       filePath: activeTab?.path || null,
       assetUrl,
     });
-  }, [renderer, activeTab?.content, activeTab?.path, assetUrl]);
+  }, [renderer, activeTab?.content, activeTab?.path, assetUrl, zipHtml]);
+
+  function formatSize(bytes: number): string {
+    if (bytes < 1024) return `${bytes}B`;
+    if (bytes < 1024*1024) return `${(bytes/1024).toFixed(1)}KB`;
+    return `${(bytes/(1024*1024)).toFixed(1)}MB`;
+  }
 
   // Scroll sync: editor → preview
   const syncScroll = useCallback(() => {
@@ -113,13 +139,15 @@ export function GenericPreview() {
 
   // HTML iframe renderer
   if (renderer.useIframe) {
+    // Asset-based renderers (docx/xlsx/3d/font/audio/video) need same-origin for local file access
+    const needsAsset = ["docx", "xlsx", "pdf", "sqlite", "3d", "font", "audio", "video", "image"].includes(renderer.id);
     return (
       <div className="markdown-preview">
         <iframe
           ref={iframeRef}
           className="preview-iframe"
           srcDoc={html}
-          sandbox="allow-scripts allow-same-origin"
+          sandbox={needsAsset ? "allow-scripts allow-same-origin" : "allow-scripts"}
           title={`${renderer.name} Preview`}
         />
       </div>

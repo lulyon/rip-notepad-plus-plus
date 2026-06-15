@@ -287,14 +287,14 @@ function renderMermaid({ content }: { content: string }): string {
   </style></head><body>
   <div class="mermaid" id="diagram"></div>
   <div id="error" class="err" style="display:none">Failed to render diagram</div>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
   <script>
-    mermaid.initialize({startOnLoad:false,theme:'default'});
+    mermaid.initialize({startOnLoad:false,theme:'default',securityLevel:'loose'});
     (async function(){
       try {
         const {svg} = await mermaid.render('diagram', decodeURIComponent('${encoded}'));
         document.getElementById('diagram').innerHTML = svg;
-      } catch(e) { document.getElementById('error').style.display='block'; }
+      } catch(e) { document.getElementById('error').style.display='block'; console.error(e); }
     })();
   </script></body></html>`;
 }
@@ -360,17 +360,14 @@ function renderDot({ content }: { content: string }): string {
     *{margin:0;padding:0}body{background:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:-apple-system,sans-serif}
     .err{color:#999;text-align:center;padding:40px}
   </style></head><body><div id="graph"></div><div id="err" class="err" style="display:none">Failed to render Graphviz</div>
-  <script src="https://cdn.jsdelivr.net/npm/@hpcc-js/wasm@2/dist/graphviz.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
   <script>
-    (async function(){
-      try{
-        const g = await (window["@hpcc-js/wasm"] || window["@hpcc-js/wasm/dist/graphviz.umd"]).graphviz;
-        if(!g){var gv=await import("https://cdn.jsdelivr.net/npm/@hpcc-js/wasm@2/dist/graphviz.umd.js");g=gv.graphviz;}
-        if(!g)throw new Error('no graphviz');
-        const svg = g.layout(decodeURIComponent('${encoded}'),'svg','dot');
-        document.getElementById('graph').innerHTML=svg;
-      }catch(e){document.getElementById('err').style.display='block'};
-    })();
+    try{
+      var viz = new Viz();
+      viz.renderSVGElement(decodeURIComponent('${encoded}'))
+        .then(function(el){document.getElementById('graph').appendChild(el)})
+        .catch(function(){document.getElementById('err').style.display='block'});
+    }catch(e){document.getElementById('err').style.display='block'};
   </script></body></html>`;
 }
 registerPreviewRenderer({
