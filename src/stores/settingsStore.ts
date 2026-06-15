@@ -150,10 +150,9 @@ export const useSettingsStore = create<SettingsState>((set) => {
     toggleSetting: (key) => {
       set((s) => {
         const current = s[key as keyof SettingsState];
-        if (typeof current !== "boolean") return s; // Guard: only toggle booleans
         const nextVal = !current;
-        saveToStorage({ [key]: nextVal } as any);
-        return { ...s, [key]: nextVal } as any;
+        saveToStorage({ [key]: nextVal });
+        return { ...s, [key]: nextVal };
       });
     },
 
@@ -190,5 +189,9 @@ export const useSettingsStore = create<SettingsState>((set) => {
       });
     },
 
+    loadSettings: () => {
+      const data = loadFromStorage();
+      set(data);
+    },
   };
 });
