@@ -53,6 +53,7 @@ export function useMenuActions() {
             });
             if (dir && typeof dir === "string") {
               useSettingsStore.getState().updateSetting("projectRoot", dir);
+              useSettingsStore.getState().addProjectRoot(dir);
               // Auto-open sidebar
               if (!useSettingsStore.getState().showSidebar) {
                 useSettingsStore.getState().updateSetting("showSidebar", true);

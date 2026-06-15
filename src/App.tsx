@@ -73,6 +73,7 @@ function App() {
       if (!session) return;
       if (session.project_root) {
         useSettingsStore.getState().updateSetting("projectRoot", session.project_root);
+        useSettingsStore.getState().addProjectRoot(session.project_root);
         useSettingsStore.getState().updateSetting("showSidebar", true);
       }
       if (session.open_tabs && session.open_tabs.length > 0) {

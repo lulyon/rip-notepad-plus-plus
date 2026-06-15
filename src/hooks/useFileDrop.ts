@@ -25,6 +25,7 @@ export function useFileDrop() {
               return ipc.listDirectory(path).then(() => {
                 // Success = it's a directory → set as project root
                 useSettingsStore.getState().updateSetting("projectRoot", path);
+                useSettingsStore.getState().addProjectRoot(path);
                 // Auto-open sidebar
                 if (!useSettingsStore.getState().showSidebar) {
                   useSettingsStore.getState().updateSetting("showSidebar", true);
