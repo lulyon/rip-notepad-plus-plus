@@ -147,6 +147,15 @@ export function GenericPreview() {
     );
   }
 
+  // PDF — render directly via asset URL (not double-wrapped iframe)
+  if (renderer.id === "pdf" && assetUrl) {
+    return (
+      <div className="markdown-preview">
+        <iframe src={assetUrl} className="preview-iframe" title="PDF Preview" />
+      </div>
+    );
+  }
+
   // HTML iframe renderer
   if (renderer.useIframe) {
     // Asset-based renderers (docx/xlsx/3d/font/audio/video) need same-origin for local file access

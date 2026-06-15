@@ -244,7 +244,7 @@ registerPreviewRenderer({
   extensions: ["pdf"],
   languages: [],
   render: renderPdf,
-  useIframe: true,
+  useIframe: false,
 });
 
 // ── XML formatted ──
