@@ -160,9 +160,6 @@ export function AiPanel() {
             <div className="ai-msg-content" dangerouslySetInnerHTML={{ __html: formatContent(msg.content) || (msg.role === "assistant" && streaming && i === messages.length - 1 ? "▊" : "") }} />
           </div>
         ))}
-        {streaming && messages[messages.length - 1]?.role === "assistant" && !messages[messages.length - 1]?.content && (
-          <div className="ai-msg assistant"><div className="ai-msg-role">🤖</div><div className="ai-msg-content">▊</div></div>
-        )}
         {error && <div className="ai-error">{error}</div>}
         <div ref={messagesEndRef} />
       </div>
