@@ -759,3 +759,66 @@ function renderDrawio({ content }: { content: string }): string {
 registerPreviewRenderer({
   id: "drawio", name: "Draw.io", extensions: ["drawio", "dio"], languages: ["xml"], render: renderDrawio, useIframe: true,
 });
+
+// ── Simple colored renderers for dev file types ──
+
+function coloredIframe(content: string, keywords: string[], className: string): string {
+  const escaped = content.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  let colored = escaped;
+  for (const kw of keywords) {
+    const re = new RegExp(`\\b(${kw})\\b`, "gi");
+    colored = colored.replace(re, `<span class="${className}">$1</span>`);
+  }
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:13px/1.6 'Cascadia Code',monospace;padding:16px;white-space:pre-wrap}
+    .kw{color:#569cd6}.str{color:#ce9178}.num{color:#b5cea8}.cmt{color:#6a9955}
+  </style></head><body><pre>${colored}</pre></body></html>`;
+}
+
+registerPreviewRenderer({
+  id: "sql", name: "SQL", extensions: ["sql"], languages: ["sql"],
+  render: ({ content }) => coloredIframe(content, ["SELECT","FROM","WHERE","JOIN","LEFT","RIGHT","INNER","ON","AND","OR","NOT","IN","AS","ORDER","BY","GROUP","HAVING","LIMIT","OFFSET","INSERT","INTO","VALUES","UPDATE","SET","DELETE","CREATE","TABLE","INDEX","DROP","ALTER","ADD","COLUMN","PRIMARY","KEY","FOREIGN","REFERENCES","INTEGER","VARCHAR","TEXT","BOOLEAN","NULL","DEFAULT","CASCADE","UNIQUE","EXISTS","COUNT","SUM","AVG","MAX","MIN","UNION","ALL","DISTINCT","BEGIN","COMMIT","ROLLBACK"], "kw"),
+  useIframe: true,
+});
+
+registerPreviewRenderer({
+  id: "toml", name: "TOML", extensions: ["toml"], languages: [],
+  render: ({ content }) => {
+    const colored = content.replace(/&/g,"&amp;").replace(/</g,"&lt;")
+      .replace(/^(\s*\[.*?\])\s*$/gm,'<span style="color:#569cd6">$1</span>')
+      .replace(/^(\s*)(\w+)(\s*=)/gm,'$1<span style="color:#9cdcfe">$2</span>$3')
+      .replace(/(=\s*)(\d+\.?\d*)/gm,'$1<span style="color:#b5cea8">$2</span>')
+      .replace(/(=\s*)(".*?"|'.*?')/gm,'$1<span style="color:#ce9178">$2</span>');
+    return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+      *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:13px/1.6 'Cascadia Code',monospace;padding:16px;white-space:pre-wrap}
+    </style></head><body><pre>${colored}</pre></body></html>`;
+  },
+  useIframe: true,
+});
+
+registerPreviewRenderer({
+  id: "ini", name: "INI", extensions: ["ini", "cfg", "conf"], languages: ["ini"],
+  render: ({ content }) => {
+    const colored = content.replace(/&/g,"&amp;").replace(/</g,"&lt;")
+      .replace(/^(\s*\[.*?\])\s*$/gm,'<span style="color:#569cd6;font-weight:bold">$1</span>')
+      .replace(/^(\s*)(\w+)(\s*=)/gm,'$1<span style="color:#9cdcfe">$2</span>$3')
+      .replace(/(=\s*)(.*?)$/gm,'$1<span style="color:#ce9178">$2</span>')
+      .replace(/^(;|#)(.*)$/gm,'<span style="color:#6a9955">$1$2</span>');
+    return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+      *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:13px/1.6 'Cascadia Code',monospace;padding:16px;white-space:pre-wrap}
+    </style></head><body><pre>${colored}</pre></body></html>`;
+  },
+  useIframe: true,
+});
+
+registerPreviewRenderer({
+  id: "graphql", name: "GraphQL", extensions: ["graphql", "gql"], languages: ["graphql"],
+  render: ({ content }) => coloredIframe(content, ["type","interface","union","enum","input","extend","schema","scalar","directive","implements","fragment","query","mutation","subscription","on","true","false","null","String","Int","Float","Boolean","ID"], "kw"),
+  useIframe: true,
+});
+
+registerPreviewRenderer({
+  id: "proto", name: "Protobuf", extensions: ["proto"], languages: ["proto"],
+  render: ({ content }) => coloredIframe(content, ["syntax","package","import","option","message","service","rpc","returns","stream","enum","oneof","map","reserved","extend","extensions","required","optional","repeated","string","int32","int64","uint32","uint64","float","double","bool","bytes","true","false"], "kw"),
+  useIframe: true,
+});

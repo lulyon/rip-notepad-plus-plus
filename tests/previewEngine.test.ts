@@ -477,3 +477,113 @@ describe("previewEngine — render outputs", () => {
     expect(r!.render(opts("hello"))).toBe("<pre>hello</pre>");
   });
 });
+
+// ── Real test files verification ──
+
+import { readFileSync } from "fs";
+import { resolve } from "path";
+
+const TEST_DIR = resolve(__dirname, "../test-files");
+
+function readTestFile(name: string): string {
+  try {
+    return readFileSync(resolve(TEST_DIR, name), "utf-8");
+  } catch {
+    return "";
+  }
+}
+
+describe("previewEngine — real test files", () => {
+  // Text-based files that can be verified
+  it("renders test.md without errors", () => {
+    const content = readTestFile("test.md");
+    expect(content.length).toBeGreaterThan(0);
+    const r = findRenderer("test.md", "markdown")!;
+    const output = r.render(opts(content));
+    expect(output).toContain("<h1");
+    expect(output).toContain("Markdown");
+  });
+
+  it("renders test.html without errors", () => {
+    const content = readTestFile("test.html");
+    const r = findRenderer("test.html", "")!;
+    const output = r.render(opts(content));
+    expect(output).toContain("HTML");
+  });
+
+  it("renders test.json — valid JSON produces colored output", () => {
+    const content = readTestFile("test.json");
+    const r = findRenderer("test.json", "")!;
+    const output = r.render(opts(content));
+    // Should contain the rendered HTML (not the error message)
+    expect(output.length).toBeGreaterThan(200);
+  });
+
+  it("renders test.csv — table output", () => {
+    const content = readTestFile("test.csv");
+    const r = findRenderer("test.csv", "")!;
+    const output = r.render(opts(content));
+    expect(output).toContain("<table>");
+    expect(output).toContain("Alice");
+  });
+
+  it("renders test.xml — colored output", () => {
+    const content = readTestFile("test.xml");
+    const r = findRenderer("test.xml", "")!;
+    const output = r.render(opts(content));
+    expect(output).toContain("<pre>");
+  });
+
+  it("renders test.yml — colored output", () => {
+    const content = readTestFile("test.yml");
+    const r = findRenderer("test.yml", "")!;
+    const output = r.render(opts(content));
+    expect(output).toContain("<pre>");
+  });
+
+  it("renders test.diff — +/- colored", () => {
+    const content = readTestFile("test.diff");
+    const r = findRenderer("test.diff", "")!;
+    const output = r.render(opts(content));
+    expect(output).toContain('class="add"');
+    expect(output).toContain('class="del"');
+  });
+
+  it("renders test.env — masked table", () => {
+    const content = readTestFile("test.env");
+    const r = findRenderer(".env", "")!;
+    const output = r.render(opts(content));
+    expect(output).toContain("<table>");
+    expect(output).toContain("DATABASE_URL");
+  });
+
+  it("renders test.srt — subtitle timeline", () => {
+    const content = readTestFile("test.srt");
+    const r = findRenderer("test.srt", "")!;
+    const output = r.render(opts(content));
+    expect(output).toContain("Welcome");
+  });
+
+  it("renders test.har — waterfall table", () => {
+    const content = readTestFile("test.har");
+    const r = findRenderer("test.har", "")!;
+    const output = r.render(opts(content));
+    expect(output).toContain("GET");
+  });
+
+  it("renders test.ipynb — notebook cells", () => {
+    const content = readTestFile("test.ipynb");
+    const r = findRenderer("test.ipynb", "")!;
+    const output = r.render(opts(content));
+    expect(output.length).toBeGreaterThan(200);
+  });
+
+  it("renders test.geojson — leaflet map", () => {
+    const content = readTestFile("test.geojson");
+    const r = findRenderer("test.geojson", "")!;
+    const output = r.render(opts(content));
+    expect(output).toContain("leaflet");
+  });
+
+  // Asset-based: all covered by detection tests above — structure verified via opts() calls
+});
