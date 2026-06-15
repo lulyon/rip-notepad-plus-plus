@@ -39,6 +39,7 @@ export function Editor({ tabId }: EditorProps) {
   const renderWhitespace = useSettingsStore((s) => s.renderWhitespace);
   const showIndentGuides = useSettingsStore((s) => s.showIndentGuides);
   const showMinimap = useSettingsStore((s) => s.showMinimap);
+  const minimapShowSlider = useSettingsStore((s) => s.minimapShowSlider);
   const bracketPairColorization = useSettingsStore((s) => s.bracketPairColorization);
   const smoothScrolling = useSettingsStore((s) => s.smoothScrolling);
   const scrollBeyondLastLine = useSettingsStore((s) => s.scrollBeyondLastLine);
@@ -190,7 +191,13 @@ export function Editor({ tabId }: EditorProps) {
       options={{
         fontSize,
         fontFamily,
-        minimap: { enabled: showMinimap && !isVeryLargeFile },
+        minimap: {
+          enabled: showMinimap && !isVeryLargeFile,
+          renderCharacters: false,
+          scale: 1,
+          showSlider: minimapShowSlider,
+          size: isVeryLargeFile ? undefined : "proportional",
+        },
         scrollBeyondLastLine: isVeryLargeFile ? false : scrollBeyondLastLine,
         wordWrap: isVeryLargeFile ? "off" : wordWrap,
         lineNumbers,

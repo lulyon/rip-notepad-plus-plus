@@ -202,6 +202,23 @@ export function PreferencesDialog({ open, onClose }: Props) {
                 <span>{t("preferences.showMinimap")}</span>
               </label>
 
+              {settings.showMinimap && (
+                <>
+                  <label className="prefs-row">
+                    <span>{t("preferences.minimapWidth")}: {settings.minimapWidth}px</span>
+                    <input type="range" min={40} max={120} step={10}
+                      value={settings.minimapWidth}
+                      onChange={(e) => settings.updateSetting("minimapWidth", Number(e.target.value))} />
+                  </label>
+                  <label className="prefs-row">
+                    <input type="checkbox"
+                      checked={settings.minimapShowSlider === "always"}
+                      onChange={() => settings.updateSetting("minimapShowSlider", settings.minimapShowSlider === "always" ? "mouseover" : "always")} />
+                    <span>{t("preferences.minimapShowSlider")}</span>
+                  </label>
+                </>
+              )}
+
               <label className="prefs-row">
                 <input
                   type="checkbox"

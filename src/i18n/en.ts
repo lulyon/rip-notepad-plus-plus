@@ -262,6 +262,8 @@ const en = {
     "preferences.wordWrap": "Word wrap",
     "preferences.showLineNumbers": "Show line numbers",
     "preferences.showMinimap": "Show minimap",
+    "preferences.minimapWidth": "Minimap width",
+    "preferences.minimapShowSlider": "Always show minimap slider",
     "preferences.showIndentGuides": "Show indent guides",
     "preferences.bracketColorization": "Bracket pair colorization",
     "preferences.smoothScrolling": "Smooth scrolling",

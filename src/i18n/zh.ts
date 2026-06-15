@@ -262,6 +262,8 @@ const zh = {
     "preferences.wordWrap": "自动换行",
     "preferences.showLineNumbers": "显示行号",
     "preferences.showMinimap": "显示缩略图",
+    "preferences.minimapWidth": "缩略图宽度",
+    "preferences.minimapShowSlider": "始终显示缩略图滑块",
     "preferences.showIndentGuides": "显示缩进线",
     "preferences.bracketColorization": "括号对颜色化",
     "preferences.smoothScrolling": "平滑滚动",

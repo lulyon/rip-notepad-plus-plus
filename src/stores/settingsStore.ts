@@ -11,6 +11,8 @@ export interface SettingsState {
   renderWhitespace: "selection" | "none" | "all";
   showIndentGuides: boolean;
   showMinimap: boolean;
+  minimapWidth: number;
+  minimapShowSlider: "always" | "mouseover";
   bracketPairColorization: boolean;
   smoothScrolling: boolean;
   scrollBeyondLastLine: boolean;
@@ -112,6 +114,8 @@ export const useSettingsStore = create<SettingsState>((set) => {
     renderWhitespace: saved.renderWhitespace ?? "selection",
     showIndentGuides: saved.showIndentGuides ?? true,
     showMinimap: saved.showMinimap ?? true,
+    minimapWidth: saved.minimapWidth ?? 60,
+    minimapShowSlider: saved.minimapShowSlider ?? "mouseover",
     bracketPairColorization: saved.bracketPairColorization ?? true,
     smoothScrolling: saved.smoothScrolling ?? true,
     scrollBeyondLastLine: saved.scrollBeyondLastLine ?? false,
