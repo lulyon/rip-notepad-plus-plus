@@ -129,7 +129,7 @@ Open a supported file and click the 👁 button in the editor toolbar, or press 
 
 ### Workspace
 - Save / Open `.ripworkspace` files — multi-project roots
-- Sidebar multi-root Files panel (+ Add Folder / × Remove)
+- Sidebar multi-root Files panel (+ Add Folder / × Remove / drag-drop from Finder)
 - Recent workspaces list (max 10)
 - Auto-detect root from active tab when no workspace
 
