@@ -225,6 +225,7 @@ export function Editor({ tabId }: EditorProps) {
         cursorSmoothCaretAnimation: isVeryLargeFile ? "off" : "on",
         smoothScrolling,
         padding: isVeryLargeFile ? { top: 4 } : { top: 8 },
+        contextmenu: false,
         find: {
           addExtraSpaceOnTop: false,
           autoFindInSelection: "never",
