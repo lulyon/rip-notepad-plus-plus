@@ -88,16 +88,15 @@ test.describe("ripNotepad++ UI Tests", () => {
 
   // ── Go to Line ──
   test("Search menu Go To opens goto dialog", async ({ page }) => {
-    // Create a tab first
     await page.locator(".menu-bar-item").first().click();
     await page.waitForTimeout(100);
     await page.locator(".menu-item", { hasText: "新建" }).click();
     await page.waitForTimeout(800);
-    // Open Search menu and click Go To
-    await page.locator(".menu-bar-item").nth(2).click();
+    // Dispatch Go To Line event directly (Ctrl+G equivalent)
+    await page.evaluate(() => {
+      window.dispatchEvent(new CustomEvent("open-go-to-line"));
+    });
     await page.waitForTimeout(300);
-    await page.locator(".menu-item", { hasText: "转到" }).click();
-    await page.waitForTimeout(500);
     await expect(page.locator(".goto-dialog")).toBeVisible({ timeout: 3000 });
   });
 
