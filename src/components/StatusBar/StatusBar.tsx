@@ -26,7 +26,7 @@ export function StatusBar() {
       <div className="status-bar">
         <span className="status-item">ripNotepad++</span>
         {gitStatus && (
-          <span className="status-item git-branch-item">
+          <span className="status-item git-branch-item" onClick={() => window.dispatchEvent(new CustomEvent("git-show-branches"))} title="Click to switch branch">
             ⎇ {gitStatus.branch}
           </span>
         )}

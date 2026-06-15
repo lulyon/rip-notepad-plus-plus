@@ -4,6 +4,7 @@ import { useEditorStore } from "../../stores/editorStore";
 import { useSettingsStore } from "../../stores/settingsStore";
 import { useGitStore } from "../../stores/gitStore";
 import { ipc } from "../../lib/ipc";
+import { CommitDialog } from "../Dialogs/CommitDialog";
 import "./GitPanel.css";
 
 export function GitPanel() {
@@ -12,18 +13,25 @@ export function GitPanel() {
   const { status, loading, error, refreshStatus } = useGitStore();
   const [diffFile, setDiffFile] = useState<string | null>(null);
   const [diffContent, setDiffContent] = useState("");
-  const [commitMsg, setCommitMsg] = useState("");
   const [stagedFiles, setStagedFiles] = useState<Set<string>>(new Set());
   const [showBranchMenu, setShowBranchMenu] = useState(false);
   const [branches, setBranches] = useState<string[]>([]);
   const [newBranchName, setNewBranchName] = useState("");
   const [actionMsg, setActionMsg] = useState("");
+  const [commitOpen, setCommitOpen] = useState(false);
 
   const refresh = useCallback(() => {
     if (projectRoot) refreshStatus(projectRoot);
   }, [projectRoot, refreshStatus]);
 
   useEffect(() => { refresh(); }, [refresh]);
+
+  // Listen for status bar branch click
+  useEffect(() => {
+    const handler = () => { if (projectRoot) loadBranches(); };
+    window.addEventListener("git-show-branches", handler);
+    return () => window.removeEventListener("git-show-branches", handler);
+  }, [projectRoot]);
 
   // Reset staged state when status changes
   useEffect(() => {
@@ -53,15 +61,6 @@ export function GitPanel() {
   const doStageAll = async () => {
     if (!projectRoot || !status) return;
     try { await ipc.gitStageAll(projectRoot); refresh(); } catch (e: any) { setActionMsg(e); }
-  };
-
-  const doCommit = async () => {
-    if (!projectRoot || !commitMsg.trim()) return;
-    try {
-      await ipc.gitCommit(projectRoot, commitMsg.trim());
-      setCommitMsg(""); refresh();
-      setActionMsg("Committed ✓");
-    } catch (e: any) { setActionMsg("Commit failed: " + e); }
   };
 
   const doPush = async () => {
@@ -176,11 +175,20 @@ export function GitPanel() {
       {status && status.changed.length > 0 && (
         <div className="git-commit-section">
           <button className="git-action-btn" onClick={doStageAll}>Stage All</button>
-          <input className="git-input commit-msg" value={commitMsg} onChange={(e) => setCommitMsg(e.target.value)}
-            placeholder="Commit message..." onKeyDown={(e) => e.key === "Enter" && doCommit()} />
-          <button className="git-btn git-commit-btn" onClick={doCommit} disabled={!commitMsg.trim()}>Commit</button>
+          <button className="git-btn git-commit-btn" onClick={() => setCommitOpen(true)}>Commit...</button>
         </div>
       )}
+
+      <CommitDialog
+        open={commitOpen}
+        files={status?.changed || []}
+        onCommit={async (msg) => {
+          if (!projectRoot) return;
+          try { await ipc.gitCommit(projectRoot, msg); refresh(); setActionMsg("Committed ✓"); }
+          catch (e: any) { setActionMsg("Commit failed: " + e); }
+        }}
+        onClose={() => setCommitOpen(false)}
+      />
 
       {/* Diff view */}
       {diffFile && (
