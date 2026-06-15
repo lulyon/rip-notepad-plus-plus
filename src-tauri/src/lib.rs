@@ -29,6 +29,7 @@ pub fn run() {
         .plugin(tauri_plugin_process::init())
         .manage(Mutex::new(MonitorState::new()))
         .setup(|app| {
+            env_logger::init();
             let icon_bytes = include_bytes!("../icons/128x128.png");
             if let Ok(img) = image::load_from_memory(icon_bytes) {
                 let rgba = img.to_rgba8();

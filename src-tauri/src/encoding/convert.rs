@@ -142,9 +142,10 @@ fn encoding_group(enc: &'static Encoding) -> String {
     } else if name.starts_with("windows-125")
         || name == "x-mac-roman"
         || name == "macintosh"
-        || name == "windows-874"
     {
         "Western European".into()
+    } else if name == "windows-874" {
+        "Thai".into()
     } else if name.starts_with("ISO-8859") {
         "ISO 8859".into()
     } else {

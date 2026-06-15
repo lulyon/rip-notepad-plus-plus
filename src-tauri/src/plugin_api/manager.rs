@@ -277,7 +277,9 @@ impl PluginManager {
         }
 
         for name in dead_plugins {
-            plugins.remove(&name);
+            if let Some(mut proc) = plugins.remove(&name) {
+                let _ = proc.child.wait(); // Reap zombie
+            }
         }
     }
 
