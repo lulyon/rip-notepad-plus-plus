@@ -190,9 +190,5 @@ export const useSettingsStore = create<SettingsState>((set) => {
       });
     },
 
-    loadSettings: () => {
-      const data = loadFromStorage();
-      set(data);
-    },
   };
 });

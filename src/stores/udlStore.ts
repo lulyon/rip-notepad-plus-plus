@@ -24,7 +24,6 @@ interface UdlState {
   updateUdl: (id: string, udl: Partial<UdlConfig>) => void;
   deleteUdl: (id: string) => void;
   getUdl: (id: string) => UdlConfig | undefined;
-  loadUdls: () => void;
 }
 
 function generateId(): string {

@@ -1,9 +1,0 @@
-.tasklist-panel { height:100%; display:flex; flex-direction:column; overflow:hidden; }
-.tasklist-header { padding:6px 8px; font-size:11px; color:var(--text-secondary); border-bottom:1px solid var(--border-color); }
-.tasklist-empty { padding:16px; text-align:center; color:var(--text-secondary); font-size:12px; }
-.tasklist-list { flex:1; overflow-y:auto; }
-.tasklist-item { display:flex; align-items:center; padding:4px 8px; cursor:pointer; font-size:12px; gap:6px; }
-.tasklist-item:hover { background:var(--bg-tertiary); }
-.tasklist-type { font-weight:bold; font-size:10px; flex-shrink:0; min-width:50px; }
-.tasklist-text { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--text-primary); }
-.tasklist-line { font-size:10px; color:var(--text-secondary); flex-shrink:0; }
