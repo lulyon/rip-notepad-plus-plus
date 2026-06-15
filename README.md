@@ -262,7 +262,7 @@ rip-notepad-plus-plus/
 ```bash
 npm test              # Run all tests
 npm run test:unit     # 308 vitest unit tests (18 suites)
-npm run test:e2e      # 70 Playwright E2E tests
+npm run test:e2e      # 65 Playwright E2E tests
 npm run test:check    # TypeScript + Rust compile checks
 ```
 

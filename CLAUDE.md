@@ -10,8 +10,8 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 - **Node**: >= 20
 - **Rust**: >= 1.70 (edition 2021)
 - **Version**: 0.3.0 (21 phases complete)
-- **Tests**: 70 E2E + 308 unit (Playwright + vitest)
-- **IPC Commands**: 41 (file_ops, encoding, search, session, system, plugin, git, monitor, workspace)
+- **Tests**: 65 E2E + 308 unit (Playwright + vitest)
+- **IPC Commands**: 51 (file_ops, encoding, search, session, system, plugin, git, monitor, workspace)
 
 ## Architecture
 
