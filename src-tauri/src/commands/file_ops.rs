@@ -2,6 +2,18 @@ use crate::models::{DirEntry, FileReadResult};
 
 const LARGE_FILE_THRESHOLD: u64 = 50 * 1024 * 1024; // 50MB
 
+/// Basic path validation: reject paths with obvious traversal attempts
+fn validate_path(path: &str) -> Result<(), String> {
+    if path.contains("..") {
+        return Err(format!("Path traversal not allowed: {}", path));
+    }
+    // Reject empty paths
+    if path.trim().is_empty() {
+        return Err("Empty path not allowed".into());
+    }
+    Ok(())
+}
+
 #[tauri::command]
 pub async fn read_file(path: String, encoding_override: Option<String>) -> Result<FileReadResult, String> {
     let metadata = std::fs::metadata(&path)
@@ -32,6 +44,7 @@ pub async fn read_file(path: String, encoding_override: Option<String>) -> Resul
 
 #[tauri::command]
 pub async fn write_file(path: String, content: String, encoding: String) -> Result<(), String> {
+    validate_path(&path)?;
     let bytes = crate::encoding::convert::encode_string(&content, &encoding)
         .map_err(|e| format!("Failed to encode content as '{}': {}", encoding, e))?;
 
@@ -48,6 +61,7 @@ pub async fn write_file(path: String, content: String, encoding: String) -> Resu
 
 #[tauri::command]
 pub async fn delete_file(path: String) -> Result<(), String> {
+    validate_path(&path)?;
     std::fs::remove_file(&path)
         .map_err(|e| format!("Failed to delete file '{}': {}", path, e))?;
     Ok(())
@@ -128,6 +142,7 @@ pub async fn create_directory(path: String) -> Result<(), String> {
 
 #[tauri::command]
 pub async fn delete_directory(path: String) -> Result<(), String> {
+    validate_path(&path)?;
     std::fs::remove_dir_all(&path)
         .map_err(|e| format!("Failed to delete directory '{}': {}", path, e))
 }
