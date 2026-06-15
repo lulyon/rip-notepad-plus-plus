@@ -7,12 +7,13 @@ import { ipc } from "../../lib/ipc";
 import { detectLanguage } from "../../lib/constants";
 import type { DirEntry } from "../../types/ipc";
 import { GitPanel } from "./GitPanel";
+import { AiPanel } from "./AiPanel";
 import "./Sidebar.css";
 
 export function Sidebar() {
   const { t } = useTranslation();
   const showSidebar = useSettingsStore((s) => s.showSidebar);
-  const [activeTab, setActiveTab] = useState<"files" | "git" | "symbols">("files");
+  const [activeTab, setActiveTab] = useState<"files" | "ai" | "git" | "symbols">("files");
 
   if (!showSidebar) return null;
 
@@ -24,6 +25,12 @@ export function Sidebar() {
           onClick={() => setActiveTab("files")}
         >
           📁 {t("sidebar.files")}
+        </button>
+        <button
+          className={`sidebar-tab ${activeTab === "ai" ? "active" : ""}`}
+          onClick={() => setActiveTab("ai")}
+        >
+          🤖 AI
         </button>
         <button
           className={`sidebar-tab ${activeTab === "git" ? "active" : ""}`}
@@ -40,6 +47,7 @@ export function Sidebar() {
       </div>
       <div className="sidebar-content">
         {activeTab === "files" && <ProjectPanel />}
+        {activeTab === "ai" && <AiPanel />}
         {activeTab === "git" && <GitPanel />}
         {activeTab === "symbols" && <FunctionList />}
       </div>
