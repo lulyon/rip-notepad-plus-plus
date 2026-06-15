@@ -5,6 +5,18 @@ import { useEditorStore } from "../../stores/editorStore";
 import { streamChat } from "../../lib/aiClient";
 import "./AiPanel.css";
 
+function ThinkingBlock({ text }: { text: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="ai-thinking">
+      <div className="ai-thinking-toggle" onClick={() => setOpen(!open)}>
+        {open ? "▾" : "▸"} Thinking {text.length > 0 ? `(${text.length} chars)` : ""}
+      </div>
+      {open && <div className="ai-thinking-content">{text}</div>}
+    </div>
+  );
+}
+
 const QUICK_ACTIONS = [
   { key: "explain", label: "Explain Code", prompt: "Explain the following code in detail:\n\n" },
   { key: "refactor", label: "Refactor", prompt: "Refactor the following code to improve readability and performance:\n\n" },
@@ -69,13 +81,26 @@ export function AiPanel() {
     const latest = useAiStore.getState();
 
     let full = "";
+    let thinkingFull = "";
     await streamChat(
       latest.apiBaseUrl, latest.apiKey, latest.model, latest.messages,
       "You are a helpful coding assistant. Respond in Markdown. Keep answers concise.",
       (token) => { full += token; useAiStore.getState().updateLastMessage(full); },
+      (thinking) => {
+        thinkingFull += thinking;
+        useAiStore.getState().updateLastMessage(full); // trigger re-render
+      },
       () => useAiStore.getState().setStreaming(false),
-      (err) => { setError(err); store.setStreaming(false); },
+      (err) => { setError(err); useAiStore.getState().setStreaming(false); },
     );
+    // Store thinking after stream completes
+    if (thinkingFull) {
+      const s = useAiStore.getState();
+      const msgs = [...s.messages];
+      if (msgs.length > 0 && msgs[msgs.length - 1].role === "assistant") {
+        (msgs[msgs.length - 1] as any).thinking = thinkingFull;
+      }
+    }
   };
 
   const doQuickAction = (prompt: string) => {
@@ -157,7 +182,10 @@ export function AiPanel() {
         {messages.map((msg, i) => (
           <div key={i} className={`ai-msg ${msg.role}`}>
             <div className="ai-msg-role">{msg.role === "user" ? "👤" : "🤖"}</div>
-            <div className="ai-msg-content" dangerouslySetInnerHTML={{ __html: formatContent(msg.content) || (msg.role === "assistant" && streaming && i === messages.length - 1 ? "▊" : "") }} />
+            <div className="ai-msg-content">
+              {(msg as any).thinking && <ThinkingBlock text={(msg as any).thinking} />}
+              <span dangerouslySetInnerHTML={{ __html: formatContent(msg.content) || (msg.role === "assistant" && streaming && i === messages.length - 1 ? "▊" : "") }} />
+            </div>
           </div>
         ))}
         {error && <div className="ai-error">{error}</div>}

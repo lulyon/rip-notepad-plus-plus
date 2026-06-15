@@ -11,6 +11,7 @@ export async function streamChat(
   messages: AiMessage[],
   systemPrompt: string,
   onToken: (text: string) => void,
+  onThinking: (text: string) => void,
   onDone: () => void,
   onError: (err: string) => void,
 ): Promise<void> {
@@ -70,8 +71,14 @@ export async function streamChat(
           const type = parsed.type;
 
           if (type === "content_block_delta") {
-            const text = parsed.delta?.text || "";
-            onToken(text);
+            const delta = parsed.delta || {};
+            if (delta.type === "thinking_delta" || delta.thinking) {
+              onThinking(delta.thinking || "");
+            } else if (delta.type === "text_delta" || delta.text) {
+              onToken(delta.text || "");
+            } else if (delta.text) {
+              onToken(delta.text);
+            }
           } else if (type === "message_stop") {
             // Stream complete
           } else if (type === "error") {
