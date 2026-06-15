@@ -9,9 +9,9 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 - **Target**: Windows, macOS, Linux
 - **Node**: >= 20
 - **Rust**: >= 1.70 (edition 2021)
-- **Version**: 0.3.0 (10 phases complete, 13 NP++ plugins ported)
-- **Tests**: 47 E2E (Playwright + mocked Tauri IPC)
-- **IPC Commands**: 31 (file_ops, encoding, search, session, system, plugin, git)
+- **Version**: 0.3.0 (15 phases complete)
+- **Tests**: 70 E2E + 308 unit (Playwright + vitest)
+- **IPC Commands**: 37 (file_ops, encoding, search, session, system, plugin, git, monitor)
 
 ## Architecture
 
@@ -20,7 +20,8 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 │  MenuBar │ TabBar(drag) │ Sidebar │ SplitEditor │ StatusBar │
 │  SearchPanel(overlay) │ Dialogs(portals)                     │
 │  Zustand stores: editor / search / settings / macro /        │
-│  encoding / plugin / git / clipboard / editorRef             │
+│  encoding / plugin / git / clipboard / editorRef /           │
+│  bookmark / mark / contextMenu / udl                         │
 ├─ Tauri IPC (src/lib/ipc.ts) ────────────────────────────────┤
 ├─ Rust Backend ──────────────────────────────────────────────┤
 │  commands/ (file_ops, encoding, search, session, system,     │
@@ -59,7 +60,7 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 | `src/components/TabBar/TabContextMenu.tsx` | Close/Close Others/Close All/Copy Path (i18n) |
 | `src/components/StatusBar/StatusBar.tsx` | File name, language, encoding, Ln/Col, git branch |
 | `src/components/SearchPanel/SearchPanel.tsx` | Find/replace with regex, case, word, wrap, FindInFiles |
-| `src/components/Panels/Sidebar.tsx` | Sidebar: Files (tree) + DocList + Clipboard + JSON Viewer + Task List + Git + Symbols (7 tabs) |
+| `src/components/Panels/Sidebar.tsx` | Sidebar: Files (tree) + Git (status/diff) + Symbols (3 tabs) |
 | `src/components/Panels/GitPanel.tsx` | Git changed files list, inline diff view |
 | `src/components/Panels/ClipboardPanel.tsx` | Clipboard history with search, pin, paste at cursor |
 | `src/components/Panels/JsonViewerPanel.tsx` | Recursive JSON tree view with copy path |
@@ -102,6 +103,10 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 | `UnsavedChangesDialog` | Close modified tab | Save/Discard/Cancel prompt |
 | `CompareDialog` | Plugins → Compare | Side-by-side file diff (Monaco DiffEditor) |
 | `CommandPalette` | Ctrl+Shift+P | Fuzzy command search and execute |
+| `HashDialog` | Tools menu | MD5/SHA-1/SHA-256/SHA-512 generation |
+| `SummaryDialog` | View → Summary | Document stats (chars/words/lines) |
+| `UdlDialog` | Language menu | User-defined language editor |
+| `ContextMenuDialog` | File → Edit Context Menu | Customize right-click menu items |
 
 ## IPC Commands (Rust → TS) — 31 total
 
@@ -247,7 +252,7 @@ Each tab: `{ id, path, name, content, encoding, modified, language, cursorLine, 
 - **Locales**: `src/i18n/zh.ts` (Chinese), `src/i18n/en.ts` (English)
 - **Config**: `src/i18n/index.ts` (default: zh, persisted to localStorage)
 - **Language switcher**: Preferences → General → Language
-- **Coverage**: Menus, welcome screen, tab context menu, status bar, sidebar panels, most dialogs (213 keys, zh=EN parity)
+- **Coverage**: Menus, welcome screen, tab context menu, status bar, sidebar panels, all dialogs (290+ keys, 7 languages: zh/en/ja/ko/fr/ar/he)
 
 ## Conventions
 
@@ -291,15 +296,16 @@ Each tab: `{ id, path, name, content, encoding, modified, language, cursorLine, 
 ## Testing
 
 ```bash
-npm run test:e2e      # 47 Playwright tests (UI + compile checks), ~120s
-npm run test:check    # TypeScript + Rust compile checks only
+npm test              # Run all tests
+npm run test:unit     # 308 vitest unit tests (18 suites)
+npm run test:e2e      # 70 Playwright E2E tests
+npm run test:check    # TypeScript + Rust compile checks
 ```
 
-- **45 UI tests**: menu items, dialogs, tab operations, sidebar, i18n, search, language, NP++ features
-- **2 compile checks**: `cargo check` and `npx tsc --noEmit`
-- Headless Chromium with mocked Tauri IPC (`window.__TAURI_INTERNALS__`)
+- **18 test suites, 308 unit tests**: stores, hooks, preview engine renderers
+- **70 E2E tests**: UI basics, feature coverage, NP++ features, deep behavior
+- Headless Chromium with mocked Tauri IPC
 - Config: `e2e/playwright.config.ts` (webServer auto-starts Vite)
-- Test files: `e2e/ui-tests.spec.ts`, `e2e/feature-coverage.spec.ts`, `e2e/npp-features.spec.ts`
 
 ## Dev Commands
 
