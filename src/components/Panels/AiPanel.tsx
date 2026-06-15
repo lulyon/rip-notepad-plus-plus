@@ -65,12 +65,15 @@ export function AiPanel() {
     store.addMessage({ role: "assistant", content: "", timestamp: Date.now() });
     store.setStreaming(true);
 
+    // Re-read state — addMessage replaces the messages array
+    const latest = useAiStore.getState();
+
     let full = "";
     await streamChat(
-      store.apiBaseUrl, store.apiKey, store.model, store.messages,
+      latest.apiBaseUrl, latest.apiKey, latest.model, latest.messages,
       "You are a helpful coding assistant. Respond in Markdown. Keep answers concise.",
-      (token) => { full += token; store.updateLastMessage(full); },
-      () => store.setStreaming(false),
+      (token) => { full += token; useAiStore.getState().updateLastMessage(full); },
+      () => useAiStore.getState().setStreaming(false),
       (err) => { setError(err); store.setStreaming(false); },
     );
   };
