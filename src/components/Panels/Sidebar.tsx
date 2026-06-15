@@ -107,16 +107,17 @@ function ProjectPanel() {
   // Listen to Tauri drag-drop events, filter to this panel's area
   useEffect(() => {
     let unlisten: (() => void) | undefined;
+    let cancelled = false;
     const getCoords = (e: any) => {
       const pos = e.payload?.position || e.position;
       if (!pos) return null;
       return { x: pos.x || pos.Physical?.x || 0, y: pos.y || pos.Physical?.y || 0 };
     };
     import("@tauri-apps/api/webview").then(({ getCurrentWebview }) => {
-      getCurrentWebview().onDragDropEvent(async (e: any) => {
+      if (cancelled) return;
+      const promise = getCurrentWebview().onDragDropEvent(async (e: any) => {
         const coords = getCoords(e);
         if (!coords) return;
-        // Check if the drop position is within this panel
         const rect = panelRef.current?.getBoundingClientRect();
         if (!rect) return;
         if (coords.x >= rect.left && coords.x <= rect.right && coords.y >= rect.top && coords.y <= rect.bottom) {
@@ -131,8 +132,9 @@ function ProjectPanel() {
           }
         }
       });
+      promise.then((fn) => { if (!cancelled) unlisten = fn; });
     });
-    return () => { unlisten?.(); };
+    return () => { cancelled = true; unlisten?.(); };
   }, []);
 
   return (

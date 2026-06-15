@@ -76,19 +76,21 @@ export function useMacroRecorder() {
         if (action.actionType === "keypress") {
           const { key } = action.payload as Record<string, string>;
 
-          // Dispatch the keystroke to Monaco
-          editorRef.trigger("keyboard", "type", {
-            text:
-              key === "Enter"
-                ? "\n"
-                : key === "Backspace"
-                  ? ""
-                  : key === "Delete"
-                    ? ""
-                    : key.startsWith("Arrow")
-                      ? ""
-                      : key,
-          });
+          if (key === "Backspace") {
+            editorRef.trigger("keyboard", "deleteLeft", {});
+          } else if (key === "Delete") {
+            editorRef.trigger("keyboard", "deleteRight", {});
+          } else if (key.startsWith("Arrow")) {
+            const dir = key.replace("Arrow", "").toLowerCase();
+            const cursor = dir === "up" ? 16 : dir === "down" ? 18 : dir === "left" ? 15 : 17;
+            editorRef.trigger("keyboard", "type", { text: "" });
+            editorRef.setPosition({
+              lineNumber: Math.max(1, editorRef.getPosition()!.lineNumber + (dir === "up" ? -1 : dir === "down" ? 1 : 0)),
+              column: Math.max(1, editorRef.getPosition()!.column + (dir === "left" ? -1 : dir === "right" ? 1 : 0)),
+            });
+          } else {
+            editorRef.trigger("keyboard", "type", { text: key === "Enter" ? "\n" : key });
+          }
         }
         idx++;
         playNext();
