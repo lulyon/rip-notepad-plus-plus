@@ -1,4 +1,5 @@
 import MarkdownIt from "markdown-it";
+import pako from "pako";
 
 // ── Bundled library URLs (Vite ?url imports = offline, no CDN) ──
 import mammothUrl from "mammoth/mammoth.browser.min.js?url";
@@ -768,10 +769,17 @@ registerPreviewRenderer({
 
 // ── 12. Draw.io ──
 function renderDrawio({ content }: { content: string }): string {
-  const encoded = encodeURIComponent(content);
+  // diagrams.net uses pako deflate + base64 + URL-safe encoding
+  const deflated = pako.deflate(content, { level: 9 });
+  let binary = "";
+  for (let i = 0; i < deflated.length; i++) {
+    binary += String.fromCharCode(deflated[i]);
+  }
+  const b64 = btoa(binary);
+  const encoded = b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
     *{margin:0;padding:0}body{background:#fff}iframe{width:100%;height:100vh;border:none}
-  </style></head><body><iframe src="https://viewer.diagrams.net/?lightbox=1&edit=_blank&xml=${encoded}"></iframe></body></html>`;
+  </style></head><body><iframe src="https://viewer.diagrams.net/?lightbox=1&edit=_blank#R${encoded}"></iframe></body></html>`;
 }
 registerPreviewRenderer({
   id: "drawio", name: "Draw.io", extensions: ["drawio", "dio"], languages: ["xml"], render: renderDrawio, useIframe: true,
