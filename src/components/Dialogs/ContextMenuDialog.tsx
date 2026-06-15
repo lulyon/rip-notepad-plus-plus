@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useContextMenuStore, CustomMenuItem } from "../../stores/contextMenuStore";
 import "./ContextMenuDialog.css";
@@ -14,6 +14,12 @@ function genId(): string {
 
 export function ContextMenuDialog({ open, onClose }: Props) {
   const { t } = useTranslation();
+  useEffect(() => {
+    if (!open) return;
+    function onKey(e: KeyboardEvent) { if (e.key === "Escape") onClose(); }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
   const items = useContextMenuStore((s) => s.items);
   const setItems = useContextMenuStore((s) => s.setItems);
   const [editingId, setEditingId] = useState<string | null>(null);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToolStore, ExternalTool } from "../../stores/toolStore";
 import "./ToolsDialog.css";
 
@@ -22,6 +22,13 @@ export function ToolsDialog({ open, onClose }: Props) {
   const [command, setCommand] = useState("");
   const [cwd, setCwd] = useState("");
   const [shortcut, setShortcut] = useState("");
+
+  useEffect(() => {
+    if (!open) return;
+    function onKey(e: KeyboardEvent) { if (e.key === "Escape") onClose(); }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
 
   if (!open) return null;
 

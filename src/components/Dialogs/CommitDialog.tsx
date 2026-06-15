@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./CommitDialog.css";
 
 interface Props {
@@ -10,6 +10,12 @@ interface Props {
 
 export function CommitDialog({ open, files, onCommit, onClose }: Props) {
   const [message, setMessage] = useState("");
+  useEffect(() => {
+    if (!open) return;
+    function onKey(e: KeyboardEvent) { if (e.key === "Escape") onClose(); }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
 
   if (!open) return null;
 

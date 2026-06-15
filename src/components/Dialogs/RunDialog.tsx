@@ -47,6 +47,13 @@ export function RunDialog({ open, onClose }: Props) {
     }
   }, [open, activeTab]);
 
+  useEffect(() => {
+    if (!open) return;
+    function onKey(e: KeyboardEvent) { if (e.key === "Escape") onClose(); }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
   // Resolve variable references like $(VAR_NAME) or ${VAR_NAME}
   const resolveVariables = useCallback(
     (cmd: string): string => {

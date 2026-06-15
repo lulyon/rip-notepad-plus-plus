@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import type { Tab } from "../../stores/editorStore";
 import "./UnsavedChangesDialog.css";
 
@@ -14,6 +15,12 @@ export function UnsavedChangesDialog({
   onDiscardAll,
   onCancel,
 }: Props) {
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) { if (e.key === "Escape") onCancel(); }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onCancel]);
+
   if (unsavedTabs.length === 0) return null;
 
   return (
