@@ -10,7 +10,6 @@ import katexAutoRenderUrl from "katex/dist/contrib/auto-render.min.js?url";
 import xlsxUrl from "xlsx/dist/xlsx.full.min.js?url";
 import mermaidUrl from "mermaid/dist/mermaid.min.js?url";
 import sqlWasmUrl from "sql.js/dist/sql-wasm.js?url";
-import vizJsUrl from "viz.js/viz.js?url";
 
 /**
  * Generic preview engine with pluggable renderers.
@@ -355,7 +354,7 @@ function renderDot({ content }: { content: string }): string {
     *{margin:0;padding:0}body{background:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:-apple-system,sans-serif}
     .err{color:#999;text-align:center;padding:40px}
   </style></head><body><div id="graph"></div><div id="err" class="err" style="display:none">Failed to render Graphviz</div>
-  <script src="${vizJsUrl}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.js"></script>
   <script>
     (function(){
       try{
