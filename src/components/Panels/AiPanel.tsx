@@ -82,7 +82,6 @@ export function AiPanel() {
     const latest = useAiStore.getState();
 
     setStreamThinking("");
-    setThinkingDone(false);
     let full = "";
     let thinkingFull = "";
     await streamChat(
