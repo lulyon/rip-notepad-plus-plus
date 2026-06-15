@@ -294,21 +294,29 @@ function renderMermaid({ content }: { content: string }): string {
   const encoded = encodeURIComponent(content);
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
     *{margin:0;padding:0}body{background:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:-apple-system,sans-serif}
-    .err{color:#999;text-align:center;padding:40px}
+    .err{color:#f88;text-align:center;padding:40px;font-size:14px}
   </style></head><body>
-  <div class="mermaid" id="diagram"></div>
-  <div id="error" class="err" style="display:none">Failed to render diagram</div>
+  <div id="diagram"></div>
+  <div id="error" class="err" style="display:none"></div>
   <script src="${mermaidUrl}"></script>
   <script>
-    mermaid.initialize({startOnLoad:false,theme:'default'});
-    try {
-      mermaid.render('diagram', decodeURIComponent('${encoded}')).then(function(result){
-        document.getElementById('diagram').innerHTML = result.svg;
-      }).catch(function(e){
-        document.getElementById('error').style.display='block'; console.error(e);
-      });
-    } catch(e) { document.getElementById('error').style.display='block'; console.error(e); }
-  </script>
+    if(typeof mermaid==='undefined'){
+      document.getElementById('error').textContent='mermaid.js failed to load';
+      document.getElementById('error').style.display='block';
+    } else {
+      mermaid.initialize({startOnLoad:false,theme:'default'});
+      try {
+        mermaid.render('diagram', decodeURIComponent('${encoded}')).then(function(result){
+          document.getElementById('diagram').innerHTML = result.svg;
+        }).catch(function(e){
+          document.getElementById('error').textContent = 'Error: '+e.message;
+          document.getElementById('error').style.display='block';
+        });
+      } catch(e) {
+        document.getElementById('error').textContent = 'Error: '+e.message;
+        document.getElementById('error').style.display='block';
+      }
+    }
   </script></body></html>`;
 }
 registerPreviewRenderer({
