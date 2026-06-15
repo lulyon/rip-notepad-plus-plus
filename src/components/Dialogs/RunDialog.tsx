@@ -12,17 +12,17 @@ interface Props {
 }
 
 // NppExec/NP++ compatible variable substitution
-const VARIABLES: { key: string; label: string; description: string }[] = [
-  { key: "FULL_CURRENT_PATH", label: "完整路径", description: "当前文件完整路径" },
-  { key: "CURRENT_DIRECTORY", label: "当前目录", description: "当前文件所在目录" },
-  { key: "FILE_NAME", label: "文件名", description: "含扩展名的文件名" },
-  { key: "NAME_PART", label: "主文件名", description: "不含扩展名的文件名" },
-  { key: "EXT_PART", label: "扩展名", description: "文件扩展名" },
-  { key: "CURRENT_WORD", label: "当前词", description: "光标所在位置的单词" },
-  { key: "CURRENT_LINE", label: "行号", description: "当前光标行号" },
-  { key: "CURRENT_COLUMN", label: "列号", description: "当前光标列号" },
-  { key: "PROJECT_ROOT", label: "项目根目录", description: "当前打开的项目文件夹" },
-  { key: "NPP_DIRECTORY", label: "NPP目录", description: "应用目录" },
+const VARIABLES: { key: string; labelKey: string; descKey: string }[] = [
+  { key: "FULL_CURRENT_PATH", labelKey: "run.var.fullpath", descKey: "run.var.fullpathDesc" },
+  { key: "CURRENT_DIRECTORY", labelKey: "run.var.dir", descKey: "run.var.dirDesc" },
+  { key: "FILE_NAME", labelKey: "run.var.filename", descKey: "run.var.filenameDesc" },
+  { key: "NAME_PART", labelKey: "run.var.namepart", descKey: "run.var.namepartDesc" },
+  { key: "EXT_PART", labelKey: "run.var.extpart", descKey: "run.var.extpartDesc" },
+  { key: "CURRENT_WORD", labelKey: "run.var.word", descKey: "run.var.wordDesc" },
+  { key: "CURRENT_LINE", labelKey: "run.var.line", descKey: "run.var.lineDesc" },
+  { key: "CURRENT_COLUMN", labelKey: "run.var.column", descKey: "run.var.columnDesc" },
+  { key: "PROJECT_ROOT", labelKey: "run.var.projectroot", descKey: "run.var.projectrootDesc" },
+  { key: "NPP_DIRECTORY", labelKey: "run.var.nppdir", descKey: "run.var.nppdirDesc" },
 ];
 
 export function RunDialog({ open, onClose }: Props) {
@@ -204,10 +204,10 @@ export function RunDialog({ open, onClose }: Props) {
                 key={v.key}
                 className="run-var-btn"
                 onClick={() => insertVariable(v.key)}
-                title={v.description}
+                title={t(v.descKey)}
               >
                 <span className="run-var-key">$( {v.key} )</span>
-                <span className="run-var-desc">{v.label}</span>
+                <span className="run-var-desc">{t(v.labelKey)}</span>
               </button>
             ))}
           </div>

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import type { Tab } from "../../stores/editorStore";
 import "./UnsavedChangesDialog.css";
 
@@ -15,6 +16,8 @@ export function UnsavedChangesDialog({
   onDiscardAll,
   onCancel,
 }: Props) {
+  const { t } = useTranslation();
+
   useEffect(() => {
     function onKey(e: KeyboardEvent) { if (e.key === "Escape") onCancel(); }
     window.addEventListener("keydown", onKey);
@@ -26,25 +29,25 @@ export function UnsavedChangesDialog({
   return (
     <div className="dialog-overlay">
       <div className="dialog">
-        <h2>Unsaved Changes</h2>
-        <p>The following files have unsaved changes:</p>
+        <h2>{t("dialog.unsavedChanges")}</h2>
+        <p>{t("dialog.unsavedDesc")}</p>
         <ul className="unsaved-list">
           {unsavedTabs.map((tab) => (
             <li key={tab.id}>
               <span className="unsaved-name">{tab.name}</span>
-              <span className="unsaved-path">{tab.path || "Untitled"}</span>
+              <span className="unsaved-path">{tab.path || t("app.newFile")}</span>
             </li>
           ))}
         </ul>
         <div className="dialog-actions">
           <button className="btn btn-primary" onClick={onSaveAll}>
-            Save All
+            {t("dialog.saveAll")}
           </button>
           <button className="btn" onClick={onDiscardAll}>
-            Discard All
+            {t("dialog.discardAll")}
           </button>
           <button className="btn" onClick={onCancel}>
-            Cancel
+            {t("dialog.cancel")}
           </button>
         </div>
       </div>

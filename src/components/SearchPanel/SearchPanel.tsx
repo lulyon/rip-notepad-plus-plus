@@ -289,11 +289,11 @@ export function SearchPanel() {
             </label>
             <label className="search-option">
               <input type="checkbox" checked={incremental} onChange={() => setIncremental(!incremental)} />
-              Incremental
+              {t("search.incremental")}
             </label>
             <label className="search-option">
               <input type="checkbox" checked={inSelection} onChange={() => setInSelection(!inSelection)} />
-              In Selection
+              {t("search.inSelection")}
             </label>
           </div>
 
@@ -314,7 +314,7 @@ export function SearchPanel() {
                   {t("search.replaceBtn")}
                 </button>
                 <button className="sbtn" onClick={handleReplacePreview}>
-                  Preview
+                  {t("search.preview")}
                 </button>
                 <button className="sbtn" onClick={handleReplaceAll}>
                   {t("search.replaceAllBtn")}
@@ -418,7 +418,7 @@ export function SearchPanel() {
       {previewOpen && (
         <div className="search-preview-overlay" onClick={() => setPreviewOpen(false)}>
           <div className="search-preview-dialog" onClick={(e) => e.stopPropagation()}>
-            <h3>Replace Preview — {previewItems.length} occurrence(s)</h3>
+            <h3>{t("search.previewTitle", { count: previewItems.length })}</h3>
             <div className="search-preview-list">
               {previewItems.map((item, i) => (
                 <div key={i} className="search-preview-item">
@@ -429,8 +429,8 @@ export function SearchPanel() {
               ))}
             </div>
             <div className="search-preview-actions">
-              <button className="sbtn sbtn-primary" onClick={handleReplaceAllConfirm}>Replace All</button>
-              <button className="sbtn" onClick={() => setPreviewOpen(false)}>Cancel</button>
+              <button className="sbtn sbtn-primary" onClick={handleReplaceAllConfirm}>{t("search.replaceAll")}</button>
+              <button className="sbtn" onClick={() => setPreviewOpen(false)}>{t("search.cancel")}</button>
             </div>
           </div>
         </div>

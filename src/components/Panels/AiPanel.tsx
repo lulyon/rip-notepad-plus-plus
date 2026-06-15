@@ -18,14 +18,14 @@ function ThinkingBlock({ text, defaultOpen }: { text: string; defaultOpen?: bool
 }
 
 const QUICK_ACTIONS = [
-  { key: "explain", label: "Explain Code", prompt: "Explain the following code in detail:\n\n" },
-  { key: "refactor", label: "Refactor", prompt: "Refactor the following code to improve readability and performance:\n\n" },
-  { key: "test", label: "Generate Tests", prompt: "Generate unit tests for the following code:\n\n" },
-  { key: "fix", label: "Fix Bugs", prompt: "Find and fix bugs in the following code:\n\n" },
+  { key: "explain", keyLabel: "ai.quickExplain", prompt: "Explain the following code in detail:\n\n" },
+  { key: "refactor", keyLabel: "ai.quickRefactor", prompt: "Refactor the following code to improve readability and performance:\n\n" },
+  { key: "test", keyLabel: "ai.quickTest", prompt: "Generate unit tests for the following code:\n\n" },
+  { key: "fix", keyLabel: "ai.quickFix", prompt: "Find and fix bugs in the following code:\n\n" },
 ];
 
 export function AiPanel() {
-  useTranslation();
+  const { t } = useTranslation();
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -139,23 +139,23 @@ export function AiPanel() {
     return (
       <div className="ai-panel">
         <div className="ai-config">
-          <h3>AI Configuration</h3>
-          <p className="ai-config-desc">Configure your AI provider. DeepSeek API is compatible with the Anthropic messages format.</p>
-          <label>API Base URL</label>
+          <h3>{t("ai.configTitle")}</h3>
+          <p className="ai-config-desc">{t("ai.configDesc")}</p>
+          <label>{t("ai.configApiUrl")}</label>
           <input className="ai-input" value={cfgUrl} onChange={(e) => setCfgUrl(e.target.value)}
             placeholder="https://api.deepseek.com/anthropic" />
-          <label>API Key</label>
+          <label>{t("ai.configApiKey")}</label>
           <input className="ai-input" type="password" value={cfgKey} onChange={(e) => setCfgKey(e.target.value)}
             placeholder="sk-..." />
-          <label>Model</label>
+          <label>{t("ai.configModel")}</label>
           <input className="ai-input" value={cfgModel} onChange={(e) => setCfgModel(e.target.value)}
             placeholder="deepseek-v4-pro[1m]" />
           <div className="ai-config-actions">
-            <button className="ai-btn ai-btn-primary" onClick={handleSaveConfig}>Save</button>
+            <button className="ai-btn ai-btn-primary" onClick={handleSaveConfig}>{t("ai.save")}</button>
             <button className="ai-btn" onClick={async () => {
               const found = await loadFromClaudeConfig();
               if (found) { const s = useAiStore.getState(); setCfgUrl(s.apiBaseUrl); setCfgKey(s.apiKey); setCfgModel(s.model); setShowConfig(false); }
-            }}>Auto-detect</button>
+            }}>{t("ai.autoDetect")}</button>
           </div>
         </div>
       </div>
@@ -165,20 +165,20 @@ export function AiPanel() {
   return (
     <div className="ai-panel">
       <div className="ai-header">
-        <span>🤖 AI Chat</span>
+        <span>🤖 {t("ai.title")}</span>
         <div className="ai-header-actions">
-          <button className="ai-btn-sm" onClick={() => setShowConfig(true)} title="Settings">⚙</button>
-          <button className="ai-btn-sm" onClick={clearMessages} title="Clear chat">🗑</button>
+          <button className="ai-btn-sm" onClick={() => setShowConfig(true)} title={t("ai.settings")}>⚙</button>
+          <button className="ai-btn-sm" onClick={clearMessages} title={t("ai.clearChat")}>🗑</button>
         </div>
       </div>
 
       <div className="ai-messages">
         {messages.length === 0 && (
           <div className="ai-empty">
-            <p>Ask me anything about your code.</p>
+            <p>{t("ai.emptyHint")}</p>
             <div className="ai-quick-actions">
               {QUICK_ACTIONS.map((qa) => (
-                <button key={qa.key} className="ai-quick-btn" onClick={() => doQuickAction(qa.prompt)}>{qa.label}</button>
+                <button key={qa.key} className="ai-quick-btn" onClick={() => doQuickAction(qa.prompt)}>{t(qa.keyLabel)}</button>
               ))}
             </div>
           </div>
@@ -211,10 +211,10 @@ export function AiPanel() {
         <textarea ref={inputRef} className="ai-input" value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
-          placeholder="Ask about your code... (Enter to send, Shift+Enter for newline)"
+          placeholder={t("ai.placeholder")}
           rows={2} disabled={streaming} />
         <button className="ai-btn ai-btn-primary" onClick={send} disabled={streaming || !input.trim()}>
-          {streaming ? "..." : "Send"}
+          {streaming ? "..." : t("ai.send")}
         </button>
       </div>
     </div>

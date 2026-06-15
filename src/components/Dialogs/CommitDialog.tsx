@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import "./CommitDialog.css";
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export function CommitDialog({ open, files, onCommit, onClose }: Props) {
+  const { t } = useTranslation();
   const [message, setMessage] = useState("");
   useEffect(() => {
     if (!open) return;
@@ -29,10 +31,10 @@ export function CommitDialog({ open, files, onCommit, onClose }: Props) {
   return (
     <div className="dialog-overlay" onClick={onClose}>
       <div className="dialog commit-dialog" onClick={(e) => e.stopPropagation()}>
-        <h2>Commit Changes</h2>
+        <h2>{t("commit.title")}</h2>
 
         <div className="commit-files">
-          <div className="commit-files-header">{files.length} file(s) staged</div>
+          <div className="commit-files-header">{t("commit.filesStaged", { count: files.length })}</div>
           {files.map((f) => (
             <div key={f.path} className="commit-file-item">
               <span className={`git-status git-status-${f.status[0] || "M"}`}>{f.status}</span>
@@ -45,7 +47,7 @@ export function CommitDialog({ open, files, onCommit, onClose }: Props) {
           className="commit-msg-input"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Commit message (Enter to commit, Shift+Enter for newline)"
+          placeholder={t("commit.messagePlaceholder")}
           rows={4}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleCommit(); }
@@ -55,9 +57,9 @@ export function CommitDialog({ open, files, onCommit, onClose }: Props) {
 
         <div className="dialog-actions">
           <button className="btn btn-primary" onClick={handleCommit} disabled={!message.trim()}>
-            Commit
+            {t("commit.commit")}
           </button>
-          <button className="btn" onClick={onClose}>Cancel</button>
+          <button className="btn" onClick={onClose}>{t("commit.cancel")}</button>
         </div>
       </div>
     </div>

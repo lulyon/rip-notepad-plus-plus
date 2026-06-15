@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useToolStore, ExternalTool } from "../../stores/toolStore";
 import "./ToolsDialog.css";
 
@@ -16,6 +17,7 @@ const VARIABLES = [
 ];
 
 export function ToolsDialog({ open, onClose }: Props) {
+  const { t } = useTranslation();
   const { tools, addTool, updateTool, removeTool } = useToolStore();
   const [editingId, setEditingId] = useState<string | null>(null);
   const [name, setName] = useState("");
@@ -43,52 +45,52 @@ export function ToolsDialog({ open, onClose }: Props) {
     setName(""); setCommand(""); setCwd(""); setShortcut("");
   };
 
-  const handleEdit = (t: ExternalTool) => {
-    setEditingId(t.id); setName(t.name); setCommand(t.command); setCwd(t.cwd); setShortcut(t.shortcut);
+  const handleEdit = (tool: ExternalTool) => {
+    setEditingId(tool.id); setName(tool.name); setCommand(tool.command); setCwd(tool.cwd); setShortcut(tool.shortcut);
   };
 
   return (
     <div className="dialog-overlay" onClick={onClose}>
       <div className="dialog tools-dialog" onClick={(e) => e.stopPropagation()}>
-        <h2>External Tools</h2>
+        <h2>{t("tools.title")}</h2>
 
         <div className="tools-list">
-          {tools.length === 0 && <p className="tools-empty">No tools configured. Add one below.</p>}
-          {tools.map((t) => (
-            <div key={t.id} className="tools-item">
+          {tools.length === 0 && <p className="tools-empty">{t("tools.empty")}</p>}
+          {tools.map((tool) => (
+            <div key={tool.id} className="tools-item">
               <div>
-                <strong>{t.name}</strong>
-                <span className="tools-cmd">{t.command}</span>
-                {t.shortcut && <span className="tools-key">{t.shortcut}</span>}
+                <strong>{tool.name}</strong>
+                <span className="tools-cmd">{tool.command}</span>
+                {tool.shortcut && <span className="tools-key">{tool.shortcut}</span>}
               </div>
               <div>
-                <button className="sbtn" onClick={() => handleEdit(t)}>Edit</button>
-                <button className="sbtn" onClick={() => removeTool(t.id)}>Remove</button>
+                <button className="sbtn" onClick={() => handleEdit(tool)}>{t("tools.edit")}</button>
+                <button className="sbtn" onClick={() => removeTool(tool.id)}>{t("tools.remove")}</button>
               </div>
             </div>
           ))}
         </div>
 
         <div className="tools-form">
-          <h3>{editingId ? "Edit Tool" : "Add Tool"}</h3>
-          <input className="tools-input" value={name} onChange={(e) => setName(e.target.value)} placeholder="Tool name" />
-          <input className="tools-input" value={command} onChange={(e) => setCommand(e.target.value)} placeholder="Command (e.g. npm run build)" />
-          <input className="tools-input" value={cwd} onChange={(e) => setCwd(e.target.value)} placeholder="Working dir (empty = project root)" />
-          <input className="tools-input" value={shortcut} onChange={(e) => setShortcut(e.target.value)} placeholder="Shortcut (e.g. Ctrl+Shift+1)" />
+          <h3>{editingId ? t("tools.editTool") : t("tools.addTool")}</h3>
+          <input className="tools-input" value={name} onChange={(e) => setName(e.target.value)} placeholder={t("tools.name")} />
+          <input className="tools-input" value={command} onChange={(e) => setCommand(e.target.value)} placeholder={t("tools.command")} />
+          <input className="tools-input" value={cwd} onChange={(e) => setCwd(e.target.value)} placeholder={t("tools.cwd")} />
+          <input className="tools-input" value={shortcut} onChange={(e) => setShortcut(e.target.value)} placeholder={t("tools.shortcut")} />
           <div className="tools-vars">
-            <span className="tools-vars-label">Variables:</span>
+            <span className="tools-vars-label">{t("tools.variables")}</span>
             {VARIABLES.map((v) => (
               <button key={v} className="tools-var-btn" onClick={() => setCommand(command + " " + v)}>{v}</button>
             ))}
           </div>
           <button className="btn btn-primary" onClick={handleAdd}>
-            {editingId ? "Update" : "Add"}
+            {editingId ? t("tools.update") : t("tools.add")}
           </button>
-          {editingId && <button className="btn" onClick={() => { setEditingId(null); setName(""); setCommand(""); setCwd(""); setShortcut(""); }}>Cancel</button>}
+          {editingId && <button className="btn" onClick={() => { setEditingId(null); setName(""); setCommand(""); setCwd(""); setShortcut(""); }}>{t("tools.cancel")}</button>}
         </div>
 
         <div className="dialog-actions">
-          <button className="btn btn-primary" onClick={onClose}>Close</button>
+          <button className="btn btn-primary" onClick={onClose}>{t("dialog.close")}</button>
         </div>
       </div>
     </div>

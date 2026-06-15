@@ -65,14 +65,14 @@ export function GitPanel() {
 
   const doPush = async () => {
     if (!projectRoot) return;
-    try { const r = await ipc.gitPush(projectRoot); setActionMsg(r || "Push OK"); refresh(); }
-    catch (e: any) { setActionMsg("Push failed: " + e); }
+    try { const r = await ipc.gitPush(projectRoot); setActionMsg(r || t("git.pushOk")); refresh(); }
+    catch (e: any) { setActionMsg(t("git.pushFailed", { error: e })); }
   };
 
   const doPull = async () => {
     if (!projectRoot) return;
-    try { const r = await ipc.gitPull(projectRoot); setActionMsg(r || "Pull OK"); refresh(); }
-    catch (e: any) { setActionMsg("Pull failed: " + e); }
+    try { const r = await ipc.gitPull(projectRoot); setActionMsg(r || t("git.pullOk")); refresh(); }
+    catch (e: any) { setActionMsg(t("git.pullFailed", { error: e })); }
   };
 
   const loadBranches = async () => {
@@ -86,7 +86,7 @@ export function GitPanel() {
     try {
       await ipc.gitCheckoutBranch(projectRoot, branch.startsWith("remotes/") ? branch.split("/").slice(2).join("/") : branch);
       setShowBranchMenu(false); refresh();
-    } catch (e: any) { setActionMsg("Checkout failed: " + e); }
+    } catch (e: any) { setActionMsg(t("git.checkoutFailed", { error: e })); }
   };
 
   const doCreateBranch = async () => {
@@ -137,7 +137,7 @@ export function GitPanel() {
       {showBranchMenu && (
         <div className="git-branch-menu">
           <div className="git-branch-create">
-            <input className="git-input" value={newBranchName} onChange={(e) => setNewBranchName(e.target.value)} placeholder="New branch name..." />
+            <input className="git-input" value={newBranchName} onChange={(e) => setNewBranchName(e.target.value)} placeholder={t("git.newBranch")} />
             <button className="git-btn" onClick={doCreateBranch}>+</button>
           </div>
           {branches.map((b, i) => (
@@ -162,7 +162,7 @@ export function GitPanel() {
                   onChange={() => isStaged ? doUnstage(entry.path) : doStage(entry.path)} />
                 <span className={`git-status git-status-${entry.status[0] || "M"}`}>{statusLabel(entry.status)}</span>
                 <span className="git-file-name" onClick={() => handleOpenFile(entry.path)} title={entry.path}>{entry.display_path}</span>
-                <button className="git-diff-btn" onClick={() => handleOpenDiff(entry.path)} title={t("git.viewDiff")}>diff</button>
+                <button className="git-diff-btn" onClick={() => handleOpenDiff(entry.path)} title={t("git.viewDiff")}>{t("git.diff")}</button>
               </div>
             );
           })}
@@ -174,8 +174,8 @@ export function GitPanel() {
       {/* Stage all + Commit */}
       {status && status.changed.length > 0 && (
         <div className="git-commit-section">
-          <button className="git-action-btn" onClick={doStageAll}>Stage All</button>
-          <button className="git-btn git-commit-btn" onClick={() => setCommitOpen(true)}>Commit...</button>
+          <button className="git-action-btn" onClick={doStageAll}>{t("git.stageAll")}</button>
+          <button className="git-btn git-commit-btn" onClick={() => setCommitOpen(true)}>{t("git.commit")}</button>
         </div>
       )}
 
@@ -184,8 +184,8 @@ export function GitPanel() {
         files={status?.changed || []}
         onCommit={async (msg) => {
           if (!projectRoot) return;
-          try { await ipc.gitCommit(projectRoot, msg); refresh(); setActionMsg("Committed ✓"); }
-          catch (e: any) { setActionMsg("Commit failed: " + e); }
+          try { await ipc.gitCommit(projectRoot, msg); refresh(); setActionMsg(t("git.committed")); }
+          catch (e: any) { setActionMsg(t("git.commitFailed", { error: e })); }
         }}
         onClose={() => setCommitOpen(false)}
       />
