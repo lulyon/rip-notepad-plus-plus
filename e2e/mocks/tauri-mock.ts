@@ -63,6 +63,22 @@ export function invoke(cmd, args) {
     git_status: () => ({ branch: "main", changed: [], ahead: 0, behind: 0 }),
     git_branch: () => "main",
     git_diff_file: () => "",
+    git_stage: ok,
+    git_unstage: ok,
+    git_stage_all: ok,
+    git_commit: ok,
+    git_push: () => "Everything up-to-date",
+    git_pull: () => "Already up to date",
+    git_list_branches: () => ["main"],
+    git_checkout_branch: ok,
+    git_create_branch: ok,
+    // Workspace (4)
+    save_workspace: ok,
+    load_workspace: () => ({ version: 1, name: "test", roots: [], active_root: null, open_tabs: [], active_tab_path: null, split_view: "none", sidebar_tab: "files", created_at: "2026-01-01" }),
+    list_recent_workspaces: () => [],
+    clear_recent_workspaces: ok,
+    // Archive (1)
+    list_archive: () => [],
     // Monitor (6)
     watch_file: ok,
     check_file_changed: () => false,

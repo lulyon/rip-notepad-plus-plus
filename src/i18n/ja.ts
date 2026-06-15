@@ -16,6 +16,8 @@ const ja = {
     "menu.file.restoreLastClosed": "最後に閉じたファイルを復元",
     "menu.file.saveSession": "セッションを保存...",
     "menu.file.loadSession": "セッションを読み込み...",
+    "menu.file.saveWorkspace": "ワークスペースを保存...",
+    "menu.file.loadWorkspace": "ワークスペースを開く...",
     "menu.file.preferences": "設定(&P)...",
     "menu.file.shortcutMapper": "ショートカットマッパー(&M)...",
     "menu.file.exit": "終了(&X)",
@@ -67,6 +69,9 @@ const ja = {
     "menu.search.nextBookmark": "次のブックマーク(&K)",
     "menu.search.prevBookmark": "前のブックマーク(&V)",
     "menu.search.clearBookmarks": "すべてのブックマークをクリア(&C)",
+    "menu.search.gotoNextChange": "次の変更箇所に移動(&X)",
+    "menu.search.gotoPrevChange": "前の変更箇所に移動(&V)",
+    "menu.search.clearChangeHistory": "変更履歴をクリア(&H)",
     "menu.search.gotoMatchingBrace": "対応する括弧に移動(&M)",
     "menu.search.selectMatchingBraces": "対応する括弧を選択(&G)",
     "menu.search.mark": "マーク(&M)",
@@ -115,6 +120,7 @@ const ja = {
     "menu.view.splitVertical": "垂直分割",
     "menu.view.alwaysOnTop": "常に手前に表示",
     "menu.view.toggleSidebar": "サイドバー表示",
+    "menu.view.markdownPreview": "Markdown プレビュー(&M)",
     "menu.view.distractionFree": "ディストラクションフリーモード",
     "menu.view.summary": "サマリー...",
 
@@ -149,6 +155,9 @@ const ja = {
     "menu.language.sql": "SQL",
     "menu.language.shell": "Shell",
 
+    "menu.language.defineLanguage": "ユーザー定義言語...",
+    "menu.language.openUdlFolder": "UDLフォルダーを開く...",
+
     // ── Menu: Macro ──
     "menu.macro": "マクロ(&M)",
     "menu.macro.startRecord": "録画開始(&S)",
@@ -169,6 +178,7 @@ const ja = {
     "menu.tools.sha1": "SHA-1生成",
     "menu.tools.sha256": "SHA-256生成",
     "menu.tools.sha512": "SHA-512生成",
+    "menu.tools.configure": "外部ツールを設定...",
 
     // ── Menu: Window ──
     "menu.window": "ウィンドウ(&W)",
@@ -180,6 +190,7 @@ const ja = {
     // ── Menu: Help ──
     "menu.help": "ヘルプ(&H)",
     "menu.help.about": "ripNotepad++について(&A)",
+    "menu.help.checkUpdate": "更新を確認(&U)...",
 
     // ── Tab Context Menu ──
     "tab.close": "閉じる",
@@ -249,11 +260,14 @@ const ja = {
     "preferences.showStatusBar": "ステータスバーを表示",
     "preferences.showMenuBar": "メニューバーを表示（Altで切替）",
     "preferences.autoSave": "自動保存（30秒ごと）",
+    "preferences.autoCheckUpdate": "自動的に更新を確認",
     "preferences.tabSize": "タブサイズ",
     "preferences.insertSpaces": "タブの代わりにスペースを挿入",
     "preferences.wordWrap": "折り返し",
     "preferences.showLineNumbers": "行番号を表示",
     "preferences.showMinimap": "ミニマップを表示",
+    "preferences.minimapWidth": "ミニマップ幅",
+    "preferences.minimapShowSlider": "ミニマップスライダーを常に表示",
     "preferences.showIndentGuides": "インデントガイドを表示",
     "preferences.bracketColorization": "括弧の色付け",
     "preferences.smoothScrolling": "スムーズスクロール",
@@ -322,6 +336,36 @@ const ja = {
     "dialog.summaryEncoding": "エンコーディング",
     "dialog.summaryLanguage": "言語",
     "dialog.summaryCursor": "カーソル位置",
+    "dialog.edit": "編集",
+    "dialog.udl": "ユーザー定義言語",
+
+    // ── UDL ──
+    "udl.basic": "基本",
+    "udl.keywords": "キーワード",
+    "udl.syntax": "構文",
+    "udl.preview": "プレビュー",
+    "udl.name": "言語名",
+    "udl.namePlaceholder": "マイカスタム言語",
+    "udl.extensions": "拡張子（カンマ区切り）",
+    "udl.keywordGroup": "キーワードグループ {{n}}",
+    "udl.lineComment": "ラインコメント",
+    "udl.blockCommentStart": "ブロックコメント開始",
+    "udl.blockCommentEnd": "ブロックコメント終了",
+    "udl.operators": "演算子",
+    "udl.delimiters": "デリミター（() [] {} など）",
+    "udl.stringChars": "文字列文字",
+    "udl.caseSensitive": "大文字と小文字を区別",
+    "udl.autoIndent": "自動インデント",
+    "udl.sampleCode": "サンプルコード",
+    "udl.save": "保存",
+    "udl.delete": "削除",
+    "udl.createNew": "新規言語作成",
+    "udl.noLanguages": "ユーザー定義言語はまだありません。「新規言語作成」をクリックして開始してください。",
+    "udl.importGrammar": ".tmLanguage をインポート",
+    "udl.unnamed": "無名",
+    "udl.customLanguages": "カスタム言語",
+    "udl.confirmDelete": "この言語を削除しますか？",
+    "udl.cancel": "キャンセル",
 
     // ── Status Bar ──
     "status.encoding": "エンコーディング",
@@ -340,6 +384,7 @@ const ja = {
     "sidebar.clipboard": "クリップボード",
     "sidebar.symbols": "シンボル",
     "sidebar.git": "Git",
+    "sidebar.preview": "プレビュー",
 
     // ── Clipboard ──
     "clipboard.search": "検索...",
@@ -419,6 +464,16 @@ const ja = {
     "app.reload": "再読み込み",
     "app.modified": "● ",
     "app.encoding.utf8": "UTF-8",
+
+    // ── Context Menu Config ──
+    "menu.file.editContextMenu": "コンテキストメニューを編集...",
+    "contextMenu.title": "コンテキストメニューを編集",
+    "contextMenu.description": "エディタ領域の右クリックメニュー項目をカスタマイズします。項目の追加、削除、並べ替えができます。",
+    "contextMenu.separator": "セパレーター",
+    "contextMenu.addItem": "項目を追加",
+    "contextMenu.add": "追加",
+    "contextMenu.selectAction": "アクションを選択...",
+    "contextMenu.resetDefaults": "デフォルトにリセット",
   },
 };
 

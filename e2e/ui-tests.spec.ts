@@ -195,7 +195,7 @@ test.describe("ripNotepad++ UI Tests", () => {
 test.describe("Rust IPC Commands", () => {
   test("cargo check passes with 0 errors", async ({ page }) => {
     const result = execSync("cargo check 2>&1", {
-      cwd: "/Users/zhihu/code/rip-notepad-plus-plus/src-tauri",
+      cwd: process.cwd() + "/src-tauri",
       encoding: "utf-8",
     });
     expect(result).not.toContain("error[");
@@ -203,7 +203,7 @@ test.describe("Rust IPC Commands", () => {
 
   test("npx tsc --noEmit passes with 0 errors", async ({ page }) => {
     const result = execSync("npx tsc --noEmit 2>&1", {
-      cwd: "/Users/zhihu/code/rip-notepad-plus-plus",
+      cwd: process.cwd(),
       encoding: "utf-8",
     });
     expect(result.trim()).toBe("");

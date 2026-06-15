@@ -15,7 +15,7 @@ export default defineConfig({
   },
   webServer: {
     command: "npm run dev",
-    cwd: "/Users/zhihu/code/rip-notepad-plus-plus",
+    cwd: process.cwd(),
     port: 1420,
     reuseExistingServer: true,
     timeout: 60000,

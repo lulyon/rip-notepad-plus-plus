@@ -60,8 +60,8 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 | `src/components/TabBar/TabContextMenu.tsx` | Close/Close Others/Close All/Copy Path (i18n) |
 | `src/components/StatusBar/StatusBar.tsx` | File name, language, encoding, Ln/Col, git branch |
 | `src/components/SearchPanel/SearchPanel.tsx` | Find/replace with regex, case, word, wrap, FindInFiles |
-| `src/components/Panels/Sidebar.tsx` | Sidebar: Files (multi-root) + AI Chat + Git + Symbols (4 tabs) |
-| `src/components/Panels/GitPanel.tsx` | Git changed files list, inline diff view |
+| `src/components/Panels/Sidebar.tsx` | Sidebar: Files (multi-root) + AI Chat + Git + Symbols (4 tabs, adjustable width) |
+| `src/components/Panels/GitPanel.tsx` | Git changed files list, inline diff view, stage/commit/push/pull/branch |
 | `src/components/Panels/ClipboardPanel.tsx` | Clipboard history with search, pin, paste at cursor |
 | `src/components/Panels/JsonViewerPanel.tsx` | Recursive JSON tree view with copy path |
 | `src/components/Panels/DocListPanel.tsx` | Open document list with modified indicators |
@@ -347,10 +347,10 @@ git push
 
 ## Next Priorities
 
-1. **SplitEditor sync scroll** — synchronize scroll between primary/secondary panes
-2. **Advanced Git** — stage/unstage, commit, branch switch
-3. **Cross-platform testing** — Windows/Linux packaging and testing
-4. **Themes marketplace** — import/export custom themes
-5. **Plugin marketplace** — discover and install plugins from a central registry
+1. **Cross-platform testing** — Windows/Linux packaging and testing
+2. **Themes marketplace** — import/export custom themes
+3. **Plugin marketplace** — discover and install plugins from a central registry
+4. **Web Worker search** — move find_in_files regex to Worker thread
+5. **Encoding detection async** — chardetng to background thread
 6. **Real plugin selection data** — pass actual cursor/selection info to plugins
-7. **Performance** — virtual scrolling for large files, web workers
+7. **Accessibility** — ARIA labels, keyboard navigation, screen reader support
