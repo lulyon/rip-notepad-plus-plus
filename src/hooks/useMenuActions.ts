@@ -171,24 +171,17 @@ export function useMenuActions() {
           break;
         }
         case "file.exit": {
-          // Save session (best effort, don't block exit)
           const tabs = useEditorStore.getState().tabs;
-          const sessionTabs = tabs
-            .filter((t) => t.path)
-            .map((t) => ({ path: t.path!, encoding: t.encoding, language: t.language }));
           ipc.saveSession({
-            open_tabs: sessionTabs,
+            open_tabs: tabs.filter((t) => t.path).map((t) => ({ path: t.path!, encoding: t.encoding, language: t.language })),
             active_tab_id: useEditorStore.getState().activeTabId,
             project_root: useSettingsStore.getState().projectRoot,
-            window_width: null,
-            window_height: null,
+            window_width: null, window_height: null,
           }).catch(() => {});
-          try {
-            await getCurrentWindow().close();
-          } catch {
-            // Fallback: force process exit (dev mode)
-            window.close();
-          }
+          // Use process.exit for reliable exit in both dev and production
+          import("@tauri-apps/plugin-process").then(({ exit }) => exit(0)).catch(() => {
+            getCurrentWindow().close();
+          });
           break;
         }
 
