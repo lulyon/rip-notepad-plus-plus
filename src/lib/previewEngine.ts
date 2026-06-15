@@ -1,5 +1,4 @@
 import MarkdownIt from "markdown-it";
-import pako from "pako";
 
 // ── Bundled library URLs (Vite ?url imports = offline, no CDN) ──
 import mammothUrl from "mammoth/mammoth.browser.min.js?url";
@@ -767,25 +766,7 @@ registerPreviewRenderer({
   id: "3d", name: "3D Model", extensions: ["stl", "glb", "gltf", "obj"], languages: [], render: render3d, useIframe: false,
 });
 
-// ── 12. Draw.io ──
-function renderDrawio({ content }: { content: string }): string {
-  // diagrams.net encoding: URL-encode → pako.deflateRaw → base64 → URL-safe
-  const urlEncoded = encodeURIComponent(content);
-  const utf8 = new TextEncoder().encode(urlEncoded);
-  const deflated = pako.deflateRaw(utf8);
-  // Chunked base64 to avoid JS argument limit
-  let fullB64 = "";
-  for (let i = 0; i < deflated.length; i += 32768) {
-    fullB64 += btoa(String.fromCharCode(...deflated.slice(i, i + 32768)));
-  }
-  const encoded = fullB64.replace(/\+/g, "-").replace(/\//g, "_");
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
-    *{margin:0;padding:0}body{background:#fff}iframe{width:100%;height:100vh;border:none}
-  </style></head><body><iframe src="https://viewer.diagrams.net/?lightbox=1&edit=_blank#R${encoded}"></iframe></body></html>`;
-}
-registerPreviewRenderer({
-  id: "drawio", name: "Draw.io", extensions: ["drawio", "dio"], languages: ["xml"], render: renderDrawio, useIframe: true,
-});
+// Draw.io preview removed — requires complex pako compression + diagrams.net CDN
 
 // ── Simple colored renderers for dev file types ──
 

@@ -105,10 +105,6 @@ describe("previewEngine — renderer detection", () => {
     expect(findRenderer("model.obj", "")!.id).toBe("3d");
   });
 
-  it("finds drawio renderer", () => {
-    expect(findRenderer("diagram.drawio", "")!.id).toBe("drawio");
-  });
-
   it("finds mermaid renderer", () => {
     expect(findRenderer("diagram.mmd", "")!.id).toBe("mermaid");
     expect(findRenderer("diagram.mermaid", "")!.id).toBe("mermaid");
@@ -390,13 +386,6 @@ describe("previewEngine — render outputs", () => {
     const output = r.render(opts("", "/path/to/model.stl"));
     expect(output).toContain("three.module.js");
     expect(output).toContain("STLLoader");
-  });
-
-  it("drawio: renders via diagrams.net embed", () => {
-    const r = findRenderer("diagram.drawio", "")!;
-    const output = r.render(opts("<mxfile><diagram name='Test'></diagram></mxfile>"));
-    expect(output).toContain("diagrams.net");
-    expect(output).toContain("iframe");
   });
 
   it("font: requires file path + renders sample text", () => {
