@@ -7,3 +7,4 @@ pub mod plugin;
 pub mod git;
 pub mod monitor;
 pub mod workspace;
+pub mod pty;

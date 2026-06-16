@@ -11,7 +11,7 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 - **Rust**: >= 1.70 (edition 2021)
 - **Version**: 0.3.0 (21 phases complete)
 - **Tests**: 65 E2E + 308 unit (Playwright + vitest)
-- **IPC Commands**: 51 (file_ops, encoding, search, session, system, plugin, git, monitor, workspace)
+- **IPC Commands**: 55 (file_ops, encoding, search, session, system, plugin, git, monitor, workspace, pty)
 
 ## Architecture
 
@@ -19,13 +19,15 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 ┌─ WebView (React + Monaco + i18n) ───────────────────────────┐
 │  MenuBar │ TabBar(drag) │ Sidebar │ SplitEditor │ StatusBar │
 │  SearchPanel(overlay) │ Dialogs(portals)                     │
+│  Sidebar Tabs: Files │ AI │ Git │ Symbols │ Terminal         │
 │  Zustand stores: editor / search / settings / macro /        │
 │  encoding / plugin / git / clipboard / editorRef /           │
 │  bookmark / mark / contextMenu / udl / ai / tool             │
 ├─ Tauri IPC (src/lib/ipc.ts) ────────────────────────────────┤
 ├─ Rust Backend ──────────────────────────────────────────────┤
 │  commands/ (file_ops, encoding, search, session, system,     │
-│             plugin, git)                                      │
+│             plugin, git, pty)                                 │
+│  pty/      (portable-pty shell, session manager)             │
 │  encoding/ (detect BOM+chardetng, convert encoding_rs 60+)   │
 │  search/   (regex+walkdir grep)                              │
 │  plugin_api/ (sidecar manager, JSON-RPC 2.0)                │

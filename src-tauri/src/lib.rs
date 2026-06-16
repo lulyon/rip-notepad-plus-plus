@@ -2,6 +2,7 @@ mod commands;
 mod encoding;
 mod models;
 mod plugin_api;
+mod pty;
 mod search;
 
 use std::sync::Mutex;
@@ -17,6 +18,7 @@ use commands::plugin::{list_plugins, notify_plugins, send_plugin_command, start_
 use commands::system::{get_system_info, open_in_browser, open_terminal, run_command};
 use commands::monitor::{watch_file, check_file_changed, update_file_mtime, save_snapshot, load_snapshots, clear_snapshot, list_archive, MonitorState};
 use commands::workspace::{save_workspace, load_workspace, list_recent_workspaces, clear_recent_workspaces};
+use commands::pty::{pty_spawn, pty_write, pty_resize, pty_kill};
 use tauri::Manager;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -103,6 +105,11 @@ pub fn run() {
             load_workspace,
             list_recent_workspaces,
             clear_recent_workspaces,
+            // PTY Terminal
+            pty_spawn,
+            pty_write,
+            pty_resize,
+            pty_kill,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

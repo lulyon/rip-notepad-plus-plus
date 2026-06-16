@@ -8,6 +8,7 @@ import { detectLanguage } from "../../lib/constants";
 import type { DirEntry } from "../../types/ipc";
 import { GitPanel } from "./GitPanel";
 import { AiPanel } from "./AiPanel";
+import { TerminalPanel } from "./Terminal";
 import "./Sidebar.css";
 
 export function Sidebar() {
@@ -15,7 +16,7 @@ export function Sidebar() {
   const showSidebar = useSettingsStore((s) => s.showSidebar);
   const sidebarWidth = useSettingsStore((s) => s.sidebarWidth);
   const updateSetting = useSettingsStore((s) => s.updateSetting);
-  const [activeTab, setActiveTab] = useState<"files" | "ai" | "git" | "symbols">("files");
+  const [activeTab, setActiveTab] = useState<"files" | "ai" | "git" | "symbols" | "terminal">("files");
   const resizing = useRef(false);
 
   const startResize = (e: React.MouseEvent) => {
@@ -23,9 +24,10 @@ export function Sidebar() {
     resizing.current = true;
     const startX = e.clientX;
     const startW = sidebarWidth;
+    const maxW = Math.max(180, Math.floor(window.innerWidth / 2));
     const onMove = (ev: MouseEvent) => {
       if (!resizing.current) return;
-      const w = Math.max(180, Math.min(600, startW + ev.clientX - startX));
+      const w = Math.max(180, Math.min(maxW, startW + ev.clientX - startX));
       updateSetting("sidebarWidth", w);
     };
     const onUp = () => { resizing.current = false; document.removeEventListener("mousemove", onMove); document.removeEventListener("mouseup", onUp); };
@@ -62,12 +64,19 @@ export function Sidebar() {
         >
           🔣 {t("sidebar.symbols")}
         </button>
+        <button
+          className={`sidebar-tab ${activeTab === "terminal" ? "active" : ""}`}
+          onClick={() => setActiveTab("terminal")}
+        >
+          💻 {t("sidebar.terminal")}
+        </button>
       </div>
       <div className="sidebar-content">
         {activeTab === "files" && <ProjectPanel />}
         {activeTab === "ai" && <AiPanel />}
         {activeTab === "git" && <GitPanel />}
         {activeTab === "symbols" && <FunctionList />}
+        <TerminalPanel visible={activeTab === "terminal"} />
       </div>
       <div className="sidebar-resize-handle" onMouseDown={startResize} />
     </div>

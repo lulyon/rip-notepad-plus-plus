@@ -198,6 +198,20 @@ export const ipc = {
     return invoke("clear_snapshot", { tabId });
   },
 
+  // ── PTY Terminal ──
+  ptySpawn(id: string, shell?: string, cwd?: string, cols?: number, rows?: number): Promise<void> {
+    return invoke("pty_spawn", { id, shell: shell ?? null, cwd: cwd ?? null, cols: cols ?? null, rows: rows ?? null });
+  },
+  ptyWrite(id: string, data: number[]): Promise<void> {
+    return invoke("pty_write", { id, data });
+  },
+  ptyResize(id: string, cols: number, rows: number): Promise<void> {
+    return invoke("pty_resize", { id, cols, rows });
+  },
+  ptyKill(id: string): Promise<void> {
+    return invoke("pty_kill", { id });
+  },
+
   // ── Updater ──
   checkUpdate(): Promise<{ available: boolean; version?: string; body?: string } | null> {
     return invoke("plugin:updater|check");

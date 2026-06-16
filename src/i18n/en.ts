@@ -393,6 +393,12 @@ const en = {
     "sidebar.clipboard": "Clipboard",
     "sidebar.symbols": "Symbols",
     "sidebar.git": "Git",
+    "sidebar.terminal": "Terminal",
+    "terminal.start": "Start Terminal",
+    "terminal.exited": "Process exited.",
+    "terminal.restart": "Restart",
+    "terminal.spawnFailed": "Failed to start terminal",
+    "terminal.retry": "Retry",
     "sidebar.preview": "Preview",
 
     // ── Clipboard ──

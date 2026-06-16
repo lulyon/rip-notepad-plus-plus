@@ -393,6 +393,12 @@ const zh = {
     "sidebar.clipboard": "剪贴板历史",
     "sidebar.symbols": "符号",
     "sidebar.git": "Git",
+    "sidebar.terminal": "终端",
+    "terminal.start": "启动终端",
+    "terminal.exited": "进程已退出。",
+    "terminal.restart": "重新启动",
+    "terminal.spawnFailed": "终端启动失败",
+    "terminal.retry": "重试",
     "sidebar.preview": "预览",
 
     // ── Clipboard ──

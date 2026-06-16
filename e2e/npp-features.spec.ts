@@ -31,13 +31,13 @@ test.describe("Notepad++ ported features", () => {
     await expect(page.locator(".menu-dropdown")).toContainText("插入日期时间");
   });
 
-  // ── Sidebar now has 3 tabs (Files, Git, Symbols) ──
-  test("sidebar has four tabs", async ({ page }) => {
+  // ── Sidebar now has 5 tabs (Files, AI, Git, Symbols, Terminal) ──
+  test("sidebar has five tabs", async ({ page }) => {
     await page.locator(".menu-bar-item").nth(3).click();
     await page.waitForTimeout(150);
     await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
     await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar-tab")).toHaveCount(4);
+    await expect(page.locator(".sidebar-tab")).toHaveCount(5);
   });
 
   // ── Git tab visible ──
