@@ -177,7 +177,7 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch }
 
     await streamChat(
       apiBaseUrl, apiKey, model, latest.messages,
-      "You are a helpful coding assistant. Respond in Markdown. Keep answers concise.",
+      `You are a helpful coding assistant. Today is ${new Date().toISOString().split("T")[0]}. Respond in Markdown. Keep answers concise.`,
       enableWebSearch,
       callbacks,
     );
