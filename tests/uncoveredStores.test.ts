@@ -23,10 +23,49 @@ describe("markStore", () => {
 });
 
 describe("aiStore", () => {
-  it("initializes with defaults", () => { expect(useAiStore.getState().messages).toHaveLength(0); expect(useAiStore.getState().streaming).toBe(false); });
-  it("adds messages", () => { useAiStore.getState().addMessage({ role: "user", content: "hello", timestamp: 1 }); expect(useAiStore.getState().messages).toHaveLength(1); });
-  it("clears messages", () => { useAiStore.getState().addMessage({ role: "user", content: "x", timestamp: 1 }); useAiStore.getState().clearMessages(); expect(useAiStore.getState().messages).toHaveLength(0); });
-  it("stores and retrieves config", () => { useAiStore.getState().setConfig("http://x", "key123", "m1"); const s = useAiStore.getState(); expect(s.apiBaseUrl).toBe("http://x"); expect(s.apiKey).toBe("key123"); });
+  beforeEach(() => { useAiStore.setState({ conversations: [], activeId: null, apiBaseUrl: "", apiKey: "", model: "" }); });
+  it("initializes with no conversations", () => {
+    expect(useAiStore.getState().conversations).toHaveLength(0);
+    expect(useAiStore.getState().activeId).toBeNull();
+  });
+  it("creates new conversation", () => {
+    const id = useAiStore.getState().newConversation();
+    expect(id).toBeTruthy();
+    expect(useAiStore.getState().conversations).toHaveLength(1);
+    expect(useAiStore.getState().activeId).toBe(id);
+  });
+  it("adds messages and auto-titles", () => {
+    const id = useAiStore.getState().newConversation();
+    useAiStore.getState().addMessage(id, { role: "user", content: "hello", timestamp: 1 });
+    expect(useAiStore.getState().getConversation(id)?.messages).toHaveLength(1);
+    expect(useAiStore.getState().getConversation(id)?.title).toBe("hello");
+  });
+  it("clears messages", () => {
+    const id = useAiStore.getState().newConversation();
+    useAiStore.getState().addMessage(id, { role: "user", content: "x", timestamp: 1 });
+    useAiStore.getState().clearMessages(id);
+    expect(useAiStore.getState().getConversation(id)?.messages).toHaveLength(0);
+  });
+  it("stores config", () => {
+    useAiStore.getState().setConfig("http://x", "key123", "m1");
+    const s = useAiStore.getState();
+    expect(s.apiBaseUrl).toBe("http://x");
+    expect(s.apiKey).toBe("key123");
+  });
+  it("closes conversation and switches active", () => {
+    useAiStore.setState({ conversations: [], activeId: null });
+    const id1 = useAiStore.getState().newConversation();
+    const id2 = useAiStore.getState().newConversation();
+    expect(useAiStore.getState().conversations).toHaveLength(2); // verify both created
+    useAiStore.getState().closeConversation(id1);
+    expect(useAiStore.getState().conversations).toHaveLength(1);
+    expect(useAiStore.getState().activeId).toBe(id2);
+  });
+  it("refuses to close last conversation", () => {
+    const id = useAiStore.getState().newConversation();
+    useAiStore.getState().closeConversation(id);
+    expect(useAiStore.getState().conversations).toHaveLength(1);
+  });
 });
 
 describe("contextMenuStore", () => {

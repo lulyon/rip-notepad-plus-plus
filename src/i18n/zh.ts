@@ -537,6 +537,7 @@ const zh = {
     "ai.quickFix": "修复 Bug",
     "ai.placeholder": "询问你的代码... (Enter 发送，Shift+Enter 换行)",
     "ai.emptyHint": "询问关于代码的任何问题。",
+    "ai.newChat": "新建对话",
 
     // ── Tools Dialog ──
     "tools.title": "外部工具",

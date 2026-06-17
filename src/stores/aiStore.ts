@@ -6,89 +6,136 @@ export interface AiMessage {
   timestamp: number;
 }
 
+export interface Conversation {
+  id: string;
+  title: string;
+  messages: AiMessage[];
+  streaming: boolean;
+  streamThinking: string;
+  error: string | null;
+  createdAt: number;
+}
+
 interface AiState {
+  // Shared config
   apiBaseUrl: string;
   apiKey: string;
   model: string;
-  messages: AiMessage[];
-  streaming: boolean;
-  conversationTitle: string;
 
+  // Multi-conversation
+  conversations: Conversation[];
+  activeId: string | null;
+
+  // Config actions
   setConfig: (url: string, key: string, model: string) => void;
-  addMessage: (msg: AiMessage) => void;
-  updateLastMessage: (content: string) => void;
-  setStreaming: (v: boolean) => void;
-  clearMessages: () => void;
   loadFromClaudeConfig: () => Promise<boolean>;
+
+  // Conversation lifecycle
+  newConversation: () => string;
+  closeConversation: (id: string) => void;
+  setActive: (id: string) => void;
+
+  // Per-conversation actions
+  addMessage: (convId: string, msg: AiMessage) => void;
+  updateLastMessage: (convId: string, content: string) => void;
+  setStreaming: (convId: string, v: boolean) => void;
+  setStreamThinking: (convId: string, text: string) => void;
+  setConvError: (convId: string, err: string | null) => void;
+  clearMessages: (convId: string) => void;
+
+  // Helpers
+  getActive: () => Conversation | undefined;
+  getConversation: (id: string) => Conversation | undefined;
 }
 
-const STORAGE_KEY = "ripnotepadpp-ai-config";
-const CHAT_KEY = "ripnotepadpp-ai-chat";
+// ── Persistence ──
 
-function loadSavedConfig(): { url: string; key: string; model: string } {
+const CONFIG_KEY = "ripnotepadpp-ai-config";
+const CONVS_KEY = "ripnotepadpp-ai-conversations";
+const OLD_CHAT_KEY = "ripnotepadpp-ai-chat";
+
+function loadConfig(): { url: string; key: string; model: string } {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(CONFIG_KEY);
     if (raw) return JSON.parse(raw);
-  } catch {}
+  } catch { /* ignore */ }
   return { url: "", key: "", model: "" };
 }
 
 function saveConfig(url: string, key: string, model: string) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ url, key, model }));
+  try {
+    localStorage.setItem(CONFIG_KEY, JSON.stringify({ url, key, model }));
+  } catch { /* ignore */ }
 }
 
-function loadSavedChat(): AiMessage[] {
+function loadConversations(): Conversation[] {
+  // Migrate old single-chat data
+  const old = localStorage.getItem(OLD_CHAT_KEY);
+  if (old) {
+    try {
+      const oldMsgs: AiMessage[] = JSON.parse(old);
+      localStorage.removeItem(OLD_CHAT_KEY);
+      if (oldMsgs.length > 0) {
+        const conv: Conversation = {
+          id: `conv-1`,
+          title: makeTitle(oldMsgs),
+          messages: oldMsgs,
+          streaming: false,
+          streamThinking: "",
+          error: null,
+          createdAt: oldMsgs[0]?.timestamp || Date.now(),
+        };
+        const data = [conv];
+        localStorage.setItem(CONVS_KEY, JSON.stringify(data));
+        return data;
+      }
+    } catch { /* ignore */ }
+  }
+  // Normal load
   try {
-    const raw = localStorage.getItem(CHAT_KEY);
+    const raw = localStorage.getItem(CONVS_KEY);
     if (raw) return JSON.parse(raw);
-  } catch {}
+  } catch { /* ignore */ }
   return [];
 }
 
-const saved = loadSavedConfig();
+function saveConversations(_convs: Conversation[]) {
+  // localStorage may be unavailable in test environments (opaque origin)
+  try {
+    localStorage.setItem(CONVS_KEY, JSON.stringify(_convs));
+  } catch { /* ignore */ }
+}
+
+function makeTitle(msgs: AiMessage[]): string {
+  const first = msgs.find((m) => m.role === "user");
+  if (!first) return "New Chat";
+  const t = first.content.replace(/\n/g, " ").trim();
+  return t.length > 20 ? t.slice(0, 20) + "…" : t;
+}
+
+// ── Store ──
+
+const savedConfig = loadConfig();
+const initialConversations = loadConversations();
+let convSeq = initialConversations.length;
 
 export const useAiStore = create<AiState>((set, get) => ({
-  apiBaseUrl: saved.url || "https://api.deepseek.com/anthropic",
-  apiKey: saved.key || "",
-  model: saved.model || "deepseek-v4-pro",
-  messages: loadSavedChat(),
-  streaming: false,
-  conversationTitle: "AI Chat",
+  apiBaseUrl: savedConfig.url || "https://api.deepseek.com/anthropic",
+  apiKey: savedConfig.key || "",
+  model: savedConfig.model || "deepseek-v4-pro",
+
+  conversations: initialConversations,
+  activeId: initialConversations.length > 0 ? initialConversations[0].id : null,
+
+  // ── Config ──
 
   setConfig: (url, key, model) => {
     saveConfig(url, key, model);
     set({ apiBaseUrl: url, apiKey: key, model });
   },
 
-  addMessage: (msg) => {
-    set((s) => {
-      const next = [...s.messages, msg];
-      localStorage.setItem(CHAT_KEY, JSON.stringify(next));
-      return { messages: next };
-    });
-  },
-
-  updateLastMessage: (content) => {
-    set((s) => {
-      const msgs = [...s.messages];
-      if (msgs.length > 0 && msgs[msgs.length - 1].role === "assistant") {
-        msgs[msgs.length - 1] = { ...msgs[msgs.length - 1], content };
-      }
-      localStorage.setItem(CHAT_KEY, JSON.stringify(msgs));
-      return { messages: msgs };
-    });
-  },
-
-  setStreaming: (v) => set({ streaming: v }),
-
-  clearMessages: () => {
-    localStorage.removeItem(CHAT_KEY);
-    set({ messages: [] });
-  },
-
   loadFromClaudeConfig: async () => {
     try {
-      // Read ~/.claude/settings.json via Tauri fs plugin
       const { readTextFile } = await import("@tauri-apps/plugin-fs");
       const homeDir = (await import("@tauri-apps/api/path")).homeDir();
       const configPath = `${homeDir}.claude/settings.json`;
@@ -103,8 +150,125 @@ export const useAiStore = create<AiState>((set, get) => ({
           get().setConfig(url, key, model);
           return true;
         }
-      } catch { /* file not found or parse error */ }
-    } catch {}
+      } catch { /* file not found */ }
+    } catch { /* Tauri FS unavailable */ }
     return false;
+  },
+
+  // ── Conversation lifecycle ──
+
+  newConversation: () => {
+    convSeq += 1;
+    const id = `conv-${Date.now()}-${convSeq}`;
+    const conv: Conversation = {
+      id,
+      title: "New Chat",
+      messages: [],
+      streaming: false,
+      streamThinking: "",
+      error: null,
+      createdAt: Date.now(),
+    };
+    set((s) => {
+      const conversations = [...s.conversations, conv];
+      saveConversations(conversations);
+      return { conversations, activeId: id };
+    });
+    return id;
+  },
+
+  closeConversation: (id: string) => {
+    set((s) => {
+      if (s.conversations.length <= 1) return s; // keep last tab
+      const idx = s.conversations.findIndex((c) => c.id === id);
+      const conversations = s.conversations.filter((c) => c.id !== id);
+      saveConversations(conversations);
+      let activeId = s.activeId;
+      if (activeId === id) {
+        const newIdx = Math.min(idx, conversations.length - 1);
+        activeId = conversations[newIdx]?.id || null;
+      }
+      return { conversations, activeId };
+    });
+  },
+
+  setActive: (id: string) => set({ activeId: id }),
+
+  // ── Per-conversation actions ──
+
+  addMessage: (convId, msg) => {
+    set((s) => {
+      const conversations = s.conversations.map((c) => {
+        if (c.id !== convId) return c;
+        const messages = [...c.messages, msg];
+        // Auto-title from first user message
+        const title = c.messages.length === 0 && msg.role === "user"
+          ? makeTitle([msg])
+          : c.title;
+        return { ...c, messages, title };
+      });
+      saveConversations(conversations);
+      return { conversations };
+    });
+  },
+
+  updateLastMessage: (convId, content) => {
+    set((s) => {
+      const conversations = s.conversations.map((c) => {
+        if (c.id !== convId) return c;
+        const messages = [...c.messages];
+        if (messages.length > 0 && messages[messages.length - 1].role === "assistant") {
+          messages[messages.length - 1] = { ...messages[messages.length - 1], content };
+        }
+        return { ...c, messages };
+      });
+      saveConversations(conversations);
+      return { conversations };
+    });
+  },
+
+  setStreaming: (convId, v) => {
+    set((s) => ({
+      conversations: s.conversations.map((c) =>
+        c.id === convId ? { ...c, streaming: v } : c
+      ),
+    }));
+  },
+
+  setStreamThinking: (convId, text) => {
+    set((s) => ({
+      conversations: s.conversations.map((c) =>
+        c.id === convId ? { ...c, streamThinking: text } : c
+      ),
+    }));
+  },
+
+  setConvError: (convId, err) => {
+    set((s) => ({
+      conversations: s.conversations.map((c) =>
+        c.id === convId ? { ...c, error: err, streaming: false } : c
+      ),
+    }));
+  },
+
+  clearMessages: (convId) => {
+    set((s) => {
+      const conversations = s.conversations.map((c) =>
+        c.id === convId ? { ...c, messages: [], title: "New Chat", error: null } : c
+      );
+      saveConversations(conversations);
+      return { conversations };
+    });
+  },
+
+  // ── Helpers ──
+
+  getActive: () => {
+    const { conversations, activeId } = get();
+    return conversations.find((c) => c.id === activeId);
+  },
+
+  getConversation: (id: string) => {
+    return get().conversations.find((c) => c.id === id);
   },
 }));

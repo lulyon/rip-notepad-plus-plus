@@ -537,6 +537,7 @@ const en = {
     "ai.quickFix": "Fix Bugs",
     "ai.placeholder": "Ask about your code... (Enter to send, Shift+Enter for newline)",
     "ai.emptyHint": "Ask me anything about your code.",
+    "ai.newChat": "New Chat",
 
     // ── Tools Dialog ──
     "tools.title": "External Tools",
