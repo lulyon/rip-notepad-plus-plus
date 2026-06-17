@@ -5,6 +5,7 @@ import { FitAddon } from "@xterm/addon-fit";
 import { ipc } from "../../lib/ipc";
 import { listen } from "@tauri-apps/api/event";
 import { useEditorStore } from "../../stores/editorStore";
+import { useSettingsStore } from "../../stores/settingsStore";
 import type { UnlistenFn } from "@tauri-apps/api/event";
 import "@xterm/xterm/css/xterm.css";
 import "./Terminal.css";
@@ -61,9 +62,12 @@ function useWorkDir(): string | undefined {
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const tabs = useEditorStore((s) => s.tabs);
   const tab = tabs.find((t) => t.id === activeTabId);
-  if (!tab?.path) return undefined;
-  const i = Math.max(tab.path.lastIndexOf("/"), tab.path.lastIndexOf("\\"));
-  return i > 0 ? tab.path.slice(0, i) : undefined;
+  if (tab?.path) {
+    const i = Math.max(tab.path.lastIndexOf("/"), tab.path.lastIndexOf("\\"));
+    if (i > 0) return tab.path.slice(0, i);
+  }
+  // Fallback to projectRoot — static getState avoids subscription crash
+  return useSettingsStore.getState().projectRoot ?? undefined;
 }
 
 // ── Xterm theme ──
@@ -276,15 +280,23 @@ function TerminalTabPane({ tab, visible, workDir, onStart, onExit, onError, onRe
 export function TerminalPanel({ visible }: Props) {
   const { t } = useTranslation();
   const workDir = useWorkDir();
-  const [tabs, setTabs] = useState<TabInfo[]>(() => [createTab(workDir)]);
+  const [tabs, setTabs] = useState<TabInfo[]>([]);
   const [activeIdx, setActiveIdx] = useState(0);
 
   // ── Tab actions ──
 
+  const startFirst = useCallback(() => {
+    const newTab = createTab(workDir);
+    setTabs([newTab]);
+  }, [workDir]);
+
   const addTab = useCallback(() => {
     const newTab = createTab(workDir);
-    setTabs((prev) => [...prev, newTab]);
-    setActiveIdx((prev) => prev + 1); // switch to new tab
+    setTabs((prev) => {
+      const next = [...prev, newTab];
+      setActiveIdx(next.length - 1);
+      return next;
+    });
   }, [workDir]);
 
   const closeTab = useCallback((idx: number) => {
@@ -336,45 +348,55 @@ export function TerminalPanel({ visible }: Props) {
 
   return (
     <div className="terminal-panel" style={{ display: visible ? "flex" : "none" }}>
-      {/* Tab bar */}
-      <div className="terminal-tab-bar">
-        {tabs.map((tab, i) => (
-          <button
-            key={tab.id}
-            className={`terminal-tab ${i === activeIdx ? "active" : ""}`}
-            onClick={() => setActiveIdx(i)}
-            title={tab.sessionId}
-          >
-            <span className="terminal-tab-title">
-              {tab.exited ? "⚫" : tab.started ? "🟢" : "⚪"} {tab.title}
-            </span>
-            {tabs.length > 1 && (
-              <span
-                className="terminal-tab-close"
-                onClick={(e) => { e.stopPropagation(); closeTab(i); }}
-                title={t("tab.close")}
-              >×</span>
-            )}
+      {tabs.length === 0 ? (
+        <div className="terminal-empty">
+          <button className="terminal-start-btn" onClick={startFirst}>
+            ▶ {t("terminal.start")}
           </button>
-        ))}
-        <button className="terminal-tab terminal-tab-plus" onClick={addTab} title={t("terminal.newTab")}>
-          +
-        </button>
-      </div>
+        </div>
+      ) : (
+        <>
+          {/* Tab bar */}
+          <div className="terminal-tab-bar">
+            {tabs.map((tab, i) => (
+              <button
+                key={tab.id}
+                className={`terminal-tab ${i === activeIdx ? "active" : ""}`}
+                onClick={() => setActiveIdx(i)}
+                title={tab.sessionId}
+              >
+                <span className="terminal-tab-title">
+                  {tab.exited ? "⚫" : tab.started ? "🟢" : "⚪"} {tab.title}
+                </span>
+                {tabs.length > 1 && (
+                  <span
+                    className="terminal-tab-close"
+                    onClick={(e) => { e.stopPropagation(); closeTab(i); }}
+                    title={t("tab.close")}
+                  >×</span>
+                )}
+              </button>
+            ))}
+            <button className="terminal-tab terminal-tab-plus" onClick={addTab} title={t("terminal.newTab")}>
+              +
+            </button>
+          </div>
 
-      {/* Tab panes */}
-      {tabs.map((tab, i) => (
-        <TerminalTabPane
-          key={tab.id}
-          tab={tab}
-          visible={visible && i === activeIdx}
-          workDir={workDir}
-          onStart={handleStart}
-          onExit={handleExit}
-          onError={handleError}
-          onRestart={handleRestart}
-        />
-      ))}
+          {/* Tab panes */}
+          {tabs.map((tab, i) => (
+            <TerminalTabPane
+              key={tab.id}
+              tab={tab}
+              visible={visible && i === activeIdx}
+              workDir={workDir}
+              onStart={handleStart}
+              onExit={handleExit}
+              onError={handleError}
+              onRestart={handleRestart}
+            />
+          ))}
+        </>
+      )}
     </div>
   );
 }
