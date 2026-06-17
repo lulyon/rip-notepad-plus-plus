@@ -63,6 +63,18 @@ function App() {
   const [ctxConfigOpen, setCtxConfigOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
 
+  // ── Disable native webview context menu (prevents accidental Reload) ──
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      // Allow custom context menus (Monaco, TabBar, etc.) to handle their own events
+      // by checking if the target already prevented default
+      if (e.defaultPrevented) return;
+      e.preventDefault();
+    };
+    document.addEventListener("contextmenu", handler);
+    return () => document.removeEventListener("contextmenu", handler);
+  }, []);
+
   // ── Session: load on startup (guarded against React StrictMode double-fire) ──
   const sessionLoaded = useRef(false);
   useEffect(() => {
