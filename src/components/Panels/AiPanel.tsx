@@ -1,11 +1,84 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import MarkdownIt from "markdown-it";
+import hljs from "highlight.js/lib/core";
+// Tree-shaken language registrations (only ~20 langs, ~30KB gzipped)
+import javascript from "highlight.js/lib/languages/javascript";
+import typescript from "highlight.js/lib/languages/typescript";
+import python from "highlight.js/lib/languages/python";
+import rust from "highlight.js/lib/languages/rust";
+import bash from "highlight.js/lib/languages/bash";
+import json from "highlight.js/lib/languages/json";
+import css from "highlight.js/lib/languages/css";
+import xml from "highlight.js/lib/languages/xml";
+import sql from "highlight.js/lib/languages/sql";
+import yaml from "highlight.js/lib/languages/yaml";
+import shell from "highlight.js/lib/languages/shell";
+import java from "highlight.js/lib/languages/java";
+import go from "highlight.js/lib/languages/go";
+import cpp from "highlight.js/lib/languages/cpp";
+import ruby from "highlight.js/lib/languages/ruby";
+import php from "highlight.js/lib/languages/php";
+import swift from "highlight.js/lib/languages/swift";
+import kotlin from "highlight.js/lib/languages/kotlin";
 import { useAiStore } from "../../stores/aiStore";
 import type { Conversation } from "../../stores/aiStore";
 import { useEditorStore } from "../../stores/editorStore";
 import { streamChat } from "../../lib/aiClient";
 import type { StreamCallbacks, SearchResult } from "../../lib/aiClient";
 import "./AiPanel.css";
+
+// ── highlight.js language registration ──
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("js", javascript);
+hljs.registerLanguage("typescript", typescript);
+hljs.registerLanguage("ts", typescript);
+hljs.registerLanguage("python", python);
+hljs.registerLanguage("py", python);
+hljs.registerLanguage("rust", rust);
+hljs.registerLanguage("rs", rust);
+hljs.registerLanguage("bash", bash);
+hljs.registerLanguage("sh", bash);
+hljs.registerLanguage("json", json);
+hljs.registerLanguage("css", css);
+hljs.registerLanguage("html", xml);
+hljs.registerLanguage("xml", xml);
+hljs.registerLanguage("sql", sql);
+hljs.registerLanguage("yaml", yaml);
+hljs.registerLanguage("yml", yaml);
+hljs.registerLanguage("shell", shell);
+hljs.registerLanguage("java", java);
+hljs.registerLanguage("go", go);
+hljs.registerLanguage("cpp", cpp);
+hljs.registerLanguage("c++", cpp);
+hljs.registerLanguage("ruby", ruby);
+hljs.registerLanguage("rb", ruby);
+hljs.registerLanguage("php", php);
+hljs.registerLanguage("swift", swift);
+hljs.registerLanguage("kotlin", kotlin);
+hljs.registerLanguage("kt", kotlin);
+
+// ── Markdown renderer (created once, reused) ──
+const md: MarkdownIt = new MarkdownIt({
+  html: false,       // Security: strip raw HTML
+  linkify: true,     // Auto-link URLs
+  breaks: true,      // \n → <br>
+  typographer: false, // Keep it simple for code-heavy output
+  highlight(str: string, lang: string): string {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return `<pre class="hljs"><code>${hljs.highlight(str, { language: lang }).value}</code></pre>`;
+      } catch { /* fall through to escaped */ }
+    }
+    return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`;
+  },
+});
+
+/** Render markdown to HTML. Safe — HTML is escaped by markdown-it by default. */
+function renderMarkdown(content: string): string {
+  if (!content) return "";
+  return md.render(content);
+}
 
 // ── Helpers ──
 
@@ -89,6 +162,8 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch }
   const [showConfig, setShowConfig] = useState(!apiKey);
   // Track in-progress search for streaming UI
   const [currentSearchQuery, setCurrentSearchQuery] = useState("");
+  // Ref to the streaming message content span for direct DOM updates
+  const streamingContentRef = useRef<HTMLSpanElement>(null);
 
   const {
     addMessage,
@@ -102,16 +177,6 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch }
   useEffect(() => {
     if (visible) messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [conv.messages, visible]);
-
-  const formatContent = (content: string) => {
-    if (!content) return "";
-    return content
-      .replace(/```(\w+)?\n([\s\S]*?)```/g, "<pre><code>$2</code></pre>")
-      .replace(/`([^`]+)`/g, "<code>$1</code>")
-      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-      .replace(/\*([^*]+)\*/g, "<em>$1</em>")
-      .replace(/\n/g, "<br>");
-  };
 
   const send = async () => {
     const text = input.trim();
@@ -136,11 +201,26 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch }
     let thinkingFull = "";
     let searchQuery = "";
     const searchResults: SearchResult[] = [];
+    let lastRenderTime = 0;
+    const THROTTLE_MS = 50;
+
+    const updateStreamingDom = (html: string) => {
+      if (streamingContentRef.current) {
+        streamingContentRef.current.innerHTML = html;
+      }
+    };
 
     const callbacks: StreamCallbacks = {
       onToken: (token) => {
         full += token;
+        // Always persist to store (batched by Zustand)
         useAiStore.getState().updateLastMessage(conv.id, full);
+        // Throttle DOM render — markdown-it.parse is ~1-2ms, fine at 20fps
+        const now = Date.now();
+        if (now - lastRenderTime > THROTTLE_MS) {
+          updateStreamingDom(renderMarkdown(full));
+          lastRenderTime = now;
+        }
       },
       onThinking: (thinking) => {
         thinkingFull += thinking;
@@ -158,6 +238,8 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch }
       onDone: () => {
         // Post-process: strip XML tool_call tags leaked by DeepSeek
         full = sanitizeText(full);
+        // Final render (no throttle)
+        updateStreamingDom(renderMarkdown(full));
         useAiStore.getState().updateLastMessage(conv.id, full);
         // Attach search metadata to the last assistant message
         if (searchQuery || searchResults.length > 0) {
@@ -231,6 +313,7 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch }
           const isLast = i === conv.messages.length - 1;
           const hasSearch = !!(msg.searchQuery || (msg.searchResults && msg.searchResults.length > 0));
           const showSearching = isLast && conv.streaming && !!currentSearchQuery && !msg.searchQuery;
+          const isStreamingMessage = isLast && msg.role === "assistant" && conv.streaming;
 
           return (
             <React.Fragment key={i}>
@@ -256,12 +339,19 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch }
                   {isSearching && (
                     <div className="ai-searching">🔍 {t("ai.searching")}</div>
                   )}
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: formatContent(msg.content) ||
-                        (msg.role === "assistant" && conv.streaming && isLast ? "▊" : ""),
-                    }}
-                  />
+                  {/* Streaming message: use ref for direct DOM update; historical: render once */}
+                  {isStreamingMessage ? (
+                    <span
+                      ref={streamingContentRef}
+                      className="ai-markdown-content"
+                      dangerouslySetInnerHTML={{ __html: renderMarkdown(msg.content) || "▊" }}
+                    />
+                  ) : (
+                    <span
+                      className="ai-markdown-content"
+                      dangerouslySetInnerHTML={{ __html: renderMarkdown(msg.content) }}
+                    />
+                  )}
                 </div>
               </div>
               {/* Streaming thinking block (shown during streaming before the assistant message) */}
