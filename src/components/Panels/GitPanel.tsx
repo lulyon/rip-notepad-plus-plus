@@ -7,9 +7,24 @@ import { ipc } from "../../lib/ipc";
 import { CommitDialog } from "../Dialogs/CommitDialog";
 import "./GitPanel.css";
 
+/** Derive repo path: configured projectRoot > active editor file's directory. */
+function useRepoPath(): string {
+  const projectRoot = useSettingsStore((s) => s.projectRoot);
+  if (projectRoot) return projectRoot;
+  // Fall back to active editor file's directory
+  const activeTabId = useEditorStore((s) => s.activeTabId);
+  const tabs = useEditorStore((s) => s.tabs);
+  const tab = tabs.find((t) => t.id === activeTabId);
+  if (tab?.path) {
+    const i = Math.max(tab.path.lastIndexOf("/"), tab.path.lastIndexOf("\\"));
+    if (i > 0) return tab.path.slice(0, i);
+  }
+  return "";
+}
+
 export function GitPanel() {
   const { t } = useTranslation();
-  const projectRoot = useSettingsStore((s) => s.projectRoot);
+  const projectRoot = useRepoPath();
   const { status, loading, error, refreshStatus } = useGitStore();
   const [diffFile, setDiffFile] = useState<string | null>(null);
   const [diffContent, setDiffContent] = useState("");
