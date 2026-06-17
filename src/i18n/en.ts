@@ -399,6 +399,7 @@ const en = {
     "terminal.restart": "Restart",
     "terminal.spawnFailed": "Failed to start terminal",
     "terminal.retry": "Retry",
+    "terminal.newTab": "New Terminal Tab",
     "sidebar.preview": "Preview",
 
     // ── Clipboard ──

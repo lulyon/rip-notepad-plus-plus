@@ -399,6 +399,7 @@ const zh = {
     "terminal.restart": "重新启动",
     "terminal.spawnFailed": "终端启动失败",
     "terminal.retry": "重试",
+    "terminal.newTab": "新建终端标签",
     "sidebar.preview": "预览",
 
     // ── Clipboard ──

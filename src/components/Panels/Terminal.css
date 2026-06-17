@@ -1,3 +1,5 @@
+/* ── Terminal Panel (parent) ── */
+
 .terminal-panel {
   display: flex;
   flex-direction: column;
@@ -5,6 +7,85 @@
   overflow: hidden;
   position: relative;
 }
+
+/* ── Tab bar ── */
+
+.terminal-tab-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #1a1a1a;
+  border-bottom: 1px solid #333;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.terminal-tab {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  border: none;
+  border-right: 1px solid #333;
+  background: #1e1e1e;
+  color: #888;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 0;
+}
+.terminal-tab:hover {
+  background: #2a2a2a;
+  color: #ccc;
+}
+.terminal-tab.active {
+  background: #2a2a2a;
+  color: #eee;
+  border-bottom: 2px solid var(--accent-color, #4a9eff);
+}
+
+.terminal-tab-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+}
+
+.terminal-tab-close {
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 2px;
+  border-radius: 2px;
+  color: #666;
+}
+.terminal-tab-close:hover {
+  color: #f66;
+  background: #3a1a1a;
+}
+
+.terminal-tab-plus {
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 4px 10px;
+  color: #666;
+  border-right: none;
+}
+.terminal-tab-plus:hover {
+  color: #4a9eff;
+}
+
+/* ── Tab pane ── */
+
+.terminal-tab-pane {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+/* ── Empty state ── */
 
 .terminal-empty {
   display: flex;
@@ -34,6 +115,8 @@
   opacity: 0.9;
 }
 
+/* ── Terminal container ── */
+
 .terminal-container {
   flex: 1;
   padding: 0;
@@ -51,6 +134,8 @@
 .terminal-container .xterm-viewport {
   scrollbar-width: thin;
 }
+
+/* ── Restart bar ── */
 
 .terminal-restart-bar {
   position: absolute;
