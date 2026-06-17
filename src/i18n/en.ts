@@ -538,6 +538,10 @@ const en = {
     "ai.placeholder": "Ask about your code... (Enter to send, Shift+Enter for newline)",
     "ai.emptyHint": "Ask me anything about your code.",
     "ai.newChat": "New Chat",
+    "ai.webSearchOn": "Web search on",
+    "ai.webSearchOff": "Web search off",
+    "ai.searching": "Searching...",
+    "ai.searchedN": "Searched: {{query}} ({{count}} results)",
 
     // ── Tools Dialog ──
     "tools.title": "External Tools",

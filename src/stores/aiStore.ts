@@ -4,6 +4,12 @@ export interface AiMessage {
   role: "user" | "assistant";
   content: string;
   timestamp: number;
+  /** Search query used to produce this message (if any) */
+  searchQuery?: string;
+  /** Search results that informed this message (if any) */
+  searchResults?: { url: string; title: string }[];
+  /** Number of web searches performed for this message */
+  searchCount?: number;
 }
 
 export interface Conversation {
@@ -22,6 +28,9 @@ interface AiState {
   apiKey: string;
   model: string;
 
+  // Web search toggle
+  enableWebSearch: boolean;
+
   // Multi-conversation
   conversations: Conversation[];
   activeId: string | null;
@@ -29,6 +38,9 @@ interface AiState {
   // Config actions
   setConfig: (url: string, key: string, model: string) => void;
   loadFromClaudeConfig: () => Promise<boolean>;
+
+  // Web search
+  toggleWebSearch: () => void;
 
   // Conversation lifecycle
   newConversation: () => string;
@@ -38,6 +50,7 @@ interface AiState {
   // Per-conversation actions
   addMessage: (convId: string, msg: AiMessage) => void;
   updateLastMessage: (convId: string, content: string) => void;
+  updateLastMessageMeta: (convId: string, meta: Partial<AiMessage>) => void;
   setStreaming: (convId: string, v: boolean) => void;
   setStreamThinking: (convId: string, text: string) => void;
   setConvError: (convId: string, err: string | null) => void;
@@ -54,7 +67,14 @@ const CONFIG_KEY = "ripnotepadpp-ai-config";
 const CONVS_KEY = "ripnotepadpp-ai-conversations";
 const OLD_CHAT_KEY = "ripnotepadpp-ai-chat";
 
-function loadConfig(): { url: string; key: string; model: string } {
+interface PersistedConfig {
+  url: string;
+  key: string;
+  model: string;
+  enableWebSearch?: boolean;
+}
+
+function loadConfig(): PersistedConfig {
   try {
     const raw = localStorage.getItem(CONFIG_KEY);
     if (raw) return JSON.parse(raw);
@@ -62,9 +82,9 @@ function loadConfig(): { url: string; key: string; model: string } {
   return { url: "", key: "", model: "" };
 }
 
-function saveConfig(url: string, key: string, model: string) {
+function saveConfig(url: string, key: string, model: string, enableWebSearch: boolean) {
   try {
-    localStorage.setItem(CONFIG_KEY, JSON.stringify({ url, key, model }));
+    localStorage.setItem(CONFIG_KEY, JSON.stringify({ url, key, model, enableWebSearch }));
   } catch { /* ignore */ }
 }
 
@@ -124,13 +144,15 @@ export const useAiStore = create<AiState>((set, get) => ({
   apiKey: savedConfig.key || "",
   model: savedConfig.model || "deepseek-v4-pro",
 
+  enableWebSearch: savedConfig.enableWebSearch !== false, // default true
+
   conversations: initialConversations,
   activeId: initialConversations.length > 0 ? initialConversations[0].id : null,
 
   // ── Config ──
 
   setConfig: (url, key, model) => {
-    saveConfig(url, key, model);
+    saveConfig(url, key, model, get().enableWebSearch);
     set({ apiBaseUrl: url, apiKey: key, model });
   },
 
@@ -153,6 +175,16 @@ export const useAiStore = create<AiState>((set, get) => ({
       } catch { /* file not found */ }
     } catch { /* Tauri FS unavailable */ }
     return false;
+  },
+
+  // ── Web search ──
+
+  toggleWebSearch: () => {
+    set((s) => {
+      const next = !s.enableWebSearch;
+      saveConfig(s.apiBaseUrl, s.apiKey, s.model, next);
+      return { enableWebSearch: next };
+    });
   },
 
   // ── Conversation lifecycle ──
@@ -219,6 +251,22 @@ export const useAiStore = create<AiState>((set, get) => ({
         const messages = [...c.messages];
         if (messages.length > 0 && messages[messages.length - 1].role === "assistant") {
           messages[messages.length - 1] = { ...messages[messages.length - 1], content };
+        }
+        return { ...c, messages };
+      });
+      saveConversations(conversations);
+      return { conversations };
+    });
+  },
+
+  updateLastMessageMeta: (convId, meta) => {
+    set((s) => {
+      const conversations = s.conversations.map((c) => {
+        if (c.id !== convId) return c;
+        const messages = [...c.messages];
+        const lastIdx = messages.length - 1;
+        if (lastIdx >= 0 && messages[lastIdx].role === "assistant") {
+          messages[lastIdx] = { ...messages[lastIdx], ...meta };
         }
         return { ...c, messages };
       });

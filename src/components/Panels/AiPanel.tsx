@@ -4,7 +4,18 @@ import { useAiStore } from "../../stores/aiStore";
 import type { Conversation } from "../../stores/aiStore";
 import { useEditorStore } from "../../stores/editorStore";
 import { streamChat } from "../../lib/aiClient";
+import type { StreamCallbacks, SearchResult } from "../../lib/aiClient";
 import "./AiPanel.css";
+
+// ── Helpers ──
+
+/** Strip XML tool_call blocks that DeepSeek occasionally leaks into text responses. */
+function sanitizeText(text: string): string {
+  return text
+    .replace(/<invoke[\s\S]*?<\/invoke>/g, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
 
 // ── Sub-components ──
 
@@ -16,6 +27,38 @@ function ThinkingBlock({ text, defaultOpen }: { text: string; defaultOpen?: bool
         {open ? "▾" : "▸"} Thinking {text.length > 0 ? `(${text.length} chars)` : ""}
       </div>
       {open && <div className="ai-thinking-content">{text}</div>}
+    </div>
+  );
+}
+
+function SearchBlock({ query, results }: { query: string; results: { url: string; title: string }[] }) {
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(true);
+  if (!query && results.length === 0) return null;
+  return (
+    <div className="ai-search-block">
+      <div className="ai-search-toggle" onClick={() => setOpen(!open)}>
+        {open ? "▾" : "▸"} 🔍{" "}
+        {query
+          ? t("ai.searchedN", { query, count: results.length })
+          : t("ai.searchedN", { query: "", count: results.length })}
+      </div>
+      {open && results.length > 0 && (
+        <div className="ai-search-results">
+          {results.map((r, i) => (
+            <a
+              key={i}
+              href={r.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ai-search-result-item"
+              title={r.url}
+            >
+              {r.title}
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -35,17 +78,21 @@ interface TabPaneProps {
   apiBaseUrl: string;
   apiKey: string;
   model: string;
+  enableWebSearch: boolean;
 }
 
-function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model }: TabPaneProps) {
+function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch }: TabPaneProps) {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [showConfig, setShowConfig] = useState(!apiKey);
+  // Track in-progress search for streaming UI
+  const [currentSearchQuery, setCurrentSearchQuery] = useState("");
 
   const {
     addMessage,
+    updateLastMessageMeta,
     setStreaming,
     setStreamThinking,
     setConvError,
@@ -78,30 +125,61 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model }: TabPaneProps) {
     addMessage(conv.id, { role: "assistant", content: "", timestamp: Date.now() });
     setStreaming(conv.id, true);
 
-    // Use getActive() to get latest state after addMessage
+    // Use getConversation() to get latest state after addMessage
     const latest = useAiStore.getState().getConversation(conv.id);
     if (!latest) return;
 
     setStreamThinking(conv.id, "");
+    setCurrentSearchQuery("");
+
     let full = "";
     let thinkingFull = "";
-    await streamChat(
-      apiBaseUrl, apiKey, model, latest.messages,
-      "You are a helpful coding assistant. Respond in Markdown. Keep answers concise.",
-      (token) => {
+    let searchQuery = "";
+    const searchResults: SearchResult[] = [];
+
+    const callbacks: StreamCallbacks = {
+      onToken: (token) => {
         full += token;
         useAiStore.getState().updateLastMessage(conv.id, full);
       },
-      (thinking) => {
+      onThinking: (thinking) => {
         thinkingFull += thinking;
         setStreamThinking(conv.id, thinkingFull);
       },
-      () => {
+      onSearchStart: (query, _toolUseId) => {
+        searchQuery = query;
+        setCurrentSearchQuery(query);
+      },
+      onSearchResult: (results, _toolUseId) => {
+        for (const r of results) {
+          searchResults.push(r);
+        }
+      },
+      onDone: () => {
+        // Post-process: strip XML tool_call tags leaked by DeepSeek
+        full = sanitizeText(full);
+        useAiStore.getState().updateLastMessage(conv.id, full);
+        // Attach search metadata to the last assistant message
+        if (searchQuery || searchResults.length > 0) {
+          updateLastMessageMeta(conv.id, {
+            searchQuery,
+            searchResults: [...searchResults],
+          });
+        }
+        setCurrentSearchQuery("");
         setStreaming(conv.id, false);
       },
-      (err) => {
+      onError: (err) => {
+        setCurrentSearchQuery("");
         setConvError(conv.id, err);
       },
+    };
+
+    await streamChat(
+      apiBaseUrl, apiKey, model, latest.messages,
+      "You are a helpful coding assistant. Respond in Markdown. Keep answers concise.",
+      enableWebSearch,
+      callbacks,
     );
   };
 
@@ -126,6 +204,9 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model }: TabPaneProps) {
     );
   }
 
+  // Are we currently searching? (thinking but no specific query decoded yet)
+  const isSearching = conv.streaming && !currentSearchQuery && conv.streamThinking.length > 0;
+
   // Chat UI
   return (
     <div className="ai-tab-pane" style={{ display: visible ? "flex" : "none" }}>
@@ -142,32 +223,55 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model }: TabPaneProps) {
             </div>
           </div>
         )}
-        {conv.messages.map((msg, i) => (
-          <React.Fragment key={i}>
-            <div className={`ai-msg ${msg.role}`}>
-              <div className="ai-msg-role">{msg.role === "user" ? "👤" : "🤖"}</div>
-              <div className="ai-msg-content">
-                {(msg as any).thinking && conv.messages[conv.messages.length - 1] !== msg && (
-                  <ThinkingBlock text={(msg as any).thinking} />
-                )}
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: formatContent(msg.content) ||
-                      (msg.role === "assistant" && conv.streaming && i === conv.messages.length - 1 ? "▊" : ""),
-                  }}
-                />
-              </div>
-            </div>
-            {conv.streamThinking && msg.role === "user" && i === conv.messages.length - 2 && (
-              <div className="ai-msg assistant">
-                <div className="ai-msg-role">🤖</div>
+        {conv.messages.map((msg, i) => {
+          const isLast = i === conv.messages.length - 1;
+          const hasSearch = !!(msg.searchQuery || (msg.searchResults && msg.searchResults.length > 0));
+          const showSearching = isLast && conv.streaming && !!currentSearchQuery && !msg.searchQuery;
+
+          return (
+            <React.Fragment key={i}>
+              <div className={`ai-msg ${msg.role}`}>
+                <div className="ai-msg-role">{msg.role === "user" ? "👤" : "🤖"}</div>
                 <div className="ai-msg-content">
-                  <ThinkingBlock text={conv.streamThinking} defaultOpen />
+                  {/* Show thinking for non-streaming messages that have it */}
+                  {(msg as any).thinking && !conv.streaming && (
+                    <ThinkingBlock text={(msg as any).thinking} />
+                  )}
+                  {/* Show search block for messages with search metadata */}
+                  {hasSearch && (
+                    <SearchBlock
+                      query={msg.searchQuery || ""}
+                      results={msg.searchResults || []}
+                    />
+                  )}
+                  {/* Show searching indicator during streaming */}
+                  {showSearching && (
+                    <div className="ai-searching">🔍 {t("ai.searching")} "{currentSearchQuery}"</div>
+                  )}
+                  {/* Show searching when we're in thinking phase (model is deciding) */}
+                  {isSearching && (
+                    <div className="ai-searching">🔍 {t("ai.searching")}</div>
+                  )}
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: formatContent(msg.content) ||
+                        (msg.role === "assistant" && conv.streaming && isLast ? "▊" : ""),
+                    }}
+                  />
                 </div>
               </div>
-            )}
-          </React.Fragment>
-        ))}
+              {/* Streaming thinking block (shown during streaming before the assistant message) */}
+              {conv.streamThinking && msg.role === "user" && i === conv.messages.length - 2 && (
+                <div className="ai-msg assistant">
+                  <div className="ai-msg-role">🤖</div>
+                  <div className="ai-msg-content">
+                    <ThinkingBlock text={conv.streamThinking} defaultOpen />
+                  </div>
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
         {conv.error && <div className="ai-error">{conv.error}</div>}
         <div ref={messagesEndRef} />
       </div>
@@ -238,10 +342,10 @@ function AiConfigScreen() {
 export function AiPanel() {
   const { t } = useTranslation();
   const {
-    apiBaseUrl, apiKey, model,
+    apiBaseUrl, apiKey, model, enableWebSearch,
     conversations, activeId,
     newConversation, closeConversation, setActive, clearMessages,
-    loadFromClaudeConfig,
+    loadFromClaudeConfig, toggleWebSearch,
   } = useAiStore();
 
   const [showConfig, setShowConfig] = useState(!apiKey);
@@ -302,6 +406,14 @@ export function AiPanel() {
           +
         </button>
         <div className="ai-header-actions">
+          {/* Web search toggle */}
+          <button
+            className={`ai-btn-sm ai-web-search-toggle ${enableWebSearch ? "active" : ""}`}
+            onClick={toggleWebSearch}
+            title={enableWebSearch ? t("ai.webSearchOn") : t("ai.webSearchOff")}
+          >
+            🌐
+          </button>
           <button className="ai-btn-sm" onClick={() => setShowConfig(!showConfig)} title={t("ai.settings")}>⚙</button>
           {activeId && (
             <button className="ai-btn-sm" onClick={() => clearMessages(activeId)} title={t("ai.clearChat")}>🗑</button>
@@ -318,6 +430,7 @@ export function AiPanel() {
           apiBaseUrl={apiBaseUrl}
           apiKey={apiKey}
           model={model}
+          enableWebSearch={enableWebSearch}
         />
       ))}
 

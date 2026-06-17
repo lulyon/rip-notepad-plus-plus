@@ -538,6 +538,10 @@ const zh = {
     "ai.placeholder": "询问你的代码... (Enter 发送，Shift+Enter 换行)",
     "ai.emptyHint": "询问关于代码的任何问题。",
     "ai.newChat": "新建对话",
+    "ai.webSearchOn": "联网搜索开",
+    "ai.webSearchOff": "联网搜索关",
+    "ai.searching": "搜索中...",
+    "ai.searchedN": "搜索：{{query}}（{{count}} 条结果）",
 
     // ── Tools Dialog ──
     "tools.title": "外部工具",
