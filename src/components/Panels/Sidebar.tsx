@@ -47,6 +47,12 @@ export function Sidebar() {
           📁 {t("sidebar.files")}
         </button>
         <button
+          className={`sidebar-tab ${activeTab === "terminal" ? "active" : ""}`}
+          onClick={() => setActiveTab("terminal")}
+        >
+          💻 {t("sidebar.terminal")}
+        </button>
+        <button
           className={`sidebar-tab ${activeTab === "ai" ? "active" : ""}`}
           onClick={() => setActiveTab("ai")}
         >
@@ -63,12 +69,6 @@ export function Sidebar() {
           onClick={() => setActiveTab("symbols")}
         >
           🔣 {t("sidebar.symbols")}
-        </button>
-        <button
-          className={`sidebar-tab ${activeTab === "terminal" ? "active" : ""}`}
-          onClick={() => setActiveTab("terminal")}
-        >
-          💻 {t("sidebar.terminal")}
         </button>
       </div>
       <div className="sidebar-content">
