@@ -5,7 +5,6 @@ import { FitAddon } from "@xterm/addon-fit";
 import { ipc } from "../../lib/ipc";
 import { listen } from "@tauri-apps/api/event";
 import { useEditorStore } from "../../stores/editorStore";
-import { useSettingsStore } from "../../stores/settingsStore";
 import type { UnlistenFn } from "@tauri-apps/api/event";
 import "@xterm/xterm/css/xterm.css";
 import "./Terminal.css";
@@ -67,8 +66,6 @@ function useWorkDir(): string | undefined {
     const i = Math.max(tab.path.lastIndexOf("/"), tab.path.lastIndexOf("\\"));
     if (i > 0) return tab.path.slice(0, i);
   }
-  const projectRoot = useSettingsStore((s) => s.projectRoot);
-  if (projectRoot) return projectRoot;
   return undefined; // Rust pty_spawn falls back to std::env::current_dir()
 }
 
