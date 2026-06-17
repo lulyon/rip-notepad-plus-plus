@@ -33,6 +33,7 @@ impl PtySession {
         } else {
             let mut c = CommandBuilder::new(&shell);
             c.cwd(&cwd);
+            c.env("TERM", "xterm-256color");
             c.arg("-l");
             c
         };

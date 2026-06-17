@@ -4,12 +4,24 @@ import { Terminal as XtermTerminal } from "@xterm/xterm";
 import { FitAddon } from "@xterm/addon-fit";
 import { ipc } from "../../lib/ipc";
 import { listen } from "@tauri-apps/api/event";
+import { useEditorStore } from "../../stores/editorStore";
 import type { UnlistenFn } from "@tauri-apps/api/event";
 import "@xterm/xterm/css/xterm.css";
 import "./Terminal.css";
 
 interface Props {
   visible: boolean;
+}
+
+/** Extract the directory from the active editor tab's path, or undefined. */
+function useWorkDir(): string | undefined {
+  const activeTabId = useEditorStore((s) => s.activeTabId);
+  const tabs = useEditorStore((s) => s.tabs);
+  const tab = tabs.find((t) => t.id === activeTabId);
+  if (!tab?.path) return undefined;
+  // Get parent directory
+  const i = Math.max(tab.path.lastIndexOf("/"), tab.path.lastIndexOf("\\"));
+  return i > 0 ? tab.path.slice(0, i) : undefined;
 }
 
 export function TerminalPanel({ visible }: Props) {
@@ -23,13 +35,14 @@ export function TerminalPanel({ visible }: Props) {
   const [started, setStarted] = useState(false);
   const [exited, setExited] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const workDir = useWorkDir();
 
   // ── Spawn PTY ──
 
-  const spawnPty = useCallback(async (sid: string) => {
+  const spawnPty = useCallback(async (sid: string, cwd?: string) => {
     try {
       setError(null);
-      await ipc.ptySpawn(sid, undefined, undefined, 80, 24);
+      await ipc.ptySpawn(sid, undefined, cwd, 80, 24);
       setStarted(true);
       setExited(false);
     } catch (e: any) {
@@ -38,7 +51,7 @@ export function TerminalPanel({ visible }: Props) {
   }, []);
 
   const startTerminal = async () => {
-    await spawnPty(sessionId);
+    await spawnPty(sessionId, workDir);
   };
 
   // ── Restart after exit ──
@@ -58,7 +71,7 @@ export function TerminalPanel({ visible }: Props) {
     setSessionId(newId);
     setStarted(false);
     setExited(false);
-    await spawnPty(newId);
+    await spawnPty(newId, workDir);
   };
 
   // ── Init xterm ──
