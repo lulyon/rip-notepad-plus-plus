@@ -28,13 +28,29 @@ interface TabInfo {
 
 let tabCounter = 0;
 
-function createTab(): TabInfo {
+function shellName(): string {
+  const s = (typeof navigator !== "undefined" && (navigator as any).userAgentData?.platform) || "";
+  if (s.includes("Win")) return "pwsh";
+  return "zsh";
+}
+
+function makeTabTitle(cwd: string | undefined): string {
+  if (cwd) {
+    const i = Math.max(cwd.lastIndexOf("/"), cwd.lastIndexOf("\\"));
+    if (i >= 0 && i < cwd.length - 1) return cwd.slice(i + 1);
+    if (cwd === "/") return "/";
+    return cwd;
+  }
+  return shellName();
+}
+
+function createTab(cwd: string | undefined): TabInfo {
   tabCounter += 1;
   const ts = Date.now();
   return {
     id: `tab-${ts}-${tabCounter}`,
     sessionId: `term-${ts}-${tabCounter}`,
-    title: String(tabCounter),
+    title: makeTabTitle(cwd),
     started: false,
     exited: false,
     error: null,
@@ -260,16 +276,16 @@ function TerminalTabPane({ tab, visible, workDir, onStart, onExit, onError, onRe
 export function TerminalPanel({ visible }: Props) {
   const { t } = useTranslation();
   const workDir = useWorkDir();
-  const [tabs, setTabs] = useState<TabInfo[]>(() => [createTab()]);
+  const [tabs, setTabs] = useState<TabInfo[]>(() => [createTab(workDir)]);
   const [activeIdx, setActiveIdx] = useState(0);
 
   // ── Tab actions ──
 
   const addTab = useCallback(() => {
-    const newTab = createTab();
+    const newTab = createTab(workDir);
     setTabs((prev) => [...prev, newTab]);
     setActiveIdx((prev) => prev + 1); // switch to new tab
-  }, []);
+  }, [workDir]);
 
   const closeTab = useCallback((idx: number) => {
     setTabs((prev) => {

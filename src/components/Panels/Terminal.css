@@ -48,7 +48,7 @@
 .terminal-tab-title {
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 80px;
+  max-width: 120px;
 }
 
 .terminal-tab-close {
