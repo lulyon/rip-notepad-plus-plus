@@ -10,7 +10,7 @@
 
 **技术栈**: Tauri v2 (Rust) + Monaco Editor + React 19 + TypeScript + Zustand + Vite 6
 
-### IPC 命令 (41 个)
+### IPC 命令 (55 个)
 
 | 模块 | 命令数 | 命令 |
 |------|:---:|------|
@@ -21,29 +21,29 @@
 | 系统 | 4 | open_in_browser, open_terminal, run_command, get_system_info |
 | 插件 | 6 | list_plugins, start_plugin, stop_plugin, send_plugin_command, update_editor_state, notify_plugins |
 | Git | 12 | git_status, git_branch, git_diff_file, git_stage, git_unstage, git_stage_all, git_commit, git_push, git_pull, git_list_branches, git_checkout_branch, git_create_branch |
-| 监控 | 6 | watch_file, check_file_changed, update_file_mtime, save_snapshot, load_snapshots, clear_snapshot |
+| 监控 | 7 | watch_file, check_file_changed, update_file_mtime, save_snapshot, load_snapshots, clear_snapshot, list_archive |
 | 工作区 | 4 | save_workspace, load_workspace, list_recent_workspaces, clear_recent_workspaces |
-| 归档 | 1 | list_archive |
+| PTY 终端 | 4 | pty_spawn, pty_write, pty_resize, pty_kill |
 
 ### 组件
 
 | 类别 | 数量 | 说明 |
 |------|:---:|------|
-| 对话框 | 14 | About, Preferences, ShortcutMapper, Encoding, GoToLine, Run, Plugin, Compare, CommandPalette, Hash, Summary, Udl, ContextMenu, Commit, Tools |
-| 侧边栏面板 | 4 | Files (多根目录), AI Chat, Git, Symbols |
+| 对话框 | 16 | About, Preferences, ShortcutMapper, Encoding, GoToLine, Run, Plugin, Compare, CommandPalette, Hash, Summary, Udl, ContextMenu, Commit, Tools, UnsavedChanges |
+| 侧边栏面板 | 5 | Files (多根目录), AI Chat, Git, Symbols, Terminal |
 | 菜单 | 12 | File, Edit, Search, View, Encoding, Language, Macro, Run, Tools, Plugins, Window, Help |
-| Store | 14 | editor, settings, search, macro, encoding, plugin, git, clipboard, editorRef, bookmark, mark, contextMenu, udl, ai, tool |
-| Hooks | 13 | useMenuActions, useMonacoActions, useAutoSave, useFileWatcher, useSnapshotAutoSave, useUpdateChecker, usePluginBridge, useKeyboardShortcuts, useFileDrop, useMacroRecorder, useWindowTitle |
+| Store | 15 | editor, settings, search, macro, encoding, plugin, git, clipboard, editorRef, bookmark, mark, contextMenu, udl, ai, tool |
+| Hooks | 11 | useMenuActions, useMonacoActions, useAutoSave, useFileWatcher, useSnapshotAutoSave, useUpdateChecker, usePluginBridge, useKeyboardShortcuts, useFileDrop, useMacroRecorder, useWindowTitle |
 
 ### i18n
 
 7 种语言: 中文 / English / 日本語 / 한국어 / Français / العربية / עברית
-290+ keys 每种语言，RTL 自动检测
+493 keys 每种语言，RTL 自动检测
 
 ### 测试
 
-- 308 单元测试 (18 suites, vitest)
-- 70 E2E 测试 (4 spec files, Playwright)
+- 356 单元测试 (21 suites, vitest)
+- 65 E2E 测试 (4 spec files, Playwright)
 
 ---
 
@@ -192,12 +192,17 @@
 | Provider 配置 | API Base URL、Key、Model，localStorage 持久化 |
 | 自动发现 | 启动时读取 `~/.claude/settings.json` |
 | AI 面板 UI | 侧边栏 🤖 tab，对话气泡 + Markdown 渲染 |
+| 多会话 | 标签页管理，自动标题（首条消息 20 字截断） |
 | API 调用 | Anthropic Messages 格式 → DeepSeek 端点 (兼容) |
 | 流式 SSE | `stream: true`, 逐 token 实时显示 |
+| **联网搜索** | `web_search_20250305` 服务端工具，模型自主决定搜索时机，搜索结果带来源链接 |
+| **位置感知** | 时区自动注入 `user_location`，天气/本地新闻搜索本地化 |
+| **日期感知** | `new Date()` 注入 system prompt，模型知道当前日期 |
 | Thinking 展示 | DeepSeek extended thinking, 折叠/展开, 流式实时更新 |
 | 上下文注入 | 自动附加当前文件内容 + 语言 |
 | 快捷操作 | Explain Code / Refactor / Generate Tests / Fix Bugs |
-| 对话历史 | localStorage 持久化 |
+| 对话历史 | localStorage 持久化，多会话独立存储 |
+| XML 清理 | 后处理 strip DeepSeek tool_call XML 残留 |
 
 ---
 
@@ -211,6 +216,9 @@
 | **侧边栏拖拽调整宽度** | 180-600px, 持久化 |
 | **菜单项检查标记** | MenuItemDef.checked + ✓ 渲染 |
 | **iTerm2 自动检测** | open_terminal 优先使用 iTerm2 |
+| **集成 PTY 终端** | 侧边栏 Terminal tab + Rust portable-pty + shell 会话管理 |
+| **AI 联网搜索** | 服务端 web_search_20250305 + user_location 时区本地化 + 日期注入 |
+| **AI 多会话** | 标签页式多会话，独立历史，XML 后处理 |
 
 ### 预览引擎支持的类型
 

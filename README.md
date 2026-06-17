@@ -46,15 +46,17 @@ Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **
 - Full screen (F11) / Distraction-free mode (F12)
 - Window always on top
 - Horizontal / Vertical split editor with sync scroll
-- Sidebar with 4 panels: Files, AI Chat, Git, Symbols
+- Sidebar with 5 panels: Files, AI Chat, Git, Symbols, Terminal
 - Markdown Preview (Ctrl+Shift+V) — split editor | rendered preview
 
 ### Sidebar Panels
 | Panel | Description |
 |-------|-------------|
-| 📁 Files | File tree explorer (lazy-load, expandable directories) |
-| ⎇ Git | Changed files, branch name, ahead/behind, inline diff |
+| 📁 Files | File tree explorer (lazy-load, expandable directories, multi-root workspace) |
+| 🤖 AI | Streaming chat with web search, multi-conversation tabs, code quick actions |
+| ⎇ Git | Changed files, branch name, ahead/behind, inline diff, stage/commit/push/pull |
 | 🔣 Symbols | Function/class outline (regex-based, language-agnostic) |
+| 💻 Terminal | Integrated PTY terminal with shell session management |
 
 ### Preview System (26 types, all offline)
 Open a supported file and click the 👁 button in the editor toolbar, or press `Ctrl+Shift+V`.
@@ -120,8 +122,11 @@ Open a supported file and click the 👁 button in the editor toolbar, or press 
 
 ### AI Assistant (Sidebar)
 - 🤖 AI tab in sidebar — DeepSeek API (Anthropic-compatible)
-- Streaming chat with real-time token display
-- Extended thinking process display (collapsible, real-time)
+- **Web search** — server-side via `web_search_20250305` tool, auto-detected by model
+- **Location-aware** — timezone auto-injected for localized search results (weather, news)
+- **System date** — current date injected into system prompt for accurate time awareness
+- **Multi-conversation** — tabbed conversations with auto-titling and independent history
+- Streaming chat with real-time token display + thinking process (collapsible)
 - Auto-detect config from `~/.claude/settings.json`
 - Quick actions: Explain Code / Refactor / Generate Tests / Fix Bugs
 - Context injection: auto-attach active file + language
@@ -190,12 +195,12 @@ cargo check              # Rust check (from src-tauri/)
 ```
 ┌─ WebView (React + Monaco + i18n) ───────────────────────┐
 │  MenuBar │ TabBar │ Sidebar │ SplitEditor │ StatusBar   │
-│  SearchPanel │ 14 Dialogs                                │
-│  14 Zustand stores                                       │
-├─ Tauri IPC (41 commands) ───────────────────────────────┤
+│  SearchPanel │ 16 Dialogs                                │
+│  15 Zustand stores                                       │
+├─ Tauri IPC (55 commands) ───────────────────────────────┤
 ├─ Rust Backend ──────────────────────────────────────────┤
 │  file_ops / encoding / search / session / system /       │
-│  plugin / git / monitor / workspace                      │
+│  plugin / git / monitor / workspace / pty                │
 │  plugin_api (sidecar manager, JSON-RPC 2.0)             │
 └─────────────────────────────────────────────────────────┘
          │ stdin/stdout (JSON-RPC 2.0)
@@ -212,25 +217,26 @@ rip-notepad-plus-plus/
 │   │   ├── TabBar/               # Drag-and-drop tabs + pin/colors
 │   │   ├── SearchPanel/          # Find/replace/find-in-files
 │   │   ├── StatusBar/            # Encoding, language, Ln/Col, branch
-│   │   ├── Panels/               # 4 sidebar panels + preview components
-│   │   └── Dialogs/              # 15 dialogs
-│   ├── stores/                   # 14 Zustand stores
-│   ├── hooks/                    # 14 custom hooks
-│   ├── i18n/                     # 7 locales (zh/en/ja/ko/fr/ar/he)
-│   ├── lib/                      # IPC, utils, constants, preview engine
+│   │   ├── Panels/               # 5 sidebar panels: Files, AI, Git, Symbols, Terminal
+│   │   └── Dialogs/              # 16 dialogs
+│   ├── stores/                   # 15 Zustand stores
+│   ├── hooks/                    # 11 custom hooks
+│   ├── i18n/                     # 7 locales (zh/en/ja/ko/fr/ar/he) — 493 keys
+│   ├── lib/                      # IPC, aiClient, utils, constants, preview engine
 │   └── types/                    # TypeScript interfaces
 ├── src-tauri/                    # Backend (Rust)
 │   └── src/
-│       ├── commands/             # 8 modules, 41 commands
+│       ├── commands/             # 10 modules, 55 commands
 │       ├── encoding/             # detect + convert
 │       ├── search/               # regex + walkdir
 │       ├── plugin_api/           # sidecar manager
+│       ├── pty/                  # portable-pty shell, session manager
 │       └── models.rs             # shared types
 ├── plugins/                      # Plugin directory
-├── e2e/                          # 70 E2E tests (Playwright)
-├── tests/                        # 308 unit tests (vitest)
+├── e2e/                          # 65 E2E tests (Playwright)
+├── tests/                        # 356 unit tests (vitest, 21 suites)
 ├── test-files/                   # 39 preview test files
-├── docs/                         # Roadmap documents
+├── docs/                         # Design & audit documents
 └── package.json
 ```
 
@@ -261,13 +267,13 @@ rip-notepad-plus-plus/
 
 ```bash
 npm test              # Run all tests
-npm run test:unit     # 308 vitest unit tests (18 suites)
+npm run test:unit     # 356 vitest unit tests (21 suites)
 npm run test:e2e      # 65 Playwright E2E tests
 npm run test:check    # TypeScript + Rust compile checks
 ```
 
-- **18 test suites, 308 unit tests** covering stores, hooks, and preview engine (all 26 types)
-- **70 E2E tests** across 4 spec files with mocked Tauri IPC
+- **21 test suites, 356 unit tests** covering stores (15), hooks, preview engine (26 types), AI client SSE parsing
+- **65 E2E tests** across 4 spec files with mocked Tauri IPC
 - Headless Chromium, auto-starts Vite dev server
 
 ## License

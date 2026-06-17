@@ -1,5 +1,7 @@
 # AI 联网搜索实现计划（Server-Side Search）
 
+> ✅ **已实现** (2026-06)，包含 `user_location` 时区注入 + 日期注入 + XML 后处理
+
 ## 方案概述
 
 利用 DeepSeek/Anthropic API 内建的 `web_search_20250305` 服务端工具，模型在服务端自动执行搜索，客户端无需实现 Agent Loop。客户端只需在请求中声明该 tool，并在 SSE 流中解析新增的 content block 类型。
