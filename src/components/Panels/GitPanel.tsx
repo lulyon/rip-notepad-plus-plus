@@ -7,11 +7,8 @@ import { ipc } from "../../lib/ipc";
 import { CommitDialog } from "../Dialogs/CommitDialog";
 import "./GitPanel.css";
 
-/** Derive repo path: configured projectRoot > active editor file's directory. */
+/** Derive repo path: active editor file's dir > projectRoot > empty. */
 function useRepoPath(): string {
-  const projectRoot = useSettingsStore((s) => s.projectRoot);
-  if (projectRoot) return projectRoot;
-  // Fall back to active editor file's directory
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const tabs = useEditorStore((s) => s.tabs);
   const tab = tabs.find((t) => t.id === activeTabId);
@@ -19,6 +16,8 @@ function useRepoPath(): string {
     const i = Math.max(tab.path.lastIndexOf("/"), tab.path.lastIndexOf("\\"));
     if (i > 0) return tab.path.slice(0, i);
   }
+  const projectRoot = useSettingsStore((s) => s.projectRoot);
+  if (projectRoot) return projectRoot;
   return "";
 }
 
