@@ -36,6 +36,7 @@ export async function streamChat(
   messages: AiMessage[],
   systemPrompt: string,
   enableWebSearch: boolean,
+  userTimezone: string | undefined,
   callbacks: StreamCallbacks,
 ): Promise<void> {
   const url = `${baseUrl}/v1/messages`;
@@ -59,13 +60,18 @@ export async function streamChat(
 
   // Include web_search tool when enabled
   if (enableWebSearch) {
-    body.tools = [
-      {
-        type: "web_search_20250305",
-        name: "web_search",
-        max_uses: 5,
-      },
-    ];
+    const tool: Record<string, unknown> = {
+      type: "web_search_20250305",
+      name: "web_search",
+      max_uses: 5,
+    };
+    if (userTimezone) {
+      tool.user_location = {
+        type: "approximate",
+        timezone: userTimezone,
+      };
+    }
+    body.tools = [tool];
   }
 
   try {

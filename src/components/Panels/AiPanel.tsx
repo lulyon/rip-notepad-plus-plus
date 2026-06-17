@@ -175,10 +175,14 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch }
       },
     };
 
+    // Resolve user timezone for search localization (e.g. weather, local news)
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
     await streamChat(
       apiBaseUrl, apiKey, model, latest.messages,
       `You are a helpful coding assistant. Today is ${new Date().toISOString().split("T")[0]}. Respond in Markdown. Keep answers concise.`,
       enableWebSearch,
+      tz,
       callbacks,
     );
   };

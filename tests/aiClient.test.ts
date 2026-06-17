@@ -67,7 +67,7 @@ describe("streamChat", () => {
     ]);
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, c.callbacks);
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, undefined, c.callbacks);
 
     expect(c.state.tokens.join("")).toBe("Hello world");
     expect(c.state.done).toBe(true);
@@ -86,7 +86,7 @@ describe("streamChat", () => {
     ]);
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, c.callbacks);
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, undefined, c.callbacks);
 
     expect(c.state.thoughts.join("")).toBe("Let me think...");
     expect(c.state.tokens.join("")).toBe("Answer");
@@ -113,7 +113,7 @@ describe("streamChat", () => {
       ]);
 
       const c = makeCollector();
-      await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, c.callbacks);
+      await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, c.callbacks);
 
       expect(c.state.searchStarts.length).toBeGreaterThanOrEqual(1);
       expect(c.state.searchStarts[0][0]).toBe("latest React version");
@@ -137,7 +137,7 @@ describe("streamChat", () => {
       ]);
 
       const c = makeCollector();
-      await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, c.callbacks);
+      await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, c.callbacks);
 
       expect(c.state.tokens.join("")).toBe("No search needed");
       expect(c.state.searchStarts).toHaveLength(0);
@@ -156,7 +156,7 @@ describe("streamChat", () => {
       ]);
 
       const c = makeCollector();
-      await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, c.callbacks);
+      await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, c.callbacks);
 
       const results = c.state.searchResults[0];
       expect(results).toHaveLength(2);
@@ -175,7 +175,7 @@ describe("streamChat", () => {
     }) as any;
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-bad", "test-model", messages, "", false, c.callbacks);
+    await streamChat("https://test.api", "sk-bad", "test-model", messages, "", false, undefined, c.callbacks);
 
     expect(c.state.error).toBeTruthy();
     expect(c.state.error).toContain("401");
@@ -186,7 +186,7 @@ describe("streamChat", () => {
     globalThis.fetch = vi.fn().mockRejectedValue(new Error("Network failure")) as any;
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, c.callbacks);
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, undefined, c.callbacks);
 
     expect(c.state.error).toBe("Network failure");
     expect(c.state.done).toBe(false);
@@ -201,7 +201,7 @@ describe("streamChat", () => {
     ]);
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, c.callbacks);
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, c.callbacks);
 
     const fetchMock = globalThis.fetch as ReturnType<typeof vi.fn>;
     const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
@@ -219,11 +219,45 @@ describe("streamChat", () => {
     ]);
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, c.callbacks);
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, undefined, c.callbacks);
 
     const fetchMock = globalThis.fetch as ReturnType<typeof vi.fn>;
     const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
     expect(body.tools).toBeUndefined();
+  });
+
+  it("includes user_location in web_search tool when timezone provided", async () => {
+    mockFetch([
+      '{"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}',
+      '{"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"ok"}}',
+      '{"type":"content_block_stop","index":0}',
+      '{"type":"message_stop"}',
+    ]);
+
+    const c = makeCollector();
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, "Asia/Shanghai", c.callbacks);
+
+    const fetchMock = globalThis.fetch as ReturnType<typeof vi.fn>;
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+    expect(body.tools[0].user_location).toBeDefined();
+    expect(body.tools[0].user_location.type).toBe("approximate");
+    expect(body.tools[0].user_location.timezone).toBe("Asia/Shanghai");
+  });
+
+  it("omits user_location when timezone is undefined", async () => {
+    mockFetch([
+      '{"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}',
+      '{"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"ok"}}',
+      '{"type":"content_block_stop","index":0}',
+      '{"type":"message_stop"}',
+    ]);
+
+    const c = makeCollector();
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, c.callbacks);
+
+    const fetchMock = globalThis.fetch as ReturnType<typeof vi.fn>;
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+    expect(body.tools[0].user_location).toBeUndefined();
   });
 });
 
