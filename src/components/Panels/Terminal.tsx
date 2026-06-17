@@ -58,15 +58,12 @@ function createTab(cwd: string | undefined): TabInfo {
 }
 
 function useWorkDir(): string | undefined {
-  // Priority: active editor file's dir > projectRoot > undefined (Rust falls back to cwd)
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const tabs = useEditorStore((s) => s.tabs);
   const tab = tabs.find((t) => t.id === activeTabId);
-  if (tab?.path) {
-    const i = Math.max(tab.path.lastIndexOf("/"), tab.path.lastIndexOf("\\"));
-    if (i > 0) return tab.path.slice(0, i);
-  }
-  return undefined; // Rust pty_spawn falls back to std::env::current_dir()
+  if (!tab?.path) return undefined;
+  const i = Math.max(tab.path.lastIndexOf("/"), tab.path.lastIndexOf("\\"));
+  return i > 0 ? tab.path.slice(0, i) : undefined;
 }
 
 // ── Xterm theme ──
