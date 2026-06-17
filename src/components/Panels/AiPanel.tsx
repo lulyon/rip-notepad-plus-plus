@@ -71,20 +71,10 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model }: TabPaneProps) {
     if (!text || conv.streaming) return;
     if (!apiKey) { setShowConfig(true); return; }
 
-    // Build context from active editor
-    const editorStore = useEditorStore.getState();
-    const activeTab = editorStore.tabs.find((tt) => tt.id === editorStore.activeTabId);
-    let contextPrompt = "";
-    if (activeTab) {
-      const selection = window.getSelection?.()?.toString() || "";
-      const code = selection || activeTab.content.slice(0, 8000);
-      contextPrompt = `File: ${activeTab.path || activeTab.name}\n\`\`\`${activeTab.language}\n${code}\n\`\`\`\n\n`;
-    }
-
     setInput("");
     setConvError(conv.id, null);
 
-    addMessage(conv.id, { role: "user", content: contextPrompt + text, timestamp: Date.now() });
+    addMessage(conv.id, { role: "user", content: text, timestamp: Date.now() });
     addMessage(conv.id, { role: "assistant", content: "", timestamp: Date.now() });
     setStreaming(conv.id, true);
 
