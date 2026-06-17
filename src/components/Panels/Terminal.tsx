@@ -5,6 +5,7 @@ import { FitAddon } from "@xterm/addon-fit";
 import { ipc } from "../../lib/ipc";
 import { listen } from "@tauri-apps/api/event";
 import { useEditorStore } from "../../stores/editorStore";
+import { useSettingsStore } from "../../stores/settingsStore";
 import type { UnlistenFn } from "@tauri-apps/api/event";
 import "@xterm/xterm/css/xterm.css";
 import "./Terminal.css";
@@ -58,6 +59,9 @@ function createTab(cwd: string | undefined): TabInfo {
 }
 
 function useWorkDir(): string | undefined {
+  // Priority: configured projectRoot > active editor file's directory
+  const projectRoot = useSettingsStore((s) => s.projectRoot);
+  if (projectRoot) return projectRoot;
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const tabs = useEditorStore((s) => s.tabs);
   const tab = tabs.find((t) => t.id === activeTabId);
