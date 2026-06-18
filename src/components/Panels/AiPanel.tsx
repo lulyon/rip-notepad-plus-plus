@@ -25,7 +25,7 @@ import { useAiStore } from "../../stores/aiStore";
 import type { Conversation } from "../../stores/aiStore";
 import { useEditorStore } from "../../stores/editorStore";
 import { streamChat } from "../../lib/aiClient";
-import type { StreamCallbacks, SearchResult } from "../../lib/aiClient";
+import type { StreamCallbacks, SearchResult, ApiProvider } from "../../lib/aiClient";
 import "./AiPanel.css";
 
 // ── highlight.js language registration ──
@@ -152,9 +152,10 @@ interface TabPaneProps {
   apiKey: string;
   model: string;
   enableWebSearch: boolean;
+  provider: ApiProvider;
 }
 
-function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch }: TabPaneProps) {
+function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch, provider }: TabPaneProps) {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -263,8 +264,9 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch }
     await streamChat(
       apiBaseUrl, apiKey, model, latest.messages,
       `You are a helpful coding assistant. Today is ${new Date().toISOString().split("T")[0]}. Respond in Markdown. Keep answers concise.`,
-      enableWebSearch,
+      provider === "anthropic" && enableWebSearch,  // web search only for Anthropic
       tz,
+      provider,
       callbacks,
     );
   };
@@ -395,13 +397,14 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch }
 
 function AiConfigScreen() {
   const { t } = useTranslation();
-  const { apiBaseUrl, apiKey, model, setConfig, loadFromClaudeConfig } = useAiStore();
+  const { apiBaseUrl, apiKey, model, provider, setConfig, loadFromClaudeConfig } = useAiStore();
   const [cfgUrl, setCfgUrl] = useState(apiBaseUrl);
   const [cfgKey, setCfgKey] = useState(apiKey);
   const [cfgModel, setCfgModel] = useState(model);
+  const [cfgProvider, setCfgProvider] = useState<ApiProvider>(provider);
 
   const handleSave = () => {
-    setConfig(cfgUrl, cfgKey, cfgModel);
+    setConfig(cfgUrl, cfgKey, cfgModel, cfgProvider);
   };
 
   return (
@@ -417,6 +420,11 @@ function AiConfigScreen() {
       <label>{t("ai.configModel")}</label>
       <input className="ai-input" value={cfgModel} onChange={(e) => setCfgModel(e.target.value)}
         placeholder="deepseek-v4-pro[1m]" />
+      <label>{t("ai.configProvider")}</label>
+      <select className="ai-select" value={cfgProvider} onChange={(e) => setCfgProvider(e.target.value as ApiProvider)}>
+        <option value="anthropic">Anthropic Compatible</option>
+        <option value="openai">OpenAI Compatible</option>
+      </select>
       <div className="ai-config-actions">
         <button className="ai-btn ai-btn-primary" onClick={handleSave}>{t("ai.save")}</button>
         <button className="ai-btn" onClick={async () => {
@@ -436,7 +444,7 @@ function AiConfigScreen() {
 export function AiPanel() {
   const { t } = useTranslation();
   const {
-    apiBaseUrl, apiKey, model, enableWebSearch,
+    apiBaseUrl, apiKey, model, enableWebSearch, provider,
     conversations, activeId,
     newConversation, closeConversation, setActive, clearMessages,
     loadFromClaudeConfig, toggleWebSearch,
@@ -500,14 +508,16 @@ export function AiPanel() {
           +
         </button>
         <div className="ai-header-actions">
-          {/* Web search toggle */}
-          <button
-            className={`ai-btn-sm ai-web-search-toggle ${enableWebSearch ? "active" : ""}`}
-            onClick={toggleWebSearch}
-            title={enableWebSearch ? t("ai.webSearchOn") : t("ai.webSearchOff")}
-          >
-            🌐
-          </button>
+          {/* Web search toggle — only for Anthropic provider */}
+          {provider !== "openai" && (
+            <button
+              className={`ai-btn-sm ai-web-search-toggle ${enableWebSearch ? "active" : ""}`}
+              onClick={toggleWebSearch}
+              title={enableWebSearch ? t("ai.webSearchOn") : t("ai.webSearchOff")}
+            >
+              🌐
+            </button>
+          )}
           <button className="ai-btn-sm" onClick={() => setShowConfig(!showConfig)} title={t("ai.settings")}>⚙</button>
           {activeId && (
             <button className="ai-btn-sm" onClick={() => clearMessages(activeId)} title={t("ai.clearChat")}>🗑</button>
@@ -525,6 +535,7 @@ export function AiPanel() {
           apiKey={apiKey}
           model={model}
           enableWebSearch={enableWebSearch}
+          provider={provider}
         />
       ))}
 

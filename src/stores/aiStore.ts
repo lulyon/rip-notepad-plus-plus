@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import type { ApiProvider } from "../lib/aiClient";
+import { detectProvider } from "../lib/aiClient";
 
 export interface AiMessage {
   role: "user" | "assistant";
@@ -27,6 +29,7 @@ interface AiState {
   apiBaseUrl: string;
   apiKey: string;
   model: string;
+  provider: ApiProvider;
 
   // Web search toggle
   enableWebSearch: boolean;
@@ -36,7 +39,7 @@ interface AiState {
   activeId: string | null;
 
   // Config actions
-  setConfig: (url: string, key: string, model: string) => void;
+  setConfig: (url: string, key: string, model: string, provider?: ApiProvider) => void;
   loadFromClaudeConfig: () => Promise<boolean>;
 
   // Web search
@@ -72,6 +75,7 @@ interface PersistedConfig {
   key: string;
   model: string;
   enableWebSearch?: boolean;
+  provider?: ApiProvider;
 }
 
 function loadConfig(): PersistedConfig {
@@ -82,9 +86,9 @@ function loadConfig(): PersistedConfig {
   return { url: "", key: "", model: "" };
 }
 
-function saveConfig(url: string, key: string, model: string, enableWebSearch: boolean) {
+function saveConfig(url: string, key: string, model: string, enableWebSearch: boolean, provider: ApiProvider) {
   try {
-    localStorage.setItem(CONFIG_KEY, JSON.stringify({ url, key, model, enableWebSearch }));
+    localStorage.setItem(CONFIG_KEY, JSON.stringify({ url, key, model, enableWebSearch, provider }));
   } catch { /* ignore */ }
 }
 
@@ -143,6 +147,7 @@ export const useAiStore = create<AiState>((set, get) => ({
   apiBaseUrl: savedConfig.url || "https://api.deepseek.com/anthropic",
   apiKey: savedConfig.key || "",
   model: savedConfig.model || "deepseek-v4-pro",
+  provider: savedConfig.provider || detectProvider(savedConfig.url || "https://api.deepseek.com/anthropic"),
 
   enableWebSearch: savedConfig.enableWebSearch !== false, // default true
 
@@ -151,9 +156,10 @@ export const useAiStore = create<AiState>((set, get) => ({
 
   // ── Config ──
 
-  setConfig: (url, key, model) => {
-    saveConfig(url, key, model, get().enableWebSearch);
-    set({ apiBaseUrl: url, apiKey: key, model });
+  setConfig: (url, key, model, provider) => {
+    const p = provider || detectProvider(url);
+    saveConfig(url, key, model, get().enableWebSearch, p);
+    set({ apiBaseUrl: url, apiKey: key, model, provider: p });
   },
 
   loadFromClaudeConfig: async () => {
@@ -182,7 +188,7 @@ export const useAiStore = create<AiState>((set, get) => ({
   toggleWebSearch: () => {
     set((s) => {
       const next = !s.enableWebSearch;
-      saveConfig(s.apiBaseUrl, s.apiKey, s.model, next);
+      saveConfig(s.apiBaseUrl, s.apiKey, s.model, next, s.provider);
       return { enableWebSearch: next };
     });
   },

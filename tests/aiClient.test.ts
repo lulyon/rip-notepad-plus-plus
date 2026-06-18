@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { streamChat } from "../src/lib/aiClient";
+import { streamChat, detectProvider } from "../src/lib/aiClient";
 import type { StreamCallbacks, SearchResult } from "../src/lib/aiClient";
 
 const messages = [
@@ -67,7 +67,7 @@ describe("streamChat", () => {
     ]);
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, undefined, c.callbacks);
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, undefined, "anthropic", c.callbacks);
 
     expect(c.state.tokens.join("")).toBe("Hello world");
     expect(c.state.done).toBe(true);
@@ -86,7 +86,7 @@ describe("streamChat", () => {
     ]);
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, undefined, c.callbacks);
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, undefined, "anthropic", c.callbacks);
 
     expect(c.state.thoughts.join("")).toBe("Let me think...");
     expect(c.state.tokens.join("")).toBe("Answer");
@@ -113,7 +113,7 @@ describe("streamChat", () => {
       ]);
 
       const c = makeCollector();
-      await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, c.callbacks);
+      await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, "anthropic", c.callbacks);
 
       expect(c.state.searchStarts.length).toBeGreaterThanOrEqual(1);
       expect(c.state.searchStarts[0][0]).toBe("latest React version");
@@ -137,7 +137,7 @@ describe("streamChat", () => {
       ]);
 
       const c = makeCollector();
-      await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, c.callbacks);
+      await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, "anthropic", c.callbacks);
 
       expect(c.state.tokens.join("")).toBe("No search needed");
       expect(c.state.searchStarts).toHaveLength(0);
@@ -156,7 +156,7 @@ describe("streamChat", () => {
       ]);
 
       const c = makeCollector();
-      await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, c.callbacks);
+      await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, "anthropic", c.callbacks);
 
       const results = c.state.searchResults[0];
       expect(results).toHaveLength(2);
@@ -175,7 +175,7 @@ describe("streamChat", () => {
     }) as any;
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-bad", "test-model", messages, "", false, undefined, c.callbacks);
+    await streamChat("https://test.api", "sk-bad", "test-model", messages, "", false, undefined, "anthropic", c.callbacks);
 
     expect(c.state.error).toBeTruthy();
     expect(c.state.error).toContain("401");
@@ -186,7 +186,7 @@ describe("streamChat", () => {
     globalThis.fetch = vi.fn().mockRejectedValue(new Error("Network failure")) as any;
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, undefined, c.callbacks);
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, undefined, "anthropic", c.callbacks);
 
     expect(c.state.error).toBe("Network failure");
     expect(c.state.done).toBe(false);
@@ -201,7 +201,7 @@ describe("streamChat", () => {
     ]);
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, c.callbacks);
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, "anthropic", c.callbacks);
 
     const fetchMock = globalThis.fetch as ReturnType<typeof vi.fn>;
     const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
@@ -219,7 +219,7 @@ describe("streamChat", () => {
     ]);
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, undefined, c.callbacks);
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", false, undefined, "anthropic", c.callbacks);
 
     const fetchMock = globalThis.fetch as ReturnType<typeof vi.fn>;
     const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
@@ -235,7 +235,7 @@ describe("streamChat", () => {
     ]);
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, "Asia/Shanghai", c.callbacks);
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, "Asia/Shanghai", "anthropic", c.callbacks);
 
     const fetchMock = globalThis.fetch as ReturnType<typeof vi.fn>;
     const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
@@ -253,11 +253,131 @@ describe("streamChat", () => {
     ]);
 
     const c = makeCollector();
-    await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, c.callbacks);
+    await streamChat("https://test.api", "sk-test", "test-model", messages, "", true, undefined, "anthropic", c.callbacks);
 
     const fetchMock = globalThis.fetch as ReturnType<typeof vi.fn>;
     const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
     expect(body.tools[0].user_location).toBeUndefined();
+  });
+});
+
+describe("openaiStream", () => {
+  it("streams text deltas from OpenAI SSE format", async () => {
+    const encoder = new TextEncoder();
+    const sse = 'data: {"id":"chatcmpl-xxx","object":"chat.completion.chunk","choices":[{"index":0,"delta":{"content":"Hello"}}]}\n\n' +
+                'data: {"id":"chatcmpl-xxx","object":"chat.completion.chunk","choices":[{"index":0,"delta":{"content":" world"}}]}\n\n' +
+                'data: {"id":"chatcmpl-xxx","object":"chat.completion.chunk","choices":[{"index":0,"delta":{},"finish_reason":"stop"}]}\n\n' +
+                'data: [DONE]\n\n';
+    const chunk = encoder.encode(sse);
+
+    globalThis.fetch = vi.fn().mockResolvedValue({
+      ok: true, status: 200,
+      body: { getReader: () => ({
+        read: vi.fn()
+          .mockResolvedValueOnce({ done: false, value: chunk })
+          .mockResolvedValue({ done: true, value: undefined }),
+      })},
+      json: async () => ({}),
+      text: async () => "",
+    }) as any;
+
+    const c = makeCollector();
+    await streamChat("https://api.openai.com", "sk-test", "gpt-4", messages, "", false, undefined, "openai", c.callbacks);
+
+    expect(c.state.tokens.join("")).toBe("Hello world");
+    expect(c.state.done).toBe(true);
+  });
+
+  it("streams reasoning_content as thinking", async () => {
+    const encoder = new TextEncoder();
+    const sse = 'data: {"id":"x","object":"chat.completion.chunk","choices":[{"index":0,"delta":{"content":null,"reasoning_content":"Let me think"}}]}\n\n' +
+                'data: {"id":"x","object":"chat.completion.chunk","choices":[{"index":0,"delta":{"content":"Answer"}}]}\n\n' +
+                'data: [DONE]\n\n';
+    const chunk = encoder.encode(sse);
+
+    globalThis.fetch = vi.fn().mockResolvedValue({
+      ok: true, status: 200,
+      body: { getReader: () => ({
+        read: vi.fn()
+          .mockResolvedValueOnce({ done: false, value: chunk })
+          .mockResolvedValue({ done: true, value: undefined }),
+      })},
+      json: async () => ({}),
+      text: async () => "",
+    }) as any;
+
+    const c = makeCollector();
+    await streamChat("https://api.openai.com", "sk-test", "gpt-4", messages, "Be helpful", false, undefined, "openai", c.callbacks);
+
+    expect(c.state.thoughts.join("")).toBe("Let me think");
+    expect(c.state.tokens.join("")).toBe("Answer");
+    expect(c.state.done).toBe(true);
+  });
+
+  it("includes system message in OpenAI format", async () => {
+    const encoder = new TextEncoder();
+    const sse = 'data: {"id":"x","object":"chat.completion.chunk","choices":[{"index":0,"delta":{"content":"ok"}}]}\n\ndata: [DONE]\n\n';
+    const chunk = encoder.encode(sse);
+
+    globalThis.fetch = vi.fn().mockResolvedValue({
+      ok: true, status: 200,
+      body: { getReader: () => ({
+        read: vi.fn()
+          .mockResolvedValueOnce({ done: false, value: chunk })
+          .mockResolvedValue({ done: true, value: undefined }),
+      })},
+      json: async () => ({}),
+      text: async () => "",
+    }) as any;
+
+    const c = makeCollector();
+    await streamChat("https://api.openai.com", "sk-test", "gpt-4", messages, "Be helpful", false, undefined, "openai", c.callbacks);
+
+    const fetchMock = globalThis.fetch as ReturnType<typeof vi.fn>;
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+    // OpenAI format: system as a message in the messages array
+    expect(body.messages[0].role).toBe("system");
+    expect(body.messages[0].content).toBe("Be helpful");
+    // Uses Bearer auth
+    expect(fetchMock.mock.calls[0][1].headers.Authorization).toBe("Bearer sk-test");
+  });
+
+  it("does NOT include web_search tool in OpenAI request", async () => {
+    const encoder = new TextEncoder();
+    const sse = 'data: {"id":"x","object":"chat.completion.chunk","choices":[{"index":0,"delta":{"content":"ok"}}]}\n\ndata: [DONE]\n\n';
+    const chunk = encoder.encode(sse);
+
+    globalThis.fetch = vi.fn().mockResolvedValue({
+      ok: true, status: 200,
+      body: { getReader: () => ({
+        read: vi.fn()
+          .mockResolvedValueOnce({ done: false, value: chunk })
+          .mockResolvedValue({ done: true, value: undefined }),
+      })},
+      json: async () => ({}),
+      text: async () => "",
+    }) as any;
+
+    const c = makeCollector();
+    // enableWebSearch=true but provider=openai — should be ignored
+    await streamChat("https://api.openai.com", "sk-test", "gpt-4", messages, "", true, undefined, "openai", c.callbacks);
+
+    const fetchMock = globalThis.fetch as ReturnType<typeof vi.fn>;
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+    expect(body.tools).toBeUndefined();
+  });
+});
+
+describe("detectProvider", () => {
+  it('returns "openai" for openai URLs', () => {
+    expect(detectProvider("https://api.openai.com")).toBe("openai");
+    expect(detectProvider("https://api.openai.com/v1")).toBe("openai");
+  });
+
+  it('returns "anthropic" as default', () => {
+    expect(detectProvider("https://api.deepseek.com/anthropic")).toBe("anthropic");
+    expect(detectProvider("https://api.anthropic.com")).toBe("anthropic");
+    expect(detectProvider("")).toBe("anthropic");
   });
 });
 

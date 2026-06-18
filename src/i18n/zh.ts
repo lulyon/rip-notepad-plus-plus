@@ -529,6 +529,7 @@ const zh = {
     "ai.configApiUrl": "API 基础地址",
     "ai.configApiKey": "API 密钥",
     "ai.configModel": "模型",
+    "ai.configProvider": "API 提供商",
     "ai.save": "保存",
     "ai.autoDetect": "自动检测",
     "ai.quickExplain": "解释代码",

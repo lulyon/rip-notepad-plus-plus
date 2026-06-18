@@ -20,16 +20,50 @@ export interface StreamCallbacks {
   onError: (err: string) => void;
 }
 
+/** Supported API provider types. */
+export type ApiProvider = "anthropic" | "openai";
+
 /**
- * Anthropic-compatible streaming chat client.
- * Works with DeepSeek API, Claude API, and other compatible endpoints.
+ * Smart detection of API provider from base URL.
+ * Returns "openai" if URL contains "openai", otherwise "anthropic".
+ */
+export function detectProvider(baseUrl: string): ApiProvider {
+  if (/openai/i.test(baseUrl)) return "openai";
+  return "anthropic";
+}
+
+// ═══════════════════════════════════════════════════
+// Public dispatcher
+// ═══════════════════════════════════════════════════
+
+/**
+ * Streaming chat client supporting Anthropic-compatible and OpenAI-compatible APIs.
  *
- * When enableWebSearch is true, includes the web_search_20250305
- * server tool so the model can search the web autonomously.
- * The client parses server_tool_use and web_search_tool_result content
- * blocks but never executes tools itself — search is server-side.
+ * Dispatch is based on `provider`. When "openai", web search is not available
+ * (the toggle is hidden in the UI and the parameter is ignored).
  */
 export async function streamChat(
+  baseUrl: string,
+  apiKey: string,
+  model: string,
+  messages: AiMessage[],
+  systemPrompt: string,
+  enableWebSearch: boolean,
+  userTimezone: string | undefined,
+  provider: ApiProvider,
+  callbacks: StreamCallbacks,
+): Promise<void> {
+  if (provider === "openai") {
+    return openaiStream(baseUrl, apiKey, model, messages, systemPrompt, callbacks);
+  }
+  return anthropicStream(baseUrl, apiKey, model, messages, systemPrompt, enableWebSearch, userTimezone, callbacks);
+}
+
+// ═══════════════════════════════════════════════════
+// Anthropic-compatible streaming
+// ═══════════════════════════════════════════════════
+
+async function anthropicStream(
   baseUrl: string,
   apiKey: string,
   model: string,
@@ -41,15 +75,11 @@ export async function streamChat(
 ): Promise<void> {
   const url = `${baseUrl}/v1/messages`;
 
-  // Convert our messages to Anthropic format.
-  // For user messages we send a simple text content block.
-  // For assistant messages we send content as-is (plain string).
   const anthropicMessages = messages.map((m) => ({
     role: m.role,
     content: m.content,
   }));
 
-  // Build the request body
   const body: Record<string, unknown> = {
     model,
     max_tokens: 8192,
@@ -58,7 +88,6 @@ export async function streamChat(
     messages: anthropicMessages,
   };
 
-  // Include web_search tool when enabled
   if (enableWebSearch) {
     const tool: Record<string, unknown> = {
       type: "web_search_20250305",
@@ -66,10 +95,7 @@ export async function streamChat(
       max_uses: 5,
     };
     if (userTimezone) {
-      tool.user_location = {
-        type: "approximate",
-        timezone: userTimezone,
-      };
+      tool.user_location = { type: "approximate", timezone: userTimezone };
     }
     body.tools = [tool];
   }
@@ -96,10 +122,7 @@ export async function streamChat(
 
     const decoder = new TextDecoder();
     let buffer = "";
-
-    // Track content block types by index for dispatching deltas
     const blockTypes = new Map<number, string>();
-    // Accumulate partial_json for server_tool_use (search query)
     let searchJsonBuf = "";
     let currentSearchToolId = "";
 
@@ -122,22 +145,15 @@ export async function streamChat(
           const type = parsed.type;
           const index: number | undefined = parsed.index;
 
-          // ── content_block_start: record block type ──
           if (type === "content_block_start") {
             const cb = parsed.content_block || {};
             const cbType: string = cb.type || "";
-
-            if (index !== undefined) {
-              blockTypes.set(index, cbType);
-            }
-
+            if (index !== undefined) blockTypes.set(index, cbType);
             if (cbType === "server_tool_use") {
               currentSearchToolId = cb.id || "";
               searchJsonBuf = "";
             }
-
             if (cbType === "web_search_tool_result") {
-              // Results arrive in the content array of the start block
               const rawContent = cb.content || [];
               const results: SearchResult[] = [];
               for (const item of rawContent) {
@@ -149,67 +165,132 @@ export async function streamChat(
                 callbacks.onSearchResult(results, cb.tool_use_id || "");
               }
             }
-          }
-
-          // ── content_block_delta ──
-          else if (type === "content_block_delta") {
+          } else if (type === "content_block_delta") {
             const delta = parsed.delta || {};
             const deltaType: string = delta.type || "";
             const blockType = index !== undefined ? blockTypes.get(index) : undefined;
 
-            // Thinking deltas
             if (deltaType === "thinking_delta" || delta.thinking) {
               callbacks.onThinking(delta.thinking || "");
-            }
-            // Search query deltas (server_tool_use → input_json_delta)
-            else if (deltaType === "input_json_delta") {
+            } else if (deltaType === "input_json_delta") {
               searchJsonBuf += delta.partial_json || "";
-              // Try to extract the query as it streams in
               const m = searchJsonBuf.match(/"query"\s*:\s*"([^"]*)"/);
               if (m && currentSearchToolId) {
                 callbacks.onSearchStart(m[1], currentSearchToolId);
               }
-            }
-            // Text deltas — only for text blocks (not thinking blocks)
-            else if (blockType === "text") {
+            } else if (blockType === "text") {
+              if (deltaType === "text_delta" || delta.text) {
+                callbacks.onToken(delta.text || "");
+              }
+            } else if (!blockType) {
               if (deltaType === "text_delta" || delta.text) {
                 callbacks.onToken(delta.text || "");
               }
             }
-            // Fallback: text deltas on unknown block types (backward compat)
-            else if (!blockType) {
-              if (deltaType === "text_delta" || delta.text) {
-                callbacks.onToken(delta.text || "");
-              }
-            }
-          }
-
-          // ── content_block_stop ──
-          else if (type === "content_block_stop") {
-            if (index !== undefined) {
-              blockTypes.delete(index);
-            }
-          }
-
-          // ── message_stop: stream complete ──
-          else if (type === "message_stop") {
-            // Stream complete — handled after loop exits
-          }
-
-          // ── error ──
-          else if (type === "error") {
+          } else if (type === "content_block_stop") {
+            if (index !== undefined) blockTypes.delete(index);
+          } else if (type === "error") {
             callbacks.onError(parsed.error?.message || "Unknown error");
             return;
           }
-        } catch {
-          // Skip unparseable chunks
-        }
+        } catch { /* skip unparseable */ }
       }
     }
 
     callbacks.onDone();
   } catch (e: unknown) {
-    const msg = e instanceof Error ? e.message : "Network error";
-    callbacks.onError(msg);
+    callbacks.onError(e instanceof Error ? e.message : "Network error");
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// OpenAI-compatible streaming
+// ═══════════════════════════════════════════════════
+
+async function openaiStream(
+  baseUrl: string,
+  apiKey: string,
+  model: string,
+  messages: AiMessage[],
+  systemPrompt: string,
+  callbacks: StreamCallbacks,
+): Promise<void> {
+  const url = `${baseUrl}/v1/chat/completions`;
+
+  // Build OpenAI-format messages array
+  const openaiMessages: { role: string; content: string }[] = [];
+  if (systemPrompt) {
+    openaiMessages.push({ role: "system", content: systemPrompt });
+  }
+  for (const m of messages) {
+    openaiMessages.push({ role: m.role, content: m.content });
+  }
+
+  const body: Record<string, unknown> = {
+    model,
+    max_tokens: 8192,
+    stream: true,
+    messages: openaiMessages,
+    stream_options: { include_usage: true },
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      callbacks.onError(`API error ${response.status}: ${errText.slice(0, 200)}`);
+      return;
+    }
+
+    const reader = response.body?.getReader();
+    if (!reader) { callbacks.onError("No response body"); return; }
+
+    const decoder = new TextDecoder();
+    let buffer = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split("\n");
+      buffer = lines.pop() || "";
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || !trimmed.startsWith("data: ")) continue;
+        const data = trimmed.slice(6);
+        if (data === "[DONE]") { callbacks.onDone(); return; }
+
+        try {
+          const parsed = JSON.parse(data);
+          const choices = parsed.choices;
+          if (!choices || choices.length === 0) continue;
+
+          const delta = choices[0].delta || {};
+
+          // Reasoning content (e.g. DeepSeek-R1, o1)
+          if (delta.reasoning_content) {
+            callbacks.onThinking(delta.reasoning_content);
+          }
+          // Regular text content
+          if (delta.content) {
+            callbacks.onToken(delta.content);
+          }
+        } catch { /* skip unparseable */ }
+      }
+    }
+
+    callbacks.onDone();
+  } catch (e: unknown) {
+    callbacks.onError(e instanceof Error ? e.message : "Network error");
   }
 }

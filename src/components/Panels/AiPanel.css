@@ -71,6 +71,19 @@
 .ai-input { flex: 1; background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px; border-radius: 4px; font-size: 13px; resize: none; font-family: inherit; }
 .ai-input:focus { outline: none; border-color: var(--accent-color); }
 .ai-input:disabled { opacity: 0.5; }
+.ai-select {
+  background: var(--bg-secondary, #2a2a2a);
+  border: 1px solid var(--border-color, #444);
+  color: var(--text-primary);
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 8px;
+}
+.ai-select:focus { outline: none; border-color: var(--accent-color); }
 .ai-btn { background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-primary); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; }
 .ai-btn:hover { background: var(--bg-secondary); }
 .ai-btn-primary { background: var(--accent-color); border-color: var(--accent-color); color: #fff; }

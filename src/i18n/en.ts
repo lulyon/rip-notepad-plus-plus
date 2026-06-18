@@ -529,6 +529,7 @@ const en = {
     "ai.configApiUrl": "API Base URL",
     "ai.configApiKey": "API Key",
     "ai.configModel": "Model",
+    "ai.configProvider": "API Provider",
     "ai.save": "Save",
     "ai.autoDetect": "Auto-detect",
     "ai.quickExplain": "Explain Code",
