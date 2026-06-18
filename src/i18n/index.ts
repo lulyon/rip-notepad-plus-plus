@@ -73,6 +73,16 @@ i18n.use(initReactI18next).init({
   } as unknown as Record<string, { translation: Record<string, string> }>,
   lng: savedLang,
   fallbackLng: "en",
+  supportedLngs: [
+    "zh", "en", "ja", "ko", "fr", "ar", "he",
+    "de", "es", "pt", "ru", "it", "tr", "pl", "cs", "hu",
+    "zh-tw", "fa", "uk", "vi", "hi", "nl", "sv", "fi", "da",
+    "nb", "th", "id", "ro", "sk", "el", "sr", "bg", "lt",
+    "lv", "sl", "hr", "et", "ca", "eu", "gl",
+    "ur", "pa", "sw", "ha", "am", "my",
+    "bn", "te", "mr", "ta", "gu", "kn", "tl", "km", "ne", "yo", "ig",
+  ],
+  nonExplicitSupportedLngs: false,
   interpolation: { escapeValue: false },
   react: { useSuspense: false },
 });
