@@ -117,7 +117,7 @@ const da = {
     "menu.view.splitVertical": "Del lodret",
     "menu.view.alwaysOnTop": "Altid øverst",
     "menu.view.toggleSidebar": "Vis sidepanel",
-    "menu.view.markdownPreview": "Slå &Markdown-forhåndsvisning til/fra",
+    "menu.view.markdownPreview": "Forhåndsvisning",
     "menu.view.distractionFree": "Forstyrrelsesfri tilstand",
     "menu.view.summary": "Resumé...",
     // ── Menu: Encoding ──
@@ -199,7 +199,7 @@ const da = {
     // ── Search Panel ──
     "search.findLabel": "Søg",
     "search.replaceLabel": "Erstat",
-    "search.regex": "Regulært udtryk",
+    "search.regex": "Regex",
     "search.caseSensitive": "Forskel på store/små",
     "search.wholeWord": "Hele ord",
     "search.wrapAround": "Ombryd",
@@ -268,10 +268,10 @@ const da = {
     "preferences.whitespaceAll": "Alle",
     "preferences.defaultEncoding": "Standardindkodning",
     "preferences.defaultLanguage": "Standardsprog",
-    "preferences.eol": "Linjeskift",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (klassisk Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtrer genveje...",
     "shortcutMapper.pressKeys": "Tryk på taster...",
@@ -448,11 +448,11 @@ const da = {
     "git.clean": "✓ Arbejdstræ rent",
     "git.viewDiff": "Se forskelle",
     "git.stageAll": "Isæt alle",
-    "git.commit": "Commitér...",
-    "git.diff": "forskel",
-    "git.pushOk": "Skub OK",
-    "git.pullOk": "Hent OK",
-    "git.committed": "Commit udført ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Commit mislykkedes: {{error}}",
     "git.pushFailed": "Push mislykkedes: {{error}}",
     "git.pullFailed": "Pull mislykkedes: {{error}}",
@@ -462,7 +462,7 @@ const da = {
     "commit.title": "Commit ændringer",
     "commit.filesStaged": "{{count}} fil(er) isat",
     "commit.messagePlaceholder": "Commit-besked (Enter committer, Shift+Enter ny linje)",
-    "commit.commit": "Commitér",
+    "commit.commit": "Commit",
     "commit.cancel": "Annuller",
     // ── Plugin ──
     "plugin.title": "Plugin-manager",
@@ -485,7 +485,7 @@ const da = {
     "app.modified": "● ",
     "app.encoding.utf8": "UTF-8",
     // ── AI Chat ──
-    "ai.title": "AI-chat",
+    "ai.title": "AI",
     "ai.send": "Afsend",
     "ai.settings": "Indstillinger",
     "ai.clearChat": "Ryd chat",
@@ -553,8 +553,8 @@ const da = {
 
     // ── Git Panel ──
     "git.switchBranch": "Skift gren",
-    "git.pull": "Hent",
-    "git.push": "Skub",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex-skabeloner",

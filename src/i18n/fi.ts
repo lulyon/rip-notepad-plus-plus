@@ -117,7 +117,7 @@ const fi = {
     "menu.view.splitVertical": "Jaa pystysuunnassa",
     "menu.view.alwaysOnTop": "Aina päällä",
     "menu.view.toggleSidebar": "Näytä sivupalkki",
-    "menu.view.markdownPreview": "&Markdown-esikatselu",
+    "menu.view.markdownPreview": "Esikatselu",
     "menu.view.distractionFree": "Häiriötön tila",
     "menu.view.summary": "Yhteenveto...",
     // ── Menu: Encoding ──
@@ -199,7 +199,7 @@ const fi = {
     // ── Search Panel ──
     "search.findLabel": "Etsi",
     "search.replaceLabel": "Korvaa",
-    "search.regex": "Säännöllinen lauseke",
+    "search.regex": "Regex",
     "search.caseSensitive": "Kirjainkoko",
     "search.wholeWord": "Koko sana",
     "search.wrapAround": "Kierre",
@@ -268,10 +268,10 @@ const fi = {
     "preferences.whitespaceAll": "Kaikki",
     "preferences.defaultEncoding": "Oletuskoodaus",
     "preferences.defaultLanguage": "Oletuskieli",
-    "preferences.eol": "Rivinvaihto",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Klassinen Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Suodata pikakuvaimia...",
     "shortcutMapper.pressKeys": "Paina näppäimiä...",
@@ -448,11 +448,11 @@ const fi = {
     "git.clean": "✓ Työpuu puhdas",
     "git.viewDiff": "Näytä erot",
     "git.stageAll": "Vaiheista kaikki",
-    "git.commit": "Tallenna...",
-    "git.diff": "erot",
-    "git.pushOk": "Työnnä OK",
-    "git.pullOk": "Nouda OK",
-    "git.committed": "Tallennettu ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Tallennus epäonnistui: {{error}}",
     "git.pushFailed": "Push epäonnistui: {{error}}",
     "git.pullFailed": "Pull epäonnistui: {{error}}",
@@ -462,7 +462,7 @@ const fi = {
     "commit.title": "Tallenna muutokset",
     "commit.filesStaged": "{{count}} tiedosto(a) vaiheistettu",
     "commit.messagePlaceholder": "Tallennusviesti (Enter tallentaa, Shift+Enter uusi rivi)",
-    "commit.commit": "Tallenna",
+    "commit.commit": "Commit",
     "commit.cancel": "Peruuta",
     // ── Plugin ──
     "plugin.title": "Liitännäisten hallinta",
@@ -485,7 +485,7 @@ const fi = {
     "app.modified": "● ",
     "app.encoding.utf8": "UTF-8",
     // ── AI Chat ──
-    "ai.title": "AI-keskustelu",
+    "ai.title": "AI",
     "ai.send": "Lähetä",
     "ai.settings": "Asetukset",
     "ai.clearChat": "Tyhjennä keskustelu",
@@ -553,8 +553,8 @@ const fi = {
 
     // ── Git Panel ──
     "git.switchBranch": "Vaihda haaraa",
-    "git.pull": "Nouda",
-    "git.push": "Työnnä",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex-pohjat",

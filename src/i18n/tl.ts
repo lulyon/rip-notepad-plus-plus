@@ -114,7 +114,7 @@ const tl = {
     "menu.view.splitVertical": "Hatiin nang &Patayo",
     "menu.view.alwaysOnTop": "Palaging nasa Itaa&s",
     "menu.view.toggleSidebar": "Ipakita ang Sidebar",
-    "menu.view.markdownPreview": "I-toggle ang &Markdown Preview",
+    "menu.view.markdownPreview": "Silipin",
     "menu.view.distractionFree": "Mode na Walang &Distraction",
     "menu.view.summary": "&Buod...",
     "menu.encoding": "Pag&kokodigo",
@@ -466,11 +466,11 @@ const tl = {
     "git.clean": "✓ Malinis ang working tree",
     "git.viewDiff": "Tingnan ang Diff",
     "git.stageAll": "I-stage Lahat",
-    "git.commit": "Mag-commit...",
+    "git.commit": "Commit...",
     "git.diff": "diff",
-    "git.pushOk": "Tagumpay ang Push",
-    "git.pullOk": "Tagumpay ang Pull",
-    "git.committed": "Na-commit na ✓",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Nag-fail ang commit: {{error}}",
     "git.pushFailed": "Nag-fail ang push: {{error}}",
     "git.pullFailed": "Nag-fail ang pull: {{error}}",
@@ -481,7 +481,7 @@ const tl = {
     "commit.title": "I-commit ang mga Pagbabago",
     "commit.filesStaged": "{{count}} file(s) na-stage",
     "commit.messagePlaceholder": "Commit message (Enter para mag-commit, Shift+Enter para sa bagong linya)",
-    "commit.commit": "I-commit",
+    "commit.commit": "Commit",
     "commit.cancel": "Kanselahin",
 
     // --- Plugin ---
@@ -511,7 +511,7 @@ const tl = {
     "app.encoding.utf8": "UTF-8",
 
     // --- AI Chat ---
-    "ai.title": "AI Chat",
+    "ai.title": "AI",
     "ai.send": "Ipadala",
     "ai.settings": "Mga Setting",
     "ai.clearChat": "I-clear ang chat",
@@ -581,8 +581,8 @@ const tl = {
 
     // --- Git Panel ---
     "git.switchBranch": "Magpalit ng branch",
-    "git.pull": "I-pull",
-    "git.push": "I-push",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // --- Search Panel ---
     "search.regexTemplates": "Mga template ng regex",

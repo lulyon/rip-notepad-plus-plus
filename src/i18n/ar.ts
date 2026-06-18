@@ -132,22 +132,22 @@ const ar = {
     // ── Menu: Language ──
     "menu.language": "&لغة",
     "menu.language.plaintext": "نص عادي",
-    "menu.language.javascript": "جافاسكريبت",
-    "menu.language.typescript": "تايبسكريبت",
-    "menu.language.json": "جيسون",
-    "menu.language.html": "إتش تي إم إل",
-    "menu.language.css": "سي إس إس",
-    "menu.language.python": "بايثون",
-    "menu.language.rust": "راست",
-    "menu.language.go": "غو",
-    "menu.language.java": "جافا",
-    "menu.language.c": "سي",
-    "menu.language.cpp": "سي++",
-    "menu.language.xml": "إكس إم إل",
-    "menu.language.yaml": "يامل",
-    "menu.language.markdown": "ماركداون",
-    "menu.language.sql": "إس كيو إل",
-    "menu.language.shell": "شل",
+    "menu.language.javascript": "JavaScript",
+    "menu.language.typescript": "TypeScript",
+    "menu.language.json": "JSON",
+    "menu.language.html": "HTML",
+    "menu.language.css": "CSS",
+    "menu.language.python": "Python",
+    "menu.language.rust": "Rust",
+    "menu.language.go": "Go",
+    "menu.language.java": "Java",
+    "menu.language.c": "C",
+    "menu.language.cpp": "C++",
+    "menu.language.xml": "XML",
+    "menu.language.yaml": "YAML",
+    "menu.language.markdown": "Markdown",
+    "menu.language.sql": "SQL",
+    "menu.language.shell": "Shell",
 
     "menu.language.defineLanguage": "لغة معرفة من قبل المستخدم...",
     "menu.language.openUdlFolder": "فتح مجلد UDL...",
@@ -204,7 +204,7 @@ const ar = {
     // ── Search Panel ──
     "search.findLabel": "بحث",
     "search.replaceLabel": "استبدال",
-    "search.regex": "تعبير منتظم",
+    "search.regex": "Regex",
     "search.caseSensitive": "حالة الأحرف",
     "search.wholeWord": "كلمة كاملة",
     "search.wrapAround": "التفاف",
@@ -267,10 +267,10 @@ const ar = {
     "preferences.whitespaceAll": "الكل",
     "preferences.defaultEncoding": "الترميز الافتراضي",
     "preferences.defaultLanguage": "اللغة الافتراضية",
-    "preferences.eol": "نهاية السطر",
-    "preferences.eolLf": "LF (يونكس/macOS)",
-    "preferences.eolCrlf": "CRLF (ويندوز)",
-    "preferences.eolCr": "CR (ماك الكلاسيكي)",
+    "preferences.eol": "EOL",
+    "preferences.eolLf": "LF (Unix/macOS)",
+    "preferences.eolCrlf": "CRLF (Windows)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "تصفية الاختصارات...",
@@ -373,7 +373,7 @@ const ar = {
     "sidebar.doclist": "قائمة المستندات",
     "sidebar.clipboard": "الحافظة",
     "sidebar.symbols": "الرموز",
-    "sidebar.git": "جيت",
+    "sidebar.git": "Git",
 
     // ── Clipboard ──
     "clipboard.search": "بحث...",
@@ -484,13 +484,13 @@ const ar = {
     "ai.searching": "جارٍ البحث...",
     "ai.send": "إرسال",
     "ai.settings": "الإعدادات",
-    "ai.title": "محادثة AI",
+    "ai.title": "AI",
     "ai.webSearchOff": "بحث الويب متوقف",
     "ai.webSearchOn": "بحث الويب مفعل",
 
     // ── Commit ──
     "commit.cancel": "إلغاء",
-    "commit.commit": "تنفيذ",
+    "commit.commit": "Commit",
     "commit.filesStaged": "{{count}} ملف(ات) مجهزة",
     "commit.messagePlaceholder": "رسالة الـ Commit (Enter للإرسال، Shift+Enter لسطر جديد)",
     "commit.title": "تغييرات الـ Commit",
@@ -502,15 +502,15 @@ const ar = {
 
     // ── Git ──
     "git.checkoutFailed": "فشل التبديل: {{error}}",
-    "git.commit": "تنفيذ...",
+    "git.commit": "Commit...",
     "git.commitFailed": "فشل الـ Commit: {{error}}",
-    "git.committed": "تم الـ Commit ✓",
-    "git.diff": "الفرق",
+    "git.committed": "Committed ✓",
+    "git.diff": "diff",
     "git.newBranch": "اسم الفرع الجديد...",
     "git.pullFailed": "فشل الـ Pull: {{error}}",
-    "git.pullOk": "تم الـ Pull",
+    "git.pullOk": "Pull OK",
     "git.pushFailed": "فشل الـ Push: {{error}}",
-    "git.pushOk": "تم الـ Push",
+    "git.pushOk": "Push OK",
     "git.stageAll": "تجهيز الكل",
 
     // ── Menu ──
@@ -521,7 +521,7 @@ const ar = {
     "menu.search.gotoNextChange": "الانتقال إلى ال&تغيير التالي",
     "menu.search.gotoPrevChange": "الانتقال إلى التغيير ال&سابق",
     "menu.tools.configure": "تكوين الأدوات الخارجية...",
-    "menu.view.markdownPreview": "تبديل &معاينة Markdown",
+    "menu.view.markdownPreview": "معاينة",
 
     // ── Preferences ──
     "preferences.autoCheckUpdate": "التحقق تلقائياً من التحديثات",
@@ -604,8 +604,8 @@ const ar = {
 
     // ── Git Panel ──
     "git.switchBranch": "تبديل الفرع",
-    "git.pull": "سحب",
-    "git.push": "دفع",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "قوالب التعبير المنتظم",

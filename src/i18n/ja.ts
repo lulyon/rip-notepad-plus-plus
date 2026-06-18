@@ -120,7 +120,7 @@ const ja = {
     "menu.view.splitVertical": "垂直分割",
     "menu.view.alwaysOnTop": "常に手前に表示",
     "menu.view.toggleSidebar": "サイドバー表示",
-    "menu.view.markdownPreview": "Markdown プレビュー(&M)",
+    "menu.view.markdownPreview": "プレビュー",
     "menu.view.distractionFree": "ディストラクションフリーモード",
     "menu.view.summary": "サマリー...",
 
@@ -138,22 +138,22 @@ const ja = {
     // ── Menu: Language ──
     "menu.language": "言語(&L)",
     "menu.language.plaintext": "プレーンテキスト",
-    "menu.language.javascript": "ジャバスクリプト",
-    "menu.language.typescript": "タイプスクリプト",
-    "menu.language.json": "ジェイソン",
-    "menu.language.html": "エイチティーエムエル",
-    "menu.language.css": "シーエスエス",
-    "menu.language.python": "パイソン",
-    "menu.language.rust": "ラスト",
-    "menu.language.go": "Go言語",
-    "menu.language.java": "ジャバ",
-    "menu.language.c": "C言語",
-    "menu.language.cpp": "C++言語",
-    "menu.language.xml": "エックスエムエル",
-    "menu.language.yaml": "ヤムル",
-    "menu.language.markdown": "マークダウン",
-    "menu.language.sql": "エスキューエル",
-    "menu.language.shell": "シェル",
+    "menu.language.javascript": "JavaScript",
+    "menu.language.typescript": "TypeScript",
+    "menu.language.json": "JSON",
+    "menu.language.html": "HTML",
+    "menu.language.css": "CSS",
+    "menu.language.python": "Python",
+    "menu.language.rust": "Rust",
+    "menu.language.go": "Go",
+    "menu.language.java": "Java",
+    "menu.language.c": "C",
+    "menu.language.cpp": "C++",
+    "menu.language.xml": "XML",
+    "menu.language.yaml": "YAML",
+    "menu.language.markdown": "Markdown",
+    "menu.language.sql": "SQL",
+    "menu.language.shell": "Shell",
 
     "menu.language.defineLanguage": "ユーザー定義言語...",
     "menu.language.openUdlFolder": "UDLフォルダーを開く...",
@@ -212,7 +212,7 @@ const ja = {
     // ── Search Panel ──
     "search.findLabel": "検索",
     "search.replaceLabel": "置換",
-    "search.regex": "正規表現",
+    "search.regex": "Regex",
     "search.caseSensitive": "大文字と小文字を区別",
     "search.wholeWord": "単語単位",
     "search.wrapAround": "折り返して検索",
@@ -278,10 +278,10 @@ const ja = {
     "preferences.whitespaceAll": "すべて",
     "preferences.defaultEncoding": "デフォルトエンコーディング",
     "preferences.defaultLanguage": "デフォルト言語",
-    "preferences.eol": "改行コード",
-    "preferences.eolLf": "LF（Unix/macOS）",
-    "preferences.eolCrlf": "CRLF（Windows）",
-    "preferences.eolCr": "CR（Classic Mac）",
+    "preferences.eol": "EOL",
+    "preferences.eolLf": "LF (Unix/macOS)",
+    "preferences.eolCrlf": "CRLF (Windows)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "ショートカットをフィルター...",
@@ -384,7 +384,7 @@ const ja = {
     "sidebar.doclist": "ドキュメント一覧",
     "sidebar.clipboard": "クリップボード",
     "sidebar.symbols": "シンボル",
-    "sidebar.git": "Git（ギット）",
+    "sidebar.git": "Git",
     "sidebar.preview": "プレビュー",
     "sidebar.terminal": "ターミナル",
 
@@ -468,7 +468,7 @@ const ja = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI チャット",
+    "ai.title": "AI",
     "ai.send": "送信",
     "ai.settings": "設定",
     "ai.clearChat": "チャットをクリア",
@@ -512,7 +512,7 @@ const ja = {
     "commit.title": "変更をコミット",
     "commit.filesStaged": "{{count}} ファイルがステージングされました",
     "commit.messagePlaceholder": "コミットメッセージ（Enter コミット、Shift+Enter 改行）",
-    "commit.commit": "コミット",
+    "commit.commit": "Commit",
     "commit.cancel": "キャンセル",
 
     // ── Search Panel (additions) ──
@@ -530,11 +530,11 @@ const ja = {
 
     // ── Git (additions) ──
     "git.stageAll": "すべてステージ",
-    "git.commit": "コミット...",
-    "git.diff": "差分",
-    "git.pushOk": "プッシュ成功",
-    "git.pullOk": "プル成功",
-    "git.committed": "コミット完了 ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "コミット失敗：{{error}}",
     "git.pushFailed": "プッシュ失敗：{{error}}",
     "git.pullFailed": "プル失敗：{{error}}",
@@ -599,8 +599,8 @@ const ja = {
 
     // ── Git Panel ──
     "git.switchBranch": "ブランチを切り替え",
-    "git.pull": "プル",
-    "git.push": "プッシュ",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "正規表現テンプレート",

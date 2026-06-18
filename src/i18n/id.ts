@@ -117,7 +117,7 @@ const id = {
     "menu.view.splitVertical": "Bagi Secara Vertikal",
     "menu.view.alwaysOnTop": "Selalu di Atas",
     "menu.view.toggleSidebar": "Tampilkan Bilah Samping",
-    "menu.view.markdownPreview": "Aktif/Nonaktifkan Pratinjau &Markdown",
+    "menu.view.markdownPreview": "Pratinjau",
     "menu.view.distractionFree": "Mode Bebas Gangguan",
     "menu.view.summary": "Ringkasan...",
     // ── Menu: Encoding ──
@@ -199,7 +199,7 @@ const id = {
     // ── Search Panel ──
     "search.findLabel": "Temukan",
     "search.replaceLabel": "Ganti",
-    "search.regex": "Ekspresi reguler",
+    "search.regex": "Regex",
     "search.caseSensitive": "Case Sensitif",
     "search.wholeWord": "Kata Utuh",
     "search.wrapAround": "Bungkus",
@@ -268,10 +268,10 @@ const id = {
     "preferences.whitespaceAll": "Semua",
     "preferences.defaultEncoding": "Pengodean bawaan",
     "preferences.defaultLanguage": "Bahasa bawaan",
-    "preferences.eol": "Akhir Baris",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Mac Klasik)",
+    "preferences.eolCr": "CR (Classic Mac)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Saring pintasan...",
     "shortcutMapper.pressKeys": "Tekan tombol...",
@@ -448,11 +448,11 @@ const id = {
     "git.clean": "✓ Pohon kerja bersih",
     "git.viewDiff": "Lihat Diff",
     "git.stageAll": "Stage Semua",
-    "git.commit": "Komit...",
-    "git.diff": "perbedaan",
-    "git.pushOk": "Push berhasil",
-    "git.pullOk": "Pull berhasil",
-    "git.committed": "Terkomit ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Komit gagal: {{error}}",
     "git.pushFailed": "Push gagal: {{error}}",
     "git.pullFailed": "Pull gagal: {{error}}",
@@ -462,7 +462,7 @@ const id = {
     "commit.title": "Komit Perubahan",
     "commit.filesStaged": "{{count}} file di-stage",
     "commit.messagePlaceholder": "Pesan komit (Enter untuk komit, Shift+Enter untuk baris baru)",
-    "commit.commit": "Komit",
+    "commit.commit": "Commit",
     "commit.cancel": "Batal",
     // ── Plugin ──
     "plugin.title": "Pengelola Plugin",
@@ -485,7 +485,7 @@ const id = {
     "app.modified": "● ",
     "app.encoding.utf8": "UTF-8",
     // ── AI Chat ──
-    "ai.title": "Chat AI",
+    "ai.title": "AI",
     "ai.send": "Kirim",
     "ai.settings": "Pengaturan",
     "ai.clearChat": "Bersihkan obrolan",
@@ -551,8 +551,8 @@ const id = {
 
     // ── Git Panel ──
     "git.switchBranch": "Ganti cabang",
-    "git.pull": "Tarik",
-    "git.push": "Dorong",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Templat regex",

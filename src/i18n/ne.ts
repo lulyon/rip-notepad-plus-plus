@@ -114,7 +114,7 @@ const ne = {
     "menu.view.splitVertical": "ठाडो रूपमा विभाजन गर्नुहोस्",
     "menu.view.alwaysOnTop": "सधैं माथि",
     "menu.view.toggleSidebar": "साइडबार देखाउनुहोस्",
-    "menu.view.markdownPreview": "मार्कडाउन पूर्वावलोकन टगल गर्नुहोस्(&M)",
+    "menu.view.markdownPreview": "पूर्वावलोकन",
     "menu.view.distractionFree": "ध्यान भंग नहुने मोड",
     "menu.view.summary": "सारांश...",
     "menu.encoding": "एन्कोडिङ(&n)",
@@ -263,10 +263,10 @@ const ne = {
     "preferences.whitespaceAll": "सबै",
     "preferences.defaultEncoding": "पूर्वनिर्धारित एन्कोडिङ",
     "preferences.defaultLanguage": "पूर्वनिर्धारित भाषा",
-    "preferences.eol": "लाइनको अन्त्य",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (क्लासिक Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // --- Shortcut Mapper ---
     "shortcutMapper.filter": "सर्टकट फिल्टर गर्नुहोस्...",
@@ -466,11 +466,11 @@ const ne = {
     "git.clean": "✓ कार्य रूख सफा",
     "git.viewDiff": "भिन्नता हेर्नुहोस्",
     "git.stageAll": "सबै स्टेज गर्नुहोस्",
-    "git.commit": "कमिट गर्नुहोस्...",
-    "git.diff": "भिन्नता",
-    "git.pushOk": "पुश ठीक",
-    "git.pullOk": "पुल ठीक",
-    "git.committed": "कमिट गरियो ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "कमिट असफल: {{error}}",
     "git.pushFailed": "पुश असफल: {{error}}",
     "git.pullFailed": "पुल असफल: {{error}}",
@@ -481,7 +481,7 @@ const ne = {
     "commit.title": "परिवर्तनहरू कमिट गर्नुहोस्",
     "commit.filesStaged": "{{count}} फाइल(हरू) स्टेज गरियो",
     "commit.messagePlaceholder": "कमिट सन्देश (Enter कमिट गर्न, Shift+Enter नयाँ लाइनको लागि)",
-    "commit.commit": "कमिट गर्नुहोस्",
+    "commit.commit": "Commit",
     "commit.cancel": "रद्द गर्नुहोस्",
 
     // --- Plugin ---
@@ -511,7 +511,7 @@ const ne = {
     "app.encoding.utf8": "UTF-8",
 
     // --- AI Chat ---
-    "ai.title": "AI च्याट",
+    "ai.title": "AI",
     "ai.send": "पठाउनुहोस्",
     "ai.settings": "सेटिङहरू",
     "ai.clearChat": "च्याट सफा गर्नुहोस्",
@@ -581,8 +581,8 @@ const ne = {
 
     // ── Git Panel ──
     "git.switchBranch": "शाखा स्विच गर्नुहोस्",
-    "git.pull": "पुल",
-    "git.push": "पुश",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex टेम्प्लेटहरू",

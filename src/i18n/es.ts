@@ -120,7 +120,7 @@ const es = {
     "menu.view.splitVertical": "Dividir Verticalmente",
     "menu.view.alwaysOnTop": "Siempre Visible",
     "menu.view.toggleSidebar": "Mostrar Barra Lateral",
-    "menu.view.markdownPreview": "Alternar &Vista Previa Markdown",
+    "menu.view.markdownPreview": "Vista previa",
     "menu.view.distractionFree": "Modo Sin Distracciones",
     "menu.view.summary": "Resumen...",
 
@@ -212,7 +212,7 @@ const es = {
     // ── Search Panel ──
     "search.findLabel": "Buscar",
     "search.replaceLabel": "Reemplazar",
-    "search.regex": "Expresión Regular",
+    "search.regex": "Regex",
     "search.caseSensitive": "Mayúsculas/Minúsculas",
     "search.wholeWord": "Palabra Completa",
     "search.wrapAround": "Ciclo Continuo",
@@ -284,10 +284,10 @@ const es = {
     "preferences.whitespaceAll": "Todo",
     "preferences.defaultEncoding": "Codificación predeterminada",
     "preferences.defaultLanguage": "Idioma predeterminado",
-    "preferences.eol": "Fin de línea",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Mac Clásico)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtrar atajos...",
@@ -479,11 +479,11 @@ const es = {
     "git.clean": "✓ Árbol de trabajo limpio",
     "git.viewDiff": "Ver Diff",
     "git.stageAll": "Preparar Todo",
-    "git.commit": "Confirmar...",
-    "git.diff": "Diff",
-    "git.pushOk": "Empujar OK",
-    "git.pullOk": "Traer OK",
-    "git.committed": "Confirmado ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Error al confirmar: {{error}}",
     "git.pushFailed": "Error al hacer push: {{error}}",
     "git.pullFailed": "Error al hacer pull: {{error}}",
@@ -494,7 +494,7 @@ const es = {
     "commit.title": "Confirmar Cambios",
     "commit.filesStaged": "{{count}} archivo(s) preparado(s)",
     "commit.messagePlaceholder": "Mensaje de confirmación (Enter para confirmar, Shift+Enter para nueva línea)",
-    "commit.commit": "Confirmar",
+    "commit.commit": "Commit",
     "commit.cancel": "Cancelar",
 
     // ── Plugin ──
@@ -521,7 +521,7 @@ const es = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "Chat IA",
+    "ai.title": "AI",
     "ai.send": "Enviar",
     "ai.settings": "Ajustes",
     "ai.clearChat": "Limpiar chat",
@@ -589,8 +589,8 @@ const es = {
 
     // ── Git Panel ──
     "git.switchBranch": "Cambiar rama",
-    "git.pull": "Traer",
-    "git.push": "Empujar",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Plantillas regex",

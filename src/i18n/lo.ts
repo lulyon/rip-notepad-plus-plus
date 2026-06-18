@@ -120,7 +120,7 @@ const lo = {
     "menu.view.splitVertical": "ແບ່ງແນວຕັ້ງ",
     "menu.view.alwaysOnTop": "ຢູ່ເທິງສຸດສະເໝີ",
     "menu.view.toggleSidebar": "ສະແດງແຖບຂ້າງ",
-    "menu.view.markdownPreview": "ສະຫຼັບ &ການເບິ່ງຕົວຢ່າງ Markdown",
+    "menu.view.markdownPreview": "ເບິ່ງກ່ອນ",
     "menu.view.distractionFree": "ໂຫມດບໍ່ມີສິ່ງລົບກວນ",
     "menu.view.summary": "ສະຫຼຸບ...",
 
@@ -138,22 +138,22 @@ const lo = {
     // ── Menu: Language ──
     "menu.language": "&ພາສາ",
     "menu.language.plaintext": "ຂໍ້ຄວາມທຳມະດາ",
-    "menu.language.javascript": "ຈາວາສະຄຣິບ",
-    "menu.language.typescript": "ໄທສະຄຣິບ",
+    "menu.language.javascript": "JavaScript",
+    "menu.language.typescript": "TypeScript",
     "menu.language.json": "JSON",
     "menu.language.html": "HTML",
     "menu.language.css": "CSS",
-    "menu.language.python": "ໄພທອນ",
-    "menu.language.rust": "ຣັສ",
-    "menu.language.go": "ໂກ",
-    "menu.language.java": "ຈາວາ",
+    "menu.language.python": "Python",
+    "menu.language.rust": "Rust",
+    "menu.language.go": "Go",
+    "menu.language.java": "Java",
     "menu.language.c": "C",
     "menu.language.cpp": "C++",
     "menu.language.xml": "XML",
     "menu.language.yaml": "YAML",
-    "menu.language.markdown": "ມາກດາວ",
+    "menu.language.markdown": "Markdown",
     "menu.language.sql": "SQL",
-    "menu.language.shell": "ເຊລ",
+    "menu.language.shell": "Shell",
 
     "menu.language.defineLanguage": "ພາສາທີ່ຜູ້ໃຊ້ກຳນົດເອງ...",
     "menu.language.openUdlFolder": "ເປີດໂຟນເດີ UDL...",
@@ -284,10 +284,10 @@ const lo = {
     "preferences.whitespaceAll": "ທັງໝົດ",
     "preferences.defaultEncoding": "ການເຂົ້າລະຫັດເລີ່ມຕົ້ນ",
     "preferences.defaultLanguage": "ພາສາເລີ່ມຕົ້ນ",
-    "preferences.eol": "ສິ້ນສຸດແຖວ",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Mac ເກົ່າ)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "ກັ່ນຕອງປຸ່ມລັດ...",
@@ -479,11 +479,11 @@ const lo = {
     "git.clean": "✓ ຕົ້ນໄມ້ເຮັດວຽກສະອາດ",
     "git.viewDiff": "ເບິ່ງຄວາມແຕກຕ່າງ",
     "git.stageAll": "Stage ທັງໝົດ",
-    "git.commit": "ຄອມມິດ...",
-    "git.diff": "ຄວາມແຕກຕ່າງ",
-    "git.pushOk": "Push ສຳເລັດ",
-    "git.pullOk": "Pull ສຳເລັດ",
-    "git.committed": "ຄອມມິດແລ້ວ ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Commit ລົ້ມເຫຼວ: {{error}}",
     "git.pushFailed": "Push ລົ້ມເຫຼວ: {{error}}",
     "git.pullFailed": "Pull ລົ້ມເຫຼວ: {{error}}",
@@ -494,7 +494,7 @@ const lo = {
     "commit.title": "Commit ການປ່ຽນແປງ",
     "commit.filesStaged": "{{count}} ໄຟລ໌ທີ່ staged",
     "commit.messagePlaceholder": "ຂໍ້ຄວາມ Commit (Enter ເພື່ອ commit, Shift+Enter ແຖວໃໝ່)",
-    "commit.commit": "ຄອມມິດ",
+    "commit.commit": "Commit",
     "commit.cancel": "ຍົກເລີກ",
 
     // ── Plugin ──
@@ -521,7 +521,7 @@ const lo = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI ສົນທະນາ",
+    "ai.title": "AI",
     "ai.send": "ສົ່ງ",
     "ai.settings": "ຕັ້ງຄ່າ",
     "ai.clearChat": "ລ້າງການສົນທະນາ",
@@ -589,8 +589,8 @@ const lo = {
 
     // ── Git Panel ──
     "git.switchBranch": "ປ່ຽນສາຂາ",
-    "git.pull": "ດຶງ",
-    "git.push": "ຍູ້",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "ແມ່ແບບ Regex",

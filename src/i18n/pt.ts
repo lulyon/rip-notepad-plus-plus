@@ -120,7 +120,7 @@ const pt = {
     "menu.view.splitVertical": "Dividir Verticalmente",
     "menu.view.alwaysOnTop": "Sempre no Topo",
     "menu.view.toggleSidebar": "Mostrar Barra Lateral",
-    "menu.view.markdownPreview": "Alternar &Pré-visualização Markdown",
+    "menu.view.markdownPreview": "Pré-visualização",
     "menu.view.distractionFree": "Modo Sem Distrações",
     "menu.view.summary": "Resumo...",
 
@@ -284,10 +284,10 @@ const pt = {
     "preferences.whitespaceAll": "Tudo",
     "preferences.defaultEncoding": "Codificação padrão",
     "preferences.defaultLanguage": "Idioma padrão",
-    "preferences.eol": "Fim de linha",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Mac Clássico)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtrar atalhos...",
@@ -479,11 +479,11 @@ const pt = {
     "git.clean": "✓ Árvore de trabalho limpa",
     "git.viewDiff": "Ver Diff",
     "git.stageAll": "Preparar Tudo",
-    "git.commit": "Confirmar...",
-    "git.diff": "Diff",
-    "git.pushOk": "Empurrar OK",
-    "git.pullOk": "Puxar OK",
-    "git.committed": "Confirmado ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Falha ao confirmar: {{error}}",
     "git.pushFailed": "Falha ao fazer push: {{error}}",
     "git.pullFailed": "Falha ao fazer pull: {{error}}",
@@ -494,7 +494,7 @@ const pt = {
     "commit.title": "Confirmar Alterações",
     "commit.filesStaged": "{{count}} arquivo(s) preparado(s)",
     "commit.messagePlaceholder": "Mensagem de confirmação (Enter para confirmar, Shift+Enter para nova linha)",
-    "commit.commit": "Confirmar",
+    "commit.commit": "Commit",
     "commit.cancel": "Cancelar",
 
     // ── Plugin ──
@@ -521,7 +521,7 @@ const pt = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "Chat IA",
+    "ai.title": "AI",
     "ai.send": "Enviar",
     "ai.settings": "Configurações",
     "ai.clearChat": "Limpar chat",
@@ -589,8 +589,8 @@ const pt = {
 
     // ── Git Panel ──
     "git.switchBranch": "Mudar de branch",
-    "git.pull": "Puxar",
-    "git.push": "Empurrar",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Modelos regex",

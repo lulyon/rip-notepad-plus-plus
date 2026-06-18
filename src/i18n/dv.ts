@@ -120,7 +120,7 @@ const dv = {
     "menu.view.splitVertical": "ވެޓިކަލް ކޮށް ބައިކުރާ",
     "menu.view.alwaysOnTop": "އޯލްވޭޒް އޮން ޓޮޕް",
     "menu.view.toggleSidebar": "ސައިޑްބާރު ދައްކާ",
-    "menu.view.markdownPreview": "&މާކްޑައުން ޕްރެވިއު ބަދަލުކުރާ",
+    "menu.view.markdownPreview": "ޕްރިވިއު",
     "menu.view.distractionFree": "ޑިސްޓްރެކްޝަން ފްރީ މޯޑް",
     "menu.view.summary": "ސަމަރީ...",
 
@@ -138,22 +138,22 @@ const dv = {
     // ── Menu: Language ──
     "menu.language": "&ބަސް",
     "menu.language.plaintext": "ޕްލޭން ޓެކްސްޓް",
-    "menu.language.javascript": "ޖަވާސްކްރިޕްޓް",
-    "menu.language.typescript": "ޓައިޕްސްކްރިޕްޓް",
+    "menu.language.javascript": "JavaScript",
+    "menu.language.typescript": "TypeScript",
     "menu.language.json": "JSON",
     "menu.language.html": "HTML",
     "menu.language.css": "CSS",
-    "menu.language.python": "ޕައިތަން",
-    "menu.language.rust": "ރަސްޓް",
-    "menu.language.go": "ގޯ",
-    "menu.language.java": "ޖަވާ",
+    "menu.language.python": "Python",
+    "menu.language.rust": "Rust",
+    "menu.language.go": "Go",
+    "menu.language.java": "Java",
     "menu.language.c": "C",
     "menu.language.cpp": "C++",
     "menu.language.xml": "XML",
     "menu.language.yaml": "YAML",
-    "menu.language.markdown": "މާކްޑައުން",
+    "menu.language.markdown": "Markdown",
     "menu.language.sql": "SQL",
-    "menu.language.shell": "ޝެލް",
+    "menu.language.shell": "Shell",
 
     "menu.language.defineLanguage": "ޔޫޒަރ ޑިފައިންޑް ލެންގުއޭޖް...",
     "menu.language.openUdlFolder": "UDL ފޯލްޑަރ ހުޅުވާ...",
@@ -212,7 +212,7 @@ const dv = {
     // ── Search Panel ──
     "search.findLabel": "ހޯދާ",
     "search.replaceLabel": "ބަދަލުކުރާ",
-    "search.regex": "ރެގެކްސް",
+    "search.regex": "Regex",
     "search.caseSensitive": "ޙަރުފު ސެންސިޓިވް",
     "search.wholeWord": "ފުރިހަމަ ލަފްޒު",
     "search.wrapAround": "ރެޕް އެރައުންޑް",
@@ -287,7 +287,7 @@ const dv = {
     "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (ކްލެސިކް މެކް)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "ޝޯޓްކަޓް ފިލްޓަރކުރާ...",
@@ -393,7 +393,7 @@ const dv = {
     "sidebar.doclist": "ޑޮކް ލިސްޓް",
     "sidebar.clipboard": "ކްލިޕްބޯޑް",
     "sidebar.symbols": "ސިމްބަލްތައް",
-    "sidebar.git": "ޖިޓް",
+    "sidebar.git": "Git",
     "sidebar.terminal": "ޓާމިނަލް",
     "terminal.start": "ޓާމިނަލް ފަށާ",
     "terminal.exited": "ޕްރޮސެސް ނިމުނީ.",
@@ -479,11 +479,11 @@ const dv = {
     "git.clean": "✓ ވަރކިންގ ޓްރީ ކްލީން",
     "git.viewDiff": "ވިއު ޑިފް",
     "git.stageAll": "ހުރިހާ ސްޓޭޖްކުރާ",
-    "git.commit": "ކޮމިޓް...",
-    "git.diff": "ޑިފް",
-    "git.pushOk": "ޕުޝް OK",
-    "git.pullOk": "ޕުލް OK",
-    "git.committed": "ކޮމިޓްކުރީ ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "ކޮމިޓް ނާކާމިޔާބު: {{error}}",
     "git.pushFailed": "Push ނާކާމިޔާބު: {{error}}",
     "git.pullFailed": "Pull ނާކާމިޔާބު: {{error}}",
@@ -494,7 +494,7 @@ const dv = {
     "commit.title": "ބަދަލުތައް ކޮމިޓްކުރާ",
     "commit.filesStaged": "{{count}} ފައިލް ސްޓޭޖްކުރީ",
     "commit.messagePlaceholder": "ކޮމިޓް މެސެޖް (Enter އިން ކޮމިޓްކުރާ, Shift+Enter އިން އައު ސަފް)",
-    "commit.commit": "ކޮމިޓް",
+    "commit.commit": "Commit",
     "commit.cancel": "ބާޠިލްކުރާ",
 
     // ── Plugin ──
@@ -521,7 +521,7 @@ const dv = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI ޗެޓް",
+    "ai.title": "AI",
     "ai.send": "ސެންޑްކުރާ",
     "ai.settings": "ސެޓިންގްސް",
     "ai.clearChat": "ޗެޓް ސާފުކުރާ",
@@ -589,8 +589,8 @@ const dv = {
 
     // ── Git Panel ──
     "git.switchBranch": "ބްރާންޗް ސްވިޗްކުރާ",
-    "git.pull": "ޕުލް",
-    "git.push": "ޕުޝް",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "ރެގެކްސް ޓެމްޕްލެޓްތައް",

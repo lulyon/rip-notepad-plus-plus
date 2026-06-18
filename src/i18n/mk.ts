@@ -120,7 +120,7 @@ const mk = {
     "menu.view.splitVertical": "Подели Вертикално",
     "menu.view.alwaysOnTop": "Секогаш на Врв",
     "menu.view.toggleSidebar": "Прикажи Странична Лента",
-    "menu.view.markdownPreview": "Префрли &Markdown Преглед",
+    "menu.view.markdownPreview": "Преглед",
     "menu.view.distractionFree": "Режим без Одвлекување",
     "menu.view.summary": "Резиме...",
 
@@ -138,22 +138,22 @@ const mk = {
     // ── Menu: Language ──
     "menu.language": "&Јазик",
     "menu.language.plaintext": "Обичен Текст",
-    "menu.language.javascript": "ЈаваСкрипт",
-    "menu.language.typescript": "ТајпСкрипт",
+    "menu.language.javascript": "JavaScript",
+    "menu.language.typescript": "TypeScript",
     "menu.language.json": "JSON",
     "menu.language.html": "HTML",
     "menu.language.css": "CSS",
-    "menu.language.python": "Пајтон",
-    "menu.language.rust": "Раст",
-    "menu.language.go": "Гоу",
-    "menu.language.java": "Џава",
+    "menu.language.python": "Python",
+    "menu.language.rust": "Rust",
+    "menu.language.go": "Go",
+    "menu.language.java": "Java",
     "menu.language.c": "C",
     "menu.language.cpp": "C++",
     "menu.language.xml": "XML",
     "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Маркдаун",
+    "menu.language.markdown": "Markdown",
     "menu.language.sql": "SQL",
-    "menu.language.shell": "Шел",
+    "menu.language.shell": "Shell",
 
     "menu.language.defineLanguage": "Кориснички Дефиниран Јазик...",
     "menu.language.openUdlFolder": "Отвори UDL Папка...",
@@ -212,7 +212,7 @@ const mk = {
     // ── Search Panel ──
     "search.findLabel": "Најди",
     "search.replaceLabel": "Замени",
-    "search.regex": "Регуларен Израз",
+    "search.regex": "Regex",
     "search.caseSensitive": "Осетливост на Големина",
     "search.wholeWord": "Цел Збор",
     "search.wrapAround": "Заобиколи",
@@ -284,10 +284,10 @@ const mk = {
     "preferences.whitespaceAll": "Сите",
     "preferences.defaultEncoding": "Стандардно кодирање",
     "preferences.defaultLanguage": "Стандарден јазик",
-    "preferences.eol": "Крај на ред",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Класичен Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Филтрирај кратенки...",
@@ -479,11 +479,11 @@ const mk = {
     "git.clean": "✓ Работното дрво е чисто",
     "git.viewDiff": "Прегледај Разлика",
     "git.stageAll": "Стагирај Сите",
-    "git.commit": "Комитирај...",
-    "git.diff": "разлика",
-    "git.pushOk": "Испрати ОК",
-    "git.pullOk": "Повлечи ОК",
-    "git.committed": "Комитирано ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Комитот не успеа: {{error}}",
     "git.pushFailed": "Push не успеа: {{error}}",
     "git.pullFailed": "Pull не успеа: {{error}}",
@@ -494,7 +494,7 @@ const mk = {
     "commit.title": "Комитирај Промени",
     "commit.filesStaged": "{{count}} датотека(и) стагирани",
     "commit.messagePlaceholder": "Порака за комит (Enter за комит, Shift+Enter за нов ред)",
-    "commit.commit": "Комитирај",
+    "commit.commit": "Commit",
     "commit.cancel": "Откажи",
 
     // ── Plugin ──
@@ -521,7 +521,7 @@ const mk = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI Разговор",
+    "ai.title": "AI",
     "ai.send": "Испрати",
     "ai.settings": "Поставки",
     "ai.clearChat": "Исчисти разговор",
@@ -589,8 +589,8 @@ const mk = {
 
     // ── Git Panel ──
     "git.switchBranch": "Промени гранка",
-    "git.pull": "Повлечи",
-    "git.push": "Испрати",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Шаблони за регуларен израз",

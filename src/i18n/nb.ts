@@ -117,7 +117,7 @@ const nb = {
     "menu.view.splitVertical": "Del loddrett",
     "menu.view.alwaysOnTop": "Alltid på topp",
     "menu.view.toggleSidebar": "Vis sidepanel",
-    "menu.view.markdownPreview": "Slå &Markdown-forhåndsvisning av/på",
+    "menu.view.markdownPreview": "Forhåndsvisning",
     "menu.view.distractionFree": "Forstyrrelsesfri modus",
     "menu.view.summary": "Sammendrag...",
     // ── Menu: Encoding ──
@@ -199,7 +199,7 @@ const nb = {
     // ── Search Panel ──
     "search.findLabel": "Finn",
     "search.replaceLabel": "Erstatt",
-    "search.regex": "Regulært uttrykk",
+    "search.regex": "Regex",
     "search.caseSensitive": "Skill på store/små",
     "search.wholeWord": "Hele ord",
     "search.wrapAround": "Ombryt",
@@ -268,10 +268,10 @@ const nb = {
     "preferences.whitespaceAll": "Alle",
     "preferences.defaultEncoding": "Standardkoding",
     "preferences.defaultLanguage": "Standardspråk",
-    "preferences.eol": "Linjeskift",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (klassisk Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtrer snarveier...",
     "shortcutMapper.pressKeys": "Trykk på taster...",
@@ -450,9 +450,9 @@ const nb = {
     "git.stageAll": "Stage alle",
     "git.commit": "Commit...",
     "git.diff": "diff",
-    "git.pushOk": "Pushe OK",
-    "git.pullOk": "Hent OK",
-    "git.committed": "Commit ✓",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Commit mislyktes: {{error}}",
     "git.pushFailed": "Push mislyktes: {{error}}",
     "git.pullFailed": "Pull mislyktes: {{error}}",
@@ -485,7 +485,7 @@ const nb = {
     "app.modified": "● ",
     "app.encoding.utf8": "UTF-8",
     // ── AI Chat ──
-    "ai.title": "AI-chat",
+    "ai.title": "AI",
     "ai.send": "Send",
     "ai.settings": "Innstillinger",
     "ai.clearChat": "Tøm chat",
@@ -553,8 +553,8 @@ const nb = {
 
     // ── Git Panel ──
     "git.switchBranch": "Bytte gren",
-    "git.pull": "Hent",
-    "git.push": "Pushe",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex-maler",

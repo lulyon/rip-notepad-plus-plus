@@ -120,7 +120,7 @@ const is = {
     "menu.view.splitVertical": "Skipta lóðrétt",
     "menu.view.alwaysOnTop": "Alltaf efst",
     "menu.view.toggleSidebar": "Sýna hliðarspjald",
-    "menu.view.markdownPreview": "Markdown forskoðun af/á",
+    "menu.view.markdownPreview": "Forskoðun",
     "menu.view.distractionFree": "Truflanalaus hamur",
     "menu.view.summary": "Yfirlit...",
 
@@ -284,10 +284,10 @@ const is = {
     "preferences.whitespaceAll": "Allt",
     "preferences.defaultEncoding": "Sjálfgefin kóðun",
     "preferences.defaultLanguage": "Sjálfgefið mál",
-    "preferences.eol": "Línulok",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Klassískt Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Sía flýtileiðir...",
@@ -480,10 +480,10 @@ const is = {
     "git.viewDiff": "Skoða mismun",
     "git.stageAll": "Skrá allt",
     "git.commit": "Commit...",
-    "git.diff": "mismunur",
-    "git.pushOk": "Senda OK",
-    "git.pullOk": "Sækja OK",
-    "git.committed": "Commit framkvæmt ✓",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Skráning mistókst: {{error}}",
     "git.pushFailed": "Ýta mistókst: {{error}}",
     "git.pullFailed": "Draga mistókst: {{error}}",
@@ -521,7 +521,7 @@ const is = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI spjall",
+    "ai.title": "AI",
     "ai.send": "Senda",
     "ai.settings": "Stillingar",
     "ai.clearChat": "Hreinsa spjall",
@@ -589,8 +589,8 @@ const is = {
 
     // ── Git Panel ──
     "git.switchBranch": "Skipta um grein",
-    "git.pull": "Sækja",
-    "git.push": "Senda",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex sniðmát",

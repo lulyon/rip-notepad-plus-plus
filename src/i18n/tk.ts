@@ -120,7 +120,7 @@ const tk = {
     "menu.view.splitVertical": "Wertikal Böl",
     "menu.view.alwaysOnTop": "Hemişe Üstde",
     "menu.view.toggleSidebar": "Sidebary Görkez",
-    "menu.view.markdownPreview": "Markdown Öňünden &Görkez",
+    "menu.view.markdownPreview": "Öňünden görme",
     "menu.view.distractionFree": "Üns Ýetirmezlik Režimi",
     "menu.view.summary": "Gysgaça...",
 
@@ -284,10 +284,10 @@ const tk = {
     "preferences.whitespaceAll": "Ählisi",
     "preferences.defaultEncoding": "Bellenen kodlama",
     "preferences.defaultLanguage": "Bellenen dil",
-    "preferences.eol": "Setir soňy",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Klassiki Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Gysga ýollary süz...",
@@ -480,10 +480,10 @@ const tk = {
     "git.viewDiff": "Diff gör",
     "git.stageAll": "Ählisini Stage et",
     "git.commit": "Commit...",
-    "git.diff": "tapawut",
-    "git.pushOk": "Itme OK",
-    "git.pullOk": "Çekme OK",
-    "git.committed": "Commit edildi ✓",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Kommit şowsuz: {{error}}",
     "git.pushFailed": "Push şowsuz: {{error}}",
     "git.pullFailed": "Pull şowsuz: {{error}}",
@@ -521,7 +521,7 @@ const tk = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI Söhbet",
+    "ai.title": "AI",
     "ai.send": "Iber",
     "ai.settings": "Sazlamalar",
     "ai.clearChat": "Söhbeti arassala",
@@ -589,8 +589,8 @@ const tk = {
 
     // ── Git Panel ──
     "git.switchBranch": "Şahany üýtget",
-    "git.pull": "Çek",
-    "git.push": "It",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex nusgalary",

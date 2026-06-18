@@ -132,22 +132,22 @@ const he = {
     // ── Menu: Language ──
     "menu.language": "&שפה",
     "menu.language.plaintext": "טקסט רגיל",
-    "menu.language.javascript": "ג'אווהסקריפט",
-    "menu.language.typescript": "טייפסקריפט",
-    "menu.language.json": "ג'ייסון",
-    "menu.language.html": "אייץ' טי אם אל",
-    "menu.language.css": "סי אס אס",
-    "menu.language.python": "פייתון",
-    "menu.language.rust": "ראסט",
-    "menu.language.go": "גו",
-    "menu.language.java": "ג'אווה",
-    "menu.language.c": "סי",
-    "menu.language.cpp": "סי++",
-    "menu.language.xml": "אקס אם אל",
-    "menu.language.yaml": "יאמל",
-    "menu.language.markdown": "מרקדאון",
-    "menu.language.sql": "אס קיו אל",
-    "menu.language.shell": "של",
+    "menu.language.javascript": "JavaScript",
+    "menu.language.typescript": "TypeScript",
+    "menu.language.json": "JSON",
+    "menu.language.html": "HTML",
+    "menu.language.css": "CSS",
+    "menu.language.python": "Python",
+    "menu.language.rust": "Rust",
+    "menu.language.go": "Go",
+    "menu.language.java": "Java",
+    "menu.language.c": "C",
+    "menu.language.cpp": "C++",
+    "menu.language.xml": "XML",
+    "menu.language.yaml": "YAML",
+    "menu.language.markdown": "Markdown",
+    "menu.language.sql": "SQL",
+    "menu.language.shell": "Shell",
 
     "menu.language.defineLanguage": "שפה מוגדרת משתמש...",
     "menu.language.openUdlFolder": "פתח תיקיית UDL...",
@@ -204,7 +204,7 @@ const he = {
     // ── Search Panel ──
     "search.findLabel": "חיפוש",
     "search.replaceLabel": "החלף",
-    "search.regex": "ביטוי רגולרי",
+    "search.regex": "Regex",
     "search.caseSensitive": "תלוי רישיות",
     "search.wholeWord": "מילה שלמה",
     "search.wrapAround": "גלישה",
@@ -267,10 +267,10 @@ const he = {
     "preferences.whitespaceAll": "הכל",
     "preferences.defaultEncoding": "קידוד ברירת מחדל",
     "preferences.defaultLanguage": "שפת ברירת מחדל",
-    "preferences.eol": "סוף שורה",
-    "preferences.eolLf": "LF (יוניקס/macOS)",
-    "preferences.eolCrlf": "CRLF (ווינדוס)",
-    "preferences.eolCr": "CR (מק קלאסי)",
+    "preferences.eol": "EOL",
+    "preferences.eolLf": "LF (Unix/macOS)",
+    "preferences.eolCrlf": "CRLF (Windows)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "סנן קיצורים...",
@@ -373,7 +373,7 @@ const he = {
     "sidebar.doclist": "רשימת מסמכים",
     "sidebar.clipboard": "לוח",
     "sidebar.symbols": "סמלים",
-    "sidebar.git": "גיט",
+    "sidebar.git": "Git",
 
     // ── Clipboard ──
     "clipboard.search": "חפש...",
@@ -484,13 +484,13 @@ const he = {
     "ai.searching": "מחפש...",
     "ai.send": "שלח",
     "ai.settings": "הגדרות",
-    "ai.title": "צ'אט AI",
+    "ai.title": "AI",
     "ai.webSearchOff": "חיפוש באינטרנט כבוי",
     "ai.webSearchOn": "חיפוש באינטרנט פעיל",
 
     // ── Commit ──
     "commit.cancel": "ביטול",
-    "commit.commit": "בצע",
+    "commit.commit": "Commit",
     "commit.filesStaged": "{{count}} קבצים מוכנים",
     "commit.messagePlaceholder": "הודעת Commit (Enter לשליחה, Shift+Enter לשורה חדשה)",
     "commit.title": "שינויי Commit",
@@ -502,15 +502,15 @@ const he = {
 
     // ── Git ──
     "git.checkoutFailed": "המעבר נכשל: {{error}}",
-    "git.commit": "בצע...",
+    "git.commit": "Commit...",
     "git.commitFailed": "ה-Commit נכשל: {{error}}",
-    "git.committed": "בוצע Commit ✓",
-    "git.diff": "הבדל",
+    "git.committed": "Committed ✓",
+    "git.diff": "diff",
     "git.newBranch": "שם ענף חדש...",
     "git.pullFailed": "ה-Pull נכשל: {{error}}",
-    "git.pullOk": "Pull בוצע",
+    "git.pullOk": "Pull OK",
     "git.pushFailed": "ה-Push נכשל: {{error}}",
-    "git.pushOk": "Push בוצע",
+    "git.pushOk": "Push OK",
     "git.stageAll": "הכן הכל",
 
     // ── Menu ──
@@ -521,7 +521,7 @@ const he = {
     "menu.search.gotoNextChange": "עבור ל&שינוי הבא",
     "menu.search.gotoPrevChange": "עבור לשינוי ה&קודם",
     "menu.tools.configure": "הגדר כלים חיצוניים...",
-    "menu.view.markdownPreview": "החלף &תצוגה מקדימה של Markdown",
+    "menu.view.markdownPreview": "תצוגה מקדימה",
 
     // ── Preferences ──
     "preferences.autoCheckUpdate": "בדוק עדכונים אוטומטית",
@@ -604,8 +604,8 @@ const he = {
 
     // ── Git Panel ──
     "git.switchBranch": "החלף ענף",
-    "git.pull": "משיכה",
-    "git.push": "דחיפה",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "תבניות ביטוי רגולרי",

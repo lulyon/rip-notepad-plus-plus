@@ -117,7 +117,7 @@ const ro = {
     "menu.view.splitVertical": "Împarte vertical",
     "menu.view.alwaysOnTop": "Mereu deasupra",
     "menu.view.toggleSidebar": "Arată bara laterală",
-    "menu.view.markdownPreview": "Comută previzualizarea &Markdown",
+    "menu.view.markdownPreview": "Previzualizare",
     "menu.view.distractionFree": "Mod fără distragere",
     "menu.view.summary": "Rezumat...",
     // ── Menu: Encoding ──
@@ -199,7 +199,7 @@ const ro = {
     // ── Search Panel ──
     "search.findLabel": "Găsește",
     "search.replaceLabel": "Înlocuiește",
-    "search.regex": "Expresie regulată",
+    "search.regex": "Regex",
     "search.caseSensitive": "Sensibil la majuscule",
     "search.wholeWord": "Cuvânt întreg",
     "search.wrapAround": "Înfășurare",
@@ -268,10 +268,10 @@ const ro = {
     "preferences.whitespaceAll": "Tot",
     "preferences.defaultEncoding": "Codificare implicită",
     "preferences.defaultLanguage": "Limbă implicită",
-    "preferences.eol": "Sfârșit de linie",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Mac clasic)",
+    "preferences.eolCr": "CR (Classic Mac)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtrează comenzi rapide...",
     "shortcutMapper.pressKeys": "Apasă taste...",
@@ -448,11 +448,11 @@ const ro = {
     "git.clean": "✓ Arborele de lucru curat",
     "git.viewDiff": "Vezi diferența",
     "git.stageAll": "Pune în scenă tot",
-    "git.commit": "Comite...",
-    "git.diff": "diferență",
-    "git.pushOk": "Push reușit",
-    "git.pullOk": "Pull reușit",
-    "git.committed": "Comis ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Comitere eșuată: {{error}}",
     "git.pushFailed": "Push eșuat: {{error}}",
     "git.pullFailed": "Pull eșuat: {{error}}",
@@ -462,7 +462,7 @@ const ro = {
     "commit.title": "Comite modificări",
     "commit.filesStaged": "{{count}} fișier(e) puse în scenă",
     "commit.messagePlaceholder": "Mesaj comitere (Enter pentru a comite, Shift+Enter pentru linie nouă)",
-    "commit.commit": "Comite",
+    "commit.commit": "Commit",
     "commit.cancel": "Anulează",
     // ── Plugin ──
     "plugin.title": "Manager plugin",
@@ -485,7 +485,7 @@ const ro = {
     "app.modified": "● ",
     "app.encoding.utf8": "UTF-8",
     // ── AI Chat ──
-    "ai.title": "Chat AI",
+    "ai.title": "AI",
     "ai.send": "Trimite",
     "ai.settings": "Setări",
     "ai.clearChat": "Șterge chat-ul",
@@ -551,8 +551,8 @@ const ro = {
 
     // ── Git Panel ──
     "git.switchBranch": "Schimbă ramura",
-    "git.pull": "Trage",
-    "git.push": "Împinge",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Șabloane regex",

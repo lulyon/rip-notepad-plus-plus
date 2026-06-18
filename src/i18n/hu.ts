@@ -117,7 +117,7 @@ const hu = {
     "menu.view.splitVertical": "Felbontas fuggolegesen",
     "menu.view.alwaysOnTop": "Mindig a tetejen",
     "menu.view.toggleSidebar": "Oldalso mutatasa",
-    "menu.view.markdownPreview": "&Markdown elonezet ki/be",
+    "menu.view.markdownPreview": "Előnézet",
     "menu.view.distractionFree": "Figyelemeltereles nelkuli mod",
     "menu.view.summary": "Osszegzes...",
     // ── Menu: Encoding ──
@@ -199,7 +199,7 @@ const hu = {
     // ── Search Panel ──
     "search.findLabel": "Kereses",
     "search.replaceLabel": "Csere",
-    "search.regex": "Reguláris kifejezés",
+    "search.regex": "Regex",
     "search.caseSensitive": "Kis/Nagybetu erzekeny",
     "search.wholeWord": "Egesz szo",
     "search.wrapAround": "Korbe",
@@ -268,10 +268,10 @@ const hu = {
     "preferences.whitespaceAll": "Osszes",
     "preferences.defaultEncoding": "Alapertelmezett kodolas",
     "preferences.defaultLanguage": "Alapertelmezett nyelv",
-    "preferences.eol": "SORVÉG",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (klasszikus Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Gyorsbillentyuk szurese...",
     "shortcutMapper.pressKeys": "Nyomjon billentyuket...",
@@ -449,10 +449,10 @@ const hu = {
     "git.viewDiff": "Diff megtekintese",
     "git.stageAll": "Osszes stage",
     "git.commit": "Commit...",
-    "git.diff": "különbség",
-    "git.pushOk": "Push sikeres",
-    "git.pullOk": "Pull sikeres",
-    "git.committed": "Commitelve",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Commit sikertelen: {{error}}",
     "git.pushFailed": "Push sikertelen: {{error}}",
     "git.pullFailed": "Pull sikertelen: {{error}}",
@@ -485,7 +485,7 @@ const hu = {
     "app.modified": "● ",
     "app.encoding.utf8": "UTF-8",
     // ── AI Chat ──
-    "ai.title": "AI csevegés",
+    "ai.title": "AI",
     "ai.send": "Kuldes",
     "ai.settings": "Beallitasok",
     "ai.clearChat": "Chat torlese",
@@ -551,8 +551,8 @@ const hu = {
 
     // ── Git Panel ──
     "git.switchBranch": "Ag valtas",
-    "git.pull": "Lehívás",
-    "git.push": "Küldés",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex sablonok",

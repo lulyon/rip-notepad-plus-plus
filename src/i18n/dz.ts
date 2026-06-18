@@ -120,7 +120,7 @@ const dz = {
     "menu.view.splitVertical": "ཕྱོགས་སུ་ཕྱེ།",
     "menu.view.alwaysOnTop": "རྟག་ཏུ་སྟེང་ལ།",
     "menu.view.toggleSidebar": "ཟུར་དེབ་སྟོན།",
-    "menu.view.markdownPreview": "&Markdown སྔོན་ལྟ་སྤོར་བ།",
+    "menu.view.markdownPreview": "སྔོན་ལྟ།",
     "menu.view.distractionFree": "གཡེང་བ་མེད་པའི་ཚུལ།",
     "menu.view.summary": "བསྡུས་དོན།...",
 
@@ -138,22 +138,22 @@ const dz = {
     // ── Menu: Language ──
     "menu.language": "&སྐད།",
     "menu.language.plaintext": "རྒྱུན་ཡིག",
-    "menu.language.javascript": "ཇ་བཱ་སྐྲིཔྚ།",
-    "menu.language.typescript": "ཊའིཔ་སྐྲིཔྚ།",
+    "menu.language.javascript": "JavaScript",
+    "menu.language.typescript": "TypeScript",
     "menu.language.json": "JSON",
     "menu.language.html": "HTML",
     "menu.language.css": "CSS",
-    "menu.language.python": "པའི་ཐོན།",
-    "menu.language.rust": "རཱསྚ།",
-    "menu.language.go": "གོ།",
-    "menu.language.java": "ཇ་བཱ།",
+    "menu.language.python": "Python",
+    "menu.language.rust": "Rust",
+    "menu.language.go": "Go",
+    "menu.language.java": "Java",
     "menu.language.c": "C",
     "menu.language.cpp": "C++",
     "menu.language.xml": "XML",
     "menu.language.yaml": "YAML",
-    "menu.language.markdown": "མརཀ་ཌཱའུན།",
+    "menu.language.markdown": "Markdown",
     "menu.language.sql": "SQL",
-    "menu.language.shell": "ཤེལ།",
+    "menu.language.shell": "Shell",
 
     "menu.language.defineLanguage": "བེད་སྤྱོད་པས་ངོས་འཛིན་བྱས་པའི་སྐད།...",
     "menu.language.openUdlFolder": "UDL ཁུར་ཡིག་ཁ་ཕྱེ།...",
@@ -284,10 +284,10 @@ const dz = {
     "preferences.whitespaceAll": "ཚང་མ།",
     "preferences.defaultEncoding": "སྔོན་སྒྲིག་གསང་རྡ།",
     "preferences.defaultLanguage": "སྔོན་སྒྲིག་སྐད།",
-    "preferences.eol": "ཐིག་མཇུག",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (སྔོན་གྱི Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "ཐུང་ལམ་བཀག...",
@@ -479,11 +479,11 @@ const dz = {
     "git.clean": "✓ ལས་ཤིང་གཙང་།",
     "git.viewDiff": "ཁྱད་ལྟ།",
     "git.stageAll": "ཚང་མ་གཞག",
-    "git.commit": "ཀོ་མིཊ།...",
-    "git.diff": "ཁྱད།",
-    "git.pushOk": "Push ཚང་།",
-    "git.pullOk": "Pull ཚང་།",
-    "git.committed": "Commit འབད་ཚར། ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Commit མ་ཚང་: {{error}}",
     "git.pushFailed": "Push མ་ཚང་: {{error}}",
     "git.pullFailed": "Pull མ་ཚང་: {{error}}",
@@ -494,7 +494,7 @@ const dz = {
     "commit.title": "བསྒྱུར་Commit བྱེད།",
     "commit.filesStaged": "{{count}} ཡིག་སྣོད་སྒྲིག",
     "commit.messagePlaceholder": "Commit འཕྲིན་ (Enter commit, Shift+Enter ཕྱི་ཐིག་གསར)",
-    "commit.commit": "ཀོ་མིཊ།",
+    "commit.commit": "Commit",
     "commit.cancel": "བཀག།",
 
     // ── Plugin ──
@@ -521,7 +521,7 @@ const dz = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI བགྲོ་གླེང་།",
+    "ai.title": "AI",
     "ai.send": "གཏོང་།",
     "ai.settings": "གསལ་བཀོད།",
     "ai.clearChat": "བགྲོ་གླེང་བཤར།",
@@ -589,8 +589,8 @@ const dz = {
 
     // ── Git Panel ──
     "git.switchBranch": "ཡལ་ག་བསྒྱུར།",
-    "git.pull": "ཕུལ།",
-    "git.push": "གཏོང་།",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex དཔེ།",

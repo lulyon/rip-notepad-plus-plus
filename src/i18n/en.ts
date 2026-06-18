@@ -120,7 +120,7 @@ const en = {
     "menu.view.splitVertical": "Split Vertically",
     "menu.view.alwaysOnTop": "Always on Top",
     "menu.view.toggleSidebar": "Show Sidebar",
-    "menu.view.markdownPreview": "Toggle &Markdown Preview",
+    "menu.view.markdownPreview": "&Preview",
     "menu.view.distractionFree": "Distraction Free Mode",
     "menu.view.summary": "Summary...",
 
@@ -521,7 +521,7 @@ const en = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI Chat",
+    "ai.title": "AI",
     "ai.send": "Send",
     "ai.settings": "Settings",
     "ai.clearChat": "Clear chat",

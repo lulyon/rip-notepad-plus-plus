@@ -120,7 +120,7 @@ const ka = {
     "menu.view.splitVertical": "ვერტიკალურად გაყოფა",
     "menu.view.alwaysOnTop": "ყოველთვის თავზე",
     "menu.view.toggleSidebar": "გვერდითა ზოლის ჩვენება",
-    "menu.view.markdownPreview": "Markdown &წინასწარი ნახვა",
+    "menu.view.markdownPreview": "წინასწარი",
     "menu.view.distractionFree": "რეჟიმი ყურადღების გაფანტვის გარეშე",
     "menu.view.summary": "შემაჯამებელი...",
 
@@ -138,22 +138,22 @@ const ka = {
     // ── Menu: Language ──
     "menu.language": "&ენა",
     "menu.language.plaintext": "უბრალო ტექსტი",
-    "menu.language.javascript": "ჯავასკრიპტი",
-    "menu.language.typescript": "ტაიპსკრიპტი",
+    "menu.language.javascript": "JavaScript",
+    "menu.language.typescript": "TypeScript",
     "menu.language.json": "JSON",
     "menu.language.html": "HTML",
     "menu.language.css": "CSS",
-    "menu.language.python": "პითონი",
-    "menu.language.rust": "რასტი",
-    "menu.language.go": "გო",
-    "menu.language.java": "ჯავა",
+    "menu.language.python": "Python",
+    "menu.language.rust": "Rust",
+    "menu.language.go": "Go",
+    "menu.language.java": "Java",
     "menu.language.c": "C",
     "menu.language.cpp": "C++",
     "menu.language.xml": "XML",
     "menu.language.yaml": "YAML",
-    "menu.language.markdown": "მარკდაუნი",
+    "menu.language.markdown": "Markdown",
     "menu.language.sql": "SQL",
-    "menu.language.shell": "შელი",
+    "menu.language.shell": "Shell",
 
     "menu.language.defineLanguage": "მომხმარებლის მიერ განსაზღვრული ენა...",
     "menu.language.openUdlFolder": "UDL საქაღალდის გახსნა...",
@@ -212,7 +212,7 @@ const ka = {
     // ── Search Panel ──
     "search.findLabel": "ძებნა",
     "search.replaceLabel": "ჩანაცვლება",
-    "search.regex": "რეგექსი",
+    "search.regex": "Regex",
     "search.caseSensitive": "რეგისტრის მგრძნობიარე",
     "search.wholeWord": "მთლიანი სიტყვა",
     "search.wrapAround": "გარშემო შემოხვევა",
@@ -284,10 +284,10 @@ const ka = {
     "preferences.whitespaceAll": "ყველა",
     "preferences.defaultEncoding": "ნაგულისხმევი კოდირება",
     "preferences.defaultLanguage": "ნაგულისხმევი ენა",
-    "preferences.eol": "ხაზის დასასრული",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (ძველი Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "მალსახმობების ფილტრი...",
@@ -479,11 +479,11 @@ const ka = {
     "git.clean": "✓ სამუშაო ხე სუფთაა",
     "git.viewDiff": "განსხვავების ნახვა",
     "git.stageAll": "ყველას staging",
-    "git.commit": "კომიტი...",
-    "git.diff": "განსხვავება",
-    "git.pushOk": "Push წარმატებული",
-    "git.pullOk": "Pull წარმატებული",
-    "git.committed": "დაკომიტებულია ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "კომიტი ჩაიშალა: {{error}}",
     "git.pushFailed": "Push ჩაიშალა: {{error}}",
     "git.pullFailed": "Pull ჩაიშალა: {{error}}",
@@ -494,7 +494,7 @@ const ka = {
     "commit.title": "ცვლილებების კომიტი",
     "commit.filesStaged": "{{count}} ფაილი დასტეიჯებულია",
     "commit.messagePlaceholder": "კომიტის შეტყობინება (Enter კომიტისთვის, Shift+Enter ახალი სტრიქონისთვის)",
-    "commit.commit": "კომიტი",
+    "commit.commit": "Commit",
     "commit.cancel": "გაუქმება",
 
     // ── Plugin ──
@@ -521,7 +521,7 @@ const ka = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI ჩატი",
+    "ai.title": "AI",
     "ai.send": "გაგზავნა",
     "ai.settings": "პარამეტრები",
     "ai.clearChat": "ჩატის გასუფთავება",
@@ -589,8 +589,8 @@ const ka = {
 
     // ── Git Panel ──
     "git.switchBranch": "ტოტის შეცვლა",
-    "git.pull": "მიღება",
-    "git.push": "გაგზავნა",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex შაბლონები",

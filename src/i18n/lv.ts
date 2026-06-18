@@ -121,7 +121,7 @@ const lv = {
     "menu.view.splitVertical": "Sadalīt vertikāli",
     "menu.view.alwaysOnTop": "Vienmēr virsū",
     "menu.view.toggleSidebar": "Rādīt sānjoslu",
-    "menu.view.markdownPreview": "Pārslēgt &Markdown priekšskatu",
+    "menu.view.markdownPreview": "Priekšskatījums",
     "menu.view.distractionFree": "Bez traucējumu režīms",
     "menu.view.summary": "Kopsavilkums...",
 
@@ -212,7 +212,7 @@ const lv = {
     // ── Search Panel ──
     "search.findLabel": "Atrast",
     "search.replaceLabel": "Aizstāt",
-    "search.regex": "Regulārā izteiksme",
+    "search.regex": "Regex",
     "search.caseSensitive": "Jutīgs pret reģistru",
     "search.wholeWord": "Viss vārds",
     "search.wrapAround": "Aptīšana",
@@ -284,7 +284,7 @@ const lv = {
     "preferences.whitespaceAll": "Visi",
     "preferences.defaultEncoding": "Noklusētais kodējums",
     "preferences.defaultLanguage": "Noklusētā valoda",
-    "preferences.eol": "Rindas beigas",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
     "preferences.eolCr": "CR (Classic Mac)",
@@ -481,9 +481,9 @@ const lv = {
     "git.stageAll": "Iekļaut visus",
     "git.commit": "Commit...",
     "git.diff": "diff",
-    "git.pushOk": "Grūšana OK",
-    "git.pullOk": "Vilkšana OK",
-    "git.committed": "Izpildīts commit ✓",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Commit neizdevās: {{error}}",
     "git.pushFailed": "Push neizdevās: {{error}}",
     "git.pullFailed": "Pull neizdevās: {{error}}",
@@ -520,7 +520,7 @@ const lv = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI Tērzēšana",
+    "ai.title": "AI",
     "ai.send": "Sūtīt",
     "ai.settings": "Iestatījumi",
     "ai.clearChat": "Notīrīt tērzēšanu",
@@ -588,8 +588,8 @@ const lv = {
 
     // ── Git Panel ──
     "git.switchBranch": "Pārslēgt zaru",
-    "git.pull": "Vilkt",
-    "git.push": "Grūst",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex veidnes",

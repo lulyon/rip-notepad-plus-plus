@@ -120,7 +120,7 @@ const ms = {
     "menu.view.splitVertical": "Pisah Menegak",
     "menu.view.alwaysOnTop": "Sentiasa di Atas",
     "menu.view.toggleSidebar": "Tunjuk Bar Sisi",
-    "menu.view.markdownPreview": "Togol Pratonton &Markdown",
+    "menu.view.markdownPreview": "Pratonton",
     "menu.view.distractionFree": "Mod Tanpa Gangguan",
     "menu.view.summary": "Ringkasan...",
 
@@ -284,10 +284,10 @@ const ms = {
     "preferences.whitespaceAll": "Semua",
     "preferences.defaultEncoding": "Pengekodan lalai",
     "preferences.defaultLanguage": "Bahasa lalai",
-    "preferences.eol": "Penamat baris",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Mac Klasik)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Tapis pintasan...",
@@ -479,11 +479,11 @@ const ms = {
     "git.clean": "✓ Pokok kerja bersih",
     "git.viewDiff": "Lihat Diff",
     "git.stageAll": "Stage Semua",
-    "git.commit": "Komit...",
-    "git.diff": "beza",
-    "git.pushOk": "Tolak OK",
-    "git.pullOk": "Tarik OK",
-    "git.committed": "Commit selesai ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Komit gagal: {{error}}",
     "git.pushFailed": "Tolak gagal: {{error}}",
     "git.pullFailed": "Tarik gagal: {{error}}",
@@ -494,7 +494,7 @@ const ms = {
     "commit.title": "Komit Perubahan",
     "commit.filesStaged": "{{count}} fail di-stage",
     "commit.messagePlaceholder": "Mesej komit (Enter untuk komit, Shift+Enter untuk baris baharu)",
-    "commit.commit": "Komit",
+    "commit.commit": "Commit",
     "commit.cancel": "Batal",
 
     // ── Plugin ──
@@ -521,7 +521,7 @@ const ms = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "Chat AI",
+    "ai.title": "AI",
     "ai.send": "Hantar",
     "ai.settings": "Tetapan",
     "ai.clearChat": "Kosongkan chat",
@@ -589,8 +589,8 @@ const ms = {
 
     // ── Git Panel ──
     "git.switchBranch": "Tukar cawangan",
-    "git.pull": "Tarik",
-    "git.push": "Tolak",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Templat Regex",

@@ -121,7 +121,7 @@ const lt = {
     "menu.view.splitVertical": "Padalyti vertikaliai",
     "menu.view.alwaysOnTop": "Visada viršuje",
     "menu.view.toggleSidebar": "Rodyti šoninę juostą",
-    "menu.view.markdownPreview": "Įjungti/išjungti &Markdown peržiūrą",
+    "menu.view.markdownPreview": "Peržiūra",
     "menu.view.distractionFree": "Režimas be blaškymosi",
     "menu.view.summary": "Santrauka...",
 
@@ -212,7 +212,7 @@ const lt = {
     // ── Search Panel ──
     "search.findLabel": "Rasti",
     "search.replaceLabel": "Keisti",
-    "search.regex": "Reguliarusis reiškinys",
+    "search.regex": "Regex",
     "search.caseSensitive": "Jautrumas raidėms",
     "search.wholeWord": "Visas žodis",
     "search.wrapAround": "Apvynioti",
@@ -284,10 +284,10 @@ const lt = {
     "preferences.whitespaceAll": "Visi",
     "preferences.defaultEncoding": "Numatytoji koduotė",
     "preferences.defaultLanguage": "Numatytoji kalba",
-    "preferences.eol": "Eilutės pabaiga",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Klasikinis Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtruoti sparčiuosius klavišus...",
@@ -480,10 +480,10 @@ const lt = {
     "git.viewDiff": "Žiūrėti diff",
     "git.stageAll": "Pridėti visus",
     "git.commit": "Commit...",
-    "git.diff": "skirtumas",
-    "git.pushOk": "Pastumta OK",
-    "git.pullOk": "Patraukta OK",
-    "git.committed": "Atliktas commit ✓",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Commit nepavyko: {{error}}",
     "git.pushFailed": "Push nepavyko: {{error}}",
     "git.pullFailed": "Pull nepavyko: {{error}}",
@@ -520,7 +520,7 @@ const lt = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI Pokalbis",
+    "ai.title": "AI",
     "ai.send": "Siųsti",
     "ai.settings": "Nustatymai",
     "ai.clearChat": "Išvalyti pokalbį",
@@ -588,8 +588,8 @@ const lt = {
 
     // ── Git Panel ──
     "git.switchBranch": "Perjungti šaką",
-    "git.pull": "Patraukti",
-    "git.push": "Pastumti",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex šablonai",

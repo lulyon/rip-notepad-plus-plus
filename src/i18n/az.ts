@@ -120,7 +120,7 @@ const az = {
     "menu.view.splitVertical": "Şaquli Böl",
     "menu.view.alwaysOnTop": "Həmişə Üstdə",
     "menu.view.toggleSidebar": "Yan Paneli Göstər",
-    "menu.view.markdownPreview": "&Markdown Ön İzləməni Dəyiş",
+    "menu.view.markdownPreview": "Önizləmə",
     "menu.view.distractionFree": "Diqqətdən Yayındırmayan Rejim",
     "menu.view.summary": "Xülasə...",
 
@@ -284,10 +284,10 @@ const az = {
     "preferences.whitespaceAll": "Hamısı",
     "preferences.defaultEncoding": "Standart kodlaşdırma",
     "preferences.defaultLanguage": "Standart dil",
-    "preferences.eol": "Sətir sonu",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Klassik Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Qısayolları filtrlə...",
@@ -480,10 +480,10 @@ const az = {
     "git.viewDiff": "Fərqə Bax",
     "git.stageAll": "Hamısını Mərhələlə",
     "git.commit": "Commit...",
-    "git.diff": "fərq",
-    "git.pushOk": "Göndərmə OK",
-    "git.pullOk": "Çəkmə OK",
-    "git.committed": "Commit edildi ✓",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Commit uğursuz: {{error}}",
     "git.pushFailed": "Push uğursuz: {{error}}",
     "git.pullFailed": "Pull uğursuz: {{error}}",
@@ -521,7 +521,7 @@ const az = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI Söhbət",
+    "ai.title": "AI",
     "ai.send": "Göndər",
     "ai.settings": "Parametrlər",
     "ai.clearChat": "Söhbəti təmizlə",
@@ -589,8 +589,8 @@ const az = {
 
     // ── Git Panel ──
     "git.switchBranch": "Budağı dəyiş",
-    "git.pull": "Çək",
-    "git.push": "Göndər",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex şablonları",

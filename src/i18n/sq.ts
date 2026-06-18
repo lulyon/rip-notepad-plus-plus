@@ -120,7 +120,7 @@ const sq = {
     "menu.view.splitVertical": "Ndaj Vertikalisht",
     "menu.view.alwaysOnTop": "Gjithmonë në Krye",
     "menu.view.toggleSidebar": "Shfaq Shiritin Anësor",
-    "menu.view.markdownPreview": "Ndrysho &Parapamje Markdown",
+    "menu.view.markdownPreview": "Parapamje",
     "menu.view.distractionFree": "Mënyra Pa Shpërqendrime",
     "menu.view.summary": "Përmbledhje...",
 
@@ -284,10 +284,10 @@ const sq = {
     "preferences.whitespaceAll": "Të gjitha",
     "preferences.defaultEncoding": "Kodimi parazgjedhje",
     "preferences.defaultLanguage": "Gjuha parazgjedhje",
-    "preferences.eol": "Fund rreshti",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Mac klasik)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtro shkurtoret...",
@@ -480,10 +480,10 @@ const sq = {
     "git.viewDiff": "Shiko Ndryshimet",
     "git.stageAll": "Shtro Të gjitha",
     "git.commit": "Commit...",
-    "git.diff": "ndryshimet",
-    "git.pushOk": "Shtytje OK",
-    "git.pullOk": "Tërheqje OK",
-    "git.committed": "Commit i kryer ✓",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Angazhimi dështoi: {{error}}",
     "git.pushFailed": "Push dështoi: {{error}}",
     "git.pullFailed": "Pull dështoi: {{error}}",
@@ -521,7 +521,7 @@ const sq = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "Bisedë AI",
+    "ai.title": "AI",
     "ai.send": "Dërgo",
     "ai.settings": "Cilësimet",
     "ai.clearChat": "Pastro bisedën",
@@ -589,8 +589,8 @@ const sq = {
 
     // ── Git Panel ──
     "git.switchBranch": "Ndrysho degën",
-    "git.pull": "Tërhiq",
-    "git.push": "Shtyje",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Shabllone Regex-i",

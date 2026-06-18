@@ -120,7 +120,7 @@ const hy = {
     "menu.view.splitVertical": "Բաժանել &ուղղահայաց",
     "menu.view.alwaysOnTop": "Միշտ &վերևում",
     "menu.view.toggleSidebar": "&Ցույց տալ կողային վահանակը",
-    "menu.view.markdownPreview": "&Markdown նախադիտում",
+    "menu.view.markdownPreview": "Նախադիտում",
     "menu.view.distractionFree": "&Անխափան ռեժիմ",
     "menu.view.summary": "&Ամփոփում...",
 
@@ -138,22 +138,22 @@ const hy = {
     // ── Menu: Language ──
     "menu.language": "&Լեզու",
     "menu.language.plaintext": "Պարզ տեքստ",
-    "menu.language.javascript": "ՋավաՍկրիպտ",
-    "menu.language.typescript": "ԹայփՍկրիպտ",
+    "menu.language.javascript": "JavaScript",
+    "menu.language.typescript": "TypeScript",
     "menu.language.json": "JSON",
     "menu.language.html": "HTML",
     "menu.language.css": "CSS",
-    "menu.language.python": "Փայթոն",
-    "menu.language.rust": "Ռաստ",
-    "menu.language.go": "Գո",
-    "menu.language.java": "Ջավա",
+    "menu.language.python": "Python",
+    "menu.language.rust": "Rust",
+    "menu.language.go": "Go",
+    "menu.language.java": "Java",
     "menu.language.c": "C",
     "menu.language.cpp": "C++",
     "menu.language.xml": "XML",
     "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Մարքդաուն",
+    "menu.language.markdown": "Markdown",
     "menu.language.sql": "SQL",
-    "menu.language.shell": "Շել",
+    "menu.language.shell": "Shell",
 
     "menu.language.defineLanguage": "&Օգտագործողի կողմից սահմանված լեզու...",
     "menu.language.openUdlFolder": "Բացել UDL &թղթապանակը...",
@@ -212,7 +212,7 @@ const hy = {
     // ── Search Panel ──
     "search.findLabel": "&Գտնել",
     "search.replaceLabel": "&Փոխարինել",
-    "search.regex": "&Regex",
+    "search.regex": "Regex",
     "search.caseSensitive": "&Գրանշանի զգայուն",
     "search.wholeWord": "Ամբողջ &բառը",
     "search.wrapAround": "&Շրջանցել",
@@ -284,10 +284,10 @@ const hy = {
     "preferences.whitespaceAll": "&Բոլորը",
     "preferences.defaultEncoding": "&Լռելյայն կոդավորում",
     "preferences.defaultLanguage": "&Լռելյայն լեզու",
-    "preferences.eol": "&EOL",
-    "preferences.eolLf": "&LF (Unix/macOS)",
-    "preferences.eolCrlf": "&CRLF (Windows)",
-    "preferences.eolCr": "&CR (Classic Mac)",
+    "preferences.eol": "EOL",
+    "preferences.eolLf": "LF (Unix/macOS)",
+    "preferences.eolCrlf": "CRLF (Windows)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "&Զտել ստեղնաշարային համակցությունները...",
@@ -479,11 +479,11 @@ const hy = {
     "git.clean": "✓ Աշխատանքային ծառը &մաքուր է",
     "git.viewDiff": "&Դիտել տարբերությունը",
     "git.stageAll": "&Պատրաստել բոլորը",
-    "git.commit": "&Հանձնել...",
-    "git.diff": "&տարբերություն",
-    "git.pushOk": "&Push հաջողված",
-    "git.pullOk": "&Pull հաջողված",
-    "git.committed": "&Հանձնված է ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Հանձնումը ձախողվեց: {{error}}",
     "git.pushFailed": "Push-ը ձախողվեց: {{error}}",
     "git.pullFailed": "Pull-ը ձախողվեց: {{error}}",
@@ -494,7 +494,7 @@ const hy = {
     "commit.title": "&Հանձնել փոփոխությունները",
     "commit.filesStaged": "{{count}} ֆայլ պատրաստված է",
     "commit.messagePlaceholder": "&Հանձնման հաղորդագրություն (Enter՝ հանձնել, Shift+Enter՝ նոր տող)",
-    "commit.commit": "&Հանձնել",
+    "commit.commit": "Commit",
     "commit.cancel": "&Չեղարկել",
 
     // ── Plugin ──
@@ -521,7 +521,7 @@ const hy = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI &Զրույց",
+    "ai.title": "AI",
     "ai.send": "&Ուղարկել",
     "ai.settings": "&Կարգավորումներ",
     "ai.clearChat": "&Մաքրել զրույցը",
@@ -589,8 +589,8 @@ const hy = {
 
     // ── Git Panel ──
     "git.switchBranch": "&Փոխել ճյուղը",
-    "git.pull": "&Pull",
-    "git.push": "&Push",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "&Regex ձևանմուշներ",

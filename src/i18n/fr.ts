@@ -120,7 +120,7 @@ const fr = {
     "menu.view.splitVertical": "Division verticale",
     "menu.view.alwaysOnTop": "Toujours au premier plan",
     "menu.view.toggleSidebar": "Afficher la barre latérale",
-    "menu.view.markdownPreview": "Aperçu Markdown(&M)",
+    "menu.view.markdownPreview": "Aperçu",
     "menu.view.distractionFree": "Mode sans distraction",
     "menu.view.summary": "Résumé...",
 
@@ -212,7 +212,7 @@ const fr = {
     // ── Search Panel ──
     "search.findLabel": "Rechercher",
     "search.replaceLabel": "Remplacer",
-    "search.regex": "Expression régulière",
+    "search.regex": "Regex",
     "search.caseSensitive": "Respecter la casse",
     "search.wholeWord": "Mot entier",
     "search.wrapAround": "Reboucler",
@@ -278,10 +278,10 @@ const fr = {
     "preferences.whitespaceAll": "Tout",
     "preferences.defaultEncoding": "Encodage par défaut",
     "preferences.defaultLanguage": "Langage par défaut",
-    "preferences.eol": "Fin de ligne",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Mac classique)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtrer les raccourcis...",
@@ -468,7 +468,7 @@ const fr = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "Chat IA",
+    "ai.title": "AI",
     "ai.send": "Envoyer",
     "ai.settings": "Paramètres",
     "ai.clearChat": "Effacer le chat",
@@ -512,7 +512,7 @@ const fr = {
     "commit.title": "Valider les modifications",
     "commit.filesStaged": "{{count}} fichier(s) indexé(s)",
     "commit.messagePlaceholder": "Message de validation (Entrée pour valider, Shift+Entrée pour nouvelle ligne)",
-    "commit.commit": "Valider",
+    "commit.commit": "Commit",
     "commit.cancel": "Annuler",
 
     // ── Search Panel (additions) ──
@@ -530,11 +530,11 @@ const fr = {
 
     // ── Git (additions) ──
     "git.stageAll": "Tout indexer",
-    "git.commit": "Valider...",
-    "git.diff": "Diff",
-    "git.pushOk": "Pousser OK",
-    "git.pullOk": "Tirer OK",
-    "git.committed": "Validé ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Échec de la validation : {{error}}",
     "git.pushFailed": "Échec du push : {{error}}",
     "git.pullFailed": "Échec du pull : {{error}}",
@@ -599,8 +599,8 @@ const fr = {
 
     // ── Git Panel ──
     "git.switchBranch": "Changer de branche",
-    "git.pull": "Tirer",
-    "git.push": "Pousser",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Modèles d'expression régulière",

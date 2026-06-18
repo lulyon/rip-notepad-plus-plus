@@ -120,7 +120,7 @@ const ko = {
     "menu.view.splitVertical": "수직 분할",
     "menu.view.alwaysOnTop": "항상 위에 표시",
     "menu.view.toggleSidebar": "사이드바 표시",
-    "menu.view.markdownPreview": "Markdown 미리보기(&M)",
+    "menu.view.markdownPreview": "미리보기",
     "menu.view.distractionFree": "방해 금지 모드",
     "menu.view.summary": "요약...",
 
@@ -138,22 +138,22 @@ const ko = {
     // ── Menu: Language ──
     "menu.language": "언어(&L)",
     "menu.language.plaintext": "일반 텍스트",
-    "menu.language.javascript": "자바스크립트",
-    "menu.language.typescript": "타입스크립트",
-    "menu.language.json": "제이슨",
-    "menu.language.html": "에이치티엠엘",
-    "menu.language.css": "씨에스에스",
-    "menu.language.python": "파이썬",
-    "menu.language.rust": "러스트",
-    "menu.language.go": "고",
-    "menu.language.java": "자바",
-    "menu.language.c": "시",
-    "menu.language.cpp": "시쁠쁠",
-    "menu.language.xml": "엑스엠엘",
-    "menu.language.yaml": "야믈",
-    "menu.language.markdown": "마크다운",
-    "menu.language.sql": "에스큐엘",
-    "menu.language.shell": "셸",
+    "menu.language.javascript": "JavaScript",
+    "menu.language.typescript": "TypeScript",
+    "menu.language.json": "JSON",
+    "menu.language.html": "HTML",
+    "menu.language.css": "CSS",
+    "menu.language.python": "Python",
+    "menu.language.rust": "Rust",
+    "menu.language.go": "Go",
+    "menu.language.java": "Java",
+    "menu.language.c": "C",
+    "menu.language.cpp": "C++",
+    "menu.language.xml": "XML",
+    "menu.language.yaml": "YAML",
+    "menu.language.markdown": "Markdown",
+    "menu.language.sql": "SQL",
+    "menu.language.shell": "Shell",
 
     "menu.language.defineLanguage": "사용자 정의 언어...",
     "menu.language.openUdlFolder": "UDL 폴더 열기...",
@@ -212,7 +212,7 @@ const ko = {
     // ── Search Panel ──
     "search.findLabel": "찾기",
     "search.replaceLabel": "바꾸기",
-    "search.regex": "정규식",
+    "search.regex": "Regex",
     "search.caseSensitive": "대소문자 구분",
     "search.wholeWord": "단어 단위",
     "search.wrapAround": "검색 범위 순환",
@@ -278,10 +278,10 @@ const ko = {
     "preferences.whitespaceAll": "모두",
     "preferences.defaultEncoding": "기본 인코딩",
     "preferences.defaultLanguage": "기본 언어",
-    "preferences.eol": "줄 끝",
-    "preferences.eolLf": "LF (유닉스/macOS)",
-    "preferences.eolCrlf": "CRLF (윈도우)",
-    "preferences.eolCr": "CR (클래식 맥)",
+    "preferences.eol": "EOL",
+    "preferences.eolLf": "LF (Unix/macOS)",
+    "preferences.eolCrlf": "CRLF (Windows)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "단축키 필터...",
@@ -384,7 +384,7 @@ const ko = {
     "sidebar.doclist": "문서 목록",
     "sidebar.clipboard": "클립보드",
     "sidebar.symbols": "심볼",
-    "sidebar.git": "깃",
+    "sidebar.git": "Git",
     "sidebar.preview": "미리보기",
     "sidebar.terminal": "터미널",
 
@@ -468,7 +468,7 @@ const ko = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI 채팅",
+    "ai.title": "AI",
     "ai.send": "보내기",
     "ai.settings": "설정",
     "ai.clearChat": "채팅 지우기",
@@ -512,7 +512,7 @@ const ko = {
     "commit.title": "변경 사항 커밋",
     "commit.filesStaged": "{{count}}개 파일이 스테이징됨",
     "commit.messagePlaceholder": "커밋 메시지 (Enter 커밋, Shift+Enter 줄바꿈)",
-    "commit.commit": "커밋",
+    "commit.commit": "Commit",
     "commit.cancel": "취소",
 
     // ── Search Panel (additions) ──
@@ -530,11 +530,11 @@ const ko = {
 
     // ── Git (additions) ──
     "git.stageAll": "모두 스테이징",
-    "git.commit": "커밋...",
-    "git.diff": "차이",
-    "git.pushOk": "푸시 성공",
-    "git.pullOk": "풀 성공",
-    "git.committed": "커밋 완료 ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "커밋 실패：{{error}}",
     "git.pushFailed": "푸시 실패：{{error}}",
     "git.pullFailed": "풀 실패：{{error}}",
@@ -599,8 +599,8 @@ const ko = {
 
     // ── Git Panel ──
     "git.switchBranch": "브랜치 전환",
-    "git.pull": "풀",
-    "git.push": "푸시",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "정규식 템플릿",

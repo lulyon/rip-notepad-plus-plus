@@ -120,7 +120,7 @@ const uz = {
     "menu.view.splitVertical": "Vertikal Bo'lish",
     "menu.view.alwaysOnTop": "Doim Yuqorida",
     "menu.view.toggleSidebar": "Yon Panelni Ko'rsatish",
-    "menu.view.markdownPreview": "Markdownni &Oldindan Ko'rish",
+    "menu.view.markdownPreview": "Oldindan ko'rish",
     "menu.view.distractionFree": "Chalg'itmaydigan Rejim",
     "menu.view.summary": "Xulosa...",
 
@@ -284,10 +284,10 @@ const uz = {
     "preferences.whitespaceAll": "Hammasi",
     "preferences.defaultEncoding": "Standart kodlash",
     "preferences.defaultLanguage": "Standart til",
-    "preferences.eol": "Qator oxiri",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Klassik Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Yorliqlarni filtrlash...",
@@ -480,10 +480,10 @@ const uz = {
     "git.viewDiff": "Farqni ko'rish",
     "git.stageAll": "Hammasini Stage qilish",
     "git.commit": "Commit...",
-    "git.diff": "farq",
-    "git.pushOk": "Jo'natish OK",
-    "git.pullOk": "Tortish OK",
-    "git.committed": "Commit bajarildi ✓",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Kommit muvaffaqiyatsiz: {{error}}",
     "git.pushFailed": "Push muvaffaqiyatsiz: {{error}}",
     "git.pullFailed": "Pull muvaffaqiyatsiz: {{error}}",
@@ -521,7 +521,7 @@ const uz = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI Suhbat",
+    "ai.title": "AI",
     "ai.send": "Yuborish",
     "ai.settings": "Sozlamalar",
     "ai.clearChat": "Chatni tozalash",
@@ -589,8 +589,8 @@ const uz = {
 
     // ── Git Panel ──
     "git.switchBranch": "Filialni o'zgartirish",
-    "git.pull": "Tortish",
-    "git.push": "Jo'natish",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex andozalari",

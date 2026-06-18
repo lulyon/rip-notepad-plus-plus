@@ -120,7 +120,7 @@ const mn = {
     "menu.view.splitVertical": "Босоо Хуваах",
     "menu.view.alwaysOnTop": "Үргэлж Дээр",
     "menu.view.toggleSidebar": "Хажуугийн Самбарыг Харуулах",
-    "menu.view.markdownPreview": "&Markdown Урьдчилан Харахыг Солих",
+    "menu.view.markdownPreview": "Урьдчилж харах",
     "menu.view.distractionFree": "Анхаарал Сараадаггүй Режим",
     "menu.view.summary": "Хураангуй...",
 
@@ -138,22 +138,22 @@ const mn = {
     // ── Menu: Language ──
     "menu.language": "&Хэл",
     "menu.language.plaintext": "Энгийн Текст",
-    "menu.language.javascript": "ЖаваСкрипт",
-    "menu.language.typescript": "ТайпСкрипт",
+    "menu.language.javascript": "JavaScript",
+    "menu.language.typescript": "TypeScript",
     "menu.language.json": "JSON",
     "menu.language.html": "HTML",
     "menu.language.css": "CSS",
-    "menu.language.python": "Пайтон",
-    "menu.language.rust": "Раст",
-    "menu.language.go": "Гоу",
-    "menu.language.java": "Жава",
+    "menu.language.python": "Python",
+    "menu.language.rust": "Rust",
+    "menu.language.go": "Go",
+    "menu.language.java": "Java",
     "menu.language.c": "C",
     "menu.language.cpp": "C++",
     "menu.language.xml": "XML",
     "menu.language.yaml": "YAML",
-    "menu.language.markdown": "МаркДаун",
+    "menu.language.markdown": "Markdown",
     "menu.language.sql": "SQL",
-    "menu.language.shell": "Шелл",
+    "menu.language.shell": "Shell",
 
     "menu.language.defineLanguage": "Хэрэглэгчийн Тодорхойлсон Хэл...",
     "menu.language.openUdlFolder": "UDL Хавтасыг Нээх...",
@@ -284,10 +284,10 @@ const mn = {
     "preferences.whitespaceAll": "Бүгд",
     "preferences.defaultEncoding": "Анхдагч кодчилол",
     "preferences.defaultLanguage": "Анхдагч хэл",
-    "preferences.eol": "Мөрийн төгсгөл",
+    "preferences.eol": "EOL",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Сонгодог Mac)",
+    "preferences.eolCr": "CR (Classic Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Хурдан товчийг шүүх...",
@@ -479,11 +479,11 @@ const mn = {
     "git.clean": "✓ Ажлын мод цэвэр",
     "git.viewDiff": "Ялгааг Үзэх",
     "git.stageAll": "Бүгдийг Stage",
-    "git.commit": "Коммит...",
-    "git.diff": "ялгаа",
-    "git.pushOk": "Push амжилттай",
-    "git.pullOk": "Pull амжилттай",
-    "git.committed": "Коммит хийгдсэн ✓",
+    "git.commit": "Commit...",
+    "git.diff": "diff",
+    "git.pushOk": "Push OK",
+    "git.pullOk": "Pull OK",
+    "git.committed": "Committed ✓",
     "git.commitFailed": "Commit амжилтгүй: {{error}}",
     "git.pushFailed": "Push амжилтгүй: {{error}}",
     "git.pullFailed": "Pull амжилтгүй: {{error}}",
@@ -494,7 +494,7 @@ const mn = {
     "commit.title": "Өөрчлөлтүүдийг Commit Хийх",
     "commit.filesStaged": "{{count}} файл(ууд) staged",
     "commit.messagePlaceholder": "Commit мессеж (Enter commit хийх, Shift+Enter шинэ мөр)",
-    "commit.commit": "Коммит",
+    "commit.commit": "Commit",
     "commit.cancel": "Цуцлах",
 
     // ── Plugin ──
@@ -521,7 +521,7 @@ const mn = {
     "app.encoding.utf8": "UTF-8",
 
     // ── AI Chat ──
-    "ai.title": "AI Чат",
+    "ai.title": "AI",
     "ai.send": "Илгээх",
     "ai.settings": "Тохиргоо",
     "ai.clearChat": "Чат цэвэрлэх",
@@ -589,8 +589,8 @@ const mn = {
 
     // ── Git Panel ──
     "git.switchBranch": "Салаа солих",
-    "git.pull": "Татах",
-    "git.push": "Түлхэх",
+    "git.pull": "Pull",
+    "git.push": "Push",
 
     // ── Search Panel ──
     "search.regexTemplates": "Regex загварууд",
