@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useEditorStore } from "../../stores/editorStore";
 import { useEncodingStore } from "../../stores/encodingStore";
 import { useSettingsStore } from "../../stores/settingsStore";
@@ -6,6 +7,7 @@ import { useEffect } from "react";
 import "./StatusBar.css";
 
 export function StatusBar() {
+  const { t } = useTranslation();
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const tabs = useEditorStore((s) => s.tabs);
   const activeTab = tabs.find((t) => t.id === activeTabId);
@@ -45,7 +47,7 @@ export function StatusBar() {
       <span
         className="status-item status-clickable"
         onClick={openEncodingDialog}
-        title="Click to change encoding"
+        title={t("status.clickToChange")}
       >
         {activeTab.encoding}
       </span>

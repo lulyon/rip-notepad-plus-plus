@@ -381,6 +381,7 @@ const zh = {
     "status.language": "语言",
     "status.line": "行",
     "status.column": "列",
+    "status.clickToChange": "点击切换编码",
 
     // ── Welcome ──
     "welcome.title": "ripNotepad++",

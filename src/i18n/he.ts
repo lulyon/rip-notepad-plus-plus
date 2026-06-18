@@ -361,6 +361,7 @@ const he = {
     "status.language": "שפה",
     "status.line": "שורה",
     "status.column": "עמודה",
+    "status.clickToChange": "לחץ לשינוי קידוד",
 
     // ── Welcome ──
     "welcome.title": "ripNotepad++",
@@ -461,6 +462,129 @@ const he = {
     "contextMenu.add": "הוסף",
     "contextMenu.selectAction": "בחר פעולה...",
     "contextMenu.resetDefaults": "אפס לברירת מחדל",
+
+    // ── AI ──
+    "ai.autoDetect": "זיהוי אוטומטי",
+    "ai.clearChat": "נקה צ'אט",
+    "ai.configApiKey": "מפתח API",
+    "ai.configApiUrl": "כתובת API בסיסית",
+    "ai.configDesc": "הגדר את ספק ה-AI שלך. תואם לפורמטים של Anthropic ו-OpenAI.",
+    "ai.configModel": "מודל",
+    "ai.configProvider": "ספק API",
+    "ai.configTitle": "הגדרות AI",
+    "ai.emptyHint": "שאל אותי כל דבר על הקוד שלך.",
+    "ai.newChat": "צ'אט חדש",
+    "ai.placeholder": "שאל על הקוד... (Enter לשליחה, Shift+Enter לשורה חדשה)",
+    "ai.quickExplain": "הסבר קוד",
+    "ai.quickFix": "תקן באגים",
+    "ai.quickRefactor": "שפר קוד",
+    "ai.quickTest": "צור בדיקות",
+    "ai.save": "שמור",
+    "ai.searchedN": "חיפוש: {{query}} ({{count}} תוצאות)",
+    "ai.searching": "מחפש...",
+    "ai.send": "שלח",
+    "ai.settings": "הגדרות",
+    "ai.title": "צ'אט AI",
+    "ai.webSearchOff": "חיפוש באינטרנט כבוי",
+    "ai.webSearchOn": "חיפוש באינטרנט פעיל",
+
+    // ── Commit ──
+    "commit.cancel": "ביטול",
+    "commit.commit": "Commit",
+    "commit.filesStaged": "{{count}} קבצים מוכנים",
+    "commit.messagePlaceholder": "הודעת Commit (Enter לשליחה, Shift+Enter לשורה חדשה)",
+    "commit.title": "שינויי Commit",
+
+    // ── Dialog ──
+    "dialog.discardAll": "השלך הכל",
+    "dialog.saveAll": "שמור הכל",
+    "dialog.unsavedDesc": "לקבצים הבאים יש שינויים שלא נשמרו:",
+
+    // ── Git ──
+    "git.checkoutFailed": "המעבר נכשל: {{error}}",
+    "git.commit": "Commit...",
+    "git.commitFailed": "ה-Commit נכשל: {{error}}",
+    "git.committed": "בוצע Commit ✓",
+    "git.diff": "diff",
+    "git.newBranch": "שם ענף חדש...",
+    "git.pullFailed": "ה-Pull נכשל: {{error}}",
+    "git.pullOk": "Pull בוצע",
+    "git.pushFailed": "ה-Push נכשל: {{error}}",
+    "git.pushOk": "Push בוצע",
+    "git.stageAll": "הכן הכל",
+
+    // ── Menu ──
+    "menu.file.loadWorkspace": "פתח סביבת עבודה...",
+    "menu.file.saveWorkspace": "שמור סביבת עבודה בשם...",
+    "menu.help.checkUpdate": "בדוק &עדכונים...",
+    "menu.search.clearChangeHistory": "נקה &היסטוריית שינויים",
+    "menu.search.gotoNextChange": "עבור ל&שינוי הבא",
+    "menu.search.gotoPrevChange": "עבור לשינוי ה&קודם",
+    "menu.tools.configure": "הגדר כלים חיצוניים...",
+    "menu.view.markdownPreview": "החלף &תצוגה מקדימה של Markdown",
+
+    // ── Preferences ──
+    "preferences.autoCheckUpdate": "בדוק עדכונים אוטומטית",
+    "preferences.minimapShowSlider": "הצג מחוון מינימפה תמיד",
+    "preferences.minimapWidth": "רוחב מינימפה",
+
+    // ── Run Variables ──
+    "run.var.column": "מספר עמודה",
+    "run.var.columnDesc": "מספר העמודה הנוכחית של הסמן",
+    "run.var.dir": "תיקייה",
+    "run.var.dirDesc": "תיקיית הקובץ הנוכחי",
+    "run.var.extpart": "סיומת",
+    "run.var.extpartDesc": "סיומת הקובץ",
+    "run.var.filename": "שם קובץ",
+    "run.var.filenameDesc": "שם הקובץ עם סיומת",
+    "run.var.fullpath": "נתיב מלא",
+    "run.var.fullpathDesc": "הנתיב המלא של הקובץ הנוכחי",
+    "run.var.line": "מספר שורה",
+    "run.var.lineDesc": "מספר השורה הנוכחית של הסמן",
+    "run.var.namepart": "שם ללא סיומת",
+    "run.var.namepartDesc": "שם הקובץ ללא סיומת",
+    "run.var.nppdir": "תיקיית היישום",
+    "run.var.nppdirDesc": "תיקיית היישום",
+    "run.var.projectroot": "שורש הפרויקט",
+    "run.var.projectrootDesc": "תיקיית הפרויקט הפתוחה כעת",
+    "run.var.word": "מילה נוכחית",
+    "run.var.wordDesc": "המילה במיקום הסמן",
+
+    // ── Search ──
+    "search.cancel": "ביטול",
+    "search.inSelection": "בבחירה",
+    "search.incremental": "מצטבר",
+    "search.preview": "תצוגה מקדימה",
+    "search.previewTitle": "תצוגה מקדימה של החלפה — {{count}} מופעים",
+    "search.replaceAll": "החלף הכל",
+
+    // ── Sidebar ──
+    "sidebar.preview": "תצוגה מקדימה",
+    "sidebar.terminal": "טרמינל",
+
+    // ── Terminal ──
+    "terminal.exited": "התהליך הסתיים.",
+    "terminal.newTab": "לשונית טרמינל חדשה",
+    "terminal.restart": "הפעל מחדש",
+    "terminal.retry": "נסה שוב",
+    "terminal.spawnFailed": "נכשל בהפעלת הטרמינל",
+    "terminal.start": "הפעל טרמינל",
+
+    // ── Tools ──
+    "tools.add": "הוסף",
+    "tools.addTool": "הוסף כלי",
+    "tools.cancel": "ביטול",
+    "tools.command": "פקודה (לדוגמה: npm run build)",
+    "tools.cwd": "תיקיית עבודה (ריק = שורש הפרויקט)",
+    "tools.edit": "ערוך",
+    "tools.editTool": "ערוך כלי",
+    "tools.empty": "אין כלים מוגדרים. הוסף אחד למטה.",
+    "tools.name": "שם הכלי",
+    "tools.remove": "הסר",
+    "tools.shortcut": "קיצור דרך (לדוגמה: Ctrl+Shift+1)",
+    "tools.title": "כלים חיצוניים",
+    "tools.update": "עדכן",
+    "tools.variables": "משתנים:",
   },
 };
 

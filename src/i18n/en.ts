@@ -381,6 +381,7 @@ const en = {
     "status.language": "Language",
     "status.line": "Ln",
     "status.column": "Col",
+    "status.clickToChange": "Click to change encoding",
 
     // ── Welcome ──
     "welcome.title": "ripNotepad++",

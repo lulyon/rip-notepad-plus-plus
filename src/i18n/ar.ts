@@ -361,6 +361,7 @@ const ar = {
     "status.language": "اللغة",
     "status.line": "سطر",
     "status.column": "عمود",
+    "status.clickToChange": "انقر لتغيير الترميز",
 
     // ── Welcome ──
     "welcome.title": "ripNotepad++",
@@ -461,6 +462,129 @@ const ar = {
     "contextMenu.add": "إضافة",
     "contextMenu.selectAction": "اختر إجراءً...",
     "contextMenu.resetDefaults": "إعادة تعيين إلى الافتراضي",
+
+    // ── AI ──
+    "ai.autoDetect": "اكتشاف تلقائي",
+    "ai.clearChat": "مسح المحادثة",
+    "ai.configApiKey": "مفتاح API",
+    "ai.configApiUrl": "عنوان API الأساسي",
+    "ai.configDesc": "تكوين مزود AI الخاص بك. متوافق مع تنسيقات Anthropic و OpenAI.",
+    "ai.configModel": "النموذج",
+    "ai.configProvider": "مزود API",
+    "ai.configTitle": "تكوين AI",
+    "ai.emptyHint": "اسألني أي شيء عن الكود الخاص بك.",
+    "ai.newChat": "محادثة جديدة",
+    "ai.placeholder": "اسأل عن الكود... (Enter للإرسال، Shift+Enter لسطر جديد)",
+    "ai.quickExplain": "شرح الكود",
+    "ai.quickFix": "إصلاح الأخطاء",
+    "ai.quickRefactor": "إعادة هيكلة",
+    "ai.quickTest": "إنشاء اختبارات",
+    "ai.save": "حفظ",
+    "ai.searchedN": "بحث: {{query}} ({{count}} نتيجة)",
+    "ai.searching": "جارٍ البحث...",
+    "ai.send": "إرسال",
+    "ai.settings": "الإعدادات",
+    "ai.title": "محادثة AI",
+    "ai.webSearchOff": "بحث الويب متوقف",
+    "ai.webSearchOn": "بحث الويب مفعل",
+
+    // ── Commit ──
+    "commit.cancel": "إلغاء",
+    "commit.commit": "Commit",
+    "commit.filesStaged": "{{count}} ملف(ات) مجهزة",
+    "commit.messagePlaceholder": "رسالة الـ Commit (Enter للإرسال، Shift+Enter لسطر جديد)",
+    "commit.title": "تغييرات الـ Commit",
+
+    // ── Dialog ──
+    "dialog.discardAll": "تجاهل الكل",
+    "dialog.saveAll": "حفظ الكل",
+    "dialog.unsavedDesc": "الملفات التالية بها تغييرات غير محفوظة:",
+
+    // ── Git ──
+    "git.checkoutFailed": "فشل التبديل: {{error}}",
+    "git.commit": "Commit...",
+    "git.commitFailed": "فشل الـ Commit: {{error}}",
+    "git.committed": "تم الـ Commit ✓",
+    "git.diff": "diff",
+    "git.newBranch": "اسم الفرع الجديد...",
+    "git.pullFailed": "فشل الـ Pull: {{error}}",
+    "git.pullOk": "تم الـ Pull",
+    "git.pushFailed": "فشل الـ Push: {{error}}",
+    "git.pushOk": "تم الـ Push",
+    "git.stageAll": "تجهيز الكل",
+
+    // ── Menu ──
+    "menu.file.loadWorkspace": "فتح مساحة العمل...",
+    "menu.file.saveWorkspace": "حفظ مساحة العمل باسم...",
+    "menu.help.checkUpdate": "التحقق من &التحديثات...",
+    "menu.search.clearChangeHistory": "مسح س&جل التغييرات",
+    "menu.search.gotoNextChange": "الانتقال إلى ال&تغيير التالي",
+    "menu.search.gotoPrevChange": "الانتقال إلى التغيير ال&سابق",
+    "menu.tools.configure": "تكوين الأدوات الخارجية...",
+    "menu.view.markdownPreview": "تبديل &معاينة Markdown",
+
+    // ── Preferences ──
+    "preferences.autoCheckUpdate": "التحقق تلقائياً من التحديثات",
+    "preferences.minimapShowSlider": "إظهار شريط التمرير دائماً",
+    "preferences.minimapWidth": "عرض الخريطة المصغرة",
+
+    // ── Run Variables ──
+    "run.var.column": "رقم العمود",
+    "run.var.columnDesc": "رقم عمود المؤشر الحالي",
+    "run.var.dir": "الدليل",
+    "run.var.dirDesc": "دليل الملف الحالي",
+    "run.var.extpart": "الامتداد",
+    "run.var.extpartDesc": "امتداد الملف",
+    "run.var.filename": "اسم الملف",
+    "run.var.filenameDesc": "اسم الملف مع الامتداد",
+    "run.var.fullpath": "المسار الكامل",
+    "run.var.fullpathDesc": "المسار الكامل للملف الحالي",
+    "run.var.line": "رقم السطر",
+    "run.var.lineDesc": "رقم سطر المؤشر الحالي",
+    "run.var.namepart": "جزء الاسم",
+    "run.var.namepartDesc": "اسم الملف بدون امتداد",
+    "run.var.nppdir": "دليل التطبيق",
+    "run.var.nppdirDesc": "دليل التطبيق",
+    "run.var.projectroot": "جذر المشروع",
+    "run.var.projectrootDesc": "مجلد المشروع المفتوح حالياً",
+    "run.var.word": "الكلمة الحالية",
+    "run.var.wordDesc": "الكلمة عند موضع المؤشر",
+
+    // ── Search ──
+    "search.cancel": "إلغاء",
+    "search.inSelection": "في التحديد",
+    "search.incremental": "تزايدي",
+    "search.preview": "معاينة",
+    "search.previewTitle": "معاينة الاستبدال — {{count}} ظهور",
+    "search.replaceAll": "استبدال الكل",
+
+    // ── Sidebar ──
+    "sidebar.preview": "معاينة",
+    "sidebar.terminal": "الطرفية",
+
+    // ── Terminal ──
+    "terminal.exited": "انتهت العملية.",
+    "terminal.newTab": "علامة تبويب جديدة",
+    "terminal.restart": "إعادة تشغيل",
+    "terminal.retry": "إعادة المحاولة",
+    "terminal.spawnFailed": "فشل بدء الطرفية",
+    "terminal.start": "بدء الطرفية",
+
+    // ── Tools ──
+    "tools.add": "إضافة",
+    "tools.addTool": "إضافة أداة",
+    "tools.cancel": "إلغاء",
+    "tools.command": "الأمر (مثال: npm run build)",
+    "tools.cwd": "دليل العمل (فارغ = جذر المشروع)",
+    "tools.edit": "تحرير",
+    "tools.editTool": "تحرير الأداة",
+    "tools.empty": "لا توجد أدوات مكونة. أضف واحدة أدناه.",
+    "tools.name": "اسم الأداة",
+    "tools.remove": "إزالة",
+    "tools.shortcut": "الاختصار (مثال: Ctrl+Shift+1)",
+    "tools.title": "أدوات خارجية",
+    "tools.update": "تحديث",
+    "tools.variables": "المتغيرات:",
   },
 };
 

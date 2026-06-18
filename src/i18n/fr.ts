@@ -372,6 +372,7 @@ const fr = {
     "status.language": "Langage",
     "status.line": "Ln",
     "status.column": "Col",
+    "status.clickToChange": "Cliquer pour changer l'encodage",
 
     // ── Welcome ──
     "welcome.title": "ripNotepad++",
@@ -385,6 +386,7 @@ const fr = {
     "sidebar.symbols": "Symboles",
     "sidebar.git": "Git",
     "sidebar.preview": "Aperçu",
+    "sidebar.terminal": "Terminal",
 
     // ── Clipboard ──
     "clipboard.search": "Rechercher...",
@@ -483,6 +485,12 @@ const fr = {
     "ai.quickFix": "Corriger les bugs",
     "ai.placeholder": "Posez une question sur votre code... (Entrée pour envoyer, Shift+Entrée pour nouvelle ligne)",
     "ai.emptyHint": "Posez-moi n'importe quelle question sur votre code.",
+    "ai.newChat": "Nouveau chat",
+    "ai.webSearchOn": "Recherche web activée",
+    "ai.webSearchOff": "Recherche web désactivée",
+    "ai.searching": "Recherche...",
+    "ai.searchedN": "Recherché : {{query}} ({{count}} résultats)",
+    "ai.configProvider": "Fournisseur API",
 
     // ── Tools Dialog ──
     "tools.title": "Outils externes",
@@ -564,6 +572,14 @@ const fr = {
     "contextMenu.add": "Ajouter",
     "contextMenu.selectAction": "Sélectionner une action...",
     "contextMenu.resetDefaults": "Réinitialiser les valeurs par défaut",
+
+    // ── Terminal ──
+    "terminal.start": "Démarrer",
+    "terminal.newTab": "Nouvel onglet",
+    "terminal.restart": "Redémarrer",
+    "terminal.retry": "Réessayer",
+    "terminal.exited": "Processus terminé",
+    "terminal.spawnFailed": "Échec du lancement",
   },
 };
 

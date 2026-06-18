@@ -372,6 +372,7 @@ const ko = {
     "status.language": "언어",
     "status.line": "행",
     "status.column": "열",
+    "status.clickToChange": "클릭하여 인코딩 변경",
 
     // ── Welcome ──
     "welcome.title": "ripNotepad++",
@@ -385,6 +386,7 @@ const ko = {
     "sidebar.symbols": "심볼",
     "sidebar.git": "Git",
     "sidebar.preview": "미리보기",
+    "sidebar.terminal": "터미널",
 
     // ── Clipboard ──
     "clipboard.search": "검색...",
@@ -483,6 +485,12 @@ const ko = {
     "ai.quickFix": "버그 수정",
     "ai.placeholder": "코드에 대해 물어보세요... (Enter 전송, Shift+Enter 줄바꿈)",
     "ai.emptyHint": "코드에 대해 무엇이든 물어보세요.",
+    "ai.newChat": "새 채팅",
+    "ai.webSearchOn": "웹 검색 켜기",
+    "ai.webSearchOff": "웹 검색 끄기",
+    "ai.searching": "검색 중...",
+    "ai.searchedN": "검색: {{query}} ({{count}}개 결과)",
+    "ai.configProvider": "API 제공자",
 
     // ── Tools Dialog ──
     "tools.title": "외부 도구",
@@ -564,6 +572,14 @@ const ko = {
     "contextMenu.add": "추가",
     "contextMenu.selectAction": "작업 선택...",
     "contextMenu.resetDefaults": "기본값으로 초기화",
+
+    // ── Terminal ──
+    "terminal.start": "시작",
+    "terminal.newTab": "새 탭",
+    "terminal.restart": "다시 시작",
+    "terminal.retry": "재시도",
+    "terminal.exited": "프로세스 종료",
+    "terminal.spawnFailed": "시작 실패",
   },
 };
 

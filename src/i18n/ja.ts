@@ -372,6 +372,7 @@ const ja = {
     "status.language": "言語",
     "status.line": "行",
     "status.column": "列",
+    "status.clickToChange": "クリックでエンコーディング変更",
 
     // ── Welcome ──
     "welcome.title": "ripNotepad++",
@@ -385,6 +386,7 @@ const ja = {
     "sidebar.symbols": "シンボル",
     "sidebar.git": "Git",
     "sidebar.preview": "プレビュー",
+    "sidebar.terminal": "ターミナル",
 
     // ── Clipboard ──
     "clipboard.search": "検索...",
@@ -483,6 +485,12 @@ const ja = {
     "ai.quickFix": "バグ修正",
     "ai.placeholder": "コードについて質問... (Enter 送信、Shift+Enter 改行)",
     "ai.emptyHint": "コードについて何でも質問してください。",
+    "ai.newChat": "新規チャット",
+    "ai.webSearchOn": "ウェブ検索オン",
+    "ai.webSearchOff": "ウェブ検索オフ",
+    "ai.searching": "検索中...",
+    "ai.searchedN": "検索: {{query}}（{{count}}件）",
+    "ai.configProvider": "API プロバイダ",
 
     // ── Tools Dialog ──
     "tools.title": "外部ツール",
@@ -564,6 +572,14 @@ const ja = {
     "contextMenu.add": "追加",
     "contextMenu.selectAction": "アクションを選択...",
     "contextMenu.resetDefaults": "デフォルトにリセット",
+
+    // ── Terminal ──
+    "terminal.start": "開始",
+    "terminal.newTab": "新規タブ",
+    "terminal.restart": "再起動",
+    "terminal.retry": "再試行",
+    "terminal.exited": "プロセス終了",
+    "terminal.spawnFailed": "起動失敗",
   },
 };
 

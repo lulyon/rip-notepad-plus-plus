@@ -56,7 +56,7 @@ export function Sidebar() {
           className={`sidebar-tab ${activeTab === "ai" ? "active" : ""}`}
           onClick={() => setActiveTab("ai")}
         >
-          🤖 AI
+          🤖 {t("ai.title")}
         </button>
         <button
           className={`sidebar-tab ${activeTab === "git" ? "active" : ""}`}
