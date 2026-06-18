@@ -41,6 +41,12 @@ import et from "./et";
 import ca from "./ca";
 import eu from "./eu";
 import gl from "./gl";
+import ur from "./ur";
+import pa from "./pa";
+import sw from "./sw";
+import ha from "./ha";
+import am from "./am";
+import my from "./my";
 
 const savedLang = localStorage.getItem("ripnotepadpp-lang") || "zh";
 
@@ -51,6 +57,7 @@ i18n.use(initReactI18next).init({
     "zh-tw": zhTw, fa, uk, vi, hi, nl, sv, fi, da,
     nb, th, id, ro, sk, el, sr, bg, lt,
     lv, sl, hr, et, ca, eu, gl,
+    ur, pa, sw, ha, am, my,
   } as unknown as Record<string, { translation: Record<string, string> }>,
   lng: savedLang,
   fallbackLng: "en",
@@ -100,10 +107,16 @@ export const LANGUAGES = [
   { code: "ca", name: "Català" },
   { code: "eu", name: "Euskara" },
   { code: "gl", name: "Galego" },
+  { code: "ur", name: "اردو" },
+  { code: "pa", name: "ਪੰਜਾਬੀ" },
+  { code: "sw", name: "Kiswahili" },
+  { code: "ha", name: "Hausa" },
+  { code: "am", name: "አማርኛ" },
+  { code: "my", name: "မြန်မာဘာသာ" },
 ];
 
 /** RTL languages: set html[dir] accordingly */
-const RTL_CODES = new Set(["ar", "he", "fa", "ur"]);
+const RTL_CODES = new Set(["ar", "he", "fa", "ur", "pa"]);
 
 export function applyDirection(lang: string) {
   document.documentElement.dir = RTL_CODES.has(lang) ? "rtl" : "ltr";

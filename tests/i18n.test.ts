@@ -5,8 +5,8 @@ describe("i18n coverage", () => {
   // All language codes that should exist
   const allCodes = LANGUAGES.map((l) => l.code);
 
-  it("has 41 languages registered", () => {
-    expect(LANGUAGES).toHaveLength(41);
+  it("has 47 languages registered", () => {
+    expect(LANGUAGES).toHaveLength(47);
   });
 
   it("all language files have same key count as en", async () => {
@@ -26,10 +26,9 @@ describe("i18n coverage", () => {
     }
   });
 
-  it("RTL_CODES includes ar, he, fa", () => {
-    // RTL support is critical for Arabic, Hebrew, Persian
-    const rtlCodes = ["ar", "he", "fa"];
-    // Verify they are in the language list
+  it("RTL_CODES includes ar, he, fa, ur, pa", () => {
+    // RTL support is critical for Arabic, Hebrew, Persian, Urdu, Punjabi
+    const rtlCodes = ["ar", "he", "fa", "ur", "pa"];
     for (const code of rtlCodes) {
       expect(allCodes).toContain(code);
     }

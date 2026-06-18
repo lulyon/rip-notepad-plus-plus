@@ -1,6 +1,6 @@
 # ripNotepad++ Supported Languages
 
-41 languages with 100% translation coverage. Covers all VS Code official languages + significant Notepad++ translations.
+47 languages with 100% translation coverage. Covers all VS Code official languages + significant Notepad++ translations.
 
 ```
 ┌──────┬───────────────────────────────────────┬──────┬──────────┐
@@ -49,6 +49,12 @@
 │   39 │ Català                                │  ca  │  NP++    │
 │   40 │ Euskara                               │  eu  │  NP++    │
 │   41 │ Galego                                │  gl  │  NP++    │
+│   42 │ اردو                                  │  ur  │  New ✨  │
+│   43 │ ਪੰਜਾਬੀ                                │  pa  │  New ✨  │
+│   44 │ Kiswahili                             │  sw  │  New    │
+│   45 │ Hausa                                 │  ha  │  New    │
+│   46 │ አማርኛ                                  │  am  │  New    │
+│   47 │ မြန်မာဘာသာ                             │  my  │  New    │
 └──────┴───────────────────────────────────────┴──────┴──────────┘
 ```
 
@@ -58,7 +64,7 @@
 |-----------|:---:|
 | VS Code official 15 | ✅ 15/15 |
 | Notepad++ significant | ✅ All |
-| RTL languages | ar, he, fa (VS Code has no native RTL) |
+| RTL languages | ar, he, fa, ur, pa (VS Code has no native RTL) |
 
 ## Adding a New Language
 
