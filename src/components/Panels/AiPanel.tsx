@@ -287,7 +287,7 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch, 
   if (showConfig) {
     return (
       <div className="ai-tab-pane" style={{ display: visible ? "flex" : "none" }}>
-        <AiConfigScreen />
+        <AiConfigScreen onSaved={() => setShowConfig(false)} />
       </div>
     );
   }
@@ -395,7 +395,7 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch, 
 
 // ── Config screen (shared, shown when API key not set) ──
 
-function AiConfigScreen() {
+function AiConfigScreen({ onSaved }: { onSaved?: () => void }) {
   const { t } = useTranslation();
   const { apiBaseUrl, apiKey, model, provider, setConfig, loadFromClaudeConfig } = useAiStore();
   const [cfgUrl, setCfgUrl] = useState(apiBaseUrl);
@@ -405,6 +405,7 @@ function AiConfigScreen() {
 
   const handleSave = () => {
     setConfig(cfgUrl, cfgKey, cfgModel, cfgProvider);
+    onSaved?.();
   };
 
   return (
@@ -542,7 +543,7 @@ export function AiPanel() {
       {/* Shared config screen (overlays all tabs) */}
       {showConfig && (
         <div className="ai-tab-pane" style={{ display: "flex" }}>
-          <AiConfigScreen />
+          <AiConfigScreen onSaved={() => setShowConfig(false)} />
         </div>
       )}
     </div>
