@@ -72,7 +72,10 @@ i18n.use(initReactI18next).init({
     bn, te, mr, ta, gu, kn, tl, km, ne, yo, ig,
   } as unknown as Record<string, { translation: Record<string, string> }>,
   lng: savedLang,
-  fallbackLng: "en",
+  fallbackLng: {
+    "zh-tw": ["en"],  // prevent fallback to zh (Simplified)
+    default: ["en"],
+  },
   supportedLngs: [
     "zh", "en", "ja", "ko", "fr", "ar", "he",
     "de", "es", "pt", "ru", "it", "tr", "pl", "cs", "hu",
