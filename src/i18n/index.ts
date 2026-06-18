@@ -47,6 +47,17 @@ import sw from "./sw";
 import ha from "./ha";
 import am from "./am";
 import my from "./my";
+import bn from "./bn";
+import te from "./te";
+import mr from "./mr";
+import ta from "./ta";
+import gu from "./gu";
+import kn from "./kn";
+import tl from "./tl";
+import km from "./km";
+import ne from "./ne";
+import yo from "./yo";
+import ig from "./ig";
 
 const savedLang = localStorage.getItem("ripnotepadpp-lang") || "zh";
 
@@ -58,6 +69,7 @@ i18n.use(initReactI18next).init({
     nb, th, id, ro, sk, el, sr, bg, lt,
     lv, sl, hr, et, ca, eu, gl,
     ur, pa, sw, ha, am, my,
+    bn, te, mr, ta, gu, kn, tl, km, ne, yo, ig,
   } as unknown as Record<string, { translation: Record<string, string> }>,
   lng: savedLang,
   fallbackLng: "en",
@@ -113,6 +125,17 @@ export const LANGUAGES = [
   { code: "ha", name: "Hausa" },
   { code: "am", name: "አማርኛ" },
   { code: "my", name: "မြန်မာဘာသာ" },
+  { code: "bn", name: "বাংলা" },
+  { code: "te", name: "తెలుగు" },
+  { code: "mr", name: "मराठी" },
+  { code: "ta", name: "தமிழ்" },
+  { code: "gu", name: "ગુજરાતી" },
+  { code: "kn", name: "ಕನ್ನಡ" },
+  { code: "tl", name: "Tagalog" },
+  { code: "km", name: "ភាសាខ្មែរ" },
+  { code: "ne", name: "नेपाली" },
+  { code: "yo", name: "Yorùbá" },
+  { code: "ig", name: "Igbo" },
 ];
 
 /** RTL languages: set html[dir] accordingly */

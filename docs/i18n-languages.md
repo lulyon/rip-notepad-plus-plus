@@ -1,6 +1,6 @@
 # ripNotepad++ Supported Languages
 
-47 languages with 100% translation coverage. Covers all VS Code official languages + significant Notepad++ translations.
+58 languages with 100% translation coverage. Covers all VS Code official languages + significant Notepad++ translations.
 
 ```
 ┌──────┬───────────────────────────────────────┬──────┬──────────┐

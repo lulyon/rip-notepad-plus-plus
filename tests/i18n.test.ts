@@ -6,7 +6,7 @@ describe("i18n coverage", () => {
   const allCodes = LANGUAGES.map((l) => l.code);
 
   it("has 47 languages registered", () => {
-    expect(LANGUAGES).toHaveLength(47);
+    expect(LANGUAGES).toHaveLength(58);
   });
 
   it("all language files have same key count as en", async () => {
