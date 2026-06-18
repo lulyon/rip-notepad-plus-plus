@@ -199,7 +199,7 @@ const id = {
     // ── Search Panel ──
     "search.findLabel": "Temukan",
     "search.replaceLabel": "Ganti",
-    "search.regex": "Regex",
+    "search.regex": "Ekspresi reguler",
     "search.caseSensitive": "Case Sensitif",
     "search.wholeWord": "Kata Utuh",
     "search.wrapAround": "Bungkus",
@@ -268,10 +268,10 @@ const id = {
     "preferences.whitespaceAll": "Semua",
     "preferences.defaultEncoding": "Pengodean bawaan",
     "preferences.defaultLanguage": "Bahasa bawaan",
-    "preferences.eol": "EOL",
+    "preferences.eol": "Akhir Baris",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eolCr": "CR (Mac Klasik)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Saring pintasan...",
     "shortcutMapper.pressKeys": "Tekan tombol...",
@@ -449,9 +449,9 @@ const id = {
     "git.viewDiff": "Lihat Diff",
     "git.stageAll": "Stage Semua",
     "git.commit": "Komit...",
-    "git.diff": "diff",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
+    "git.diff": "perbedaan",
+    "git.pushOk": "Push berhasil",
+    "git.pullOk": "Pull berhasil",
     "git.committed": "Terkomit ✓",
     "git.commitFailed": "Komit gagal: {{error}}",
     "git.pushFailed": "Push gagal: {{error}}",
@@ -532,7 +532,97 @@ const id = {
     "contextMenu.add": "Tambah",
     "contextMenu.selectAction": "Pilih tindakan...",
     "contextMenu.resetDefaults": "Atur Ulang ke Default",
-  },
+    "contextMenu.labelPlaceholder": "Label (&Huruf untuk pintasan)",
+    "contextMenu.actionPlaceholder": "ID Tindakan (mis. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Label",
+    "contextMenu.customActionPlaceholder": "Atau ketik ID tindakan kustom...",
+
+    // ── Status Bar ──
+    "status.ready": "Siap",
+    "status.branchTooltip": "Klik untuk ganti cabang",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Tutup",
+    "tab.newTooltip": "File baru (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Hapus akar",
+    "sidebar.refresh": "Segarkan",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Ganti cabang",
+    "git.pull": "Tarik",
+    "git.push": "Dorong",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Templat regex",
+    "search.lineLabel": "Br",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Nomor baris",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Klik untuk membuka {file} pada baris {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "Galat XML: {error}",
+    "menu.xmlParseError": "Galat Penguraian XML: {error}",
+    "menu.xmlValid": "✅ XML valid.",
+    "menu.xmlInvalid": "❌ XML Tidak Valid:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Simpan file terlebih dahulu untuk pratinjau",
+    "preview.saveFirstShort": "Simpan file terlebih dahulu",
+    "preview.imageFailed": "Gagal memuat gambar",
+    "preview.emptyCsv": "CSV kosong",
+    "preview.invalidJson": "JSON tidak valid",
+    "preview.katexInfo": "KaTeX hanya merender matematika inline ($...$) dan display ($$...$$)",
+    "preview.spreadsheetFailed": "Gagal memuat spreadsheet",
+    "preview.invalidNotebook": "Notebook tidak valid",
+    "preview.docFailed": "Gagal memuat dokumen",
+    "preview.geoJsonFailed": "Gagal memuat GeoJSON",
+    "preview.sqliteFailed": "Gagal membuka basis data",
+    "preview.emptyTable": "Tabel kosong",
+    "preview.loadingArchive": "Memuat arsip...",
+    "preview.archiveFailed": "Gagal membaca arsip",
+    "preview.noPreview": "Tidak ada pratinjau untuk jenis file ini",
+    "preview.pdfTitle": "Pratinjau PDF",
+    "preview.iframeTitle": "Pratinjau {name}",
+    "preview.dotRenderError": "Gagal merender grafik",
+    "preview.dotLoadError": "Gagal memuat mesin Graphviz",
+    "preview.noContent": "Tidak ada konten",
+    "preview.invalidHar": "File HAR tidak valid",
+    "preview.harTitle": "HAR: {count} permintaan",
+    "preview.harMethod": "Metode",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Status",
+    "preview.harTime": "Waktu",
+    "preview.harSize": "Ukuran",
+    "preview.3dOffline": "Pratinjau 3D tidak tersedia saat offline",
+    "preview.envMasked": "Nilai disembunyikan — arahkan untuk menampilkan",
+    "preview.saveFirst3d": "Simpan file terlebih dahulu untuk pratinjau model 3D",
+
+    "preview.close": "Tutup pratinjau",
+    "preview.open": "Pratinjau ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Tidak ada tab dipilih",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Bahasa",
+
+    // ── About ──
+    "about.version": "Versi {version}",
+  }
 };
 
 export default id;

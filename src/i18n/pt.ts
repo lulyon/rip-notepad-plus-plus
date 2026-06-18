@@ -251,7 +251,7 @@ const pt = {
     "encoding.filter": "Filtrar codificações...",
 
     // ── Go To Line ──
-    "gotoLine.go": "Go",
+    "gotoLine.go": "Ir",
 
     // ── Preferences ──
     "preferences.general": "Geral",
@@ -284,7 +284,7 @@ const pt = {
     "preferences.whitespaceAll": "Tudo",
     "preferences.defaultEncoding": "Codificação padrão",
     "preferences.defaultLanguage": "Idioma padrão",
-    "preferences.eol": "EOL",
+    "preferences.eol": "Fim de linha",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
     "preferences.eolCr": "CR (Mac Clássico)",
@@ -379,8 +379,8 @@ const pt = {
     // ── Status Bar ──
     "status.encoding": "Codificação",
     "status.language": "Idioma",
-    "status.line": "Ln",
-    "status.column": "Col",
+    "status.line": "Li",
+    "status.column": "Co",
     "status.clickToChange": "Clique para alterar codificação",
 
     // ── Welcome ──
@@ -404,7 +404,7 @@ const pt = {
     "sidebar.preview": "Pré-visualização",
 
     // ── Clipboard ──
-    "clipboard.search": "Search...",
+    "clipboard.search": "Pesquisar...",
     "clipboard.clear": "Limpar Histórico",
     "clipboard.empty": "Conteúdo copiado aparecerá aqui",
     "clipboard.noResults": "Nenhuma entrada correspondente",
@@ -459,7 +459,7 @@ const pt = {
     "run.var.wordDesc": "Palavra na posição do cursor",
     "run.var.line": "Número da Linha",
     "run.var.lineDesc": "Número da linha atual do cursor",
-    "run.var.column": "Column Number",
+    "run.var.column": "Número da coluna",
     "run.var.columnDesc": "Número da coluna atual do cursor",
     "run.var.projectroot": "Raiz do Projeto",
     "run.var.projectrootDesc": "Pasta do projeto atualmente aberta",
@@ -480,9 +480,9 @@ const pt = {
     "git.viewDiff": "Ver Diff",
     "git.stageAll": "Preparar Tudo",
     "git.commit": "Confirmar...",
-    "git.diff": "diff",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
+    "git.diff": "Diff",
+    "git.pushOk": "Empurrar OK",
+    "git.pullOk": "Puxar OK",
     "git.committed": "Confirmado ✓",
     "git.commitFailed": "Falha ao confirmar: {{error}}",
     "git.pushFailed": "Falha ao fazer push: {{error}}",
@@ -570,6 +570,96 @@ const pt = {
     "contextMenu.add": "Adicionar",
     "contextMenu.selectAction": "Selecionar ação...",
     "contextMenu.resetDefaults": "Redefinir para Padrões",
+    "contextMenu.labelPlaceholder": "Rótulo (&Letra para atalho)",
+    "contextMenu.actionPlaceholder": "ID da ação (ex. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Rótulo",
+    "contextMenu.customActionPlaceholder": "Ou digite um ID de ação personalizado...",
+
+    // ── Status Bar ──
+    "status.ready": "Pronto",
+    "status.branchTooltip": "Clique para mudar de branch",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Fechar",
+    "tab.newTooltip": "Novo arquivo (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Remover raiz",
+    "sidebar.refresh": "Atualizar",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Mudar de branch",
+    "git.pull": "Puxar",
+    "git.push": "Empurrar",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Modelos regex",
+    "search.lineLabel": "Li",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Número da linha",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Clique para abrir {file} na linha {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "Erro XML: {error}",
+    "menu.xmlParseError": "Erro de análise XML: {error}",
+    "menu.xmlValid": "✅ XML é válido.",
+    "menu.xmlInvalid": "❌ XML inválido:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Salve o arquivo primeiro para visualizar",
+    "preview.saveFirstShort": "Salve o arquivo primeiro",
+    "preview.imageFailed": "Falha ao carregar imagem",
+    "preview.emptyCsv": "CSV vazio",
+    "preview.invalidJson": "JSON inválido",
+    "preview.katexInfo": "KaTeX renderiza apenas matemática inline ($...$) e matemática em display ($$...$$)",
+    "preview.spreadsheetFailed": "Falha ao carregar planilha",
+    "preview.invalidNotebook": "Caderno inválido",
+    "preview.docFailed": "Falha ao carregar documento",
+    "preview.geoJsonFailed": "Falha ao carregar GeoJSON",
+    "preview.sqliteFailed": "Falha ao abrir banco de dados",
+    "preview.emptyTable": "Tabela vazia",
+    "preview.loadingArchive": "Carregando arquivo...",
+    "preview.archiveFailed": "Falha ao ler arquivo",
+    "preview.noPreview": "Nenhuma visualização disponível para este tipo de arquivo",
+    "preview.pdfTitle": "Visualização PDF",
+    "preview.iframeTitle": "Visualização de {name}",
+    "preview.dotRenderError": "Falha ao renderizar gráfico",
+    "preview.dotLoadError": "Falha ao carregar mecanismo Graphviz",
+    "preview.noContent": "Sem conteúdo",
+    "preview.invalidHar": "Arquivo HAR inválido",
+    "preview.harTitle": "HAR: {count} requisições",
+    "preview.harMethod": "Método",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Status",
+    "preview.harTime": "Tempo",
+    "preview.harSize": "Tamanho",
+    "preview.3dOffline": "Visualização 3D não disponível offline",
+    "preview.envMasked": "Valores mascarados — passe o mouse para revelar",
+    "preview.saveFirst3d": "Salve o arquivo primeiro para visualizar modelo 3D",
+
+    "preview.close": "Fechar visualização",
+    "preview.open": "Visualização ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Nenhuma guia selecionada",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Idioma",
+
+    // ── About ──
+    "about.version": "Versão {version}",
   },
 };
 

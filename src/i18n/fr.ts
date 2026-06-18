@@ -281,7 +281,7 @@ const fr = {
     "preferences.eol": "Fin de ligne",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eolCr": "CR (Mac classique)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtrer les raccourcis...",
@@ -370,8 +370,8 @@ const fr = {
     // ── Status Bar ──
     "status.encoding": "Encodage",
     "status.language": "Langage",
-    "status.line": "Ln",
-    "status.column": "Col",
+    "status.line": "Lg",
+    "status.column": "Co",
     "status.clickToChange": "Cliquer pour changer l'encodage",
 
     // ── Welcome ──
@@ -531,9 +531,9 @@ const fr = {
     // ── Git (additions) ──
     "git.stageAll": "Tout indexer",
     "git.commit": "Valider...",
-    "git.diff": "diff",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
+    "git.diff": "Diff",
+    "git.pushOk": "Pousser OK",
+    "git.pullOk": "Tirer OK",
     "git.committed": "Validé ✓",
     "git.commitFailed": "Échec de la validation : {{error}}",
     "git.pushFailed": "Échec du push : {{error}}",
@@ -580,6 +580,96 @@ const fr = {
     "terminal.retry": "Réessayer",
     "terminal.exited": "Processus terminé",
     "terminal.spawnFailed": "Échec du lancement",
+    "contextMenu.labelPlaceholder": "Libellé (&Lettre pour raccourci)",
+    "contextMenu.actionPlaceholder": "ID d'action (ex. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Libellé",
+    "contextMenu.customActionPlaceholder": "Ou saisissez un ID d'action personnalisé...",
+
+    // ── Status Bar ──
+    "status.ready": "Prêt",
+    "status.branchTooltip": "Cliquez pour changer de branche",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Fermer",
+    "tab.newTooltip": "Nouveau fichier (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Supprimer la racine",
+    "sidebar.refresh": "Actualiser",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Changer de branche",
+    "git.pull": "Tirer",
+    "git.push": "Pousser",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Modèles d'expression régulière",
+    "search.lineLabel": "Lg",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Numéro de ligne",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Cliquez pour ouvrir {file} à la ligne {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "Erreur XML : {error}",
+    "menu.xmlParseError": "Erreur d'analyse XML : {error}",
+    "menu.xmlValid": "✅ Le XML est valide.",
+    "menu.xmlInvalid": "❌ XML invalide :\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Enregistrez d'abord le fichier pour prévisualiser",
+    "preview.saveFirstShort": "Enregistrez d'abord le fichier",
+    "preview.imageFailed": "Échec du chargement de l'image",
+    "preview.emptyCsv": "CSV vide",
+    "preview.invalidJson": "JSON invalide",
+    "preview.katexInfo": "KaTeX ne rend que les maths en ligne ($...$) et les maths en affichage ($$...$$)",
+    "preview.spreadsheetFailed": "Échec du chargement du tableur",
+    "preview.invalidNotebook": "Cahier invalide",
+    "preview.docFailed": "Échec du chargement du document",
+    "preview.geoJsonFailed": "Échec du chargement du GeoJSON",
+    "preview.sqliteFailed": "Échec de l'ouverture de la base de données",
+    "preview.emptyTable": "Tableau vide",
+    "preview.loadingArchive": "Chargement de l'archive...",
+    "preview.archiveFailed": "Échec de la lecture de l'archive",
+    "preview.noPreview": "Aucun aperçu disponible pour ce type de fichier",
+    "preview.pdfTitle": "Aperçu PDF",
+    "preview.iframeTitle": "Aperçu de {name}",
+    "preview.dotRenderError": "Échec du rendu du graphique",
+    "preview.dotLoadError": "Échec du chargement du moteur Graphviz",
+    "preview.noContent": "Aucun contenu",
+    "preview.invalidHar": "Fichier HAR invalide",
+    "preview.harTitle": "HAR : {count} requêtes",
+    "preview.harMethod": "Méthode",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Statut",
+    "preview.harTime": "Temps",
+    "preview.harSize": "Taille",
+    "preview.3dOffline": "Aperçu 3D non disponible hors ligne",
+    "preview.envMasked": "Valeurs masquées — survolez pour révéler",
+    "preview.saveFirst3d": "Enregistrez d'abord le fichier pour prévisualiser le modèle 3D",
+
+    "preview.close": "Fermer l'aperçu",
+    "preview.open": "Aperçu ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Aucun onglet sélectionné",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Langue",
+
+    // ── About ──
+    "about.version": "Version {version}",
   },
 };
 

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Graphviz } from "@hpcc-js/wasm-graphviz";
 import { useEditorStore } from "../../stores/editorStore";
 
@@ -9,6 +10,7 @@ function getGraphviz() {
 }
 
 export function DotPreview() {
+  const { t } = useTranslation();
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const tabs = useEditorStore((s) => s.tabs);
   const activeTab = tabs.find((t) => t.id === activeTabId);
@@ -32,15 +34,15 @@ export function DotPreview() {
           svgEl.style.margin = "0 auto";
         }
       } catch (e: any) {
-        setError(e.message || "Failed to render graph");
+        setError(e.message || t("preview.dotRenderError"));
       }
     }).catch((e: any) => {
-      setError(e.message || "Failed to load Graphviz engine");
+      setError(e.message || t("preview.dotLoadError"));
     });
   }, [activeTab?.content]);
 
   if (!activeTab?.content) {
-    return <div className="markdown-empty">No content</div>;
+    return <div className="markdown-empty">{t("preview.noContent")}</div>;
   }
 
   if (error) {

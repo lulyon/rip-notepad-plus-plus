@@ -63,7 +63,7 @@ export function GoToLineDialog({ open, onClose }: Props) {
             onKeyDown={(e) => {
               if (e.key === "Enter") handleGo();
             }}
-            placeholder="1"
+            placeholder={t("gotoLine.placeholder")}
             min="1"
           />
         </div>

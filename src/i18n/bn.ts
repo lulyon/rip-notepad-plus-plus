@@ -56,7 +56,7 @@ const bn = {
 
     // ── Commit Dialog ──
     "commit.cancel": "বাতিল",
-    "commit.commit": "Commit",
+    "commit.commit": "কমিট",
     "commit.filesStaged": "{{count}} ফাইল স্টেজ করা হয়েছে",
     "commit.messagePlaceholder": "কমিট বার্তা (Enter কমিট করতে, Shift+Enter নতুন লাইনের জন্য)",
     "commit.title": "পরিবর্তন কমিট",
@@ -140,9 +140,9 @@ const bn = {
     // ── Git ──
     "git.checkoutFailed": "Checkout ব্যর্থ: {{error}}",
     "git.clean": "✓ ওয়ার্কিং ট্রি ক্লিন",
-    "git.commit": "Commit...",
+    "git.commit": "কমিট...",
     "git.commitFailed": "Commit ব্যর্থ: {{error}}",
-    "git.committed": "Committed ✓",
+    "git.committed": "কমিটেড ✓",
     "git.diff": "ডিফ",
     "git.filesChanged": "ফাইল পরিবর্তিত হয়েছে",
     "git.loading": "লোড হচ্ছে...",
@@ -244,25 +244,25 @@ const bn = {
 
     // ── Menu: Language ──
     "menu.language": "ভাষা",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.css": "CSS",
+    "menu.language.c": "সি",
+    "menu.language.cpp": "সি++",
+    "menu.language.css": "সিএসএস",
     "menu.language.defineLanguage": "ব্যবহারকারী সংজ্ঞায়িত ভাষা...",
-    "menu.language.go": "Go",
-    "menu.language.html": "HTML",
-    "menu.language.java": "Java",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.json": "JSON",
-    "menu.language.markdown": "Markdown",
+    "menu.language.go": "গো",
+    "menu.language.html": "এইচটিএমএল",
+    "menu.language.java": "জাভা",
+    "menu.language.javascript": "জাভাস্ক্রিপ্ট",
+    "menu.language.json": "জেসন",
+    "menu.language.markdown": "মার্কডাউন",
     "menu.language.openUdlFolder": "UDL ফোল্ডার খুলুন...",
     "menu.language.plaintext": "সাধারণ টেক্সট",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.shell": "Shell",
-    "menu.language.sql": "SQL",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
+    "menu.language.python": "পাইথন",
+    "menu.language.rust": "রাস্ট",
+    "menu.language.shell": "শেল",
+    "menu.language.sql": "এসকিউএল",
+    "menu.language.typescript": "টাইপস্ক্রিপ্ট",
+    "menu.language.xml": "এক্সএমএল",
+    "menu.language.yaml": "ইয়ামল",
 
     // ── Menu: Macro ──
     "menu.macro": "ম্যাক্রো",
@@ -382,10 +382,10 @@ const bn = {
     "preferences.defaultEncoding": "ডিফল্ট এনকোডিং",
     "preferences.defaultLanguage": "ডিফল্ট ভাষা",
     "preferences.editing": "সম্পাদনা",
-    "preferences.eol": "EOL",
-    "preferences.eolCr": "CR (Classic Mac)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolLf": "LF (Unix/macOS)",
+    "preferences.eol": "EOL (লাইন শেষ)",
+    "preferences.eolCr": "CR (ক্লাসিক Mac)",
+    "preferences.eolCrlf": "CRLF (উইন্ডোজ)",
+    "preferences.eolLf": "LF (ইউনিক্স/macOS)",
     "preferences.fontFamily": "ফন্ট পরিবার",
     "preferences.fontSize": "ফন্ট সাইজ",
     "preferences.general": "সাধারণ",
@@ -409,7 +409,7 @@ const bn = {
     "preferences.whitespaceAll": "সব",
     "preferences.whitespaceNone": "কোনটি না",
     "preferences.whitespaceSelection": "নির্বাচন",
-    "preferences.wordWrap": "Word wrap",
+    "preferences.wordWrap": "শব্দ মোড়ানো",
 
     // ── Run Dialog ──
     "run.clear": "মুছুন",
@@ -462,7 +462,7 @@ const bn = {
     "search.matchStats": "{{current}} এর {{count}}",
     "search.preview": "প্রিভিউ",
     "search.previewTitle": "প্রতিস্থাপন প্রিভিউ — {{count}} ঘটনা",
-    "search.regex": "Regex",
+    "search.regex": "রেজেক্স",
     "search.replaceAll": "সব প্রতিস্থাপন",
     "search.replaceAllBtn": "সব প্রতিস্থাপন",
     "search.replaceBtn": "প্রতিস্থাপন",
@@ -485,8 +485,8 @@ const bn = {
     "sidebar.clipboard": "ক্লিপবোর্ড",
     "sidebar.doclist": "ডক তালিকা",
     "sidebar.files": "ফাইল",
-    "sidebar.git": "Git",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.git": "গিট",
+    "sidebar.jsonViewer": "জেসন",
     "sidebar.preview": "প্রিভিউ",
     "sidebar.symbols": "প্রতীক",
     "sidebar.taskList": "টাস্ক তালিকা",
@@ -577,6 +577,96 @@ const bn = {
     "welcome.dropHint": "খোলার জন্য ফাইল এখানে ড্রপ করুন",
     "welcome.subtitle": "Ctrl+N নতুন · Ctrl+O খুলুন · Ctrl+S সংরক্ষণ",
     "welcome.title": "ripNotepad++",
+    "contextMenu.labelPlaceholder": "লেবেল (&হটকির জন্য অক্ষর)",
+    "contextMenu.actionPlaceholder": "অ্যাকশন আইডি (যেমন edit.cut)",
+    "contextMenu.labelShortPlaceholder": "লেবেল",
+    "contextMenu.customActionPlaceholder": "অথবা কাস্টম অ্যাকশন আইডি টাইপ করুন...",
+
+    // ── Status Bar ──
+    "status.ready": "প্রস্তুত",
+    "status.branchTooltip": "ব্রাঞ্চ পরিবর্তন করতে ক্লিক করুন",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "বন্ধ",
+    "tab.newTooltip": "নতুন ফাইল (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "রুট সরান",
+    "sidebar.refresh": "রিফ্রেশ",
+
+    // ── Git Panel ──
+    "git.switchBranch": "ব্রাঞ্চ পরিবর্তন করুন",
+    "git.pull": "পুল",
+    "git.push": "পুশ",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex টেমপ্লেট",
+    "search.lineLabel": "লাই",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "লাইন নম্বর",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "{file} লাইন {line} এ খুলতে ক্লিক করুন",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML ত্রুটি: {error}",
+    "menu.xmlParseError": "XML পার্স ত্রুটি: {error}",
+    "menu.xmlValid": "✅ XML বৈধ।",
+    "menu.xmlInvalid": "❌ XML অবৈধ:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "প্রিভিউ করতে প্রথমে ফাইলটি সংরক্ষণ করুন",
+    "preview.saveFirstShort": "প্রথমে ফাইলটি সংরক্ষণ করুন",
+    "preview.imageFailed": "ছবি লোড করতে ব্যর্থ",
+    "preview.emptyCsv": "খালি CSV",
+    "preview.invalidJson": "অবৈধ JSON",
+    "preview.katexInfo": "KaTeX শুধুমাত্র ইনলাইন গণিত ($...$) এবং ডিসপ্লে গণিত ($$...$$) রেন্ডার করে",
+    "preview.spreadsheetFailed": "স্প্রেডশীট লোড করতে ব্যর্থ",
+    "preview.invalidNotebook": "অবৈধ নোটবুক",
+    "preview.docFailed": "ডকুমেন্ট লোড করতে ব্যর্থ",
+    "preview.geoJsonFailed": "GeoJSON লোড করতে ব্যর্থ",
+    "preview.sqliteFailed": "ডাটাবেস খুলতে ব্যর্থ",
+    "preview.emptyTable": "খালি টেবিল",
+    "preview.loadingArchive": "আর্কাইভ লোড হচ্ছে...",
+    "preview.archiveFailed": "আর্কাইভ পড়তে ব্যর্থ",
+    "preview.noPreview": "এই ফাইল টাইপের জন্য কোন প্রিভিউ উপলব্ধ নেই",
+    "preview.pdfTitle": "PDF প্রিভিউ",
+    "preview.iframeTitle": "{name} প্রিভিউ",
+    "preview.dotRenderError": "গ্রাফ রেন্ডার করতে ব্যর্থ",
+    "preview.dotLoadError": "Graphviz ইঞ্জিন লোড করতে ব্যর্থ",
+    "preview.noContent": "কোন বিষয়বস্তু নেই",
+    "preview.invalidHar": "অবৈধ HAR ফাইল",
+    "preview.harTitle": "HAR: {count} টি অনুরোধ",
+    "preview.harMethod": "পদ্ধতি",
+    "preview.harUrl": "URL（ইউআরএল）",
+    "preview.harStatus": "স্থিতি",
+    "preview.harTime": "সময়",
+    "preview.harSize": "আকার",
+    "preview.3dOffline": "অফলাইনে 3D প্রিভিউ উপলব্ধ নয়",
+    "preview.envMasked": "মান গোপন করা হয়েছে — প্রকাশ করতে হোভার করুন",
+    "preview.saveFirst3d": "3D মডেল প্রিভিউ করতে প্রথমে ফাইলটি সংরক্ষণ করুন",
+
+    "preview.close": "প্রিভিউ বন্ধ করুন",
+    "preview.open": "প্রিভিউ ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "কোন ট্যাব নির্বাচিত হয়নি",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "ভাষা",
+
+    // ── About ──
+    "about.version": "সংস্করণ {version}",
   },
 };
 

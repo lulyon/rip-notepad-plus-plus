@@ -199,7 +199,7 @@ const nb = {
     // ── Search Panel ──
     "search.findLabel": "Finn",
     "search.replaceLabel": "Erstatt",
-    "search.regex": "Regex",
+    "search.regex": "Regulært uttrykk",
     "search.caseSensitive": "Skill på store/små",
     "search.wholeWord": "Hele ord",
     "search.wrapAround": "Ombryt",
@@ -268,10 +268,10 @@ const nb = {
     "preferences.whitespaceAll": "Alle",
     "preferences.defaultEncoding": "Standardkoding",
     "preferences.defaultLanguage": "Standardspråk",
-    "preferences.eol": "EOL",
+    "preferences.eol": "Linjeskift",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eolCr": "CR (klassisk Mac)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtrer snarveier...",
     "shortcutMapper.pressKeys": "Trykk på taster...",
@@ -450,9 +450,9 @@ const nb = {
     "git.stageAll": "Stage alle",
     "git.commit": "Commit...",
     "git.diff": "diff",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
-    "git.committed": "Committed ✓",
+    "git.pushOk": "Pushe OK",
+    "git.pullOk": "Hent OK",
+    "git.committed": "Commit ✓",
     "git.commitFailed": "Commit mislyktes: {{error}}",
     "git.pushFailed": "Push mislyktes: {{error}}",
     "git.pullFailed": "Pull mislyktes: {{error}}",
@@ -472,7 +472,7 @@ const nb = {
     "plugin.disabled": "Deaktivert",
     "plugin.start": "Start",
     "plugin.stop": "Stopp",
-    "menu.plugins": "&Plugins",
+    "menu.plugins": "&Plugin",
     "panel.noSymbols": "Ingen symboler i gjeldende fil",
     "panel.noFile": "Ingen fil åpen",
     // ── General ──
@@ -532,6 +532,99 @@ const nb = {
     "contextMenu.add": "Legg til",
     "contextMenu.selectAction": "Velg handling...",
     "contextMenu.resetDefaults": "Tilbakestill til standard",
+
+    // ── Context Menu Placeholders ──
+    "contextMenu.labelPlaceholder": "Etikett (&Bokstav for hurtigtast)",
+    "contextMenu.actionPlaceholder": "Handlings-ID (f.eks. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Etikett",
+    "contextMenu.customActionPlaceholder": "Eller skriv egendefinert handlings-ID...",
+
+    // ── Status Bar ──
+    "status.ready": "Klar",
+    "status.branchTooltip": "Klikk for å bytte gren",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Lukk",
+    "tab.newTooltip": "Ny fil (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Fjern rot",
+    "sidebar.refresh": "Oppdater",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Bytte gren",
+    "git.pull": "Hent",
+    "git.push": "Pushe",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex-maler",
+    "search.lineLabel": "Li",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Linjenummer",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Klikk for å åpne {file} på linje {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML-feil: {error}",
+    "menu.xmlParseError": "XML-tolkningsfeil: {error}",
+    "menu.xmlValid": "✅ XML er gyldig.",
+    "menu.xmlInvalid": "❌ XML ugyldig:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Lagre filen først for å forhåndsvise",
+    "preview.saveFirstShort": "Lagre filen først",
+    "preview.imageFailed": "Kunne ikke laste inn bilde",
+    "preview.emptyCsv": "Tom CSV",
+    "preview.invalidJson": "Ugyldig JSON",
+    "preview.katexInfo": "KaTeX gjengir kun innebygd matematikk ($...$) og visningsmatematikk ($$...$$)",
+    "preview.spreadsheetFailed": "Kunne ikke laste inn regneark",
+    "preview.invalidNotebook": "Ugyldig notatbok",
+    "preview.docFailed": "Kunne ikke laste inn dokument",
+    "preview.geoJsonFailed": "Kunne ikke laste inn GeoJSON",
+    "preview.sqliteFailed": "Kunne ikke åpne database",
+    "preview.emptyTable": "Tom tabell",
+    "preview.loadingArchive": "Laster arkiv...",
+    "preview.archiveFailed": "Kunne ikke lese arkiv",
+    "preview.noPreview": "Ingen forhåndsvisning tilgjengelig for denne filtypen",
+    "preview.pdfTitle": "PDF-forhåndsvisning",
+    "preview.iframeTitle": "{name} forhåndsvisning",
+    "preview.dotRenderError": "Kunne ikke gjengi graf",
+    "preview.dotLoadError": "Kunne ikke laste inn Graphviz-motor",
+    "preview.noContent": "Ingen innhold",
+    "preview.invalidHar": "Ugyldig HAR-fil",
+    "preview.harTitle": "HAR: {count} forespørsler",
+    "preview.harMethod": "Metode",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Status",
+    "preview.harTime": "Tid",
+    "preview.harSize": "Størrelse",
+    "preview.3dOffline": "3D-forhåndsvisning ikke tilgjengelig frakoblet",
+    "preview.envMasked": "Verdier maskert — hold musen over for å avsløre",
+    "preview.saveFirst3d": "Lagre filen først for å forhåndsvise 3D-modell",
+
+    "preview.close": "Lukk forhåndsvisning",
+    "preview.open": "Forhåndsvisning ({shortcut})",
+
+    // ── Split Editor ──
+    "splitEditor.noTab": "Ingen fane valgt",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Språk",
+
+    // ── About ──
+    "about.version": "Versjon {version}",
   },
 };
 

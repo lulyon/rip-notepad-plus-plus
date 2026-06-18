@@ -138,23 +138,23 @@ const el = {
 
     // ── Menu: Language ──
     "menu.language": "&Γλώσσα",
-    "menu.language.plaintext": "Plain Text",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.plaintext": "Απλό κείμενο",
+    "menu.language.javascript": "ΤζαβαΣκριπτ",
+    "menu.language.typescript": "ΤαϊπΣκριπτ",
+    "menu.language.json": "Τζέισον",
+    "menu.language.html": "ΧΤΜΛ",
+    "menu.language.css": "ΣΙΕΣΣ",
+    "menu.language.python": "Πάιθον",
+    "menu.language.rust": "Ραστ",
+    "menu.language.go": "Γκο",
+    "menu.language.java": "Τζάβα",
+    "menu.language.c": "Γ",
+    "menu.language.cpp": "Γ++",
+    "menu.language.xml": "ΕΞΕΜΕΛ",
+    "menu.language.yaml": "Γιαμλ",
+    "menu.language.markdown": "Μαρκνταουν",
+    "menu.language.sql": "Εσκιουελ",
+    "menu.language.shell": "Σελ",
     "menu.language.defineLanguage": "Γλώσσα ορισμένη από χρήστη...",
     "menu.language.openUdlFolder": "Άνοιγμα φακέλου UDL...",
 
@@ -174,10 +174,10 @@ const el = {
 
     // ── Menu: Tools ──
     "menu.tools": "&Εργαλεία",
-    "menu.tools.md5": "MD5 Generate",
-    "menu.tools.sha1": "SHA-1 Generate",
-    "menu.tools.sha256": "SHA-256 Generate",
-    "menu.tools.sha512": "SHA-512 Generate",
+    "menu.tools.md5": "Δημιουργία MD5",
+    "menu.tools.sha1": "Δημιουργία SHA-1",
+    "menu.tools.sha256": "Δημιουργία SHA-256",
+    "menu.tools.sha512": "Δημιουργία SHA-512",
     "menu.tools.configure": "Διαμόρφωση εξωτερικών εργαλείων...",
 
     // ── Menu: Window ──
@@ -284,10 +284,10 @@ const el = {
     "preferences.whitespaceAll": "Όλα",
     "preferences.defaultEncoding": "Προεπιλεγμένη κωδικοποίηση",
     "preferences.defaultLanguage": "Προεπιλεγμένη γλώσσα",
-    "preferences.eol": "EOL",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eol": "Τέλος γραμμής",
+    "preferences.eolLf": "LF (Γιουνιξ/μακΟΣ)",
+    "preferences.eolCrlf": "CRLF (Γουιντοους)",
+    "preferences.eolCr": "CR (Κλασικό Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Φιλτράρισμα συντομεύσεων...",
@@ -393,7 +393,7 @@ const el = {
     "sidebar.doclist": "Λίστα εγγράφων",
     "sidebar.clipboard": "Πρόχειρο",
     "sidebar.symbols": "Σύμβολα",
-    "sidebar.git": "Git",
+    "sidebar.git": "Γκιτ",
     "sidebar.terminal": "Τερματικό",
     "terminal.start": "Εκκίνηση τερματικού",
     "terminal.exited": "Η διεργασία τερματίστηκε.",
@@ -412,7 +412,7 @@ const el = {
     "clipboard.copy": "Αντιγραφή στο πρόχειρο συστήματος",
     "clipboard.pin": "Καρφίτσωμα/Ξεκαρφίτσωμα",
     "clipboard.remove": "Αφαίρεση",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "Τζέισον",
     "sidebar.taskList": "Λίστα εργασιών",
 
     // ── JSON Viewer ──
@@ -479,10 +479,10 @@ const el = {
     "git.clean": "✓ Το δέντρο εργασίας είναι καθαρό",
     "git.viewDiff": "Προβολή diff",
     "git.stageAll": "Προσθήκη όλων",
-    "git.commit": "Commit...",
-    "git.diff": "diff",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
+    "git.commit": "Κομμιτ...",
+    "git.diff": "διαφορά",
+    "git.pushOk": "Push επιτυχής",
+    "git.pullOk": "Pull επιτυχής",
     "git.committed": "Έγινε commit ✓",
     "git.commitFailed": "Αποτυχία commit: {{error}}",
     "git.pushFailed": "Αποτυχία push: {{error}}",
@@ -494,7 +494,7 @@ const el = {
     "commit.title": "Commit αλλαγών",
     "commit.filesStaged": "{{count}} αρχείο(α) σταδιοποιήθηκαν",
     "commit.messagePlaceholder": "Μήνυμα commit (Enter για commit, Shift+Enter για νέα γραμμή)",
-    "commit.commit": "Commit",
+    "commit.commit": "Κομμιτ",
     "commit.cancel": "Ακύρωση",
 
     // ── Plugin ──
@@ -526,7 +526,7 @@ const el = {
     "ai.clearChat": "Εκκαθάριση συνομιλίας",
     "ai.configTitle": "AI Διαμόρφωση",
     "ai.configDesc": "Διαμορφώστε τον πάροχο AI. Συμβατό με μορφές μηνυμάτων Anthropic και OpenAI.",
-    "ai.configApiUrl": "API Base URL",
+    "ai.configApiUrl": "API Βασικό URL",
     "ai.configApiKey": "API κλειδί",
     "ai.configModel": "Μοντέλο",
     "ai.configProvider": "Πάροχος API",
@@ -569,6 +569,96 @@ const el = {
     "contextMenu.add": "Προσθήκη",
     "contextMenu.selectAction": "Επιλογή ενέργειας...",
     "contextMenu.resetDefaults": "Επαναφορά προεπιλογών",
+    "contextMenu.labelPlaceholder": "Ετικέτα (&Γράμμα για συντόμευση)",
+    "contextMenu.actionPlaceholder": "Αναγνωριστικό ενέργειας (π.χ. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Ετικέτα",
+    "contextMenu.customActionPlaceholder": "Ή πληκτρολογήστε αναγνωριστικό προσαρμοσμένης ενέργειας...",
+
+    // ── Status Bar ──
+    "status.ready": "Έτοιμο",
+    "status.branchTooltip": "Κλικ για αλλαγή κλάδου",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Κλείσιμο",
+    "tab.newTooltip": "Νέο αρχείο (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Αφαίρεση ρίζας",
+    "sidebar.refresh": "Ανανέωση",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Αλλαγή κλάδου",
+    "git.pull": "Λήψη",
+    "git.push": "Αποστολή",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Πρότυπα regex",
+    "search.lineLabel": "Γρ",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Αριθμός γραμμής",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Κλικ για άνοιγμα {file} στη γραμμή {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "Σφάλμα XML: {error}",
+    "menu.xmlParseError": "Σφάλμα ανάλυσης XML: {error}",
+    "menu.xmlValid": "✅ Το XML είναι έγκυρο.",
+    "menu.xmlInvalid": "❌ Μη έγκυρο XML:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Αποθηκεύστε πρώτα το αρχείο για προεπισκόπηση",
+    "preview.saveFirstShort": "Αποθηκεύστε πρώτα το αρχείο",
+    "preview.imageFailed": "Αποτυχία φόρτωσης εικόνας",
+    "preview.emptyCsv": "Κενό CSV",
+    "preview.invalidJson": "Μη έγκυρο JSON",
+    "preview.katexInfo": "Το KaTeX αποδίδει μόνο ενσωματωμένα μαθηματικά ($...$) και εκτεταμένα μαθηματικά ($$...$$)",
+    "preview.spreadsheetFailed": "Αποτυχία φόρτωσης υπολογιστικού φύλλου",
+    "preview.invalidNotebook": "Μη έγκυρο σημειωματάριο",
+    "preview.docFailed": "Αποτυχία φόρτωσης εγγράφου",
+    "preview.geoJsonFailed": "Αποτυχία φόρτωσης GeoJSON",
+    "preview.sqliteFailed": "Αποτυχία ανοίγματος βάσης δεδομένων",
+    "preview.emptyTable": "Κενός πίνακας",
+    "preview.loadingArchive": "Φόρτωση αρχείου...",
+    "preview.archiveFailed": "Αποτυχία ανάγνωσης αρχείου",
+    "preview.noPreview": "Δεν υπάρχει προεπισκόπηση για αυτόν τον τύπο αρχείου",
+    "preview.pdfTitle": "Προεπισκόπηση PDF",
+    "preview.iframeTitle": "Προεπισκόπηση {name}",
+    "preview.dotRenderError": "Αποτυχία απόδοσης γραφήματος",
+    "preview.dotLoadError": "Αποτυχία φόρτωσης μηχανής Graphviz",
+    "preview.noContent": "Χωρίς περιεχόμενο",
+    "preview.invalidHar": "Μη έγκυρο αρχείο HAR",
+    "preview.harTitle": "HAR: {count} αιτήματα",
+    "preview.harMethod": "Μέθοδος",
+    "preview.harUrl": "URL（ΟΥΡΛ）",
+    "preview.harStatus": "Κατάσταση",
+    "preview.harTime": "Χρόνος",
+    "preview.harSize": "Μέγεθος",
+    "preview.3dOffline": "Η τρισδιάστατη προεπισκόπηση δεν είναι διαθέσιμη εκτός σύνδεσης",
+    "preview.envMasked": "Τιμές αποκρυμμένες — τοποθετήστε τον κέρσορα για αποκάλυψη",
+    "preview.saveFirst3d": "Αποθηκεύστε πρώτα το αρχείο για προεπισκόπηση 3D μοντέλου",
+
+    "preview.close": "Κλείσιμο προεπισκόπησης",
+    "preview.open": "Προεπισκόπηση ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Δεν έχει επιλεγεί καρτέλα",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Γλώσσα",
+
+    // ── About ──
+    "about.version": "Έκδοση {version}",
   },
 };
 

@@ -56,7 +56,7 @@ const am = {
 
     // ── Commit Dialog ──
     "commit.cancel": "ሰርዝ",
-    "commit.commit": "Commit",
+    "commit.commit": "Commit አድርግ",
     "commit.filesStaged": "{{count}} ፋይል(ች) ተዘጋጅተዋል",
     "commit.messagePlaceholder": "የCommit መልእክት (Enter ለCommit፣ Shift+Enter ለአዲስ መስመር)",
     "commit.title": "ለውጦችን Commit አድርግ",
@@ -140,9 +140,9 @@ const am = {
     // ── Git ──
     "git.checkoutFailed": "Checkout አልተሳካም: {{error}}",
     "git.clean": "✓ የስራ ዛፍ ንጹህ",
-    "git.commit": "Commit...",
+    "git.commit": "Commit አድርግ...",
     "git.commitFailed": "Commit አልተሳካም: {{error}}",
-    "git.committed": "Committed ✓",
+    "git.committed": "Commit ተከናውኗል ✓",
     "git.diff": "ልዩነት",
     "git.filesChanged": "ፋይሎች ተለውጠዋል",
     "git.loading": "በመጫን ላይ...",
@@ -244,25 +244,25 @@ const am = {
 
     // ── Menu: Language ──
     "menu.language": "ቋንቋ",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.css": "CSS",
+    "menu.language.c": "ሲ",
+    "menu.language.cpp": "ሲ++",
+    "menu.language.css": "ሲኤስኤስ",
     "menu.language.defineLanguage": "በተጠቃሚ የተገለጸ ቋንቋ...",
-    "menu.language.go": "Go",
-    "menu.language.html": "HTML",
-    "menu.language.java": "Java",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.json": "JSON",
-    "menu.language.markdown": "Markdown",
+    "menu.language.go": "ጎ",
+    "menu.language.html": "ኤችቲኤምኤል",
+    "menu.language.java": "ጃቫ",
+    "menu.language.javascript": "ጃቫስክሪፕት",
+    "menu.language.json": "ጄሰን",
+    "menu.language.markdown": "ማርክዳውን",
     "menu.language.openUdlFolder": "የUDL አቃፊ ክፈት...",
     "menu.language.plaintext": "ግልጽ ጽሑፍ",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.shell": "Shell",
-    "menu.language.sql": "SQL",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
+    "menu.language.python": "ፓይተን",
+    "menu.language.rust": "ራስት",
+    "menu.language.shell": "ሼል",
+    "menu.language.sql": "ኤስኪዩኤል",
+    "menu.language.typescript": "ታይፕስክሪፕት",
+    "menu.language.xml": "ኤክስኤምኤል",
+    "menu.language.yaml": "ያምል",
 
     // ── Menu: Macro ──
     "menu.macro": "ማክሮ",
@@ -382,10 +382,10 @@ const am = {
     "preferences.defaultEncoding": "ነባሪ ኢንኮዲንግ",
     "preferences.defaultLanguage": "ነባሪ ቋንቋ",
     "preferences.editing": "አርትዖት",
-    "preferences.eol": "EOL",
-    "preferences.eolCr": "CR (Classic Mac)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolLf": "LF (Unix/macOS)",
+    "preferences.eol": "የመስመር መጨረሻ",
+    "preferences.eolCr": "CR (ክላሲክ ማክ)",
+    "preferences.eolCrlf": "CRLF (ዊንዶውስ)",
+    "preferences.eolLf": "LF (ዩኒክስ/ማክኦኤስ)",
     "preferences.fontFamily": "የቅርጸ ቁምፊ ቤተሰብ",
     "preferences.fontSize": "የቅርጸ ቁምፊ መጠን",
     "preferences.general": "አጠቃላይ",
@@ -462,7 +462,7 @@ const am = {
     "search.matchStats": "{{current}} ከ {{count}}",
     "search.preview": "ቅድመ እይታ",
     "search.previewTitle": "የመተካት ቅድመ እይታ — {{count}} ክስተት(ች)",
-    "search.regex": "Regex",
+    "search.regex": "ሪጌክስ",
     "search.replaceAll": "ሁሉንም ተካ",
     "search.replaceAllBtn": "ሁሉንም ተካ",
     "search.replaceBtn": "ተካ",
@@ -485,8 +485,8 @@ const am = {
     "sidebar.clipboard": "ቅንጥብ ሰሌዳ",
     "sidebar.doclist": "የሰነድ ዝርዝር",
     "sidebar.files": "ፋይሎች",
-    "sidebar.git": "Git",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.git": "ጊት",
+    "sidebar.jsonViewer": "ጄሰን",
     "sidebar.preview": "ቅድመ እይታ",
     "sidebar.symbols": "ምልክቶች",
     "sidebar.taskList": "የተግባር ዝርዝር",
@@ -577,6 +577,96 @@ const am = {
     "welcome.dropHint": "ለመክፈት ፋይሎችን እዚህ ጣል",
     "welcome.subtitle": "Ctrl+N አዲስ · Ctrl+O ክፈት · Ctrl+S አስቀምጥ",
     "welcome.title": "ripNotepad++",
+    "contextMenu.labelPlaceholder": "መለያ (&ፊደል ለሆትኪ)",
+    "contextMenu.actionPlaceholder": "የተግባር መታወቂያ (ለምሳሌ edit.cut)",
+    "contextMenu.labelShortPlaceholder": "መለያ",
+    "contextMenu.customActionPlaceholder": "ወይም ብጁ የተግባር መታወቂያ ይተይቡ...",
+
+    // ── Status Bar ──
+    "status.ready": "ዝግጁ",
+    "status.branchTooltip": "ቅርንጫፍ ለመቀየር ጠቅ ያድርጉ",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "ዝጋ",
+    "tab.newTooltip": "አዲስ ፋይል (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "ሥር አስወግድ",
+    "sidebar.refresh": "አድስ",
+
+    // ── Git Panel ──
+    "git.switchBranch": "ቅርንጫፍ ቀይር",
+    "git.pull": "ጎትት",
+    "git.push": "ግፋ",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "የRegex አብነቶች",
+    "search.lineLabel": "መስ",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "የመስመር ቁጥር",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "{file} በመስመር {line} ለመክፈት ጠቅ ያድርጉ",
+
+    // ── XML Tools ──
+    "menu.xmlError": "የXML ስህተት: {error}",
+    "menu.xmlParseError": "የXML መተንተኛ ስህተት: {error}",
+    "menu.xmlValid": "✅ XML ትክክል ነው።",
+    "menu.xmlInvalid": "❌ XML ልክ ያልሆነ:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "ለቅድመ እይታ መጀመሪያ ፋይሉን ያስቀምጡ",
+    "preview.saveFirstShort": "መጀመሪያ ፋይሉን ያስቀምጡ",
+    "preview.imageFailed": "ምስል መጫን አልተሳካም",
+    "preview.emptyCsv": "ባዶ CSV",
+    "preview.invalidJson": "ልክ ያልሆነ JSON",
+    "preview.katexInfo": "KaTeX የመስመር ሂሳብ ($...$) እና የማሳያ ሂሳብ ($$...$$) ብቻ ያቀርባል",
+    "preview.spreadsheetFailed": "የተመን ሉህ መጫን አልተሳካም",
+    "preview.invalidNotebook": "ልክ ያልሆነ ማስታወሻ ደብተር",
+    "preview.docFailed": "ሰነድ መጫን አልተሳካም",
+    "preview.geoJsonFailed": "GeoJSON መጫን አልተሳካም",
+    "preview.sqliteFailed": "የውሂብ ጎታ መክፈት አልተሳካም",
+    "preview.emptyTable": "ባዶ ሠንጠረዥ",
+    "preview.loadingArchive": "ማህደር በመጫን ላይ...",
+    "preview.archiveFailed": "ማህደር ማንበብ አልተሳካም",
+    "preview.noPreview": "ለዚህ የፋይል ዓይነት ምንም ቅድመ እይታ የለም",
+    "preview.pdfTitle": "የPDF ቅድመ እይታ",
+    "preview.iframeTitle": "የ{name} ቅድመ እይታ",
+    "preview.dotRenderError": "ግራፍ ማቅረብ አልተሳካም",
+    "preview.dotLoadError": "የGraphviz ሞተር መጫን አልተሳካም",
+    "preview.noContent": "ምንም ይዘት የለም",
+    "preview.invalidHar": "ልክ ያልሆነ የHAR ፋይል",
+    "preview.harTitle": "HAR: {count} ጥያቄዎች",
+    "preview.harMethod": "ዘዴ",
+    "preview.harUrl": "URL（ዩአርኤል）",
+    "preview.harStatus": "ሁኔታ",
+    "preview.harTime": "ሰዓት",
+    "preview.harSize": "መጠን",
+    "preview.3dOffline": "የ3D ቅድመ እይታ ከመስመር ውጭ አይገኝም",
+    "preview.envMasked": "እሴቶች ተደብቀዋል — ለማሳየት አንዣብቡ",
+    "preview.saveFirst3d": "የ3D ሞዴል ቅድመ እይታ ለማድረግ መጀመሪያ ፋይሉን ያስቀምጡ",
+
+    "preview.close": "ቅድመ እይታ ዝጋ",
+    "preview.open": "ቅድመ እይታ ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "ምንም ትር አልተመረጠም",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "ቋንቋ",
+
+    // ── About ──
+    "about.version": "ስሪት {version}",
   },
 };
 

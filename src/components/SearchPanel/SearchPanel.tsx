@@ -218,7 +218,7 @@ export function SearchPanel() {
               placeholder={t("search.findPlaceholder")}
             />
             <div className="search-regex-dropdown" style={{ position: "relative" }}>
-              <button className="sbtn" onClick={() => setRegexDropdown(!regexDropdown)} title="Regex templates"
+              <button className="sbtn" onClick={() => setRegexDropdown(!regexDropdown)} title={t("search.regexTemplates")}
                 style={{ padding: "4px 6px", fontSize: "12px" }}>📋</button>
               {regexDropdown && (
                 <div className="search-regex-menu">
@@ -422,7 +422,7 @@ export function SearchPanel() {
             <div className="search-preview-list">
               {previewItems.map((item, i) => (
                 <div key={i} className="search-preview-item">
-                  <span className="search-preview-line">Ln {item.line}</span>
+                  <span className="search-preview-line">{t("search.lineLabel")} {item.line}</span>
                   <span className="search-preview-before">− {item.before}</span>
                   <span className="search-preview-after">+ {item.after}</span>
                 </div>

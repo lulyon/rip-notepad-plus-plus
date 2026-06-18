@@ -138,7 +138,7 @@ const lt = {
 
     // ── Menu: Language ──
     "menu.language": "&Kalba",
-    "menu.language.plaintext": "Plain Text",
+    "menu.language.plaintext": "Paprastasis tekstas",
     "menu.language.javascript": "JavaScript",
     "menu.language.typescript": "TypeScript",
     "menu.language.json": "JSON",
@@ -174,10 +174,10 @@ const lt = {
 
     // ── Menu: Tools ──
     "menu.tools": "&Įrankiai",
-    "menu.tools.md5": "MD5 Generate",
-    "menu.tools.sha1": "SHA-1 Generate",
-    "menu.tools.sha256": "SHA-256 Generate",
-    "menu.tools.sha512": "SHA-512 Generate",
+    "menu.tools.md5": "Generuoti MD5",
+    "menu.tools.sha1": "Generuoti SHA-1",
+    "menu.tools.sha256": "Generuoti SHA-256",
+    "menu.tools.sha512": "Generuoti SHA-512",
     "menu.tools.configure": "Konfigūruoti išorinius įrankius...",
 
     // ── Menu: Window ──
@@ -284,10 +284,10 @@ const lt = {
     "preferences.whitespaceAll": "Visi",
     "preferences.defaultEncoding": "Numatytoji koduotė",
     "preferences.defaultLanguage": "Numatytoji kalba",
-    "preferences.eol": "EOL",
+    "preferences.eol": "Eilutės pabaiga",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eolCr": "CR (Klasikinis Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtruoti sparčiuosius klavišus...",
@@ -480,9 +480,9 @@ const lt = {
     "git.viewDiff": "Žiūrėti diff",
     "git.stageAll": "Pridėti visus",
     "git.commit": "Commit...",
-    "git.diff": "diff",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
+    "git.diff": "skirtumas",
+    "git.pushOk": "Pastumta OK",
+    "git.pullOk": "Patraukta OK",
     "git.committed": "Atliktas commit ✓",
     "git.commitFailed": "Commit nepavyko: {{error}}",
     "git.pushFailed": "Push nepavyko: {{error}}",
@@ -569,6 +569,96 @@ const lt = {
     "contextMenu.add": "Pridėti",
     "contextMenu.selectAction": "Pasirinkti veiksmą...",
     "contextMenu.resetDefaults": "Atstatyti į numatytuosius",
+    "contextMenu.labelPlaceholder": "Etiketė (&Raide spartiesiems klavišams)",
+    "contextMenu.actionPlaceholder": "Veiksmo ID (pvz., edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Etiketė",
+    "contextMenu.customActionPlaceholder": "Arba įveskite pasirinktinį veiksmo ID...",
+
+    // ── Status Bar ──
+    "status.ready": "Paruošta",
+    "status.branchTooltip": "Spustelėkite, norėdami perjungti šaką",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Uždaryti",
+    "tab.newTooltip": "Naujas failas (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Pašalinti šaknį",
+    "sidebar.refresh": "Atnaujinti",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Perjungti šaką",
+    "git.pull": "Patraukti",
+    "git.push": "Pastumti",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex šablonai",
+    "search.lineLabel": "Eil",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Eilutės numeris",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Spustelėkite, norėdami atidaryti {file} eilutėje {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML klaida: {error}",
+    "menu.xmlParseError": "XML analizės klaida: {error}",
+    "menu.xmlValid": "✅ XML yra teisingas.",
+    "menu.xmlInvalid": "❌ XML neteisingas:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Pirmiausia išsaugokite failą, kad peržiūrėtumėte",
+    "preview.saveFirstShort": "Pirmiausia išsaugokite failą",
+    "preview.imageFailed": "Nepavyko įkelti paveikslėlio",
+    "preview.emptyCsv": "Tuščias CSV",
+    "preview.invalidJson": "Neteisingas JSON",
+    "preview.katexInfo": "KaTeX atvaizduoja tik įterptąją ($...$) ir atskirąją ($$...$$) matematiką",
+    "preview.spreadsheetFailed": "Nepavyko įkelti skaičiuoklės",
+    "preview.invalidNotebook": "Neteisingas užrašų knygelės failas",
+    "preview.docFailed": "Nepavyko įkelti dokumento",
+    "preview.geoJsonFailed": "Nepavyko įkelti GeoJSON",
+    "preview.sqliteFailed": "Nepavyko atidaryti duomenų bazės",
+    "preview.emptyTable": "Tuščia lentelė",
+    "preview.loadingArchive": "Įkeliamas archyvas...",
+    "preview.archiveFailed": "Nepavyko perskaityti archyvo",
+    "preview.noPreview": "Šiam failo tipui peržiūra nėra prieinama",
+    "preview.pdfTitle": "PDF peržiūra",
+    "preview.iframeTitle": "{name} peržiūra",
+    "preview.dotRenderError": "Nepavyko atvaizduoti grafo",
+    "preview.dotLoadError": "Nepavyko įkelti Graphviz variklio",
+    "preview.noContent": "Nėra turinio",
+    "preview.invalidHar": "Neteisingas HAR failas",
+    "preview.harTitle": "HAR: {count} užklausų",
+    "preview.harMethod": "Metodas",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Būsena",
+    "preview.harTime": "Laikas",
+    "preview.harSize": "Dydis",
+    "preview.3dOffline": "3D peržiūra nepasiekiama neprisijungus",
+    "preview.envMasked": "Reikšmės paslėptos — užveskite pelę, kad pamatytumėte",
+    "preview.saveFirst3d": "Pirmiausia išsaugokite failą, kad peržiūrėtumėte 3D modelį",
+
+    "preview.close": "Uždaryti peržiūrą",
+    "preview.open": "Peržiūra ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Nepasirinkta jokia kortelė",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Kalba",
+
+    // ── About ──
+    "about.version": "Versija {version}",
   },
 };
 

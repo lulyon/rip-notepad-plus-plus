@@ -142,7 +142,7 @@ const ca = {
     "git.clean": "✓ Arbre de treball net",
     "git.commit": "Commit...",
     "git.commitFailed": "Commit fallit: {{error}}",
-    "git.committed": "Committed ✓",
+    "git.committed": "Commit fet ✓",
     "git.diff": "diferència",
     "git.filesChanged": "fitxers modificats",
     "git.loading": "Carregant...",
@@ -382,14 +382,14 @@ const ca = {
     "preferences.defaultEncoding": "Codificació per defecte",
     "preferences.defaultLanguage": "Llenguatge per defecte",
     "preferences.editing": "Edició",
-    "preferences.eol": "EOL",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eol": "Final de línia",
+    "preferences.eolCr": "CR (Mac clàssic)",
     "preferences.eolCrlf": "CRLF (Windows)",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.fontFamily": "Família de font",
     "preferences.fontSize": "Mida de font",
     "preferences.general": "General",
-    "preferences.insertSpaces": "Insert spaces instead of tabs",
+    "preferences.insertSpaces": "Insereix espais en lloc de tabulacions",
     "preferences.minimapShowSlider": "Mostra sempre el control lliscant del minimapa",
     "preferences.minimapWidth": "Amplada del minimapa",
     "preferences.newDoc": "Nou document",
@@ -401,7 +401,7 @@ const ca = {
     "preferences.showMinimap": "Mostra el minimapa",
     "preferences.showStatusBar": "Mostra la barra d'estat",
     "preferences.smoothScrolling": "Desplaçament suau",
-    "preferences.tabSize": "Tab size",
+    "preferences.tabSize": "Mida de tabulació",
     "preferences.theme": "Tema",
     "preferences.themeDark": "Fosc (VS fosc)",
     "preferences.themeHighContrast": "Alt contrast",
@@ -409,7 +409,7 @@ const ca = {
     "preferences.whitespaceAll": "Tot",
     "preferences.whitespaceNone": "Cap",
     "preferences.whitespaceSelection": "Selecció",
-    "preferences.wordWrap": "Word wrap",
+    "preferences.wordWrap": "Salt de línia",
 
     // ── Run Dialog ──
     "run.clear": "Neteja",
@@ -462,7 +462,7 @@ const ca = {
     "search.matchStats": "{{current}} de {{count}}",
     "search.preview": "Vista prèvia",
     "search.previewTitle": "Vista prèvia de substitució — {{count}} ocurrència(es)",
-    "search.regex": "Regex",
+    "search.regex": "Expressió regular",
     "search.replaceAll": "Substitueix-ho tot",
     "search.replaceAllBtn": "Substitueix-ho tot",
     "search.replaceBtn": "Substitueix",
@@ -494,10 +494,10 @@ const ca = {
 
     // ── Status Bar ──
     "status.clickToChange": "Feu clic per canviar la codificació",
-    "status.column": "Col",
+    "status.column": "Co",
     "status.encoding": "Codificació",
     "status.language": "Llenguatge",
-    "status.line": "Ln",
+    "status.line": "Lín",
 
     // ── Tab Context Menu ──
     "tab.close": "Tanca",
@@ -577,6 +577,96 @@ const ca = {
     "welcome.dropHint": "Arrossegueu fitxers aquí per obrir",
     "welcome.subtitle": "Ctrl+N Nou · Ctrl+O Obre · Ctrl+S Desa",
     "welcome.title": "ripNotepad++",
+    "contextMenu.labelPlaceholder": "Etiqueta (&Letter per a la drecera)",
+    "contextMenu.actionPlaceholder": "ID d'acció (p. ex. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Etiqueta",
+    "contextMenu.customActionPlaceholder": "O escriviu una ID d'acció personalitzada...",
+
+    // ── Status Bar ──
+    "status.ready": "Llest",
+    "status.branchTooltip": "Feu clic per canviar de branca",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Tanca",
+    "tab.newTooltip": "Nou fitxer (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Elimina l'arrel",
+    "sidebar.refresh": "Refresca",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Canvia de branca",
+    "git.pull": "Estira",
+    "git.push": "Empeny",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Plantilles regex",
+    "search.lineLabel": "Lín",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Número de línia",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Feu clic per obrir {file} a la línia {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "Error XML: {error}",
+    "menu.xmlParseError": "Error d'anàlisi XML: {error}",
+    "menu.xmlValid": "✅ XML és vàlid.",
+    "menu.xmlInvalid": "❌ XML no vàlid:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Desa el fitxer primer per previsualitzar",
+    "preview.saveFirstShort": "Desa el fitxer primer",
+    "preview.imageFailed": "No s'ha pogut carregar la imatge",
+    "preview.emptyCsv": "CSV buit",
+    "preview.invalidJson": "JSON no vàlid",
+    "preview.katexInfo": "KaTeX només renderitza matemàtiques en línia ($...$) i en display ($$...$$)",
+    "preview.spreadsheetFailed": "No s'ha pogut carregar el full de càlcul",
+    "preview.invalidNotebook": "Quadern no vàlid",
+    "preview.docFailed": "No s'ha pogut carregar el document",
+    "preview.geoJsonFailed": "No s'ha pogut carregar el GeoJSON",
+    "preview.sqliteFailed": "No s'ha pogut obrir la base de dades",
+    "preview.emptyTable": "Taula buida",
+    "preview.loadingArchive": "Carregant l'arxiu...",
+    "preview.archiveFailed": "No s'ha pogut llegir l'arxiu",
+    "preview.noPreview": "No hi ha vista prèvia disponible per a aquest tipus de fitxer",
+    "preview.pdfTitle": "Vista prèvia del PDF",
+    "preview.iframeTitle": "Vista prèvia de {name}",
+    "preview.dotRenderError": "No s'ha pogut renderitzar el gràfic",
+    "preview.dotLoadError": "No s'ha pogut carregar el motor Graphviz",
+    "preview.noContent": "Sense contingut",
+    "preview.invalidHar": "Fitxer HAR no vàlid",
+    "preview.harTitle": "HAR: {count} peticions",
+    "preview.harMethod": "Mètode",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Estat",
+    "preview.harTime": "Temps",
+    "preview.harSize": "Mida",
+    "preview.3dOffline": "Vista prèvia 3D no disponible sense connexió",
+    "preview.envMasked": "Valors emmascarats — passeu el ratolí per revelar",
+    "preview.saveFirst3d": "Desa el fitxer primer per previsualitzar el model 3D",
+
+    "preview.close": "Tanca la vista prèvia",
+    "preview.open": "Vista prèvia ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "No s'ha seleccionat cap pestanya",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Idioma",
+
+    // ── About ──
+    "about.version": "Versió {version}",
   },
 };
 

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { useEditorStore } from "../../stores/editorStore";
 import { useEditorRefStore } from "../../stores/editorRefStore";
@@ -8,6 +9,7 @@ import { DotPreview } from "./DotPreview";
 import "./MarkdownPreview.css"; // reuse existing styles
 
 export function GenericPreview() {
+  const { t } = useTranslation();
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const tabs = useEditorStore((s) => s.tabs);
   const activeTab = tabs.find((t) => t.id === activeTabId);
@@ -45,7 +47,7 @@ export function GenericPreview() {
               .name{flex:1}.size{color:#888;text-align:right;min-width:80px}
               .dir{color:#569cd6}.file{color:#d4d4d4}.err{color:#999;text-align:center;padding:40px}
             </style></head><body><h2>${entries.length} entries</h2>${rows}</body></html>`);
-          }).catch(() => setZipHtml("<p class='err'>Failed to read archive</p>"));
+          }).catch(() => setZipHtml(`<p class='err'>${t("preview.archiveFailed")}</p>`));
         });
       }
       return zipHtml || renderer.render({ content: "", filePath: activeTab?.path || null, assetUrl });
@@ -132,11 +134,11 @@ export function GenericPreview() {
   );
 
   if (!renderer) {
-    return <div className="markdown-empty">No preview available for this file type</div>;
+    return <div className="markdown-empty">{t("preview.noPreview")}</div>;
   }
 
   if (!activeTab?.content && !activeTab?.path) {
-    return <div className="markdown-empty">Save the file first to preview</div>;
+    return <div className="markdown-empty">{t("preview.saveFirst")}</div>;
   }
 
   // 3D model — React component (three.js from npm, fully offline)
@@ -161,7 +163,7 @@ export function GenericPreview() {
   if (renderer.id === "pdf" && assetUrl) {
     return (
       <div className="markdown-preview">
-        <iframe src={assetUrl} className="preview-iframe" title="PDF Preview" />
+        <iframe src={assetUrl} className="preview-iframe" title={t("preview.pdfTitle")} />
       </div>
     );
   }
@@ -177,7 +179,7 @@ export function GenericPreview() {
           className="preview-iframe"
           srcDoc={html}
           sandbox={needsAsset ? "allow-scripts allow-same-origin" : "allow-scripts"}
-          title={`${renderer.name} Preview`}
+          title={t("preview.iframeTitle", { name: renderer.name })}
         />
       </div>
     );

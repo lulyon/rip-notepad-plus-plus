@@ -138,23 +138,23 @@ const bg = {
 
     // ── Menu: Language ──
     "menu.language": "&Език",
-    "menu.language.plaintext": "Plain Text",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.plaintext": "Чист текст",
+    "menu.language.javascript": "ДжаваСкрипт",
+    "menu.language.typescript": "ТайпСкрипт",
+    "menu.language.json": "Джейсън",
+    "menu.language.html": "ЕйчТиЕмЕл",
+    "menu.language.css": "СиЕсЕс",
+    "menu.language.python": "Пайтън",
+    "menu.language.rust": "Ръст",
+    "menu.language.go": "Го",
+    "menu.language.java": "Джава",
+    "menu.language.c": "Си",
+    "menu.language.cpp": "Си++",
+    "menu.language.xml": "ЕксЕмЕл",
+    "menu.language.yaml": "Ямл",
+    "menu.language.markdown": "Маркдаун",
+    "menu.language.sql": "ЕсКюЕл",
+    "menu.language.shell": "Шел",
     "menu.language.defineLanguage": "Потребителски дефиниран език...",
     "menu.language.openUdlFolder": "Отваряне на UDL папка...",
 
@@ -174,10 +174,10 @@ const bg = {
 
     // ── Menu: Tools ──
     "menu.tools": "&Инструменти",
-    "menu.tools.md5": "MD5 Generate",
-    "menu.tools.sha1": "SHA-1 Generate",
-    "menu.tools.sha256": "SHA-256 Generate",
-    "menu.tools.sha512": "SHA-512 Generate",
+    "menu.tools.md5": "MD5 генериране",
+    "menu.tools.sha1": "SHA-1 генериране",
+    "menu.tools.sha256": "SHA-256 генериране",
+    "menu.tools.sha512": "SHA-512 генериране",
     "menu.tools.configure": "Конфигуриране на външни инструменти...",
 
     // ── Menu: Window ──
@@ -208,6 +208,8 @@ const bg = {
     "tab.colorYellow": "Жълт",
     "tab.colorGreen": "Зелен",
     "tab.colorBlue": "Син",
+    "tab.closeTooltip": "Затваряне",
+    "tab.newTooltip": "Нов файл (Ctrl+N)",
 
     // ── Search Panel ──
     "search.findLabel": "Намиране",
@@ -245,6 +247,8 @@ const bg = {
     "search.previewTitle": "Преглед на заместване — {{count}} срещания",
     "search.replaceAll": "Заместване на всички",
     "search.cancel": "Отказ",
+    "search.regexTemplates": "Regex шаблони",
+    "search.lineLabel": "Ред",
 
     // ── Encoding Dialog ──
     "encoding.current": "Текущо",
@@ -252,6 +256,7 @@ const bg = {
 
     // ── Go To Line ──
     "gotoLine.go": "Отиване",
+    "gotoLine.placeholder": "Номер на ред",
 
     // ── Preferences ──
     "preferences.general": "Общи",
@@ -284,10 +289,10 @@ const bg = {
     "preferences.whitespaceAll": "Всички",
     "preferences.defaultEncoding": "Кодиране по подразбиране",
     "preferences.defaultLanguage": "Език по подразбиране",
-    "preferences.eol": "EOL",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eol": "Край на ред",
+    "preferences.eolLf": "LF (Юникс/макОС)",
+    "preferences.eolCrlf": "CRLF (Уиндоус)",
+    "preferences.eolCr": "CR (Класически Mac)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Филтриране на преки пътища...",
@@ -297,6 +302,7 @@ const bg = {
     // ── About ──
     "about.description": "Кръстоплатформена текстообработваща програма - заместител на Notepad++.",
     "about.copyright": "© 2026 сътрудници на ripNotepad++",
+    "about.version": "Версия {version}",
 
     // ── Dialogs ──
     "dialog.save": "Запис",
@@ -382,6 +388,8 @@ const bg = {
     "status.line": "Ред",
     "status.column": "Кол",
     "status.clickToChange": "Щракнете за промяна на кодирането",
+    "status.ready": "Готов",
+    "status.branchTooltip": "Щракнете за смяна на клон",
 
     // ── Welcome ──
     "welcome.title": "ripNotepad++",
@@ -393,7 +401,7 @@ const bg = {
     "sidebar.doclist": "Списък с документи",
     "sidebar.clipboard": "Клипборд",
     "sidebar.symbols": "Символи",
-    "sidebar.git": "Git",
+    "sidebar.git": "Гит",
     "sidebar.terminal": "Терминал",
     "terminal.start": "Стартиране на терминал",
     "terminal.exited": "Процесът приключи.",
@@ -401,7 +409,46 @@ const bg = {
     "terminal.spawnFailed": "Неуспешно стартиране на терминал",
     "terminal.retry": "Опитай отново",
     "terminal.newTab": "Нов раздел на терминал",
+    "sidebar.removeRoot": "Премахване на корен",
+    "sidebar.refresh": "Обновяване",
     "sidebar.preview": "Преглед",
+
+    // ── Preview ──
+    "preview.saveFirst": "Запишете първо файла за преглед",
+    "preview.saveFirstShort": "Запишете първо файла",
+    "preview.imageFailed": "Неуспешно зареждане на изображение",
+    "preview.emptyCsv": "Празен CSV",
+    "preview.invalidJson": "Невалиден JSON",
+    "preview.katexInfo": "KaTeX рендерира само вградена математика ($...$) и математика в отделен ред ($$...$$)",
+    "preview.spreadsheetFailed": "Неуспешно зареждане на електронна таблица",
+    "preview.invalidNotebook": "Невалидна тетрадка",
+    "preview.docFailed": "Неуспешно зареждане на документ",
+    "preview.geoJsonFailed": "Неуспешно зареждане на GeoJSON",
+    "preview.sqliteFailed": "Неуспешно отваряне на база данни",
+    "preview.emptyTable": "Празна таблица",
+    "preview.loadingArchive": "Зареждане на архив...",
+    "preview.archiveFailed": "Неуспешно четене на архив",
+    "preview.noPreview": "Няма преглед за този тип файл",
+    "preview.pdfTitle": "Преглед на PDF",
+    "preview.iframeTitle": "{name} Преглед",
+    "preview.dotRenderError": "Неуспешно рендериране на графика",
+    "preview.dotLoadError": "Неуспешно зареждане на Graphviz двигател",
+    "preview.noContent": "Няма съдържание",
+    "preview.invalidHar": "Невалиден HAR файл",
+    "preview.harTitle": "HAR: {count} заявки",
+    "preview.harMethod": "Метод",
+    "preview.harUrl": "URL（УРЛ）",
+    "preview.harStatus": "Статус",
+    "preview.harTime": "Време",
+    "preview.harSize": "Размер",
+    "preview.3dOffline": "3D прегледът не е достъпен офлайн",
+    "preview.envMasked": "Стойностите са скрити — задръжте мишката за разкриване",
+    "preview.saveFirst3d": "Запишете първо файла за преглед на 3D модел",
+    "preview.close": "Затвори преглед",
+    "preview.open": "Преглед ({shortcut})",
+
+    // ── Split Editor ──
+    "splitEditor.noTab": "Няма избран раздел",
 
     // ── Clipboard ──
     "clipboard.search": "Търсене...",
@@ -412,7 +459,7 @@ const bg = {
     "clipboard.copy": "Копиране в системния клипборд",
     "clipboard.pin": "Закачане/Откачане",
     "clipboard.remove": "Премахване",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "Джейсън",
     "sidebar.taskList": "Списък със задачи",
 
     // ── JSON Viewer ──
@@ -437,6 +484,10 @@ const bg = {
     "menu.compare": "&Сравняване...",
     "menu.edit.formatXml": "Форматиране на XML",
     "menu.edit.validateXml": "Валидиране на XML",
+    "menu.xmlError": "XML грешка: {error}",
+    "menu.xmlParseError": "XML грешка при анализ: {error}",
+    "menu.xmlValid": "✅ XML е валиден.",
+    "menu.xmlInvalid": "❌ Невалиден XML:\n{error}",
 
     // ── Command Palette ──
     "cmdPalette.placeholder": "Въведете име на команда...",
@@ -465,6 +516,7 @@ const bg = {
     "run.var.projectrootDesc": "Текущо отворена папка на проекта",
     "run.var.nppdir": "Директория на приложението",
     "run.var.nppdirDesc": "Директория на приложението",
+    "run.openFileAtLine": "Щракнете за отваряне на {file} на ред {line}",
 
     // ── DocList ──
     "doclist.empty": "Няма отворени документи",
@@ -475,12 +527,15 @@ const bg = {
     "git.loading": "Зареждане...",
     "git.notRepo": "Не е Git хранилище",
     "git.filesChanged": "променени файлове",
+    "git.switchBranch": "Смяна на клон",
+    "git.pull": "Изтегляне",
+    "git.push": "Качване",
     "git.refresh": "Обновяване",
     "git.clean": "✓ Работното дърво е чисто",
     "git.viewDiff": "Преглед на diff",
     "git.stageAll": "Добавяне на всички",
-    "git.commit": "Commit...",
-    "git.diff": "diff",
+    "git.commit": "Комит...",
+    "git.diff": "разлика",
     "git.pushOk": "Push успешен",
     "git.pullOk": "Pull успешен",
     "git.committed": "Извършен commit ✓",
@@ -494,7 +549,7 @@ const bg = {
     "commit.title": "Commit на промени",
     "commit.filesStaged": "{{count}} файл(а) добавени",
     "commit.messagePlaceholder": "Commit съобщение (Enter за commit, Shift+Enter за нов ред)",
-    "commit.commit": "Commit",
+    "commit.commit": "Комит",
     "commit.cancel": "Отказ",
 
     // ── Plugin ──
@@ -526,7 +581,7 @@ const bg = {
     "ai.clearChat": "Изчистване на чата",
     "ai.configTitle": "AI Конфигурация",
     "ai.configDesc": "Конфигурирайте вашия AI доставчик. Съвместим с форматите за съобщения на Anthropic и OpenAI.",
-    "ai.configApiUrl": "API Base URL",
+    "ai.configApiUrl": "API базов URL",
     "ai.configApiKey": "API ключ",
     "ai.configModel": "Модел",
     "ai.configProvider": "API доставчик",
@@ -568,7 +623,24 @@ const bg = {
     "contextMenu.addItem": "Добавяне на елемент",
     "contextMenu.add": "Добавяне",
     "contextMenu.selectAction": "Избор на действие...",
+    "contextMenu.labelPlaceholder": "Етикет (&Буква за бърз клавиш)",
+    "contextMenu.actionPlaceholder": "ID на действие (напр. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Етикет",
+    "contextMenu.customActionPlaceholder": "Или въведете ID на персонализирано действие...",
     "contextMenu.resetDefaults": "Нулиране към подразбиране",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Език",
   },
 };
 

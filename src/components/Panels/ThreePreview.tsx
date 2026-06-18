@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
@@ -7,6 +8,7 @@ import { convertFileSrc } from "@tauri-apps/api/core";
 import { useEditorStore } from "../../stores/editorStore";
 
 export function ThreePreview() {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const tabs = useEditorStore((s) => s.tabs);
@@ -109,7 +111,7 @@ export function ThreePreview() {
   }, [activeTab?.path]);
 
   if (!activeTab?.path) {
-    return <div className="markdown-empty">Save the file first to preview 3D model</div>;
+    return <div className="markdown-empty">{t("preview.saveFirst3d")}</div>;
   }
 
   return <div ref={containerRef} style={{ width: "100%", height: "100%" }} />;

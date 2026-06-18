@@ -127,23 +127,23 @@ const mr = {
     "menu.encoding.convertUtf16BE": "UTF-16 BE मध्ये रूपांतरित करा",
     "menu.encoding.openDialog": "अक्षर संच(&C)...",
     "menu.language": "भाषा(&L)",
-    "menu.language.plaintext": "Plain Text",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.plaintext": "साधा मजकूर",
+    "menu.language.javascript": "जावास्क्रिप्ट",
+    "menu.language.typescript": "टाइपस्क्रिप्ट",
+    "menu.language.json": "जेसन",
+    "menu.language.html": "एचटीएमएल",
+    "menu.language.css": "सीएसएस",
+    "menu.language.python": "पायथॉन",
+    "menu.language.rust": "रस्ट",
+    "menu.language.go": "गो",
+    "menu.language.java": "जावा",
+    "menu.language.c": "सी",
+    "menu.language.cpp": "सी++",
+    "menu.language.xml": "एक्सएमएल",
+    "menu.language.yaml": "यामल",
+    "menu.language.markdown": "मार्कडाउन",
+    "menu.language.sql": "एसक्यूएल",
+    "menu.language.shell": "शेल",
     "menu.language.defineLanguage": "वापरकर्ता परिभाषित भाषा...",
     "menu.language.openUdlFolder": "UDL फोल्डर उघडा...",
     "menu.macro": "मॅक्रो(&M)",
@@ -157,10 +157,10 @@ const mr = {
     "menu.run.claudeCode": "Claude लाँच करा",
     "menu.run.codex": "Codex लाँच करा",
     "menu.tools": "साधने(&T)",
-    "menu.tools.md5": "MD5 Generate",
-    "menu.tools.sha1": "SHA-1 Generate",
-    "menu.tools.sha256": "SHA-256 Generate",
-    "menu.tools.sha512": "SHA-512 Generate",
+    "menu.tools.md5": "MD5 तयार करा",
+    "menu.tools.sha1": "SHA-1 तयार करा",
+    "menu.tools.sha256": "SHA-256 तयार करा",
+    "menu.tools.sha512": "SHA-512 तयार करा",
     "menu.tools.configure": "बाह्य साधने कॉन्फिगर करा...",
     "menu.window": "विंडो(&W)",
     "menu.window.nextTab": "पुढील टॅब(&N)",
@@ -191,7 +191,7 @@ const mr = {
     // --- Search Panel ---
     "search.findLabel": "शोधा",
     "search.replaceLabel": "बदला",
-    "search.regex": "Regex",
+    "search.regex": "रेगेक्स",
     "search.caseSensitive": "केस संवेदनशील",
     "search.wholeWord": "संपूर्ण शब्द",
     "search.wrapAround": "भोवती फिरा",
@@ -216,12 +216,12 @@ const mr = {
     "search.searchBtn": "शोधा",
     "search.searching": "शोधत आहे...",
     "search.clear": "साफ करा",
-    "search.resultsCount": "{{count}} results found",
-    "search.matchStats": "{{current}} of {{count}}",
+    "search.resultsCount": "{{count}} परिणाम सापडले",
+    "search.matchStats": "{{current}} पैकी {{count}}",
     "search.incremental": "वाढीव",
     "search.inSelection": "निवडीत",
     "search.preview": "पूर्वावलोकन",
-    "search.previewTitle": "Replace Preview — {{count}} occurrence(s)",
+    "search.previewTitle": "बदली पूर्वावलोकन — {{count}} प्रसंग",
     "search.replaceAll": "सर्व बदला",
     "search.cancel": "रद्द करा",
 
@@ -263,9 +263,9 @@ const mr = {
     "preferences.whitespaceAll": "सर्व",
     "preferences.defaultEncoding": "डीफॉल्ट एन्कोडिंग",
     "preferences.defaultLanguage": "डीफॉल्ट भाषा",
-    "preferences.eol": "EOL",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
+    "preferences.eol": "EOL (ओळ शेवट)",
+    "preferences.eolLf": "LF (युनिक्स/macOS)",
+    "preferences.eolCrlf": "CRLF (विंडोज)",
     "preferences.eolCr": "CR (क्लासिक Mac)",
 
     // --- Shortcut Mapper ---
@@ -358,8 +358,8 @@ const mr = {
     // --- Status Bar ---
     "status.encoding": "एन्कोडिंग",
     "status.language": "भाषा",
-    "status.line": "Ln",
-    "status.column": "Col",
+    "status.line": "रे",
+    "status.column": "स्त",
     "status.clickToChange": "एन्कोडिंग बदलण्यासाठी क्लिक करा",
 
     // --- Welcome ---
@@ -372,7 +372,7 @@ const mr = {
     "sidebar.doclist": "दस्तऐवज यादी",
     "sidebar.clipboard": "क्लिपबोर्ड",
     "sidebar.symbols": "चिन्हे",
-    "sidebar.git": "Git",
+    "sidebar.git": "गिट",
     "sidebar.terminal": "टर्मिनल",
 
     // --- Terminal ---
@@ -397,7 +397,7 @@ const mr = {
     "clipboard.remove": "काढा",
 
     // --- Sidebar ---
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "जेसन",
     "sidebar.taskList": "कार्य यादी",
 
     // --- JSON Viewer ---
@@ -562,6 +562,96 @@ const mr = {
     "contextMenu.add": "जोडा",
     "contextMenu.selectAction": "क्रिया निवडा...",
     "contextMenu.resetDefaults": "डीफॉल्टवर रीसेट करा",
+    "contextMenu.labelPlaceholder": "लेबल (&हॉटकीसाठी अक्षर)",
+    "contextMenu.actionPlaceholder": "क्रिया आयडी (उदा. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "लेबल",
+    "contextMenu.customActionPlaceholder": "किंवा कस्टम क्रिया आयडी टाइप करा...",
+
+    // ── Status Bar ──
+    "status.ready": "तयार",
+    "status.branchTooltip": "शाखा बदलण्यासाठी क्लिक करा",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "बंद करा",
+    "tab.newTooltip": "नवीन फाइल (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "रूट काढा",
+    "sidebar.refresh": "रीफ्रेश करा",
+
+    // ── Git Panel ──
+    "git.switchBranch": "शाखा बदला",
+    "git.pull": "पुल",
+    "git.push": "पुश",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex टेम्पलेट्स",
+    "search.lineLabel": "रे",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "ओळ क्रमांक",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "{file} ओळ {line} वर उघडण्यासाठी क्लिक करा",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML त्रुटी: {error}",
+    "menu.xmlParseError": "XML पार्स त्रुटी: {error}",
+    "menu.xmlValid": "✅ XML वैध आहे.",
+    "menu.xmlInvalid": "❌ XML अवैध:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "पूर्वावलोकन करण्यासाठी प्रथम फाइल जतन करा",
+    "preview.saveFirstShort": "प्रथम फाइल जतन करा",
+    "preview.imageFailed": "प्रतिमा लोड करण्यात अयशस्वी",
+    "preview.emptyCsv": "रिकामे CSV",
+    "preview.invalidJson": "अवैध JSON",
+    "preview.katexInfo": "KaTeX फक्त इनलाइन गणित ($...$) आणि डिस्प्ले गणित ($$...$$) रेंडर करते",
+    "preview.spreadsheetFailed": "स्प्रेडशीट लोड करण्यात अयशस्वी",
+    "preview.invalidNotebook": "अवैध नोटबुक",
+    "preview.docFailed": "दस्तऐवज लोड करण्यात अयशस्वी",
+    "preview.geoJsonFailed": "GeoJSON लोड करण्यात अयशस्वी",
+    "preview.sqliteFailed": "डेटाबेस उघडण्यात अयशस्वी",
+    "preview.emptyTable": "रिकामी तक्ता",
+    "preview.loadingArchive": "आर्काइव्ह लोड होत आहे...",
+    "preview.archiveFailed": "आर्काइव्ह वाचण्यात अयशस्वी",
+    "preview.noPreview": "या फाइल प्रकारासाठी पूर्वावलोकन उपलब्ध नाही",
+    "preview.pdfTitle": "PDF पूर्वावलोकन",
+    "preview.iframeTitle": "{name} पूर्वावलोकन",
+    "preview.dotRenderError": "आलेख रेंडर करण्यात अयशस्वी",
+    "preview.dotLoadError": "Graphviz इंजिन लोड करण्यात अयशस्वी",
+    "preview.noContent": "कोणतीही सामग्री नाही",
+    "preview.invalidHar": "अवैध HAR फाइल",
+    "preview.harTitle": "HAR: {count} विनंत्या",
+    "preview.harMethod": "पद्धत",
+    "preview.harUrl": "URL（यूआरएल）",
+    "preview.harStatus": "स्थिती",
+    "preview.harTime": "वेळ",
+    "preview.harSize": "आकार",
+    "preview.3dOffline": "3D पूर्वावलोकन ऑफलाइन उपलब्ध नाही",
+    "preview.envMasked": "मूल्ये लपविली आहेत — प्रकट करण्यासाठी हॉवर करा",
+    "preview.saveFirst3d": "3D मॉडेल पूर्वावलोकन करण्यासाठी प्रथम फाइल जतन करा",
+
+    "preview.close": "पूर्वावलोकन बंद करा",
+    "preview.open": "पूर्वावलोकन ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "कोणताही टॅब निवडला नाही",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "भाषा",
+
+    // ── About ──
+    "about.version": "आवृत्ती {version}",
   },
 };
 

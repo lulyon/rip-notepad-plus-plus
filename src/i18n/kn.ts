@@ -127,23 +127,23 @@ const kn = {
     "menu.encoding.convertUtf16BE": "UTF-16 BE ಗೆ ಪರಿವರ್ತಿಸಿ",
     "menu.encoding.openDialog": "ಅಕ್ಷರ ಸೆಟ್(&C)...",
     "menu.language": "ಭಾಷೆ(&L)",
-    "menu.language.plaintext": "Plain Text",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.plaintext": "ಸರಳ ಪಠ್ಯ",
+    "menu.language.javascript": "ಜಾವಾಸ್ಕ್ರಿಪ್ಟ್",
+    "menu.language.typescript": "ಟೈಪ್ಸ್ಕ್ರಿಪ್ಟ್",
+    "menu.language.json": "ಜೆಸನ್",
+    "menu.language.html": "ಎಚ್ಟಿಎಮ್ಎಲ್",
+    "menu.language.css": "ಸಿಎಸ್ಎಸ್",
+    "menu.language.python": "ಪೈಥಾನ್",
+    "menu.language.rust": "ರಸ್ಟ್",
+    "menu.language.go": "ಗೋ",
+    "menu.language.java": "ಜಾವಾ",
+    "menu.language.c": "ಸಿ",
+    "menu.language.cpp": "ಸಿ++",
+    "menu.language.xml": "ಎಕ್ಸ್ಎಮ್ಎಲ್",
+    "menu.language.yaml": "ಯಾಮಲ್",
+    "menu.language.markdown": "ಮಾರ್ಕ್ಡೌನ್",
+    "menu.language.sql": "ಎಸ್ಕ್ಯೂಎಲ್",
+    "menu.language.shell": "ಶೆಲ್",
     "menu.language.defineLanguage": "ಬಳಕೆದಾರ ವ್ಯಾಖ್ಯಾನಿತ ಭಾಷೆ...",
     "menu.language.openUdlFolder": "UDL ಫೋಲ್ಡರ್ ತೆರೆಯಿರಿ...",
     "menu.macro": "ಮ್ಯಾಕ್ರೋ(&M)",
@@ -157,10 +157,10 @@ const kn = {
     "menu.run.claudeCode": "Claude ಪ್ರಾರಂಭಿಸಿ",
     "menu.run.codex": "Codex ಪ್ರಾರಂಭಿಸಿ",
     "menu.tools": "ಉಪಕರಣಗಳು(&T)",
-    "menu.tools.md5": "MD5 Generate",
-    "menu.tools.sha1": "SHA-1 Generate",
-    "menu.tools.sha256": "SHA-256 Generate",
-    "menu.tools.sha512": "SHA-512 Generate",
+    "menu.tools.md5": "MD5 ರಚಿಸಿ",
+    "menu.tools.sha1": "SHA-1 ರಚಿಸಿ",
+    "menu.tools.sha256": "SHA-256 ರಚಿಸಿ",
+    "menu.tools.sha512": "SHA-512 ರಚಿಸಿ",
     "menu.tools.configure": "ಬಾಹ್ಯ ಉಪಕರಣಗಳನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡಿ...",
     "menu.window": "ವಿಂಡೋ(&W)",
     "menu.window.nextTab": "ಮುಂದಿನ ಟ್ಯಾಬ್(&N)",
@@ -191,7 +191,7 @@ const kn = {
     // --- Search Panel ---
     "search.findLabel": "ಕಂಡುಹಿಡಿ",
     "search.replaceLabel": "ಬದಲಾಯಿಸಿ",
-    "search.regex": "Regex",
+    "search.regex": "ರೆಜೆಕ್ಸ್",
     "search.caseSensitive": "ಕೇಸ್ ಸೆನ್ಸಿಟಿವ್",
     "search.wholeWord": "ಸಂಪೂರ್ಣ ಪದ",
     "search.wrapAround": "ಸುತ್ತು ಸುತ್ತು",
@@ -216,12 +216,12 @@ const kn = {
     "search.searchBtn": "ಹುಡುಕು",
     "search.searching": "ಹುಡುಕುತ್ತಿದೆ...",
     "search.clear": "ತೆರವುಗೊಳಿಸಿ",
-    "search.resultsCount": "{{count}} results found",
-    "search.matchStats": "{{current}} of {{count}}",
+    "search.resultsCount": "{{count}} ಫಲಿತಾಂಶಗಳು ಕಂಡುಬಂದಿವೆ",
+    "search.matchStats": "{{current}} ನ {{count}}",
     "search.incremental": "ವರ್ಧಕ",
     "search.inSelection": "ಆಯ್ಕೆಯಲ್ಲಿ",
     "search.preview": "ಮುನ್ನೋಟ",
-    "search.previewTitle": "Replace Preview — {{count}} occurrence(s)",
+    "search.previewTitle": "ಬದಲಿ ಮುನ್ನೋಟ — {{count}} ಸಂಭವ(ಗಳು)",
     "search.replaceAll": "ಎಲ್ಲವನ್ನು ಬದಲಾಯಿಸಿ",
     "search.cancel": "ರದ್ದುಮಾಡಿ",
 
@@ -263,9 +263,9 @@ const kn = {
     "preferences.whitespaceAll": "ಎಲ್ಲಾ",
     "preferences.defaultEncoding": "ಡೀಫಾಲ್ಟ್ ಎನ್‌ಕೋಡಿಂಗ್",
     "preferences.defaultLanguage": "ಡೀಫಾಲ್ಟ್ ಭಾಷೆ",
-    "preferences.eol": "EOL",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
+    "preferences.eol": "EOL (ಸಾಲಿನ ಅಂತ್ಯ)",
+    "preferences.eolLf": "LF (ಯುನಿಕ್ಸ್/ಮ್ಯಾಕೋಸ್)",
+    "preferences.eolCrlf": "CRLF (ವಿಂಡೋಸ್)",
     "preferences.eolCr": "CR (ಕ್ಲಾಸಿಕ್ Mac)",
 
     // --- Shortcut Mapper ---
@@ -358,8 +358,8 @@ const kn = {
     // --- Status Bar ---
     "status.encoding": "ಎನ್‌ಕೋಡಿಂಗ್",
     "status.language": "ಭಾಷೆ",
-    "status.line": "Ln",
-    "status.column": "Col",
+    "status.line": "ಸಾ",
+    "status.column": "ಕಾ",
     "status.clickToChange": "ಎನ್‌ಕೋಡಿಂಗ್ ಬದಲಾಯಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
 
     // --- Welcome ---
@@ -372,7 +372,7 @@ const kn = {
     "sidebar.doclist": "ದಾಖಲೆ ಪಟ್ಟಿ",
     "sidebar.clipboard": "ಕ್ಲಿಪ್‌ಬೋರ್ಡ್",
     "sidebar.symbols": "ಚಿಹ್ನೆಗಳು",
-    "sidebar.git": "Git",
+    "sidebar.git": "ಗಿಟ್",
     "sidebar.terminal": "ಟರ್ಮಿನಲ್",
 
     // --- Terminal ---
@@ -397,7 +397,7 @@ const kn = {
     "clipboard.remove": "ತೆಗೆದುಹಾಕಿ",
 
     // --- Sidebar ---
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "ಜೆಸನ್",
     "sidebar.taskList": "ಕಾರ್ಯ ಪಟ್ಟಿ",
 
     // --- JSON Viewer ---
@@ -562,6 +562,96 @@ const kn = {
     "contextMenu.add": "ಸೇರಿಸಿ",
     "contextMenu.selectAction": "ಕ್ರಿಯೆ ಆಯ್ಕೆಮಾಡಿ...",
     "contextMenu.resetDefaults": "ಡೀಫಾಲ್ಟ್‌ಗೆ ಮರುಹೊಂದಿಸಿ",
+    "contextMenu.labelPlaceholder": "ಲೇಬಲ್ (&ಹಾಟ್‌ಕೀಗಾಗಿ ಅಕ್ಷರ)",
+    "contextMenu.actionPlaceholder": "ಕ್ರಿಯೆ ಐಡಿ (ಉದಾ. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "ಲೇಬಲ್",
+    "contextMenu.customActionPlaceholder": "ಅಥವಾ ಕಸ್ಟಮ್ ಕ್ರಿಯೆ ಐಡಿ ಟೈಪ್ ಮಾಡಿ...",
+
+    // ── Status Bar ──
+    "status.ready": "ಸಿದ್ಧ",
+    "status.branchTooltip": "ಶಾಖೆ ಬದಲಾಯಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "ಮುಚ್ಚಿ",
+    "tab.newTooltip": "ಹೊಸ ಕಡತ (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "ಮೂಲ ತೆಗೆದುಹಾಕಿ",
+    "sidebar.refresh": "ರಿಫ್ರೆಶ್ ಮಾಡಿ",
+
+    // ── Git Panel ──
+    "git.switchBranch": "ಶಾಖೆ ಬದಲಾಯಿಸಿ",
+    "git.pull": "ಪುಲ್",
+    "git.push": "ಪುಶ್",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex ಟೆಂಪ್ಲೇಟ್‌ಗಳು",
+    "search.lineLabel": "ಸಾ",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "ಸಾಲು ಸಂಖ್ಯೆ",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "{file} ಸಾಲು {line} ನಲ್ಲಿ ತೆರೆಯಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML ದೋಷ: {error}",
+    "menu.xmlParseError": "XML ಪಾರ್ಸ್ ದೋಷ: {error}",
+    "menu.xmlValid": "✅ XML ಮಾನ್ಯವಾಗಿದೆ.",
+    "menu.xmlInvalid": "❌ XML ಅಮಾನ್ಯ:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "ಮುನ್ನೋಟಕ್ಕಾಗಿ ಮೊದಲು ಕಡತವನ್ನು ಉಳಿಸಿ",
+    "preview.saveFirstShort": "ಮೊದಲು ಕಡತವನ್ನು ಉಳಿಸಿ",
+    "preview.imageFailed": "ಚಿತ್ರ ಲೋಡ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ",
+    "preview.emptyCsv": "ಖಾಲಿ CSV",
+    "preview.invalidJson": "ಅಮಾನ್ಯ JSON",
+    "preview.katexInfo": "KaTeX ಇನ್‌ಲೈನ್ ಗಣಿತ ($...$) ಮತ್ತು ಡಿಸ್ಪ್ಲೇ ಗಣಿತ ($$...$$) ಅನ್ನು ಮಾತ್ರ ರೆಂಡರ್ ಮಾಡುತ್ತದೆ",
+    "preview.spreadsheetFailed": "ಸ್ಪ್ರೆಡ್‌ಶೀಟ್ ಲೋಡ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ",
+    "preview.invalidNotebook": "ಅಮಾನ್ಯ ನೋಟ್‌ಬುಕ್",
+    "preview.docFailed": "ದಾಖಲೆ ಲೋಡ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ",
+    "preview.geoJsonFailed": "GeoJSON ಲೋಡ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ",
+    "preview.sqliteFailed": "ಡೇಟಾಬೇಸ್ ತೆರೆಯಲು ವಿಫಲವಾಗಿದೆ",
+    "preview.emptyTable": "ಖಾಲಿ ಕೋಷ್ಟಕ",
+    "preview.loadingArchive": "ಆರ್ಕೈವ್ ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
+    "preview.archiveFailed": "ಆರ್ಕೈವ್ ಓದಲು ವಿಫಲವಾಗಿದೆ",
+    "preview.noPreview": "ಈ ಕಡತ ಪ್ರಕಾರಕ್ಕೆ ಮುನ್ನೋಟ ಲಭ್ಯವಿಲ್ಲ",
+    "preview.pdfTitle": "PDF ಮುನ್ನೋಟ",
+    "preview.iframeTitle": "{name} ಮುನ್ನೋಟ",
+    "preview.dotRenderError": "ಗ್ರಾಫ್ ರೆಂಡರ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ",
+    "preview.dotLoadError": "Graphviz ಎಂಜಿನ್ ಲೋಡ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ",
+    "preview.noContent": "ಯಾವುದೇ ವಿಷಯವಿಲ್ಲ",
+    "preview.invalidHar": "ಅಮಾನ್ಯ HAR ಕಡತ",
+    "preview.harTitle": "HAR: {count} ವಿನಂತಿಗಳು",
+    "preview.harMethod": "ವಿಧಾನ",
+    "preview.harUrl": "URL（ಯುಆರ್ಎಲ್）",
+    "preview.harStatus": "ಸ್ಥಿತಿ",
+    "preview.harTime": "ಸಮಯ",
+    "preview.harSize": "ಗಾತ್ರ",
+    "preview.3dOffline": "3D ಮುನ್ನೋಟ ಆಫ್‌ಲೈನ್ನಲ್ಲಿ ಲಭ್ಯವಿಲ್ಲ",
+    "preview.envMasked": "ಮೌಲ್ಯಗಳು ಮರೆಮಾಡಲಾಗಿವೆ — ಬಹಿರಂಗಪಡಿಸಲು ಹೋವರ್ ಮಾಡಿ",
+    "preview.saveFirst3d": "3D ಮಾದರಿಯನ್ನು ಮುನ್ನೋಟ ಮಾಡಲು ಮೊದಲು ಕಡತವನ್ನು ಉಳಿಸಿ",
+
+    "preview.close": "ಮುನ್ನೋಟ ಮುಚ್ಚಿ",
+    "preview.open": "ಮುನ್ನೋಟ ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "ಯಾವುದೇ ಟ್ಯಾಬ್ ಆಯ್ಕೆ ಮಾಡಿಲ್ಲ",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "ಭಾಷೆ",
+
+    // ── About ──
+    "about.version": "ಆವೃತ್ತಿ {version}",
   },
 };
 

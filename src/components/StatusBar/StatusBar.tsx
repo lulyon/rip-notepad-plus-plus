@@ -6,6 +6,11 @@ import { useGitStore } from "../../stores/gitStore";
 import { useEffect } from "react";
 import "./StatusBar.css";
 
+/**
+ * StatusBar — displays file name, language, encoding, Ln/Col, git branch, and size (DEV only).
+ *
+ * All user-facing strings use i18n t().
+ */
 export function StatusBar() {
   const { t } = useTranslation();
   const activeTabId = useEditorStore((s) => s.activeTabId);
@@ -28,11 +33,11 @@ export function StatusBar() {
       <div className="status-bar">
         <span className="status-item">ripNotepad++</span>
         {gitStatus && (
-          <span className="status-item git-branch-item" onClick={() => window.dispatchEvent(new CustomEvent("git-show-branches"))} title="Click to switch branch">
+          <span className="status-item git-branch-item" onClick={() => window.dispatchEvent(new CustomEvent("git-show-branches"))} title={t("status.branchTooltip")}>
             ⎇ {gitStatus.branch}
           </span>
         )}
-        <span className="status-item">Ready</span>
+        <span className="status-item">{t("status.ready")}</span>
       </div>
     );
   }
@@ -52,7 +57,7 @@ export function StatusBar() {
         {activeTab.encoding}
       </span>
       <span className="status-item">
-        Ln {activeTab.cursorLine}, Col {activeTab.cursorColumn}
+        {t("status.line")} {activeTab.cursorLine}, {t("status.column")} {activeTab.cursorColumn}
       </span>
       {gitStatus && (
         <span className="status-item git-branch-item">

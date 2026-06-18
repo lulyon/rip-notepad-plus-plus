@@ -1,7 +1,7 @@
 # ripNotepad++ — Supported Languages
 
-**58 languages** with 100% translation coverage (495 keys each).
-Covers all VS Code official languages + all significant Notepad++ translations + strategic additions.
+**70 languages** with 100% translation coverage (559 keys each).
+Covers all 14 VS Code official display languages + all significant Notepad++ translations + strategic additions.
 
 ## Language Inventory
 
@@ -27,50 +27,63 @@ Covers all VS Code official languages + all significant Notepad++ translations +
 │   15 │ Čeština                               │  cs  │ VS Code  │ 11M          │
 │   16 │ Magyar                                │  hu  │ VS Code  │ 13M          │
 ├──────┼───────────────────────────────────────┼──────┼──────────┼──────────────┤
-│   17 │ 繁體中文                              │zh-tw │  NP++    │ 23M          │
-│   18 │ فارسی                                 │  fa  │  NP++    │ 110M       ✨ │
-│   19 │ Українська                            │  uk  │  NP++    │ 35M          │
-│   20 │ Tiếng Việt                            │  vi  │  NP++    │ 85M          │
-│   21 │ हिन्दी                                │  hi  │  NP++    │ 600M         │
-│   22 │ Nederlands                            │  nl  │  NP++    │ 24M          │
-│   23 │ Svenska                               │  sv  │  NP++    │ 10M          │
-│   24 │ Suomi                                 │  fi  │  NP++    │ 5.5M         │
-│   25 │ Dansk                                 │  da  │  NP++    │ 5.5M         │
-│   26 │ Norsk (Bokmål)                        │  nb  │  NP++    │ 5.3M         │
-│   27 │ ภาษาไทย                               │  th  │  NP++    │ 70M          │
-│   28 │ Bahasa Indonesia                      │  id  │  NP++    │ 200M         │
-│   29 │ Română                                │  ro  │  NP++    │ 24M          │
-│   30 │ Slovenčina                            │  sk  │  NP++    │ 5.2M         │
-│   31 │ Ελληνικά                              │  el  │  NP++    │ 13M          │
-│   32 │ Српски (Latinica)                     │  sr  │  NP++    │ 8.6M         │
-│   33 │ Български                             │  bg  │  NP++    │ 5.2M         │
-│   34 │ Lietuvių                              │  lt  │  NP++    │ 2.8M         │
-│   35 │ Latviešu                              │  lv  │  NP++    │ 1.75M        │
-│   36 │ Slovenščina                           │  sl  │  NP++    │ 2.5M         │
-│   37 │ Hrvatski                              │  hr  │  NP++    │ 5.6M         │
-│   38 │ Eesti                                 │  et  │  NP++    │ 1.1M         │
-│   39 │ Català                                │  ca  │  NP++    │ 9.2M         │
-│   40 │ Euskara                               │  eu  │  NP++    │ 750K         │
-│   41 │ Galego                                │  gl  │  NP++    │ 2.4M         │
+│   17 │ فارسی                                 │  fa  │  NP++    │ 110M       ✨ │
+│   18 │ Українська                            │  uk  │  NP++    │ 35M          │
+│   19 │ Tiếng Việt                            │  vi  │  NP++    │ 85M          │
+│   20 │ हिन्दी                                │  hi  │  NP++    │ 600M         │
+│   21 │ Nederlands                            │  nl  │  NP++    │ 24M          │
+│   22 │ Svenska                               │  sv  │  NP++    │ 10M          │
+│   23 │ Suomi                                 │  fi  │  NP++    │ 5.5M         │
+│   24 │ Dansk                                 │  da  │  NP++    │ 5.5M         │
+│   25 │ Norsk (Bokmål)                        │  nb  │  NP++    │ 5.3M         │
+│   26 │ ภาษาไทย                               │  th  │  NP++    │ 70M          │
+│   27 │ Bahasa Indonesia                      │  id  │  NP++    │ 200M         │
+│   28 │ Română                                │  ro  │  NP++    │ 24M          │
+│   29 │ Slovenčina                            │  sk  │  NP++    │ 5.2M         │
+│   30 │ Ελληνικά                              │  el  │  NP++    │ 13M          │
+│   31 │ Српски (Latinica)                     │  sr  │  NP++    │ 8.6M         │
+│   32 │ Български                             │  bg  │  NP++    │ 5.2M         │
+│   33 │ Lietuvių                              │  lt  │  NP++    │ 2.8M         │
+│   34 │ Latviešu                              │  lv  │  NP++    │ 1.75M        │
+│   35 │ Slovenščina                           │  sl  │  NP++    │ 2.5M         │
+│   36 │ Hrvatski                              │  hr  │  NP++    │ 5.6M         │
+│   37 │ Eesti                                 │  et  │  NP++    │ 1.1M         │
+│   38 │ Català                                │  ca  │  NP++    │ 9.2M         │
+│   39 │ Euskara                               │  eu  │  NP++    │ 750K         │
+│   40 │ Galego                                │  gl  │  NP++    │ 2.4M         │
 ├──────┼───────────────────────────────────────┼──────┼──────────┼──────────────┤
-│   42 │ اردو                                  │  ur  │  New     │ 230M       ✨ │
-│   43 │ ਪੰਜਾਬੀ                                │  pa  │  New     │ 125M       ✨ │
-│   44 │ Kiswahili                             │  sw  │  New     │ 100M         │
-│   45 │ Hausa                                 │  ha  │  New     │ 75M          │
-│   46 │ አማርኛ                                  │  am  │  New     │ 32M          │
-│   47 │ မြန်မာဘာသာ                             │  my  │  New     │ 38M          │
+│   41 │ اردو                                  │  ur  │  New     │ 230M       ✨ │
+│   42 │ ਪੰਜਾਬੀ                                │  pa  │  New     │ 125M       ✨ │
+│   43 │ Kiswahili                             │  sw  │  New     │ 100M         │
+│   44 │ Hausa                                 │  ha  │  New     │ 75M          │
+│   45 │ አማርኛ                                  │  am  │  New     │ 32M          │
+│   46 │ မြန်မာဘာသာ                             │  my  │  New     │ 38M          │
 ├──────┼───────────────────────────────────────┼──────┼──────────┼──────────────┤
-│   48 │ বাংলা                                  │  bn  │  New     │ 230M         │
-│   49 │ తెలుగు                                  │  te  │  New     │ 81M          │
-│   50 │ मराठी                                   │  mr  │  New     │ 83M          │
-│   51 │ தமிழ்                                   │  ta  │  New     │ 75M          │
-│   52 │ ગુજરાતી                               │  gu  │  New     │ 62M          │
-│   53 │ ಕನ್ನಡ                                   │  kn  │  New     │ 44M          │
-│   54 │ Tagalog                               │  tl  │  New     │ 45M          │
-│   55 │ ភាសាខ្មែរ                             │  km  │  New     │ 16M          │
-│   56 │ नेपाली                                 │  ne  │  New     │ 16M          │
-│   57 │ Yorùbá                                │  yo  │  New     │ 28M          │
-│   58 │ Igbo                                  │  ig  │  New     │ 27M          │
+│   47 │ বাংলা                                  │  bn  │  New     │ 230M         │
+│   48 │ తెలుగు                                  │  te  │  New     │ 81M          │
+│   49 │ मराठी                                   │  mr  │  New     │ 83M          │
+│   50 │ தமிழ்                                   │  ta  │  New     │ 75M          │
+│   51 │ ગુજરાતી                               │  gu  │  New     │ 62M          │
+│   52 │ ಕನ್ನಡ                                   │  kn  │  New     │ 44M          │
+│   53 │ Tagalog                               │  tl  │  New     │ 45M          │
+│   54 │ ភាសាខ្មែរ                             │  km  │  New     │ 16M          │
+│   55 │ नेपाली                                 │  ne  │  New     │ 16M          │
+│   56 │ Yorùbá                                │  yo  │  New     │ 28M          │
+│   57 │ Igbo                                  │  ig  │  New     │ 27M          │
+├──────┼───────────────────────────────────────┼──────┼──────────┼──────────────┤
+│   58 │ Íslenska                              │  is  │  New     │ 370K         │
+│   59 │ Shqip                                 │  sq  │  New     │ 7.5M         │
+│   60 │ Македонски                            │  mk  │  New     │ 2M           │
+│   61 │ ქართული                               │  ka  │  New     │ 3.7M         │
+│   62 │ Հայերեն                               │  hy  │  New     │ 5.3M         │
+│   63 │ Azərbaycan dili                       │  az  │  New     │ 24M          │
+│   64 │ Монгол хэл                            │  mn  │  New     │ 5.7M         │
+│   65 │ ລາວ                                   │  lo  │  New     │ 7M           │
+│   66 │ རྫོང་ཁ                                │  dz  │  New     │ 640K         │
+│   67 │ ދިވެހި                                │  dv  │  New     │ 350K       ✨ │
+│   68 │ Türkmençe                             │  tk  │  New     │ 11M          │
+│   69 │ Oʻzbek tili                           │  uz  │  New     │ 45M          │
+│   70 │ Bahasa Melayu                         │  ms  │  New     │ 29M          │
 └──────┴───────────────────────────────────────┴──────┴──────────┴──────────────┘
 ```
 
@@ -78,12 +91,14 @@ Covers all VS Code official languages + all significant Notepad++ translations +
 
 | Region | Count | Languages |
 |--------|:----:|-----------|
-| East Asia | 4 | zh, zh-tw, ja, ko |
-| South Asia | 10 | hi, bn, te, mr, ta, gu, kn, pa, ne, ur |
-| Southeast Asia | 6 | vi, th, id, tl, km, my |
-| Middle East | 3 | ar, he, fa |
-| Europe (West) | 10 | en, fr, de, nl, it, es, pt, ca, eu, gl |
-| Europe (East/Balkan) | 11 | ru, uk, pl, cs, sk, sr, bg, hr, sl, ro, hu |
+| East Asia | 3 | zh, ja, ko |
+| South Asia | 11 | hi, bn, te, mr, ta, gu, kn, pa, ne, ur, dv |
+| Southeast Asia | 8 | vi, th, id, tl, km, my, lo, ms |
+| Middle East | 4 | ar, he, fa, az |
+| Central Asia | 3 | tk, uz, mn |
+| Caucasus | 3 | ka, hy, az |
+| Europe (West) | 11 | en, fr, de, nl, it, es, pt, ca, eu, gl, is |
+| Europe (East/Balkan) | 13 | ru, uk, pl, cs, sk, sr, bg, hr, sl, ro, hu, sq, mk |
 | Europe (Nordic/Baltic) | 7 | sv, fi, da, nb, lt, lv, et |
 | Africa | 5 | sw, ha, am, yo, ig |
 | Other | 2 | tr, el |
@@ -97,37 +112,19 @@ Covers all VS Code official languages + all significant Notepad++ translations +
 | fa | Persian | Arabic |
 | ur | Urdu | Arabic |
 | pa | Punjabi (Shahmukhi) | Arabic |
+| dv | Dhivehi | Thaana |
 
-RTL layout is applied automatically via `applyDirection(lang)` — sets `document.documentElement.dir = "rtl"` and CSS mirrors the layout. Monaco Editor's built-in `bidiSupport` enables RTL text editing.
-
-## Coverage Benchmarks
-
-| Benchmark | Status |
-|-----------|:-----:|
-| VS Code official 15 | ✅ 15/15 |
-| Notepad++ significant | ✅ All |
-| Top 20 global languages by speakers | ✅ 20/20 |
-| Native RTL | 5 (VS Code has 0 native) |
+RTL layout is applied automatically via `applyDirection(lang)` — sets `document.documentElement.dir = "rtl"` and CSS mirrors the layout.
 
 ## Translation Status
 
-All 58 languages have **495 keys** — 100% structural coverage.  
-The original 7 languages (zh, en, ja, ko, fr, ar, he) have human-reviewed translations.  
-The remaining 51 are generated from the English template — community contributions welcome.
-
-## Adding a Language
-
-1. Copy `src/i18n/en.ts` → `src/i18n/<code>.ts`, rename `const en` → `const <code>`, rename `export default en` → `export default <code>`
-2. Add `import <code> from "./<code>"` to `src/i18n/index.ts`
-3. Add to `resources` object and `LANGUAGES` array
-4. If RTL, add code to `RTL_CODES` set
-5. Update this document
-6. Run `npx vitest run tests/i18n.test.ts` to verify key parity
+All 70 languages have **559 keys** — 100% structural coverage (key parity).
+All translations generated via Claude API.
 
 ## Verification
 
 ```bash
-npx vitest run tests/i18n.test.ts  # All 58 languages key-parity check
+npx vitest run tests/i18n.test.ts  # All 70 languages key-parity check
 npx tsc --noEmit                    # TypeScript compilation
-npx vitest run                      # Full test suite
+npx vitest run                      # Full test suite (376 tests)
 ```

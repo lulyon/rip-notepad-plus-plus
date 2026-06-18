@@ -133,22 +133,22 @@ const th = {
     // ── Menu: Language ──
     "menu.language": "&ภาษา",
     "menu.language.plaintext": "ข้อความธรรมดา",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.javascript": "จาวาสคริปต์",
+    "menu.language.typescript": "ไทป์สคริปต์",
+    "menu.language.json": "เจสัน",
+    "menu.language.html": "เอชทีเอ็มแอล",
+    "menu.language.css": "ซีเอสเอส",
+    "menu.language.python": "ไพธอน",
+    "menu.language.rust": "รัสต์",
+    "menu.language.go": "โก",
+    "menu.language.java": "จาวา",
+    "menu.language.c": "ซี",
+    "menu.language.cpp": "ซีพลัสพลัส",
+    "menu.language.xml": "เอ็กซ์เอ็มแอล",
+    "menu.language.yaml": "แยมล",
+    "menu.language.markdown": "มาร์กดาวน์",
+    "menu.language.sql": "เอสคิวแอล",
+    "menu.language.shell": "เชลล์",
     "menu.language.defineLanguage": "ภาษาที่ผู้ใช้กำหนด...",
     "menu.language.openUdlFolder": "เปิดโฟลเดอร์ UDL...",
     // ── Menu: Macro ──
@@ -199,7 +199,7 @@ const th = {
     // ── Search Panel ──
     "search.findLabel": "ค้นหา",
     "search.replaceLabel": "แทนที่",
-    "search.regex": "Regex",
+    "search.regex": "นิพจน์ปกติ",
     "search.caseSensitive": "ตัวพิมพ์ใหญ่พิมพ์เล็ก",
     "search.wholeWord": "ทั้งคำ",
     "search.wrapAround": "วนรอบ",
@@ -268,10 +268,10 @@ const th = {
     "preferences.whitespaceAll": "ทั้งหมด",
     "preferences.defaultEncoding": "การเข้ารหัสเริ่มต้น",
     "preferences.defaultLanguage": "ภาษาเริ่มต้น",
-    "preferences.eol": "EOL",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eol": "สิ้นสุดบรรทัด",
+    "preferences.eolLf": "LF (ยูนิกซ์/macOS)",
+    "preferences.eolCrlf": "CRLF (วินโดวส์)",
+    "preferences.eolCr": "CR (แมคคลาสสิก)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "กรองปุ่มลัด...",
     "shortcutMapper.pressKeys": "กดปุ่ม...",
@@ -370,7 +370,7 @@ const th = {
     "sidebar.doclist": "รายการเอกสาร",
     "sidebar.clipboard": "คลิปบอร์ด",
     "sidebar.symbols": "สัญลักษณ์",
-    "sidebar.git": "Git",
+    "sidebar.git": "กิท",
     "sidebar.terminal": "เทอร์มินัล",
     "terminal.start": "เริ่มเทอร์มินัล",
     "terminal.exited": "กระบวนการสิ้นสุดแล้ว",
@@ -388,7 +388,7 @@ const th = {
     "clipboard.copy": "คัดลอกไปยังคลิปบอร์ดระบบ",
     "clipboard.pin": "ปักหมุด/เลิกปักหมุด",
     "clipboard.remove": "ลบ",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "เจสัน",
     "sidebar.taskList": "รายการงาน",
     // ── JSON Viewer ──
     "json.noFile": "เปิดไฟล์ JSON เพื่อดูโครงสร้างต้นไม้",
@@ -449,7 +449,7 @@ const th = {
     "git.viewDiff": "ดูความแตกต่าง",
     "git.stageAll": "จัดเตรียมทั้งหมด",
     "git.commit": "คอมมิต...",
-    "git.diff": "diff",
+    "git.diff": "ความแตกต่าง",
     "git.pushOk": "Push สำเร็จ",
     "git.pullOk": "Pull สำเร็จ",
     "git.committed": "คอมมิตแล้ว ✓",
@@ -532,7 +532,97 @@ const th = {
     "contextMenu.add": "เพิ่ม",
     "contextMenu.selectAction": "เลือกการดำเนินการ...",
     "contextMenu.resetDefaults": "รีเซ็ตเป็นค่าเริ่มต้น",
-  },
+    "contextMenu.labelPlaceholder": "ป้ายกำกับ (&ตัวอักษรสำหรับปุ่มลัด)",
+    "contextMenu.actionPlaceholder": "รหัสการดำเนินการ (เช่น edit.cut)",
+    "contextMenu.labelShortPlaceholder": "ป้ายกำกับ",
+    "contextMenu.customActionPlaceholder": "หรือพิมพ์รหัสการดำเนินการแบบกำหนดเอง...",
+
+    // ── Status Bar ──
+    "status.ready": "พร้อม",
+    "status.branchTooltip": "คลิกเพื่อเปลี่ยนสาขา",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "ปิด",
+    "tab.newTooltip": "ไฟล์ใหม่ (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "เอารากออก",
+    "sidebar.refresh": "รีเฟรช",
+
+    // ── Git Panel ──
+    "git.switchBranch": "เปลี่ยนสาขา",
+    "git.pull": "ดึง",
+    "git.push": "ผลัก",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "แม่แบบ regex",
+    "search.lineLabel": "บรรทัด",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "หมายเลขบรรทัด",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "คลิกเพื่อเปิด {file} ที่บรรทัด {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML ผิดพลาด: {error}",
+    "menu.xmlParseError": "XML แยกวิเคราะห์ผิดพลาด: {error}",
+    "menu.xmlValid": "✅ XML ถูกต้อง",
+    "menu.xmlInvalid": "❌ XML ไม่ถูกต้อง:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "บันทึกไฟล์ก่อนเพื่อแสดงตัวอย่าง",
+    "preview.saveFirstShort": "บันทึกไฟล์ก่อน",
+    "preview.imageFailed": "โหลดรูปภาพล้มเหลว",
+    "preview.emptyCsv": "CSV ว่างเปล่า",
+    "preview.invalidJson": "JSON ไม่ถูกต้อง",
+    "preview.katexInfo": "KaTeX แสดงผลคณิตศาสตร์แบบอินไลน์ ($...$) และแบบเต็ม ($$...$$) เท่านั้น",
+    "preview.spreadsheetFailed": "โหลดสเปรดชีตล้มเหลว",
+    "preview.invalidNotebook": "โน๊ตบุ๊คไม่ถูกต้อง",
+    "preview.docFailed": "โหลดเอกสารล้มเหลว",
+    "preview.geoJsonFailed": "โหลด GeoJSON ล้มเหลว",
+    "preview.sqliteFailed": "เปิดฐานข้อมูลล้มเหลว",
+    "preview.emptyTable": "ตารางว่างเปล่า",
+    "preview.loadingArchive": "กำลังโหลดไฟล์เก็บถาวร...",
+    "preview.archiveFailed": "อ่านไฟล์เก็บถาวรล้มเหลว",
+    "preview.noPreview": "ไม่มีตัวอย่างสำหรับไฟล์ประเภทนี้",
+    "preview.pdfTitle": "ตัวอย่าง PDF",
+    "preview.iframeTitle": "ตัวอย่าง {name}",
+    "preview.dotRenderError": "แสดงกราฟล้มเหลว",
+    "preview.dotLoadError": "โหลดเอ็นจิน Graphviz ล้มเหลว",
+    "preview.noContent": "ไม่มีเนื้อหา",
+    "preview.invalidHar": "ไฟล์ HAR ไม่ถูกต้อง",
+    "preview.harTitle": "HAR: {count} คำขอ",
+    "preview.harMethod": "วิธีการ",
+    "preview.harUrl": "URL（ยูอาร์แอล）",
+    "preview.harStatus": "สถานะ",
+    "preview.harTime": "เวลา",
+    "preview.harSize": "ขนาด",
+    "preview.3dOffline": "ตัวอย่าง 3D ไม่สามารถใช้งานได้เมื่อออฟไลน์",
+    "preview.envMasked": "ค่าถูกซ่อน — วางเมาส์เพื่อดู",
+    "preview.saveFirst3d": "บันทึกไฟล์ก่อนเพื่อแสดงตัวอย่างโมเดล 3D",
+
+    "preview.close": "ปิดตัวอย่าง",
+    "preview.open": "ตัวอย่าง ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "ไม่ได้เลือกแท็บ",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "ภาษา",
+
+    // ── About ──
+    "about.version": "เวอร์ชัน {version}",
+  }
 };
 
 export default th;

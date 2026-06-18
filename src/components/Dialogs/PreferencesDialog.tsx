@@ -123,7 +123,7 @@ export function PreferencesDialog({ open, onClose }: Props) {
               </label>
 
               <label className="prefs-row">
-                <span>Language / 语言:</span>
+                <span>{t("preferences.language")}</span>
                 <select
                   value={i18n.language}
                   onChange={(e) => {

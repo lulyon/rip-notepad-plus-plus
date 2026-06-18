@@ -1,4 +1,5 @@
 import MarkdownIt from "markdown-it";
+import i18n from "../i18n";
 
 // ── Bundled library URLs (Vite ?url imports = offline, no CDN) ──
 import mammothUrl from "mammoth/mammoth.browser.min.js?url";
@@ -113,7 +114,7 @@ registerPreviewRenderer({
 
 /** Image renderer — renders image files via Tauri convertFileSrc */
 function renderImage({ assetUrl }: { assetUrl: string | null }): string {
-  if (!assetUrl) return "<p style='color:#999;text-align:center;padding:40px'>Save the file first to preview</p>";
+  if (!assetUrl) return `<p style='color:#999;text-align:center;padding:40px'>${i18n.t("preview.saveFirst")}</p>`;
 
   return `<!DOCTYPE html>
 <html><head><style>
@@ -125,7 +126,7 @@ function renderImage({ assetUrl }: { assetUrl: string | null }): string {
   <img src="${assetUrl}" alt="Preview"
     onerror="this.style.display='none';document.getElementById('err').style.display='block'"
   />
-  <p id="err" class="error" style="display:none">Failed to load image</p>
+  <p id="err" class="error" style="display:none">${i18n.t("preview.imageFailed")}</p>
 </body></html>`;
 }
 
@@ -178,7 +179,7 @@ function parseCsv(content: string, delimiter: string): string[][] {
 function renderCsv({ content }: { content: string }): string {
   const delim = content.includes("\t") ? "\t" : ",";
   const rows = parseCsv(content, delim);
-  if (rows.length === 0) return "<p>Empty CSV</p>";
+  if (rows.length === 0) return `<p>${i18n.t("preview.emptyCsv")}</p>`;
   const headers = rows[0];
   const body = rows.slice(1);
   const thead = `<thead><tr>${headers.map((h) => `<th>${h}</th>`).join("")}</tr></thead>`;
@@ -212,14 +213,14 @@ function renderJson({ content }: { content: string }): string {
     try {
       var obj = JSON.parse(decodeURIComponent('${encoded}'));
       document.getElementById('out').innerHTML = syntaxHighlight(JSON.stringify(obj,null,2));
-    } catch(e) { document.getElementById('out').textContent = 'Invalid JSON'; }
+    } catch(e) { document.getElementById('out').textContent = i18n.t("preview.invalidJson"); }
     function syntaxHighlight(json) {
       return json.replace(/(&|<|>)/g,'') .replace(/("(\\\\u[a-fA-F0-9]{4}|\\\\[^u]|[^"\\\\])*"(\\s*:)?|\\b(true|false|null)\\b|-?\\d+(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)/g,
       function(m){var cls='number';if(/^"/.test(m)){cls=/:$/.test(m)?'key':'string'}else if(/true|false/.test(m)){cls='boolean'}else if(/null/.test(m)){cls='null'}
       return'<span class='+cls+'>'+m+'</span>'});
     }
     </script></body></html>`;
-  } catch { return "<p style='color:#999;padding:40px;text-align:center'>Invalid JSON</p>"; }
+  } catch { return `<p style='color:#999;padding:40px;text-align:center'>${i18n.t("preview.invalidJson")}</p>`; }
 }
 registerPreviewRenderer({
   id: "json",
@@ -232,7 +233,7 @@ registerPreviewRenderer({
 
 // ── PDF embed ──
 function renderPdf({ assetUrl }: { assetUrl: string | null }): string {
-  if (!assetUrl) return "<p style='color:#999;padding:40px;text-align:center'>Save the file first</p>";
+  if (!assetUrl) return `<p style='color:#999;padding:40px;text-align:center'>${i18n.t("preview.saveFirstShort")}</p>`;
   return `<!DOCTYPE html><html><head><style>
     *{margin:0;padding:0}body{background:#525659}
     iframe{width:100%;height:100vh;border:none}
@@ -377,7 +378,7 @@ registerPreviewRenderer({
 
 // ── Font preview ──
 function renderFont({ assetUrl }: { assetUrl: string | null }): string {
-  if (!assetUrl) return "<p style='color:#999;padding:40px;text-align:center'>Save the file first</p>";
+  if (!assetUrl) return `<p style='color:#999;padding:40px;text-align:center'>${i18n.t("preview.saveFirstShort")}</p>`;
   const sample = "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789 .,;:!?@#$%^&*()\nThe quick brown fox jumps over the lazy dog.";
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
     @font-face { font-family:'PreviewFont'; src:url('${assetUrl}') format('truetype'); }
@@ -405,7 +406,7 @@ registerPreviewRenderer({
 
 // ── Audio player ──
 function renderAudio({ assetUrl }: { assetUrl: string | null }): string {
-  if (!assetUrl) return "<p style='color:#999;padding:40px;text-align:center'>Save the file first</p>";
+  if (!assetUrl) return `<p style='color:#999;padding:40px;text-align:center'>${i18n.t("preview.saveFirstShort")}</p>`;
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
     *{margin:0;padding:0}body{background:#1e1e1e;display:flex;align-items:center;justify-content:center;min-height:100vh}
     audio{outline:none;width:400px}
@@ -422,7 +423,7 @@ registerPreviewRenderer({
 
 // ── Video player ──
 function renderVideo({ assetUrl }: { assetUrl: string | null }): string {
-  if (!assetUrl) return "<p style='color:#999;padding:40px;text-align:center'>Save the file first</p>";
+  if (!assetUrl) return `<p style='color:#999;padding:40px;text-align:center'>${i18n.t("preview.saveFirstShort")}</p>`;
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
     *{margin:0;padding:0}body{background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh}
     video{max-width:100%;max-height:100vh;outline:none}
@@ -474,7 +475,7 @@ function renderEnv({ content }: { content: string }): string {
     button{background:#333;border:1px solid #555;color:#ccc;padding:2px 8px;border-radius:3px;cursor:pointer;font-size:11px;margin-left:8px}
     button:hover{background:#555}
   </style></head><body>
-  <p style="color:#888;margin-bottom:8px;font-size:12px">🔒 Values masked — hover to reveal</p>
+  <p style="color:#888;margin-bottom:8px;font-size:12px">${i18n.t("preview.envMasked")}</p>
   <table>${rows}</table>
   <script>
     document.querySelectorAll('td').forEach(td=>{td.onclick=function(e){if(e.target.tagName==='BUTTON')return;
@@ -488,7 +489,7 @@ registerPreviewRenderer({
 
 // ── 3. Excel (.xlsx) ──
 function renderXlsx({ assetUrl }: { assetUrl: string | null }): string {
-  if (!assetUrl) return "<p style='color:#999;padding:40px;text-align:center'>Save the file first</p>";
+  if (!assetUrl) return `<p style='color:#999;padding:40px;text-align:center'>${i18n.t("preview.saveFirstShort")}</p>`;
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
     *{margin:0;padding:0}body{background:#1e1e1e;color:#d4d4d4;font:13px -apple-system,sans-serif;padding:16px}
     table{border-collapse:collapse}th,td{border:1px solid #444;padding:4px 8px;text-align:left;white-space:nowrap;max-width:300px;overflow:hidden;text-overflow:ellipsis}
@@ -499,7 +500,7 @@ function renderXlsx({ assetUrl }: { assetUrl: string | null }): string {
   </style></head><body>
   <div id="sheets" class="sheet-tabs"></div>
   <div id="table"></div>
-  <div id="err" class="err" style="display:none">Failed to load spreadsheet</div>
+  <div id="err" class="err" style="display:none">${i18n.t("preview.spreadsheetFailed")}</div>
   <script src="${xlsxUrl}"></script>
   <script>
     (async function(){
@@ -548,7 +549,7 @@ function renderIpynb({ content }: { content: string }): string {
       .cell-content{padding:10px}pre{background:#252526;padding:10px;font:13px 'Cascadia Code',monospace;overflow-x:auto}
       .output{background:#0a2a0a;color:#8f8;padding:8px 10px;border-top:1px solid #333;font:12px 'Cascadia Code',monospace;white-space:pre-wrap}
     </style></head><body><h2>${title}</h2>${cells}</body></html>`;
-  } catch { return "<p style='color:#999;padding:40px;text-align:center'>Invalid notebook</p>"; }
+  } catch { return `<p style='color:#999;padding:40px;text-align:center'>${i18n.t("preview.invalidNotebook")}</p>`; }
 }
 registerPreviewRenderer({
   id: "ipynb", name: "Jupyter", extensions: ["ipynb"], languages: [], render: renderIpynb, useIframe: true,
@@ -556,11 +557,11 @@ registerPreviewRenderer({
 
 // ── 5. Office (.docx) ──
 function renderDocx({ assetUrl }: { assetUrl: string | null }): string {
-  if (!assetUrl) return "<p style='color:#999;padding:40px;text-align:center'>Save the file first</p>";
+  if (!assetUrl) return `<p style='color:#999;padding:40px;text-align:center'>${i18n.t("preview.saveFirstShort")}</p>`;
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
     *{margin:0;padding:0}body{background:#fff;color:#333;font:14px/1.7 -apple-system,sans-serif;padding:24px;max-width:800px;margin:0 auto}
     .err{color:#999;text-align:center;padding:40px}
-  </style></head><body><div id="content"></div><div id="err" class="err" style="display:none">Failed to load document</div>
+  </style></head><body><div id="content"></div><div id="err" class="err" style="display:none">${i18n.t("preview.docFailed")}</div>
   <script src="${mammothUrl}"></script>
   <script>
     (async function(){
@@ -588,7 +589,7 @@ function renderGeoJson({ content }: { content: string }): string {
   </style>
   <link rel="stylesheet" href="${leafletCssUrl}">
   <script src="${leafletJsUrl}"></script>
-  </head><body><div id="map"></div><div id="err" class="err" style="display:none">Failed to load GeoJSON</div>
+  </head><body><div id="map"></div><div id="err" class="err" style="display:none">${i18n.t("preview.geoJsonFailed")}</div>
   <script>
     try{
       var map=L.map('map').setView([0,0],2);
@@ -614,7 +615,7 @@ function renderSqlite({ assetUrl }: { assetUrl: string | null }): string {
   </style></head><body>
   <select id="tables" onchange="showTable(this.value)"></select>
   <div id="data"></div>
-  <div id="err" class="err" style="display:none">Failed to open database</div>
+  <div id="err" class="err" style="display:none">${i18n.t("preview.sqliteFailed")}</div>
   <script src="${sqlWasmUrl}"></script>
   <script>
     (async function(){
@@ -630,7 +631,7 @@ function renderSqlite({ assetUrl }: { assetUrl: string | null }): string {
         });
         window.showTable=function(name){
           const r=db.exec('SELECT * FROM ['+name+'] LIMIT 500');
-          if(!r[0]){document.getElementById('data').innerHTML='<p>Empty table</p>';return}
+          if(!r[0]){document.getElementById('data').innerHTML='<p>${i18n.t("preview.emptyTable")}</p>';return}
           const cols=r[0].columns,h='<tr>'+cols.map(c=>'<th>'+c+'</th>').join('')+'</tr>';
           const rows=r[0].values.map(row=>'<tr>'+row.map(v=>'<td>'+(v===null?'<i>NULL</i>':String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;')))+'</td>').join('')+'</tr>';
           document.getElementById('data').innerHTML='<table>'+h+rows+'</table>';
@@ -653,7 +654,7 @@ function renderZip(_opts: { content: string; filePath: string | null }): string 
     .entry{padding:4px 0;border-bottom:1px solid #2a2a2a;display:flex}.name{flex:1}.size{color:#888;text-align:right;min-width:100px}
     .dir{color:#569cd6}.file{color:#d4d4d4}.err{color:#999;text-align:center;padding:40px;font-family:-apple-system,sans-serif}
     .loading{color:#888;text-align:center;padding:40px}
-  </style></head><body><div id="list" class="loading">Loading archive...</div></body></html>`;
+  </style></head><body><div id="list" class="loading">${i18n.t("preview.loadingArchive")}</div></body></html>`;
 }
 registerPreviewRenderer({
   id: "zip", name: "ZIP", extensions: ["zip", "jar", "war", "apk"], languages: [], render: renderZip, useIframe: true,
@@ -701,8 +702,8 @@ function renderHar({ content }: { content: string }): string {
       th{background:#333;padding:6px 8px;text-align:left;position:sticky;top:0}
       td{padding:4px 8px;border-bottom:1px solid #2a2a2a}.url{max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
       .ok{color:#8f8}.redir{color:#ff0}.err{color:#f88}
-    </style></head><body><h2>HAR: ${entries.length} requests</h2><table><thead><tr><th>Method</th><th>URL</th><th>Status</th><th>Time</th><th>Size</th></tr></thead><tbody>${rows}</tbody></table></body></html>`;
-  } catch { return "<p style='color:#999;padding:40px;text-align:center;font-family:-apple-system,sans-serif'>Invalid HAR file</p>"; }
+    </style></head><body><h2>${i18n.t("preview.harTitle", { count: entries.length })}</h2><table><thead><tr><th>${i18n.t("preview.harMethod")}</th><th>${i18n.t("preview.harUrl")}</th><th>${i18n.t("preview.harStatus")}</th><th>${i18n.t("preview.harTime")}</th><th>${i18n.t("preview.harSize")}</th></tr></thead><tbody>${rows}</tbody></table></body></html>`;
+  } catch { return `<p style='color:#999;padding:40px;text-align:center;font-family:-apple-system,sans-serif'>${i18n.t("preview.invalidHar")}</p>`; }
 }
 registerPreviewRenderer({
   id: "har", name: "HAR", extensions: ["har"], languages: [], render: renderHar, useIframe: true,
@@ -714,7 +715,7 @@ function render3d({ assetUrl }: { assetUrl: string | null }): string {
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
     *{margin:0;padding:0}body{background:#1a1a2e;overflow:hidden}.err{color:#999;text-align:center;padding:40px;font-family:-apple-system,sans-serif}
   </style></head><body>
-  <div id="err" class="err" style="display:none">3D preview not available offline</div>
+  <div id="err" class="err" style="display:none">${i18n.t("preview.3dOffline")}</div>
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/"}}</script>
   <script type="module">
     import * as THREE from 'three';

@@ -138,23 +138,23 @@ const sr = {
 
     // ── Menu: Language ──
     "menu.language": "&Језик",
-    "menu.language.plaintext": "Plain Text",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.plaintext": "Обичан текст",
+    "menu.language.javascript": "ЏаваСкрипт",
+    "menu.language.typescript": "ТајпСкрипт",
+    "menu.language.json": "Џејсон",
+    "menu.language.html": "ЕјчТиЕмЕл",
+    "menu.language.css": "СиЕсЕс",
+    "menu.language.python": "Пајтон",
+    "menu.language.rust": "Раст",
+    "menu.language.go": "Го",
+    "menu.language.java": "Џава",
+    "menu.language.c": "Ц",
+    "menu.language.cpp": "Ц++",
+    "menu.language.xml": "ЕксЕмЕл",
+    "menu.language.yaml": "Јамл",
+    "menu.language.markdown": "Маркдаун",
+    "menu.language.sql": "ЕсКијуЕл",
+    "menu.language.shell": "Шел",
     "menu.language.defineLanguage": "Кориснички дефинисан језик...",
     "menu.language.openUdlFolder": "Отвори UDL фасциклу...",
 
@@ -174,10 +174,10 @@ const sr = {
 
     // ── Menu: Tools ──
     "menu.tools": "&Алати",
-    "menu.tools.md5": "MD5 Generate",
-    "menu.tools.sha1": "SHA-1 Generate",
-    "menu.tools.sha256": "SHA-256 Generate",
-    "menu.tools.sha512": "SHA-512 Generate",
+    "menu.tools.md5": "MD5 генерисање",
+    "menu.tools.sha1": "SHA-1 генерисање",
+    "menu.tools.sha256": "SHA-256 генерисање",
+    "menu.tools.sha512": "SHA-512 генерисање",
     "menu.tools.configure": "Подеси спољне алате...",
 
     // ── Menu: Window ──
@@ -284,10 +284,10 @@ const sr = {
     "preferences.whitespaceAll": "Сви",
     "preferences.defaultEncoding": "Подразумевано кодирање",
     "preferences.defaultLanguage": "Подразумевани језик",
-    "preferences.eol": "EOL",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eol": "Крај реда",
+    "preferences.eolLf": "LF (Јуникс/макОС)",
+    "preferences.eolCrlf": "CRLF (Виндоус)",
+    "preferences.eolCr": "CR (Класични Мак)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Филтрирај пречице...",
@@ -393,7 +393,7 @@ const sr = {
     "sidebar.doclist": "Листа докумената",
     "sidebar.clipboard": "Клипборд",
     "sidebar.symbols": "Симболи",
-    "sidebar.git": "Git",
+    "sidebar.git": "Гит",
     "sidebar.terminal": "Терминал",
     "terminal.start": "Покрени терминал",
     "terminal.exited": "Процес је завршен.",
@@ -412,7 +412,7 @@ const sr = {
     "clipboard.copy": "Копирај у системски клипборд",
     "clipboard.pin": "Закачи/Откачи",
     "clipboard.remove": "Уклони",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "Џејсон",
     "sidebar.taskList": "Листа задатака",
 
     // ── JSON Viewer ──
@@ -479,8 +479,8 @@ const sr = {
     "git.clean": "✓ Радно стабло је чисто",
     "git.viewDiff": "Прикажи diff",
     "git.stageAll": "Додај све",
-    "git.commit": "Commit...",
-    "git.diff": "diff",
+    "git.commit": "Комит...",
+    "git.diff": "разлика",
     "git.pushOk": "Push успешан",
     "git.pullOk": "Pull успешан",
     "git.committed": "Commit успешан ✓",
@@ -494,7 +494,7 @@ const sr = {
     "commit.title": "Commit измене",
     "commit.filesStaged": "{{count}} датотека(е) додато",
     "commit.messagePlaceholder": "Commit порука (Enter за commit, Shift+Enter за нови ред)",
-    "commit.commit": "Commit",
+    "commit.commit": "Комит",
     "commit.cancel": "Откажи",
 
     // ── Plugin ──
@@ -569,6 +569,96 @@ const sr = {
     "contextMenu.add": "Додај",
     "contextMenu.selectAction": "Изаберите акцију...",
     "contextMenu.resetDefaults": "Ресетуј на подразумевано",
+    "contextMenu.labelPlaceholder": "Налепница (&Слово за пречицу)",
+    "contextMenu.actionPlaceholder": "ID радње (нпр. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Налепница",
+    "contextMenu.customActionPlaceholder": "Или унесите ID прилагођене радње...",
+
+    // ── Status Bar ──
+    "status.ready": "Спреман",
+    "status.branchTooltip": "Кликните за промену гране",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Затвори",
+    "tab.newTooltip": "Нова датотека (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Уклони корен",
+    "sidebar.refresh": "Освежи",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Промени грану",
+    "git.pull": "Повуци",
+    "git.push": "Гурни",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Регекс шаблони",
+    "search.lineLabel": "Ред",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Број реда",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Кликните да отворите {file} на реду {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML грешка: {error}",
+    "menu.xmlParseError": "XML грешка при парсирању: {error}",
+    "menu.xmlValid": "✅ XML је исправан.",
+    "menu.xmlInvalid": "❌ XML није исправан:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Прво сачувајте датотеку за преглед",
+    "preview.saveFirstShort": "Прво сачувајте датотеку",
+    "preview.imageFailed": "Неуспешно учитавање слике",
+    "preview.emptyCsv": "Празан CSV",
+    "preview.invalidJson": "Неисправан JSON",
+    "preview.katexInfo": "KaTeX приказује само математику у реду ($...$) и приказну математику ($$...$$)",
+    "preview.spreadsheetFailed": "Неуспешно учитавање табеле",
+    "preview.invalidNotebook": "Неисправна свеска",
+    "preview.docFailed": "Неуспешно учитавање документа",
+    "preview.geoJsonFailed": "Неуспешно учитавање GeoJSON-а",
+    "preview.sqliteFailed": "Неуспешно отварање базе података",
+    "preview.emptyTable": "Празна табела",
+    "preview.loadingArchive": "Учитавање архиве...",
+    "preview.archiveFailed": "Неуспешно читање архиве",
+    "preview.noPreview": "Нема прегледа за овај тип датотеке",
+    "preview.pdfTitle": "PDF Преглед",
+    "preview.iframeTitle": "{name} Преглед",
+    "preview.dotRenderError": "Неуспешно приказивање графа",
+    "preview.dotLoadError": "Неуспешно учитавање Graphviz мотора",
+    "preview.noContent": "Нема садржаја",
+    "preview.invalidHar": "Неисправна HAR датотека",
+    "preview.harTitle": "HAR: {count} захтева",
+    "preview.harMethod": "Метод",
+    "preview.harUrl": "URL（УРЛ）",
+    "preview.harStatus": "Статус",
+    "preview.harTime": "Време",
+    "preview.harSize": "Величина",
+    "preview.3dOffline": "3D преглед није доступан ван мреже",
+    "preview.envMasked": "Вредности су сакривене — пређите мишем да откријете",
+    "preview.saveFirst3d": "Прво сачувајте датотеку за преглед 3D модела",
+
+    "preview.close": "Затвори преглед",
+    "preview.open": "Преглед ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Није изабрана картица",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Језик",
+
+    // ── About ──
+    "about.version": "Верзија {version}",
   },
 };
 

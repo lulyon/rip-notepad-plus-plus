@@ -127,22 +127,22 @@ const fa = {
     "menu.encoding.openDialog": "&مجموعه کاراکتر...",
     "menu.language": "&زبان",
     "menu.language.plaintext": "متن ساده",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.javascript": "جاوااسکریپت",
+    "menu.language.typescript": "تایپ‌اسکریپت",
+    "menu.language.json": "جی‌سان",
+    "menu.language.html": "اچ‌تی‌ام‌ال",
+    "menu.language.css": "سی‌اس‌اس",
+    "menu.language.python": "پایتون",
+    "menu.language.rust": "راست",
+    "menu.language.go": "گو",
+    "menu.language.java": "جاوا",
+    "menu.language.c": "سی",
+    "menu.language.cpp": "سی++",
+    "menu.language.xml": "اکس‌ام‌ال",
+    "menu.language.yaml": "یامل",
+    "menu.language.markdown": "مارک‌داون",
+    "menu.language.sql": "اس‌کیو‌ال",
+    "menu.language.shell": "شل",
     "menu.language.defineLanguage": "زبان تعریف شده توسط کاربر...",
     "menu.language.openUdlFolder": "باز کردن پوشه UDL...",
     "menu.macro": "&ماکرو",
@@ -186,7 +186,7 @@ const fa = {
     "tab.colorBlue": "آبی",
     "search.findLabel": "یافتن",
     "search.replaceLabel": "جایگزینی",
-    "search.regex": "Regex",
+    "search.regex": "عبارت منظم",
     "search.caseSensitive": "حساس به بزرگی/کوچکی",
     "search.wholeWord": "کلمه کامل",
     "search.wrapAround": "دورگردی",
@@ -253,8 +253,8 @@ const fa = {
     "preferences.defaultEncoding": "کدگذاری پیش‌فرض",
     "preferences.defaultLanguage": "زبان پیش‌فرض",
     "preferences.eol": "پایان خط",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
+    "preferences.eolLf": "LF (یونیکس/macOS)",
+    "preferences.eolCrlf": "CRLF (ویندوز)",
     "preferences.eolCr": "CR (مک کلاسیک)",
     "shortcutMapper.filter": "فیلتر میانبرها...",
     "shortcutMapper.pressKeys": "کلیدها را فشار دهید...",
@@ -347,7 +347,7 @@ const fa = {
     "sidebar.doclist": "لیست اسناد",
     "sidebar.clipboard": "کلیپ‌بورد",
     "sidebar.symbols": "نمادها",
-    "sidebar.git": "Git",
+    "sidebar.git": "گیت",
     "sidebar.terminal": "ترمینال",
     "terminal.start": "شروع ترمینال",
     "terminal.exited": "فرآیند خارج شد.",
@@ -364,7 +364,7 @@ const fa = {
     "clipboard.copy": "کپی به کلیپ‌بورد سیستم",
     "clipboard.pin": "سنجاق/برداشتن سنجاق",
     "clipboard.remove": "حذف",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "جی‌سان",
     "sidebar.taskList": "لیست وظایف",
     "json.noFile": "برای مشاهده درخت، یک فایل JSON باز کنید",
     "json.notJson": "فایل جاری JSON نیست",
@@ -495,6 +495,96 @@ const fa = {
     "contextMenu.add": "افزودن",
     "contextMenu.selectAction": "انتخاب عملیات...",
     "contextMenu.resetDefaults": "بازنشانی به پیش‌فرض",
+    "contextMenu.labelPlaceholder": "برچسب (&حرف برای کلید میانبر)",
+    "contextMenu.actionPlaceholder": "شناسه عملیات (مثال: edit.cut)",
+    "contextMenu.labelShortPlaceholder": "برچسب",
+    "contextMenu.customActionPlaceholder": "یا شناسه عملیات سفارشی تایپ کنید...",
+
+    // ── Status Bar ──
+    "status.ready": "آماده",
+    "status.branchTooltip": "برای تغییر شاخه کلیک کنید",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "بستن",
+    "tab.newTooltip": "فایل جدید (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "حذف ریشه",
+    "sidebar.refresh": "تازه‌سازی",
+
+    // ── Git Panel ──
+    "git.switchBranch": "تغییر شاخه",
+    "git.pull": "کشیدن",
+    "git.push": "ارسال",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "الگوهای عبارت باقاعده",
+    "search.lineLabel": "خط",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "شماره خط",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "برای باز کردن {file} در خط {line} کلیک کنید",
+
+    // ── XML Tools ──
+    "menu.xmlError": "خطای XML: {error}",
+    "menu.xmlParseError": "خطای تجزیه XML: {error}",
+    "menu.xmlValid": "✅ XML معتبر است.",
+    "menu.xmlInvalid": "❌ XML نامعتبر:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "برای پیش‌نمایش ابتدا فایل را ذخیره کنید",
+    "preview.saveFirstShort": "ابتدا فایل را ذخیره کنید",
+    "preview.imageFailed": "بارگذاری تصویر ناموفق بود",
+    "preview.emptyCsv": "CSV خالی",
+    "preview.invalidJson": "JSON نامعتبر",
+    "preview.katexInfo": "KaTeX فقط ریاضیات درون‌خطی ($...$) و ریاضیات نمایشی ($$...$$) را نمایش می‌دهد",
+    "preview.spreadsheetFailed": "بارگذاری صفحه گسترده ناموفق بود",
+    "preview.invalidNotebook": "دفترچه یادداشت نامعتبر",
+    "preview.docFailed": "بارگذاری سند ناموفق بود",
+    "preview.geoJsonFailed": "بارگذاری GeoJSON ناموفق بود",
+    "preview.sqliteFailed": "باز کردن پایگاه داده ناموفق بود",
+    "preview.emptyTable": "جدول خالی",
+    "preview.loadingArchive": "در حال بارگذاری بایگانی...",
+    "preview.archiveFailed": "خواندن بایگانی ناموفق بود",
+    "preview.noPreview": "پیش‌نمایشی برای این نوع فایل در دسترس نیست",
+    "preview.pdfTitle": "پیش‌نمایش PDF",
+    "preview.iframeTitle": "پیش‌نمایش {name}",
+    "preview.dotRenderError": "نمایش گراف ناموفق بود",
+    "preview.dotLoadError": "بارگذاری موتور Graphviz ناموفق بود",
+    "preview.noContent": "بدون محتوا",
+    "preview.invalidHar": "فایل HAR نامعتبر",
+    "preview.harTitle": "HAR: {count} درخواست",
+    "preview.harMethod": "روش",
+    "preview.harUrl": "نشانی اینترنتی",
+    "preview.harStatus": "وضعیت",
+    "preview.harTime": "زمان",
+    "preview.harSize": "اندازه",
+    "preview.3dOffline": "پیش‌نمایش سه‌بعدی در حالت آفلاین در دسترس نیست",
+    "preview.envMasked": "مقادیر پنهان‌شدند — موس را نگه دارید تا نمایش داده شود",
+    "preview.saveFirst3d": "برای پیش‌نمایش مدل سه‌بعدی ابتدا فایل را ذخیره کنید",
+
+    "preview.close": "بستن پیش‌نمایش",
+    "preview.open": "پیش‌نمایش ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "هیچ تب‌ای انتخاب نشده است",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "زبان",
+
+    // ── About ──
+    "about.version": "نسخه {version}",
   },
 };
 

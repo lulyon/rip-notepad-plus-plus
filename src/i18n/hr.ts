@@ -142,7 +142,7 @@ const hr = {
     "git.clean": "✓ Radno stablo čisto",
     "git.commit": "Commit...",
     "git.commitFailed": "Commit neuspješan: {{error}}",
-    "git.committed": "Committed ✓",
+    "git.committed": "Commit potvrđen ✓",
     "git.diff": "razlika",
     "git.filesChanged": "datoteka promijenjeno",
     "git.loading": "Učitavam...",
@@ -150,9 +150,9 @@ const hr = {
     "git.noProject": "Otvori mapu za pregled Git statusa",
     "git.notRepo": "Nije Git repozitorij",
     "git.pullFailed": "Pull neuspješan: {{error}}",
-    "git.pullOk": "Pull uspješan",
+    "git.pullOk": "Povuci uspješan",
     "git.pushFailed": "Push neuspješan: {{error}}",
-    "git.pushOk": "Push uspješan",
+    "git.pushOk": "Gurni uspješan",
     "git.refresh": "Osvježi",
     "git.stageAll": "Stage sve",
     "git.viewDiff": "Prikaži razliku",
@@ -382,7 +382,7 @@ const hr = {
     "preferences.defaultEncoding": "Zadano kodiranje",
     "preferences.defaultLanguage": "Zadani jezik",
     "preferences.editing": "Uređivanje",
-    "preferences.eol": "EOL",
+    "preferences.eol": "Kraj retka",
     "preferences.eolCr": "CR (klasični Mac)",
     "preferences.eolCrlf": "CRLF (Windows)",
     "preferences.eolLf": "LF (Unix/macOS)",
@@ -462,7 +462,7 @@ const hr = {
     "search.matchStats": "{{current}} od {{count}}",
     "search.preview": "Pregled",
     "search.previewTitle": "Pregled zamjene — {{count}} pojavljivanje(a)",
-    "search.regex": "Regex",
+    "search.regex": "Reg. izraz",
     "search.replaceAll": "Zamijeni sve",
     "search.replaceAllBtn": "Zamijeni sve",
     "search.replaceBtn": "Zamijeni",
@@ -577,6 +577,96 @@ const hr = {
     "welcome.dropHint": "Povucite datoteke ovdje za otvaranje",
     "welcome.subtitle": "Ctrl+N Novi · Ctrl+O Otvori · Ctrl+S Spremi",
     "welcome.title": "ripNotepad++",
+    "contextMenu.labelPlaceholder": "Oznaka (&Slovo za prečac)",
+    "contextMenu.actionPlaceholder": "ID radnje (npr. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Oznaka",
+    "contextMenu.customActionPlaceholder": "Ili upišite ID radnje po mjeri...",
+
+    // ── Status Bar ──
+    "status.ready": "Spremno",
+    "status.branchTooltip": "Kliknite za promjenu grane",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Zatvori",
+    "tab.newTooltip": "Nova datoteka (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Ukloni korijen",
+    "sidebar.refresh": "Osvježi",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Promijeni granu",
+    "git.pull": "Povuci",
+    "git.push": "Gurni",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex predlošci",
+    "search.lineLabel": "Re",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Broj retka",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Kliknite za otvaranje {file} u retku {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML greška: {error}",
+    "menu.xmlParseError": "XML greška parsiranja: {error}",
+    "menu.xmlValid": "✅ XML je valjan.",
+    "menu.xmlInvalid": "❌ XML nevaljan:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Prvo spremite datoteku za pregled",
+    "preview.saveFirstShort": "Prvo spremite datoteku",
+    "preview.imageFailed": "Učitavanje slike nije uspjelo",
+    "preview.emptyCsv": "Prazan CSV",
+    "preview.invalidJson": "Nevaljan JSON",
+    "preview.katexInfo": "KaTeX prikazuje samo inline ($...$) i display ($$...$$) matematiku",
+    "preview.spreadsheetFailed": "Učitavanje tablice nije uspjelo",
+    "preview.invalidNotebook": "Nevaljana bilježnica",
+    "preview.docFailed": "Učitavanje dokumenta nije uspjelo",
+    "preview.geoJsonFailed": "Učitavanje GeoJSON nije uspjelo",
+    "preview.sqliteFailed": "Otvaranje baze podataka nije uspjelo",
+    "preview.emptyTable": "Prazna tablica",
+    "preview.loadingArchive": "Učitavanje arhive...",
+    "preview.archiveFailed": "Čitanje arhive nije uspjelo",
+    "preview.noPreview": "Pregled nije dostupan za ovu vrstu datoteke",
+    "preview.pdfTitle": "PDF pregled",
+    "preview.iframeTitle": "{name} pregled",
+    "preview.dotRenderError": "Renderiranje grafa nije uspjelo",
+    "preview.dotLoadError": "Učitavanje Graphviz enginea nije uspjelo",
+    "preview.noContent": "Nema sadržaja",
+    "preview.invalidHar": "Nevaljana HAR datoteka",
+    "preview.harTitle": "HAR: {count} zahtjeva",
+    "preview.harMethod": "Metoda",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Status",
+    "preview.harTime": "Vrijeme",
+    "preview.harSize": "Veličina",
+    "preview.3dOffline": "3D pregled nije dostupan izvan mreže",
+    "preview.envMasked": "Vrijednosti maskirane — prijeđite mišem za otkrivanje",
+    "preview.saveFirst3d": "Prvo spremite datoteku za pregled 3D modela",
+
+    "preview.close": "Zatvori pregled",
+    "preview.open": "Pregled ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Nije odabrana kartica",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Jezik",
+
+    // ── About ──
+    "about.version": "Verzija {version}",
   },
 };
 

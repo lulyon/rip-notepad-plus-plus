@@ -142,7 +142,7 @@ const gl = {
     "git.clean": "✓ Árbore de traballo limpa",
     "git.commit": "Commit...",
     "git.commitFailed": "Commit fallou: {{error}}",
-    "git.committed": "Committed ✓",
+    "git.committed": "Commit confirmado ✓",
     "git.diff": "diferenza",
     "git.filesChanged": "ficheiros modificados",
     "git.loading": "Cargando...",
@@ -150,9 +150,9 @@ const gl = {
     "git.noProject": "Abrir un cartafol para ver o estado de Git",
     "git.notRepo": "Non é un repositorio Git",
     "git.pullFailed": "Pull fallou: {{error}}",
-    "git.pullOk": "Pull correcto",
+    "git.pullOk": "Estirar correcto",
     "git.pushFailed": "Push fallou: {{error}}",
-    "git.pushOk": "Push correcto",
+    "git.pushOk": "Empurrar correcto",
     "git.refresh": "Actualizar",
     "git.stageAll": "Stage todo",
     "git.viewDiff": "Ver diferenza",
@@ -270,7 +270,7 @@ const gl = {
     "menu.macro.save": "Gardar macro actual",
     "menu.macro.startRecord": "Iniciar &gravación",
     "menu.macro.stopRecord": "&Deter gravación",
-    "menu.plugins": "&Plugins",
+    "menu.plugins": "&Complementos",
 
     // ── Menu: Run ──
     "menu.run": "&Executar",
@@ -382,7 +382,7 @@ const gl = {
     "preferences.defaultEncoding": "Codificación predeterminada",
     "preferences.defaultLanguage": "Linguaxe predeterminada",
     "preferences.editing": "Edición",
-    "preferences.eol": "EOL",
+    "preferences.eol": "Fin de liña",
     "preferences.eolCr": "CR (Mac clásico)",
     "preferences.eolCrlf": "CRLF (Windows)",
     "preferences.eolLf": "LF (Unix/macOS)",
@@ -462,7 +462,7 @@ const gl = {
     "search.matchStats": "{{current}} de {{count}}",
     "search.preview": "Vista previa",
     "search.previewTitle": "Vista previa de substitución — {{count}} ocorrencia(s)",
-    "search.regex": "Regex",
+    "search.regex": "Exp. regular",
     "search.replaceAll": "Substituír todo",
     "search.replaceAllBtn": "Substituír todo",
     "search.replaceBtn": "Substituír",
@@ -543,7 +543,7 @@ const gl = {
     "tools.shortcut": "Atallo (ex. Ctrl+Shift+1)",
     "tools.title": "Ferramentas externas",
     "tools.update": "Actualizar",
-    "tools.variables": "Variables:",
+    "tools.variables": ":Variables",
 
     // ── UDL ──
     "udl.autoIndent": "Sangría automática",
@@ -577,6 +577,96 @@ const gl = {
     "welcome.dropHint": "Arrastrar ficheiros aquí para abrir",
     "welcome.subtitle": "Ctrl+N Novo · Ctrl+O Abrir · Ctrl+S Gardar",
     "welcome.title": "ripNotepad++",
+    "contextMenu.labelPlaceholder": "Etiqueta (&Letter para atallo)",
+    "contextMenu.actionPlaceholder": "ID de acción (ex. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Etiqueta",
+    "contextMenu.customActionPlaceholder": "Ou escribe un ID de acción personalizado...",
+
+    // ── Status Bar ──
+    "status.ready": "Preparado",
+    "status.branchTooltip": "Fai clic para cambiar de rama",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Pechar",
+    "tab.newTooltip": "Novo ficheiro (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Eliminar raíz",
+    "sidebar.refresh": "Actualizar",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Cambiar de rama",
+    "git.pull": "Estirar",
+    "git.push": "Empurrar",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Modelos regex",
+    "search.lineLabel": "Li",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Número de liña",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Fai clic para abrir {file} na liña {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "Erro XML: {error}",
+    "menu.xmlParseError": "Erro de análise XML: {error}",
+    "menu.xmlValid": "✅ XML é válido.",
+    "menu.xmlInvalid": "❌ XML non válido:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Garda o ficheiro primeiro para previsualizar",
+    "preview.saveFirstShort": "Garda o ficheiro primeiro",
+    "preview.imageFailed": "Non se puido cargar a imaxe",
+    "preview.emptyCsv": "CSV baleiro",
+    "preview.invalidJson": "JSON non válido",
+    "preview.katexInfo": "KaTeX só renderiza matemáticas en liña ($...$) e en display ($$...$$)",
+    "preview.spreadsheetFailed": "Non se puido cargar a folla de cálculo",
+    "preview.invalidNotebook": "Caderno non válido",
+    "preview.docFailed": "Non se puido cargar o documento",
+    "preview.geoJsonFailed": "Non se puido cargar o GeoJSON",
+    "preview.sqliteFailed": "Non se puido abrir a base de datos",
+    "preview.emptyTable": "Táboa baleira",
+    "preview.loadingArchive": "Cargando o arquivo...",
+    "preview.archiveFailed": "Non se puido ler o arquivo",
+    "preview.noPreview": "Non hai vista previa dispoñible para este tipo de ficheiro",
+    "preview.pdfTitle": "Vista previa do PDF",
+    "preview.iframeTitle": "Vista previa de {name}",
+    "preview.dotRenderError": "Non se puido renderizar o gráfico",
+    "preview.dotLoadError": "Non se puido cargar o motor Graphviz",
+    "preview.noContent": "Sen contido",
+    "preview.invalidHar": "Ficheiro HAR non válido",
+    "preview.harTitle": "HAR: {count} solicitudes",
+    "preview.harMethod": "Método",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Estado",
+    "preview.harTime": "Tempo",
+    "preview.harSize": "Tamaño",
+    "preview.3dOffline": "Vista previa 3D non dispoñible sen conexión",
+    "preview.envMasked": "Valores enmascarados — pasa o rato para revelar",
+    "preview.saveFirst3d": "Garda o ficheiro primeiro para previsualizar o modelo 3D",
+
+    "preview.close": "Pechar vista previa",
+    "preview.open": "Vista previa ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Non se seleccionou ningunha lapela",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Idioma",
+
+    // ── About ──
+    "about.version": "Versión {version}",
   },
 };
 

@@ -186,7 +186,7 @@ const sv = {
     "tab.colorBlue": "Blå",
     "search.findLabel": "Sök",
     "search.replaceLabel": "Ersätt",
-    "search.regex": "Regex",
+    "search.regex": "Reguljärt uttryck",
     "search.caseSensitive": "Skiftlägeskänsligt",
     "search.wholeWord": "Helt ord",
     "search.wrapAround": "Cirkulera",
@@ -418,9 +418,9 @@ const sv = {
     "git.viewDiff": "Visa diff",
     "git.stageAll": "Staga alla",
     "git.commit": "Commita...",
-    "git.diff": "diff",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
+    "git.diff": "skillnad",
+    "git.pushOk": "Skicka OK",
+    "git.pullOk": "Hämta OK",
     "git.committed": "Committad ✓",
     "git.commitFailed": "Commit misslyckades: {{error}}",
     "git.pushFailed": "Push misslyckades: {{error}}",
@@ -430,7 +430,7 @@ const sv = {
     "commit.title": "Committa ändringar",
     "commit.filesStaged": "{{count}} fil(er) stagade",
     "commit.messagePlaceholder": "Commitmeddelande (Enter för att committa, Shift+Enter för ny rad)",
-    "commit.commit": "Commit",
+    "commit.commit": "Committa",
     "commit.cancel": "Avbryt",
     "plugin.title": "Pluginhanterare",
     "plugin.loading": "Läser in...",
@@ -495,6 +495,98 @@ const sv = {
     "contextMenu.add": "Lägg till",
     "contextMenu.selectAction": "Välj åtgärd...",
     "contextMenu.resetDefaults": "Återställ till standard",
+    // ── Context Menu Placeholders ──
+    "contextMenu.labelPlaceholder": "Etikett (&Bokstav för snabbkommando)",
+    "contextMenu.actionPlaceholder": "Åtgärds-ID (t.ex. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Etikett",
+    "contextMenu.customActionPlaceholder": "Eller skriv anpassat åtgärds-ID...",
+
+    // ── Status Bar ──
+    "status.ready": "Redo",
+    "status.branchTooltip": "Klicka för att byta gren",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Stäng",
+    "tab.newTooltip": "Ny fil (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Ta bort rot",
+    "sidebar.refresh": "Uppdatera",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Byt gren",
+    "git.pull": "Hämta",
+    "git.push": "Skicka",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex-mallar",
+    "search.lineLabel": "Ra",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Radnummer",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Klicka för att öppna {file} på rad {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML-fel: {error}",
+    "menu.xmlParseError": "XML-tolkningsfel: {error}",
+    "menu.xmlValid": "✅ XML är giltigt.",
+    "menu.xmlInvalid": "❌ XML ogiltigt:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Spara filen först för att förhandsgranska",
+    "preview.saveFirstShort": "Spara filen först",
+    "preview.imageFailed": "Misslyckades att ladda bild",
+    "preview.emptyCsv": "Tom CSV",
+    "preview.invalidJson": "Ogiltig JSON",
+    "preview.katexInfo": "KaTeX renderar endast inline-matematik ($...$) och displaymatematik ($$...$$)",
+    "preview.spreadsheetFailed": "Misslyckades att ladda kalkylblad",
+    "preview.invalidNotebook": "Ogiltig anteckningsbok",
+    "preview.docFailed": "Misslyckades att ladda dokument",
+    "preview.geoJsonFailed": "Misslyckades att ladda GeoJSON",
+    "preview.sqliteFailed": "Misslyckades att öppna databas",
+    "preview.emptyTable": "Tom tabell",
+    "preview.loadingArchive": "Läser in arkiv...",
+    "preview.archiveFailed": "Misslyckades att läsa arkiv",
+    "preview.noPreview": "Ingen förhandsvisning tillgänglig för denna filtyp",
+    "preview.pdfTitle": "PDF-förhandsvisning",
+    "preview.iframeTitle": "{name} förhandsvisning",
+    "preview.dotRenderError": "Misslyckades att rendera graf",
+    "preview.dotLoadError": "Misslyckades att ladda Graphviz-motor",
+    "preview.noContent": "Inget innehåll",
+    "preview.invalidHar": "Ogiltig HAR-fil",
+    "preview.harTitle": "HAR: {count} förfrågningar",
+    "preview.harMethod": "Metod",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Status",
+    "preview.harTime": "Tid",
+    "preview.harSize": "Storlek",
+    "preview.3dOffline": "3D-förhandsvisning inte tillgänglig offline",
+    "preview.envMasked": "Värden maskerade — håll musen över för att visa",
+    "preview.saveFirst3d": "Spara filen först för att förhandsgranska 3D-modell",
+
+    "preview.close": "Stäng förhandsvisning",
+    "preview.open": "Förhandsvisning ({shortcut})",
+
+    // ── Split Editor ──
+    "splitEditor.noTab": "Ingen flik vald",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Språk",
+
+    // ── About ──
+    "about.version": "Version {version}",
   },
 };
 

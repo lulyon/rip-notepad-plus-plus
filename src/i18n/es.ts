@@ -251,7 +251,7 @@ const es = {
     "encoding.filter": "Filtrar codificaciones...",
 
     // ── Go To Line ──
-    "gotoLine.go": "Go",
+    "gotoLine.go": "Ir",
 
     // ── Preferences ──
     "preferences.general": "General",
@@ -284,7 +284,7 @@ const es = {
     "preferences.whitespaceAll": "Todo",
     "preferences.defaultEncoding": "Codificación predeterminada",
     "preferences.defaultLanguage": "Idioma predeterminado",
-    "preferences.eol": "EOL",
+    "preferences.eol": "Fin de línea",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
     "preferences.eolCr": "CR (Mac Clásico)",
@@ -379,8 +379,8 @@ const es = {
     // ── Status Bar ──
     "status.encoding": "Codificación",
     "status.language": "Idioma",
-    "status.line": "Ln",
-    "status.column": "Col",
+    "status.line": "Li",
+    "status.column": "Co",
     "status.clickToChange": "Haga clic para cambiar codificación",
 
     // ── Welcome ──
@@ -404,7 +404,7 @@ const es = {
     "sidebar.preview": "Vista Previa",
 
     // ── Clipboard ──
-    "clipboard.search": "Search...",
+    "clipboard.search": "Buscar...",
     "clipboard.clear": "Limpiar Historial",
     "clipboard.empty": "El contenido copiado aparecerá aquí",
     "clipboard.noResults": "Sin entradas coincidentes",
@@ -459,7 +459,7 @@ const es = {
     "run.var.wordDesc": "Palabra en la posición del cursor",
     "run.var.line": "Número de Línea",
     "run.var.lineDesc": "Número de línea actual del cursor",
-    "run.var.column": "Column Number",
+    "run.var.column": "Número de columna",
     "run.var.columnDesc": "Número de columna actual del cursor",
     "run.var.projectroot": "Raíz del Proyecto",
     "run.var.projectrootDesc": "Carpeta del proyecto actualmente abierta",
@@ -480,9 +480,9 @@ const es = {
     "git.viewDiff": "Ver Diff",
     "git.stageAll": "Preparar Todo",
     "git.commit": "Confirmar...",
-    "git.diff": "diff",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
+    "git.diff": "Diff",
+    "git.pushOk": "Empujar OK",
+    "git.pullOk": "Traer OK",
     "git.committed": "Confirmado ✓",
     "git.commitFailed": "Error al confirmar: {{error}}",
     "git.pushFailed": "Error al hacer push: {{error}}",
@@ -570,6 +570,96 @@ const es = {
     "contextMenu.add": "Agregar",
     "contextMenu.selectAction": "Seleccionar acción...",
     "contextMenu.resetDefaults": "Restablecer Valores Predeterminados",
+    "contextMenu.labelPlaceholder": "Etiqueta (&Letra para acceso directo)",
+    "contextMenu.actionPlaceholder": "ID de acción (ej. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Etiqueta",
+    "contextMenu.customActionPlaceholder": "O escriba un ID de acción personalizado...",
+
+    // ── Status Bar ──
+    "status.ready": "Listo",
+    "status.branchTooltip": "Haga clic para cambiar de rama",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Cerrar",
+    "tab.newTooltip": "Nuevo archivo (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Eliminar raíz",
+    "sidebar.refresh": "Actualizar",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Cambiar rama",
+    "git.pull": "Traer",
+    "git.push": "Empujar",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Plantillas regex",
+    "search.lineLabel": "Li",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Número de línea",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Haga clic para abrir {file} en la línea {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "Error XML: {error}",
+    "menu.xmlParseError": "Error de análisis XML: {error}",
+    "menu.xmlValid": "✅ El XML es válido.",
+    "menu.xmlInvalid": "❌ XML no válido:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Guarde el archivo primero para previsualizar",
+    "preview.saveFirstShort": "Guarde el archivo primero",
+    "preview.imageFailed": "Error al cargar la imagen",
+    "preview.emptyCsv": "CSV vacío",
+    "preview.invalidJson": "JSON no válido",
+    "preview.katexInfo": "KaTeX solo renderiza matemáticas en línea ($...$) y matemáticas en pantalla ($$...$$)",
+    "preview.spreadsheetFailed": "Error al cargar la hoja de cálculo",
+    "preview.invalidNotebook": "Cuaderno no válido",
+    "preview.docFailed": "Error al cargar el documento",
+    "preview.geoJsonFailed": "Error al cargar GeoJSON",
+    "preview.sqliteFailed": "Error al abrir la base de datos",
+    "preview.emptyTable": "Tabla vacía",
+    "preview.loadingArchive": "Cargando archivo...",
+    "preview.archiveFailed": "Error al leer el archivo",
+    "preview.noPreview": "No hay vista previa disponible para este tipo de archivo",
+    "preview.pdfTitle": "Vista previa PDF",
+    "preview.iframeTitle": "Vista previa de {name}",
+    "preview.dotRenderError": "Error al renderizar el gráfico",
+    "preview.dotLoadError": "Error al cargar el motor Graphviz",
+    "preview.noContent": "Sin contenido",
+    "preview.invalidHar": "Archivo HAR no válido",
+    "preview.harTitle": "HAR: {count} solicitudes",
+    "preview.harMethod": "Método",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Estado",
+    "preview.harTime": "Tiempo",
+    "preview.harSize": "Tamaño",
+    "preview.3dOffline": "Vista previa 3D no disponible sin conexión",
+    "preview.envMasked": "Valores ocultados — coloque el cursor para revelar",
+    "preview.saveFirst3d": "Guarde el archivo primero para previsualizar el modelo 3D",
+
+    "preview.close": "Cerrar vista previa",
+    "preview.open": "Vista previa ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Ninguna pestaña seleccionada",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Idioma",
+
+    // ── About ──
+    "about.version": "Versión {version}",
   },
 };
 

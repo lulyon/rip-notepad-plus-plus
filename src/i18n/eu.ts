@@ -142,7 +142,7 @@ const eu = {
     "git.clean": "✓ Lan zuhaitza garbi",
     "git.commit": "Commit...",
     "git.commitFailed": "Commit huts: {{error}}",
-    "git.committed": "Committed ✓",
+    "git.committed": "Commit eginda ✓",
     "git.diff": "aldea",
     "git.filesChanged": "fitxategi aldatu",
     "git.loading": "Kargatzen...",
@@ -150,9 +150,9 @@ const eu = {
     "git.noProject": "Ireki karpeta bat Git egoera ikusteko",
     "git.notRepo": "Ez da Git biltegia",
     "git.pullFailed": "Pull huts: {{error}}",
-    "git.pullOk": "Pull ongi",
+    "git.pullOk": "Tira ongi",
     "git.pushFailed": "Push huts: {{error}}",
-    "git.pushOk": "Push ongi",
+    "git.pushOk": "Bultzatu ongi",
     "git.refresh": "Freskatu",
     "git.stageAll": "Stage denak",
     "git.viewDiff": "Ikusi aldea",
@@ -382,7 +382,7 @@ const eu = {
     "preferences.defaultEncoding": "Kodeketa lehenetsia",
     "preferences.defaultLanguage": "Hizkuntza lehenetsia",
     "preferences.editing": "Edizioa",
-    "preferences.eol": "EOL",
+    "preferences.eol": "Lerro amaiera",
     "preferences.eolCr": "CR (Mac klasikoa)",
     "preferences.eolCrlf": "CRLF (Windows)",
     "preferences.eolLf": "LF (Unix/macOS)",
@@ -462,7 +462,7 @@ const eu = {
     "search.matchStats": "{{current}} / {{count}}",
     "search.preview": "Aurrebista",
     "search.previewTitle": "Ordezkapen aurrebista — {{count}} agerraldi",
-    "search.regex": "Regex",
+    "search.regex": "Reg. adierazpen",
     "search.replaceAll": "Ordeztu denak",
     "search.replaceAllBtn": "Ordeztu denak",
     "search.replaceBtn": "Ordeztu",
@@ -577,6 +577,96 @@ const eu = {
     "welcome.dropHint": "Fitxategiak hemen utzi irekitzeko",
     "welcome.subtitle": "Ctrl+N Berria · Ctrl+O Ireki · Ctrl+S Gorde",
     "welcome.title": "ripNotepad++",
+    "contextMenu.labelPlaceholder": "Etiketa (&Letter lasterbiderako)",
+    "contextMenu.actionPlaceholder": "Ekintza IDa (adib. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Etiketa",
+    "contextMenu.customActionPlaceholder": "Edo idatzi ekintza ID pertsonalizatua...",
+
+    // ── Status Bar ──
+    "status.ready": "Prest",
+    "status.branchTooltip": "Egin klik adarra aldatzeko",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Itxi",
+    "tab.newTooltip": "Fitxategi berria (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Kendu erroa",
+    "sidebar.refresh": "Freskatu",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Aldatu adarra",
+    "git.pull": "Tira",
+    "git.push": "Bultzatu",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex txantiloiak",
+    "search.lineLabel": "L",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Lerro zenbakia",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Egin klik {file} irekitzeko {line} lerroan",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML errorea: {error}",
+    "menu.xmlParseError": "XML parseaketa errorea: {error}",
+    "menu.xmlValid": "✅ XML baliozkoa da.",
+    "menu.xmlInvalid": "❌ XML ez baliozkoa:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Gorde fitxategia aurrebista ikusteko",
+    "preview.saveFirstShort": "Gorde fitxategia lehenengo",
+    "preview.imageFailed": "Ezin izan da irudia kargatu",
+    "preview.emptyCsv": "CSV hutsa",
+    "preview.invalidJson": "JSON baliogabea",
+    "preview.katexInfo": "KaTeX-ek lerro barneko ($...$) eta erakusteko ($$...$$) matematika soilik errendatzen ditu",
+    "preview.spreadsheetFailed": "Kalkulu-orria kargatzeak huts egin du",
+    "preview.invalidNotebook": "Koaderno baliogabea",
+    "preview.docFailed": "Dokumentua kargatzeak huts egin du",
+    "preview.geoJsonFailed": "GeoJSON kargatzeak huts egin du",
+    "preview.sqliteFailed": "Datu-basea irekitzeak huts egin du",
+    "preview.emptyTable": "Taula hutsa",
+    "preview.loadingArchive": "Artxiboa kargatzen...",
+    "preview.archiveFailed": "Artxiboa irakurtzeak huts egin du",
+    "preview.noPreview": "Ez dago aurrebistarik fitxategi mota honetarako",
+    "preview.pdfTitle": "PDF aurrebista",
+    "preview.iframeTitle": "{name} aurrebista",
+    "preview.dotRenderError": "Grafikoa errendatzeak huts egin du",
+    "preview.dotLoadError": "Graphviz motorra kargatzeak huts egin du",
+    "preview.noContent": "Edukirik ez",
+    "preview.invalidHar": "HAR fitxategi baliogabea",
+    "preview.harTitle": "HAR: {count} eskaera",
+    "preview.harMethod": "Metodoa",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Egoera",
+    "preview.harTime": "Denbora",
+    "preview.harSize": "Tamaina",
+    "preview.3dOffline": "3D aurrebista ez dago erabilgarri lineaz kanpo",
+    "preview.envMasked": "Balioak ezkutatuak — pasa sagua erakusteko",
+    "preview.saveFirst3d": "Gorde fitxategia 3D modeloa aurrebistatzeko",
+
+    "preview.close": "Itxi aurrebista",
+    "preview.open": "Aurrebista ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Fitxarik ez da hautatu",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Hizkuntza",
+
+    // ── About ──
+    "about.version": "Bertsioa {version}",
   },
 };
 

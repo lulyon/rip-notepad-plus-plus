@@ -1,5 +1,11 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { findRenderer, hasPreview, registerPreviewRenderer } from "../src/lib/previewEngine";
+import i18n from "../src/i18n";
+
+// Set language to English for deterministic test output
+beforeAll(() => {
+  i18n.changeLanguage("en");
+});
 
 // ── Renderer detection ──
 

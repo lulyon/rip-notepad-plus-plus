@@ -142,7 +142,7 @@ const de = {
     "git.clean": "✓ Arbeitsverzeichnis sauber",
     "git.commit": "Commit...",
     "git.commitFailed": "Commit fehlgeschlagen: {{error}}",
-    "git.committed": "Committed ✓",
+    "git.committed": "Commit abgeschlossen ✓",
     "git.diff": "Diff",
     "git.filesChanged": "Dateien geändert",
     "git.loading": "Lade...",
@@ -270,7 +270,7 @@ const de = {
     "menu.macro.save": "Makro &speichern...",
     "menu.macro.startRecord": "&Aufnahme starten",
     "menu.macro.stopRecord": "Aufnahme &stoppen",
-    "menu.plugins": "&Plugins",
+    "menu.plugins": "&Plug-ins",
 
     // ── Menu: Run ──
     "menu.run": "A&usführen",
@@ -382,8 +382,8 @@ const de = {
     "preferences.defaultEncoding": "Standardcodierung",
     "preferences.defaultLanguage": "Standardsprache",
     "preferences.editing": "Bearbeitung",
-    "preferences.eol": "EOL",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eol": "Zeilenende",
+    "preferences.eolCr": "CR (Klassischer Mac)",
     "preferences.eolCrlf": "CRLF (Windows)",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.fontFamily": "Schriftart",
@@ -449,7 +449,7 @@ const de = {
     "search.filePattern": "Dateimuster",
     "search.filePatternPlaceholder": "*.ts,*.rs,*.json",
     "search.findInFilesPlaceholder": "Text oder Regex zum Suchen...",
-    "search.findLabel": "Find",
+    "search.findLabel": "Suchen",
     "search.findNextBtn": "Weitersuchen",
     "search.findPlaceholder": "Suchtext oder Regex...",
     "search.findPrevBtn": "Rückwärts suchen",
@@ -577,6 +577,96 @@ const de = {
     "welcome.dropHint": "Dateien zum Öffnen hier ablegen",
     "welcome.subtitle": "ripNotepad++ — Ein moderner Texteditor",
     "welcome.title": "Willkommen",
+    "contextMenu.labelPlaceholder": "Bezeichnung (&Buchstabe für Tastenkürzel)",
+    "contextMenu.actionPlaceholder": "Aktions-ID (z.B. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Bezeichnung",
+    "contextMenu.customActionPlaceholder": "Oder benutzerdefinierte Aktions-ID eingeben...",
+
+    // ── Status Bar ──
+    "status.ready": "Bereit",
+    "status.branchTooltip": "Klicken zum Wechseln des Branches",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Schließen",
+    "tab.newTooltip": "Neue Datei (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Root entfernen",
+    "sidebar.refresh": "Aktualisieren",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Branch wechseln",
+    "git.pull": "Pullen",
+    "git.push": "Pushen",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex-Vorlagen",
+    "search.lineLabel": "Ze",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Zeilennummer",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Klicken zum Öffnen von {file} in Zeile {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML-Fehler: {error}",
+    "menu.xmlParseError": "XML-Parsefehler: {error}",
+    "menu.xmlValid": "✅ XML ist gültig.",
+    "menu.xmlInvalid": "❌ XML ungültig:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Speichern Sie die Datei zuerst für die Vorschau",
+    "preview.saveFirstShort": "Speichern Sie die Datei zuerst",
+    "preview.imageFailed": "Bild konnte nicht geladen werden",
+    "preview.emptyCsv": "Leeres CSV",
+    "preview.invalidJson": "Ungültiges JSON",
+    "preview.katexInfo": "KaTeX rendert nur Inline-Mathe ($...$) und Display-Mathe ($$...$$)",
+    "preview.spreadsheetFailed": "Tabellenkalkulation konnte nicht geladen werden",
+    "preview.invalidNotebook": "Ungültiges Notebook",
+    "preview.docFailed": "Dokument konnte nicht geladen werden",
+    "preview.geoJsonFailed": "GeoJSON konnte nicht geladen werden",
+    "preview.sqliteFailed": "Datenbank konnte nicht geöffnet werden",
+    "preview.emptyTable": "Leere Tabelle",
+    "preview.loadingArchive": "Archiv wird geladen...",
+    "preview.archiveFailed": "Archiv konnte nicht gelesen werden",
+    "preview.noPreview": "Keine Vorschau für diesen Dateityp verfügbar",
+    "preview.pdfTitle": "PDF-Vorschau",
+    "preview.iframeTitle": "{name} Vorschau",
+    "preview.dotRenderError": "Graph konnte nicht gerendert werden",
+    "preview.dotLoadError": "Graphviz-Engine konnte nicht geladen werden",
+    "preview.noContent": "Kein Inhalt",
+    "preview.invalidHar": "Ungültige HAR-Datei",
+    "preview.harTitle": "HAR: {count} Anfragen",
+    "preview.harMethod": "Methode",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Status",
+    "preview.harTime": "Zeit",
+    "preview.harSize": "Größe",
+    "preview.3dOffline": "3D-Vorschau offline nicht verfügbar",
+    "preview.envMasked": "Werte maskiert — zum Anzeigen darüberfahren",
+    "preview.saveFirst3d": "Speichern Sie die Datei zuerst für die 3D-Modellvorschau",
+
+    "preview.close": "Vorschau schließen",
+    "preview.open": "Vorschau ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Kein Tab ausgewählt",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Sprache",
+
+    // ── About ──
+    "about.version": "Version {version}",
   },
 };
 

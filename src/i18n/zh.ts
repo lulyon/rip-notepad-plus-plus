@@ -138,22 +138,22 @@ const zh = {
     // ── Menu: Language ──
     "menu.language": "语言(&L)",
     "menu.language.plaintext": "纯文本",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.javascript": "JavaScript（JS）",
+    "menu.language.typescript": "TypeScript（TS）",
+    "menu.language.json": "JSON（杰森）",
+    "menu.language.html": "HTML（超文本）",
+    "menu.language.css": "CSS（样式表）",
+    "menu.language.python": "Python（派森）",
+    "menu.language.rust": "Rust（锈）",
+    "menu.language.go": "Go语言",
+    "menu.language.java": "Java（爪哇）",
+    "menu.language.c": "C语言",
+    "menu.language.cpp": "C++语言",
+    "menu.language.xml": "XML（可扩展标记）",
+    "menu.language.yaml": "YAML（雅梅尔）",
+    "menu.language.markdown": "Markdown（马克当）",
+    "menu.language.sql": "SQL（结构化查询）",
+    "menu.language.shell": "Shell（壳）",
 
     "menu.language.defineLanguage": "用户自定义语言...",
     "menu.language.openUdlFolder": "打开 UDL 文件夹...",
@@ -285,8 +285,8 @@ const zh = {
     "preferences.defaultEncoding": "默认编码",
     "preferences.defaultLanguage": "默认语言",
     "preferences.eol": "行尾格式",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
+    "preferences.eolLf": "LF（Unix/macOS）",
+    "preferences.eolCrlf": "CRLF（Windows）",
     "preferences.eolCr": "CR (经典 Mac)",
 
     // ── Shortcut Mapper ──
@@ -393,7 +393,7 @@ const zh = {
     "sidebar.doclist": "文档列表",
     "sidebar.clipboard": "剪贴板历史",
     "sidebar.symbols": "符号",
-    "sidebar.git": "Git",
+    "sidebar.git": "Git（吉特）",
     "sidebar.terminal": "终端",
     "terminal.start": "启动终端",
     "terminal.exited": "进程已退出。",
@@ -412,7 +412,7 @@ const zh = {
     "clipboard.copy": "复制到系统剪贴板",
     "clipboard.pin": "固定/取消固定",
     "clipboard.remove": "移除",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "JSON（杰森）",
     "sidebar.taskList": "任务列表",
 
     // ── JSON Viewer ──
@@ -570,6 +570,96 @@ const zh = {
     "contextMenu.add": "添加",
     "contextMenu.selectAction": "选择操作...",
     "contextMenu.resetDefaults": "恢复默认",
+    "contextMenu.labelPlaceholder": "标签 (&用于热键的字母)",
+    "contextMenu.actionPlaceholder": "操作 ID (例如 edit.cut)",
+    "contextMenu.labelShortPlaceholder": "标签",
+    "contextMenu.customActionPlaceholder": "或输入自定义操作 ID...",
+
+    // ── Status Bar ──
+    "status.ready": "就绪",
+    "status.branchTooltip": "点击切换分支",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "关闭",
+    "tab.newTooltip": "新建文件 (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "移除根目录",
+    "sidebar.refresh": "刷新",
+
+    // ── Git Panel ──
+    "git.switchBranch": "切换分支",
+    "git.pull": "拉取",
+    "git.push": "推送",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "正则模板",
+    "search.lineLabel": "行",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "行号",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "点击在 {line} 行打开 {file}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML 错误: {error}",
+    "menu.xmlParseError": "XML 解析错误: {error}",
+    "menu.xmlValid": "✅ XML 有效。",
+    "menu.xmlInvalid": "❌ XML 无效:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "请先保存文件再进行预览",
+    "preview.saveFirstShort": "请先保存文件",
+    "preview.imageFailed": "加载图片失败",
+    "preview.emptyCsv": "空 CSV",
+    "preview.invalidJson": "无效的 JSON",
+    "preview.katexInfo": "KaTeX 仅支持内联数学公式 ($...$) 和展示数学公式 ($$...$$)",
+    "preview.spreadsheetFailed": "加载电子表格失败",
+    "preview.invalidNotebook": "无效的笔记本",
+    "preview.docFailed": "加载文档失败",
+    "preview.geoJsonFailed": "加载 GeoJSON 失败",
+    "preview.sqliteFailed": "打开数据库失败",
+    "preview.emptyTable": "空表",
+    "preview.loadingArchive": "正在加载归档...",
+    "preview.archiveFailed": "读取归档失败",
+    "preview.noPreview": "此文件类型无可用的预览",
+    "preview.pdfTitle": "PDF 预览",
+    "preview.iframeTitle": "{name} 预览",
+    "preview.dotRenderError": "渲染图形失败",
+    "preview.dotLoadError": "加载 Graphviz 引擎失败",
+    "preview.noContent": "无内容",
+    "preview.invalidHar": "无效的 HAR 文件",
+    "preview.harTitle": "HAR: {count} 个请求",
+    "preview.harMethod": "方法",
+    "preview.harUrl": "网址",
+    "preview.harStatus": "状态",
+    "preview.harTime": "时间",
+    "preview.harSize": "大小",
+    "preview.3dOffline": "3D 预览离线不可用",
+    "preview.envMasked": "值已遮蔽 — 悬停以显示",
+    "preview.saveFirst3d": "请先保存文件再预览 3D 模型",
+
+    "preview.close": "关闭预览",
+    "preview.open": "预览 ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "未选择标签页",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "语言",
+
+    // ── About ──
+    "about.version": "版本 {version}",
   },
 };
 

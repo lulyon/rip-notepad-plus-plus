@@ -570,6 +570,96 @@ const en = {
     "contextMenu.add": "Add",
     "contextMenu.selectAction": "Select action...",
     "contextMenu.resetDefaults": "Reset to Defaults",
+    "contextMenu.labelPlaceholder": "Label (&Letter for hotkey)",
+    "contextMenu.actionPlaceholder": "Action ID (e.g. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Label",
+    "contextMenu.customActionPlaceholder": "Or type custom action ID...",
+
+    // ── Status Bar ──
+    "status.ready": "Ready",
+    "status.branchTooltip": "Click to switch branch",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Close",
+    "tab.newTooltip": "New file (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Remove root",
+    "sidebar.refresh": "Refresh",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Switch branch",
+    "git.pull": "Pull",
+    "git.push": "Push",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex templates",
+    "search.lineLabel": "Ln",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Line number",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Click to open {file} at line {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML Error: {error}",
+    "menu.xmlParseError": "XML Parse Error: {error}",
+    "menu.xmlValid": "✅ XML is valid.",
+    "menu.xmlInvalid": "❌ XML Invalid:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Save the file first to preview",
+    "preview.saveFirstShort": "Save the file first",
+    "preview.imageFailed": "Failed to load image",
+    "preview.emptyCsv": "Empty CSV",
+    "preview.invalidJson": "Invalid JSON",
+    "preview.katexInfo": "KaTeX renders inline math ($...$) and display math ($$...$$) only",
+    "preview.spreadsheetFailed": "Failed to load spreadsheet",
+    "preview.invalidNotebook": "Invalid notebook",
+    "preview.docFailed": "Failed to load document",
+    "preview.geoJsonFailed": "Failed to load GeoJSON",
+    "preview.sqliteFailed": "Failed to open database",
+    "preview.emptyTable": "Empty table",
+    "preview.loadingArchive": "Loading archive...",
+    "preview.archiveFailed": "Failed to read archive",
+    "preview.noPreview": "No preview available for this file type",
+    "preview.pdfTitle": "PDF Preview",
+    "preview.iframeTitle": "{name} Preview",
+    "preview.dotRenderError": "Failed to render graph",
+    "preview.dotLoadError": "Failed to load Graphviz engine",
+    "preview.noContent": "No content",
+    "preview.invalidHar": "Invalid HAR file",
+    "preview.harTitle": "HAR: {count} requests",
+    "preview.harMethod": "Method",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Status",
+    "preview.harTime": "Time",
+    "preview.harSize": "Size",
+    "preview.3dOffline": "3D preview not available offline",
+    "preview.envMasked": "Values masked — hover to reveal",
+    "preview.saveFirst3d": "Save the file first to preview 3D model",
+    "preview.close": "Close preview",
+    "preview.open": "Preview ({shortcut})",
+
+    // ── Split Editor ──
+    "splitEditor.noTab": "No tab selected",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Language",
+
+    // ── About ──
+    "about.version": "Version {version}",
   },
 };
 

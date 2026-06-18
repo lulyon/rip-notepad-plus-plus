@@ -132,22 +132,22 @@ const ar = {
     // ── Menu: Language ──
     "menu.language": "&لغة",
     "menu.language.plaintext": "نص عادي",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.javascript": "جافاسكريبت",
+    "menu.language.typescript": "تايبسكريبت",
+    "menu.language.json": "جيسون",
+    "menu.language.html": "إتش تي إم إل",
+    "menu.language.css": "سي إس إس",
+    "menu.language.python": "بايثون",
+    "menu.language.rust": "راست",
+    "menu.language.go": "غو",
+    "menu.language.java": "جافا",
+    "menu.language.c": "سي",
+    "menu.language.cpp": "سي++",
+    "menu.language.xml": "إكس إم إل",
+    "menu.language.yaml": "يامل",
+    "menu.language.markdown": "ماركداون",
+    "menu.language.sql": "إس كيو إل",
+    "menu.language.shell": "شل",
 
     "menu.language.defineLanguage": "لغة معرفة من قبل المستخدم...",
     "menu.language.openUdlFolder": "فتح مجلد UDL...",
@@ -373,7 +373,7 @@ const ar = {
     "sidebar.doclist": "قائمة المستندات",
     "sidebar.clipboard": "الحافظة",
     "sidebar.symbols": "الرموز",
-    "sidebar.git": "Git",
+    "sidebar.git": "جيت",
 
     // ── Clipboard ──
     "clipboard.search": "بحث...",
@@ -384,7 +384,7 @@ const ar = {
     "clipboard.copy": "نسخ إلى حافظة النظام",
     "clipboard.pin": "تثبيت/إلغاء تثبيت",
     "clipboard.remove": "إزالة",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "جيسون",
     "sidebar.taskList": "قائمة المهام",
 
     // ── JSON Viewer ──
@@ -490,7 +490,7 @@ const ar = {
 
     // ── Commit ──
     "commit.cancel": "إلغاء",
-    "commit.commit": "Commit",
+    "commit.commit": "تنفيذ",
     "commit.filesStaged": "{{count}} ملف(ات) مجهزة",
     "commit.messagePlaceholder": "رسالة الـ Commit (Enter للإرسال، Shift+Enter لسطر جديد)",
     "commit.title": "تغييرات الـ Commit",
@@ -502,10 +502,10 @@ const ar = {
 
     // ── Git ──
     "git.checkoutFailed": "فشل التبديل: {{error}}",
-    "git.commit": "Commit...",
+    "git.commit": "تنفيذ...",
     "git.commitFailed": "فشل الـ Commit: {{error}}",
     "git.committed": "تم الـ Commit ✓",
-    "git.diff": "diff",
+    "git.diff": "الفرق",
     "git.newBranch": "اسم الفرع الجديد...",
     "git.pullFailed": "فشل الـ Pull: {{error}}",
     "git.pullOk": "تم الـ Pull",
@@ -585,6 +585,96 @@ const ar = {
     "tools.title": "أدوات خارجية",
     "tools.update": "تحديث",
     "tools.variables": "المتغيرات:",
+    "contextMenu.labelPlaceholder": "التسمية (&حرف للاختصار)",
+    "contextMenu.actionPlaceholder": "معرف الإجراء (مثال: edit.cut)",
+    "contextMenu.labelShortPlaceholder": "التسمية",
+    "contextMenu.customActionPlaceholder": "أو اكتب معرف إجراء مخصص...",
+
+    // ── Status Bar ──
+    "status.ready": "جاهز",
+    "status.branchTooltip": "انقر لتبديل الفرع",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "إغلاق",
+    "tab.newTooltip": "ملف جديد (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "إزالة الجذر",
+    "sidebar.refresh": "تحديث",
+
+    // ── Git Panel ──
+    "git.switchBranch": "تبديل الفرع",
+    "git.pull": "سحب",
+    "git.push": "دفع",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "قوالب التعبير المنتظم",
+    "search.lineLabel": "س",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "رقم السطر",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "انقر لفتح {file} في السطر {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "خطأ XML: {error}",
+    "menu.xmlParseError": "خطأ تحليل XML: {error}",
+    "menu.xmlValid": "✅ XML صالح.",
+    "menu.xmlInvalid": "❌ XML غير صالح:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "احفظ الملف أولاً للمعاينة",
+    "preview.saveFirstShort": "احفظ الملف أولاً",
+    "preview.imageFailed": "فشل تحميل الصورة",
+    "preview.emptyCsv": "CSV فارغ",
+    "preview.invalidJson": "JSON غير صالح",
+    "preview.katexInfo": "KaTeX يعرض الرياضيات المضمنة ($...$) ورياضيات العرض ($$...$$) فقط",
+    "preview.spreadsheetFailed": "فشل تحميل جدول البيانات",
+    "preview.invalidNotebook": "دفتر ملاحظات غير صالح",
+    "preview.docFailed": "فشل تحميل المستند",
+    "preview.geoJsonFailed": "فشل تحميل GeoJSON",
+    "preview.sqliteFailed": "فشل فتح قاعدة البيانات",
+    "preview.emptyTable": "جدول فارغ",
+    "preview.loadingArchive": "جارٍ تحميل الأرشيف...",
+    "preview.archiveFailed": "فشل قراءة الأرشيف",
+    "preview.noPreview": "لا توجد معاينة متاحة لهذا النوع من الملفات",
+    "preview.pdfTitle": "معاينة PDF",
+    "preview.iframeTitle": "معاينة {name}",
+    "preview.dotRenderError": "فشل عرض الرسم البياني",
+    "preview.dotLoadError": "فشل تحميل محرك Graphviz",
+    "preview.noContent": "لا يوجد محتوى",
+    "preview.invalidHar": "ملف HAR غير صالح",
+    "preview.harTitle": "HAR: {count} طلب",
+    "preview.harMethod": "الطريقة",
+    "preview.harUrl": "رابط",
+    "preview.harStatus": "الحالة",
+    "preview.harTime": "الوقت",
+    "preview.harSize": "الحجم",
+    "preview.3dOffline": "المعاينة ثلاثية الأبعاد غير متاحة بدون اتصال",
+    "preview.envMasked": "القيم مخفية — مرر المؤشر للإظهار",
+    "preview.saveFirst3d": "احفظ الملف أولاً لمعاينة النموذج ثلاثي الأبعاد",
+
+    "preview.close": "إغلاق المعاينة",
+    "preview.open": "معاينة ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "لم يتم تحديد علامة تبويب",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "اللغة",
+
+    // ── About ──
+    "about.version": "الإصدار {version}",
   },
 };
 

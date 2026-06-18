@@ -199,7 +199,7 @@ const hu = {
     // ── Search Panel ──
     "search.findLabel": "Kereses",
     "search.replaceLabel": "Csere",
-    "search.regex": "Regex",
+    "search.regex": "Reguláris kifejezés",
     "search.caseSensitive": "Kis/Nagybetu erzekeny",
     "search.wholeWord": "Egesz szo",
     "search.wrapAround": "Korbe",
@@ -268,10 +268,10 @@ const hu = {
     "preferences.whitespaceAll": "Osszes",
     "preferences.defaultEncoding": "Alapertelmezett kodolas",
     "preferences.defaultLanguage": "Alapertelmezett nyelv",
-    "preferences.eol": "EOL",
+    "preferences.eol": "SORVÉG",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eolCr": "CR (klasszikus Mac)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Gyorsbillentyuk szurese...",
     "shortcutMapper.pressKeys": "Nyomjon billentyuket...",
@@ -371,7 +371,7 @@ const hu = {
     "sidebar.clipboard": "Vazolap",
     "sidebar.symbols": "Szimbolumok",
     "sidebar.git": "Git",
-    "sidebar.terminal": "Terminal",
+    "sidebar.terminal": "Terminál",
     "terminal.start": "Terminal inditasa",
     "terminal.exited": "Folyamat kilepett.",
     "terminal.restart": "Ujrainditas",
@@ -449,9 +449,9 @@ const hu = {
     "git.viewDiff": "Diff megtekintese",
     "git.stageAll": "Osszes stage",
     "git.commit": "Commit...",
-    "git.diff": "diff",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
+    "git.diff": "különbség",
+    "git.pushOk": "Push sikeres",
+    "git.pullOk": "Pull sikeres",
     "git.committed": "Commitelve",
     "git.commitFailed": "Commit sikertelen: {{error}}",
     "git.pushFailed": "Push sikertelen: {{error}}",
@@ -485,7 +485,7 @@ const hu = {
     "app.modified": "● ",
     "app.encoding.utf8": "UTF-8",
     // ── AI Chat ──
-    "ai.title": "AI Chat",
+    "ai.title": "AI csevegés",
     "ai.send": "Kuldes",
     "ai.settings": "Beallitasok",
     "ai.clearChat": "Chat torlese",
@@ -532,6 +532,96 @@ const hu = {
     "contextMenu.add": "Hozzaadas",
     "contextMenu.selectAction": "Muvelet kivalasztasa...",
     "contextMenu.resetDefaults": "Alaphelyzetbe allitas",
+    "contextMenu.labelPlaceholder": "Cimke (&Betu a gyorsbillentyuhoz)",
+    "contextMenu.actionPlaceholder": "Muvelet ID (pl. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Cimke",
+    "contextMenu.customActionPlaceholder": "Vagy irjon be egyeni muvelet ID-t...",
+
+    // ── Status Bar ──
+    "status.ready": "Kesz",
+    "status.branchTooltip": "Kattintson az ag valtasahoz",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Bezaras",
+    "tab.newTooltip": "Uj fajl (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Gyoker eltavolitasa",
+    "sidebar.refresh": "Frissites",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Ag valtas",
+    "git.pull": "Lehívás",
+    "git.push": "Küldés",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex sablonok",
+    "search.lineLabel": "So",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Sor szama",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Kattintson a {file} megnyitasahoz a(z) {line} sorban",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML hiba: {error}",
+    "menu.xmlParseError": "XML feldolgozasi hiba: {error}",
+    "menu.xmlValid": "✅ XML ervenyes.",
+    "menu.xmlInvalid": "❌ XML ervenytelen:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "A megtekinteshez eloszor mentse a fajlt",
+    "preview.saveFirstShort": "Eloszor mentse a fajlt",
+    "preview.imageFailed": "A kep betoltese sikertelen",
+    "preview.emptyCsv": "Ures CSV",
+    "preview.invalidJson": "Ervenytelen JSON",
+    "preview.katexInfo": "A KaTeX csak inline ($...$) es display ($$...$$) matematikat jelenit meg",
+    "preview.spreadsheetFailed": "A tablazat betoltese sikertelen",
+    "preview.invalidNotebook": "Ervenytelen jegyzetfuzet",
+    "preview.docFailed": "A dokumentum betoltese sikertelen",
+    "preview.geoJsonFailed": "A GeoJSON betoltese sikertelen",
+    "preview.sqliteFailed": "Az adatbazis megnyitasa sikertelen",
+    "preview.emptyTable": "Ures tablazat",
+    "preview.loadingArchive": "Archivum betoltese...",
+    "preview.archiveFailed": "Az archivum olvasasa sikertelen",
+    "preview.noPreview": "Nincs elonezet ehhez a fajl tipushoz",
+    "preview.pdfTitle": "PDF elonezet",
+    "preview.iframeTitle": "{name} elonezet",
+    "preview.dotRenderError": "A graf megjelenitese sikertelen",
+    "preview.dotLoadError": "A Graphviz motor betoltese sikertelen",
+    "preview.noContent": "Nincs tartalom",
+    "preview.invalidHar": "Ervenytelen HAR fajl",
+    "preview.harTitle": "HAR: {count} keres",
+    "preview.harMethod": "Modszer",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Allapot",
+    "preview.harTime": "Ido",
+    "preview.harSize": "Meret",
+    "preview.3dOffline": "3D elonezet offline nem elerheto",
+    "preview.envMasked": "Ertekek elrejtve — vigye az egeret a felfedeshez",
+    "preview.saveFirst3d": "A 3D modell megtekintesehez eloszor mentse a fajlt",
+
+    "preview.close": "Elonezet bezarasa",
+    "preview.open": "Elonezet ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Nincs ful kivalasztva",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Nyelv",
+
+    // ── About ──
+    "about.version": "Verzio {version}",
   },
 };
 

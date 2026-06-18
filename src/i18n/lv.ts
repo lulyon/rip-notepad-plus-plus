@@ -138,7 +138,7 @@ const lv = {
 
     // ── Menu: Language ──
     "menu.language": "&Valoda",
-    "menu.language.plaintext": "Plain Text",
+    "menu.language.plaintext": "Vienkāršs teksts",
     "menu.language.javascript": "JavaScript",
     "menu.language.typescript": "TypeScript",
     "menu.language.json": "JSON",
@@ -174,10 +174,10 @@ const lv = {
 
     // ── Menu: Tools ──
     "menu.tools": "&Rīki",
-    "menu.tools.md5": "MD5 Generate",
-    "menu.tools.sha1": "SHA-1 Generate",
-    "menu.tools.sha256": "SHA-256 Generate",
-    "menu.tools.sha512": "SHA-512 Generate",
+    "menu.tools.md5": "Ģenerēt MD5",
+    "menu.tools.sha1": "Ģenerēt SHA-1",
+    "menu.tools.sha256": "Ģenerēt SHA-256",
+    "menu.tools.sha512": "Ģenerēt SHA-512",
     "menu.tools.configure": "Konfigurēt ārējos rīkus...",
 
     // ── Menu: Window ──
@@ -284,7 +284,7 @@ const lv = {
     "preferences.whitespaceAll": "Visi",
     "preferences.defaultEncoding": "Noklusētais kodējums",
     "preferences.defaultLanguage": "Noklusētā valoda",
-    "preferences.eol": "EOL",
+    "preferences.eol": "Rindas beigas",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
     "preferences.eolCr": "CR (Classic Mac)",
@@ -481,8 +481,8 @@ const lv = {
     "git.stageAll": "Iekļaut visus",
     "git.commit": "Commit...",
     "git.diff": "diff",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
+    "git.pushOk": "Grūšana OK",
+    "git.pullOk": "Vilkšana OK",
     "git.committed": "Izpildīts commit ✓",
     "git.commitFailed": "Commit neizdevās: {{error}}",
     "git.pushFailed": "Push neizdevās: {{error}}",
@@ -569,7 +569,98 @@ const lv = {
     "contextMenu.add": "Pievienot",
     "contextMenu.selectAction": "Izvēlēties darbību...",
     "contextMenu.resetDefaults": "Atiestatīt uz noklusējumu",
+    "contextMenu.labelPlaceholder": "Etiķete (&Burts karstajam taustiņam)",
+    "contextMenu.actionPlaceholder": "Darbības ID (piem., edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Etiķete",
+    "contextMenu.customActionPlaceholder": "Vai ierakstiet pielāgotu darbības ID...",
+
+    // ── Status Bar ──
+    "status.ready": "Gatavs",
+    "status.branchTooltip": "Noklikšķiniet, lai pārslēgtu zaru",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Aizvērt",
+    "tab.newTooltip": "Jauns fails (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Noņemt sakni",
+    "sidebar.refresh": "Atsvaidzināt",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Pārslēgt zaru",
+    "git.pull": "Vilkt",
+    "git.push": "Grūst",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex veidnes",
+    "search.lineLabel": "Rn",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Rindas numurs",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Noklikšķiniet, lai atvērtu {file} rindā {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML kļūda: {error}",
+    "menu.xmlParseError": "XML parsēšanas kļūda: {error}",
+    "menu.xmlValid": "✅ XML ir derīgs.",
+    "menu.xmlInvalid": "❌ XML nederīgs:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Vispirms saglabājiet failu, lai priekšskatītu",
+    "preview.saveFirstShort": "Vispirms saglabājiet failu",
+    "preview.imageFailed": "Neizdevās ielādēt attēlu",
+    "preview.emptyCsv": "Tukšs CSV",
+    "preview.invalidJson": "Nederīgs JSON",
+    "preview.katexInfo": "KaTeX attēlo tikai iekļauto ($...$) un atsevišķo ($$...$$) matemātiku",
+    "preview.spreadsheetFailed": "Neizdevās ielādēt izklājlapu",
+    "preview.invalidNotebook": "Nederīga piezīmju grāmatiņa",
+    "preview.docFailed": "Neizdevās ielādēt dokumentu",
+    "preview.geoJsonFailed": "Neizdevās ielādēt GeoJSON",
+    "preview.sqliteFailed": "Neizdevās atvērt datubāzi",
+    "preview.emptyTable": "Tukša tabula",
+    "preview.loadingArchive": "Ielādē arhīvu...",
+    "preview.archiveFailed": "Neizdevās nolasīt arhīvu",
+    "preview.noPreview": "Šim faila tipam priekšskats nav pieejams",
+    "preview.pdfTitle": "PDF priekšskats",
+    "preview.iframeTitle": "{name} priekšskats",
+    "preview.dotRenderError": "Neizdevās attēlot grafu",
+    "preview.dotLoadError": "Neizdevās ielādēt Graphviz dzinēju",
+    "preview.noContent": "Nav satura",
+    "preview.invalidHar": "Nederīgs HAR fails",
+    "preview.harTitle": "HAR: {count} pieprasījumu",
+    "preview.harMethod": "Metode",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Statuss",
+    "preview.harTime": "Laiks",
+    "preview.harSize": "Izmērs",
+    "preview.3dOffline": "3D priekšskats nav pieejams bezsaistē",
+    "preview.envMasked": "Vērtības maskētas — novietojiet kursoru, lai atklātu",
+    "preview.saveFirst3d": "Vispirms saglabājiet failu, lai priekšskatītu 3D modeli",
+    "preview.close": "Aizvērt priekšskatu",
+    "preview.open": "Priekšskats ({shortcut})",
+
+    // ── Split Editor ──
+    "splitEditor.noTab": "Nav izvēlēta cilne",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Valoda",
+
+    // ── About ──
+    "about.version": "Versija {version}",
   },
+
 };
 
 export default lv;

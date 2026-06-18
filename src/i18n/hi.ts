@@ -56,7 +56,7 @@ const hi = {
 
     // ── Commit Dialog ──
     "commit.cancel": "रद्द करें",
-    "commit.commit": "Commit",
+    "commit.commit": "कमिट करें",
     "commit.filesStaged": "{{count}} फ़ाइल(एँ) स्टेज की गईं",
     "commit.messagePlaceholder": "कमिट संदेश (Enter कमिट करने के लिए, Shift+Enter नई पंक्ति के लिए)",
     "commit.title": "परिवर्तन कमिट करें",
@@ -140,9 +140,9 @@ const hi = {
     // ── Git ──
     "git.checkoutFailed": "Checkout विफल: {{error}}",
     "git.clean": "✓ वर्किंग ट्री साफ़",
-    "git.commit": "Commit...",
+    "git.commit": "कमिट...",
     "git.commitFailed": "Commit विफल: {{error}}",
-    "git.committed": "Committed ✓",
+    "git.committed": "कमिट हुआ ✓",
     "git.diff": "अंतर",
     "git.filesChanged": "फ़ाइलें बदली गईं",
     "git.loading": "लोड हो रहा है...",
@@ -244,25 +244,25 @@ const hi = {
 
     // ── Menu: Language ──
     "menu.language": "भाषा",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.css": "CSS",
+    "menu.language.c": "सी",
+    "menu.language.cpp": "सी++",
+    "menu.language.css": "सीएसएस",
     "menu.language.defineLanguage": "उपयोगकर्ता परिभाषित भाषा...",
-    "menu.language.go": "Go",
-    "menu.language.html": "HTML",
-    "menu.language.java": "Java",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.json": "JSON",
-    "menu.language.markdown": "Markdown",
+    "menu.language.go": "गो",
+    "menu.language.html": "एचटीएमएल",
+    "menu.language.java": "जावा",
+    "menu.language.javascript": "जावास्क्रिप्ट",
+    "menu.language.json": "जेसन",
+    "menu.language.markdown": "मार्कडाउन",
     "menu.language.openUdlFolder": "UDL फ़ोल्डर खोलें...",
     "menu.language.plaintext": "सादा पाठ",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.shell": "Shell",
-    "menu.language.sql": "SQL",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
+    "menu.language.python": "पायथन",
+    "menu.language.rust": "रस्ट",
+    "menu.language.shell": "शैल",
+    "menu.language.sql": "एसक्यूएल",
+    "menu.language.typescript": "टाइपस्क्रिप्ट",
+    "menu.language.xml": "एक्सएमएल",
+    "menu.language.yaml": "यामल",
 
     // ── Menu: Macro ──
     "menu.macro": "मैक्रो",
@@ -382,10 +382,10 @@ const hi = {
     "preferences.defaultEncoding": "डिफ़ॉल्ट एन्कोडिंग",
     "preferences.defaultLanguage": "डिफ़ॉल्ट भाषा",
     "preferences.editing": "संपादन",
-    "preferences.eol": "EOL",
+    "preferences.eol": "पंक्ति अंत",
     "preferences.eolCr": "CR (क्लासिक Mac)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolLf": "LF (Unix/macOS)",
+    "preferences.eolCrlf": "CRLF (विंडोज़)",
+    "preferences.eolLf": "LF (यूनिक्स/macOS)",
     "preferences.fontFamily": "फ़ॉन्ट परिवार",
     "preferences.fontSize": "फ़ॉन्ट आकार",
     "preferences.general": "सामान्य",
@@ -462,7 +462,7 @@ const hi = {
     "search.matchStats": "{{current}} का {{count}}",
     "search.preview": "पूर्वावलोकन",
     "search.previewTitle": "बदलें पूर्वावलोकन — {{count}} घटना(एँ)",
-    "search.regex": "Regex",
+    "search.regex": "रेगेक्स",
     "search.replaceAll": "सभी बदलें",
     "search.replaceAllBtn": "सभी बदलें",
     "search.replaceBtn": "बदलें",
@@ -485,8 +485,8 @@ const hi = {
     "sidebar.clipboard": "क्लिपबोर्ड",
     "sidebar.doclist": "दस्तावेज़ सूची",
     "sidebar.files": "फ़ाइलें",
-    "sidebar.git": "Git",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.git": "गिट",
+    "sidebar.jsonViewer": "जेसन",
     "sidebar.preview": "पूर्वावलोकन",
     "sidebar.symbols": "प्रतीक",
     "sidebar.taskList": "कार्य सूची",
@@ -577,6 +577,96 @@ const hi = {
     "welcome.dropHint": "खोलने के लिए फ़ाइलें यहाँ छोड़ें",
     "welcome.subtitle": "Ctrl+N नया · Ctrl+O खोलें · Ctrl+S सहेजें",
     "welcome.title": "ripNotepad++",
+    "contextMenu.labelPlaceholder": "लेबल (&Letter हॉटकी के लिए)",
+    "contextMenu.actionPlaceholder": "कार्रवाई ID (जैसे edit.cut)",
+    "contextMenu.labelShortPlaceholder": "लेबल",
+    "contextMenu.customActionPlaceholder": "या कस्टम कार्रवाई ID टाइप करें...",
+
+    // ── Status Bar ──
+    "status.ready": "तैयार",
+    "status.branchTooltip": "शाखा बदलने के लिए क्लिक करें",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "बंद करें",
+    "tab.newTooltip": "नई फ़ाइल (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "रूट हटाएँ",
+    "sidebar.refresh": "ताज़ा करें",
+
+    // ── Git Panel ──
+    "git.switchBranch": "शाखा बदलें",
+    "git.pull": "खींचें",
+    "git.push": "भेजें",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex टेम्पलेट",
+    "search.lineLabel": "पं",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "पंक्ति संख्या",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "{file} को पंक्ति {line} पर खोलने के लिए क्लिक करें",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML त्रुटि: {error}",
+    "menu.xmlParseError": "XML पार्स त्रुटि: {error}",
+    "menu.xmlValid": "✅ XML मान्य है।",
+    "menu.xmlInvalid": "❌ XML अमान्य:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "पूर्वावलोकन के लिए पहले फ़ाइल सहेजें",
+    "preview.saveFirstShort": "पहले फ़ाइल सहेजें",
+    "preview.imageFailed": "छवि लोड करने में विफल",
+    "preview.emptyCsv": "खाली CSV",
+    "preview.invalidJson": "अमान्य JSON",
+    "preview.katexInfo": "KaTeX केवल इनलाइन गणित ($...$) और डिस्प्ले गणित ($$...$$) प्रस्तुत करता है",
+    "preview.spreadsheetFailed": "स्प्रेडशीट लोड करने में विफल",
+    "preview.invalidNotebook": "अमान्य नोटबुक",
+    "preview.docFailed": "दस्तावेज़ लोड करने में विफल",
+    "preview.geoJsonFailed": "GeoJSON लोड करने में विफल",
+    "preview.sqliteFailed": "डेटाबेस खोलने में विफल",
+    "preview.emptyTable": "खाली तालिका",
+    "preview.loadingArchive": "संग्रह लोड हो रहा है...",
+    "preview.archiveFailed": "संग्रह पढ़ने में विफल",
+    "preview.noPreview": "इस फ़ाइल प्रकार के लिए कोई पूर्वावलोकन उपलब्ध नहीं है",
+    "preview.pdfTitle": "PDF पूर्वावलोकन",
+    "preview.iframeTitle": "{name} पूर्वावलोकन",
+    "preview.dotRenderError": "ग्राफ़ प्रस्तुत करने में विफल",
+    "preview.dotLoadError": "Graphviz इंजन लोड करने में विफल",
+    "preview.noContent": "कोई सामग्री नहीं",
+    "preview.invalidHar": "अमान्य HAR फ़ाइल",
+    "preview.harTitle": "HAR: {count} अनुरोध",
+    "preview.harMethod": "विधि",
+    "preview.harUrl": "URL（यूआरएल）",
+    "preview.harStatus": "स्थिति",
+    "preview.harTime": "समय",
+    "preview.harSize": "आकार",
+    "preview.3dOffline": "3D पूर्वावलोकन ऑफ़लाइन उपलब्ध नहीं है",
+    "preview.envMasked": "मान छिपाए गए — प्रकट करने के लिए होवर करें",
+    "preview.saveFirst3d": "3D मॉडल पूर्वावलोकन के लिए पहले फ़ाइल सहेजें",
+
+    "preview.close": "पूर्वावलोकन बंद करें",
+    "preview.open": "पूर्वावलोकन ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "कोई टैब चयनित नहीं",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "भाषा",
+
+    // ── About ──
+    "about.version": "संस्करण {version}",
   },
 };
 

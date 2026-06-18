@@ -56,7 +56,7 @@ const my = {
 
     // ── Commit Dialog ──
     "commit.cancel": "ပယ်ဖျက်",
-    "commit.commit": "Commit",
+    "commit.commit": "ကျူးလွန်ရန်",
     "commit.filesStaged": "{{count}} ဖိုင်(ဖိုင်များ) staged",
     "commit.messagePlaceholder": "Commit စာတမ်း (Enter commit လုပ်ရန်၊ Shift+Enter စာကြောင်းသစ်အတွက်)",
     "commit.title": "ပြောင်းလဲမှုများ commit",
@@ -91,16 +91,16 @@ const my = {
     "dialog.discard": "စွန့်ပစ်",
     "dialog.discardAll": "အားလုံးစွန့်ပစ်",
     "dialog.edit": "တည်းဖြတ်",
-    "dialog.encoding": "Encoding",
+    "dialog.encoding": "အန်ကုဒ်",
     "dialog.goToLine": "စာကြောင်းသို့သွား",
     "dialog.hash": "Hash ထုတ်ကိရိယာ",
     "dialog.hashFromFile": "ဖိုင်မှ",
     "dialog.hashFromSelection": "ရွေးချယ်မှုမှ",
     "dialog.hashPlaceholder": "Hash လုပ်ရန်စာသားထည့်...",
     "dialog.lineNumber": "စာကြောင်းနံပါတ်",
-    "dialog.ok": "အိုကေ",
+    "dialog.ok": "အဆင်ပြေပါသည်",
     "dialog.preferences": "ရွေးချယ်မှုများ",
-    "dialog.run": "Run",
+    "dialog.run": "Run (ပြေး)",
     "dialog.runCommand": "Command Run",
     "dialog.runPlaceholder": "Shell command ရိုက်ထည့်...",
     "dialog.running": "Run နေသည်...",
@@ -112,7 +112,7 @@ const my = {
     "dialog.summaryCharsNoSpaces": "စာလုံးများ (နေရာလွတ်မပါ)",
     "dialog.summaryContent": "အကြောင်းအရာ",
     "dialog.summaryCursor": "ကာဆာတည်နေရာ",
-    "dialog.summaryEncoding": "Encoding",
+    "dialog.summaryEncoding": "အန်ကုဒ်",
     "dialog.summaryFile": "ဖိုင်",
     "dialog.summaryFileName": "ဖိုင်အမည်",
     "dialog.summaryFilePath": "ဖိုင်လမ်းကြောင်း",
@@ -135,14 +135,14 @@ const my = {
 
     // ── Encoding Dialog ──
     "encoding.current": "လက်ရှိ",
-    "encoding.filter": "Encoding များစစ်ထုတ်...",
+    "encoding.filter": "အန်ကုဒ်များစစ်ထုတ်...",
 
     // ── Git ──
     "git.checkoutFailed": "Checkout မအောင်မြင်: {{error}}",
     "git.clean": "✓ Working tree သန့်",
-    "git.commit": "Commit...",
+    "git.commit": "ကတိတော်...",
     "git.commitFailed": "Commit မအောင်မြင်: {{error}}",
-    "git.committed": "Committed ✓",
+    "git.committed": "ကျူးလွန်ပြီးပြီ ✓",
     "git.diff": "ကွာခြားချက်",
     "git.filesChanged": "ဖိုင်များပြောင်းလဲ",
     "git.loading": "တင်နေသည်...",
@@ -204,7 +204,7 @@ const my = {
     "menu.edit.validateXml": "XML ကိုစစ်ဆေး",
 
     // ── Menu: Encoding ──
-    "menu.encoding": "Encoding",
+    "menu.encoding": "အန်ကုဒ်",
     "menu.encoding.convertAnsi": "ANSI သို့ပြောင်း",
     "menu.encoding.convertUtf16BE": "UTF-16 BE သို့ပြောင်း",
     "menu.encoding.convertUtf16LE": "UTF-16 LE သို့ပြောင်း",
@@ -244,28 +244,28 @@ const my = {
 
     // ── Menu: Language ──
     "menu.language": "ဘာသာစကား",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.css": "CSS",
+    "menu.language.c": "စီ",
+    "menu.language.cpp": "စီပလပ်ပလပ်",
+    "menu.language.css": "စီအက်စ်အက်စ်",
     "menu.language.defineLanguage": "အသုံးပြုသူသတ်မှတ်ဘာသာစကား...",
-    "menu.language.go": "Go",
-    "menu.language.html": "HTML",
-    "menu.language.java": "Java",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.json": "JSON",
-    "menu.language.markdown": "Markdown",
+    "menu.language.go": "ဂိုး",
+    "menu.language.html": "အိတ်ချ်တီအမ်အယ်",
+    "menu.language.java": "ဂျာဗား",
+    "menu.language.javascript": "ဂျာဗားစခရစ်ပ့်",
+    "menu.language.json": "ဂျေဆန်",
+    "menu.language.markdown": "မားဒေါင်း",
     "menu.language.openUdlFolder": "UDL ဖိုဒါဖွင့်...",
     "menu.language.plaintext": "စာသားချည်း",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.shell": "Shell",
-    "menu.language.sql": "SQL",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
+    "menu.language.python": "ပါသွန်",
+    "menu.language.rust": "ရတ်စ်",
+    "menu.language.shell": "ရှဲလ်",
+    "menu.language.sql": "အီးစ်ကျူအယ်",
+    "menu.language.typescript": "တိုက်ပ်စခရစ်ပ့်",
+    "menu.language.xml": "အိတ်စ်အမ်အယ်",
+    "menu.language.yaml": "ယာမဲလ်",
 
     // ── Menu: Macro ──
-    "menu.macro": "Macro",
+    "menu.macro": "မက်ခရို",
     "menu.macro.playback": "ပြန်ဖွင့်",
     "menu.macro.save": "လက်ရှိ Macro သိမ်း",
     "menu.macro.startRecord": "စတင်ရိုက်ကူး",
@@ -382,10 +382,10 @@ const my = {
     "preferences.defaultEncoding": "ပုံသေ encoding",
     "preferences.defaultLanguage": "ပုံသေဘာသာစကား",
     "preferences.editing": "တည်းဖြတ်ခြင်း",
-    "preferences.eol": "EOL",
-    "preferences.eolCr": "CR (Classic Mac)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolLf": "LF (Unix/macOS)",
+    "preferences.eol": "EOL (လိုင်းအဆုံး)",
+    "preferences.eolCr": "CR (ဂန္ထဝင် Mac)",
+    "preferences.eolCrlf": "CRLF (ဝင်းဒိုး)",
+    "preferences.eolLf": "LF (ယူနစ်/မက်အိုအက်စ်)",
     "preferences.fontFamily": "စာလုံးမိသားစု",
     "preferences.fontSize": "စာလုံးအရွယ်",
     "preferences.general": "အထွေထွေ",
@@ -462,7 +462,7 @@ const my = {
     "search.matchStats": "{{current}} ၏ {{count}}",
     "search.preview": "အစမ်းကြည့်",
     "search.previewTitle": "အစားထိုးအစမ်းကြည့် — {{count}} ကြိမ်",
-    "search.regex": "Regex",
+    "search.regex": "ရီဂျက်စ်",
     "search.replaceAll": "အားလုံးအစားထိုး",
     "search.replaceAllBtn": "အားလုံးအစားထိုး",
     "search.replaceBtn": "အစားထိုး",
@@ -482,20 +482,20 @@ const my = {
     "shortcutMapper.resetAll": "အားလုံးမူလပြန်",
 
     // ── Sidebar ──
-    "sidebar.clipboard": "Clipboard",
+    "sidebar.clipboard": "ကလစ်ဘုတ်",
     "sidebar.doclist": "စာရွက်စာတမ်းစာရင်း",
     "sidebar.files": "ဖိုင်များ",
-    "sidebar.git": "Git",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.git": "ဂစ်",
+    "sidebar.jsonViewer": "ဂျေဆန်",
     "sidebar.preview": "အစမ်းကြည့်",
     "sidebar.symbols": "သင်္ကေတများ",
     "sidebar.taskList": "လုပ်ဆောင်စရာများ",
-    "sidebar.terminal": "Terminal",
+    "sidebar.terminal": "တာမီနယ်",
 
     // ── Status Bar ──
-    "status.clickToChange": "Encoding ပြောင်းရန်နှိပ်ပါ",
+    "status.clickToChange": "အန်ကုဒ်ပြောင်းရန်နှိပ်ပါ",
     "status.column": "ကော",
-    "status.encoding": "Encoding",
+    "status.encoding": "အန်ကုဒ်",
     "status.language": "ဘာသာစကား",
     "status.line": "စာ",
 
@@ -570,13 +570,103 @@ const my = {
     "udl.sampleCode": "နမူနာကုဒ်",
     "udl.save": "သိမ်း",
     "udl.stringChars": "စာကြောင်းစာလုံးများ",
-    "udl.syntax": "Syntax",
+    "udl.syntax": "ဝါကျဖွဲ့စည်းပုံ",
     "udl.unnamed": "အမည်မဲ့",
 
     // ── Welcome ──
     "welcome.dropHint": "ဖွင့်ရန်ဖိုင်များကိုဤနေရာသို့ဆွဲချပါ",
     "welcome.subtitle": "Ctrl+N အသစ် · Ctrl+O ဖွင့် · Ctrl+S သိမ်း",
     "welcome.title": "ripNotepad++",
+    "contextMenu.labelPlaceholder": "တံဆိပ် (&Letter for hotkey အတွက်)",
+    "contextMenu.actionPlaceholder": "လုပ်ဆောင်ချက် ID (ဥပမာ edit.cut)",
+    "contextMenu.labelShortPlaceholder": "တံဆိပ်",
+    "contextMenu.customActionPlaceholder": "သို့မဟုတ် စိတ်ကြိုက်လုပ်ဆောင်ချက် ID ရိုက်ထည့်ပါ...",
+
+    // ── Status Bar ──
+    "status.ready": "အဆင်သင့်",
+    "status.branchTooltip": "အကိုင်းပြောင်းရန်နှိပ်ပါ",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "ပိတ်",
+    "tab.newTooltip": "ဖိုင်အသစ် (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "အရင်းကိုဖယ်ရှား",
+    "sidebar.refresh": "ပြန်လည်ဆန်းသစ်",
+
+    // ── Git Panel ──
+    "git.switchBranch": "အကိုင်းပြောင်း",
+    "git.pull": "ဆွဲယူ",
+    "git.push": "တွန်းတင်",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex ပုံစံများ",
+    "search.lineLabel": "စာ",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "စာကြောင်းနံပါတ်",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "{file} ကို စာကြောင်း {line} တွင်ဖွင့်ရန်နှိပ်ပါ",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML အမှား: {error}",
+    "menu.xmlParseError": "XML ခွဲခြမ်းအမှား: {error}",
+    "menu.xmlValid": "✅ XML မှန်ကန်သည်။",
+    "menu.xmlInvalid": "❌ XML မမှန်ကန်:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "အစမ်းကြည့်ရန်အရင်ဆုံးဖိုင်ကိုသိမ်းပါ",
+    "preview.saveFirstShort": "အရင်ဆုံးဖိုင်ကိုသိမ်းပါ",
+    "preview.imageFailed": "ပုံတင်ရန်မအောင်မြင်ပါ",
+    "preview.emptyCsv": "CSV ဗလာ",
+    "preview.invalidJson": "JSON မမှန်ကန်ပါ",
+    "preview.katexInfo": "KaTeX သည် inline math ($...$) နှင့် display math ($$...$$) ကိုသာ render လုပ်သည်",
+    "preview.spreadsheetFailed": "စာရင်းဇယားတင်ရန်မအောင်မြင်ပါ",
+    "preview.invalidNotebook": "မှတ်စုစာအုပ်မမှန်ကန်ပါ",
+    "preview.docFailed": "စာရွက်စာတမ်းတင်ရန်မအောင်မြင်ပါ",
+    "preview.geoJsonFailed": "GeoJSON တင်ရန်မအောင်မြင်ပါ",
+    "preview.sqliteFailed": "ဒေတာဘေ့စ်ဖွင့်ရန်မအောင်မြင်ပါ",
+    "preview.emptyTable": "ဇယားဗလာ",
+    "preview.loadingArchive": "မော်ကွန်းတင်နေသည်...",
+    "preview.archiveFailed": "မော်ကွန်းဖတ်ရန်မအောင်မြင်ပါ",
+    "preview.noPreview": "ဤဖိုင်အမျိုးအစားအတွက်အစမ်းကြည့်မရနိုင်ပါ",
+    "preview.pdfTitle": "PDF အစမ်းကြည့်",
+    "preview.iframeTitle": "{name} အစမ်းကြည့်",
+    "preview.dotRenderError": "ဂရပ် render လုပ်ရန်မအောင်မြင်ပါ",
+    "preview.dotLoadError": "Graphviz အင်ဂျင်တင်ရန်မအောင်မြင်ပါ",
+    "preview.noContent": "အကြောင်းအရာမရှိ",
+    "preview.invalidHar": "HAR ဖိုင်မမှန်ကန်ပါ",
+    "preview.harTitle": "HAR: {count} တောင်းဆိုမှုများ",
+    "preview.harMethod": "နည်းလမ်း",
+    "preview.harUrl": "URL（ယူအာရ်အယ်）",
+    "preview.harStatus": "အခြေအနေ",
+    "preview.harTime": "အချိန်",
+    "preview.harSize": "အရွယ်",
+    "preview.3dOffline": "3D အစမ်းကြည့်ကိုအော့ဖ်လိုင်းတွင်မရနိုင်ပါ",
+    "preview.envMasked": "တန်ဖိုးများဖုံးကွယ်ထားသည် — hover လုပ်ပြကြည့်ပါ",
+    "preview.saveFirst3d": "3D မော်ဒယ်အစမ်းကြည့်ရန်အရင်ဆုံးဖိုင်ကိုသိမ်းပါ",
+
+    "preview.close": "အစမ်းကြည့်ပိတ်",
+    "preview.open": "အစမ်းကြည့် ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Tab မရွေးထားပါ",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "ဘာသာစကား",
+
+    // ── About ──
+    "about.version": "ဗားရှင်း {version}",
   },
 };
 

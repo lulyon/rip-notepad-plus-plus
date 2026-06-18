@@ -1,9 +1,11 @@
 import { useState, useCallback, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useEditorStore } from "../../stores/editorStore";
 import { TabContextMenu } from "./TabContextMenu";
 import "./TabBar.css";
 
 export function TabBar() {
+  const { t } = useTranslation();
   const tabs = useEditorStore((s) => s.tabs);
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const setActiveTab = useEditorStore((s) => s.setActiveTab);
@@ -110,12 +112,12 @@ export function TabBar() {
               {tab.color && <span className={`tab-color-dot tab-color-${tab.color}`} />}
             </span>
             {!tab.pinned && (
-              <button className="tab-close" onClick={(e) => { e.stopPropagation(); closeTab(tab.id); }} title="Close">×</button>
+              <button className="tab-close" onClick={(e) => { e.stopPropagation(); closeTab(tab.id); }} title={t("tab.closeTooltip")}>×</button>
             )}
           </div>
         ))}
       </div>
-      <button className="tab-new" onClick={newTab} title="New file (Ctrl+N)">
+      <button className="tab-new" onClick={newTab} title={t("tab.newTooltip")}>
         +
       </button>
 

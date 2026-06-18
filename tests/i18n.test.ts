@@ -6,13 +6,13 @@ describe("i18n coverage", () => {
 
   // ── Count ──
 
-  it("has 57 languages registered", () => {
-    expect(LANGUAGES).toHaveLength(57);
+  it("has 70 languages registered (57 original + 13 new)", () => {
+    expect(LANGUAGES).toHaveLength(70);
   });
 
   // ── Key parity ──
 
-  it("all 58 language files have exactly the same keys as en", async () => {
+  it("all 70 registered languages have exactly the same keys as en", async () => {
     const enMod = await import("../src/i18n/en");
     const enTranslation = enMod.default.translation;
     const enKeys = Object.keys(enTranslation);
@@ -74,7 +74,7 @@ describe("i18n coverage", () => {
 
   // ── VS Code official 15 ──
 
-  it("covers all 14 VS Code official display languages (zh-tw removed)", () => {
+  it("covers all 14 VS Code official display languages", () => {
     const vscodeCodes = [
       "en", "zh", "fr", "de", "it", "es",
       "ja", "ko", "ru", "pt", "tr", "pl", "cs", "hu",

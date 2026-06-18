@@ -57,6 +57,19 @@ import km from "./km";
 import ne from "./ne";
 import yo from "./yo";
 import ig from "./ig";
+import is from "./is";
+import sq from "./sq";
+import mk from "./mk";
+import ka from "./ka";
+import hy from "./hy";
+import az from "./az";
+import mn from "./mn";
+import lo from "./lo";
+import dz from "./dz";
+import dv from "./dv";
+import tk from "./tk";
+import uz from "./uz";
+import ms from "./ms";
 
 const savedLang = localStorage.getItem("ripnotepadpp-lang") || "zh";
 
@@ -69,6 +82,7 @@ i18n.use(initReactI18next).init({
     lv, sl, hr, et, ca, eu, gl,
     ur, pa, sw, ha, am, my,
     bn, te, mr, ta, gu, kn, tl, km, ne, yo, ig,
+    is, sq, mk, ka, hy, az, mn, lo, dz, dv, tk, uz, ms,
   } as unknown as Record<string, { translation: Record<string, string> }>,
   lng: savedLang,
   fallbackLng: "en",
@@ -80,6 +94,7 @@ i18n.use(initReactI18next).init({
     "lv", "sl", "hr", "et", "ca", "eu", "gl",
     "ur", "pa", "sw", "ha", "am", "my",
     "bn", "te", "mr", "ta", "gu", "kn", "tl", "km", "ne", "yo", "ig",
+    "is", "sq", "mk", "ka", "hy", "az", "mn", "lo", "dz", "dv", "tk", "uz", "ms",
   ],
   nonExplicitSupportedLngs: false,
   interpolation: { escapeValue: false },
@@ -144,10 +159,23 @@ export const LANGUAGES = [
   { code: "ne", name: "नेपाली" },
   { code: "yo", name: "Yorùbá" },
   { code: "ig", name: "Igbo" },
+  { code: "is", name: "Íslenska" },
+  { code: "sq", name: "Shqip" },
+  { code: "mk", name: "Македонски" },
+  { code: "ka", name: "ქართული" },
+  { code: "hy", name: "Հայերեն" },
+  { code: "az", name: "Azərbaycan dili" },
+  { code: "mn", name: "Монгол хэл" },
+  { code: "lo", name: "ລາວ" },
+  { code: "dz", name: "རྫོང་ཁ" },
+  { code: "dv", name: "ދިވެހި" },
+  { code: "tk", name: "Türkmençe" },
+  { code: "uz", name: "Oʻzbek tili" },
+  { code: "ms", name: "Bahasa Melayu" },
 ];
 
 /** RTL languages: set html[dir] accordingly */
-const RTL_CODES = new Set(["ar", "he", "fa", "ur", "pa"]);
+const RTL_CODES = new Set(["ar", "he", "fa", "ur", "pa", "dv"]);
 
 export function applyDirection(lang: string) {
   document.documentElement.dir = RTL_CODES.has(lang) ? "rtl" : "ltr";

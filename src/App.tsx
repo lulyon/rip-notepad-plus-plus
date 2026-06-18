@@ -319,7 +319,7 @@ function App() {
             <button
               className="md-preview-toggle-btn"
               onClick={() => setShowMdPreview((prev) => !prev)}
-              title={showMdPreview ? "Close preview" : "Preview (Ctrl+Shift+V)"}
+              title={showMdPreview ? t("preview.close") : t("preview.open", { shortcut: "Ctrl+Shift+V" })}
             >
               {showMdPreview ? "✕" : "👁"}
             </button>

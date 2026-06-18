@@ -136,7 +136,7 @@ export function RunDialog({ open, onClose }: Props) {
                 }, 500);
               } catch { /* file not found */ }
             }}
-            title={`Click to open ${file} at line ${line}`}
+            title={t("run.openFileAtLine", { file, line })}
           >
             {part}
           </span>

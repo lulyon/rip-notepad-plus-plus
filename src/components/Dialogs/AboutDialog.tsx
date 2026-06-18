@@ -25,7 +25,7 @@ export function AboutDialog({ open, onClose }: Props) {
     <div className="dialog-overlay" onClick={onClose}>
       <div className="dialog about-dialog" onClick={(e) => e.stopPropagation()}>
         <h1>ripNotepad++</h1>
-        <p className="about-version">Version {version}</p>
+        <p className="about-version">{t("about.version", { version })}</p>
         <p className="about-desc">
           {t("about.description")}
         </p>

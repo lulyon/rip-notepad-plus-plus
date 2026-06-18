@@ -199,7 +199,7 @@ const fi = {
     // ── Search Panel ──
     "search.findLabel": "Etsi",
     "search.replaceLabel": "Korvaa",
-    "search.regex": "Regex",
+    "search.regex": "Säännöllinen lauseke",
     "search.caseSensitive": "Kirjainkoko",
     "search.wholeWord": "Koko sana",
     "search.wrapAround": "Kierre",
@@ -268,10 +268,10 @@ const fi = {
     "preferences.whitespaceAll": "Kaikki",
     "preferences.defaultEncoding": "Oletuskoodaus",
     "preferences.defaultLanguage": "Oletuskieli",
-    "preferences.eol": "EOL",
+    "preferences.eol": "Rivinvaihto",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eolCr": "CR (Klassinen Mac)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Suodata pikakuvaimia...",
     "shortcutMapper.pressKeys": "Paina näppäimiä...",
@@ -450,8 +450,8 @@ const fi = {
     "git.stageAll": "Vaiheista kaikki",
     "git.commit": "Tallenna...",
     "git.diff": "erot",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
+    "git.pushOk": "Työnnä OK",
+    "git.pullOk": "Nouda OK",
     "git.committed": "Tallennettu ✓",
     "git.commitFailed": "Tallennus epäonnistui: {{error}}",
     "git.pushFailed": "Push epäonnistui: {{error}}",
@@ -532,6 +532,99 @@ const fi = {
     "contextMenu.add": "Lisää",
     "contextMenu.selectAction": "Valitse toiminto...",
     "contextMenu.resetDefaults": "Palauta oletukset",
+
+    // ── Context Menu Placeholders ──
+    "contextMenu.labelPlaceholder": "Nimi (&Kirjain pikanäppäimelle)",
+    "contextMenu.actionPlaceholder": "Toiminnon tunnus (esim. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Nimi",
+    "contextMenu.customActionPlaceholder": "Tai kirjoita oma toimintotunnus...",
+
+    // ── Status Bar ──
+    "status.ready": "Valmis",
+    "status.branchTooltip": "Napsauta vaihtaaksesi haaraa",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Sulje",
+    "tab.newTooltip": "Uusi tiedosto (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Poista juuri",
+    "sidebar.refresh": "Päivitä",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Vaihda haaraa",
+    "git.pull": "Nouda",
+    "git.push": "Työnnä",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex-pohjat",
+    "search.lineLabel": "R",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Rivin numero",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Napsauta avataksesi {file} rivillä {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML-virhe: {error}",
+    "menu.xmlParseError": "XML-jäsennysvirhe: {error}",
+    "menu.xmlValid": "✅ XML on kelvollinen.",
+    "menu.xmlInvalid": "❌ XML virheellinen:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Tallenna tiedosto ensin esikatsellaksesi",
+    "preview.saveFirstShort": "Tallenna tiedosto ensin",
+    "preview.imageFailed": "Kuvan lataus epäonnistui",
+    "preview.emptyCsv": "Tyhjä CSV",
+    "preview.invalidJson": "Virheellinen JSON",
+    "preview.katexInfo": "KaTeX renderöi vain sisäkkäisen matematiikan ($...$) ja näyttömatematiikan ($$...$$)",
+    "preview.spreadsheetFailed": "Laskentataulukon lataus epäonnistui",
+    "preview.invalidNotebook": "Virheellinen muistikirja",
+    "preview.docFailed": "Asiakirjan lataus epäonnistui",
+    "preview.geoJsonFailed": "GeoJSON:n lataus epäonnistui",
+    "preview.sqliteFailed": "Tietokannan avaus epäonnistui",
+    "preview.emptyTable": "Tyhjä taulukko",
+    "preview.loadingArchive": "Ladataan arkistoa...",
+    "preview.archiveFailed": "Arkiston luku epäonnistui",
+    "preview.noPreview": "Ei esikatselua tälle tiedostotyypille",
+    "preview.pdfTitle": "PDF-esikatselu",
+    "preview.iframeTitle": "{name} esikatselu",
+    "preview.dotRenderError": "Graafin renderöinti epäonnistui",
+    "preview.dotLoadError": "Graphviz-moottorin lataus epäonnistui",
+    "preview.noContent": "Ei sisältöä",
+    "preview.invalidHar": "Virheellinen HAR-tiedosto",
+    "preview.harTitle": "HAR: {count} pyyntöä",
+    "preview.harMethod": "Menetelmä",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Tila",
+    "preview.harTime": "Aika",
+    "preview.harSize": "Koko",
+    "preview.3dOffline": "3D-esikatselu ei saatavilla offline-tilassa",
+    "preview.envMasked": "Arvot piilotettu — vie hiirellä paljastaaksesi",
+    "preview.saveFirst3d": "Tallenna tiedosto ensin esikatsellaksesi 3D-mallia",
+
+    "preview.close": "Sulje esikatselu",
+    "preview.open": "Esikatselu ({shortcut})",
+
+    // ── Split Editor ──
+    "splitEditor.noTab": "Ei välilehteä valittu",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Kieli",
+
+    // ── About ──
+    "about.version": "Versio {version}",
   },
 };
 

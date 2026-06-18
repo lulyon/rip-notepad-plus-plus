@@ -56,7 +56,7 @@ const pa = {
 
     // ── Commit Dialog ──
     "commit.cancel": "ਰੱਦ ਕਰੋ",
-    "commit.commit": "Commit",
+    "commit.commit": "ਕਮਿਟ",
     "commit.filesStaged": "{{count}} ਫ਼ਾਈਲ(ਾਂ) ਸਟੇਜ ਕੀਤੀਆਂ",
     "commit.messagePlaceholder": "Commit ਸੁਨੇਹਾ (Enter commit ਕਰਨ ਲਈ, Shift+Enter ਨਵੀਂ ਲਾਈਨ ਲਈ)",
     "commit.title": "ਤਬਦੀਲੀਆਂ commit ਕਰੋ",
@@ -140,9 +140,9 @@ const pa = {
     // ── Git ──
     "git.checkoutFailed": "Checkout ਅਸਫਲ: {{error}}",
     "git.clean": "✓ ਵਰਕਿੰਗ ਟ੍ਰੀ ਸਾਫ਼",
-    "git.commit": "Commit...",
+    "git.commit": "ਕਮਿਟ...",
     "git.commitFailed": "Commit ਅਸਫਲ: {{error}}",
-    "git.committed": "Committed ✓",
+    "git.committed": "Commit ਕੀਤਾ ✓",
     "git.diff": "ਅੰਤਰ",
     "git.filesChanged": "ਫ਼ਾਈਲਾਂ ਬਦਲੀਆਂ",
     "git.loading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...",
@@ -244,25 +244,25 @@ const pa = {
 
     // ── Menu: Language ──
     "menu.language": "ਭਾਸ਼ਾ",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.css": "CSS",
+    "menu.language.c": "ਸੀ",
+    "menu.language.cpp": "ਸੀ++",
+    "menu.language.css": "ਸੀਐਸਐਸ",
     "menu.language.defineLanguage": "ਉਪਭੋਗਤਾ-ਪਰਿਭਾਸ਼ਿਤ ਭਾਸ਼ਾ...",
-    "menu.language.go": "Go",
-    "menu.language.html": "HTML",
-    "menu.language.java": "Java",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.json": "JSON",
-    "menu.language.markdown": "Markdown",
+    "menu.language.go": "ਗੋ",
+    "menu.language.html": "ਐਚਟੀਐਮਐਲ",
+    "menu.language.java": "ਜਾਵਾ",
+    "menu.language.javascript": "ਜਾਵਾਸਕ੍ਰਿਪਟ",
+    "menu.language.json": "ਜੇਸਨ",
+    "menu.language.markdown": "ਮਾਰਕਡਾਊਨ",
     "menu.language.openUdlFolder": "UDL ਫ਼ੋਲਡਰ ਖੋਲ੍ਹੋ...",
     "menu.language.plaintext": "ਸਾਦਾ ਟੈਕਸਟ",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.shell": "Shell",
-    "menu.language.sql": "SQL",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
+    "menu.language.python": "ਪਾਈਥਨ",
+    "menu.language.rust": "ਰਸਟ",
+    "menu.language.shell": "ਸ਼ੈੱਲ",
+    "menu.language.sql": "ਐਸਕਿਊਐਲ",
+    "menu.language.typescript": "ਟਾਈਪਸਕ੍ਰਿਪਟ",
+    "menu.language.xml": "ਐਕਸਐਮਐਲ",
+    "menu.language.yaml": "ਯਾਮਲ",
 
     // ── Menu: Macro ──
     "menu.macro": "ਮੈਕਰੋ",
@@ -382,10 +382,10 @@ const pa = {
     "preferences.defaultEncoding": "ਡਿਫਾਲਟ ਏਨਕੋਡਿੰਗ",
     "preferences.defaultLanguage": "ਡਿਫਾਲਟ ਭਾਸ਼ਾ",
     "preferences.editing": "ਸੰਪਾਦਨ",
-    "preferences.eol": "EOL",
+    "preferences.eol": "EOL (ਲਾਈਨ ਅੰਤ)",
     "preferences.eolCr": "CR (ਕਲਾਸਿਕ Mac)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolLf": "LF (Unix/macOS)",
+    "preferences.eolCrlf": "CRLF (ਵਿੰਡੋਜ਼)",
+    "preferences.eolLf": "LF (ਯੂਨਿਕਸ/ਮੈਕ ਓਐਸ)",
     "preferences.fontFamily": "ਫ਼ੌਂਟ ਪਰਿਵਾਰ",
     "preferences.fontSize": "ਫ਼ੌਂਟ ਆਕਾਰ",
     "preferences.general": "ਆਮ",
@@ -462,7 +462,7 @@ const pa = {
     "search.matchStats": "{{current}} ਦਾ {{count}}",
     "search.preview": "ਪ੍ਰੀਵਿਊ",
     "search.previewTitle": "ਬਦਲੀ ਪ੍ਰੀਵਿਊ — {{count}} ਵਾਪਰੀ(ਆਂ)",
-    "search.regex": "Regex",
+    "search.regex": "ਰੈਗੈਕਸ",
     "search.replaceAll": "ਸਭ ਬਦਲੋ",
     "search.replaceAllBtn": "ਸਭ ਬਦਲੋ",
     "search.replaceBtn": "ਬਦਲੋ",
@@ -485,8 +485,8 @@ const pa = {
     "sidebar.clipboard": "ਕਲਿੱਪਬੋਰਡ",
     "sidebar.doclist": "ਦਸਤਾਵੇਜ਼ ਸੂਚੀ",
     "sidebar.files": "ਫ਼ਾਈਲਾਂ",
-    "sidebar.git": "Git",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.git": "ਗਿੱਟ",
+    "sidebar.jsonViewer": "ਜੇਸਨ",
     "sidebar.preview": "ਪ੍ਰੀਵਿਊ",
     "sidebar.symbols": "ਚਿੰਨ੍ਹ",
     "sidebar.taskList": "ਕਾਰਜ ਸੂਚੀ",
@@ -577,6 +577,96 @@ const pa = {
     "welcome.dropHint": "ਖੋਲ੍ਹਣ ਲਈ ਫ਼ਾਈਲਾਂ ਇੱਥੇ ਸੁੱਟੋ",
     "welcome.subtitle": "Ctrl+N ਨਵੀਂ · Ctrl+O ਖੋਲ੍ਹੋ · Ctrl+S ਸੁਰੱਖਿਅਤ ਕਰੋ",
     "welcome.title": "ripNotepad++",
+    "contextMenu.labelPlaceholder": "ਲੇਬਲ (ਹੌਟਕੀ ਲਈ &ਅੱਖਰ)",
+    "contextMenu.actionPlaceholder": "ਕਾਰਵਾਈ ID (ਜਿਵੇਂ edit.cut)",
+    "contextMenu.labelShortPlaceholder": "ਲੇਬਲ",
+    "contextMenu.customActionPlaceholder": "ਜਾਂ ਕਸਟਮ ਕਾਰਵਾਈ ID ਟਾਈਪ ਕਰੋ...",
+
+    // ── Status Bar ──
+    "status.ready": "ਤਿਆਰ",
+    "status.branchTooltip": "ਬ੍ਰਾਂਚ ਬਦਲਣ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "ਬੰਦ ਕਰੋ",
+    "tab.newTooltip": "ਨਵੀਂ ਫ਼ਾਈਲ (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "ਰੂਟ ਹਟਾਓ",
+    "sidebar.refresh": "ਰਿਫ੍ਰੈਸ਼",
+
+    // ── Git Panel ──
+    "git.switchBranch": "ਬ੍ਰਾਂਚ ਬਦਲੋ",
+    "git.pull": "ਪੁੱਲ",
+    "git.push": "ਪੁਸ਼",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex ਟੈਂਪਲੇਟ",
+    "search.lineLabel": "ਲਾ",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "ਲਾਈਨ ਨੰਬਰ",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "{file} ਨੂੰ ਲਾਈਨ {line} 'ਤੇ ਖੋਲ੍ਹਣ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML ਗਲਤੀ: {error}",
+    "menu.xmlParseError": "XML ਪਾਰਸ ਗਲਤੀ: {error}",
+    "menu.xmlValid": "✅ XML ਵੈਧ ਹੈ।",
+    "menu.xmlInvalid": "❌ XML ਗਲਤ:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "ਪ੍ਰੀਵਿਊ ਕਰਨ ਲਈ ਪਹਿਲਾਂ ਫ਼ਾਈਲ ਸੁਰੱਖਿਅਤ ਕਰੋ",
+    "preview.saveFirstShort": "ਪਹਿਲਾਂ ਫ਼ਾਈਲ ਸੁਰੱਖਿਅਤ ਕਰੋ",
+    "preview.imageFailed": "ਚਿੱਤਰ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "preview.emptyCsv": "ਖਾਲੀ CSV",
+    "preview.invalidJson": "ਗਲਤ JSON",
+    "preview.katexInfo": "KaTeX ਸਿਰਫ਼ ਇਨਲਾਈਨ ਗਣਿਤ ($...$) ਅਤੇ ਡਿਸਪਲੇ ਗਣਿਤ ($$...$$) ਪੇਸ਼ ਕਰਦਾ ਹੈ",
+    "preview.spreadsheetFailed": "ਸਪ੍ਰੈੱਡਸ਼ੀਟ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "preview.invalidNotebook": "ਗਲਤ ਨੋਟਬੁੱਕ",
+    "preview.docFailed": "ਦਸਤਾਵੇਜ਼ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "preview.geoJsonFailed": "GeoJSON ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "preview.sqliteFailed": "ਡੇਟਾਬੇਸ ਖੋਲ੍ਹਣ ਵਿੱਚ ਅਸਫਲ",
+    "preview.emptyTable": "ਖਾਲੀ ਟੇਬਲ",
+    "preview.loadingArchive": "ਆਰਕਾਈਵ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...",
+    "preview.archiveFailed": "ਆਰਕਾਈਵ ਪੜ੍ਹਨ ਵਿੱਚ ਅਸਫਲ",
+    "preview.noPreview": "ਇਸ ਫ਼ਾਈਲ ਕਿਸਮ ਲਈ ਕੋਈ ਪ੍ਰੀਵਿਊ ਉਪਲਬਧ ਨਹੀਂ",
+    "preview.pdfTitle": "PDF ਪ੍ਰੀਵਿਊ",
+    "preview.iframeTitle": "{name} ਪ੍ਰੀਵਿਊ",
+    "preview.dotRenderError": "ਗ੍ਰਾਫ਼ ਪੇਸ਼ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "preview.dotLoadError": "Graphviz ਇੰਜਣ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "preview.noContent": "ਕੋਈ ਸਮੱਗਰੀ ਨਹੀਂ",
+    "preview.invalidHar": "ਗਲਤ HAR ਫ਼ਾਈਲ",
+    "preview.harTitle": "HAR: {count} ਬੇਨਤੀਆਂ",
+    "preview.harMethod": "ਢੰਗ",
+    "preview.harUrl": "URL（ਯੂਆਰਐਲ）",
+    "preview.harStatus": "ਸਥਿਤੀ",
+    "preview.harTime": "ਸਮਾਂ",
+    "preview.harSize": "ਆਕਾਰ",
+    "preview.3dOffline": "3D ਪ੍ਰੀਵਿਊ ਆਫ਼ਲਾਈਨ ਉਪਲਬਧ ਨਹੀਂ",
+    "preview.envMasked": "ਮੁੱਲ ਲੁਕਾਏ ਗਏ — ਪ੍ਰਗਟ ਕਰਨ ਲਈ ਹੋਵਰ ਕਰੋ",
+    "preview.saveFirst3d": "3D ਮਾਡਲ ਪ੍ਰੀਵਿਊ ਕਰਨ ਲਈ ਪਹਿਲਾਂ ਫ਼ਾਈਲ ਸੁਰੱਖਿਅਤ ਕਰੋ",
+
+    "preview.close": "ਪ੍ਰੀਵਿਊ ਬੰਦ ਕਰੋ",
+    "preview.open": "ਪ੍ਰੀਵਿਊ ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "ਕੋਈ ਟੈਬ ਨਹੀਂ ਚੁਣੀ",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "ਭਾਸ਼ਾ",
+
+    // ── About ──
+    "about.version": "ਵਰਜਨ {version}",
   },
 };
 

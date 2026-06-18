@@ -142,7 +142,7 @@ const et = {
     "git.clean": "✓ Tööpuu puhas",
     "git.commit": "Commit...",
     "git.commitFailed": "Commit ebaõnnestus: {{error}}",
-    "git.committed": "Committed ✓",
+    "git.committed": "Commit tehtud ✓",
     "git.diff": "erinevus",
     "git.filesChanged": "faili muudetud",
     "git.loading": "Laeb...",
@@ -150,9 +150,9 @@ const et = {
     "git.noProject": "Git oleku nägemiseks avage kaust",
     "git.notRepo": "Pole Git repositorium",
     "git.pullFailed": "Pull ebaõnnestus: {{error}}",
-    "git.pullOk": "Pull õnnestus",
+    "git.pullOk": "Tõmba õnnestus",
     "git.pushFailed": "Push ebaõnnestus: {{error}}",
-    "git.pushOk": "Push õnnestus",
+    "git.pushOk": "Lükka õnnestus",
     "git.refresh": "Värskenda",
     "git.stageAll": "Staadiumi kõik",
     "git.viewDiff": "Kuva erinevus",
@@ -382,8 +382,8 @@ const et = {
     "preferences.defaultEncoding": "Vaikekodeering",
     "preferences.defaultLanguage": "Vaikekeel",
     "preferences.editing": "Redigeerimine",
-    "preferences.eol": "EOL",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eol": "Reavahetus",
+    "preferences.eolCr": "CR (Klassikaline Mac)",
     "preferences.eolCrlf": "CRLF (Windows)",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.fontFamily": "Fondi perekond",
@@ -462,7 +462,7 @@ const et = {
     "search.matchStats": "{{current}} / {{count}}",
     "search.preview": "Eelvaade",
     "search.previewTitle": "Asenduse eelvaade — {{count}} esinemist",
-    "search.regex": "Regex",
+    "search.regex": "Reg. avaldis",
     "search.replaceAll": "Asenda kõik",
     "search.replaceAllBtn": "Asenda kõik",
     "search.replaceBtn": "Asenda",
@@ -577,6 +577,96 @@ const et = {
     "welcome.dropHint": "Failide avamiseks lohistage need siia",
     "welcome.subtitle": "Ctrl+N Uus · Ctrl+O Ava · Ctrl+S Salvesta",
     "welcome.title": "ripNotepad++",
+    "contextMenu.labelPlaceholder": "Silt (&Letter kiirklahvi jaoks)",
+    "contextMenu.actionPlaceholder": "Tegevuse ID (nt edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Silt",
+    "contextMenu.customActionPlaceholder": "Või sisesta kohandatud tegevuse ID...",
+
+    // ── Status Bar ──
+    "status.ready": "Valmis",
+    "status.branchTooltip": "Klõpsa haru vahetamiseks",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Sulge",
+    "tab.newTooltip": "Uus fail (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Eemalda juur",
+    "sidebar.refresh": "Värskenda",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Vaheta haru",
+    "git.pull": "Tõmba",
+    "git.push": "Lükka",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex mallid",
+    "search.lineLabel": "R",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Rea number",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Klõpsa {file} avamiseks real {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML viga: {error}",
+    "menu.xmlParseError": "XML parsimise viga: {error}",
+    "menu.xmlValid": "✅ XML on kehtiv.",
+    "menu.xmlInvalid": "❌ XML vigane:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Eelvaateks salvesta fail esmalt",
+    "preview.saveFirstShort": "Salvesta fail esmalt",
+    "preview.imageFailed": "Pildi laadimine ebaõnnestus",
+    "preview.emptyCsv": "Tühi CSV",
+    "preview.invalidJson": "Vigane JSON",
+    "preview.katexInfo": "KaTeX renderdab ainult reasisest ($...$) ja eraldiseisvat ($$...$$) matemaatikat",
+    "preview.spreadsheetFailed": "Tabeli laadimine ebaõnnestus",
+    "preview.invalidNotebook": "Vigane märkmik",
+    "preview.docFailed": "Dokumendi laadimine ebaõnnestus",
+    "preview.geoJsonFailed": "GeoJSONi laadimine ebaõnnestus",
+    "preview.sqliteFailed": "Andmebaasi avamine ebaõnnestus",
+    "preview.emptyTable": "Tühi tabel",
+    "preview.loadingArchive": "Arhiivi laadimine...",
+    "preview.archiveFailed": "Arhiivi lugemine ebaõnnestus",
+    "preview.noPreview": "Selle failitüübi jaoks pole eelvaadet saadaval",
+    "preview.pdfTitle": "PDF eelvaade",
+    "preview.iframeTitle": "{name} eelvaade",
+    "preview.dotRenderError": "Graafiku renderdamine ebaõnnestus",
+    "preview.dotLoadError": "Graphviz mootori laadimine ebaõnnestus",
+    "preview.noContent": "Sisu puudub",
+    "preview.invalidHar": "Vigane HAR fail",
+    "preview.harTitle": "HAR: {count} päringut",
+    "preview.harMethod": "Meetod",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Olek",
+    "preview.harTime": "Aeg",
+    "preview.harSize": "Suurus",
+    "preview.3dOffline": "3D eelvaade pole võrguühenduseta saadaval",
+    "preview.envMasked": "Väärtused peidetud — hõljuta kuvamiseks",
+    "preview.saveFirst3d": "3D mudeli eelvaateks salvesta fail esmalt",
+
+    "preview.close": "Sulge eelvaade",
+    "preview.open": "Eelvaade ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Sakki pole valitud",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Keel",
+
+    // ── About ──
+    "about.version": "Versioon {version}",
   },
 };
 

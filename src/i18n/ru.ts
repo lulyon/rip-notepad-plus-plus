@@ -133,22 +133,22 @@ const ru = {
     // ── Menu: Language ──
     "menu.language": "&Язык",
     "menu.language.plaintext": "Простой текст",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.javascript": "ДжаваСкрипт",
+    "menu.language.typescript": "ТайпСкрипт",
+    "menu.language.json": "Джейсон",
+    "menu.language.html": "ЭйчТиЭмЭл",
+    "menu.language.css": "СиЭсЭс",
+    "menu.language.python": "Пайтон",
+    "menu.language.rust": "Раст",
+    "menu.language.go": "Го",
+    "menu.language.java": "Джава",
+    "menu.language.c": "Си",
+    "menu.language.cpp": "Си++",
+    "menu.language.xml": "ЭксЭмЭл",
+    "menu.language.yaml": "Ямл",
+    "menu.language.markdown": "Маркдаун",
+    "menu.language.sql": "ЭсКьюЭл",
+    "menu.language.shell": "Шелл",
     "menu.language.defineLanguage": "Пользовательский язык...",
     "menu.language.openUdlFolder": "Открыть папку UDL...",
     // ── Menu: Macro ──
@@ -199,7 +199,7 @@ const ru = {
     // ── Search Panel ──
     "search.findLabel": "Найти",
     "search.replaceLabel": "Заменить",
-    "search.regex": "Regex",
+    "search.regex": "Регулярное выражение",
     "search.caseSensitive": "С учётом регистра",
     "search.wholeWord": "Целое слово",
     "search.wrapAround": "По кругу",
@@ -268,10 +268,10 @@ const ru = {
     "preferences.whitespaceAll": "Все",
     "preferences.defaultEncoding": "Кодировка по умолчанию",
     "preferences.defaultLanguage": "Язык по умолчанию",
-    "preferences.eol": "EOL",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eol": "Окончание строки",
+    "preferences.eolLf": "LF (Юникс/макОС)",
+    "preferences.eolCrlf": "CRLF (Виндоус)",
+    "preferences.eolCr": "CR (Классический Мак)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Фильтр сочетаний...",
     "shortcutMapper.pressKeys": "Нажмите клавиши...",
@@ -284,7 +284,7 @@ const ru = {
     "dialog.cancel": "Отмена",
     "dialog.discard": "Не сохранять",
     "dialog.close": "Закрыть",
-    "dialog.ok": "OK",
+    "dialog.ok": "Ок",
     "dialog.run": "Запустить",
     "dialog.running": "Выполнение...",
     "dialog.runCommand": "Выполнить команду",
@@ -370,7 +370,7 @@ const ru = {
     "sidebar.doclist": "Список документов",
     "sidebar.clipboard": "Буфер обмена",
     "sidebar.symbols": "Символы",
-    "sidebar.git": "Git",
+    "sidebar.git": "Гит",
     "sidebar.terminal": "Терминал",
     "terminal.start": "Запустить терминал",
     "terminal.exited": "Процесс завершён.",
@@ -388,7 +388,7 @@ const ru = {
     "clipboard.copy": "Копировать в буфер обмена",
     "clipboard.pin": "Закрепить/Открепить",
     "clipboard.remove": "Удалить",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "Джейсон",
     "sidebar.taskList": "Список задач",
     // ── JSON Viewer ──
     "json.noFile": "Откройте JSON для просмотра дерева",
@@ -449,7 +449,7 @@ const ru = {
     "git.viewDiff": "Просмотр diff",
     "git.stageAll": "Индексировать всё",
     "git.commit": "Коммит...",
-    "git.diff": "diff",
+    "git.diff": "разница",
     "git.pushOk": "Push выполнен",
     "git.pullOk": "Pull выполнен",
     "git.committed": "Скоммичено",
@@ -532,6 +532,96 @@ const ru = {
     "contextMenu.add": "Добавить",
     "contextMenu.selectAction": "Выберите действие...",
     "contextMenu.resetDefaults": "Сбросить на умолчания",
+    "contextMenu.labelPlaceholder": "Метка (&Буква для горячей клавиши)",
+    "contextMenu.actionPlaceholder": "ID действия (напр. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Метка",
+    "contextMenu.customActionPlaceholder": "Или введите пользовательский ID действия...",
+
+    // ── Status Bar ──
+    "status.ready": "Готово",
+    "status.branchTooltip": "Нажмите для переключения ветки",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Закрыть",
+    "tab.newTooltip": "Новый файл (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Удалить корень",
+    "sidebar.refresh": "Обновить",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Переключить ветку",
+    "git.pull": "Пулл",
+    "git.push": "Пуш",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Шаблоны регулярных выражений",
+    "search.lineLabel": "Стр",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Номер строки",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Нажмите, чтобы открыть {file} на строке {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "Ошибка XML: {error}",
+    "menu.xmlParseError": "Ошибка парсинга XML: {error}",
+    "menu.xmlValid": "✅ XML корректен.",
+    "menu.xmlInvalid": "❌ XML некорректен:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Сначала сохраните файл для предпросмотра",
+    "preview.saveFirstShort": "Сначала сохраните файл",
+    "preview.imageFailed": "Не удалось загрузить изображение",
+    "preview.emptyCsv": "Пустой CSV",
+    "preview.invalidJson": "Некорректный JSON",
+    "preview.katexInfo": "KaTeX рендерит только встроенные ($...$) и выносные ($$...$$) математические формулы",
+    "preview.spreadsheetFailed": "Не удалось загрузить таблицу",
+    "preview.invalidNotebook": "Некорректный блокнот",
+    "preview.docFailed": "Не удалось загрузить документ",
+    "preview.geoJsonFailed": "Не удалось загрузить GeoJSON",
+    "preview.sqliteFailed": "Не удалось открыть базу данных",
+    "preview.emptyTable": "Пустая таблица",
+    "preview.loadingArchive": "Загрузка архива...",
+    "preview.archiveFailed": "Не удалось прочитать архив",
+    "preview.noPreview": "Предпросмотр недоступен для этого типа файла",
+    "preview.pdfTitle": "Предпросмотр PDF",
+    "preview.iframeTitle": "Предпросмотр {name}",
+    "preview.dotRenderError": "Не удалось отобразить граф",
+    "preview.dotLoadError": "Не удалось загрузить движок Graphviz",
+    "preview.noContent": "Нет содержимого",
+    "preview.invalidHar": "Некорректный HAR файл",
+    "preview.harTitle": "HAR: {count} запросов",
+    "preview.harMethod": "Метод",
+    "preview.harUrl": "URL-адрес",
+    "preview.harStatus": "Статус",
+    "preview.harTime": "Время",
+    "preview.harSize": "Размер",
+    "preview.3dOffline": "3D предпросмотр недоступен офлайн",
+    "preview.envMasked": "Значения скрыты — наведите для отображения",
+    "preview.saveFirst3d": "Сначала сохраните файл для предпросмотра 3D модели",
+
+    "preview.close": "Закрыть предпросмотр",
+    "preview.open": "Предпросмотр ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Вкладка не выбрана",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Язык",
+
+    // ── About ──
+    "about.version": "Версия {version}",
   },
 };
 

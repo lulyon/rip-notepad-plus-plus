@@ -138,22 +138,22 @@ const ko = {
     // ── Menu: Language ──
     "menu.language": "언어(&L)",
     "menu.language.plaintext": "일반 텍스트",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.javascript": "자바스크립트",
+    "menu.language.typescript": "타입스크립트",
+    "menu.language.json": "제이슨",
+    "menu.language.html": "에이치티엠엘",
+    "menu.language.css": "씨에스에스",
+    "menu.language.python": "파이썬",
+    "menu.language.rust": "러스트",
+    "menu.language.go": "고",
+    "menu.language.java": "자바",
+    "menu.language.c": "시",
+    "menu.language.cpp": "시쁠쁠",
+    "menu.language.xml": "엑스엠엘",
+    "menu.language.yaml": "야믈",
+    "menu.language.markdown": "마크다운",
+    "menu.language.sql": "에스큐엘",
+    "menu.language.shell": "셸",
 
     "menu.language.defineLanguage": "사용자 정의 언어...",
     "menu.language.openUdlFolder": "UDL 폴더 열기...",
@@ -278,10 +278,10 @@ const ko = {
     "preferences.whitespaceAll": "모두",
     "preferences.defaultEncoding": "기본 인코딩",
     "preferences.defaultLanguage": "기본 언어",
-    "preferences.eol": "EOL",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eol": "줄 끝",
+    "preferences.eolLf": "LF (유닉스/macOS)",
+    "preferences.eolCrlf": "CRLF (윈도우)",
+    "preferences.eolCr": "CR (클래식 맥)",
 
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "단축키 필터...",
@@ -384,7 +384,7 @@ const ko = {
     "sidebar.doclist": "문서 목록",
     "sidebar.clipboard": "클립보드",
     "sidebar.symbols": "심볼",
-    "sidebar.git": "Git",
+    "sidebar.git": "깃",
     "sidebar.preview": "미리보기",
     "sidebar.terminal": "터미널",
 
@@ -397,7 +397,7 @@ const ko = {
     "clipboard.copy": "시스템 클립보드에 복사",
     "clipboard.pin": "고정/고정 해제",
     "clipboard.remove": "제거",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "제이슨",
     "sidebar.taskList": "작업 목록",
 
     // ── JSON Viewer ──
@@ -580,6 +580,96 @@ const ko = {
     "terminal.retry": "재시도",
     "terminal.exited": "프로세스 종료",
     "terminal.spawnFailed": "시작 실패",
+    "contextMenu.labelPlaceholder": "레이블 (&단축키 문자)",
+    "contextMenu.actionPlaceholder": "작업 ID (예: edit.cut)",
+    "contextMenu.labelShortPlaceholder": "레이블",
+    "contextMenu.customActionPlaceholder": "또는 사용자 작업 ID 입력...",
+
+    // ── Status Bar ──
+    "status.ready": "준비",
+    "status.branchTooltip": "클릭하여 브랜치 전환",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "닫기",
+    "tab.newTooltip": "새 파일 (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "루트 제거",
+    "sidebar.refresh": "새로 고침",
+
+    // ── Git Panel ──
+    "git.switchBranch": "브랜치 전환",
+    "git.pull": "풀",
+    "git.push": "푸시",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "정규식 템플릿",
+    "search.lineLabel": "행",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "줄 번호",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "클릭하여 {line}행의 {file} 열기",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML 오류: {error}",
+    "menu.xmlParseError": "XML 구문 분석 오류: {error}",
+    "menu.xmlValid": "✅ XML이 유효합니다.",
+    "menu.xmlInvalid": "❌ XML이 유효하지 않음:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "미리보려면 먼저 파일을 저장하세요",
+    "preview.saveFirstShort": "먼저 파일을 저장하세요",
+    "preview.imageFailed": "이미지를 불러오지 못했습니다",
+    "preview.emptyCsv": "빈 CSV",
+    "preview.invalidJson": "잘못된 JSON",
+    "preview.katexInfo": "KaTeX는 인라인 수식 ($...$)과 디스플레이 수식 ($$...$$)만 렌더링합니다",
+    "preview.spreadsheetFailed": "스프레드시트를 불러오지 못했습니다",
+    "preview.invalidNotebook": "잘못된 노트북",
+    "preview.docFailed": "문서를 불러오지 못했습니다",
+    "preview.geoJsonFailed": "GeoJSON을 불러오지 못했습니다",
+    "preview.sqliteFailed": "데이터베이스를 열지 못했습니다",
+    "preview.emptyTable": "빈 테이블",
+    "preview.loadingArchive": "아카이브 로딩 중...",
+    "preview.archiveFailed": "아카이브를 읽지 못했습니다",
+    "preview.noPreview": "이 파일 형식에 사용할 수 있는 미리보기가 없습니다",
+    "preview.pdfTitle": "PDF 미리보기",
+    "preview.iframeTitle": "{name} 미리보기",
+    "preview.dotRenderError": "그래프를 렌더링하지 못했습니다",
+    "preview.dotLoadError": "Graphviz 엔진을 불러오지 못했습니다",
+    "preview.noContent": "내용 없음",
+    "preview.invalidHar": "잘못된 HAR 파일",
+    "preview.harTitle": "HAR: {count}개 요청",
+    "preview.harMethod": "메서드",
+    "preview.harUrl": "URL（유알엘）",
+    "preview.harStatus": "상태",
+    "preview.harTime": "시간",
+    "preview.harSize": "크기",
+    "preview.3dOffline": "3D 미리보기는 오프라인에서 사용할 수 없습니다",
+    "preview.envMasked": "값이 가려졌습니다 — 마우스를 올리면 표시됩니다",
+    "preview.saveFirst3d": "3D 모델을 미리보려면 먼저 파일을 저장하세요",
+
+    "preview.close": "미리보기 닫기",
+    "preview.open": "미리보기 ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "선택된 탭 없음",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "언어",
+
+    // ── About ──
+    "about.version": "버전 {version}",
   },
 };
 

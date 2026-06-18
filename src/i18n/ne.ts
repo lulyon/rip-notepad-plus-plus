@@ -127,7 +127,7 @@ const ne = {
     "menu.encoding.convertUtf16BE": "UTF-16 BE मा रूपान्तरण गर्नुहोस्",
     "menu.encoding.openDialog": "क्यारेक्टर सेट(&C)...",
     "menu.language": "भाषा(&L)",
-    "menu.language.plaintext": "Plain Text",
+    "menu.language.plaintext": "सादा पाठ",
     "menu.language.javascript": "JavaScript",
     "menu.language.typescript": "TypeScript",
     "menu.language.json": "JSON",
@@ -157,10 +157,10 @@ const ne = {
     "menu.run.claudeCode": "Claude सुरु गर्नुहोस्",
     "menu.run.codex": "Codex सुरु गर्नुहोस्",
     "menu.tools": "उपकरणहरू(&T)",
-    "menu.tools.md5": "MD5 Generate",
-    "menu.tools.sha1": "SHA-1 Generate",
-    "menu.tools.sha256": "SHA-256 Generate",
-    "menu.tools.sha512": "SHA-512 Generate",
+    "menu.tools.md5": "MD5 उत्पन्न गर्नुहोस्",
+    "menu.tools.sha1": "SHA-1 उत्पन्न गर्नुहोस्",
+    "menu.tools.sha256": "SHA-256 उत्पन्न गर्नुहोस्",
+    "menu.tools.sha512": "SHA-512 उत्पन्न गर्नुहोस्",
     "menu.tools.configure": "बाह्य उपकरणहरू कन्फिगर गर्नुहोस्...",
     "menu.window": "सञ्झ्याल(&W)",
     "menu.window.nextTab": "अर्को ट्याब(&N)",
@@ -216,12 +216,12 @@ const ne = {
     "search.searchBtn": "खोज्नुहोस्",
     "search.searching": "खोज्दै...",
     "search.clear": "सफा गर्नुहोस्",
-    "search.resultsCount": "{{count}} results found",
-    "search.matchStats": "{{current}} of {{count}}",
+    "search.resultsCount": "{{count}} परिणामहरू फेला पर्यो",
+    "search.matchStats": "{{current}} को {{count}}",
     "search.incremental": "क्रमिक",
     "search.inSelection": "चयनमा",
     "search.preview": "पूर्वावलोकन",
-    "search.previewTitle": "Replace Preview — {{count}} occurrence(s)",
+    "search.previewTitle": "बदल्ने पूर्वावलोकन — {{count}} घटना(हरू)",
     "search.replaceAll": "सबै बदल्नुहोस्",
     "search.cancel": "रद्द गर्नुहोस्",
 
@@ -263,7 +263,7 @@ const ne = {
     "preferences.whitespaceAll": "सबै",
     "preferences.defaultEncoding": "पूर्वनिर्धारित एन्कोडिङ",
     "preferences.defaultLanguage": "पूर्वनिर्धारित भाषा",
-    "preferences.eol": "EOL",
+    "preferences.eol": "लाइनको अन्त्य",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
     "preferences.eolCr": "CR (क्लासिक Mac)",
@@ -358,8 +358,8 @@ const ne = {
     // --- Status Bar ---
     "status.encoding": "एन्कोडिङ",
     "status.language": "भाषा",
-    "status.line": "Ln",
-    "status.column": "Col",
+    "status.line": "रे",
+    "status.column": "स्त",
     "status.clickToChange": "एन्कोडिङ परिवर्तन गर्न क्लिक गर्नुहोस्",
 
     // --- Welcome ---
@@ -562,6 +562,96 @@ const ne = {
     "contextMenu.add": "थप्नुहोस्",
     "contextMenu.selectAction": "कार्य चयन गर्नुहोस्...",
     "contextMenu.resetDefaults": "पूर्वनिर्धारितमा रिसेट गर्नुहोस्",
+    "contextMenu.labelPlaceholder": "लेबल (&हटकीको लागि अक्षर)",
+    "contextMenu.actionPlaceholder": "कार्य आईडी (जस्तै edit.cut)",
+    "contextMenu.labelShortPlaceholder": "लेबल",
+    "contextMenu.customActionPlaceholder": "वा अनुकूलित कार्य आईडी टाइप गर्नुहोस्...",
+
+    // ── Status Bar ──
+    "status.ready": "तयार",
+    "status.branchTooltip": "शाखा स्विच गर्न क्लिक गर्नुहोस्",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "बन्द गर्नुहोस्",
+    "tab.newTooltip": "नयाँ फाइल (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "रूट हटाउनुहोस्",
+    "sidebar.refresh": "ताजा गर्नुहोस्",
+
+    // ── Git Panel ──
+    "git.switchBranch": "शाखा स्विच गर्नुहोस्",
+    "git.pull": "पुल",
+    "git.push": "पुश",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex टेम्प्लेटहरू",
+    "search.lineLabel": "रे",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "लाइन नम्बर",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "{file} लाइन {line} मा खोल्न क्लिक गर्नुहोस्",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML त्रुटि: {error}",
+    "menu.xmlParseError": "XML पार्स त्रुटि: {error}",
+    "menu.xmlValid": "✅ XML मान्य छ।",
+    "menu.xmlInvalid": "❌ XML अमान्य:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "पूर्वावलोकन गर्न पहिले फाइल सुरक्षित गर्नुहोस्",
+    "preview.saveFirstShort": "पहिले फाइल सुरक्षित गर्नुहोस्",
+    "preview.imageFailed": "छवि लोड गर्न असफल",
+    "preview.emptyCsv": "खाली CSV",
+    "preview.invalidJson": "अमान्य JSON",
+    "preview.katexInfo": "KaTeX ले इनलाइन गणित ($...$) र डिस्प्ले गणित ($$...$$) मात्र रेन्डर गर्दछ",
+    "preview.spreadsheetFailed": "स्प्रेडसिट लोड गर्न असफल",
+    "preview.invalidNotebook": "अमान्य नोटबुक",
+    "preview.docFailed": "दस्तावेज लोड गर्न असफल",
+    "preview.geoJsonFailed": "GeoJSON लोड गर्न असफल",
+    "preview.sqliteFailed": "डाटाबेस खोल्न असफल",
+    "preview.emptyTable": "खाली तालिका",
+    "preview.loadingArchive": "अभिलेख लोड हुँदै...",
+    "preview.archiveFailed": "अभिलेख पढ्न असफल",
+    "preview.noPreview": "यो फाइल प्रकारको लागि कुनै पूर्वावलोकन उपलब्ध छैन",
+    "preview.pdfTitle": "PDF पूर्वावलोकन",
+    "preview.iframeTitle": "{name} पूर्वावलोकन",
+    "preview.dotRenderError": "ग्राफ रेन्डर गर्न असफल",
+    "preview.dotLoadError": "Graphviz इन्जिन लोड गर्न असफल",
+    "preview.noContent": "कुनै सामग्री छैन",
+    "preview.invalidHar": "अमान्य HAR फाइल",
+    "preview.harTitle": "HAR: {count} अनुरोधहरू",
+    "preview.harMethod": "विधि",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "स्थिति",
+    "preview.harTime": "समय",
+    "preview.harSize": "आकार",
+    "preview.3dOffline": "3D पूर्वावलोकन अफलाइन उपलब्ध छैन",
+    "preview.envMasked": "मानहरू लुकाइएका छन् — प्रकट गर्न हभर गर्नुहोस्",
+    "preview.saveFirst3d": "3D मोडेल पूर्वावलोकन गर्न पहिले फाइल सुरक्षित गर्नुहोस्",
+
+    "preview.close": "पूर्वावलोकन बन्द गर्नुहोस्",
+    "preview.open": "पूर्वावलोकन ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "कुनै ट्याब चयन गरिएको छैन",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "भाषा",
+
+    // ── About ──
+    "about.version": "संस्करण {version}",
   },
 };
 

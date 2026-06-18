@@ -121,15 +121,15 @@ export function GitPanel() {
       <div className="git-branch">
         {loading ? <span>{t("git.loading")}</span> : status ? <>
           <span className="git-branch-icon">⎇</span>
-          <span className="git-branch-name" onClick={loadBranches} title="Switch branch">{status.branch}</span>
+          <span className="git-branch-name" onClick={loadBranches} title={t("git.switchBranch")}>{status.branch}</span>
           {status.ahead > 0 && <span className="git-ahead">↑{status.ahead}</span>}
           {status.behind > 0 && <span className="git-behind">↓{status.behind}</span>}
           <span className="git-changed-count">{status.changed.length} {t("git.filesChanged")}</span>
         </> : error ? <span className="git-error">{t("git.notRepo")}</span> : null}
         <div className="git-actions">
-          <button className="git-action-btn" onClick={doPull} title="Pull">↓</button>
-          <button className="git-action-btn" onClick={doPush} title="Push">↑</button>
-          <button className="git-action-btn" onClick={refresh} disabled={loading} title="Refresh">↻</button>
+          <button className="git-action-btn" onClick={doPull} title={t("git.pull")}>↓</button>
+          <button className="git-action-btn" onClick={doPush} title={t("git.push")}>↑</button>
+          <button className="git-action-btn" onClick={refresh} disabled={loading} title={t("git.refresh")}>↻</button>
         </div>
       </div>
 

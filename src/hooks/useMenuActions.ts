@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useEditorStore } from "../stores/editorStore";
 import { useSearchStore } from "../stores/searchStore";
 import { useEncodingStore } from "../stores/encodingStore";
@@ -14,6 +15,7 @@ import { open, save } from "@tauri-apps/plugin-dialog";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 
 export function useMenuActions() {
+  const { t } = useTranslation();
   const editorRef = useEditorRefStore((s) => s.editorRef);
 
   const handleMenuAction = useCallback(
@@ -269,7 +271,7 @@ export function useMenuActions() {
             const doc = parser.parseFromString(model.getValue(), "text/xml");
             const errNode = doc.querySelector("parsererror");
             if (errNode) {
-              window.alert(`XML Error: ${errNode.textContent}`);
+              window.alert(t("menu.xmlError", { error: errNode.textContent }));
             } else {
               const serializer = new XMLSerializer();
               let formatted = serializer.serializeToString(doc);
@@ -281,7 +283,7 @@ export function useMenuActions() {
               editorRef?.executeEdits("format-xml", [{ range: fullRange, text: formatted }]);
             }
           } catch (e) {
-            window.alert(`XML Parse Error: ${e}`);
+            window.alert(t("menu.xmlParseError", { error: String(e) }));
           }
           break;
         }
@@ -293,12 +295,12 @@ export function useMenuActions() {
             const doc = parser.parseFromString(model.getValue(), "text/xml");
             const errNode = doc.querySelector("parsererror");
             if (errNode) {
-              window.alert(`❌ XML Invalid:\n${errNode.textContent}`);
+              window.alert(t("menu.xmlInvalid", { error: errNode.textContent }));
             } else {
-              window.alert("✅ XML is valid.");
+              window.alert(t("menu.xmlValid"));
             }
           } catch (e) {
-            window.alert(`XML Parse Error: ${e}`);
+            window.alert(t("menu.xmlParseError", { error: String(e) }));
           }
           break;
         }

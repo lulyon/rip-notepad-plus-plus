@@ -199,7 +199,7 @@ const ro = {
     // ── Search Panel ──
     "search.findLabel": "Găsește",
     "search.replaceLabel": "Înlocuiește",
-    "search.regex": "Regex",
+    "search.regex": "Expresie regulată",
     "search.caseSensitive": "Sensibil la majuscule",
     "search.wholeWord": "Cuvânt întreg",
     "search.wrapAround": "Înfășurare",
@@ -268,10 +268,10 @@ const ro = {
     "preferences.whitespaceAll": "Tot",
     "preferences.defaultEncoding": "Codificare implicită",
     "preferences.defaultLanguage": "Limbă implicită",
-    "preferences.eol": "EOL",
+    "preferences.eol": "Sfârșit de linie",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eolCr": "CR (Mac clasic)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtrează comenzi rapide...",
     "shortcutMapper.pressKeys": "Apasă taste...",
@@ -358,8 +358,8 @@ const ro = {
     // ── Status Bar ──
     "status.encoding": "Codificare",
     "status.language": "Limbă",
-    "status.line": "Ln",
-    "status.column": "Col",
+    "status.line": "Li",
+    "status.column": "Co",
     "status.clickToChange": "Faceți clic pentru a schimba codificarea",
     // ── Welcome ──
     "welcome.title": "ripNotepad++",
@@ -449,7 +449,7 @@ const ro = {
     "git.viewDiff": "Vezi diferența",
     "git.stageAll": "Pune în scenă tot",
     "git.commit": "Comite...",
-    "git.diff": "diff",
+    "git.diff": "diferență",
     "git.pushOk": "Push reușit",
     "git.pullOk": "Pull reușit",
     "git.committed": "Comis ✓",
@@ -532,7 +532,97 @@ const ro = {
     "contextMenu.add": "Adaugă",
     "contextMenu.selectAction": "Selectați acțiune...",
     "contextMenu.resetDefaults": "Resetează la valori implicite",
-  },
+    "contextMenu.labelPlaceholder": "Etichetă (&Literă pentru scurtătură)",
+    "contextMenu.actionPlaceholder": "ID Acțiune (ex. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Etichetă",
+    "contextMenu.customActionPlaceholder": "Sau tastați un ID de acțiune personalizat...",
+
+    // ── Status Bar ──
+    "status.ready": "Pregătit",
+    "status.branchTooltip": "Click pentru a schimba ramura",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Închide",
+    "tab.newTooltip": "Fișier nou (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Elimină rădăcina",
+    "sidebar.refresh": "Reîmprospătează",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Schimbă ramura",
+    "git.pull": "Trage",
+    "git.push": "Împinge",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Șabloane regex",
+    "search.lineLabel": "Li",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Număr linie",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Click pentru a deschide {file} la linia {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "Eroare XML: {error}",
+    "menu.xmlParseError": "Eroare de analiză XML: {error}",
+    "menu.xmlValid": "✅ XML este valid.",
+    "menu.xmlInvalid": "❌ XML invalid:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Salvați mai întâi fișierul pentru previzualizare",
+    "preview.saveFirstShort": "Salvați mai întâi fișierul",
+    "preview.imageFailed": "Eșec la încărcarea imaginii",
+    "preview.emptyCsv": "CSV gol",
+    "preview.invalidJson": "JSON invalid",
+    "preview.katexInfo": "KaTeX redă doar matematică inline ($...$) și afișare ($$...$$)",
+    "preview.spreadsheetFailed": "Eșec la încărcarea foii de calcul",
+    "preview.invalidNotebook": "Notebook invalid",
+    "preview.docFailed": "Eșec la încărcarea documentului",
+    "preview.geoJsonFailed": "Eșec la încărcarea GeoJSON",
+    "preview.sqliteFailed": "Eșec la deschiderea bazei de date",
+    "preview.emptyTable": "Tabel gol",
+    "preview.loadingArchive": "Se încarcă arhiva...",
+    "preview.archiveFailed": "Eșec la citirea arhivei",
+    "preview.noPreview": "Nicio previzualizare disponibilă pentru acest tip de fișier",
+    "preview.pdfTitle": "Previzualizare PDF",
+    "preview.iframeTitle": "Previzualizare {name}",
+    "preview.dotRenderError": "Eșec la redarea graficului",
+    "preview.dotLoadError": "Eșec la încărcarea motorului Graphviz",
+    "preview.noContent": "Fără conținut",
+    "preview.invalidHar": "Fișier HAR invalid",
+    "preview.harTitle": "HAR: {count} cereri",
+    "preview.harMethod": "Metodă",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Stare",
+    "preview.harTime": "Timp",
+    "preview.harSize": "Dimensiune",
+    "preview.3dOffline": "Previzualizarea 3D nu este disponibilă offline",
+    "preview.envMasked": "Valori mascate — hover pentru a dezvălui",
+    "preview.saveFirst3d": "Salvați mai întâi fișierul pentru previzualizare model 3D",
+
+    "preview.close": "Închide previzualizarea",
+    "preview.open": "Previzualizare ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Nicio filă selectată",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Limbă",
+
+    // ── About ──
+    "about.version": "Versiunea {version}",
+  }
 };
 
 export default ro;

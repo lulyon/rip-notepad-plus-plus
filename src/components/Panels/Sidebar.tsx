@@ -164,6 +164,7 @@ function ProjectPanel() {
 function RootTree({ root, isActive, onRemove, onActivate }: {
   root: string; isActive: boolean; onRemove?: () => void; onActivate: () => void;
 }) {
+  const { t } = useTranslation();
   const tabs = useEditorStore((s) => s.tabs);
   const [entries, setEntries] = useState<DirEntry[]>([]);
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
@@ -204,8 +205,8 @@ function RootTree({ root, isActive, onRemove, onActivate }: {
       <div className={`project-root ${isActive ? "active" : ""}`} onClick={onActivate} title={root}>
         <span className="root-collapse" onClick={(e) => { e.stopPropagation(); setCollapsed(!collapsed); }}>{collapsed ? "▸" : "▾"}</span>
         <span>{name}</span>
-        {onRemove && <button className="root-remove" onClick={(e) => { e.stopPropagation(); onRemove(); }} title="Remove root">×</button>}
-        <button className="root-refresh" onClick={(e) => { e.stopPropagation(); loadDir(root); }} title="Refresh">↻</button>
+        {onRemove && <button className="root-remove" onClick={(e) => { e.stopPropagation(); onRemove(); }} title={t("sidebar.removeRoot")}>×</button>}
+        <button className="root-refresh" onClick={(e) => { e.stopPropagation(); loadDir(root); }} title={t("sidebar.refresh")}>↻</button>
       </div>
       {!collapsed && (loading ? <div className="project-loading">...</div> : (
         <div className="project-tree">

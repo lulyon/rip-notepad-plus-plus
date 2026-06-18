@@ -56,7 +56,7 @@ const da = {
     "menu.edit.space2TabAll": "Mellemrum til tabulator (alle)",
     // ── Menu: Search ──
     "menu.search": "&Søg",
-    "menu.search.find": "&Find...",
+    "menu.search.find": "&Søg...",
     "menu.search.findNext": "Find &næste",
     "menu.search.findPrev": "Find for&rige",
     "menu.search.replace": "&Erstat...",
@@ -197,9 +197,9 @@ const da = {
     "tab.colorGreen": "Grøn",
     "tab.colorBlue": "Blå",
     // ── Search Panel ──
-    "search.findLabel": "Find",
+    "search.findLabel": "Søg",
     "search.replaceLabel": "Erstat",
-    "search.regex": "Regex",
+    "search.regex": "Regulært udtryk",
     "search.caseSensitive": "Forskel på store/små",
     "search.wholeWord": "Hele ord",
     "search.wrapAround": "Ombryd",
@@ -268,10 +268,10 @@ const da = {
     "preferences.whitespaceAll": "Alle",
     "preferences.defaultEncoding": "Standardindkodning",
     "preferences.defaultLanguage": "Standardsprog",
-    "preferences.eol": "EOL",
+    "preferences.eol": "Linjeskift",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eolCr": "CR (klassisk Mac)",
     // ── Shortcut Mapper ──
     "shortcutMapper.filter": "Filtrer genveje...",
     "shortcutMapper.pressKeys": "Tryk på taster...",
@@ -448,11 +448,11 @@ const da = {
     "git.clean": "✓ Arbejdstræ rent",
     "git.viewDiff": "Se forskelle",
     "git.stageAll": "Isæt alle",
-    "git.commit": "Commit...",
-    "git.diff": "diff",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
-    "git.committed": "Committed ✓",
+    "git.commit": "Commitér...",
+    "git.diff": "forskel",
+    "git.pushOk": "Skub OK",
+    "git.pullOk": "Hent OK",
+    "git.committed": "Commit udført ✓",
     "git.commitFailed": "Commit mislykkedes: {{error}}",
     "git.pushFailed": "Push mislykkedes: {{error}}",
     "git.pullFailed": "Pull mislykkedes: {{error}}",
@@ -462,7 +462,7 @@ const da = {
     "commit.title": "Commit ændringer",
     "commit.filesStaged": "{{count}} fil(er) isat",
     "commit.messagePlaceholder": "Commit-besked (Enter committer, Shift+Enter ny linje)",
-    "commit.commit": "Commit",
+    "commit.commit": "Commitér",
     "commit.cancel": "Annuller",
     // ── Plugin ──
     "plugin.title": "Plugin-manager",
@@ -472,7 +472,7 @@ const da = {
     "plugin.disabled": "Deaktiveret",
     "plugin.start": "Start",
     "plugin.stop": "Stop",
-    "menu.plugins": "&Plugins",
+    "menu.plugins": "&Plug-ins",
     "panel.noSymbols": "Ingen symboler i den aktuelle fil",
     "panel.noFile": "Ingen fil åben",
     // ── General ──
@@ -486,7 +486,7 @@ const da = {
     "app.encoding.utf8": "UTF-8",
     // ── AI Chat ──
     "ai.title": "AI-chat",
-    "ai.send": "Send",
+    "ai.send": "Afsend",
     "ai.settings": "Indstillinger",
     "ai.clearChat": "Ryd chat",
     "ai.configTitle": "AI-konfiguration",
@@ -496,7 +496,7 @@ const da = {
     "ai.configModel": "Model",
     "ai.configProvider": "API-udbyder",
     "ai.save": "Gem",
-    "ai.autoDetect": "Auto-detect",
+    "ai.autoDetect": "Automatisk registrering",
     "ai.quickExplain": "Forklar kode",
     "ai.quickRefactor": "Refaktorér",
     "ai.quickTest": "Generér tests",
@@ -527,11 +527,104 @@ const da = {
     "menu.file.editContextMenu": "Rediger genvejsmenu...",
     "contextMenu.title": "Rediger genvejsmenu",
     "contextMenu.description": "Tilpas genvejsmenuen i editorområdet. Tilføj, fjern eller omarranger elementer.",
-    "contextMenu.separator": "Separator",
+    "contextMenu.separator": "Adskiller",
     "contextMenu.addItem": "Tilføj element",
     "contextMenu.add": "Tilføj",
     "contextMenu.selectAction": "Vælg handling...",
     "contextMenu.resetDefaults": "Nulstil til standard",
+
+    // ── Context Menu Placeholders ──
+    "contextMenu.labelPlaceholder": "Etiket (&Bogstav for genvej)",
+    "contextMenu.actionPlaceholder": "Handlings-ID (f.eks. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Etiket",
+    "contextMenu.customActionPlaceholder": "Eller skriv brugerdefineret handlings-ID...",
+
+    // ── Status Bar ──
+    "status.ready": "Klar",
+    "status.branchTooltip": "Klik for at skifte gren",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Luk",
+    "tab.newTooltip": "Ny fil (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Fjern rod",
+    "sidebar.refresh": "Opdater",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Skift gren",
+    "git.pull": "Hent",
+    "git.push": "Skub",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex-skabeloner",
+    "search.lineLabel": "Li",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Linjenummer",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Klik for at åbne {file} på linje {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML-fejl: {error}",
+    "menu.xmlParseError": "XML-parseringsfejl: {error}",
+    "menu.xmlValid": "✅ XML er gyldigt.",
+    "menu.xmlInvalid": "❌ XML ugyldigt:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Gem filen først for at forhåndsvise",
+    "preview.saveFirstShort": "Gem filen først",
+    "preview.imageFailed": "Kunne ikke indlæse billede",
+    "preview.emptyCsv": "Tom CSV",
+    "preview.invalidJson": "Ugyldig JSON",
+    "preview.katexInfo": "KaTeX gengiver kun inline matematik ($...$) og display matematik ($$...$$)",
+    "preview.spreadsheetFailed": "Kunne ikke indlæse regneark",
+    "preview.invalidNotebook": "Ugyldig notesbog",
+    "preview.docFailed": "Kunne ikke indlæse dokument",
+    "preview.geoJsonFailed": "Kunne ikke indlæse GeoJSON",
+    "preview.sqliteFailed": "Kunne ikke åbne database",
+    "preview.emptyTable": "Tom tabel",
+    "preview.loadingArchive": "Indlæser arkiv...",
+    "preview.archiveFailed": "Kunne ikke læse arkiv",
+    "preview.noPreview": "Ingen forhåndsvisning tilgængelig for denne filtype",
+    "preview.pdfTitle": "PDF-forhåndsvisning",
+    "preview.iframeTitle": "{name} forhåndsvisning",
+    "preview.dotRenderError": "Kunne ikke gengive graf",
+    "preview.dotLoadError": "Kunne ikke indlæse Graphviz-motor",
+    "preview.noContent": "Intet indhold",
+    "preview.invalidHar": "Ugyldig HAR-fil",
+    "preview.harTitle": "HAR: {count} anmodninger",
+    "preview.harMethod": "Metode",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Status",
+    "preview.harTime": "Tid",
+    "preview.harSize": "Størrelse",
+    "preview.3dOffline": "3D-forhåndsvisning ikke tilgængelig offline",
+    "preview.envMasked": "Værdier maskeret — hold musen over for at afsløre",
+    "preview.saveFirst3d": "Gem filen først for at forhåndsvise 3D-model",
+
+    "preview.close": "Luk forhåndsvisning",
+    "preview.open": "Forhåndsvisning ({shortcut})",
+
+    // ── Split Editor ──
+    "splitEditor.noTab": "Ingen fane valgt",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Sprog",
+
+    // ── About ──
+    "about.version": "Version {version}",
   },
 };
 

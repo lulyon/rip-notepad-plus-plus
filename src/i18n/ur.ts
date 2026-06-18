@@ -56,7 +56,7 @@ const ur = {
 
     // ── Commit Dialog ──
     "commit.cancel": "منسوخ کریں",
-    "commit.commit": "Commit",
+    "commit.commit": "کمٹ کریں",
     "commit.filesStaged": "{{count}} فائل(یں) سٹیج کی گئیں",
     "commit.messagePlaceholder": "کمٹ پیغام (Enter کمٹ کرنے کے لیے، Shift+Enter نئی سطر کے لیے)",
     "commit.title": "تبدیلیاں کمٹ کریں",
@@ -140,9 +140,9 @@ const ur = {
     // ── Git ──
     "git.checkoutFailed": "Checkout ناکام: {{error}}",
     "git.clean": "✓ ورکنگ ٹری صاف",
-    "git.commit": "Commit...",
+    "git.commit": "کمٹ کریں...",
     "git.commitFailed": "Commit ناکام: {{error}}",
-    "git.committed": "Committed ✓",
+    "git.committed": "کمٹ شدہ ✓",
     "git.diff": "فرق",
     "git.filesChanged": "فائلیں تبدیل ہوئیں",
     "git.loading": "لوڈ ہو رہا ہے...",
@@ -244,25 +244,25 @@ const ur = {
 
     // ── Menu: Language ──
     "menu.language": "زبان",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.css": "CSS",
+    "menu.language.c": "سی",
+    "menu.language.cpp": "سی++",
+    "menu.language.css": "سی ایس ایس",
     "menu.language.defineLanguage": "صارف کی متعین کردہ زبان...",
-    "menu.language.go": "Go",
-    "menu.language.html": "HTML",
-    "menu.language.java": "Java",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.json": "JSON",
-    "menu.language.markdown": "Markdown",
+    "menu.language.go": "گو",
+    "menu.language.html": "ایچ ٹی ایم ایل",
+    "menu.language.java": "جاوا",
+    "menu.language.javascript": "جاوا اسکرپٹ",
+    "menu.language.json": "جیسن",
+    "menu.language.markdown": "مارک ڈاؤن",
     "menu.language.openUdlFolder": "UDL فولڈر کھولیں...",
     "menu.language.plaintext": "سادہ متن",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.shell": "Shell",
-    "menu.language.sql": "SQL",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
+    "menu.language.python": "پائتھون",
+    "menu.language.rust": "رسٹ",
+    "menu.language.shell": "شیل",
+    "menu.language.sql": "ایس کیو ایل",
+    "menu.language.typescript": "ٹائپ اسکرپٹ",
+    "menu.language.xml": "ایکس ایم ایل",
+    "menu.language.yaml": "یامل",
 
     // ── Menu: Macro ──
     "menu.macro": "میکرو",
@@ -382,10 +382,10 @@ const ur = {
     "preferences.defaultEncoding": "پہلے سے طے شدہ انکوڈنگ",
     "preferences.defaultLanguage": "پہلے سے طے شدہ زبان",
     "preferences.editing": "ترمیم",
-    "preferences.eol": "EOL",
+    "preferences.eol": "EOL (سطر کا اختتام)",
     "preferences.eolCr": "CR (کلاسک Mac)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolLf": "LF (Unix/macOS)",
+    "preferences.eolCrlf": "CRLF (ونڈوز)",
+    "preferences.eolLf": "LF (یونکس/میک او ایس)",
     "preferences.fontFamily": "فونٹ خاندان",
     "preferences.fontSize": "فونٹ کا سائز",
     "preferences.general": "عام",
@@ -462,7 +462,7 @@ const ur = {
     "search.matchStats": "{{current}} کا {{count}}",
     "search.preview": "پیش نظارہ",
     "search.previewTitle": "تبدیل پیش نظارہ — {{count}} واقعات",
-    "search.regex": "Regex",
+    "search.regex": "ریجیکس",
     "search.replaceAll": "سب تبدیل کریں",
     "search.replaceAllBtn": "سب تبدیل کریں",
     "search.replaceBtn": "تبدیل کریں",
@@ -485,8 +485,8 @@ const ur = {
     "sidebar.clipboard": "کلپ بورڈ",
     "sidebar.doclist": "دستاویزات کی فہرست",
     "sidebar.files": "فائلیں",
-    "sidebar.git": "Git",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.git": "گٹ",
+    "sidebar.jsonViewer": "جیسن",
     "sidebar.preview": "پیش نظارہ",
     "sidebar.symbols": "علامات",
     "sidebar.taskList": "کاموں کی فہرست",
@@ -577,6 +577,96 @@ const ur = {
     "welcome.dropHint": "کھولنے کے لیے فائلیں یہاں ڈراپ کریں",
     "welcome.subtitle": "Ctrl+N نیا · Ctrl+O کھولیں · Ctrl+S محفوظ کریں",
     "welcome.title": "ripNotepad++",
+    "contextMenu.labelPlaceholder": "لیبل (ہاٹکی کے لیے &حرف)",
+    "contextMenu.actionPlaceholder": "ایکشن ID (مثلاً edit.cut)",
+    "contextMenu.labelShortPlaceholder": "لیبل",
+    "contextMenu.customActionPlaceholder": "یا حسب ضرورت ایکشن ID ٹائپ کریں...",
+
+    // ── Status Bar ──
+    "status.ready": "تیار",
+    "status.branchTooltip": "برانچ تبدیل کرنے کے لیے کلک کریں",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "بند کریں",
+    "tab.newTooltip": "نئی فائل (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "روٹ ہٹائیں",
+    "sidebar.refresh": "ریفریش کریں",
+
+    // ── Git Panel ──
+    "git.switchBranch": "برانچ تبدیل کریں",
+    "git.pull": "پل",
+    "git.push": "پش",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex ٹیمپلیٹس",
+    "search.lineLabel": "س",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "سطر نمبر",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "{file} کو سطر {line} پر کھولنے کے لیے کلک کریں",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML خرابی: {error}",
+    "menu.xmlParseError": "XML تجزیہ خرابی: {error}",
+    "menu.xmlValid": "✅ XML درست ہے۔",
+    "menu.xmlInvalid": "❌ XML غلط:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "پیش نظارہ کرنے کے لیے پہلے فائل محفوظ کریں",
+    "preview.saveFirstShort": "پہلے فائل محفوظ کریں",
+    "preview.imageFailed": "تصویر لوڈ کرنے میں ناکام",
+    "preview.emptyCsv": "خالی CSV",
+    "preview.invalidJson": "غلط JSON",
+    "preview.katexInfo": "KaTeX صرف ان لائن ریاضی ($...$) اور ڈسپلے ریاضی ($$...$$) پیش کرتا ہے",
+    "preview.spreadsheetFailed": "اسپریڈ شیٹ لوڈ کرنے میں ناکام",
+    "preview.invalidNotebook": "غلط نوٹ بک",
+    "preview.docFailed": "دستاویز لوڈ کرنے میں ناکام",
+    "preview.geoJsonFailed": "GeoJSON لوڈ کرنے میں ناکام",
+    "preview.sqliteFailed": "ڈیٹا بیس کھولنے میں ناکام",
+    "preview.emptyTable": "خالی جدول",
+    "preview.loadingArchive": "آرکائیو لوڈ ہو رہا ہے...",
+    "preview.archiveFailed": "آرکائیو پڑھنے میں ناکام",
+    "preview.noPreview": "اس فائل کی قسم کے لیے کوئی پیش نظارہ دستیاب نہیں",
+    "preview.pdfTitle": "PDF پیش نظارہ",
+    "preview.iframeTitle": "{name} پیش نظارہ",
+    "preview.dotRenderError": "گراف پیش کرنے میں ناکام",
+    "preview.dotLoadError": "Graphviz انجن لوڈ کرنے میں ناکام",
+    "preview.noContent": "کوئی مواد نہیں",
+    "preview.invalidHar": "غلط HAR فائل",
+    "preview.harTitle": "HAR: {count} درخواستیں",
+    "preview.harMethod": "طریقہ",
+    "preview.harUrl": "URL（网址）",
+    "preview.harStatus": "حالت",
+    "preview.harTime": "وقت",
+    "preview.harSize": "سائز",
+    "preview.3dOffline": "3D پیش نظارہ آف لائن دستیاب نہیں",
+    "preview.envMasked": "اقدار چھپائی گئی — ظاہر کرنے کے لیے ہوور کریں",
+    "preview.saveFirst3d": "3D ماڈل پیش نظارہ کرنے کے لیے پہلے فائل محفوظ کریں",
+
+    "preview.close": "پیش نظارہ بند کریں",
+    "preview.open": "پیش نظارہ ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "کوئی ٹیب منتخب نہیں",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "زبان",
+
+    // ── About ──
+    "about.version": "ورژن {version}",
   },
 };
 

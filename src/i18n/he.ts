@@ -132,22 +132,22 @@ const he = {
     // ── Menu: Language ──
     "menu.language": "&שפה",
     "menu.language.plaintext": "טקסט רגיל",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.javascript": "ג'אווהסקריפט",
+    "menu.language.typescript": "טייפסקריפט",
+    "menu.language.json": "ג'ייסון",
+    "menu.language.html": "אייץ' טי אם אל",
+    "menu.language.css": "סי אס אס",
+    "menu.language.python": "פייתון",
+    "menu.language.rust": "ראסט",
+    "menu.language.go": "גו",
+    "menu.language.java": "ג'אווה",
+    "menu.language.c": "סי",
+    "menu.language.cpp": "סי++",
+    "menu.language.xml": "אקס אם אל",
+    "menu.language.yaml": "יאמל",
+    "menu.language.markdown": "מרקדאון",
+    "menu.language.sql": "אס קיו אל",
+    "menu.language.shell": "של",
 
     "menu.language.defineLanguage": "שפה מוגדרת משתמש...",
     "menu.language.openUdlFolder": "פתח תיקיית UDL...",
@@ -373,7 +373,7 @@ const he = {
     "sidebar.doclist": "רשימת מסמכים",
     "sidebar.clipboard": "לוח",
     "sidebar.symbols": "סמלים",
-    "sidebar.git": "Git",
+    "sidebar.git": "גיט",
 
     // ── Clipboard ──
     "clipboard.search": "חפש...",
@@ -384,7 +384,7 @@ const he = {
     "clipboard.copy": "העתק ללוח המערכת",
     "clipboard.pin": "נעץ/בטל נעיצה",
     "clipboard.remove": "הסר",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "ג'ייסון",
     "sidebar.taskList": "רשימת משימות",
 
     // ── JSON Viewer ──
@@ -490,7 +490,7 @@ const he = {
 
     // ── Commit ──
     "commit.cancel": "ביטול",
-    "commit.commit": "Commit",
+    "commit.commit": "בצע",
     "commit.filesStaged": "{{count}} קבצים מוכנים",
     "commit.messagePlaceholder": "הודעת Commit (Enter לשליחה, Shift+Enter לשורה חדשה)",
     "commit.title": "שינויי Commit",
@@ -502,10 +502,10 @@ const he = {
 
     // ── Git ──
     "git.checkoutFailed": "המעבר נכשל: {{error}}",
-    "git.commit": "Commit...",
+    "git.commit": "בצע...",
     "git.commitFailed": "ה-Commit נכשל: {{error}}",
     "git.committed": "בוצע Commit ✓",
-    "git.diff": "diff",
+    "git.diff": "הבדל",
     "git.newBranch": "שם ענף חדש...",
     "git.pullFailed": "ה-Pull נכשל: {{error}}",
     "git.pullOk": "Pull בוצע",
@@ -585,6 +585,96 @@ const he = {
     "tools.title": "כלים חיצוניים",
     "tools.update": "עדכן",
     "tools.variables": "משתנים:",
+    "contextMenu.labelPlaceholder": "תווית (&אות לקיצור)",
+    "contextMenu.actionPlaceholder": "מזהה פעולה (למשל: edit.cut)",
+    "contextMenu.labelShortPlaceholder": "תווית",
+    "contextMenu.customActionPlaceholder": "או הקלד מזהה פעולה מותאם אישית...",
+
+    // ── Status Bar ──
+    "status.ready": "מוכן",
+    "status.branchTooltip": "לחץ למעבר ענף",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "סגור",
+    "tab.newTooltip": "קובץ חדש (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "הסר שורש",
+    "sidebar.refresh": "רענן",
+
+    // ── Git Panel ──
+    "git.switchBranch": "החלף ענף",
+    "git.pull": "משיכה",
+    "git.push": "דחיפה",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "תבניות ביטוי רגולרי",
+    "search.lineLabel": "ש",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "מספר שורה",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "לחץ לפתיחת {file} בשורה {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "שגיאת XML: {error}",
+    "menu.xmlParseError": "שגיאת ניתוח XML: {error}",
+    "menu.xmlValid": "✅ XML תקין.",
+    "menu.xmlInvalid": "❌ XML לא תקין:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "שמור את הקובץ תחילה לצפייה בתצוגה מקדימה",
+    "preview.saveFirstShort": "שמור את הקובץ תחילה",
+    "preview.imageFailed": "טעינת התמונה נכשלה",
+    "preview.emptyCsv": "CSV ריק",
+    "preview.invalidJson": "JSON לא תקין",
+    "preview.katexInfo": "KaTeX מציג מתמטיקה מוטבעת ($...$) ומתמטיקה מוצגת ($$...$$) בלבד",
+    "preview.spreadsheetFailed": "טעינת הגיליון האלקטרוני נכשלה",
+    "preview.invalidNotebook": "מחברת לא תקינה",
+    "preview.docFailed": "טעינת המסמך נכשלה",
+    "preview.geoJsonFailed": "טעינת GeoJSON נכשלה",
+    "preview.sqliteFailed": "פתיחת מסד הנתונים נכשלה",
+    "preview.emptyTable": "טבלה ריקה",
+    "preview.loadingArchive": "טוען ארכיון...",
+    "preview.archiveFailed": "קריאת הארכיון נכשלה",
+    "preview.noPreview": "אין תצוגה מקדימה זמינה לסוג קובץ זה",
+    "preview.pdfTitle": "תצוגה מקדימה של PDF",
+    "preview.iframeTitle": "תצוגה מקדימה של {name}",
+    "preview.dotRenderError": "עיבוד הגרף נכשל",
+    "preview.dotLoadError": "טעינת מנוע Graphviz נכשלה",
+    "preview.noContent": "אין תוכן",
+    "preview.invalidHar": "קובץ HAR לא תקין",
+    "preview.harTitle": "HAR: {count} בקשות",
+    "preview.harMethod": "שיטה",
+    "preview.harUrl": "כתובת",
+    "preview.harStatus": "סטטוס",
+    "preview.harTime": "זמן",
+    "preview.harSize": "גודל",
+    "preview.3dOffline": "תצוגה מקדימה תלת-ממד אינה זמינה במצב לא מקוון",
+    "preview.envMasked": "ערכים מוסתרים — העבר עכבר לחשיפה",
+    "preview.saveFirst3d": "שמור את הקובץ תחילה לצפייה במודל תלת-ממדי",
+
+    "preview.close": "סגור תצוגה מקדימה",
+    "preview.open": "תצוגה מקדימה ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "לא נבחרה לשונית",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "שפה",
+
+    // ── About ──
+    "about.version": "גרסה {version}",
   },
 };
 

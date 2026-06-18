@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Editor } from "./Editor";
 import { useSettingsStore } from "../../stores/settingsStore";
 import { useEditorStore } from "../../stores/editorStore";
@@ -6,6 +7,7 @@ import { useEditorRefStore } from "../../stores/editorRefStore";
 import "./SplitEditor.css";
 
 export function SplitEditor() {
+  const { t } = useTranslation();
   const splitView = useSettingsStore((s) => s.splitView);
   const secondaryTabId = useEditorStore((s) => s.secondaryTabId);
   const activeTabId = useEditorStore((s) => s.activeTabId);
@@ -79,7 +81,7 @@ export function SplitEditor() {
         {secondaryTabId ? (
           <Editor key={`sec-${secondaryTabId}`} tabId={secondaryTabId} />
         ) : (
-          <div className="split-empty">No tab selected</div>
+          <div className="split-empty">{t("splitEditor.noTab")}</div>
         )}
       </div>
     </div>

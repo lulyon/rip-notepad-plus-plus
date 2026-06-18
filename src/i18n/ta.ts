@@ -127,23 +127,23 @@ const ta = {
     "menu.encoding.convertUtf16BE": "UTF-16 BE ஆக மாற்று",
     "menu.encoding.openDialog": "எழுத்து தொகுப்பு(&C)...",
     "menu.language": "மொழி(&L)",
-    "menu.language.plaintext": "Plain Text",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.plaintext": "எளிய உரை",
+    "menu.language.javascript": "ஜாவாஸ்கிரிப்ட்",
+    "menu.language.typescript": "டைப்ஸ்கிரிப்ட்",
+    "menu.language.json": "ஜேசன்",
+    "menu.language.html": "எச்டிஎம்எல்",
+    "menu.language.css": "சிஎஸ்எஸ்",
+    "menu.language.python": "பைதான்",
+    "menu.language.rust": "ரஸ்ட்",
+    "menu.language.go": "கோ",
+    "menu.language.java": "ஜாவா",
+    "menu.language.c": "சி",
+    "menu.language.cpp": "சி++",
+    "menu.language.xml": "எக்ஸ்எம்எல்",
+    "menu.language.yaml": "யாமல்",
+    "menu.language.markdown": "மார்க்‌டவுன்",
+    "menu.language.sql": "எஸ்கியூஎல்",
+    "menu.language.shell": "ஷெல்",
     "menu.language.defineLanguage": "பயனர் வரையறுத்த மொழி...",
     "menu.language.openUdlFolder": "UDL கோப்புறையைத் திற...",
     "menu.macro": "மேக்ரோ(&M)",
@@ -157,10 +157,10 @@ const ta = {
     "menu.run.claudeCode": "Claude ஐத் தொடங்கு",
     "menu.run.codex": "Codex ஐத் தொடங்கு",
     "menu.tools": "கருவிகள்(&T)",
-    "menu.tools.md5": "MD5 Generate",
-    "menu.tools.sha1": "SHA-1 Generate",
-    "menu.tools.sha256": "SHA-256 Generate",
-    "menu.tools.sha512": "SHA-512 Generate",
+    "menu.tools.md5": "MD5 உருவாக்கு",
+    "menu.tools.sha1": "SHA-1 உருவாக்கு",
+    "menu.tools.sha256": "SHA-256 உருவாக்கு",
+    "menu.tools.sha512": "SHA-512 உருவாக்கு",
     "menu.tools.configure": "வெளிப்புற கருவிகளை உள்ளமை...",
     "menu.window": "சாளரம்(&W)",
     "menu.window.nextTab": "அடுத்த தாவல்(&N)",
@@ -191,7 +191,7 @@ const ta = {
     // --- Search Panel ---
     "search.findLabel": "கண்டுபிடி",
     "search.replaceLabel": "மாற்று",
-    "search.regex": "Regex",
+    "search.regex": "ரெஜெக்ஸ்",
     "search.caseSensitive": "எழுத்துணரி",
     "search.wholeWord": "முழுச்சொல்",
     "search.wrapAround": "சுற்றி வளை",
@@ -216,12 +216,12 @@ const ta = {
     "search.searchBtn": "தேடு",
     "search.searching": "தேடுகிறது...",
     "search.clear": "அழி",
-    "search.resultsCount": "{{count}} results found",
-    "search.matchStats": "{{current}} of {{count}}",
+    "search.resultsCount": "{{count}} முடிவுகள் கண்டறியப்பட்டன",
+    "search.matchStats": "{{current}} இல் {{count}}",
     "search.incremental": "அதிகரிப்பு",
     "search.inSelection": "தேர்வில்",
     "search.preview": "முன்னோட்டம்",
-    "search.previewTitle": "Replace Preview — {{count}} occurrence(s)",
+    "search.previewTitle": "மாற்று முன்னோட்டம் — {{count}} நிகழ்வு(கள்)",
     "search.replaceAll": "அனைத்தையும் மாற்று",
     "search.cancel": "ரத்து செய்",
 
@@ -263,9 +263,9 @@ const ta = {
     "preferences.whitespaceAll": "அனைத்தும்",
     "preferences.defaultEncoding": "இயல்புநிலை குறியாக்கம்",
     "preferences.defaultLanguage": "இயல்புநிலை மொழி",
-    "preferences.eol": "EOL",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
+    "preferences.eol": "EOL (வரி முடிவு)",
+    "preferences.eolLf": "LF (யூனிக்ஸ்/மேக்கோஎஸ்)",
+    "preferences.eolCrlf": "CRLF (விண்டோஸ்)",
     "preferences.eolCr": "CR (கிளாசிக் Mac)",
 
     // --- Shortcut Mapper ---
@@ -358,8 +358,8 @@ const ta = {
     // --- Status Bar ---
     "status.encoding": "குறியாக்கம்",
     "status.language": "மொழி",
-    "status.line": "Ln",
-    "status.column": "Col",
+    "status.line": "வ",
+    "status.column": "நெ",
     "status.clickToChange": "குறியாக்கத்தை மாற்ற கிளிக் செய்க",
 
     // --- Welcome ---
@@ -372,7 +372,7 @@ const ta = {
     "sidebar.doclist": "ஆவணப் பட்டியல்",
     "sidebar.clipboard": "கிளிப்போர்டு",
     "sidebar.symbols": "குறியீடுகள்",
-    "sidebar.git": "Git",
+    "sidebar.git": "கிட்",
     "sidebar.terminal": "முனையம்",
 
     // --- Terminal ---
@@ -397,7 +397,7 @@ const ta = {
     "clipboard.remove": "அகற்று",
 
     // --- Sidebar ---
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "ஜேசன்",
     "sidebar.taskList": "பணி பட்டியல்",
 
     // --- JSON Viewer ---
@@ -562,6 +562,96 @@ const ta = {
     "contextMenu.add": "சேர்",
     "contextMenu.selectAction": "செயலைத் தேர்ந்தெடு...",
     "contextMenu.resetDefaults": "இயல்புநிலைகளுக்கு மீட்டமை",
+    "contextMenu.labelPlaceholder": "லேபிள் (&ஹாட்கீக்கான எழுத்து)",
+    "contextMenu.actionPlaceholder": "செயல் ஐடி (எ.கா. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "லேபிள்",
+    "contextMenu.customActionPlaceholder": "அல்லது கஸ்டம் செயல் ஐடியை தட்டச்சு செய்க...",
+
+    // ── Status Bar ──
+    "status.ready": "தயார்",
+    "status.branchTooltip": "கிளையை மாற்ற கிளிக் செய்க",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "மூடு",
+    "tab.newTooltip": "புதிய கோப்பு (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "மூலத்தை அகற்று",
+    "sidebar.refresh": "புதுப்பி",
+
+    // ── Git Panel ──
+    "git.switchBranch": "கிளையை மாற்று",
+    "git.pull": "இழு",
+    "git.push": "தள்ளு",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex வார்ப்புருக்கள்",
+    "search.lineLabel": "வ",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "வரி எண்",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "{file} வரி {line} இல் திறக்க கிளிக் செய்க",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML பிழை: {error}",
+    "menu.xmlParseError": "XML பாகுபடுத்தல் பிழை: {error}",
+    "menu.xmlValid": "✅ XML சரியானது.",
+    "menu.xmlInvalid": "❌ XML தவறானது:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "முன்னோட்டத்திற்கு முதலில் கோப்பை சேமிக்கவும்",
+    "preview.saveFirstShort": "முதலில் கோப்பை சேமிக்கவும்",
+    "preview.imageFailed": "படத்தை ஏற்ற முடியவில்லை",
+    "preview.emptyCsv": "காலி CSV",
+    "preview.invalidJson": "தவறான JSON",
+    "preview.katexInfo": "KaTeX இன்லைன் கணிதம் ($...$) மற்றும் டிஸ்ப்ளே கணிதம் ($$...$$) மட்டுமே ரெண்டர் செய்கிறது",
+    "preview.spreadsheetFailed": "விரிதாளை ஏற்ற முடியவில்லை",
+    "preview.invalidNotebook": "தவறான நோட்புக்",
+    "preview.docFailed": "ஆவணத்தை ஏற்ற முடியவில்லை",
+    "preview.geoJsonFailed": "GeoJSON ஐ ஏற்ற முடியவில்லை",
+    "preview.sqliteFailed": "தரவுத்தளத்தை திறக்க முடியவில்லை",
+    "preview.emptyTable": "காலி அட்டவணை",
+    "preview.loadingArchive": "காப்பகம் ஏற்றப்படுகிறது...",
+    "preview.archiveFailed": "காப்பகத்தை படிக்க முடியவில்லை",
+    "preview.noPreview": "இந்த கோப்பு வகைக்கு முன்னோட்டம் கிடைக்கவில்லை",
+    "preview.pdfTitle": "PDF முன்னோட்டம்",
+    "preview.iframeTitle": "{name} முன்னோட்டம்",
+    "preview.dotRenderError": "வரைபடத்தை ரெண்டர் செய்ய முடியவில்லை",
+    "preview.dotLoadError": "Graphviz இயந்திரத்தை ஏற்ற முடியவில்லை",
+    "preview.noContent": "உள்ளடக்கம் இல்லை",
+    "preview.invalidHar": "தவறான HAR கோப்பு",
+    "preview.harTitle": "HAR: {count} கோரிக்கைகள்",
+    "preview.harMethod": "முறை",
+    "preview.harUrl": "URL（யுஆர்எல்）",
+    "preview.harStatus": "நிலை",
+    "preview.harTime": "நேரம்",
+    "preview.harSize": "அளவு",
+    "preview.3dOffline": "3D முன்னோட்டம் ஆஃப்லைனில் கிடைக்காது",
+    "preview.envMasked": "மதிப்புகள் மறைக்கப்பட்டுள்ளன — வெளிப்படுத்த ஹோவர் செய்க",
+    "preview.saveFirst3d": "3D மாதிரியை முன்னோட்டமிட முதலில் கோப்பை சேமிக்கவும்",
+
+    "preview.close": "முன்னோட்டத்தை மூடு",
+    "preview.open": "முன்னோட்டம் ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "எந்த தாவலும் தேர்ந்தெடுக்கப்படவில்லை",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "மொழி",
+
+    // ── About ──
+    "about.version": "பதிப்பு {version}",
   },
 };
 

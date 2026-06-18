@@ -145,7 +145,7 @@ const vi = {
     "menu.language.shell": "Shell",
     "menu.language.defineLanguage": "Ngôn ngữ do người dùng định nghĩa...",
     "menu.language.openUdlFolder": "Mở thư mục UDL...",
-    "menu.macro": "&Macro",
+    "menu.macro": "Tập lệnh &M",
     "menu.macro.startRecord": "&Bắt đầu ghi",
     "menu.macro.stopRecord": "Dừng g&hi",
     "menu.macro.playback": "&Phát lại",
@@ -186,7 +186,7 @@ const vi = {
     "tab.colorBlue": "Xanh dương",
     "search.findLabel": "Tìm",
     "search.replaceLabel": "Thay thế",
-    "search.regex": "Regex",
+    "search.regex": "Biểu thức chính quy",
     "search.caseSensitive": "Phân biệt hoa/thường",
     "search.wholeWord": "Toàn bộ từ",
     "search.wrapAround": "Quay vòng",
@@ -348,7 +348,7 @@ const vi = {
     "sidebar.clipboard": "Bộ nhớ tạm",
     "sidebar.symbols": "Ký hiệu",
     "sidebar.git": "Git",
-    "sidebar.terminal": "Terminal",
+    "sidebar.terminal": "Thiết bị đầu cuối",
     "terminal.start": "Khởi động Terminal",
     "terminal.exited": "Tiến trình đã thoát.",
     "terminal.restart": "Khởi động lại",
@@ -495,6 +495,96 @@ const vi = {
     "contextMenu.add": "Thêm",
     "contextMenu.selectAction": "Chọn hành động...",
     "contextMenu.resetDefaults": "Đặt lại mặc định",
+    "contextMenu.labelPlaceholder": "Nhãn (&Letter cho phím tắt)",
+    "contextMenu.actionPlaceholder": "ID hành động (ví dụ: edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Nhãn",
+    "contextMenu.customActionPlaceholder": "Hoặc nhập ID hành động tùy chỉnh...",
+
+    // ── Status Bar ──
+    "status.ready": "Sẵn sàng",
+    "status.branchTooltip": "Nhấp để chuyển nhánh",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Đóng",
+    "tab.newTooltip": "Tệp mới (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Xóa thư mục gốc",
+    "sidebar.refresh": "Làm mới",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Chuyển nhánh",
+    "git.pull": "Kéo về",
+    "git.push": "Đẩy lên",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Mẫu regex",
+    "search.lineLabel": "Dòng",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Số dòng",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Nhấp để mở {file} tại dòng {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "Lỗi XML: {error}",
+    "menu.xmlParseError": "Lỗi phân tích XML: {error}",
+    "menu.xmlValid": "✅ XML hợp lệ.",
+    "menu.xmlInvalid": "❌ XML không hợp lệ:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Lưu tệp trước để xem trước",
+    "preview.saveFirstShort": "Lưu tệp trước",
+    "preview.imageFailed": "Không thể tải hình ảnh",
+    "preview.emptyCsv": "CSV trống",
+    "preview.invalidJson": "JSON không hợp lệ",
+    "preview.katexInfo": "KaTeX chỉ hiển thị toán nội dòng ($...$) và toán hiển thị ($$...$$)",
+    "preview.spreadsheetFailed": "Không thể tải bảng tính",
+    "preview.invalidNotebook": "Notebook không hợp lệ",
+    "preview.docFailed": "Không thể tải tài liệu",
+    "preview.geoJsonFailed": "Không thể tải GeoJSON",
+    "preview.sqliteFailed": "Không thể mở cơ sở dữ liệu",
+    "preview.emptyTable": "Bảng trống",
+    "preview.loadingArchive": "Đang tải kho lưu trữ...",
+    "preview.archiveFailed": "Không thể đọc kho lưu trữ",
+    "preview.noPreview": "Không có bản xem trước cho loại tệp này",
+    "preview.pdfTitle": "Xem trước PDF",
+    "preview.iframeTitle": "Xem trước {name}",
+    "preview.dotRenderError": "Không thể hiển thị đồ thị",
+    "preview.dotLoadError": "Không thể tải công cụ Graphviz",
+    "preview.noContent": "Không có nội dung",
+    "preview.invalidHar": "Tệp HAR không hợp lệ",
+    "preview.harTitle": "HAR: {count} yêu cầu",
+    "preview.harMethod": "Phương thức",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Trạng thái",
+    "preview.harTime": "Thời gian",
+    "preview.harSize": "Kích thước",
+    "preview.3dOffline": "Xem trước 3D không khả dụng khi ngoại tuyến",
+    "preview.envMasked": "Giá trị bị ẩn — di chuột để hiển thị",
+    "preview.saveFirst3d": "Lưu tệp trước để xem trước mô hình 3D",
+
+    "preview.close": "Đóng xem trước",
+    "preview.open": "Xem trước ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Chưa chọn tab",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Ngôn ngữ",
+
+    // ── About ──
+    "about.version": "Phiên bản {version}",
   },
 };
 

@@ -166,7 +166,7 @@ const nl = {
     "menu.window.prevTab": "&Vorige tab",
     "menu.window.close": "&Sluiten",
     "menu.window.closeAll": "Alles sluiten",
-    "menu.help": "&Help",
+    "menu.help": "&Hulp",
     "menu.help.about": "&Over ripNotepad++",
     "menu.help.checkUpdate": "Controleren op &updates...",
     "tab.close": "Sluiten",
@@ -186,7 +186,7 @@ const nl = {
     "tab.colorBlue": "Blauw",
     "search.findLabel": "Zoeken",
     "search.replaceLabel": "Vervangen",
-    "search.regex": "Regex",
+    "search.regex": "Reguliere expressie",
     "search.caseSensitive": "Hoofdlettergevoelig",
     "search.wholeWord": "Heel woord",
     "search.wrapAround": "Rondspringen",
@@ -255,7 +255,7 @@ const nl = {
     "preferences.eol": "Einde regel",
     "preferences.eolLf": "LF (Unix/macOS)",
     "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eolCr": "CR (klassieke Mac)",
     "shortcutMapper.filter": "Sneltoetsen filteren...",
     "shortcutMapper.pressKeys": "Toetsen indrukken...",
     "shortcutMapper.resetAll": "Alles resetten",
@@ -311,7 +311,7 @@ const nl = {
     "dialog.udl": "Door gebruiker gedefinieerde taal",
     "udl.basic": "Basis",
     "udl.keywords": "Sleutelwoorden",
-    "udl.syntax": "Syntax",
+    "udl.syntax": "Syntaxis",
     "udl.preview": "Voorvertoning",
     "udl.name": "Taalnaam",
     "udl.namePlaceholder": "Mijn aangepaste taal",
@@ -417,10 +417,10 @@ const nl = {
     "git.clean": "✓ Werkstructuur schoon",
     "git.viewDiff": "Diff bekijken",
     "git.stageAll": "Alles stagen",
-    "git.commit": "Commit...",
-    "git.diff": "diff",
-    "git.pushOk": "Push OK",
-    "git.pullOk": "Pull OK",
+    "git.commit": "Wijziging vastleggen...",
+    "git.diff": "verschillen",
+    "git.pushOk": "Push gelukt",
+    "git.pullOk": "Pull gelukt",
     "git.committed": "Gecommit ✓",
     "git.commitFailed": "Commit mislukt: {{error}}",
     "git.pushFailed": "Push mislukt: {{error}}",
@@ -430,7 +430,7 @@ const nl = {
     "commit.title": "Wijzigingen committen",
     "commit.filesStaged": "{{count}} bestand(en) gestaged",
     "commit.messagePlaceholder": "Commitbericht (Enter om te committen, Shift+Enter voor nieuwe regel)",
-    "commit.commit": "Commit",
+    "commit.commit": "Vastleggen",
     "commit.cancel": "Annuleren",
     "plugin.title": "Pluginbeheer",
     "plugin.loading": "Laden...",
@@ -495,6 +495,96 @@ const nl = {
     "contextMenu.add": "Toevoegen",
     "contextMenu.selectAction": "Selecteer actie...",
     "contextMenu.resetDefaults": "Standaardinstellingen herstellen",
+    "contextMenu.labelPlaceholder": "Label (&Letter voor sneltoets)",
+    "contextMenu.actionPlaceholder": "Actie-ID (bijv. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "Label",
+    "contextMenu.customActionPlaceholder": "Of typ een aangepaste actie-ID...",
+
+    // ── Status Bar ──
+    "status.ready": "Gereed",
+    "status.branchTooltip": "Klik om te wisselen van branch",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "Sluiten",
+    "tab.newTooltip": "Nieuw bestand (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "Root verwijderen",
+    "sidebar.refresh": "Vernieuwen",
+
+    // ── Git Panel ──
+    "git.switchBranch": "Wissel van branch",
+    "git.pull": "Pullen",
+    "git.push": "Pushen",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex-sjablonen",
+    "search.lineLabel": "Regel",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "Regelnummer",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "Klik om {file} te openen op regel {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML-fout: {error}",
+    "menu.xmlParseError": "XML-parserfout: {error}",
+    "menu.xmlValid": "✅ XML is geldig.",
+    "menu.xmlInvalid": "❌ XML ongeldig:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "Sla het bestand eerst op om voor te vertonen",
+    "preview.saveFirstShort": "Sla het bestand eerst op",
+    "preview.imageFailed": "Afbeelding laden mislukt",
+    "preview.emptyCsv": "Lege CSV",
+    "preview.invalidJson": "Ongeldige JSON",
+    "preview.katexInfo": "KaTeX geeft alleen inline wiskunde ($...$) en display wiskunde ($$...$$) weer",
+    "preview.spreadsheetFailed": "Spreadsheet laden mislukt",
+    "preview.invalidNotebook": "Ongeldige notebook",
+    "preview.docFailed": "Document laden mislukt",
+    "preview.geoJsonFailed": "GeoJSON laden mislukt",
+    "preview.sqliteFailed": "Database openen mislukt",
+    "preview.emptyTable": "Lege tabel",
+    "preview.loadingArchive": "Archief laden...",
+    "preview.archiveFailed": "Archief lezen mislukt",
+    "preview.noPreview": "Geen voorvertoning beschikbaar voor dit bestandstype",
+    "preview.pdfTitle": "PDF-voorvertoning",
+    "preview.iframeTitle": "{name}-voorvertoning",
+    "preview.dotRenderError": "Grafiek renderen mislukt",
+    "preview.dotLoadError": "Graphviz-engine laden mislukt",
+    "preview.noContent": "Geen inhoud",
+    "preview.invalidHar": "Ongeldig HAR-bestand",
+    "preview.harTitle": "HAR: {count} verzoeken",
+    "preview.harMethod": "Methode",
+    "preview.harUrl": "URL",
+    "preview.harStatus": "Status",
+    "preview.harTime": "Tijd",
+    "preview.harSize": "Grootte",
+    "preview.3dOffline": "3D-voorvertoning niet beschikbaar offline",
+    "preview.envMasked": "Waarden gemaskeerd — hover om te onthullen",
+    "preview.saveFirst3d": "Sla het bestand eerst op om 3D-model voor te vertonen",
+
+    "preview.close": "Sluit voorvertoning",
+    "preview.open": "Voorvertoning ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "Geen tab geselecteerd",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "Taal",
+
+    // ── About ──
+    "about.version": "Versie {version}",
   },
 };
 

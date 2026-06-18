@@ -127,23 +127,23 @@ const km = {
     "menu.encoding.convertUtf16BE": "បម្លែងទៅ UTF-16 BE",
     "menu.encoding.openDialog": "សំណុំតួអក្សរ(&C)...",
     "menu.language": "ភាសា(&L)",
-    "menu.language.plaintext": "Plain Text",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.plaintext": "អត្ថបទធម្មតា",
+    "menu.language.javascript": "ចាវ៉ាស្គ្រីប",
+    "menu.language.typescript": "តាយប៉េស្គ្រីប",
+    "menu.language.json": "ជេសុន",
+    "menu.language.html": "អេចធីអិមអិល",
+    "menu.language.css": "ស៊ីអេសអេស",
+    "menu.language.python": "ពីថុន",
+    "menu.language.rust": "រ៉ាស្ត",
+    "menu.language.go": "ហ្គោ",
+    "menu.language.java": "ចាវ៉ា",
+    "menu.language.c": "ស៊ី",
+    "menu.language.cpp": "ស៊ី++",
+    "menu.language.xml": "អេកស៍អិមអិល",
+    "menu.language.yaml": "យ៉ាម៉ាល់",
+    "menu.language.markdown": "ម៉ាកដាវ៉ន",
+    "menu.language.sql": "អេសឃ្យូអិល",
+    "menu.language.shell": "សែល",
     "menu.language.defineLanguage": "ភាសាកំណត់ដោយអ្នកប្រើ...",
     "menu.language.openUdlFolder": "បើកថត UDL...",
     "menu.macro": "ម៉ាក្រូ(&M)",
@@ -157,10 +157,10 @@ const km = {
     "menu.run.claudeCode": "បើកដំណើរការ Claude",
     "menu.run.codex": "បើកដំណើរការ Codex",
     "menu.tools": "ឧបករណ៍(&T)",
-    "menu.tools.md5": "MD5 Generate",
-    "menu.tools.sha1": "SHA-1 Generate",
-    "menu.tools.sha256": "SHA-256 Generate",
-    "menu.tools.sha512": "SHA-512 Generate",
+    "menu.tools.md5": "បង្កើត MD5",
+    "menu.tools.sha1": "បង្កើត SHA-1",
+    "menu.tools.sha256": "បង្កើត SHA-256",
+    "menu.tools.sha512": "បង្កើត SHA-512",
     "menu.tools.configure": "កំណត់រចនាសម្ព័ន្ធឧបករណ៍ខាងក្រៅ...",
     "menu.window": "បង្អួច(&W)",
     "menu.window.nextTab": "ផ្ទាំងបន្ទាប់(&N)",
@@ -191,7 +191,7 @@ const km = {
     // --- Search Panel ---
     "search.findLabel": "រក",
     "search.replaceLabel": "ជំនួស",
-    "search.regex": "Regex",
+    "search.regex": "រេហ្សិក",
     "search.caseSensitive": "ប្រកាន់អក្សរតូចធំ",
     "search.wholeWord": "ពាក្យទាំងមូល",
     "search.wrapAround": "រុំជុំវិញ",
@@ -216,12 +216,12 @@ const km = {
     "search.searchBtn": "ស្វែងរក",
     "search.searching": "កំពុងស្វែងរក...",
     "search.clear": "សម្អាត",
-    "search.resultsCount": "{{count}} results found",
-    "search.matchStats": "{{current}} of {{count}}",
+    "search.resultsCount": "{{count}} លទ្ធផលត្រូវបានរកឃើញ",
+    "search.matchStats": "{{current}} នៃ {{count}}",
     "search.incremental": "បន្តិចម្តង",
     "search.inSelection": "ក្នុងការជ្រើសរើស",
     "search.preview": "មើលជាមុន",
-    "search.previewTitle": "Replace Preview — {{count}} occurrence(s)",
+    "search.previewTitle": "មើលជាមុនការជំនួស — {{count}} ករណី",
     "search.replaceAll": "ជំនួសទាំងអស់",
     "search.cancel": "បោះបង់",
 
@@ -263,10 +263,10 @@ const km = {
     "preferences.whitespaceAll": "ទាំងអស់",
     "preferences.defaultEncoding": "ការអ៊ិនកូដលំនាំដើម",
     "preferences.defaultLanguage": "ភាសាលំនាំដើម",
-    "preferences.eol": "EOL",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
-    "preferences.eolCr": "CR (Classic Mac)",
+    "preferences.eol": "EOL (ចុងបន្ទាត់)",
+    "preferences.eolLf": "LF (យូនីក/ម៉ាក់អូអេស)",
+    "preferences.eolCrlf": "CRLF (វីនដូ)",
+    "preferences.eolCr": "CR (ម៉ាក់បុរាណ)",
 
     // --- Shortcut Mapper ---
     "shortcutMapper.filter": "ត្រងផ្លូវកាត់...",
@@ -335,7 +335,7 @@ const km = {
     "udl.name": "ឈ្មោះភាសា",
     "udl.namePlaceholder": "ភាសាផ្ទាល់ខ្លួនរបស់ខ្ញុំ",
     "udl.extensions": "ផ្នែកបន្ថែម (បំបែកដោយក្បៀស)",
-    "udl.keywordGroup": "Keyword Group {{n}}",
+    "udl.keywordGroup": "ក្រុមពាក្យគន្លឹះ {{n}}",
     "udl.lineComment": "មតិយោបល់បន្ទាត់",
     "udl.blockCommentStart": "ចាប់ផ្តើមមតិយោបល់ដុំ",
     "udl.blockCommentEnd": "បញ្ចប់មតិយោបល់ដុំ",
@@ -358,8 +358,8 @@ const km = {
     // --- Status Bar ---
     "status.encoding": "ការអ៊ិនកូដ",
     "status.language": "ភាសា",
-    "status.line": "Ln",
-    "status.column": "Col",
+    "status.line": "បន្ទ",
+    "status.column": "ជួរ",
     "status.clickToChange": "ចុចដើម្បីផ្លាស់ប្តូរការអ៊ិនកូដ",
 
     // --- Welcome ---
@@ -372,7 +372,7 @@ const km = {
     "sidebar.doclist": "បញ្ជីឯកសារ",
     "sidebar.clipboard": "ក្តារតម្បៀតខ្ទាស់",
     "sidebar.symbols": "និមិត្តសញ្ញា",
-    "sidebar.git": "Git",
+    "sidebar.git": "ហ្គីត",
     "sidebar.terminal": "ស្ថានីយ",
 
     // --- Terminal ---
@@ -397,7 +397,7 @@ const km = {
     "clipboard.remove": "យកចេញ",
 
     // --- Sidebar ---
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "ជេសុន",
     "sidebar.taskList": "បញ្ជីការងារ",
 
     // --- JSON Viewer ---
@@ -562,6 +562,96 @@ const km = {
     "contextMenu.add": "បន្ថែម",
     "contextMenu.selectAction": "ជ្រើសរើសសកម្មភាព...",
     "contextMenu.resetDefaults": "កំណត់ឡើងវិញទៅលំនាំដើម",
+    "contextMenu.labelPlaceholder": "ស្លាក (&អក្សរសម្រាប់គ្រាប់ចុចក្តៅ)",
+    "contextMenu.actionPlaceholder": "លេខសម្គាល់សកម្មភាព (ឧ. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "ស្លាក",
+    "contextMenu.customActionPlaceholder": "ឬវាយលេខសម្គាល់សកម្មភាពផ្ទាល់ខ្លួន...",
+
+    // ── Status Bar ──
+    "status.ready": "រួចរាល់",
+    "status.branchTooltip": "ចុចដើម្បីប្តូរសាខា",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "បិទ",
+    "tab.newTooltip": "ឯកសារថ្មី (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "យកឫសចេញ",
+    "sidebar.refresh": "ធ្វើឱ្យស្រស់",
+
+    // ── Git Panel ──
+    "git.switchBranch": "ប្តូរសាខា",
+    "git.pull": "ទាញ",
+    "git.push": "រុញ",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "គំរូ Regex",
+    "search.lineLabel": "បន្ទាត់",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "លេខបន្ទាត់",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "ចុចដើម្បីបើក {file} នៅបន្ទាត់ {line}",
+
+    // ── XML Tools ──
+    "menu.xmlError": "កំហុស XML: {error}",
+    "menu.xmlParseError": "កំហុសការញែក XML: {error}",
+    "menu.xmlValid": "✅ XML ត្រឹមត្រូវ។",
+    "menu.xmlInvalid": "❌ XML មិនត្រឹមត្រូវ:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "រក្សាទុកឯកសារជាមុនដើម្បីមើលជាមុន",
+    "preview.saveFirstShort": "រក្សាទុកឯកសារជាមុន",
+    "preview.imageFailed": "បរាជ័យក្នុងការផ្ទុករូបភាព",
+    "preview.emptyCsv": "CSV ទទេ",
+    "preview.invalidJson": "JSON មិនត្រឹមត្រូវ",
+    "preview.katexInfo": "KaTeX បង្ហាញតែគណិតវិទ្យាក្នុងជួរ ($...$) និងគណិតវិទ្យាបង្ហាញ ($$...$$) ប៉ុណ្ណោះ",
+    "preview.spreadsheetFailed": "បរាជ័យក្នុងការផ្ទុកសៀវភៅបញ្ជី",
+    "preview.invalidNotebook": "សៀវភៅកត់ត្រាមិនត្រឹមត្រូវ",
+    "preview.docFailed": "បរាជ័យក្នុងការផ្ទុកឯកសារ",
+    "preview.geoJsonFailed": "បរាជ័យក្នុងការផ្ទុក GeoJSON",
+    "preview.sqliteFailed": "បរាជ័យក្នុងការបើកមូលដ្ឋានទិន្នន័យ",
+    "preview.emptyTable": "តារាងទទេ",
+    "preview.loadingArchive": "កំពុងផ្ទុកប័ណ្ណសារ...",
+    "preview.archiveFailed": "បរាជ័យក្នុងការអានប័ណ្ណសារ",
+    "preview.noPreview": "មិនមានការមើលជាមុនសម្រាប់ប្រភេទឯកសារនេះទេ",
+    "preview.pdfTitle": "ការមើលជាមុន PDF",
+    "preview.iframeTitle": "ការមើលជាមុន {name}",
+    "preview.dotRenderError": "បរាជ័យក្នុងការបង្ហាញក្រាហ្វ",
+    "preview.dotLoadError": "បរាជ័យក្នុងការផ្ទុកម៉ាស៊ីន Graphviz",
+    "preview.noContent": "គ្មានមាតិកា",
+    "preview.invalidHar": "ឯកសារ HAR មិនត្រឹមត្រូវ",
+    "preview.harTitle": "HAR: {count} សំណើ",
+    "preview.harMethod": "វិធីសាស្ត្រ",
+    "preview.harUrl": "URL（យូអរអិល）",
+    "preview.harStatus": "ស្ថានភាព",
+    "preview.harTime": "ពេលវេលា",
+    "preview.harSize": "ទំហំ",
+    "preview.3dOffline": "ការមើលជាមុន 3D មិនអាចប្រើបានពេលគ្មានបណ្តាញ",
+    "preview.envMasked": "តម្លៃត្រូវបានលាក់ — ដាក់កណ្ដុរពីលើដើម្បីបង្ហាញ",
+    "preview.saveFirst3d": "រក្សាទុកឯកសារជាមុនដើម្បីមើលគំរូ 3D ជាមុន",
+
+    "preview.close": "បិទការមើលជាមុន",
+    "preview.open": "មើលជាមុន ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "គ្មានផ្ទាំងត្រូវបានជ្រើសរើស",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "ភាសា",
+
+    // ── About ──
+    "about.version": "កំណែ {version}",
   },
 };
 

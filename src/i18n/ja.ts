@@ -138,22 +138,22 @@ const ja = {
     // ── Menu: Language ──
     "menu.language": "言語(&L)",
     "menu.language.plaintext": "プレーンテキスト",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.javascript": "ジャバスクリプト",
+    "menu.language.typescript": "タイプスクリプト",
+    "menu.language.json": "ジェイソン",
+    "menu.language.html": "エイチティーエムエル",
+    "menu.language.css": "シーエスエス",
+    "menu.language.python": "パイソン",
+    "menu.language.rust": "ラスト",
+    "menu.language.go": "Go言語",
+    "menu.language.java": "ジャバ",
+    "menu.language.c": "C言語",
+    "menu.language.cpp": "C++言語",
+    "menu.language.xml": "エックスエムエル",
+    "menu.language.yaml": "ヤムル",
+    "menu.language.markdown": "マークダウン",
+    "menu.language.sql": "エスキューエル",
+    "menu.language.shell": "シェル",
 
     "menu.language.defineLanguage": "ユーザー定義言語...",
     "menu.language.openUdlFolder": "UDLフォルダーを開く...",
@@ -297,7 +297,7 @@ const ja = {
     "dialog.cancel": "キャンセル",
     "dialog.discard": "破棄",
     "dialog.close": "閉じる",
-    "dialog.ok": "OK",
+    "dialog.ok": "オーケー",
     "dialog.run": "実行",
     "dialog.running": "実行中...",
     "dialog.runCommand": "コマンド実行",
@@ -384,7 +384,7 @@ const ja = {
     "sidebar.doclist": "ドキュメント一覧",
     "sidebar.clipboard": "クリップボード",
     "sidebar.symbols": "シンボル",
-    "sidebar.git": "Git",
+    "sidebar.git": "Git（ギット）",
     "sidebar.preview": "プレビュー",
     "sidebar.terminal": "ターミナル",
 
@@ -397,7 +397,7 @@ const ja = {
     "clipboard.copy": "システムクリップボードにコピー",
     "clipboard.pin": "固定/固定解除",
     "clipboard.remove": "削除",
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "JSONビューア",
     "sidebar.taskList": "タスク一覧",
 
     // ── JSON Viewer ──
@@ -580,6 +580,96 @@ const ja = {
     "terminal.retry": "再試行",
     "terminal.exited": "プロセス終了",
     "terminal.spawnFailed": "起動失敗",
+    "contextMenu.labelPlaceholder": "ラベル (&ホットキーの文字)",
+    "contextMenu.actionPlaceholder": "アクション ID (例: edit.cut)",
+    "contextMenu.labelShortPlaceholder": "ラベル",
+    "contextMenu.customActionPlaceholder": "またはカスタムアクション ID を入力...",
+
+    // ── Status Bar ──
+    "status.ready": "準備完了",
+    "status.branchTooltip": "クリックでブランチ切り替え",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "閉じる",
+    "tab.newTooltip": "新規ファイル (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "ルートを削除",
+    "sidebar.refresh": "更新",
+
+    // ── Git Panel ──
+    "git.switchBranch": "ブランチを切り替え",
+    "git.pull": "プル",
+    "git.push": "プッシュ",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "正規表現テンプレート",
+    "search.lineLabel": "行",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "行番号",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "クリックで {file} の {line} 行目を開く",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML エラー: {error}",
+    "menu.xmlParseError": "XML 解析エラー: {error}",
+    "menu.xmlValid": "✅ XML は有効です。",
+    "menu.xmlInvalid": "❌ XML が無効です:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "プレビューするにはファイルを保存してください",
+    "preview.saveFirstShort": "ファイルを保存してください",
+    "preview.imageFailed": "画像の読み込みに失敗しました",
+    "preview.emptyCsv": "空の CSV",
+    "preview.invalidJson": "無効な JSON",
+    "preview.katexInfo": "KaTeX はインライン数式 ($...$) とディスプレイ数式 ($$...$$) のみをレンダリングします",
+    "preview.spreadsheetFailed": "スプレッドシートの読み込みに失敗しました",
+    "preview.invalidNotebook": "無効なノートブック",
+    "preview.docFailed": "ドキュメントの読み込みに失敗しました",
+    "preview.geoJsonFailed": "GeoJSON の読み込みに失敗しました",
+    "preview.sqliteFailed": "データベースのオープンに失敗しました",
+    "preview.emptyTable": "空のテーブル",
+    "preview.loadingArchive": "アーカイブを読み込み中...",
+    "preview.archiveFailed": "アーカイブの読み取りに失敗しました",
+    "preview.noPreview": "このファイルタイプのプレビューは利用できません",
+    "preview.pdfTitle": "PDF プレビュー",
+    "preview.iframeTitle": "{name} プレビュー",
+    "preview.dotRenderError": "グラフのレンダリングに失敗しました",
+    "preview.dotLoadError": "Graphviz エンジンの読み込みに失敗しました",
+    "preview.noContent": "コンテンツがありません",
+    "preview.invalidHar": "無効な HAR ファイル",
+    "preview.harTitle": "HAR: {count} リクエスト",
+    "preview.harMethod": "メソッド",
+    "preview.harUrl": "URL（ユーアールエル）",
+    "preview.harStatus": "ステータス",
+    "preview.harTime": "時間",
+    "preview.harSize": "サイズ",
+    "preview.3dOffline": "3D プレビューはオフラインでは利用できません",
+    "preview.envMasked": "値はマスクされています — ホバーで表示",
+    "preview.saveFirst3d": "3D モデルをプレビューするにはファイルを保存してください",
+
+    "preview.close": "プレビューを閉じる",
+    "preview.open": "プレビュー ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "タブが選択されていません",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "言語",
+
+    // ── About ──
+    "about.version": "バージョン {version}",
   },
 };
 

@@ -127,23 +127,23 @@ const te = {
     "menu.encoding.convertUtf16BE": "UTF-16 BEకి మార్చు",
     "menu.encoding.openDialog": "అక్షర సెట్(&C)...",
     "menu.language": "భాష(&L)",
-    "menu.language.plaintext": "Plain Text",
-    "menu.language.javascript": "JavaScript",
-    "menu.language.typescript": "TypeScript",
-    "menu.language.json": "JSON",
-    "menu.language.html": "HTML",
-    "menu.language.css": "CSS",
-    "menu.language.python": "Python",
-    "menu.language.rust": "Rust",
-    "menu.language.go": "Go",
-    "menu.language.java": "Java",
-    "menu.language.c": "C",
-    "menu.language.cpp": "C++",
-    "menu.language.xml": "XML",
-    "menu.language.yaml": "YAML",
-    "menu.language.markdown": "Markdown",
-    "menu.language.sql": "SQL",
-    "menu.language.shell": "Shell",
+    "menu.language.plaintext": "సాదా టెక్స్ట్",
+    "menu.language.javascript": "జావాస్క్రిప్ట్",
+    "menu.language.typescript": "టైప్స్క్రిప్ట్",
+    "menu.language.json": "జెసన్",
+    "menu.language.html": "ఎచ్టిఎమ్ఎల్",
+    "menu.language.css": "సిఎస్ఎస్",
+    "menu.language.python": "పైథాన్",
+    "menu.language.rust": "రస్ట్",
+    "menu.language.go": "గో",
+    "menu.language.java": "జావా",
+    "menu.language.c": "సీ",
+    "menu.language.cpp": "సీ++",
+    "menu.language.xml": "ఎక్స్ఎమ్ఎల్",
+    "menu.language.yaml": "యామల్",
+    "menu.language.markdown": "మార్క్డౌన్",
+    "menu.language.sql": "ఎస్క్యూఎల్",
+    "menu.language.shell": "షెల్",
     "menu.language.defineLanguage": "వినియోగదారు నిర్వచిత భాష...",
     "menu.language.openUdlFolder": "UDL ఫోల్డర్ తెరువు...",
     "menu.macro": "మాక్రో(&M)",
@@ -157,10 +157,10 @@ const te = {
     "menu.run.claudeCode": "Claude ప్రారంభించు",
     "menu.run.codex": "Codex ప్రారంభించు",
     "menu.tools": "సాధనాలు(&T)",
-    "menu.tools.md5": "MD5 Generate",
-    "menu.tools.sha1": "SHA-1 Generate",
-    "menu.tools.sha256": "SHA-256 Generate",
-    "menu.tools.sha512": "SHA-512 Generate",
+    "menu.tools.md5": "MD5 సృష్టించు",
+    "menu.tools.sha1": "SHA-1 సృష్టించు",
+    "menu.tools.sha256": "SHA-256 సృష్టించు",
+    "menu.tools.sha512": "SHA-512 సృష్టించు",
     "menu.tools.configure": "బాహ్య సాధనాలు కాన్ఫిగర్ చేయి...",
     "menu.window": "విండో(&W)",
     "menu.window.nextTab": "తదుపరి ట్యాబ్(&N)",
@@ -191,7 +191,7 @@ const te = {
     // --- Search Panel ---
     "search.findLabel": "కనుగొనండి",
     "search.replaceLabel": "భర్తీ చేయండి",
-    "search.regex": "Regex",
+    "search.regex": "రెజెక్స్",
     "search.caseSensitive": "కేస్ సెన్సిటివ్",
     "search.wholeWord": "పూర్తి పదం",
     "search.wrapAround": "చుట్టూ చుట్టండి",
@@ -216,12 +216,12 @@ const te = {
     "search.searchBtn": "శోధించు",
     "search.searching": "శోధిస్తోంది...",
     "search.clear": "క్లియర్ చేయి",
-    "search.resultsCount": "{{count}} results found",
-    "search.matchStats": "{{current}} of {{count}}",
+    "search.resultsCount": "{{count}} ఫలితాలు కనుగొనబడ్డాయి",
+    "search.matchStats": "{{current}} లో {{count}}",
     "search.incremental": "ఇంక్రిమెంటల్",
     "search.inSelection": "ఎంపికలో",
     "search.preview": "ప్రివ్యూ",
-    "search.previewTitle": "భర్తీ ప్రివ్యూ — {{count}} ప్రాంత(లు)",
+    "search.previewTitle": "భర్తీ ప్రివ్యూ — {{count}} సంభవం(లు)",
     "search.replaceAll": "అన్నీ భర్తీ చేయండి",
     "search.cancel": "రద్దు చేయి",
 
@@ -263,9 +263,9 @@ const te = {
     "preferences.whitespaceAll": "అన్నీ",
     "preferences.defaultEncoding": "డిఫాల్ట్ ఎన్కోడింగ్",
     "preferences.defaultLanguage": "డిఫాల్ట్ భాష",
-    "preferences.eol": "EOL",
-    "preferences.eolLf": "LF (Unix/macOS)",
-    "preferences.eolCrlf": "CRLF (Windows)",
+    "preferences.eol": "EOL (లైను ముగింపు)",
+    "preferences.eolLf": "LF (యునిక్స్/macOS)",
+    "preferences.eolCrlf": "CRLF (విండోస్)",
     "preferences.eolCr": "CR (క్లాసిక్ Mac)",
 
     // --- Shortcut Mapper ---
@@ -358,8 +358,8 @@ const te = {
     // --- Status Bar ---
     "status.encoding": "ఎన్కోడింగ్",
     "status.language": "భాష",
-    "status.line": "Ln",
-    "status.column": "Col",
+    "status.line": "లై",
+    "status.column": "కా",
     "status.clickToChange": "ఎన్కోడింగ్ మార్చడానికి క్లిక్ చేయండి",
 
     // --- Welcome ---
@@ -372,7 +372,7 @@ const te = {
     "sidebar.doclist": "పత్రాల జాబితా",
     "sidebar.clipboard": "క్లిప్‌బోర్డ్",
     "sidebar.symbols": "చిహ్నాలు",
-    "sidebar.git": "Git",
+    "sidebar.git": "గిట్",
     "sidebar.terminal": "టెర్మినల్",
 
     // --- Terminal ---
@@ -397,7 +397,7 @@ const te = {
     "clipboard.remove": "తొలగించు",
 
     // --- Sidebar ---
-    "sidebar.jsonViewer": "JSON",
+    "sidebar.jsonViewer": "జెసన్",
     "sidebar.taskList": "టాస్క్ లిస్ట్",
 
     // --- JSON Viewer ---
@@ -562,6 +562,96 @@ const te = {
     "contextMenu.add": "జోడించు",
     "contextMenu.selectAction": "చర్య ఎంచుకోండి...",
     "contextMenu.resetDefaults": "డిఫాల్ట్‌లకు రీసెట్ చేయి",
+    "contextMenu.labelPlaceholder": "లేబుల్ (&Letter for hotkey కోసం)",
+    "contextMenu.actionPlaceholder": "యాక్షన్ ID (ఉదా. edit.cut)",
+    "contextMenu.labelShortPlaceholder": "లేబుల్",
+    "contextMenu.customActionPlaceholder": "లేదా కస్టమ్ యాక్షన్ ID టైప్ చేయండి...",
+
+    // ── Status Bar ──
+    "status.ready": "సిద్ధంగా ఉంది",
+    "status.branchTooltip": "బ్రాంచ్ మార్చడానికి క్లిక్ చేయండి",
+
+    // ── Tab Bar ──
+    "tab.closeTooltip": "మూసివేయి",
+    "tab.newTooltip": "కొత్త ఫైల్ (Ctrl+N)",
+
+    // ── Sidebar ──
+    "sidebar.removeRoot": "రూట్ తొలగించు",
+    "sidebar.refresh": "రిఫ్రెష్ చేయి",
+
+    // ── Git Panel ──
+    "git.switchBranch": "బ్రాంచ్ మార్చు",
+    "git.pull": "పుల్",
+    "git.push": "పుష్",
+
+    // ── Search Panel ──
+    "search.regexTemplates": "Regex టెంప్లేట్లు",
+    "search.lineLabel": "లై",
+
+    // ── Go To Line ──
+    "gotoLine.placeholder": "లైన్ నంబర్",
+
+    // ── Run Dialog ──
+    "run.openFileAtLine": "లైన్ {line} వద్ద {file} తెరవడానికి క్లిక్ చేయండి",
+
+    // ── XML Tools ──
+    "menu.xmlError": "XML లోపం: {error}",
+    "menu.xmlParseError": "XML పార్స్ లోపం: {error}",
+    "menu.xmlValid": "✅ XML చెల్లుతుంది.",
+    "menu.xmlInvalid": "❌ XML చెల్లదు:\n{error}",
+
+    // ── Preview ──
+    "preview.saveFirst": "ప్రివ్యూ చూడటానికి ముందు ఫైల్ సేవ్ చేయండి",
+    "preview.saveFirstShort": "ముందు ఫైల్ సేవ్ చేయండి",
+    "preview.imageFailed": "చిత్రాన్ని లోడ్ చేయడంలో విఫలమైంది",
+    "preview.emptyCsv": "CSV ఖాళీగా ఉంది",
+    "preview.invalidJson": "JSON చెల్లదు",
+    "preview.katexInfo": "KaTeX inline math ($...$) మరియు display math ($$...$$) మాత్రమే రెండర్ చేస్తుంది",
+    "preview.spreadsheetFailed": "స్ప్రెడ్‌షీట్ లోడ్ చేయడంలో విఫలమైంది",
+    "preview.invalidNotebook": "నోట్‌బుక్ చెల్లదు",
+    "preview.docFailed": "డాక్యుమెంట్ లోడ్ చేయడంలో విఫలమైంది",
+    "preview.geoJsonFailed": "GeoJSON లోడ్ చేయడంలో విఫలమైంది",
+    "preview.sqliteFailed": "డేటాబేస్ తెరవడంలో విఫలమైంది",
+    "preview.emptyTable": "పట్టిక ఖాళీగా ఉంది",
+    "preview.loadingArchive": "ఆర్కైవ్ లోడ్ అవుతోంది...",
+    "preview.archiveFailed": "ఆర్కైవ్ చదవడంలో విఫలమైంది",
+    "preview.noPreview": "ఈ ఫైల్ రకానికి ప్రివ్యూ అందుబాటులో లేదు",
+    "preview.pdfTitle": "PDF ప్రివ్యూ",
+    "preview.iframeTitle": "{name} ప్రివ్యూ",
+    "preview.dotRenderError": "గ్రాఫ్ రెండర్ చేయడంలో విఫలమైంది",
+    "preview.dotLoadError": "Graphviz ఇంజిన్ లోడ్ చేయడంలో విఫలమైంది",
+    "preview.noContent": "కంటెంట్ లేదు",
+    "preview.invalidHar": "HAR ఫైల్ చెల్లదు",
+    "preview.harTitle": "HAR: {count} అభ్యర్థనలు",
+    "preview.harMethod": "పద్ధతి",
+    "preview.harUrl": "URL（యుఆర్ఎల్）",
+    "preview.harStatus": "స్థితి",
+    "preview.harTime": "సమయం",
+    "preview.harSize": "పరిమాణం",
+    "preview.3dOffline": "3D ప్రివ్యూ ఆఫ్‌లైన్‌లో అందుబాటులో లేదు",
+    "preview.envMasked": "విలువలు మాస్క్ చేయబడ్డాయి — hover చేసి చూడండి",
+    "preview.saveFirst3d": "3D మోడల్ ప్రివ్యూ చూడటానికి ముందు ఫైల్ సేవ్ చేయండి",
+
+    "preview.close": "ప్రివ్యూ మూసివేయి",
+    "preview.open": "ప్రివ్యూ ({shortcut})",
+    // ── Split Editor ──
+    "splitEditor.noTab": "ట్యాబ్ ఎంచుకోబడలేదు",
+
+    // ── UDL Placeholders ──
+    "udl.extensionsPlaceholder": "dsl, mylang",
+    "udl.keywordsPlaceholder": "if else while for return",
+    "udl.lineCommentPlaceholder": "//",
+    "udl.blockCommentStartPlaceholder": "/*",
+    "udl.blockCommentEndPlaceholder": "*/",
+    "udl.operatorsPlaceholder": "+-*/=<>!&|~^%",
+    "udl.delimitersPlaceholder": "() [] {}",
+    "udl.stringCharsPlaceholder": "\"'",
+
+    // ── Preferences ──
+    "preferences.language": "భాష",
+
+    // ── About ──
+    "about.version": "వెర్షన్ {version}",
   },
 };
 
