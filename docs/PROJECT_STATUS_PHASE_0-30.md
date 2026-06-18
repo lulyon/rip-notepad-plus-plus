@@ -37,12 +37,12 @@
 
 ### i18n
 
-7 种语言: 中文 / English / 日本語 / 한국어 / Français / العربية / עברית
-493 keys 每种语言，RTL 自动检测
+58 种语言: 覆盖 VS Code 全部官方语言 + Notepad++ 全部有效翻译
+495 keys 每种语言，5 种 RTL（ar/he/fa/ur/pa），自动方向检测
 
 ### 测试
 
-- 356 单元测试 (21 suites, vitest)
+- 376 单元测试 (22 suites, vitest)
 - 65 E2E 测试 (4 spec files, Playwright)
 
 ---
@@ -193,8 +193,10 @@
 | 自动发现 | 启动时读取 `~/.claude/settings.json` |
 | AI 面板 UI | 侧边栏 🤖 tab，对话气泡 + Markdown 渲染 |
 | 多会话 | 标签页管理，自动标题（首条消息 20 字截断） |
-| API 调用 | Anthropic Messages 格式 → DeepSeek 端点 (兼容) |
+| API 调用 | Anthropic + OpenAI 双 Provider，自动检测，手动覆盖 |
+| OpenAI 搜索 | DeepSeek 自动端点切换（`/v1` → `/anthropic`）复用 Anthropic 搜索 |
 | 流式 SSE | `stream: true`, 逐 token 实时显示 |
+| **Markdown 渲染** | `markdown-it` + `highlight.js`，完整 GFM，50ms 流式节流 |
 | **联网搜索** | `web_search_20250305` 服务端工具，模型自主决定搜索时机，搜索结果带来源链接 |
 | **位置感知** | 时区自动注入 `user_location`，天气/本地新闻搜索本地化 |
 | **日期感知** | `new Date()` 注入 system prompt，模型知道当前日期 |
@@ -217,8 +219,11 @@
 | **菜单项检查标记** | MenuItemDef.checked + ✓ 渲染 |
 | **iTerm2 自动检测** | open_terminal 优先使用 iTerm2 |
 | **集成 PTY 终端** | 侧边栏 Terminal tab + Rust portable-pty + shell 会话管理 |
-| **AI 联网搜索** | 服务端 web_search_20250305 + user_location 时区本地化 + 日期注入 |
+| **AI 联网搜索** | 服务端 web_search_20250305 + user_location 时区本地化 + 日期注入 + OpenAI 端点自动切换 |
 | **AI 多会话** | 标签页式多会话，独立历史，XML 后处理 |
+| **AI Markdown 渲染** | markdown-it + highlight.js，完整 GFM，流式 50ms 节流 |
+| **AI 双 Provider** | Anthropic + OpenAI 兼容 API，自动检测，provider 下拉选择 |
+| **i18n 扩展** | 7 → 58 种语言，495 keys，100% 覆盖，自动 key 校验测试 |
 
 ### 预览引擎支持的类型
 

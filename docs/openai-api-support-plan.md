@@ -1,5 +1,7 @@
 # OpenAI 兼容 API 支持 — 实现方案
 
+> ✅ **已实现** (2026-06-18)，含 DeepSeek 端点自动切换 + AI 面板双 Provider
+
 ## 调研结论
 
 ### 实测 DeepSeek OpenAI 端点

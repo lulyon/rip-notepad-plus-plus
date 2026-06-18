@@ -10,8 +10,9 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 - **Node**: >= 20
 - **Rust**: >= 1.70 (edition 2021)
 - **Version**: 0.3.0 (21 phases complete)
-- **Tests**: 65 E2E + 356 unit (Playwright + vitest, 21 suites)
+- **Tests**: 65 E2E + 376 unit (Playwright + vitest, 22 suites)
 - **IPC Commands**: 55 (file_ops, encoding, search, session, system, plugin, git, monitor, workspace, pty)
+- **i18n**: 495 keys, 58 languages (5 RTL: ar/he/fa/ur/pa)
 
 ## Architecture
 
@@ -91,7 +92,7 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 | `src/hooks/useSnapshotAutoSave.ts` | 7s interval snapshot backup for crash recovery |
 | `src/hooks/useUpdateChecker.ts` | Check for app updates via tauri-plugin-updater |
 | `src/lib/ipc.ts` | Typed invoke() wrapper for all 55 Rust commands |
-| `src/lib/aiClient.ts` | Anthropic-compatible SSE streaming client with web_search support |
+| `src/lib/aiClient.ts` | Dual-provider SSE streaming (Anthropic + OpenAI), web_search, endpoint auto-switch |
 | `src/lib/constants.ts` | 75 language extension→Monaco ID mappings |
 | `src/lib/fileUtils.ts` | Path utils, binary detection, size formatting |
 | `src/i18n/` | i18next config + zh.ts / en.ts locale files (493 keys) |
@@ -307,10 +308,10 @@ Each tab: `{ id, path, name, content, encoding, modified, language, cursorLine, 
 ## i18n
 
 - **Framework**: react-i18next + i18next
-- **Locales**: `src/i18n/zh.ts` (Chinese), `src/i18n/en.ts` (English)
+- **Locales**: 58 language files in `src/i18n/` (see `docs/i18n-languages.md` for full list)
 - **Config**: `src/i18n/index.ts` (default: zh, persisted to localStorage)
 - **Language switcher**: Preferences → General → Language
-- **Coverage**: Menus, welcome screen, tab context menu, status bar, sidebar panels, all dialogs, AI chat (493 keys, 7 languages: zh/en/ja/ko/fr/ar/he)
+- **Coverage**: Menus, welcome screen, tab context menu, status bar, sidebar panels, all dialogs, AI chat (495 keys, 58 languages: zh/en/ja/ko/fr/ar/he/de/es/pt/ru/it/tr/pl/cs/hu/zh-tw/fa/uk/vi/hi/nl/sv/fi/da/nb/th/id/ro/sk/el/sr/bg/lt/lv/sl/hr/et/ca/eu/gl/ur/pa/sw/ha/am/my/bn/te/mr/ta/gu/kn/tl/km/ne/yo/ig)
 
 ## Conventions
 
@@ -355,12 +356,12 @@ Each tab: `{ id, path, name, content, encoding, modified, language, cursorLine, 
 
 ```bash
 npm test              # Run all tests
-npm run test:unit     # 356 vitest unit tests (21 suites)
+npm run test:unit     # 376 vitest unit tests (22 suites)
 npm run test:e2e      # 65 Playwright E2E tests
 npm run test:check    # TypeScript + Rust compile checks
 ```
 
-- **21 test suites, 356 unit tests**: stores (incl. ai, encoding, clipboard, git, editor, macro, plugin, search, settings), hooks, preview engine renderers, aiClient SSE parsing
+- **22 test suites, 376 unit tests**: stores (15), hooks, preview engine, aiClient (Anthropic + OpenAI SSE), i18n coverage (58 languages)
 - **65 E2E tests**: UI basics, feature coverage, NP++ features, deep behavior
 - Headless Chromium with mocked Tauri IPC
 - Config: `e2e/playwright.config.ts` (webServer auto-starts Vite)
@@ -405,9 +406,13 @@ git push
 
 ## Recently Completed
 
+- **OpenAI API support** — dual-provider architecture (Anthropic + OpenAI), auto-detection, provider selector in settings
+- **OpenAI web search** — auto-switch DeepSeek OpenAI endpoint to Anthropic for server-side search
+- **Markdown rendering** — `markdown-it` + `highlight.js` replaces hand-rolled regex, full GFM (tables, code blocks with syntax highlighting), 50ms streaming throttle
 - **AI web search** — server-side search via `web_search_20250305` tool, auto-detected by model, with `user_location` timezone localization and XML output sanitization
 - **AI multi-tab** — multi-conversation support with auto-titling and per-tab history
 - **System date injection** — current date auto-injected into AI system prompt
+- **i18n expansion** — 7 → 58 languages, 495 keys, 100% coverage, automated key-parity tests
 
 ## Next Priorities
 

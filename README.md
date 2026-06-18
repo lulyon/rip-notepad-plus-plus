@@ -121,15 +121,16 @@ Open a supported file and click the 👁 button in the editor toolbar, or press 
 - Event notifications: fileOpened, fileSaved, fileClosed
 
 ### AI Assistant (Sidebar)
-- 🤖 AI tab in sidebar — DeepSeek API (Anthropic-compatible)
-- **Web search** — server-side via `web_search_20250305` tool, auto-detected by model
+- 🤖 AI tab in sidebar — **Anthropic + OpenAI dual-provider** support
+- **Web search** — server-side via `web_search_20250305`, auto-switch to Anthropic endpoint for DeepSeek OpenAI users
 - **Location-aware** — timezone auto-injected for localized search results (weather, news)
 - **System date** — current date injected into system prompt for accurate time awareness
 - **Multi-conversation** — tabbed conversations with auto-titling and independent history
-- Streaming chat with real-time token display + thinking process (collapsible)
-- Auto-detect config from `~/.claude/settings.json`
+- **Markdown rendering** — `markdown-it` + `highlight.js`, full GFM (tables, syntax-highlighted code), 50ms streaming throttle
+- Auto-detect config from `~/.claude/settings.json` + provider auto-detection
 - Quick actions: Explain Code / Refactor / Generate Tests / Fix Bugs
 - Context injection: auto-attach active file + language
+- Conversation history persisted to localStorage
 - Conversation history persisted to localStorage
 
 ### Workspace
@@ -153,7 +154,7 @@ Open a supported file and click the 👁 button in the editor toolbar, or press 
 - Show/hide menu bar, status bar, sidebar
 - Custom keyboard shortcut mapping
 - Custom editor context menu (add/remove/reorder items)
-- Language: 中文 / English / 日本語 / 한국어 / Français / العربية / עברית
+- Language: 58 languages (中文 / English / 日本語 / 한국어 / Français / العربية / עברית / Deutsch / Español / Português / Русский / ...)
 
 ### Auto Update
 - Automatic update check via tauri-plugin-updater
@@ -221,7 +222,7 @@ rip-notepad-plus-plus/
 │   │   └── Dialogs/              # 16 dialogs
 │   ├── stores/                   # 15 Zustand stores
 │   ├── hooks/                    # 11 custom hooks
-│   ├── i18n/                     # 7 locales (zh/en/ja/ko/fr/ar/he) — 493 keys
+│   ├── i18n/                     # 58 locales — 495 keys, 5 RTL
 │   ├── lib/                      # IPC, aiClient, utils, constants, preview engine
 │   └── types/                    # TypeScript interfaces
 ├── src-tauri/                    # Backend (Rust)
@@ -234,7 +235,7 @@ rip-notepad-plus-plus/
 │       └── models.rs             # shared types
 ├── plugins/                      # Plugin directory
 ├── e2e/                          # 65 E2E tests (Playwright)
-├── tests/                        # 356 unit tests (vitest, 21 suites)
+├── tests/                        # 376 unit tests (vitest, 22 suites)
 ├── test-files/                   # 39 preview test files
 ├── docs/                         # Design & audit documents
 └── package.json

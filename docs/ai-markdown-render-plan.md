@@ -1,5 +1,7 @@
 # AI Tab Markdown 实时渲染方案
 
+> ✅ **已实现** (2026-06-18)，markdown-it + highlight.js，50ms 流式节流
+
 ## 现状
 
 `AiPanel.tsx` 的 `formatContent()` 用 4 行正则做简陋转换：
