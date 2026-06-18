@@ -16,7 +16,6 @@ import tr from "./tr";
 import pl from "./pl";
 import cs from "./cs";
 import hu from "./hu";
-import zhTw from "./zh-tw";
 import fa from "./fa";
 import uk from "./uk";
 import vi from "./vi";
@@ -65,21 +64,18 @@ i18n.use(initReactI18next).init({
   resources: {
     en, zh, ja, ko, fr, ar, he,
     de, es, pt, ru, it, tr, pl, cs, hu,
-    "zh-tw": zhTw, fa, uk, vi, hi, nl, sv, fi, da,
+    fa, uk, vi, hi, nl, sv, fi, da,
     nb, th, id, ro, sk, el, sr, bg, lt,
     lv, sl, hr, et, ca, eu, gl,
     ur, pa, sw, ha, am, my,
     bn, te, mr, ta, gu, kn, tl, km, ne, yo, ig,
   } as unknown as Record<string, { translation: Record<string, string> }>,
   lng: savedLang,
-  fallbackLng: {
-    "zh-tw": ["en"],  // prevent fallback to zh (Simplified)
-    default: ["en"],
-  },
+  fallbackLng: "en",
   supportedLngs: [
     "zh", "en", "ja", "ko", "fr", "ar", "he",
     "de", "es", "pt", "ru", "it", "tr", "pl", "cs", "hu",
-    "zh-tw", "fa", "uk", "vi", "hi", "nl", "sv", "fi", "da",
+    "fa", "uk", "vi", "hi", "nl", "sv", "fi", "da",
     "nb", "th", "id", "ro", "sk", "el", "sr", "bg", "lt",
     "lv", "sl", "hr", "et", "ca", "eu", "gl",
     "ur", "pa", "sw", "ha", "am", "my",
@@ -107,7 +103,6 @@ export const LANGUAGES = [
   { code: "pl", name: "Polski" },
   { code: "cs", name: "Čeština" },
   { code: "hu", name: "Magyar" },
-  { code: "zh-tw", name: "繁體中文" },
   { code: "fa", name: "فارسی" },
   { code: "uk", name: "Українська" },
   { code: "vi", name: "Tiếng Việt" },

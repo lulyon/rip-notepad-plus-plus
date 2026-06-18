@@ -6,8 +6,8 @@ describe("i18n coverage", () => {
 
   // ── Count ──
 
-  it("has 58 languages registered", () => {
-    expect(LANGUAGES).toHaveLength(58);
+  it("has 57 languages registered", () => {
+    expect(LANGUAGES).toHaveLength(57);
   });
 
   // ── Key parity ──
@@ -74,9 +74,9 @@ describe("i18n coverage", () => {
 
   // ── VS Code official 15 ──
 
-  it("covers all 15 VS Code official display languages", () => {
+  it("covers all 14 VS Code official display languages (zh-tw removed)", () => {
     const vscodeCodes = [
-      "en", "zh", "zh-tw", "fr", "de", "it", "es",
+      "en", "zh", "fr", "de", "it", "es",
       "ja", "ko", "ru", "pt", "tr", "pl", "cs", "hu",
     ];
     for (const code of vscodeCodes) {
