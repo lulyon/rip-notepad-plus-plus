@@ -525,7 +525,7 @@ const en = {
     "ai.settings": "Settings",
     "ai.clearChat": "Clear chat",
     "ai.configTitle": "AI Configuration",
-    "ai.configDesc": "Configure your AI provider. DeepSeek API is compatible with the Anthropic messages format.",
+    "ai.configDesc": "Configure your AI provider. Compatible with Anthropic and OpenAI message formats.",
     "ai.configApiUrl": "API Base URL",
     "ai.configApiKey": "API Key",
     "ai.configModel": "Model",

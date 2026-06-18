@@ -525,7 +525,7 @@ const zh = {
     "ai.settings": "设置",
     "ai.clearChat": "清除聊天",
     "ai.configTitle": "AI 配置",
-    "ai.configDesc": "配置你的 AI 提供商。DeepSeek API 兼容 Anthropic 消息格式。",
+    "ai.configDesc": "配置你的 AI 提供商，兼容 Anthropic 和 OpenAI 消息格式。",
     "ai.configApiUrl": "API 基础地址",
     "ai.configApiKey": "API 密钥",
     "ai.configModel": "模型",
