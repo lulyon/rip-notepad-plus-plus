@@ -73,6 +73,7 @@ i18n.use(initReactI18next).init({
   } as unknown as Record<string, { translation: Record<string, string> }>,
   lng: savedLang,
   fallbackLng: "en",
+  load: "currentOnly",  // Don't merge zh into zh-tw, etc.
   interpolation: { escapeValue: false },
   react: { useSuspense: false },
 });
