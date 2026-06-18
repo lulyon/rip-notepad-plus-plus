@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { streamChat, detectProvider } from "../src/lib/aiClient";
+import { streamChat, detectProvider, rewriteToAnthropicEndpoint } from "../src/lib/aiClient";
 import type { StreamCallbacks, SearchResult } from "../src/lib/aiClient";
 
 const messages = [
@@ -342,7 +342,7 @@ describe("openaiStream", () => {
     expect(fetchMock.mock.calls[0][1].headers.Authorization).toBe("Bearer sk-test");
   });
 
-  it("does NOT include web_search tool in OpenAI request", async () => {
+  it("generic OpenAI ignores web search (no Anthropic endpoint)", async () => {
     const encoder = new TextEncoder();
     const sse = 'data: {"id":"x","object":"chat.completion.chunk","choices":[{"index":0,"delta":{"content":"ok"}}]}\n\ndata: [DONE]\n\n';
     const chunk = encoder.encode(sse);
@@ -359,12 +359,71 @@ describe("openaiStream", () => {
     }) as any;
 
     const c = makeCollector();
-    // enableWebSearch=true but provider=openai — should be ignored
+    // Generic OpenAI (not DeepSeek) with web search — falls through to openaiStream without search
     await streamChat("https://api.openai.com", "sk-test", "gpt-4", messages, "", true, undefined, "openai", c.callbacks);
 
     const fetchMock = globalThis.fetch as ReturnType<typeof vi.fn>;
     const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
     expect(body.tools).toBeUndefined();
+  });
+
+  it("DeepSeek OpenAI with web search auto-switches to Anthropic endpoint", async () => {
+    const encoder = new TextEncoder();
+    const sse = 'data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}\n\n' +
+                'data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"ok"}}\n\n' +
+                'data: {"type":"content_block_stop","index":0}\n\n' +
+                'data: {"type":"message_stop"}\n\n';
+    const chunk = encoder.encode(sse);
+
+    globalThis.fetch = vi.fn().mockResolvedValue({
+      ok: true, status: 200,
+      body: { getReader: () => ({
+        read: vi.fn()
+          .mockResolvedValueOnce({ done: false, value: chunk })
+          .mockResolvedValue({ done: true, value: undefined }),
+      })},
+      json: async () => ({}),
+      text: async () => "",
+    }) as any;
+
+    const c = makeCollector();
+    // DeepSeek OpenAI URL + web search → should hit Anthropic endpoint with web_search tool
+    await streamChat("https://api.deepseek.com/v1", "sk-test", "deepseek-chat", messages, "", true, undefined, "openai", c.callbacks);
+
+    const fetchMock = globalThis.fetch as ReturnType<typeof vi.fn>;
+    const callUrl = fetchMock.mock.calls[0][0] as string;
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+
+    // Should have rewritten to Anthropic endpoint
+    expect(callUrl).toContain("/anthropic/v1/messages");
+    // Should include the web_search tool
+    expect(body.tools).toBeDefined();
+    expect(body.tools[0].type).toBe("web_search_20250305");
+    // Should use x-api-key header (Anthropic auth)
+    expect(fetchMock.mock.calls[0][1].headers["x-api-key"]).toBe("sk-test");
+  });
+});
+
+describe("rewriteToAnthropicEndpoint", () => {
+  it("rewrites api.deepseek.com/v1 to /anthropic", () => {
+    expect(rewriteToAnthropicEndpoint("https://api.deepseek.com/v1"))
+      .toBe("https://api.deepseek.com/anthropic");
+  });
+
+  it("rewrites api.deepseek.com (no /v1) to /anthropic", () => {
+    expect(rewriteToAnthropicEndpoint("https://api.deepseek.com"))
+      .toBe("https://api.deepseek.com/anthropic");
+  });
+
+  it("rewrites api.deepseek.com/v1/ to /anthropic (trailing slash)", () => {
+    expect(rewriteToAnthropicEndpoint("https://api.deepseek.com/v1/"))
+      .toBe("https://api.deepseek.com/anthropic");
+  });
+
+  it("returns null for non-DeepSeek URLs", () => {
+    expect(rewriteToAnthropicEndpoint("https://api.openai.com/v1")).toBeNull();
+    expect(rewriteToAnthropicEndpoint("https://api.anthropic.com")).toBeNull();
+    expect(rewriteToAnthropicEndpoint("https://localhost:11434/v1")).toBeNull();
   });
 });
 

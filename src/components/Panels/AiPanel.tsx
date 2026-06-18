@@ -264,7 +264,7 @@ function AiTabPane({ conv, visible, apiBaseUrl, apiKey, model, enableWebSearch, 
     await streamChat(
       apiBaseUrl, apiKey, model, latest.messages,
       `You are a helpful coding assistant. Today is ${new Date().toISOString().split("T")[0]}. Respond in Markdown. Keep answers concise.`,
-      provider === "anthropic" && enableWebSearch,  // web search only for Anthropic
+      enableWebSearch,  // streamChat dispatcher handles endpoint routing
       tz,
       provider,
       callbacks,
@@ -509,16 +509,14 @@ export function AiPanel() {
           +
         </button>
         <div className="ai-header-actions">
-          {/* Web search toggle — only for Anthropic provider */}
-          {provider !== "openai" && (
-            <button
-              className={`ai-btn-sm ai-web-search-toggle ${enableWebSearch ? "active" : ""}`}
-              onClick={toggleWebSearch}
-              title={enableWebSearch ? t("ai.webSearchOn") : t("ai.webSearchOff")}
-            >
-              🌐
-            </button>
-          )}
+          {/* Web search toggle */}
+          <button
+            className={`ai-btn-sm ai-web-search-toggle ${enableWebSearch ? "active" : ""}`}
+            onClick={toggleWebSearch}
+            title={enableWebSearch ? t("ai.webSearchOn") : t("ai.webSearchOff")}
+          >
+            🌐
+          </button>
           <button className="ai-btn-sm" onClick={() => setShowConfig(!showConfig)} title={t("ai.settings")}>⚙</button>
           {activeId && (
             <button className="ai-btn-sm" onClick={() => clearMessages(activeId)} title={t("ai.clearChat")}>🗑</button>

@@ -37,10 +37,27 @@ export function detectProvider(baseUrl: string): ApiProvider {
 // ═══════════════════════════════════════════════════
 
 /**
+ * Try to rewrite an OpenAI-format base URL to the provider's Anthropic endpoint.
+ * Returns null if the provider is unknown or has no Anthropic-compatible endpoint.
+ *
+ * Known mappings:
+ *   https://api.deepseek.com/v1 → https://api.deepseek.com/anthropic
+ *   https://api.deepseek.com     → https://api.deepseek.com/anthropic
+ */
+export function rewriteToAnthropicEndpoint(baseUrl: string): string | null {
+  if (baseUrl.includes("api.deepseek.com")) {
+    return baseUrl.replace(/\/v1\/?$/, "").replace(/\/+$/, "") + "/anthropic";
+  }
+  return null;
+}
+
+/**
  * Streaming chat client supporting Anthropic-compatible and OpenAI-compatible APIs.
  *
- * Dispatch is based on `provider`. When "openai", web search is not available
- * (the toggle is hidden in the UI and the parameter is ignored).
+ * When provider is "openai" and web search is enabled, the client tries to
+ * rewrite the URL to the provider's Anthropic-compatible endpoint (if known).
+ * This allows DeepSeek users to use web search even when configured for the
+ * OpenAI endpoint format.
  */
 export async function streamChat(
   baseUrl: string,
@@ -53,6 +70,13 @@ export async function streamChat(
   provider: ApiProvider,
   callbacks: StreamCallbacks,
 ): Promise<void> {
+  if (provider === "openai" && enableWebSearch) {
+    const anthroUrl = rewriteToAnthropicEndpoint(baseUrl);
+    if (anthroUrl) {
+      return anthropicStream(anthroUrl, apiKey, model, messages, systemPrompt, true, userTimezone, callbacks);
+    }
+    // Unknown provider: fall through to OpenAI without search
+  }
   if (provider === "openai") {
     return openaiStream(baseUrl, apiKey, model, messages, systemPrompt, callbacks);
   }
