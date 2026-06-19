@@ -195,12 +195,12 @@ test.describe("Status bar", () => {
 test.describe("Preferences dialog", () => {
   test.beforeEach(async ({ page }) => { await setupPage(page); });
 
-  test("preferences has three tabs with Chinese labels", async ({ page }) => {
+  test("preferences has four tabs with Chinese labels", async ({ page }) => {
     await page.evaluate(() => {
       window.dispatchEvent(new CustomEvent("menu-action", { detail: "file.preferences" }));
     });
     await page.waitForTimeout(300);
-    await expect(page.locator(".prefs-tab")).toHaveCount(3);
+    await expect(page.locator(".prefs-tab")).toHaveCount(4);
   });
 
   test("can switch between preference tabs", async ({ page }) => {
