@@ -464,15 +464,27 @@ import { resolve } from "path";
 
 const TEST_DIR = resolve(__dirname, "../test-files");
 
+import { existsSync } from "fs";
+
 function readTestFile(name: string): string {
-  try {
-    return readFileSync(resolve(TEST_DIR, name), "utf-8");
-  } catch {
-    return "";
+  const path = resolve(TEST_DIR, name);
+  if (!existsSync(path)) {
+    throw new Error(`Test file not found: ${path}`);
   }
+  return readFileSync(path, "utf-8");
+}
+
+function hasTestFiles(): boolean {
+  return existsSync(TEST_DIR);
 }
 
 describe("previewEngine — real test files", () => {
+  // Skip if test-files directory doesn't exist (e.g. in CI)
+  if (!hasTestFiles()) {
+    it.skip("real test files not available", () => {});
+    return;
+  }
+
   // Text-based files that can be verified
   it("renders test.md without errors", () => {
     const content = readTestFile("test.md");
