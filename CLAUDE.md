@@ -12,7 +12,7 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 - **Version**: 0.3.0 (21 phases complete)
 - **Tests**: 65 E2E + 376 unit (Playwright + vitest, 22 suites)
 - **IPC Commands**: 55 (file_ops, encoding, search, session, system, plugin, git, monitor, workspace, pty)
-- **i18n**: 495 keys, 58 languages (5 RTL: ar/he/fa/ur/pa)
+- **i18n**: 559 keys, 70 languages (6 RTL: ar/he/fa/ur/pa/dv)
 
 ## Architecture
 
@@ -308,10 +308,10 @@ Each tab: `{ id, path, name, content, encoding, modified, language, cursorLine, 
 ## i18n
 
 - **Framework**: react-i18next + i18next
-- **Locales**: 58 language files in `src/i18n/` (see `docs/i18n-languages.md` for full list)
+- **Locales**: 70 language files in `src/i18n/` (see `docs/i18n-languages.md` for full list)
 - **Config**: `src/i18n/index.ts` (default: zh, persisted to localStorage)
 - **Language switcher**: Preferences → General → Language
-- **Coverage**: Menus, welcome screen, tab context menu, status bar, sidebar panels, all dialogs, AI chat (495 keys, 58 languages: zh/en/ja/ko/fr/ar/he/de/es/pt/ru/it/tr/pl/cs/hu/zh-tw/fa/uk/vi/hi/nl/sv/fi/da/nb/th/id/ro/sk/el/sr/bg/lt/lv/sl/hr/et/ca/eu/gl/ur/pa/sw/ha/am/my/bn/te/mr/ta/gu/kn/tl/km/ne/yo/ig)
+- **Coverage**: Menus, welcome screen, tab context menu, status bar, sidebar panels, all dialogs, AI chat (559 keys, 70 languages: zh/en/ja/ko/fr/ar/he/de/es/pt/ru/it/tr/pl/cs/hu/fa/uk/vi/hi/nl/sv/fi/da/nb/th/id/ro/sk/el/sr/bg/lt/lv/sl/hr/et/ca/eu/gl/ur/pa/sw/ha/am/my/bn/te/mr/ta/gu/kn/tl/km/ne/yo/ig/is/sq/mk/ka/hy/az/mn/lo/dz/dv/tk/uz/ms)
 
 ## Conventions
 
@@ -361,7 +361,7 @@ npm run test:e2e      # 65 Playwright E2E tests
 npm run test:check    # TypeScript + Rust compile checks
 ```
 
-- **22 test suites, 376 unit tests**: stores (15), hooks, preview engine, aiClient (Anthropic + OpenAI SSE), i18n coverage (58 languages)
+- **22 test suites, 376 unit tests**: stores (15), hooks, preview engine, aiClient (Anthropic + OpenAI SSE), i18n coverage (70 languages)
 - **65 E2E tests**: UI basics, feature coverage, NP++ features, deep behavior
 - Headless Chromium with mocked Tauri IPC
 - Config: `e2e/playwright.config.ts` (webServer auto-starts Vite)
@@ -412,7 +412,7 @@ git push
 - **AI web search** — server-side search via `web_search_20250305` tool, auto-detected by model, with `user_location` timezone localization and XML output sanitization
 - **AI multi-tab** — multi-conversation support with auto-titling and per-tab history
 - **System date injection** — current date auto-injected into AI system prompt
-- **i18n expansion** — 7 → 58 languages, 495 keys, 100% coverage, automated key-parity tests
+- **i18n expansion** — 7 → 70 languages, 559 keys, 100% coverage, automated key-parity tests
 
 ## Next Priorities
 
