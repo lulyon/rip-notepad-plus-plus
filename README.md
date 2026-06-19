@@ -1,5 +1,7 @@
 # ripNotepad++
 
+[![CI](https://github.com/lulyon/rip-notepad-plus-plus/actions/workflows/ci.yml/badge.svg)](https://github.com/lulyon/rip-notepad-plus-plus/actions/workflows/ci.yml)
+
 A cross-platform text editor — a complete replacement for Notepad++.
 
 Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **Zustand** + **Vite 6**.
@@ -46,7 +48,7 @@ Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **
 - Full screen (F11) / Distraction-free mode (F12)
 - Window always on top
 - Horizontal / Vertical split editor with sync scroll
-- Sidebar with 5 panels: Files, AI Chat, Git, Symbols, Terminal
+- Sidebar with 10 panels: Files, AI, Git, Symbols, Terminal, Clipboard, Doc List, Task List, JSON, Preview
 - Markdown Preview (Ctrl+Shift+V) — split editor | rendered preview
 
 ### Sidebar Panels
@@ -57,6 +59,11 @@ Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **
 | ⎇ Git | Changed files, branch name, ahead/behind, inline diff, stage/commit/push/pull |
 | 🔣 Symbols | Function/class outline (regex-based, language-agnostic) |
 | 💻 Terminal | Integrated PTY terminal with shell session management |
+| 📋 Clipboard | Clipboard history with search, pin, paste at cursor |
+| 📄 Doc List | Open document list with modified indicators |
+| ✅ Task List | TODO/FIXME/HACK/XXX/NOTE/OPTIMIZE/BUG scanner |
+| 🔍 JSON | Recursive JSON tree viewer with copy path |
+| 👁 Preview | Document preview (26 types: markdown, HTML, images, PDF, 3D, etc.) |
 
 ### Preview System (26 types, all offline)
 Open a supported file and click the 👁 button in the editor toolbar, or press `Ctrl+Shift+V`.
@@ -131,7 +138,6 @@ Open a supported file and click the 👁 button in the editor toolbar, or press 
 - Quick actions: Explain Code / Refactor / Generate Tests / Fix Bugs
 - Context injection: auto-attach active file + language
 - Conversation history persisted to localStorage
-- Conversation history persisted to localStorage
 
 ### Workspace
 - Save / Open `.ripworkspace` files — multi-project roots
@@ -154,7 +160,7 @@ Open a supported file and click the 👁 button in the editor toolbar, or press 
 - Show/hide menu bar, status bar, sidebar
 - Custom keyboard shortcut mapping
 - Custom editor context menu (add/remove/reorder items)
-- Language: 58 languages (中文 / English / 日本語 / 한국어 / Français / العربية / עברית / Deutsch / Español / Português / Русский / ...)
+- Language: 70 languages (中文 / English / 日本語 / 한국어 / Français / العربية / עברית / Deutsch / Español / Português / Русский / ...)
 
 ### Auto Update
 - Automatic update check via tauri-plugin-updater
@@ -162,7 +168,8 @@ Open a supported file and click the 👁 button in the editor toolbar, or press 
 - Configurable auto-check toggle in Preferences
 
 ### RTL Support
-- Arabic (العربية) and Hebrew (עברית) with automatic RTL layout mirroring
+- 6 RTL languages: Arabic (العربية), Hebrew (עברית), Persian (فارسی), Urdu (اردو), Punjabi (ਪੰਜਾਬੀ), Dhivehi (ދިވެހި)
+- Automatic RTL layout mirroring via applyDirection()
 - Monaco bidiSupport for right-to-left text editing
 
 ## Quick Start
@@ -183,9 +190,8 @@ npm run tauri dev        # Dev mode (Tauri desktop + Vite HMR)
 npm run dev              # Frontend only (browser, no Rust backend)
 lsof -ti :1420 | xargs kill  # Fix port conflict
 
-npm run tauri build                    # Production build (native arch)
-npm run tauri build -- --target aarch64-apple-darwin  # Apple Silicon
-npm run tauri build -- --target x86_64-apple-darwin   # Intel Mac
+npm run tauri build                              # Production build (native arch)
+npx tauri build -- --target universal-apple-darwin  # Universal macOS (Intel + Apple Silicon)
 
 npx tsc --noEmit         # TypeScript check
 cargo check              # Rust check (from src-tauri/)
@@ -214,15 +220,15 @@ rip-notepad-plus-plus/
 ├── src/                          # Frontend (React + TS)
 │   ├── components/
 │   │   ├── Editor/               # Monaco wrapper + split + context menu
-│   │   ├── MenuBar/              # Custom HTML menu (12 menus)
+│   │   ├── MenuBar/              # Custom HTML menu (11 menus)
 │   │   ├── TabBar/               # Drag-and-drop tabs + pin/colors
 │   │   ├── SearchPanel/          # Find/replace/find-in-files
 │   │   ├── StatusBar/            # Encoding, language, Ln/Col, branch
-│   │   ├── Panels/               # 5 sidebar panels: Files, AI, Git, Symbols, Terminal
+│   │   ├── Panels/               # 10 sidebar panels
 │   │   └── Dialogs/              # 16 dialogs
 │   ├── stores/                   # 15 Zustand stores
 │   ├── hooks/                    # 11 custom hooks
-│   ├── i18n/                     # 58 locales — 495 keys, 5 RTL
+│   ├── i18n/                     # 70 locales — 559 keys, 6 RTL
 │   ├── lib/                      # IPC, aiClient, utils, constants, preview engine
 │   └── types/                    # TypeScript interfaces
 ├── src-tauri/                    # Backend (Rust)
@@ -259,7 +265,6 @@ rip-notepad-plus-plus/
 | `Ctrl+Shift+P` | Command palette |
 | `F12` | Distraction-free mode |
 | `F11` | Full screen |
-| `Ctrl+Alt+C` / `Ctrl+Alt+X` | Launch Claude / Codex |
 | `Ctrl+Alt+C` / `Ctrl+Alt+X` | Launch Claude / Codex in terminal |
 | `Ctrl+Tab` / `Ctrl+Shift+Tab` | Next / Previous tab |
 | `F3` / `Shift+F3` | Find next / previous |
@@ -268,12 +273,12 @@ rip-notepad-plus-plus/
 
 ```bash
 npm test              # Run all tests
-npm run test:unit     # 356 vitest unit tests (21 suites)
+npm run test:unit     # 376 vitest unit tests (22 suites)
 npm run test:e2e      # 65 Playwright E2E tests
 npm run test:check    # TypeScript + Rust compile checks
 ```
 
-- **21 test suites, 356 unit tests** covering stores (15), hooks, preview engine (26 types), AI client SSE parsing
+- **22 test suites, 376 unit tests** covering stores (15), hooks, preview engine (26 types), AI client SSE parsing, i18n coverage (70 languages)
 - **65 E2E tests** across 4 spec files with mocked Tauri IPC
 - Headless Chromium, auto-starts Vite dev server
 

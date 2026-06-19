@@ -87,6 +87,276 @@
 
 **未开始。** 需 Windows/Linux 虚拟机 + GitHub Actions CI。
 
+#### 16.1 现状
+
+| 维度 | 状态 |
+|------|:---:|
+| 当前开发平台 | macOS only (Apple Silicon) |
+| 已装 Rust targets | `aarch64-apple-darwin`, `x86_64-apple-darwin` — 无 Linux/Windows target |
+| E2E 测试 | 65 个 (4 specs, 782 行)，mock Tauri IPC (`e2e/mocks/tauri-mock.ts`)，headless Chromium |
+| 单元测试 | 376 个 (22 suites)，全部 `vitest`，平台无关 |
+| CI/CD | **无任何 GitHub Actions workflow** |
+| 本地编译 | `tsc` + `cargo check` 通过（macOS only） |
+| 平台构建 | 从未在 Windows/Linux 上编译/运行过 |
+| 二进制签名 | macOS 未公证，Windows 无代码签名 |
+
+#### 16.2 代码审计 — 跨平台兼容性
+
+逐个审查了全部 `cfg(target_os)` 条件编译块（共 6 处）和所有路径/换行/Shell 相关代码：
+
+##### ✅ 已做好跨平台适配（无需修改）
+
+| 模块 | 文件 | 审计结论 |
+|------|------|----------|
+| **路径分隔符 (TS)** | `src/App.tsx`, `editorStore.ts`, `Sidebar.tsx`, `RunDialog.tsx` 等 | 所有 `.split(/[/\\]/)` 同时处理 `/` 和 `\`。未使用 Node `path` 模块。✅ |
+| **路径操作 (Rust)** | `src-tauri/src/commands/file_ops.rs` | 全部使用 `std::path::Path`，跨平台原生。`validate_path()` 只拦截 `..` 遍历。✅ |
+| **Shell 命令** | `src-tauri/src/commands/system.rs:10-74` | `run_command()` 已 `cfg!(windows)` → `cmd /C` vs `sh -c`。`open_terminal()` 三平台分别处理：macOS `osascript` → iTerm2/Terminal.app，Linux `gnome-terminal`/`xterm`，Windows `cmd /k`。✅ |
+| **PTY 会话** | `src-tauri/src/pty/session.rs:29-39` | 使用 `portable-pty` crate，已 `cfg!(windows)` → `powershell.exe` vs `$SHELL`。ConPTY 由 portable-pty 内部处理。✅ |
+| **PTY 命令** | `src-tauri/src/commands/pty.rs:24-32` | `pty_spawn()` 回退逻辑：`$SHELL` → Windows `powershell.exe` → `/bin/sh`。✅ |
+| **编码检测** | `src-tauri/src/encoding/detect.rs` | `encoding_rs::Encoding::for_bom()` + `chardetng` 纯 Rust 统计检测，平台无关。✅ |
+| **编码转换** | `src-tauri/src/encoding/convert.rs` | `encoding_rs` 纯 Rust，43 种编码，BOM 处理平台无关。✅ |
+| **换行符 (EOL)** | `src/stores/settingsStore.ts:38` | 已有 `defaultEol` 设置 (LF/CRLF/CR)，编辑操作使用 Monaco `model.getEOL()`。✅ |
+| **搜索** | `src-tauri/src/search/` | `regex` + `walkdir` 纯 Rust，平台无关。✅ |
+| **文件监控** | `src-tauri/src/commands/monitor.rs` | `notify` crate 跨平台。✅ |
+
+##### ⚠️ 实际发现的问题
+
+| 问题 | 位置 | 严重度 | 说明 |
+|------|------|:---:|------|
+| **`test:check` 脚本 bug** | `package.json` | 🔴 需修 | `cargo check` 在项目根目录运行，但 `Cargo.toml` 在 `src-tauri/`。CI 需加 `--manifest-path src-tauri/Cargo.toml`。 |
+| **`rustup` 无 Linux/Windows target** | 本地 | 🟡 已知 | 仅装了 macOS targets。CI runner 各自装各自 target，不影响 CI。本地交叉编译需 `rustup target add`。 |
+| **`windows_subsystem` 属性** | `src-tauri/src/main.rs:2` | 🟢 正常 | 标准 Tauri 模板，仅 Windows release build 生效。无需修改。 |
+
+##### ❓ 无法本地验证的项（需 CI 揭晓）
+
+| 项目 | 风险 | 说明 |
+|------|:---:|------|
+| **Linux WebKitGTK 依赖** | 中 | `libwebkit2gtk-4.1-dev` 等 4 个系统包版本可能与 Tauri v2 要求不完全匹配 |
+| **AppImage `libfuse2`** | 低 | Ubuntu 24.04 默认用 fuse3，AppImage 运行时需 fuse2。构建 CI 不受影响，但用户运行需提示 |
+| **macOS Intel 交叉编译** | 低 | CI `macos-latest` 是 ARM runner，交叉编译 `x86_64-apple-darwin` 需验证 |
+| **Windows `cmd` stdout 编码** | 极低 | `from_utf8_lossy` 在 Windows 默认 code page 下可能产生乱码 |
+| **Monaco 字体回退** | 极低 | 三平台 Chromium 字体回退行为一致，CJK/阿拉伯/RTL 可能有细微差异 |
+
+##### 平台条件编译块分布（全部合理）
+
+```
+src-tauri/src/main.rs:2       #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+src-tauri/src/pty/session.rs:29   cfg!(target_os = "windows")  → shell 选择
+src-tauri/src/commands/pt
+src-tauri/src/commands/system.rs:10  #[cfg(target_os = "macos")]   → macOS open_terminal
+src-tauri/src/commands/system.rs:58  #[cfg(target_os = "linux")]   → Linux open_terminal
+src-tauri/src/commands/system.rs:68  #[cfg(target_os = "windows")] → Windows open_terminal
+src-tauri/src/commands/system.rs:80  cfg!(target_os = "windows")   → run_command shell 选择
+```
+
+#### 16.3 目标和范围
+
+1. **PR CI 矩阵** — 每 push 自动在 `ubuntu-latest` 跑 tsc + vitest + Rust check，在 `macos/windows/ubuntu` 三平台跑 E2E
+2. **Release 自动化** — tag push → 构建 4 target + DMG/NSIS/AppImage → GitHub Release draft
+3. **README badge** — CI 状态徽章显示 "passing"
+4. **纯 CI** — 无本地虚拟机，push → 看日志 → 修
+
+#### 16.4 实施步骤
+
+##### Step 0 — 修复已知问题 (10 分钟)
+
+修复 `package.json` 中的 `test:check` 脚本（`cargo check` 需要指定 manifest 路径）：
+
+```diff
+- "test:check": "npx tsc --noEmit && cargo check",
++ "test:check": "npx tsc --noEmit && cargo check --manifest-path src-tauri/Cargo.toml",
+```
+
+并新增本地 CI 一键命令：
+```json
+"ci": "npm run test:check && npm run test:unit && npm run test:e2e"
+```
+
+##### Step 1 — CI 矩阵：check + E2E 三平台 (1 天)
+
+创建 `.github/workflows/ci.yml`：
+
+```yaml
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── Phase 1: 快速检查 (单平台, ~2 min) ──
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20", cache: "npm" }
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm run test:unit
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo check --manifest-path src-tauri/Cargo.toml
+
+  # ── Phase 2: 三平台 E2E (mock IPC, 并行 ~3 min) ──
+  e2e:
+    needs: check
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+      fail-fast: false      # 一个平台挂不取消其他
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20", cache: "npm" }
+      - run: npm ci
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium
+      - name: Run E2E (mock IPC, no Rust needed)
+        run: npm run test:e2e
+```
+
+**为什么 E2E job 不需要装 Rust / WebView 库**：`e2e/mocks/tauri-mock.ts` 通过 `page.route()` 拦截了全部 `@tauri-apps/*` 导入，mock 了 55 个 IPC 命令 + window/dialog/plugin APIs。Playwright 启动的是 headless Chromium + Vite dev server，完全不加载 Tauri native 层。三平台 E2E 行为完全一致。
+
+**fail-fast: false**：避免 macOS E2E 挂了就取消 Windows/Linux，方便一次 push 看到全部平台的失败信息。
+
+##### Step 2 — Release 流水线 (0.5 天)
+
+创建 `.github/workflows/release.yml`：
+
+```yaml
+name: Release
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - { os: macos-latest,   target: aarch64-apple-darwin,      artifact: macos-arm64 }
+          - { os: macos-latest,   target: x86_64-apple-darwin,       artifact: macos-x64 }
+          - { os: windows-latest, target: x86_64-pc-windows-msvc,    artifact: windows-x64 }
+          - { os: ubuntu-latest,  target: x86_64-unknown-linux-gnu,  artifact: linux-x64 }
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20", cache: "npm" }
+      - run: npm ci
+
+      - uses: dtolnay/rust-toolchain@stable
+        with: { targets: "${{ matrix.target }}" }
+
+      - name: Install Tauri Linux deps
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev \
+            libayatana-appindicator3-dev librsvg2-dev \
+            libjavascriptcoregtk-4.1-dev libsoup-3.0-dev
+
+      - name: Build
+        run: npm run tauri build -- --target ${{ matrix.target }}
+
+      - name: Upload bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: |
+            src-tauri/target/${{ matrix.target }}/release/bundle/dmg/*.dmg
+            src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*.exe
+            src-tauri/target/${{ matrix.target }}/release/bundle/appimage/*.AppImage
+          if-no-files-found: ignore
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { path: artifacts }
+      - run: ls -R artifacts/
+      - uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          generate_release_notes: true
+          body: |
+            **Linux users**: Ubuntu 24.04+ may need `sudo apt install libfuse2` to run the AppImage.
+          files: artifacts/**/*
+```
+
+**Linux 用户提示**：Release body 中自动附加 `libfuse2` 安装提示。如果 `generate_release_notes: true` 和自定义 `body` 不能同时用，改用 `append_body: true` 或写到 Release description 中。
+
+##### Step 3 — README Badge (5 分钟)
+
+```markdown
+[![CI](https://github.com/luliang/rip-notepad-plus-plus/actions/workflows/ci.yml/badge.svg)](https://github.com/luliang/rip-notepad-plus-plus/actions/workflows/ci.yml)
+```
+
+##### Step 4 — Bug 修复 (CI 反馈驱动，0-1 天)
+
+代码审计已确认核心模块（路径/Shell/PTY/编码/EOL）均已做好跨平台适配。**预计不会有大 bug。** 策略：CI 跑起来，哪个平台报错修哪个，不提前修没有报错的东西。
+
+可能遇到的小修小补（概率排序）：
+
+| 可能问题 | 触发平台 | 概率 | 现象 | 修复 |
+|----------|:---:|:---:|------|------|
+| Linux WebKitGTK 版本差异 | Ubuntu | 中 | `cargo check` 或 `tauri build` 失败，找不到头文件 | pin 依赖版本或调整 apt 安装列表 |
+| macOS Intel 交叉编译 | macOS ARM runner | 低 | `x86_64-apple-darwin` 链接失败 | `rustup target add` 或改用 `macos-13` runner (Intel) |
+| Windows stdout 编码 | Windows | 极低 | `run_command` 中文输出乱码 | 切换到 `chcp 65001` (UTF-8 code page) |
+| `find_in_files` 路径分隔符 | Windows | 极低 | 搜索结果路径显示 `\` | 前端归一化为 `/` |
+| AppImage 运行问题 | Linux | — | 构建成功但用户无法运行 | ✅ 已确认：Release body 加 `apt install libfuse2` 提示 |
+
+##### Step 5 — (远期) 签名 & 公证
+
+- **macOS 公证**: 需要 Apple Developer Program ($99/年) + `notarytool`
+- **Windows 代码签名**: 需要 OV/EV Code Signing Certificate ($200-300/年)
+- **当前跳过**：GitHub Release binary 走"开发者未签名"路径。macOS 用户右键打开，Windows 用户忽略 SmartScreen。
+
+#### 16.5 文件清单
+
+```
+新增:
+├── .github/workflows/ci.yml           # PR CI: check + e2e (三平台)
+├── .github/workflows/release.yml      # tag CI: 构建 4 target + Release draft
+
+修改:
+├── package.json                        # test:check 修复 + 新增 ci 命令
+└── README.md                           # CI badge
+```
+
+#### 16.6 时间估算
+
+| 步骤 | 内容 | 时间 |
+|:---:|------|:---:|
+| 0 | 修复 `test:check` + 加 `ci` 脚本 | 10 分钟 |
+| 1 | CI 矩阵 (check + e2e 三平台) | 1 天 |
+| 2 | Release 流水线 | 0.5 天 |
+| 3 | README badge | 5 分钟 |
+| 4 | Bug 修复 (CI 反馈驱动) | 0-1 天 |
+| 5 | 签名 & 公证 | 远期 |
+| **总计** | | **1.5-2.5 天** |
+
+#### 16.7 需用户确认（已确认 ✅）
+
+| # | 问题 | 结论 |
+|---|------|------|
+| 1 | **Repo 是 public 还是 private？** | ✅ Public — GitHub Actions 全部免费无限，CI 矩阵随意跑 |
+| 2 | **要不要 macOS Intel binary？** | ✅ ARM + Intel 都要，保持 4 target 矩阵 |
+| 3 | **Release 构建 15-20 min 是否接受？** | ✅ 可以接受 |
+| 4 | **AppImage 需 libfuse2 提醒用户？** | ✅ 提醒 |
+
+#### 16.8 完成后验收
+
+- [ ] `git push` → CI badge 绿色，check + e2e 三平台全过
+- [ ] `git tag v0.4.0 && git push --tags` → GitHub Release draft 包含 4 个产物
+- [ ] README 显示 CI badge `passing`
+
 ### Phase 17 — 插件市场 ❌
 
 **未开始。** 需 GitHub 仓库托管 `plugins.json` + 市场 UI + 一键安装流程。
@@ -252,13 +522,13 @@ Phase 26-30 ██░░░░░░░░░░ 平台/创新       🟡   1/5
 
 | 指标 | 数值 |
 |------|:---:|
-| IPC 命令 | 41 |
-| 对话框 | 14 |
-| Store | 14 |
-| Hooks | 13 |
-| i18n 语言 | 7 |
-| 单元测试 | 308 |
-| E2E 测试 | 70 |
+| IPC 命令 | 55 |
+| 对话框 | 16 |
+| Store | 15 |
+| Hooks | 11 |
+| i18n 语言 | 70 (559 keys, 6 RTL) |
+| 单元测试 | 376 (22 suites) |
+| E2E 测试 | 65 (4 specs) |
 | DMG 大小 | 9.1 MB (Intel) / 8.9 MB (ARM) |
 
 ---
@@ -267,7 +537,7 @@ Phase 26-30 ██░░░░░░░░░░ 平台/创新       🟡   1/5
 
 | 优先级 | Phase | 工作量 | 前置依赖 |
 |:---:|:---:|:---:|---|
-| P0 | 16-跨平台测试 | 2-3天 | Windows/Linux 虚拟机 |
+| P0 | 16-跨平台测试 | 1.5-2.5天 | 纯 CI（无本地 VM） |
 | P0 | 25-工具栏/输出面板 | 1-2天 | — |
 | P1 | 20-主题市场 | 2-3天 | GitHub 仓库 |
 | P1 | 17-插件市场 | 4-6天 | GitHub 仓库 + 种子插件 |

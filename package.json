@@ -12,8 +12,9 @@
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
     "test:e2e": "npx playwright test --config=e2e/playwright.config.ts",
-    "test:check": "npx tsc --noEmit && cargo check",
-    "test": "npm run test:unit && npm run test:e2e"
+    "test:check": "npx tsc --noEmit && cargo check --manifest-path src-tauri/Cargo.toml",
+    "test": "npm run test:unit && npm run test:e2e",
+    "ci": "npm run test:check && npm run test:unit && npm run test:e2e"
   },
   "dependencies": {
     "@hpcc-js/wasm": "^2.34.0",
