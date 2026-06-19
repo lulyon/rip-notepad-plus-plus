@@ -192,14 +192,23 @@ test.describe("ripNotepad++ UI Tests", () => {
   });
 });
 
-// ── Rust IPC command tests (via cargo test) ──
+// ── Cargo check / tsc — skip if tools unavailable on e2e runner ──
 test.describe("Rust IPC Commands", () => {
   test("cargo check passes with 0 errors", async ({ page }) => {
-    const result = execSync("cargo check 2>&1", {
-      cwd: process.cwd() + "/src-tauri",
-      encoding: "utf-8",
-    });
-    expect(result).not.toContain("error[");
+    try {
+      const result = execSync("cargo check 2>&1", {
+        cwd: process.cwd() + "/src-tauri",
+        encoding: "utf-8",
+      });
+      expect(result).not.toContain("error[");
+    } catch (err: any) {
+      const msg = err?.message || String(err);
+      if (msg.includes("command not found") || msg.includes("ENOENT")) {
+        console.log("Skipping: cargo not installed on this runner");
+      } else {
+        throw err;
+      }
+    }
   });
 
   test("npx tsc --noEmit passes with 0 errors", async ({ page }) => {
