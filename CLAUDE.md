@@ -405,20 +405,18 @@ git push
 
 ## Recently Completed
 
+- **Cross-platform CI/CD** — GitHub Actions matrix (macOS/Windows/Linux), PR checks, tag-triggered Release builds
+- **Cloud Sync (GitHub Gist)** — settings Export/Import via Personal Access Token, Preferences Sync tab, 70-language i18n
 - **OpenAI API support** — dual-provider architecture (Anthropic + OpenAI), auto-detection, provider selector in settings
-- **OpenAI web search** — auto-switch DeepSeek OpenAI endpoint to Anthropic for server-side search
-- **Markdown rendering** — `markdown-it` + `highlight.js` replaces hand-rolled regex, full GFM (tables, code blocks with syntax highlighting), 50ms streaming throttle
-- **AI web search** — server-side search via `web_search_20250305` tool, auto-detected by model, with `user_location` timezone localization and XML output sanitization
+- **AI web search** — server-side search via `web_search_20250305` tool, auto-detected by model, with `user_location` timezone localization
 - **AI multi-tab** — multi-conversation support with auto-titling and per-tab history
-- **System date injection** — current date auto-injected into AI system prompt
-- **i18n expansion** — 7 → 70 languages, 559 keys, 100% coverage, automated key-parity tests
+- **i18n expansion** — 7 → 70 languages, 582 keys, 100% coverage, automated key-parity tests
 
 ## Next Priorities
 
-1. **Cross-platform testing** — Windows/Linux packaging and testing
-2. **Themes marketplace** — import/export custom themes
-3. **Plugin marketplace** — discover and install plugins from a central registry
-4. **Web Worker search** — move find_in_files regex to Worker thread
-5. **Encoding detection async** — chardetng to background thread
-6. **Real plugin selection data** — pass actual cursor/selection info to plugins
-7. **Accessibility** — ARIA labels, keyboard navigation, screen reader support
+1. **Themes marketplace** — import/export custom themes
+2. **Plugin marketplace** — discover and install plugins from a central registry
+3. **Web Worker search** — move find_in_files regex to Worker thread
+4. **Encoding detection async** — chardetng to background thread
+5. **Real plugin selection data** — pass actual cursor/selection info to plugins
+6. **Accessibility** — ARIA labels, keyboard navigation, screen reader support

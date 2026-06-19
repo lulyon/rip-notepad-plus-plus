@@ -1,6 +1,6 @@
 # ripNotepad++ — Supported Languages
 
-**70 languages** with 100% translation coverage (559 keys each).
+**70 languages** with 100% translation coverage (582 keys each).
 Covers all 14 VS Code official display languages + all significant Notepad++ translations + strategic additions.
 
 ## Language Inventory
