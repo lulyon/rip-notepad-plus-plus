@@ -38,7 +38,7 @@
 ### i18n
 
 58 种语言: 覆盖 VS Code 全部官方语言 + Notepad++ 全部有效翻译
-581 keys 每种语言，6 种 RTL（ar/he/fa/ur/pa/dv），自动方向检测
+582 keys 每种语言，6 种 RTL（ar/he/fa/ur/pa/dv），自动方向检测
 
 ### 测试
 
@@ -508,7 +508,7 @@ jobs:
 | **AI 多会话** | 标签页式多会话，独立历史，XML 后处理 |
 | **AI Markdown 渲染** | markdown-it + highlight.js，完整 GFM，流式 50ms 节流 |
 | **AI 双 Provider** | Anthropic + OpenAI 兼容 API，自动检测，provider 下拉选择 |
-| **i18n 扩展** | 7 → 70 种语言，581 keys，100% 覆盖，自动 key 校验测试 |
+| **i18n 扩展** | 7 → 70 种语言，582 keys，100% 覆盖，自动 key 校验测试 |
 | **Cloud Sync** | GitHub Gist 设置同步 (Export/Import)，Preferences Sync 标签页 + 菜单入口 |
 
 ### 预览引擎支持的类型
@@ -542,7 +542,7 @@ Phase 26-30 ██████░░░░░░ 平台/创新       🟡   2/5
 | 对话框 | 16 |
 | Store | 15 |
 | Hooks | 11 |
-| i18n 语言 | 70 (581 keys, 6 RTL) |
+| i18n 语言 | 70 (582 keys, 6 RTL) |
 | 单元测试 | 376 (22 suites) |
 | E2E 测试 | 65 (4 specs) |
 | DMG 大小 | 9.1 MB (Intel) / 8.9 MB (ARM) |

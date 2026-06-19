@@ -12,7 +12,7 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 - **Version**: 0.3.0 (23 phases complete)
 - **Tests**: 65 E2E + 376 unit (Playwright + vitest, 22 suites)
 - **IPC Commands**: 55 (file_ops, encoding, search, session, system, plugin, git, monitor, workspace, pty)
-- **i18n**: 581 keys, 70 languages (6 RTL: ar/he/fa/ur/pa/dv)
+- **i18n**: 582 keys, 70 languages (6 RTL: ar/he/fa/ur/pa/dv)
 
 ## Architecture
 
