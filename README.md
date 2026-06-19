@@ -283,7 +283,7 @@ npm run test:e2e      # 65 Playwright E2E tests
 npm run test:check    # TypeScript + Rust compile checks
 ```
 
-- **22 test suites, 376 unit tests** covering stores (15), hooks, preview engine (26 types), AI client SSE parsing, i18n coverage (70 languages)
+- **22 test suites, 376 unit tests** covering stores (16), hooks, preview engine (26 types), AI client SSE parsing, i18n coverage (70 languages)
 - **65 E2E tests** across 4 spec files with mocked Tauri IPC
 - Headless Chromium, auto-starts Vite dev server
 
