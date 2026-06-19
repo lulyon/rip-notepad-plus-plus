@@ -8,16 +8,15 @@ import "./PreferencesDialog.css";
 interface Props {
   open: boolean;
   onClose: () => void;
-  initialTab?: PrefTab;
 }
 
 type PrefTab = "general" | "editing" | "newdoc" | "sync";
 
-export function PreferencesDialog({ open, onClose, initialTab }: Props) {
+export function PreferencesDialog({ open, onClose }: Props) {
   const { i18n, t } = useTranslation();
   const settings = useSettingsStore();
   const syncStore = useSyncStore();
-  const [activeTab, setActiveTab] = useState<PrefTab>(initialTab || "general");
+  const [activeTab, setActiveTab] = useState<PrefTab>("general");
   const [testResult, setTestResult] = useState<"success" | "error" | null>(null);
 
   // Close on Escape

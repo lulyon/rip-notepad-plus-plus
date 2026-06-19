@@ -51,7 +51,6 @@ function App() {
 
   const [gotoLineOpen, setGotoLineOpen] = useState(false);
   const [prefsOpen, setPrefsOpen] = useState(false);
-  const [prefsInitialTab, setPrefsInitialTab] = useState<"general" | "editing" | "newdoc" | "sync">("general");
   const [shortcutMapperOpen, setShortcutMapperOpen] = useState(false);
   const [runOpen, setRunOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -197,10 +196,6 @@ function App() {
     function handler(e: Event) {
       const actionId = (e as CustomEvent).detail as string;
       if (actionId === "file.preferences") {
-        setPrefsInitialTab("general");
-        setPrefsOpen(true);
-      } else if (actionId === "file.syncSettings") {
-        setPrefsInitialTab("sync");
         setPrefsOpen(true);
       } else if (actionId === "file.shortcutMapper") {
         setShortcutMapperOpen(true);
@@ -357,7 +352,7 @@ function App() {
       <Suspense fallback={null}>
         <EncodingDialog />
       <GoToLineDialog open={gotoLineOpen} onClose={() => setGotoLineOpen(false)} />
-      <PreferencesDialog open={prefsOpen} onClose={() => setPrefsOpen(false)} initialTab={prefsInitialTab} />
+      <PreferencesDialog open={prefsOpen} onClose={() => setPrefsOpen(false)} />
       <ShortcutMapperDialog open={shortcutMapperOpen} onClose={() => setShortcutMapperOpen(false)} />
       <RunDialog open={runOpen} onClose={() => setRunOpen(false)} />
       <AboutDialog open={aboutOpen} onClose={() => setAboutOpen(false)} />

@@ -57,7 +57,6 @@ export const MENU_STRUCTURE: MenuDef[] = [
       { id: "file.preferences", labelKey: "menu.file.preferences" },
       { id: "file.shortcutMapper", labelKey: "menu.file.shortcutMapper" },
       { id: "settings.editContextMenu", labelKey: "menu.file.editContextMenu" },
-      { id: "file.syncSettings", labelKey: "menu.file.syncSettings" },
       S(),
       { id: "file.exit", labelKey: "menu.file.exit", shortcut: "Alt+F4" },
     ],
