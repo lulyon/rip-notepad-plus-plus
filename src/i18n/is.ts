@@ -19,6 +19,7 @@ const is = {
     "menu.file.saveWorkspace": "Vista vinnusvæði sem...",
     "menu.file.loadWorkspace": "Opna vinnusvæði...",
     "menu.file.preferences": "&Stillingar...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Flýtileiða&kort...",
     "menu.file.exit": "&Hætta",
 

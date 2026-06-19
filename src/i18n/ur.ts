@@ -228,6 +228,7 @@ const ur = {
     "menu.file.open": "کھولیں...",
     "menu.file.openFolder": "فولڈر کھولیں...",
     "menu.file.preferences": "ترجیحات...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "ڈسک سے دوبارہ لوڈ کریں",
     "menu.file.restoreLastClosed": "آخری بند فائل بحال کریں",
     "menu.file.save": "محفوظ کریں",

@@ -19,6 +19,7 @@ const nb = {
     "menu.file.saveWorkspace": "Lagre arbeidsområde som...",
     "menu.file.loadWorkspace": "Åpne arbeidsområde...",
     "menu.file.preferences": "&Innstillinger...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "&Snarveiskart...",
     "menu.file.exit": "A&vslutt",
     // ── Menu: Edit ──

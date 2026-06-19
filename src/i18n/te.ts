@@ -19,6 +19,7 @@ const te = {
     "menu.file.saveWorkspace": "వర్క్‌స్పేస్ ఇలా సేవ్ చేయి...",
     "menu.file.loadWorkspace": "వర్క్‌స్పేస్ తెరువు...",
     "menu.file.preferences": "ప్రాధాన్యతలు(&P)...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "షార్ట్‌కట్ మ్యాపర్(&M)...",
     "menu.file.exit": "నిష్క్రమించు(&x)",
     "menu.edit": "సవరించు(&E)",

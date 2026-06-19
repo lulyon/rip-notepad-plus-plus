@@ -20,6 +20,7 @@ const lv = {
     "menu.file.saveWorkspace": "Saglabāt darbvietu kā...",
     "menu.file.loadWorkspace": "Atvērt darbvietu...",
     "menu.file.preferences": "&Iestatījumi...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Saīsņu &kartētājs...",
     "menu.file.exit": "&Iziet",
 

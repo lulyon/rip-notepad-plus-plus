@@ -228,6 +228,7 @@ const ca = {
     "menu.file.open": "&Obre...",
     "menu.file.openFolder": "Obre &carpeta...",
     "menu.file.preferences": "&Preferències...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "&Recarrega del disc",
     "menu.file.restoreLastClosed": "Restaura l'últim fitxer tancat",
     "menu.file.save": "&Desa",

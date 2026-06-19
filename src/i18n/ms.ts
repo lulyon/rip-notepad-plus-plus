@@ -19,6 +19,7 @@ const ms = {
     "menu.file.saveWorkspace": "Simpan Ruang Kerja Sebagai...",
     "menu.file.loadWorkspace": "Buka Ruang Kerja...",
     "menu.file.preferences": "&Keutamaan...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Pemeta &Pintasan...",
     "menu.file.exit": "&Keluar",
 

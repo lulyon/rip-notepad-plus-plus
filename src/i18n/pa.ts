@@ -228,6 +228,7 @@ const pa = {
     "menu.file.open": "ਖੋਲ੍ਹੋ...",
     "menu.file.openFolder": "ਫ਼ੋਲਡਰ ਖੋਲ੍ਹੋ...",
     "menu.file.preferences": "ਤਰਜੀਹਾਂ...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "ਡਿਸਕ ਤੋਂ ਮੁੜ ਲੋਡ ਕਰੋ",
     "menu.file.restoreLastClosed": "ਆਖਰੀ ਬੰਦ ਕੀਤੀ ਫ਼ਾਈਲ ਰੀਸਟੋਰ ਕਰੋ",
     "menu.file.save": "ਸੁਰੱਖਿਅਤ ਕਰੋ",

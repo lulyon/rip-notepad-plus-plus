@@ -19,6 +19,7 @@ const mk = {
     "menu.file.saveWorkspace": "Зачувај Работен Простор Како...",
     "menu.file.loadWorkspace": "Отвори Работен Простор...",
     "menu.file.preferences": "&Поставки...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Мапирање на &Кратенки...",
     "menu.file.exit": "&Излез",
 

@@ -228,6 +228,7 @@ const bn = {
     "menu.file.open": "খুলুন...",
     "menu.file.openFolder": "ফোল্ডার খুলুন...",
     "menu.file.preferences": "পছন্দসমূহ...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "ডিস্ক থেকে পুনরায় লোড",
     "menu.file.restoreLastClosed": "শেষ বন্ধ ফাইল পুনরুদ্ধার",
     "menu.file.save": "সংরক্ষণ",

@@ -228,6 +228,7 @@ const gl = {
     "menu.file.open": "&Abrir...",
     "menu.file.openFolder": "Abrir &cartafol...",
     "menu.file.preferences": "&Preferencias...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "&Recargar do disco",
     "menu.file.restoreLastClosed": "Restaurar último ficheiro pechado",
     "menu.file.save": "&Gardar",

@@ -19,6 +19,7 @@ const fi = {
     "menu.file.saveWorkspace": "Tallenna työtila nimellä...",
     "menu.file.loadWorkspace": "Avaa työtila...",
     "menu.file.preferences": "&Asetukset...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Pikakuvain&kartta...",
     "menu.file.exit": "Lo&peta",
     // ── Menu: Edit ──

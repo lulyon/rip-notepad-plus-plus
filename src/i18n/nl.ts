@@ -18,6 +18,7 @@ const nl = {
     "menu.file.saveWorkspace": "Werkruimte opslaan als...",
     "menu.file.loadWorkspace": "Werkruimte openen...",
     "menu.file.preferences": "&Voorkeuren...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "&Sneltoetsen bewerken...",
     "menu.file.exit": "A&fsluiten",
     "menu.edit": "&Bewerken",

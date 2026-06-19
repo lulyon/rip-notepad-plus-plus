@@ -18,6 +18,7 @@ const uk = {
     "menu.file.saveWorkspace": "Зберегти робочу область як...",
     "menu.file.loadWorkspace": "Відкрити робочу область...",
     "menu.file.preferences": "&Налаштування...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Редактор &сполучень клавіш...",
     "menu.file.exit": "&Вихід",
     "menu.edit": "&Правка",

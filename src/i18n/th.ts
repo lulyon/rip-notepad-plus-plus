@@ -19,6 +19,7 @@ const th = {
     "menu.file.saveWorkspace": "บันทึกพื้นที่ทำงานเป็น...",
     "menu.file.loadWorkspace": "เปิดพื้นที่ทำงาน...",
     "menu.file.preferences": "การตั้งค่า(&P)...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "ตัวจัดการปุ่มลัด(&M)...",
     "menu.file.exit": "ออ&ก",
     // ── Menu: Edit ──

@@ -19,6 +19,7 @@ const id = {
     "menu.file.saveWorkspace": "Simpan Ruang Kerja Sebagai...",
     "menu.file.loadWorkspace": "Buka Ruang Kerja...",
     "menu.file.preferences": "&Preferensi...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Pemeta &Pintasan...",
     "menu.file.exit": "K&eluar",
     // ── Menu: Edit ──

@@ -19,6 +19,7 @@ const es = {
     "menu.file.saveWorkspace": "Guardar Espacio de Trabajo Como...",
     "menu.file.loadWorkspace": "Abrir Espacio de Trabajo...",
     "menu.file.preferences": "&Preferencias...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "&Asignar Atajos...",
     "menu.file.exit": "&Salir",
 

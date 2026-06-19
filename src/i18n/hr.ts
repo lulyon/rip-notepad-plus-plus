@@ -228,6 +228,7 @@ const hr = {
     "menu.file.open": "&Otvori...",
     "menu.file.openFolder": "Otvori &mapu...",
     "menu.file.preferences": "&Postavke...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "&Ponovno učitaj s diska",
     "menu.file.restoreLastClosed": "Vrati zadnju zatvorenu datoteku",
     "menu.file.save": "&Spremi",

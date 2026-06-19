@@ -228,6 +228,7 @@ const hi = {
     "menu.file.open": "खोलें...",
     "menu.file.openFolder": "फ़ोल्डर खोलें...",
     "menu.file.preferences": "प्राथमिकताएँ...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "डिस्क से पुनः लोड करें",
     "menu.file.restoreLastClosed": "अंतिम बंद फ़ाइल पुनर्स्थापित करें",
     "menu.file.save": "सहेजें",

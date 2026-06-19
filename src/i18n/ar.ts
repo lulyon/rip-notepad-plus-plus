@@ -17,6 +17,7 @@ const ar = {
     "menu.file.saveSession": "حفظ الجلسة...",
     "menu.file.loadSession": "تحميل الجلسة...",
     "menu.file.preferences": "&التفضيلات...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "مدير الا&ختصارات...",
     "menu.file.exit": "&خروج",
 

@@ -228,6 +228,7 @@ const sl = {
     "menu.file.open": "&Odpri...",
     "menu.file.openFolder": "Odpri &mapo...",
     "menu.file.preferences": "&Možnosti...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "&Ponovno naloži z diska",
     "menu.file.restoreLastClosed": "Obnovi zadnjo zaprto datoteko",
     "menu.file.save": "&Shrani",

@@ -19,6 +19,7 @@ const lo = {
     "menu.file.saveWorkspace": "ບັນທຶກພື້ນທີ່ເຮັດວຽກເປັນ...",
     "menu.file.loadWorkspace": "ເປີດພື້ນທີ່ເຮັດວຽກ...",
     "menu.file.preferences": "&ຕັ້ງຄ່າ...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "ແຜນທີ່ປຸ່ມລັດ...",
     "menu.file.exit": "ອອກ",
 

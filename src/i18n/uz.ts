@@ -19,6 +19,7 @@ const uz = {
     "menu.file.saveWorkspace": "Ish Maydonini Saqlash...",
     "menu.file.loadWorkspace": "Ish Maydonini Ochish...",
     "menu.file.preferences": "&Sozlamalar...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Yorliq &Belgilagich...",
     "menu.file.exit": "Chiq&ish",
 

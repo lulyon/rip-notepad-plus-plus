@@ -19,6 +19,7 @@ const ru = {
     "menu.file.saveWorkspace": "Сохранить рабочую область...",
     "menu.file.loadWorkspace": "Открыть рабочую область...",
     "menu.file.preferences": "&Настройки...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Редактор &сочетаний...",
     "menu.file.exit": "&Выход",
     // ── Menu: Edit ──

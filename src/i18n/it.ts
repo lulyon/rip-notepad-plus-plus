@@ -19,6 +19,7 @@ const it = {
     "menu.file.saveWorkspace": "Salva Workspace Come...",
     "menu.file.loadWorkspace": "Apri Workspace...",
     "menu.file.preferences": "&Preferenze...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "&Mappatura Scorciatoie...",
     "menu.file.exit": "E&sci",
 

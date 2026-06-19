@@ -19,6 +19,7 @@ const ja = {
     "menu.file.saveWorkspace": "ワークスペースを保存...",
     "menu.file.loadWorkspace": "ワークスペースを開く...",
     "menu.file.preferences": "設定(&P)...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "ショートカットマッパー(&M)...",
     "menu.file.exit": "終了(&X)",
 

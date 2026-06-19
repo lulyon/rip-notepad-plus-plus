@@ -19,6 +19,7 @@ const fr = {
     "menu.file.saveWorkspace": "Enregistrer l'espace de travail...",
     "menu.file.loadWorkspace": "Ouvrir l'espace de travail...",
     "menu.file.preferences": "&Préférences...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "&Mapper les raccourcis...",
     "menu.file.exit": "&Quitter",
 

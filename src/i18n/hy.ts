@@ -19,6 +19,7 @@ const hy = {
     "menu.file.saveWorkspace": "Պահպանել աշխատանքային տարածքը &որպես...",
     "menu.file.loadWorkspace": "&Բացել աշխատանքային տարածքը...",
     "menu.file.preferences": "&Կարգավորումներ...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Ստեղնաշարի &համապատասխանեցում...",
     "menu.file.exit": "Ե&լք",
 

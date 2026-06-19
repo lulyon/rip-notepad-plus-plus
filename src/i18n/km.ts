@@ -19,6 +19,7 @@ const km = {
     "menu.file.saveWorkspace": "រក្សាទុកផ្ទៃការងារជា...",
     "menu.file.loadWorkspace": "បើកផ្ទៃការងារ...",
     "menu.file.preferences": "ចំណូលចិត្ត(&P)...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "អ្នកគូសផ្លូវកាត់(&M)...",
     "menu.file.exit": "ចាកចេញ(&x)",
     "menu.edit": "កែសម្រួល(&E)",

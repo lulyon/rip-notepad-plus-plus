@@ -19,6 +19,7 @@ const da = {
     "menu.file.saveWorkspace": "Gem arbejdsområde som...",
     "menu.file.loadWorkspace": "Åbn arbejdsområde...",
     "menu.file.preferences": "&Indstillinger...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "&Genvejskort...",
     "menu.file.exit": "A&fslut",
     // ── Menu: Edit ──

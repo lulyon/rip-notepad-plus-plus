@@ -19,6 +19,7 @@ const hu = {
     "menu.file.saveWorkspace": "Munkaterulet mentese...",
     "menu.file.loadWorkspace": "Munkaterulet megnyitasa...",
     "menu.file.preferences": "&Beallitasok...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "&Gyorsbillentyu szerkeszto...",
     "menu.file.exit": "K&ilepes",
     // ── Menu: Edit ──

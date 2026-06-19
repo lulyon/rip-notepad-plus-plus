@@ -19,6 +19,7 @@ const dv = {
     "menu.file.saveWorkspace": "ވޯރކްސްޕޭސް ރައްކާކުރާ...",
     "menu.file.loadWorkspace": "ވޯރކްސްޕޭސް ހުޅުވާ...",
     "menu.file.preferences": "&ބޭނުންތަކެތި...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "ޝޯޓްކަޓް &މެޕަރ...",
     "menu.file.exit": "ނިންމާ&ލާ",
 

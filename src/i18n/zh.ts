@@ -19,6 +19,7 @@ const zh = {
     "menu.file.saveWorkspace": "保存工作区...",
     "menu.file.loadWorkspace": "打开工作区...",
     "menu.file.preferences": "首选项(&P)...",
+    "menu.file.syncSettings": "同步设置(&Y)...",
     "menu.file.shortcutMapper": "快捷键管理(&K)...",
     "menu.file.exit": "退出(&X)",
 

@@ -19,6 +19,7 @@ const tl = {
     "menu.file.saveWorkspace": "I-save ang Workspace Bilang...",
     "menu.file.loadWorkspace": "Buksan ang Workspace...",
     "menu.file.preferences": "&Mga Kagustuhan...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Tagapamahala ng &Shortcut...",
     "menu.file.exit": "Lu&mabas",
     "menu.edit": "&I-edit",

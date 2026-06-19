@@ -18,6 +18,7 @@ const vi = {
     "menu.file.saveWorkspace": "Lưu không gian làm việc...",
     "menu.file.loadWorkspace": "Mở không gian làm việc...",
     "menu.file.preferences": "&Tùy chọn...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Trình quản lý &phím tắt...",
     "menu.file.exit": "Th&oát",
     "menu.edit": "&Sửa",

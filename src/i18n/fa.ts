@@ -18,6 +18,7 @@ const fa = {
     "menu.file.saveWorkspace": "ذخیره فضای کار با نام...",
     "menu.file.loadWorkspace": "باز کردن فضای کار...",
     "menu.file.preferences": "&تنظیمات...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "مدیریت &میانبرها...",
     "menu.file.exit": "&خروج",
     "menu.edit": "&ویرایش",

@@ -19,6 +19,7 @@ const ro = {
     "menu.file.saveWorkspace": "Salvează spațiul de lucru ca...",
     "menu.file.loadWorkspace": "Deschide spațiul de lucru...",
     "menu.file.preferences": "&Preferințe...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "&Mapă comenzi rapide...",
     "menu.file.exit": "Ieși&re",
     // ── Menu: Edit ──

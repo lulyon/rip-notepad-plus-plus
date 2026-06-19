@@ -19,6 +19,7 @@ const tk = {
     "menu.file.saveWorkspace": "Iş Meýdanyny Başga Ýazdyr...",
     "menu.file.loadWorkspace": "Iş Meýdanyny Aç...",
     "menu.file.preferences": "&Sazlamalar...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Gysga ýol &Belleýji...",
     "menu.file.exit": "Çy&k",
 

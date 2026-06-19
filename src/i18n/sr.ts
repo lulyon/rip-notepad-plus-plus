@@ -20,6 +20,7 @@ const sr = {
     "menu.file.saveWorkspace": "Сачувај радни простор као...",
     "menu.file.loadWorkspace": "Отвори радни простор...",
     "menu.file.preferences": "&Подешавања...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Мапер &пречица...",
     "menu.file.exit": "&Излаз",
 

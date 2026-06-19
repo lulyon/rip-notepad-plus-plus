@@ -20,6 +20,7 @@ const bg = {
     "menu.file.saveWorkspace": "Запис на работното пространство като...",
     "menu.file.loadWorkspace": "Отваряне на работно пространство...",
     "menu.file.preferences": "&Настройки...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Картограф на &преки пътища...",
     "menu.file.exit": "&Изход",
 

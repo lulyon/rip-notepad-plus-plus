@@ -19,6 +19,7 @@ const ne = {
     "menu.file.saveWorkspace": "कार्यक्षेत्र यसरी सुरक्षित गर्नुहोस्...",
     "menu.file.loadWorkspace": "कार्यक्षेत्र खोल्नुहोस्...",
     "menu.file.preferences": "प्राथमिकताहरू(&P)...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "सर्टकट म्यापर(&M)...",
     "menu.file.exit": "बाहिर निस्कनुहोस्(&x)",
     "menu.edit": "सम्पादन गर्नुहोस्(&E)",

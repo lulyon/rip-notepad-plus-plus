@@ -19,6 +19,7 @@ const ka = {
     "menu.file.saveWorkspace": "სამუშაო გარემოს შენახვა...",
     "menu.file.loadWorkspace": "სამუშაო გარემოს გახსნა...",
     "menu.file.preferences": "&პარამეტრები...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "მალსახმობების &რედაქტორი...",
     "menu.file.exit": "გა&სვლა",
 

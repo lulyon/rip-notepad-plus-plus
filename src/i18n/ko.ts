@@ -19,6 +19,7 @@ const ko = {
     "menu.file.saveWorkspace": "작업공간 저장...",
     "menu.file.loadWorkspace": "작업공간 열기...",
     "menu.file.preferences": "환경 설정(&P)...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "단축키 매퍼(&M)...",
     "menu.file.exit": "종료(&X)",
 

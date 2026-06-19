@@ -228,6 +228,7 @@ const sw = {
     "menu.file.open": "&Fungua...",
     "menu.file.openFolder": "Fungua &folda...",
     "menu.file.preferences": "&Mapendeleo...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "&Pakia upya kutoka diski",
     "menu.file.restoreLastClosed": "Rejesha faili iliyofungwa mwisho",
     "menu.file.save": "&Hifadhi",

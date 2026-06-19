@@ -19,6 +19,7 @@ const az = {
     "menu.file.saveWorkspace": "İş Məkanını Kimi Saxla...",
     "menu.file.loadWorkspace": "İş Məkanını Aç...",
     "menu.file.preferences": "&Parametrlər...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Qısayol &Xəritəçisi...",
     "menu.file.exit": "Çı&xış",
 

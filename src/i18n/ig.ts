@@ -19,6 +19,7 @@ const ig = {
     "menu.file.saveWorkspace": "Chekwa Workspace Dịka...",
     "menu.file.loadWorkspace": "Mepee Workspace...",
     "menu.file.preferences": "&Mmasị...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Ụzọ Mkpirisi &Maper...",
     "menu.file.exit": "&Pụọ",
     "menu.edit": "&Dezie",

@@ -19,6 +19,7 @@ const ta = {
     "menu.file.saveWorkspace": "பணியிடத்தை இவ்வாறு சேமி...",
     "menu.file.loadWorkspace": "பணியிடத்தைத் திற...",
     "menu.file.preferences": "விருப்பத்தேர்வுகள்(&P)...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "குறுக்குவழி வரைபடம்(&M)...",
     "menu.file.exit": "வெளியேறு(&x)",
     "menu.edit": "தொகு(&E)",

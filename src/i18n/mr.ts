@@ -19,6 +19,7 @@ const mr = {
     "menu.file.saveWorkspace": "कार्यक्षेत्र असे जतन करा...",
     "menu.file.loadWorkspace": "कार्यक्षेत्र उघडा...",
     "menu.file.preferences": "प्राधान्ये(&P)...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "शॉर्टकट मॅपर(&M)...",
     "menu.file.exit": "बाहेर पडा(&x)",
     "menu.edit": "संपादित करा(&E)",

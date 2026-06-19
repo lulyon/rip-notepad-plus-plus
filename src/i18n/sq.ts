@@ -19,6 +19,7 @@ const sq = {
     "menu.file.saveWorkspace": "Ruaj Hapësirën e Punës Si...",
     "menu.file.loadWorkspace": "Hap Hapësirën e Punës...",
     "menu.file.preferences": "&Preferencat...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Hartuesi i &Shkurtoreve...",
     "menu.file.exit": "&Dalje",
 

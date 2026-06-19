@@ -19,6 +19,7 @@ const kn = {
     "menu.file.saveWorkspace": "ಕಾರ್ಯಕ್ಷೇತ್ರವನ್ನು ಹೀಗೆ ಉಳಿಸಿ...",
     "menu.file.loadWorkspace": "ಕಾರ್ಯಕ್ಷೇತ್ರ ತೆರೆಯಿರಿ...",
     "menu.file.preferences": "ಆದ್ಯತೆಗಳು(&P)...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "ಶಾರ್ಟ್‌ಕಟ್ ಮ್ಯಾಪರ್(&M)...",
     "menu.file.exit": "ನಿರ್ಗಮಿಸಿ(&x)",
     "menu.edit": "ಸಂಪಾದಿಸಿ(&E)",

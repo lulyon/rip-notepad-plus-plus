@@ -19,6 +19,7 @@ const tr = {
     "menu.file.saveWorkspace": "Calisma Alanini Kaydet...",
     "menu.file.loadWorkspace": "Calisma Alanini Ac...",
     "menu.file.preferences": "&Tercihler...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Kisayol &Duzenleyici...",
     "menu.file.exit": "C&ikis",
     // ── Menu: Edit ──

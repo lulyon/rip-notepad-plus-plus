@@ -18,6 +18,7 @@ const sv = {
     "menu.file.saveWorkspace": "Spara arbetsyta som...",
     "menu.file.loadWorkspace": "Öppna arbetsyta...",
     "menu.file.preferences": "&Inställningar...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Kortkommando&hanterare...",
     "menu.file.exit": "A&vsluta",
     "menu.edit": "&Redigera",

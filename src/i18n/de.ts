@@ -228,6 +228,7 @@ const de = {
     "menu.file.open": "Ö&ffnen...",
     "menu.file.openFolder": "Ordner ö&ffnen...",
     "menu.file.preferences": "&Einstellungen...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "Vom &Datenträger neu laden",
     "menu.file.restoreLastClosed": "Zuletzt geschlossene Datei wiederherstellen",
     "menu.file.save": "&Speichern",

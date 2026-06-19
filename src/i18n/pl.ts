@@ -19,6 +19,7 @@ const pl = {
     "menu.file.saveWorkspace": "Zapisz obszar roboczy...",
     "menu.file.loadWorkspace": "Otworz obszar roboczy...",
     "menu.file.preferences": "&Ustawienia...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Edytor s&krotow...",
     "menu.file.exit": "&Wyjscie",
     // ── Menu: Edit ──

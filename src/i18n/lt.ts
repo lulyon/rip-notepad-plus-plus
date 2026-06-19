@@ -20,6 +20,7 @@ const lt = {
     "menu.file.saveWorkspace": "Išsaugoti darbo erdvę kaip...",
     "menu.file.loadWorkspace": "Atidaryti darbo erdvę...",
     "menu.file.preferences": "&Nustatymai...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Sparčiųjų &klavišų žemėlapis...",
     "menu.file.exit": "I&šeiti",
 

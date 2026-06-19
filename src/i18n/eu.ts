@@ -228,6 +228,7 @@ const eu = {
     "menu.file.open": "&Ireki...",
     "menu.file.openFolder": "Ireki &karpeta...",
     "menu.file.preferences": "&Hobespenak...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "&Berriz kargatu disketik",
     "menu.file.restoreLastClosed": "Berrezarri azken itxitako fitxategia",
     "menu.file.save": "&Gorde",

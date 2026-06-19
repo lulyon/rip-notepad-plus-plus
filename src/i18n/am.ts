@@ -228,6 +228,7 @@ const am = {
     "menu.file.open": "ክፈት...",
     "menu.file.openFolder": "አቃፊ ክፈት...",
     "menu.file.preferences": "ምርጫዎች...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "ከዲስክ እንደገና ጫን",
     "menu.file.restoreLastClosed": "የመጨረሻውን የተዘጋ ፋይል መልስ",
     "menu.file.save": "አስቀምጥ",

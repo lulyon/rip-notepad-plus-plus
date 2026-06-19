@@ -19,6 +19,7 @@ const dz = {
     "menu.file.saveWorkspace": "ལས་ཁོར་ཉར་ཚགས་ཨིན...",
     "menu.file.loadWorkspace": "ལས་ཁོར་ཁ་ཕྱེ།...",
     "menu.file.preferences": "&བསམ་འཆར།...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "ཐུང་ལམ &གསལ་བཀོད།...",
     "menu.file.exit": "ཕྱིར་&ཐོན།",
 

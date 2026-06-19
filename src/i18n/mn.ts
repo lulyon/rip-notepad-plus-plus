@@ -19,6 +19,7 @@ const mn = {
     "menu.file.saveWorkspace": "Ажлын Орчныг Хадгалах нэр...",
     "menu.file.loadWorkspace": "Ажлын Орчин Нээх...",
     "menu.file.preferences": "&Тохиргоо...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Хурдан Товч &Зураглал...",
     "menu.file.exit": "&Гарах",
 

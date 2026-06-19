@@ -228,6 +228,7 @@ const my = {
     "menu.file.open": "ဖွင့်...",
     "menu.file.openFolder": "ဖိုဒါဖွင့်...",
     "menu.file.preferences": "ရွေးချယ်မှုများ...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "ဒစ်ခ်မှ ပြန်တင်",
     "menu.file.restoreLastClosed": "နောက်ဆုံးပိတ်ထားသောဖိုင်ကို ပြန်ယူ",
     "menu.file.save": "သိမ်း",

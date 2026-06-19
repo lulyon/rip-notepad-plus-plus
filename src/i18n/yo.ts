@@ -19,6 +19,7 @@ const yo = {
     "menu.file.saveWorkspace": "Fi ààyè iṣẹ́ pamọ Bí...",
     "menu.file.loadWorkspace": "Ṣí ààyè iṣẹ́...",
     "menu.file.preferences": "À&yànfàní...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Olùya &wọn ọ̀nà kúkurú...",
     "menu.file.exit": "Já&de",
     "menu.edit": "Ṣà&túnṣe",

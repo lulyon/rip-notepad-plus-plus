@@ -17,6 +17,7 @@ const he = {
     "menu.file.saveSession": "שמור הפעלה...",
     "menu.file.loadSession": "טען הפעלה...",
     "menu.file.preferences": "&העדפות...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "מנהל &קיצורים...",
     "menu.file.exit": "&יציאה",
 

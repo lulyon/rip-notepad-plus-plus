@@ -228,6 +228,7 @@ const et = {
     "menu.file.open": "&Ava...",
     "menu.file.openFolder": "Ava &kaust...",
     "menu.file.preferences": "&Eelistused...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "Laadi kettalt &uuesti",
     "menu.file.restoreLastClosed": "Taasta viimati suletud fail",
     "menu.file.save": "&Salvesta",

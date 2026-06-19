@@ -20,6 +20,7 @@ const el = {
     "menu.file.saveWorkspace": "Αποθήκευση χώρου εργασίας ως...",
     "menu.file.loadWorkspace": "Άνοιγμα χώρου εργασίας...",
     "menu.file.preferences": "&Προτιμήσεις...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "&Αντιστοίχιση συντομεύσεων...",
     "menu.file.exit": "&Έξοδος",
 

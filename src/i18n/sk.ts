@@ -20,6 +20,7 @@ const sk = {
     "menu.file.saveWorkspace": "Uložiť pracovný priestor ako...",
     "menu.file.loadWorkspace": "Otvoriť pracovný priestor...",
     "menu.file.preferences": "&Predvoľby...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Mapovač &klávesových skratiek...",
     "menu.file.exit": "&Koniec",
 

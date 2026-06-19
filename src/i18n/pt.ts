@@ -19,6 +19,7 @@ const pt = {
     "menu.file.saveWorkspace": "Salvar Workspace Como...",
     "menu.file.loadWorkspace": "Abrir Workspace...",
     "menu.file.preferences": "&Preferências...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "&Mapear Atalhos...",
     "menu.file.exit": "Sai&r",
 

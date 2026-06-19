@@ -19,6 +19,7 @@ const cs = {
     "menu.file.saveWorkspace": "Ulozit pracovni prostor...",
     "menu.file.loadWorkspace": "Otevrit pracovni prostor...",
     "menu.file.preferences": "&Predvolby...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "Editor &zkratek...",
     "menu.file.exit": "&Konec",
     // ── Menu: Edit ──

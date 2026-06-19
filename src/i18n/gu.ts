@@ -19,6 +19,7 @@ const gu = {
     "menu.file.saveWorkspace": "કાર્યક્ષેત્ર આ રીતે સાચવો...",
     "menu.file.loadWorkspace": "કાર્યક્ષેત્ર ખોલો...",
     "menu.file.preferences": "પસંદગીઓ(&P)...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.shortcutMapper": "શોર્ટકટ મેપર(&M)...",
     "menu.file.exit": "બહાર નીકળો(&x)",
     "menu.edit": "સંપાદિત કરો(&E)",

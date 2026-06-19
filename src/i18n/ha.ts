@@ -228,6 +228,7 @@ const ha = {
     "menu.file.open": "&Bude...",
     "menu.file.openFolder": "Bude &jaka...",
     "menu.file.preferences": "&Zaɓuɓɓuka...",
+    "menu.file.syncSettings": "Sync Settings...",
     "menu.file.reload": "&Sake lodawa daga faifai",
     "menu.file.restoreLastClosed": "Mayar da fayil din da aka rufe na karshe",
     "menu.file.save": "&Ajiye",
