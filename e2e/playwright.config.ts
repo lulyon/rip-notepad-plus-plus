@@ -13,7 +13,7 @@ export default defineConfig({
     headless: true,
     viewport: { width: 1280, height: 800 },
     actionTimeout: ci ? 15000 : 5000,
-    baseURL: "http://localhost:1420",
+    baseURL: "http://127.0.0.1:1420",
     // Required for Chromium in GitHub Actions Linux runners:
     // — /dev/shm is limited to 64 MB, causes renderer crashes
     // — sandbox requires kernel capabilities unavailable in CI
@@ -22,7 +22,7 @@ export default defineConfig({
     } : undefined,
   },
   webServer: {
-    command: "npm run dev",
+    command: "npm run dev -- --host 127.0.0.1",
     cwd: process.cwd(),
     port: 1420,
     reuseExistingServer: true,
