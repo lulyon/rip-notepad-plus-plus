@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSettingsStore } from "../../stores/settingsStore";
+import { useSyncStore } from "../../stores/syncStore";
 import { LANGUAGES } from "../../i18n";
 import "./PreferencesDialog.css";
 
@@ -9,12 +10,14 @@ interface Props {
   onClose: () => void;
 }
 
-type PrefTab = "general" | "editing" | "newdoc";
+type PrefTab = "general" | "editing" | "newdoc" | "sync";
 
 export function PreferencesDialog({ open, onClose }: Props) {
   const { i18n, t } = useTranslation();
   const settings = useSettingsStore();
+  const syncStore = useSyncStore();
   const [activeTab, setActiveTab] = useState<PrefTab>("general");
+  const [testResult, setTestResult] = useState<"success" | "error" | null>(null);
 
   // Close on Escape
   useEffect(() => {
@@ -35,13 +38,13 @@ export function PreferencesDialog({ open, onClose }: Props) {
 
         {/* Tab bar */}
         <div className="prefs-tabs">
-          {(["general", "editing", "newdoc"] as PrefTab[]).map((tab) => (
+          {(["general", "editing", "newdoc", "sync"] as PrefTab[]).map((tab) => (
             <button
               key={tab}
               className={`prefs-tab ${activeTab === tab ? "active" : ""}`}
               onClick={() => setActiveTab(tab)}
             >
-              {tab === "general" ? t("preferences.general") : tab === "editing" ? t("preferences.editing") : t("preferences.newDoc")}
+              {tab === "general" ? t("preferences.general") : tab === "editing" ? t("preferences.editing") : tab === "newdoc" ? t("preferences.newDoc") : t("preferences.sync")}
             </button>
           ))}
         </div>
@@ -321,6 +324,94 @@ export function PreferencesDialog({ open, onClose }: Props) {
                   <option value="CR">{t("preferences.eolCr")}</option>
                 </select>
               </label>
+            </div>
+          )}
+
+          {/* ── Sync ── */}
+          {activeTab === "sync" && (
+            <div className="prefs-section">
+              {/* Provider selector */}
+              <label className="prefs-row">
+                <span>{t("preferences.sync.provider")}:</span>
+                <select value="github_gist" disabled style={{ maxWidth: "100%" }}>
+                  <option value="github_gist">{t("preferences.sync.providerGist")}</option>
+                  <option disabled>{t("preferences.sync.providerDropbox")}</option>
+                  <option disabled>{t("preferences.sync.providerGoogle")}</option>
+                </select>
+              </label>
+
+              {/* Token input */}
+              <label className="prefs-row">
+                <span>{t("preferences.sync.patLabel")}:</span>
+                <input
+                  type="password"
+                  value={syncStore.githubToken}
+                  onChange={(e) => syncStore.setGithubToken(e.target.value)}
+                  placeholder="ghp_..."
+                  style={{ flex: 1 }}
+                />
+              </label>
+              <div className="sync-help">{t("preferences.sync.patHelp")}</div>
+
+              {/* Test Connection */}
+              <div className="sync-actions">
+                <button
+                  className="btn"
+                  disabled={!syncStore.githubToken}
+                  onClick={async () => {
+                    setTestResult(null);
+                    try {
+                      const res = await fetch("https://api.github.com/gists", {
+                        headers: { Authorization: `Bearer ${syncStore.githubToken}`, Accept: "application/vnd.github+json" },
+                      });
+                      setTestResult(res.ok ? "success" : "error");
+                    } catch {
+                      setTestResult("error");
+                    }
+                  }}
+                >
+                  {t("preferences.sync.testConnection")}
+                </button>
+                {testResult === "success" && <span className="sync-success">✓ {t("preferences.sync.testSuccess")}</span>}
+                {testResult === "error" && <span className="sync-error">✗ {t("preferences.sync.testFailed", { error: "" })}</span>}
+              </div>
+
+              {/* Export/Import buttons */}
+              <div className="sync-actions">
+                <button
+                  className="btn btn-primary"
+                  disabled={!syncStore.githubToken || syncStore.syncStatus === "exporting"}
+                  onClick={() => {
+                    if (window.confirm(t("preferences.sync.confirmExport"))) syncStore.exportSettings();
+                  }}
+                >
+                  {syncStore.syncStatus === "exporting" ? t("preferences.sync.exporting") : t("preferences.sync.export")}
+                </button>
+                <button
+                  className="btn"
+                  disabled={!syncStore.githubToken || !syncStore.githubGistId || syncStore.syncStatus === "importing"}
+                  onClick={() => {
+                    if (window.confirm(t("preferences.sync.confirmImport"))) syncStore.importSettings();
+                  }}
+                >
+                  {syncStore.syncStatus === "importing" ? t("preferences.sync.importing") : t("preferences.sync.import")}
+                </button>
+              </div>
+
+              {/* Status display */}
+              <div className="sync-status">
+                <span className="sync-last-sync">
+                  {syncStore.lastSyncTimestamp
+                    ? t("preferences.sync.lastSync", { time: new Date(syncStore.lastSyncTimestamp).toLocaleString() })
+                    : t("preferences.sync.never")}
+                </span>
+                {syncStore.syncStatus === "success" && (
+                  <span className="sync-success">✓ {t("preferences.sync.success")}</span>
+                )}
+                {syncStore.syncStatus === "error" && (
+                  <span className="sync-error">✗ {syncStore.lastError}</span>
+                )}
+              </div>
             </div>
           )}
         </div>
