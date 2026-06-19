@@ -182,8 +182,8 @@ test.describe("Status bar", () => {
   test("status bar shows cursor info", async ({ page }) => {
     await createTab(page);
     await expect(page.locator(".status-bar")).toBeVisible();
-    await expect(page.locator(".status-bar")).toContainText("Ln");
-    await expect(page.locator(".status-bar")).toContainText("Col");
+    await expect(page.locator(".status-bar")).toContainText("行");
+    await expect(page.locator(".status-bar")).toContainText("列");
   });
 
   test("status bar shows encoding", async ({ page }) => {
@@ -239,8 +239,8 @@ test.describe("Git panel", () => {
     await page.waitForTimeout(100);
     await page.locator(".menu-item", { hasText: "显示侧边栏" }).click();
     await page.waitForTimeout(300);
-    // Git is tab index 2 (Files=0, AI=1, Git=2, Symbols=3)
-    await expect(page.locator(".sidebar-tab").nth(2)).toContainText("Git");
+    // Git is tab index 3 (Files=0, Terminal=1, AI=2, Git=3, Symbols=4)
+    await expect(page.locator(".sidebar-tab").nth(3)).toContainText("Git");
   });
 });
 

@@ -46,7 +46,7 @@ test.describe("Notepad++ ported features", () => {
     await page.waitForTimeout(150);
     await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
     await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar-tab").nth(2)).toContainText("Git");
+    await expect(page.locator(".sidebar-tab").nth(3)).toContainText("Git");
   });
 
   // ── Symbols tab visible ──
@@ -55,7 +55,7 @@ test.describe("Notepad++ ported features", () => {
     await page.waitForTimeout(150);
     await page.locator(".menu-item",{hasText:"显示侧边栏"}).click();
     await page.waitForTimeout(300);
-    await expect(page.locator(".sidebar-tab").nth(3)).toContainText("符号");
+    await expect(page.locator(".sidebar-tab").nth(4)).toContainText("符号");
   });
 
   // ── Terminal toggle menu item ──
