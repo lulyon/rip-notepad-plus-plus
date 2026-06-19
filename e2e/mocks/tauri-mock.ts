@@ -113,6 +113,8 @@ export function invoke(cmd, args) {
   await page.route("**/@tauri-apps/plugin-*", (r: any) =>
     r.fulfill({ status: 200, contentType: "application/javascript", body: "export {}" }));
 
-  await page.goto("/", { waitUntil: "networkidle" });
-  await page.waitForTimeout(800);
+  await page.goto("/", { waitUntil: "load" });
+  // Wait for React to mount — ensure the app root is rendered
+  await page.waitForSelector("#root", { timeout: 30000 });
+  await page.waitForTimeout(1500);
 }
