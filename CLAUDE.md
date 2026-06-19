@@ -9,7 +9,7 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 - **Target**: Windows, macOS, Linux
 - **Node**: >= 20
 - **Rust**: >= 1.70 (edition 2021)
-- **Version**: 0.3.0 (21 phases complete)
+- **Version**: 0.3.0 (22 phases complete)
 - **Tests**: 65 E2E + 376 unit (Playwright + vitest, 22 suites)
 - **IPC Commands**: 55 (file_ops, encoding, search, session, system, plugin, git, monitor, workspace, pty)
 - **i18n**: 559 keys, 70 languages (6 RTL: ar/he/fa/ur/pa/dv)
@@ -20,7 +20,7 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 ┌─ WebView (React + Monaco + i18n) ───────────────────────────┐
 │  MenuBar │ TabBar(drag) │ Sidebar │ SplitEditor │ StatusBar │
 │  SearchPanel(overlay) │ Dialogs(portals)                     │
-│  Sidebar Tabs: Files │ AI │ Git │ Symbols │ Terminal         │
+│  Sidebar Tabs: Files │ Terminal │ AI │ Git │ Symbols        │
 │  Zustand stores (15): editor / search / settings / macro /   │
 │  encoding / plugin / git / clipboard / editorRef /           │
 │  bookmark / mark / contextMenu / udl / ai / tool             │
@@ -69,14 +69,10 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 | `src/components/TabBar/TabContextMenu.tsx` | Close/Close Others/Close All/Copy Path (i18n) |
 | `src/components/StatusBar/StatusBar.tsx` | File name, language, encoding, Ln/Col, git branch |
 | `src/components/SearchPanel/SearchPanel.tsx` | Find/replace with regex, case, word, wrap, FindInFiles |
-| `src/components/Panels/Sidebar.tsx` | Sidebar: Files (multi-root) + AI Chat + Git + Symbols + Terminal (5 tabs, adjustable width) |
+| `src/components/Panels/Sidebar.tsx` | Sidebar: Files | Terminal | AI | Git | Symbols (5 tabs, adjustable width 180-600px) |
 | `src/components/Panels/AiPanel.tsx` | AI Chat panel: multi-tab conversations, streaming, web search with citations |
 | `src/components/Panels/GitPanel.tsx` | Git changed files list, inline diff view, stage/commit/push/pull/branch |
-| `src/components/Panels/ClipboardPanel.tsx` | Clipboard history with search, pin, paste at cursor |
-| `src/components/Panels/JsonViewerPanel.tsx` | Recursive JSON tree view with copy path |
-| `src/components/Panels/DocListPanel.tsx` | Open document list with modified indicators |
-| `src/components/Panels/TaskListPanel.tsx` | TODO/FIXME/HACK/XXX/NOTE/OPTIMIZE/BUG scanner |
-| `src/components/Panels/TerminalPanel.tsx` | Integrated PTY terminal with shell session management |
+| `src/components/Panels/Terminal.tsx` | Integrated PTY terminal with shell session management |
 | `src/components/Dialogs/CompareDialog.tsx` | Side-by-side file diff comparison (Monaco DiffEditor) |
 | `src/components/Dialogs/CommandPalette.tsx` | Fuzzy command search, keyboard navigation |
 | `src/components/Dialogs/UnsavedChangesDialog.tsx` | Save/Discard/Cancel prompt on close |

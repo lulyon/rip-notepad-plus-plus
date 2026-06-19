@@ -48,22 +48,21 @@ Built with **Tauri v2** + **Monaco Editor** + **React 19** + **TypeScript** + **
 - Full screen (F11) / Distraction-free mode (F12)
 - Window always on top
 - Horizontal / Vertical split editor with sync scroll
-- Sidebar with 10 panels: Files, AI, Git, Symbols, Terminal, Clipboard, Doc List, Task List, JSON, Preview
+- Sidebar with 5 panels: Files, Terminal, AI, Git, Symbols
 - Markdown Preview (Ctrl+Shift+V) — split editor | rendered preview
 
 ### Sidebar Panels
 | Panel | Description |
 |-------|-------------|
 | 📁 Files | File tree explorer (lazy-load, expandable directories, multi-root workspace) |
+| 💻 Terminal | Integrated PTY terminal with shell session management |
 | 🤖 AI | Streaming chat with web search, multi-conversation tabs, code quick actions |
 | ⎇ Git | Changed files, branch name, ahead/behind, inline diff, stage/commit/push/pull |
 | 🔣 Symbols | Function/class outline (regex-based, language-agnostic) |
-| 💻 Terminal | Integrated PTY terminal with shell session management |
-| 📋 Clipboard | Clipboard history with search, pin, paste at cursor |
-| 📄 Doc List | Open document list with modified indicators |
-| ✅ Task List | TODO/FIXME/HACK/XXX/NOTE/OPTIMIZE/BUG scanner |
-| 🔍 JSON | Recursive JSON tree viewer with copy path |
-| 👁 Preview | Document preview (26 types: markdown, HTML, images, PDF, 3D, etc.) |
+
+Additional features accessible from the UI:
+- **Preview** (👁 button in editor toolbar + Ctrl+Shift+V): 26 file types rendered in split editor
+- **Clipboard History**: search, pin, paste at cursor (status bar access)
 
 ### Preview System (26 types, all offline)
 Open a supported file and click the 👁 button in the editor toolbar, or press `Ctrl+Shift+V`.
@@ -94,7 +93,7 @@ Open a supported file and click the 👁 button in the editor toolbar, or press 
 
 ### Run
 - Execute shell commands (cross-platform, NppExec-style console)
-- Variable substitution: `$(FULL_CURRENT_PATH)`, `$(FILE_NAME)`, `$(CURRENT_WORD)`, etc.
+- Variable substitution: `$(FULL_CURRENT_PATH)`, `$(CURRENT_DIRECTORY)`, `$(FILE_NAME)`, `$(CURRENT_LINE)`
 - Error output parsing (clickable file:line links)
 - Open terminal at project root (iTerm2 auto-detected, fallback to Terminal.app)
 - Launch Claude (Ctrl+Alt+C) / Codex (Ctrl+Alt+X) in terminal
@@ -147,7 +146,7 @@ Open a supported file and click the 👁 button in the editor toolbar, or press 
 
 ### External Tools
 - Configure custom tools (name, command, working dir, shortcut)
-- 11 variable substitutions: `$(FULL_CURRENT_PATH)`, `$(FILE_NAME)`, etc.
+- 4 variable substitutions: `$(FULL_CURRENT_PATH)`, `$(CURRENT_DIRECTORY)`, `$(FILE_NAME)`, `$(CURRENT_LINE)`
 - Tools → Configure External Tools... / Execute
 
 ### Change History
@@ -224,7 +223,7 @@ rip-notepad-plus-plus/
 │   │   ├── TabBar/               # Drag-and-drop tabs + pin/colors
 │   │   ├── SearchPanel/          # Find/replace/find-in-files
 │   │   ├── StatusBar/            # Encoding, language, Ln/Col, branch
-│   │   ├── Panels/               # 10 sidebar panels
+│   │   ├── Panels/               # 5 sidebar panels + preview engine
 │   │   └── Dialogs/              # 16 dialogs
 │   ├── stores/                   # 15 Zustand stores
 │   ├── hooks/                    # 11 custom hooks
