@@ -9,10 +9,10 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 - **Target**: Windows, macOS, Linux
 - **Node**: >= 20
 - **Rust**: >= 1.70 (edition 2021)
-- **Version**: 0.3.0 (22 phases complete)
+- **Version**: 0.3.0 (23 phases complete)
 - **Tests**: 65 E2E + 376 unit (Playwright + vitest, 22 suites)
 - **IPC Commands**: 55 (file_ops, encoding, search, session, system, plugin, git, monitor, workspace, pty)
-- **i18n**: 559 keys, 70 languages (6 RTL: ar/he/fa/ur/pa/dv)
+- **i18n**: 581 keys, 70 languages (6 RTL: ar/he/fa/ur/pa/dv)
 
 ## Architecture
 
@@ -21,9 +21,9 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 │  MenuBar │ TabBar(drag) │ Sidebar │ SplitEditor │ StatusBar │
 │  SearchPanel(overlay) │ Dialogs(portals)                     │
 │  Sidebar Tabs: Files │ Terminal │ AI │ Git │ Symbols        │
-│  Zustand stores (15): editor / search / settings / macro /   │
+│  Zustand stores (16): editor / search / settings / macro /   │
 │  encoding / plugin / git / clipboard / editorRef /           │
-│  bookmark / mark / contextMenu / udl / ai / tool             │
+│  bookmark / mark / contextMenu / udl / ai / tool / sync      │
 ├─ Tauri IPC (src/lib/ipc.ts) ────────────────────────────────┤
 ├─ Rust Backend ──────────────────────────────────────────────┤
 │  commands/ (file_ops, encoding, search, session, system,     │
@@ -60,6 +60,8 @@ A cross-platform text editor replacing Notepad++. Built on **Tauri v2** (Rust ba
 | `src/stores/contextMenuStore.ts` | Customizable editor right-click menu items |
 | `src/stores/udlStore.ts` | User Defined Language definitions (Monarch tokenizer) |
 | `src/stores/toolStore.ts` | External tool configurations |
+| `src/stores/syncStore.ts` | Cloud sync state: token/gistId persistence, export/import actions |
+| `src/lib/sync.ts` | Cloud sync engine: SyncPayload types, GitHub Gist API (create/get/update), build/apply payload |
 | `src/components/Editor/Editor.tsx` | Monaco Editor + columnSelection + cursor tracking |
 | `src/components/Editor/SplitEditor.tsx` | Horizontal/vertical split |
 | `src/components/MenuBar/MenuBar.tsx` | Custom HTML menu bar, Alt+letter navigation |
@@ -298,6 +300,7 @@ Zustand stores (all persistent where applicable):
 | `contextMenuStore` | menu items[], load/save custom context menu | localStorage |
 | `udlStore` | udl definitions[], Monarch tokenizer configs | localStorage |
 | `toolStore` | external tools[], load/save/execute | localStorage |
+| `syncStore` | provider, githubToken, githubGistId, syncStatus, export/import | localStorage |
 
 Each tab: `{ id, path, name, content, encoding, modified, language, cursorLine, cursorColumn }`
 

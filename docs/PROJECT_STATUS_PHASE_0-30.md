@@ -38,7 +38,7 @@
 ### i18n
 
 58 种语言: 覆盖 VS Code 全部官方语言 + Notepad++ 全部有效翻译
-559 keys 每种语言，6 种 RTL（ar/he/fa/ur/pa/dv），自动方向检测
+581 keys 每种语言，6 种 RTL（ar/he/fa/ur/pa/dv），自动方向检测
 
 ### 测试
 
@@ -443,9 +443,24 @@ jobs:
 
 **未开始。** ARIA 标签、键盘独占导航、屏幕阅读器测试、高对比度主题增强、焦点指示器、字体缩放。
 
-### Phase 27 — 云同步 ❌
+### Phase 27 — 云同步 🟡
 
-**未开始。** Dropbox/Google Drive/GitHub Gist OAuth 同步。需注册各平台 API Key。
+**部分完成。** GitHub Gist 设置同步已实现。Dropbox/Google Drive deferred。
+
+#### 已完成
+- `src/lib/sync.ts` — SyncPayload 序列化引擎 + GitHub Gist API 客户端 (create/get/update)
+- `src/stores/syncStore.ts` — Zustand store: token/gistId 持久化, export/import 操作
+- PreferencesDialog Sync 标签页 — provider 选择器, token 输入, 测试连接, 导出/导入按钮
+- 菜单 File → Sync Settings 可直接打开 Sync 标签页
+- i18n: 20 个 `preferences.sync.*` 键，70 语言全覆盖
+- 同步内容: 编辑器设置 (~30 字段), 键盘快捷键, AI 配置 (不含 apiKey)
+- 安全: apiKey 不同步, Gist 创建为 private, token 存 localStorage (与 AI API key 一致)
+
+#### 待完成
+- Dropbox OAuth (localhost redirect flow)
+- Google Drive OAuth (device code flow)
+- 会话/工作区同步 (SessionData + WorkspaceData 加入 payload)
+- 自动同步 (当前为手动 Export/Import)
 
 ### Phase 28 — 移动端移植 ❌
 
@@ -493,7 +508,8 @@ jobs:
 | **AI 多会话** | 标签页式多会话，独立历史，XML 后处理 |
 | **AI Markdown 渲染** | markdown-it + highlight.js，完整 GFM，流式 50ms 节流 |
 | **AI 双 Provider** | Anthropic + OpenAI 兼容 API，自动检测，provider 下拉选择 |
-| **i18n 扩展** | 7 → 58 种语言，495 keys，100% 覆盖，自动 key 校验测试 |
+| **i18n 扩展** | 7 → 70 种语言，581 keys，100% 覆盖，自动 key 校验测试 |
+| **Cloud Sync** | GitHub Gist 设置同步 (Export/Import)，Preferences Sync 标签页 + 菜单入口 |
 
 ### 预览引擎支持的类型
 
@@ -514,10 +530,10 @@ Phase 0-10  ████████████ 基础架构        ✅  10/10
 Phase 11-15 ████████████ NP++对标        ✅   5/5
 Phase 16-20 ██████░░░░░░ 质量/生态       🟡   3/5
 Phase 21-25 ████████░░░░ 工具/效率       🟡   3/5
-Phase 26-30 ██░░░░░░░░░░ 平台/创新       🟡   1/5
+Phase 26-30 ██████░░░░░░ 平台/创新       🟡   2/5
 额外完成   ██████                         ✅   10+
 ──────────────────────────────────────────
-总计        ████████░░░░                  22/30 + 10+
+总计        ████████░░░░                  22.5/30 + 10+
 ```
 
 | 指标 | 数值 |
@@ -526,7 +542,7 @@ Phase 26-30 ██░░░░░░░░░░ 平台/创新       🟡   1/5
 | 对话框 | 16 |
 | Store | 15 |
 | Hooks | 11 |
-| i18n 语言 | 70 (559 keys, 6 RTL) |
+| i18n 语言 | 70 (581 keys, 6 RTL) |
 | 单元测试 | 376 (22 suites) |
 | E2E 测试 | 65 (4 specs) |
 | DMG 大小 | 9.1 MB (Intel) / 8.9 MB (ARM) |
@@ -543,6 +559,6 @@ Phase 26-30 ██░░░░░░░░░░ 平台/创新       🟡   1/5
 | P1 | 17-插件市场 | 4-6天 | GitHub 仓库 + 种子插件 |
 | P2 | 21-打印系统 | 2-3天 | — |
 | P2 | 26-无障碍 | 3-4天 | 屏幕阅读器 |
-| P3 | 27-云同步 | 4-5天 | OAuth API Keys |
+| P3 | 27-云同步 | 2-3天 (剩余) | Dropbox/Google OAuth + session sync |
 | P4 | 28-移动端 | 8-12天 | Apple Developer + Android Studio |
 | P4 | 29-协作编辑 | 7-10天 | WebSocket 服务器 + CRDT |

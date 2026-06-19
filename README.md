@@ -161,6 +161,12 @@ Open a supported file and click the 👁 button in the editor toolbar, or press 
 - Custom editor context menu (add/remove/reorder items)
 - Language: 70 languages (中文 / English / 日本語 / 한국어 / Français / العربية / עברית / Deutsch / Español / Português / Русский / ...)
 
+### Cloud Sync (GitHub Gist)
+- Export/Import settings via GitHub Gist (Personal Access Token)
+- Syncs: editor preferences, keyboard shortcuts, AI config (excluding apiKey)
+- Manual Export/Import: Preferences → Sync tab
+- Private Gist: settings stored as `ripnotepadpp-sync.json`
+
 ### Auto Update
 - Automatic update check via tauri-plugin-updater
 - Manual check: Help → Check for Updates
