@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, lazy, Suspense } from "react";
+import { useState, useEffect, useRef, useCallback, lazy, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import "./i18n";
 import { useEditorStore } from "./stores/editorStore";
@@ -46,6 +46,42 @@ function App() {
   const activeTabId = useEditorStore((s) => s.activeTabId);
   const unsavedTabs = useEditorStore((s) => s.unsavedTabs);
   const [showMdPreview, setShowMdPreview] = useState(false);
+  // ── Preview pane resize: ratio of preview width to split view width (0.2–0.5) ──
+  const [previewRatio, setPreviewRatio] = useState(0.5);
+  const [isDraggingDivider, setIsDraggingDivider] = useState(false);
+  const splitViewRef = useRef<HTMLDivElement>(null);
+  const MIN_PREVIEW_RATIO = 0.2;
+  const MAX_PREVIEW_RATIO = 0.5;
+
+  // ── Divider drag handlers ──
+  const onDividerMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsDraggingDivider(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isDraggingDivider) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!splitViewRef.current) return;
+      const rect = splitViewRef.current.getBoundingClientRect();
+      const offsetX = e.clientX - rect.left;
+      const ratio = 1 - offsetX / rect.width;
+      setPreviewRatio(Math.min(MAX_PREVIEW_RATIO, Math.max(MIN_PREVIEW_RATIO, ratio)));
+    };
+
+    const handleMouseUp = () => {
+      setIsDraggingDivider(false);
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isDraggingDivider]);
+
   const showMenuBar = useSettingsStore((s) => s.showMenuBar);
   const showStatusBar = useSettingsStore((s) => s.showStatusBar);
 
@@ -325,12 +361,18 @@ function App() {
             </button>
           )}
           {activeTabId && showMdPreview && hasFilePreview ? (
-            <div className="md-split-view">
-              <div className="md-editor-pane">
+            <div
+              className={`md-split-view${isDraggingDivider ? " md-dragging" : ""}`}
+              ref={splitViewRef}
+            >
+              <div className="md-editor-pane" style={{ flex: `0 0 ${(1 - previewRatio) * 100}%` }}>
                 <SplitEditor />
               </div>
-              <div className="md-preview-divider" />
-              <div className="md-preview-pane">
+              <div
+                className="md-preview-divider"
+                onMouseDown={onDividerMouseDown}
+              />
+              <div className="md-preview-pane" style={{ flex: `0 0 ${previewRatio * 100}%` }}>
                 <GenericPreview />
               </div>
             </div>

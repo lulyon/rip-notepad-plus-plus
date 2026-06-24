@@ -124,9 +124,12 @@ html[dir="rtl"] .tab-color-dot { margin-right: 0; margin-left: 4px; }
   overflow: hidden;
 }
 
-.md-editor-pane,
+.md-editor-pane {
+  min-width: 0;
+  overflow: hidden;
+}
+
 .md-preview-pane {
-  flex: 1;
   min-width: 0;
   overflow: hidden;
 }
@@ -136,6 +139,17 @@ html[dir="rtl"] .tab-color-dot { margin-right: 0; margin-left: 4px; }
   background: var(--border-color);
   cursor: col-resize;
   flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.md-preview-divider:hover,
+.md-dragging .md-preview-divider {
+  background: var(--accent-color);
+}
+
+.md-dragging {
+  user-select: none;
+  cursor: col-resize;
 }
 
 .md-preview-pane {
