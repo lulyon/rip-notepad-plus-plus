@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/nicedoc/schemas/main/tauri/config.schema.json",
   "productName": "ripNotepad++",
-  "version": "0.3.0",
+  "version": "0.5.1",
   "identifier": "com.ripnotepad.plusplus",
   "build": {
     "frontendDist": "../dist",
