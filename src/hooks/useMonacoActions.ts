@@ -37,7 +37,6 @@ export function useMonacoActions() {
             save({
               title: "Save As",
               defaultPath: tab.name,
-              filters: [{ name: "All Files", extensions: ["*"] }],
             }).then((filePath) => {
               if (filePath) {
                 ipc
@@ -70,7 +69,6 @@ export function useMonacoActions() {
           save({
             title: "Save As",
             defaultPath: tab.path || tab.name,
-            filters: [{ name: "All Files", extensions: ["*"] }],
           }).then((filePath) => {
             if (filePath) {
               ipc
@@ -109,7 +107,6 @@ export function useMonacoActions() {
           open({
             title: "Open File",
             multiple: true,
-            filters: [{ name: "All Files", extensions: ["*"] }],
           }).then((result) => {
             const files: string[] = result
               ? (Array.isArray(result) ? result : [result])
